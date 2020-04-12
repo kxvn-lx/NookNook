@@ -9,8 +9,10 @@
 import Foundation
 
 struct ImageEngine {
-    private var imageQuery: String?
-    private let imageURL = "https://i.imgur.com/"
     
+    private static let SERVICE_URL = "https://i.imgur.com/"
     
+    static func parseURL(of imageID: String) -> URL {
+        return URL(string: "\(ImageEngine.SERVICE_URL)\(imageID).png")!
+    }
 }
