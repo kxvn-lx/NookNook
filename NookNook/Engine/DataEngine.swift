@@ -11,19 +11,6 @@ import UIKit
 import SwiftyJSON
 
 struct DataEngine {
-    
-    enum Categories: String {
-        case housewares, miscellaneous
-        case wallMounted = "wall-mounted"
-        case wallpaper, floors, rugs, photos, posters, fencing, tools
-        case tops, bottoms, dresses, headwear, accessories, socks, shoes, bags
-        case umbrellas, songs, recipes, fossils, construction, nookmiles, other
-        case bugsNorth = "bugs-north"
-        case bugsSouth = "bugs-south"
-        case fishesNorth = "fish-north"
-        case fishesSouth = "fish-south"
-    }
-    
     /**
      Load all items from the datasource - And return them for view.
      */

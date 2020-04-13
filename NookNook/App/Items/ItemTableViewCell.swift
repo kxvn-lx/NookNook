@@ -46,12 +46,12 @@ class ItemTableViewCell: UITableViewCell {
         customisableImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         customisableImageView.translatesAutoresizingMaskIntoConstraints = false
         customisableImageView.contentMode = .scaleAspectFit
-        customisableImageView.tintColor = UIColor(named: ColourUtil.text.rawValue)
+        customisableImageView.tintColor = .darkGray
         
         isFavImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         isFavImageView.translatesAutoresizingMaskIntoConstraints = false
         isFavImageView.contentMode = .scaleAspectFit
-        isFavImageView.tintColor = UIColor(named: ColourUtil.text.rawValue)
+        isFavImageView.tintColor = .darkGray
         
         iconStackView.addArrangedSubview(customisableImageView)
         iconStackView.addArrangedSubview(isFavImageView)
@@ -67,7 +67,7 @@ class ItemTableViewCell: UITableViewCell {
         itemNameLabel.translatesAutoresizingMaskIntoConstraints = false
         itemNameLabel.numberOfLines = 0
         itemNameLabel.font = UIFont.systemFont(ofSize: itemNameLabel.font!.pointSize, weight: .semibold)
-        itemNameLabel.textColor = UIColor(named: ColourUtil.text.rawValue)
+        itemNameLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)
         
         obtainedFromLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         obtainedFromLabel.translatesAutoresizingMaskIntoConstraints = false

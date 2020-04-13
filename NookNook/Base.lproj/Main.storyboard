@@ -74,7 +74,7 @@
         <!--Category-->
         <scene sceneID="0vX-9d-Pnc">
             <objects>
-                <tableViewController id="ZT3-0T-pLS" customClass="CategoriesTableViewController" customModule="NookNook" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="Categories" id="ZT3-0T-pLS" customClass="CategoriesTableViewController" customModule="NookNook" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Edu-9c-6mb">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -99,24 +99,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zuy-fO-FD0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="254" y="671"/>
-        </scene>
-        <!--Categories-->
-        <scene sceneID="cji-3U-yCG">
-            <objects>
-                <navigationController storyboardIdentifier="Categories" title="Categories" automaticallyAdjustsScrollViewInsets="NO" id="w59-Rg-E7h" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="nvG-i5-uE7">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="ZT3-0T-pLS" kind="relationship" relationship="rootViewController" id="g0a-aa-N7f"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkc-PG-sLb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="255" y="-66"/>
         </scene>
     </scenes>
 </document>

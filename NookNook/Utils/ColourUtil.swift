@@ -9,7 +9,9 @@
 import Foundation
 
 enum ColourUtil: String {
-    case primary = "Primary"
-    case primary2 = "Primary-2"
-    case text = "Text"
+    case dirt1 = "Dirt-1"
+    case grass1 = "Grass-1"
+    case grass2 = "Grass-2"
+    case cream1 = "Cream-1"
+    case cream2 = "Cream-2"
 }

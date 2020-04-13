@@ -8,47 +8,79 @@
 
 import UIKit
 
-class CategoriesTableViewController: UITableViewController {
+protocol CatDelegate : NSObjectProtocol {
+    func parseNewCategory(of category: Categories)
+}
 
+class CategoriesTableViewController: UITableViewController {
+    
     let CAT_CELL = "CategoryCell"
+    var filteredCategories: [Categories] = []
+    var currentCategory: Categories!
+    
+    weak var catDelegate: CatDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 200
+        
+        tableView.tableFooterView = UIView()
+        
         setBar()
-
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 0
+        return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return filteredCategories.count
     }
-
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: CAT_CELL, for: indexPath)
+        
+        if let categoryCell = cell as? CategoryTableViewCell {
+            categoryCell.categoryNameLabel.text = filteredCategories[indexPath.row].rawValue
+            
+            if filteredCategories[indexPath.row] == currentCategory {
+                categoryCell.accessoryType = .checkmark
+            }
+            
+            categoryCell.categoryNameLabel.text = filteredCategories[indexPath.row].rawValue
+        }
+        
         return cell
     }
-
-    private func setBar() {
-        self.configureNavigationBar(largeTitleColor: .white, backgoundColor: UIColor(named: ColourUtil.primary.rawValue)!, tintColor: .white, title: "Categories", preferredLargeTitle: false)
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        
-        let button: UIButton = UIButton(type: .custom)
-        button.setImage(IconUtil.systemIcon(of: .xmark, weight: .regular), for: .normal)
-        button.addTarget(self, action: #selector(closeTapped), for: UIControl.Event.touchUpInside)
-        button.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
-
-        let barButton = UIBarButtonItem(customView: button)
-        self.navigationItem.leftBarButtonItem = barButton
+        if let catDelegate = catDelegate {
+            catDelegate.parseNewCategory(of: filteredCategories[indexPath.row])
+            Taptic.lightTaptic()
+            closeTapped()
+        } else {
+            fatalError()
+        }
     }
-
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
+    }
+    
+    private func setBar() {
+        self.configureNavigationBar(largeTitleColor: .white, backgoundColor: UIColor(named: ColourUtil.grass1.rawValue)!, tintColor: .white, title: "Categories", preferredLargeTitle: false)
+        
+        self.tableView.backgroundColor = UIColor(named: ColourUtil.cream2.rawValue)
+        
+        let cancel = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(closeTapped))
+        navigationItem.rightBarButtonItems = [cancel]
+    }
+    
     @objc func closeTapped() {
         navigationController?.popViewController(animated: true)
         dismiss(animated: true, completion: nil)

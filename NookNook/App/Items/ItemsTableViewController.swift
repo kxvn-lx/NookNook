@@ -16,6 +16,16 @@ class ItemsTableViewController: UITableViewController {
     
     var favouritedItems: [Item] = []
     var items: [Item] = []
+    var filteredItems: [Item] = []
+    var currentCategory: Categories = Categories.housewares
+    
+    let searchController = UISearchController(searchResultsController: nil)
+    var isSearchBarEmpty: Bool {
+      return searchController.searchBar.text?.isEmpty ?? true
+    }
+    var isFiltering: Bool {
+      return searchController.isActive && !isSearchBarEmpty
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,8 +34,18 @@ class ItemsTableViewController: UITableViewController {
         tableView.estimatedRowHeight = 200
         
         setBar()
-        items = DataEngine.loadJSON(category: DataEngine.Categories.housewares)
+        
+        // Default categories to be presented
+        items = DataEngine.loadJSON(category: currentCategory)
+        
+          
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search \(items.count) items..."
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
     }
+    
     
     // MARK: - Table view data source
     
@@ -34,6 +54,9 @@ class ItemsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isFiltering {
+          return filteredItems.count
+        }
         return items.count
     }
     
@@ -41,20 +64,45 @@ class ItemsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: ITEM_CELL, for: indexPath)
         
         if let itemCell = cell as? ItemTableViewCell {
-            itemCell.itemImageView.sd_setImage(with: ImageEngine.parseURL(of: items[indexPath.row].image!), placeholderImage: nil)
-            itemCell.itemNameLabel.text = items[indexPath.row].name
-            itemCell.obtainedFromLabel.text = items[indexPath.row].obtainedFrom
-            itemCell.buyLabel.attributedText = PriceEngine.renderPrice(amount: items[indexPath.row].buy, with: .buy)
-            itemCell.sellLabel.attributedText = PriceEngine.renderPrice(amount: items[indexPath.row].sell, with: .sell)
+            itemCell.itemImageView.sd_imageTransition = .fade
+            itemCell.itemImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
             
-            itemCell.isFavImageView.image = favouritedItems.contains(items[indexPath.row]) ?  IconUtil.systemIcon(of: IconUtil.IconName.starFill, weight: .thin) : nil
-            itemCell.customisableImageView.image = items[indexPath.row].isCustomisable! ? IconUtil.systemIcon(of: IconUtil.IconName.paintbrush, weight: .thin) : nil
+            let item: Item
+            if isFiltering {
+                item = filteredItems[indexPath.row]
+            } else {
+                item = items[indexPath.row]
+            }
+            
+            itemCell.itemImageView.sd_setImage(with: ImageEngine.parseURL(of: item.image!), placeholderImage: nil)
+            itemCell.itemNameLabel.text = item.name
+            itemCell.obtainedFromLabel.text = items[indexPath.row].obtainedFrom
+            itemCell.buyLabel.attributedText = PriceEngine.renderPrice(amount: item.buy, with: .buy)
+            itemCell.sellLabel.attributedText = PriceEngine.renderPrice(amount: item.sell, with: .sell)
+            
+            itemCell.isFavImageView.image = favouritedItems.contains(item) ?  IconUtil.systemIcon(of: IconUtil.IconName.starFill, weight: .thin) : nil
+            itemCell.customisableImageView.image = item.isCustomisable! ? IconUtil.systemIcon(of: IconUtil.IconName.paintbrush, weight: .thin) : nil
         }
         return cell
     }
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedItem: Item
+        if isFiltering {
+            selectedItem = filteredItems[indexPath.row]
+        } else {
+            selectedItem = items[indexPath.row]
+        }
+        
+        print(selectedItem.name)
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
     }
     
     // swipe right function
@@ -76,7 +124,7 @@ class ItemsTableViewController: UITableViewController {
         })
         let starOption = favouritedItems.contains(self.items[indexPath.row]) ? IconUtil.IconName.starFill : IconUtil.IconName.star
         favouriteAction.image = IconUtil.systemIcon(of: starOption, weight: .thin)
-        favouriteAction.backgroundColor = UIColor(named: ColourUtil.primary2.rawValue)
+        favouriteAction.backgroundColor = UIColor(named: ColourUtil.grass2.rawValue)
         
         return UISwipeActionsConfiguration(actions: [favouriteAction])
         
@@ -84,8 +132,10 @@ class ItemsTableViewController: UITableViewController {
     
     // Modify the UI
     private func setBar() {
-        tabBarController?.tabBar.barTintColor = UIColor(named: ColourUtil.primary.rawValue)
-        self.configureNavigationBar(largeTitleColor: .white, backgoundColor: UIColor(named: ColourUtil.primary.rawValue)!, tintColor: .white, title: "Items", preferredLargeTitle: true)
+        tabBarController?.tabBar.barTintColor = UIColor(named: ColourUtil.grass1.rawValue)
+        self.configureNavigationBar(largeTitleColor: .white, backgoundColor: UIColor(named: ColourUtil.grass1.rawValue)!, tintColor: .white, title: "Items", preferredLargeTitle: true)
+        
+        self.tableView.backgroundColor = UIColor(named: ColourUtil.cream2.rawValue)
         
         tabBarController?.tabBar.items![0].image = UIImage(systemName: "house")
         tabBarController?.tabBar.items![0].selectedImage = UIImage(systemName: "house.fill")
@@ -95,7 +145,7 @@ class ItemsTableViewController: UITableViewController {
         button.setImage(IconUtil.systemIcon(of: .filter, weight: .regular), for: .normal)
         button.addTarget(self, action: #selector(filterButtonPressed), for: UIControl.Event.touchUpInside)
         button.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
-
+        
         let barButton = UIBarButtonItem(customView: button)
         self.navigationItem.rightBarButtonItem = barButton
     }
@@ -103,9 +153,38 @@ class ItemsTableViewController: UITableViewController {
     
     @objc func filterButtonPressed() {
         let CAT_ID = "Categories"
-        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyBoard.instantiateViewController(withIdentifier: CAT_ID)
-        self.present(vc, animated: true, completion: nil)
+        
+        let vc = self.storyboard!.instantiateViewController(withIdentifier: CAT_ID) as! CategoriesTableViewController
+        vc.filteredCategories = Categories.items()
+        vc.catDelegate = self
+        vc.currentCategory = currentCategory
+        
+        let navController = UINavigationController(rootViewController: vc)
+        self.present(navController, animated:true, completion: nil)
     }
     
+}
+
+extension ItemsTableViewController: CatDelegate {
+    func parseNewCategory(of category: Categories) {
+        currentCategory = category
+        items = DataEngine.loadJSON(category: currentCategory)
+        tableView.reloadData()
+        searchController.searchBar.placeholder = "Search \(items.count) items..."
+    }
+}
+
+extension ItemsTableViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+    let searchBar = searchController.searchBar
+    filterContentForSearchText(searchBar.text!)
+    }
+    
+    func filterContentForSearchText(_ searchText: String) {
+      filteredItems = items.filter { (item: Item) -> Bool in
+        return item.name.lowercased().contains(searchText.lowercased())
+      }
+      
+      tableView.reloadData()
+    }
 }

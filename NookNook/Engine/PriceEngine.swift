@@ -18,15 +18,16 @@ struct PriceEngine {
     
     static func renderPrice(amount: Int?, with price: Price) -> NSMutableAttributedString {
         
-        let body: String = amount != nil ? String(amount!) : "-"
+        let body: String = amount != 0 ? String(amount!) : "-"
         
-        let titleAttr = [NSAttributedString.Key.font :  UIFont.systemFont(ofSize: 12, weight: .semibold)]
-        let finalString = NSMutableAttributedString(string: price.rawValue, attributes:titleAttr)
+        let priceAttr = [NSAttributedString.Key.font :  UIFont.systemFont(ofSize: 12, weight: .semibold)]
+        let finalString = NSMutableAttributedString(string: body, attributes:priceAttr)
         
-        let bodyString = NSMutableAttributedString(string: body)
+        let bodyString = NSMutableAttributedString(string: price.rawValue)
         
-        finalString.append(bodyString)
         
-        return finalString
+        bodyString.append(finalString)
+        
+        return bodyString
     }
 }
