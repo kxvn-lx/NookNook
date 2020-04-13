@@ -82,7 +82,7 @@ class ItemsTableViewController: UITableViewController {
         
     }
     
-    // Change the appearance of navbar and tabbar
+    // Modify the UI
     private func setBar() {
         tabBarController?.tabBar.barTintColor = UIColor(named: ColourUtil.primary.rawValue)
         self.configureNavigationBar(largeTitleColor: .white, backgoundColor: UIColor(named: ColourUtil.primary.rawValue)!, tintColor: .white, title: "Items", preferredLargeTitle: true)
@@ -90,6 +90,22 @@ class ItemsTableViewController: UITableViewController {
         tabBarController?.tabBar.items![0].image = UIImage(systemName: "house")
         tabBarController?.tabBar.items![0].selectedImage = UIImage(systemName: "house.fill")
         tabBarController?.tabBar.tintColor = .white
+        
+        let button: UIButton = UIButton(type: .custom)
+        button.setImage(IconUtil.systemIcon(of: .filter, weight: .regular), for: .normal)
+        button.addTarget(self, action: #selector(filterButtonPressed), for: UIControl.Event.touchUpInside)
+        button.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
+
+        let barButton = UIBarButtonItem(customView: button)
+        self.navigationItem.rightBarButtonItem = barButton
+    }
+    
+    
+    @objc func filterButtonPressed() {
+        let CAT_ID = "Categories"
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyBoard.instantiateViewController(withIdentifier: CAT_ID)
+        self.present(vc, animated: true, completion: nil)
     }
     
 }

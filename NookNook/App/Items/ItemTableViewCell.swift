@@ -104,6 +104,8 @@ class ItemTableViewCell: UITableViewCell {
         bsStackView.addArrangedSubview(buyLabel)
         bsStackView.addArrangedSubview(sellLabel)
         
+        infoStackView.isLayoutMarginsRelativeArrangement = true
+        infoStackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: MARGIN, leading: 0, bottom: 0, trailing: 0)
         infoStackView.addArrangedSubview(itemNameLabel)
         infoStackView.addArrangedSubview(obtainedFromLabel)
         infoStackView.addArrangedSubview(bsStackView)
