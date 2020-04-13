@@ -8,12 +8,14 @@
 
 import UIKit
 import SDWebImage
+import SwiftyJSON
 
 class ItemsTableViewController: UITableViewController {
     
     let ITEM_CELL = "ItemCell"
     
     var favouritedItems: [Item] = []
+    var items: [Item] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +24,7 @@ class ItemsTableViewController: UITableViewController {
         tableView.estimatedRowHeight = 200
         
         setBar()
+        items = DataEngine.loadJSON(category: DataEngine.Categories.housewares)
     }
     
     // MARK: - Table view data source
@@ -31,18 +34,21 @@ class ItemsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return items.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ITEM_CELL, for: indexPath)
         
         if let itemCell = cell as? ItemTableViewCell {
-            itemCell.itemImageView.sd_setImage(with: ImageEngine.parseURL(of: static_item.image!), placeholderImage: nil)
-            itemCell.itemNameLabel.text = static_item.name
-            itemCell.obtainedFromLabel.text = static_item.obtainedFrom
-            itemCell.buyLabel.text = "Buy: \(static_item.buy!)"
-            itemCell.sellLabel.text = "Sell: \(static_item.sell!)"
+            itemCell.itemImageView.sd_setImage(with: ImageEngine.parseURL(of: items[indexPath.row].image!), placeholderImage: nil)
+            itemCell.itemNameLabel.text = items[indexPath.row].name
+            itemCell.obtainedFromLabel.text = items[indexPath.row].obtainedFrom
+            itemCell.buyLabel.attributedText = PriceEngine.renderPrice(amount: items[indexPath.row].buy, with: .buy)
+            itemCell.sellLabel.attributedText = PriceEngine.renderPrice(amount: items[indexPath.row].sell, with: .sell)
+            
+            itemCell.isFavImageView.image = favouritedItems.contains(items[indexPath.row]) ?  IconUtil.systemIcon(of: IconUtil.IconName.starFill, weight: .thin) : nil
+            itemCell.customisableImageView.image = items[indexPath.row].isCustomisable! ? IconUtil.systemIcon(of: IconUtil.IconName.paintbrush, weight: .thin) : nil
         }
         return cell
     }
@@ -56,30 +62,34 @@ class ItemsTableViewController: UITableViewController {
                             leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
     {
         let favouriteAction = UIContextualAction(style: .normal, title:  "", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-            if !self.favouritedItems.contains(static_item) {
-                self.favouritedItems.append(static_item)
+            if !self.favouritedItems.contains(self.items[indexPath.row]) {
+                self.favouritedItems.append(self.items[indexPath.row])
             } else {
-                if let index = self.favouritedItems.firstIndex(of: static_item) {
+                if let index = self.favouritedItems.firstIndex(of: self.items[indexPath.row]) {
                     self.favouritedItems.remove(at: index)
                 }
             }
             
+            self.tableView.reloadRows(at: [indexPath], with: .left)
+            
             success(true)
         })
-        let starOption = favouritedItems.contains(static_item) ? "star.fill" : "star"
-        let favConfig = UIImage.SymbolConfiguration(weight: .thin)
-        let star = UIImage(systemName: starOption, withConfiguration: favConfig)
-        favouriteAction.image = star
+        let starOption = favouritedItems.contains(self.items[indexPath.row]) ? IconUtil.IconName.starFill : IconUtil.IconName.star
+        favouriteAction.image = IconUtil.systemIcon(of: starOption, weight: .thin)
         favouriteAction.backgroundColor = UIColor(named: ColourUtil.primary2.rawValue)
         
         return UISwipeActionsConfiguration(actions: [favouriteAction])
         
     }
     
-    // Change the colour of Tab bar and nav bar.
+    // Change the appearance of navbar and tabbar
     private func setBar() {
         tabBarController?.tabBar.barTintColor = UIColor(named: ColourUtil.primary.rawValue)
-        self.configureNavigationBar(largeTitleColor: .black, backgoundColor: UIColor(named: ColourUtil.primary.rawValue)!, tintColor: .black, title: "Items", preferredLargeTitle: true)
+        self.configureNavigationBar(largeTitleColor: .white, backgoundColor: UIColor(named: ColourUtil.primary.rawValue)!, tintColor: .white, title: "Items", preferredLargeTitle: true)
+        
+        tabBarController?.tabBar.items![0].image = UIImage(systemName: "house")
+        tabBarController?.tabBar.items![0].selectedImage = UIImage(systemName: "house.fill")
+        tabBarController?.tabBar.tintColor = .white
     }
     
 }

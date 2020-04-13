@@ -14,8 +14,8 @@ struct Item: Codable, Equatable, Identifiable {
     let name: String
     let image: String?
     let obtainedFrom: String?
-    let dIY: Bool?
-    let customize: Bool?
+    let isDIY: Bool?
+    let isCustomisable: Bool?
     
     let variants: [String]?
     
@@ -26,15 +26,3 @@ struct Item: Codable, Equatable, Identifiable {
     
     let set: String?
 }
-
-let static_item = Item(name: "Acoustic Guitar",
-    image: "3FX566U",
-    obtainedFrom: "Crafting",
-    dIY: true,
-    customize: true,
-    variants: ["3FX566U", "dob8IS9", "fJWXEXw", "CrJ1ozg", "LJROUEd", ""],
-    category: "Housewares",
-    buy: 200,
-    sell: 1300,
-    set: "Instrument"
-)
