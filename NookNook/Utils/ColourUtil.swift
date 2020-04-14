@@ -14,4 +14,5 @@ enum ColourUtil: String {
     case grass2 = "Grass-2"
     case cream1 = "Cream-1"
     case cream2 = "Cream-2"
+    case gold1 = "Gold-1"
 }

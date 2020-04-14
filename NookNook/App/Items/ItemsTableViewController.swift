@@ -105,6 +105,15 @@ class ItemsTableViewController: UITableViewController {
         cell.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
     }
     
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "\(currentCategory.rawValue)"
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        (view as! UITableViewHeaderFooterView).contentView.backgroundColor = UIColor(named: ColourUtil.cream2.rawValue)
+        (view as! UITableViewHeaderFooterView).textLabel?.textColor = UIColor(named: ColourUtil.dirt1.rawValue)
+    }
+    
     // swipe right function
     override func tableView(_ tableView: UITableView,
                             leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
@@ -143,8 +152,9 @@ class ItemsTableViewController: UITableViewController {
         
         let button: UIButton = UIButton(type: .custom)
         button.setImage(IconUtil.systemIcon(of: .filter, weight: .regular), for: .normal)
-        button.addTarget(self, action: #selector(filterButtonPressed), for: UIControl.Event.touchUpInside)
-        button.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
+        button.addTarget(self, action: #selector(filterButtonPressed), for: .touchUpInside)
+        button.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        button.imageView?.contentMode = .scaleAspectFit
         
         let barButton = UIBarButtonItem(customView: button)
         self.navigationItem.rightBarButtonItem = barButton

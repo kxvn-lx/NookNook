@@ -127,9 +127,12 @@ class ItemTableViewCell: UITableViewCell {
     }
     
     private func setupConstraint() {
+        let itemImageViewSize: CGFloat = 0.25
+        let smallIconSize: CGFloat = itemImageViewSize / 6
+        
         NSLayoutConstraint.activate([
-            itemImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.3),
-            itemImageView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.3),
+            itemImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: itemImageViewSize),
+            itemImageView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: itemImageViewSize),
             
             mStackView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: MARGIN),
             mStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: MARGIN),
@@ -140,11 +143,11 @@ class ItemTableViewCell: UITableViewCell {
             iconStackView.topAnchor.constraint(equalTo: itemImageView.topAnchor),
             iconStackView.bottomAnchor.constraint(equalTo: itemImageView.bottomAnchor, constant: -MARGIN),
             
-            isFavImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.05),
-            isFavImageView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.05),
+            isFavImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: smallIconSize),
+            isFavImageView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: smallIconSize),
             
-            customisableImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.05),
-            customisableImageView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.05),
+            customisableImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: smallIconSize),
+            customisableImageView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: smallIconSize),
         ])
     }
     
