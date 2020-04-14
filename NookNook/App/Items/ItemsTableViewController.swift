@@ -80,12 +80,14 @@ class ItemsTableViewController: UITableViewController {
             itemCell.itemImageView.sd_setImage(with: ImageEngine.parseURL(of: item.image!), placeholderImage: nil)
             itemCell.itemNameLabel.text = item.name
             itemCell.obtainedFromLabel.text = items[indexPath.row].obtainedFrom
-            itemCell.buyLabel.attributedText = PriceEngine.renderPrice(amount: item.buy, with: .buy)
-            itemCell.sellLabel.attributedText = PriceEngine.renderPrice(amount: item.sell, with: .sell)
+            itemCell.buyLabel.attributedText = PriceEngine.renderPrice(amount: item.buy, with: .buy, of: 12)
+            itemCell.sellLabel.attributedText = PriceEngine.renderPrice(amount: item.sell, with: .sell, of: 12)
             
             itemCell.isFavImageView.image = favouritedItems.contains(item) ?  IconUtil.systemIcon(of: IconUtil.IconName.starFill, weight: .thin) : nil
             if item.variants != nil {
                 itemCell.customisableImageView.image = IconUtil.systemIcon(of: IconUtil.IconName.paintbrush, weight: .thin)
+            } else {
+                itemCell.customisableImageView.image = nil
             }
         }
         return cell

@@ -109,8 +109,8 @@ class DetailViewController: UIViewController {
         detailImageView.sd_setImage(with: ImageEngine.parseURL(of: itemObj.image!), completed: nil)
         titleLabel.text = itemObj.name
         subtitleLabel.text = itemObj.obtainedFrom
-        buyLabel.attributedText = PriceEngine.renderPrice(amount: itemObj.buy!, with: .none)
-        sellLabel.attributedText = PriceEngine.renderPrice(amount: itemObj.sell!, with: .none)
+        buyLabel.attributedText = PriceEngine.renderPrice(amount: itemObj.buy!, with: .none, of: buyLabel.font.pointSize)
+        sellLabel.attributedText = PriceEngine.renderPrice(amount: itemObj.sell!, with: .none, of: buyLabel.font.pointSize)
         if itemObj.variants == nil {
             variationStack.isHidden = true
         }

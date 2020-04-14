@@ -25,7 +25,7 @@ struct PriceEngine {
      - Returns:
         - An attributed string with a rendered format.
      */
-    static func renderPrice(amount: Int?, with price: Price) -> NSMutableAttributedString {
+    static func renderPrice(amount: Int?, with price: Price, of size: CGFloat) -> NSMutableAttributedString {
         
         // Format the price for better readability.
         let numberFormatter = NumberFormatter()
@@ -34,7 +34,7 @@ struct PriceEngine {
         
         let body: String = amount != 0 ? String(formattedNumber) : "-"
         
-        let priceAttr = [NSAttributedString.Key.font :  UIFont.systemFont(ofSize: 12, weight: .semibold), NSAttributedString.Key.foregroundColor : UIColor(named: ColourUtil.gold1.rawValue)]
+        let priceAttr = [NSAttributedString.Key.font :  UIFont.systemFont(ofSize: size, weight: .semibold), NSAttributedString.Key.foregroundColor : UIColor(named: ColourUtil.gold1.rawValue)]
         let finalString = NSMutableAttributedString(string: body, attributes: priceAttr as [NSAttributedString.Key : Any])
         
         let bodyString = NSMutableAttributedString(string: price.rawValue)
