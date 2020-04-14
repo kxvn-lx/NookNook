@@ -84,7 +84,9 @@ class ItemsTableViewController: UITableViewController {
             itemCell.sellLabel.attributedText = PriceEngine.renderPrice(amount: item.sell, with: .sell)
             
             itemCell.isFavImageView.image = favouritedItems.contains(item) ?  IconUtil.systemIcon(of: IconUtil.IconName.starFill, weight: .thin) : nil
-            itemCell.customisableImageView.image = item.isCustomisable! ? IconUtil.systemIcon(of: IconUtil.IconName.paintbrush, weight: .thin) : nil
+            if item.variants != nil {
+                itemCell.customisableImageView.image = IconUtil.systemIcon(of: IconUtil.IconName.paintbrush, weight: .thin)
+            }
         }
         return cell
     }
