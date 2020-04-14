@@ -36,7 +36,7 @@ class ItemsTableViewController: UITableViewController {
         setBar()
         
         // Default categories to be presented
-        items = DataEngine.loadJSON(category: currentCategory)
+        items = DataEngine.loadJSON(to: .items, category: currentCategory) as! [Item]
         
           
         searchController.searchResultsUpdater = self
@@ -150,8 +150,7 @@ class ItemsTableViewController: UITableViewController {
         self.navigationItem.rightBarButtonItem = barButton
     }
     
-    
-    @objc func filterButtonPressed() {
+    @objc private func filterButtonPressed() {
         let CAT_ID = "Categories"
         
         let vc = self.storyboard!.instantiateViewController(withIdentifier: CAT_ID) as! CategoriesTableViewController
@@ -168,7 +167,7 @@ class ItemsTableViewController: UITableViewController {
 extension ItemsTableViewController: CatDelegate {
     func parseNewCategory(of category: Categories) {
         currentCategory = category
-        items = DataEngine.loadJSON(category: currentCategory)
+        items = DataEngine.loadJSON(to: .items, category: currentCategory) as! [Item]
         tableView.reloadData()
         searchController.searchBar.placeholder = "Search \(items.count) items..."
     }

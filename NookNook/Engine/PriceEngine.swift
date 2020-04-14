@@ -16,6 +16,14 @@ struct PriceEngine {
         case sell = "Sell for: "
     }
     
+    /**
+     Render the price into a better visual
+     - parameters:
+        - amount: The amount of the price
+        - price: The title of the price, either buy or sell.
+     - Returns:
+        - An attributed string with a rendered format.
+     */
     static func renderPrice(amount: Int?, with price: Price) -> NSMutableAttributedString {
         
         let body: String = amount != 0 ? String(amount!) : "-"

@@ -19,6 +19,14 @@ struct IconUtil {
         case xmark
     }
     
+    /**
+     This method will render an icon based on the system icon.
+     - Parameters:
+        - icon: The icon's system name.
+        - weight: The weight of the icon.
+     - Returns:
+        - A UIImage of the icon.
+     */
     static func systemIcon(of icon: IconName, weight: UIImage.SymbolWeight) -> UIImage {
         let config = UIImage.SymbolConfiguration(weight: weight)
         let icon = UIImage(systemName: icon.rawValue, withConfiguration: config)!
