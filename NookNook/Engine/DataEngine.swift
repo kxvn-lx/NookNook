@@ -12,6 +12,7 @@ import SwiftyJSON
 
 struct DataEngine {
     
+    // If new group is being created, this will know first.
     enum Group {
         case items, critters, wardrobes
     }
@@ -51,17 +52,16 @@ struct DataEngine {
                     }
                     
                 case .critters:
-                    for critter in jsonObj {
-                        print("Attempt to create critter objects.")
-                    }
+                    print("Attempt to create critter objects.")
+//                    for critter in jsonObj {
+//
+//                    }
                     
                 case .wardrobes:
-                    for wardrobe in jsonObj {
-                        print("Attempt to create critter objects.")
-                    }
-                    
-                default:
-                    fatalError("No group detected.")
+                    print("Attempt to create critter objects.")
+//                    for wardrobe in jsonObj {
+//
+//                    }
                     
                 }
                 

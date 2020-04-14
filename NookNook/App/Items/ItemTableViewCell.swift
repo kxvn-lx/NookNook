@@ -20,9 +20,9 @@ class ItemTableViewCell: UITableViewCell {
     var buyLabel: UILabel!
     var sellLabel: UILabel!
     
-    var infoStackView: UIStackView!
-    var mStackView: UIStackView!
-    var iconStackView: UIStackView!
+    private var infoStackView: UIStackView!
+    private var mStackView: UIStackView!
+    private var iconStackView: UIStackView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

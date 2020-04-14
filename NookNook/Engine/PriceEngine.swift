@@ -14,6 +14,7 @@ struct PriceEngine {
     enum Price: String {
         case buy = "Buy for: "
         case sell = "Sell for: "
+        case none = ""
     }
     
     /**

@@ -10,6 +10,8 @@ import UIKit
 
 class CrittersTableViewController: UITableViewController {
 
+    let CRITTER_CELL = "CritterCell"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

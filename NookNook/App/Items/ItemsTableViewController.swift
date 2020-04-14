@@ -12,7 +12,8 @@ import SwiftyJSON
 
 class ItemsTableViewController: UITableViewController {
     
-    let ITEM_CELL = "ItemCell"
+    private let ITEM_CELL = "ItemCell"
+    private let DETAIL_ID = "Detail"
     
     var favouritedItems: [Item] = []
     var items: [Item] = []
@@ -29,6 +30,8 @@ class ItemsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.clearsSelectionOnViewWillAppear = true
         
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 200
@@ -91,6 +94,7 @@ class ItemsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         let selectedItem: Item
         if isFiltering {
             selectedItem = filteredItems[indexPath.row]
@@ -98,7 +102,15 @@ class ItemsTableViewController: UITableViewController {
             selectedItem = items[indexPath.row]
         }
         
-        print(selectedItem.name)
+        
+        let vc = self.storyboard!.instantiateViewController(withIdentifier: DETAIL_ID) as! DetailViewController
+        
+        vc.parseOject(from: .items, object: selectedItem)
+        
+        let navController = UINavigationController(rootViewController: vc)
+        self.present(navController, animated:true, completion: nil)
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
