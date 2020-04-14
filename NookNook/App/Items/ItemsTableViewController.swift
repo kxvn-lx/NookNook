@@ -146,8 +146,6 @@ class ItemsTableViewController: UITableViewController {
         
         self.tableView.backgroundColor = UIColor(named: ColourUtil.cream2.rawValue)
         
-        tabBarController?.tabBar.items![0].image = UIImage(systemName: "house")
-        tabBarController?.tabBar.items![0].selectedImage = UIImage(systemName: "house.fill")
         tabBarController?.tabBar.tintColor = .white
         
         let button: UIButton = UIButton(type: .custom)
