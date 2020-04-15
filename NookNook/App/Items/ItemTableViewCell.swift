@@ -12,10 +12,10 @@ class ItemTableViewCell: UITableViewCell {
     
     private let MARGIN: CGFloat = 10
     
-    var itemImageView: UIImageView!
+    var imgView: UIImageView!
     var customisableImageView: UIImageView!
     var isFavImageView: UIImageView!
-    var itemNameLabel: UILabel!
+    var nameLabel: UILabel!
     var obtainedFromLabel: UILabel!
     var buyLabel: UILabel!
     var sellLabel: UILabel!
@@ -56,18 +56,18 @@ class ItemTableViewCell: UITableViewCell {
         iconStackView.addArrangedSubview(customisableImageView)
         iconStackView.addArrangedSubview(isFavImageView)
         
-        itemImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-        itemImageView.translatesAutoresizingMaskIntoConstraints = false
-        itemImageView.contentMode = .scaleAspectFit
+        imgView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        imgView.translatesAutoresizingMaskIntoConstraints = false
+        imgView.contentMode = .scaleAspectFit
         
-        itemImageView.addSubview(iconStackView)
+        imgView.addSubview(iconStackView)
         
         
-        itemNameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
-        itemNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        itemNameLabel.numberOfLines = 0
-        itemNameLabel.font = UIFont.systemFont(ofSize: itemNameLabel.font!.pointSize, weight: .semibold)
-        itemNameLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)
+        nameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
+        nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        nameLabel.numberOfLines = 0
+        nameLabel.font = UIFont.systemFont(ofSize: nameLabel.font!.pointSize, weight: .semibold)
+        nameLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)
         
         obtainedFromLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         obtainedFromLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -106,7 +106,7 @@ class ItemTableViewCell: UITableViewCell {
         
         infoStackView.isLayoutMarginsRelativeArrangement = true
         infoStackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: MARGIN, leading: 0, bottom: 0, trailing: 0)
-        infoStackView.addArrangedSubview(itemNameLabel)
+        infoStackView.addArrangedSubview(nameLabel)
         infoStackView.addArrangedSubview(obtainedFromLabel)
         infoStackView.addArrangedSubview(bsStackView)
 
@@ -118,7 +118,7 @@ class ItemTableViewCell: UITableViewCell {
         mStackView.spacing = MARGIN
         
 
-        mStackView.addArrangedSubview(itemImageView)
+        mStackView.addArrangedSubview(imgView)
         mStackView.addArrangedSubview(infoStackView)
         
 
@@ -131,17 +131,17 @@ class ItemTableViewCell: UITableViewCell {
         let smallIconSize: CGFloat = itemImageViewSize / 6
         
         NSLayoutConstraint.activate([
-            itemImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: itemImageViewSize),
-            itemImageView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: itemImageViewSize),
+            imgView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: itemImageViewSize),
+            imgView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: itemImageViewSize),
             
             mStackView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: MARGIN),
             mStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: MARGIN),
             mStackView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -MARGIN),
             mStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -MARGIN),
             
-            iconStackView.leftAnchor.constraint(equalTo: itemImageView.leftAnchor),
-            iconStackView.topAnchor.constraint(equalTo: itemImageView.topAnchor),
-            iconStackView.bottomAnchor.constraint(equalTo: itemImageView.bottomAnchor, constant: -MARGIN),
+            iconStackView.leftAnchor.constraint(equalTo: imgView.leftAnchor),
+            iconStackView.topAnchor.constraint(equalTo: imgView.topAnchor),
+            iconStackView.bottomAnchor.constraint(equalTo: imgView.bottomAnchor, constant: -MARGIN),
             
             isFavImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: smallIconSize),
             isFavImageView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: smallIconSize),

@@ -11,6 +11,9 @@
 		0A01F31224431725001499D5 /* ImageEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A01F31124431724001499D5 /* ImageEngine.swift */; };
 		0A295B4A244494F9001CF828 /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A295B49244494F9001CF828 /* Categories.swift */; };
 		0A295B4C2444AAD0001CF828 /* Taptic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A295B4B2444AAD0001CF828 /* Taptic.swift */; };
+		0A36427E244695FE0081315A /* Critter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A36427D244695FE0081315A /* Critter.swift */; };
+		0A36428024469C600081315A /* bugs.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A36427F24469C600081315A /* bugs.json */; };
+		0A36428224469CAC0081315A /* fishes.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A36428124469CAC0081315A /* fishes.json */; };
 		0A370B5F2443223D00A72048 /* VC+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A370B5E2443223D00A72048 /* VC+.swift */; };
 		0A370B61244322F100A72048 /* ColourUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A370B60244322F100A72048 /* ColourUtil.swift */; };
 		0A370B6C2444467900A72048 /* PriceEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A370B6B2444467900A72048 /* PriceEngine.swift */; };
@@ -67,6 +70,9 @@
 		0A01F31124431724001499D5 /* ImageEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEngine.swift; sourceTree = "<group>"; };
 		0A295B49244494F9001CF828 /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
 		0A295B4B2444AAD0001CF828 /* Taptic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Taptic.swift; sourceTree = "<group>"; };
+		0A36427D244695FE0081315A /* Critter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Critter.swift; sourceTree = "<group>"; };
+		0A36427F24469C600081315A /* bugs.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bugs.json; sourceTree = "<group>"; };
+		0A36428124469CAC0081315A /* fishes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fishes.json; sourceTree = "<group>"; };
 		0A370B5E2443223D00A72048 /* VC+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VC+.swift"; sourceTree = "<group>"; };
 		0A370B60244322F100A72048 /* ColourUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColourUtil.swift; sourceTree = "<group>"; };
 		0A370B6B2444467900A72048 /* PriceEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceEngine.swift; sourceTree = "<group>"; };
@@ -187,11 +193,13 @@
 				0A370B702444543000A72048 /* accessories.json */,
 				0A370B882444543200A72048 /* bags.json */,
 				0A370B742444543000A72048 /* bottoms.json */,
+				0A36427F24469C600081315A /* bugs.json */,
 				0A370B762444543000A72048 /* bugs-north.json */,
 				0A370B782444543000A72048 /* bugs-south.json */,
 				0A370B8B2444543200A72048 /* construction.json */,
 				0A370B7B2444543000A72048 /* dresses.json */,
 				0A370B822444543100A72048 /* fencing.json */,
+				0A36428124469CAC0081315A /* fishes.json */,
 				0A370B772444543000A72048 /* fish-north.json */,
 				0A370B7C2444543100A72048 /* fish-south.json */,
 				0A370B842444543100A72048 /* floors.json */,
@@ -293,6 +301,7 @@
 			isa = PBXGroup;
 			children = (
 				0AFD70742441D9BF00957BE6 /* Item.swift */,
+				0A36427D244695FE0081315A /* Critter.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -364,6 +373,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A370B9E2444543200A72048 /* socks.json in Resources */,
+				0A36428224469CAC0081315A /* fishes.json in Resources */,
 				0A370BA22444543200A72048 /* songs.json in Resources */,
 				0A370B982444543200A72048 /* dresses.json in Resources */,
 				0A370B992444543200A72048 /* fish-south.json in Resources */,
@@ -386,6 +396,7 @@
 				0A370B9B2444543200A72048 /* posters.json in Resources */,
 				0A370B952444543200A72048 /* bugs-south.json in Resources */,
 				0A370BA02444543200A72048 /* headwear.json in Resources */,
+				0A36428024469C600081315A /* bugs.json in Resources */,
 				0A370BA82444543200A72048 /* construction.json in Resources */,
 				0AFD705624419DD300957BE6 /* Main.storyboard in Resources */,
 				0A370BA52444543200A72048 /* bags.json in Resources */,
@@ -409,6 +420,7 @@
 				0A370B5F2443223D00A72048 /* VC+.swift in Sources */,
 				0A7FA6A32445971900921079 /* CrittersTableViewController.swift in Sources */,
 				0A7FA6A52445972A00921079 /* CritterTableViewCell.swift in Sources */,
+				0A36427E244695FE0081315A /* Critter.swift in Sources */,
 				0AFD704F24419DD300957BE6 /* AppDelegate.swift in Sources */,
 				0A370B6E24444BD800A72048 /* DataEngine.swift in Sources */,
 				0AFD705124419DD300957BE6 /* SceneDelegate.swift in Sources */,

@@ -9,42 +9,137 @@
 import UIKit
 
 class CrittersTableViewController: UITableViewController {
-
+    
     let CRITTER_CELL = "CritterCell"
+    private let DETAIL_ID = "Detail"
+    
+    var favouritedCritters: [Critter] = []
+    var critters: [Critter] = []
+    var filteredCritters: [Critter] = []
+    var currentCategory: Categories = Categories.bugsSouth
+    
+    let searchController = UISearchController(searchResultsController: nil)
+    var isSearchBarEmpty: Bool {
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    var isFiltering: Bool {
+        return searchController.isActive && !isSearchBarEmpty
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        self.clearsSelectionOnViewWillAppear = true
+        
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 200
+        
         setBar()
+        
+        // Default categories to be presented
+        critters = DataEngine.loadCritterJSON(from: currentCategory)
+        
+        
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search \(critters.count) items..."
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 0
+        return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        if isFiltering {
+            return filteredCritters.count
+        }
+        return critters.count
     }
-
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: CRITTER_CELL, for: indexPath)
+        
         // Configure the cell...
-
+        
         return cell
     }
     
-
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        //        let selectedItem: Item
+        //        if isFiltering {
+        //            selectedItem = filteredItems[indexPath.row]
+        //        } else {
+        //            selectedItem = items[indexPath.row]
+        //        }
+        //
+        //
+        //        let vc = self.storyboard!.instantiateViewController(withIdentifier: DETAIL_ID) as! DetailViewController
+        //
+        //        vc.parseOject(from: .items, object: selectedItem)
+        //
+        //        let navController = UINavigationController(rootViewController: vc)
+        //        self.present(navController, animated:true, completion: nil)
+        //
+        //        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "\(currentCategory.rawValue)"
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        (view as! UITableViewHeaderFooterView).contentView.backgroundColor = UIColor(named: ColourUtil.cream2.rawValue)
+        (view as! UITableViewHeaderFooterView).textLabel?.textColor = UIColor(named: ColourUtil.dirt1.rawValue)
+    }
+    
+    // swipe right function
+    override func tableView(_ tableView: UITableView,
+                            leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
+    {
+        let favouriteAction = UIContextualAction(style: .normal, title:  "", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            if !self.favouritedCritters.contains(self.critters[indexPath.row]) {
+                self.favouritedCritters.append(self.critters[indexPath.row])
+            } else {
+                if let index = self.favouritedCritters.firstIndex(of: self.critters[indexPath.row]) {
+                    self.favouritedCritters.remove(at: index)
+                }
+            }
+            
+            self.tableView.reloadRows(at: [indexPath], with: .left)
+            
+            success(true)
+        })
+        let starOption = favouritedCritters.contains(self.critters[indexPath.row]) ? IconUtil.IconName.starFill : IconUtil.IconName.star
+        favouriteAction.image = IconUtil.systemIcon(of: starOption, weight: .thin)
+        favouriteAction.backgroundColor = UIColor(named: ColourUtil.grass2.rawValue)
+        
+        return UISwipeActionsConfiguration(actions: [favouriteAction])
+        
+    }
+    
+    
     // Modify the UI
     private func setBar() {
         tabBarController?.tabBar.barTintColor = UIColor(named: ColourUtil.grass1.rawValue)
         self.configureNavigationBar(largeTitleColor: .white, backgoundColor: UIColor(named: ColourUtil.grass1.rawValue)!, tintColor: .white, title: "Critters", preferredLargeTitle: true)
         
         self.tableView.backgroundColor = UIColor(named: ColourUtil.cream2.rawValue)
-
+        
         let button: UIButton = UIButton(type: .custom)
         button.setImage(IconUtil.systemIcon(of: .filter, weight: .regular), for: .normal)
         button.addTarget(self, action: #selector(filterButtonPressed), for: .touchUpInside)
@@ -56,7 +151,39 @@ class CrittersTableViewController: UITableViewController {
     }
     
     @objc private func filterButtonPressed() {
-        print("Attempting to filter")
+        let CAT_ID = "Categories"
+        
+        let vc = self.storyboard!.instantiateViewController(withIdentifier: CAT_ID) as! CategoriesTableViewController
+        vc.filteredCategories = Categories.critters()
+        vc.catDelegate = self
+        vc.currentCategory = currentCategory
+        
+        let navController = UINavigationController(rootViewController: vc)
+        self.present(navController, animated:true, completion: nil)
     }
+    
+}
 
+extension CrittersTableViewController: CatDelegate {
+    func parseNewCategory(of category: Categories) {
+        currentCategory = category
+        critters = DataEngine.loadCritterJSON(from: currentCategory)
+        tableView.reloadData()
+        searchController.searchBar.placeholder = "Search \(critters.count) items..."
+    }
+}
+
+extension CrittersTableViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        let searchBar = searchController.searchBar
+        filterContentForSearchText(searchBar.text!)
+    }
+    
+    func filterContentForSearchText(_ searchText: String) {
+        filteredCritters = critters.filter { (critter: Critter) -> Bool in
+            return critter.name.lowercased().contains(searchText.lowercased())
+        }
+        
+        tableView.reloadData()
+    }
 }

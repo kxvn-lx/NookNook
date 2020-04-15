@@ -339,9 +339,14 @@ class DetailViewController: UIViewController {
 
 extension DetailViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let itemObjArr = itemObj.variants {
-            return itemObjArr.count
+        switch groupOrigin {
+        case .items:
+            if let itemObjArr = itemObj.variants {
+                return itemObjArr.count
+            }
+        default: fatalError("Attempt to create cells from an unkown group origin or, groupOrigin is nul!")
         }
+
         return 0
     }
     

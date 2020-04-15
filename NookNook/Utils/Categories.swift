@@ -19,6 +19,7 @@ enum Categories: String {
     case bugsSouth = "bugs-south"
     case fishesNorth = "fish-north"
     case fishesSouth = "fish-south"
+    case bugs, fishes
     
     // Static functions to returns the filtered categories
     static func items() -> [Categories] {

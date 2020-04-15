@@ -12,67 +12,117 @@ import SwiftyJSON
 
 struct DataEngine {
     
-    // If new group is being created, this will know first.
-    enum Group {
-        case items, critters, wardrobes
-    }
-    
     /**
-     Load all datas from the datasource - And return them for view.
-        - parameters:
-          - group: The current VC that invoke the method.
-          - category: The category that needs to be loaded to the VC.
-        - returns:
-                - An array of Any, which will be typecasted individually byt its respective caller.
+     Load Item datas from the datasrouce - and return them for view.
+     - Parameters:
+        - category: The category that needs to be loaded to the VC.
+     - Returns:
+        - An array of Items, ready to be rendered.
      */
-    static func loadJSON(to group: Group, category: Categories) -> [Any] {
-        var datas: [Any] = []
+    static func loadItemJSON(from category: Categories) -> [Item] {
+        var items: [Item] = []
         
         if let path = Bundle.main.path(forResource: category.rawValue, ofType: "json") {
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped)
                 let jsonObj = try JSON(data: data)["results"].array!
                 
-                switch group {
-                case .items:
-                    for item in jsonObj {
-                        let newItem = Item(
-                            name: item["name"].stringValue,
-                            image: item["image"].stringValue,
-                            obtainedFrom: item["obtainedFrom"].stringValue,
-                            isDIY: item["dIY"].boolValue,
-                            isCustomisable: item["customize"].boolValue,
-                            variants: item["variants"].arrayObject as? [String],
-                            category: item["category"].stringValue,
-                            buy: item["buy"].intValue,
-                            sell: item["sell"].intValue,
-                            set: item["set"].stringValue
-                        )
-                        datas.append(newItem)
+                
+                for item in jsonObj {
+                    let newItem = Item(
+                        name: item["name"].stringValue,
+                        image: item["image"].stringValue,
+                        obtainedFrom: item["obtainedFrom"].stringValue,
+                        isDIY: item["dIY"].boolValue,
+                        isCustomisable: item["customize"].boolValue,
+                        variants: item["variants"].arrayObject as? [String],
+                        category: item["category"].stringValue,
+                        buy: item["buy"].intValue,
+                        sell: item["sell"].intValue,
+                        set: item["set"].stringValue
+                    )
+                    items.append(newItem)
+                }
+            } catch let error {
+                fatalError("parse error: \(error.localizedDescription)")
+            }
+        } else {
+            fatalError("Invalid filename/path.")
+        }
+        
+        return items
+    }
+    
+    
+    /**
+     Load Critters datas from the datasrouce - and return them for view.
+     - Parameters:
+        - category: The category  that needs to be loaded to the VC.
+     - Returns:
+        - An array of critters, ready to be rendered.
+     */
+    static func loadCritterJSON(from category: Categories) -> [Critter] {
+        var critters: [Critter] = []
+        
+        if let path = Bundle.main.path(forResource: category.rawValue, ofType: "json") {
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped)
+                let jsonObj = try JSON(data: data)["results"].array!
+                
+                // save active months array from the other JSON file.
+                var activeMonths: [[Int]] = []
+                
+                if let path = Bundle.main.path(forResource: Categories.bugs.rawValue, ofType: "json") {
+                    do {
+                        let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped)
+                        let jsonObj = try JSON(data: data)["results"].array!
+                        
+                        // iterate the data and ONLY get the active months
+                        switch category {
+                        case .bugsNorth, .fishesNorth:
+                            for data in jsonObj {
+                                activeMonths.append(data["activeMonthsNorth"].arrayObject as! [Int])
+                            }
+                        case .bugsSouth, .fishesSouth:
+                            for data in jsonObj {
+                                activeMonths.append(data["activeMonthsSouth"].arrayObject as! [Int])
+                            }
+                        default:
+                            fatalError("Attempt to parse a JSON files not belonging to critters")
+                        }
+                        
+                    } catch let error {
+                        fatalError("parse error: \(error.localizedDescription)")
                     }
-                    
-                case .critters:
-                    print("Attempt to create critter objects.")
-//                    for critter in jsonObj {
-//
-//                    }
-                    
-                case .wardrobes:
-                    print("Attempt to create critter objects.")
-//                    for wardrobe in jsonObj {
-//
-//                    }
-                    
+                } else {
+                    fatalError("Invalid filename/path.")
                 }
                 
-                
-                
+                var critterCount = 0
+                for critter in jsonObj {
+                    let newCritter = Critter(
+                        name: critter["name"].stringValue,
+                        image: critter["image"].stringValue,
+                        weather: critter["weather"].stringValue,
+                        obtainedFrom: critter["obtainedFrom"].stringValue,
+                        startTime: critter["startTime"],
+                        endTime: critter["endTime"],
+                        activeMonths: activeMonths[critterCount],
+                        category: critter["category"].stringValue,
+                        sell: critter["sell"].intValue
+                    )
+                    critterCount += 1
+                    critters.append(newCritter)
+                }
             } catch let error {
                 print("parse error: \(error.localizedDescription)")
             }
         } else {
             print("Invalid filename/path.")
         }
-        return datas
+        
+        
+        
+        return critters
     }
 }

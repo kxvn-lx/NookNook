@@ -39,7 +39,7 @@ class ItemsTableViewController: UITableViewController {
         setBar()
         
         // Default categories to be presented
-        items = DataEngine.loadJSON(to: .items, category: currentCategory) as! [Item]
+        items = DataEngine.loadItemJSON(from: currentCategory)
         
           
         searchController.searchResultsUpdater = self
@@ -67,8 +67,8 @@ class ItemsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: ITEM_CELL, for: indexPath)
         
         if let itemCell = cell as? ItemTableViewCell {
-            itemCell.itemImageView.sd_imageTransition = .fade
-            itemCell.itemImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            itemCell.imgView.sd_imageTransition = .fade
+            itemCell.imgView.sd_imageIndicator = SDWebImageActivityIndicator.gray
             
             let item: Item
             if isFiltering {
@@ -77,8 +77,8 @@ class ItemsTableViewController: UITableViewController {
                 item = items[indexPath.row]
             }
             
-            itemCell.itemImageView.sd_setImage(with: ImageEngine.parseURL(of: item.image!), placeholderImage: nil)
-            itemCell.itemNameLabel.text = item.name
+            itemCell.imgView.sd_setImage(with: ImageEngine.parseURL(of: item.image!), placeholderImage: nil)
+            itemCell.nameLabel.text = item.name
             itemCell.obtainedFromLabel.text = items[indexPath.row].obtainedFrom
             itemCell.buyLabel.attributedText = PriceEngine.renderPrice(amount: item.buy, with: .buy, of: 12)
             itemCell.sellLabel.attributedText = PriceEngine.renderPrice(amount: item.sell, with: .sell, of: 12)
@@ -191,7 +191,7 @@ class ItemsTableViewController: UITableViewController {
 extension ItemsTableViewController: CatDelegate {
     func parseNewCategory(of category: Categories) {
         currentCategory = category
-        items = DataEngine.loadJSON(to: .items, category: currentCategory) as! [Item]
+        items = DataEngine.loadItemJSON(from: currentCategory)
         tableView.reloadData()
         searchController.searchBar.placeholder = "Search \(items.count) items..."
     }
