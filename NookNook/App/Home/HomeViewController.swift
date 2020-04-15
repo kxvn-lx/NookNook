@@ -28,6 +28,9 @@ class HomeViewController: UITabBarController {
         } else {
             fatalError("TabBar index out of bound.")
         }
+        
+        DataEngine.loadVillagersJSON(from: .villagers)
     }
+    
     
 }

@@ -167,6 +167,46 @@ struct DataEngine {
         return wardrobes
     }
     
+    
+    /**
+     Load Villagers datas from the datasrouce - and return them for view.
+     - Parameters:
+        - category: The category  that needs to be loaded to the VC.
+     - Returns:
+        - An array of wardrobes, ready to be rendered.
+     */
+    static func loadVillagersJSON(from category: Categories) -> [Villager] {
+        var villagers: [Villager] = []
+        
+        if let path = Bundle.main.path(forResource: category.rawValue, ofType: "json") {
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped)
+                let jsonObj = try JSON(data: data).dictionary!
+                
+                for key in jsonObj {
+                    let v = key.value
+                    let newVillager = Villager(name: v["name"]["name-en"].stringValue,
+                                               image: v["id"].stringValue,
+                                               personality: v["personality"].stringValue,
+                                               bdayString: v["birthday-string"].stringValue,
+                                               species: v["species"].stringValue,
+                                               gender: v["gender"].stringValue,
+                                               catchphrase: v["catch-phrase"].stringValue
+                    )
+                    villagers.append(newVillager)
+                }
+                
+            } catch let error {
+                fatalError("parse error: \(error.localizedDescription)")
+            }
+        } else {
+            fatalError("Invalid filename/path on villagers")
+        }
+        
+        return villagers
+    }
+    
+    
     /**
      Load any JSON for experimenting.
      - Parameters:
@@ -189,5 +229,6 @@ struct DataEngine {
         } else {
             fatalError("Invalid filename/path on wardrobes")
         }
+        
     }
 }

@@ -19,6 +19,7 @@ enum Categories: String {
     case worldFishes = "fishes"
     case bugs = "bugsV2"
     case fishes = "fishesV2"
+    case villagers
     
     // Static functions to returns the filtered categories
     static func items() -> [Categories] {
@@ -35,4 +36,5 @@ enum Categories: String {
     static func critters() -> [Categories] {
         return [.worldBugs, .worldFishes]
     }
+    
 }

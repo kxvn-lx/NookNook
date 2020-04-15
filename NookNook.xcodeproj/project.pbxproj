@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0A01F3102442DB8A001499D5 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 0A01F30F2442DB8A001499D5 /* SDWebImage */; };
 		0A01F31224431725001499D5 /* ImageEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A01F31124431724001499D5 /* ImageEngine.swift */; };
+		0A26E7B5244758C500D80594 /* Villager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A26E7B4244758C500D80594 /* Villager.swift */; };
+		0A26E7B724475B6300D80594 /* villagers.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A26E7B624475B6300D80594 /* villagers.json */; };
 		0A295B4A244494F9001CF828 /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A295B49244494F9001CF828 /* Categories.swift */; };
 		0A295B4C2444AAD0001CF828 /* Taptic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A295B4B2444AAD0001CF828 /* Taptic.swift */; };
 		0A36427E244695FE0081315A /* Critter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A36427D244695FE0081315A /* Critter.swift */; };
@@ -72,6 +74,8 @@
 
 /* Begin PBXFileReference section */
 		0A01F31124431724001499D5 /* ImageEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEngine.swift; sourceTree = "<group>"; };
+		0A26E7B4244758C500D80594 /* Villager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Villager.swift; sourceTree = "<group>"; };
+		0A26E7B624475B6300D80594 /* villagers.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = villagers.json; sourceTree = "<group>"; };
 		0A295B49244494F9001CF828 /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
 		0A295B4B2444AAD0001CF828 /* Taptic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Taptic.swift; sourceTree = "<group>"; };
 		0A36427D244695FE0081315A /* Critter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Critter.swift; sourceTree = "<group>"; };
@@ -200,6 +204,7 @@
 		0A370B682444417800A72048 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				0A26E7B624475B6300D80594 /* villagers.json */,
 				0A370B702444543000A72048 /* accessories.json */,
 				0A370B882444543200A72048 /* bags.json */,
 				0A370B742444543000A72048 /* bottoms.json */,
@@ -322,6 +327,7 @@
 				0AFD70742441D9BF00957BE6 /* Item.swift */,
 				0A36427D244695FE0081315A /* Critter.swift */,
 				0AEFF82E24471CD90032156C /* Wardrobe.swift */,
+				0A26E7B4244758C500D80594 /* Villager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -394,6 +400,7 @@
 			files = (
 				0A370B9E2444543200A72048 /* socks.json in Resources */,
 				0A36428224469CAC0081315A /* fishesV2.json in Resources */,
+				0A26E7B724475B6300D80594 /* villagers.json in Resources */,
 				0A370BA22444543200A72048 /* songs.json in Resources */,
 				0A370B982444543200A72048 /* dresses.json in Resources */,
 				0A370B992444543200A72048 /* fishes.json in Resources */,
@@ -447,6 +454,7 @@
 				0A370BAA24446D7B00A72048 /* IconUtil.swift in Sources */,
 				0A370B61244322F100A72048 /* ColourUtil.swift in Sources */,
 				0AFD70752441D9BF00957BE6 /* Item.swift in Sources */,
+				0A26E7B5244758C500D80594 /* Villager.swift in Sources */,
 				0AEFF82B24470EAF0032156C /* WardrobesUITableViewController.swift in Sources */,
 				0A72C3752445FD93009FA0D4 /* VariantCollectionViewCell.swift in Sources */,
 				0A3642862446CC070081315A /* TimeEngine.swift in Sources */,
