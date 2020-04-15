@@ -166,4 +166,28 @@ struct DataEngine {
         
         return wardrobes
     }
+    
+    /**
+     Load any JSON for experimenting.
+     - Parameters:
+        - fileName: The file's name
+     */
+    static func loadExperimentalJSON(with fileName: String) {
+        
+        if let path = Bundle.main.path(forResource: fileName, ofType: "json") {
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped)
+                let jsonObj = try JSON(data: data).dictionary!
+                
+                for key in jsonObj {
+                    print(key.value["name"]["name-jp"])
+                }
+                
+            } catch let error {
+                fatalError("parse error: \(error.localizedDescription)")
+            }
+        } else {
+            fatalError("Invalid filename/path on wardrobes")
+        }
+    }
 }

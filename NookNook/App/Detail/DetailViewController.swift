@@ -33,14 +33,17 @@ class DetailViewController: UIViewController {
     private var titleRarityStack: UIStackView!
     private var buyLabel: UILabel!
     private var sellLabel: UILabel!
+    private var specialSellLabel: UILabel!
     private var weatherLabel: UILabel!
     private var rarityLabel: UIButton!
     private var activeTimeN: UILabel!
     private var activeTimeS: UILabel!
+    
     private var activeTimeSStack: UIStackView!
     private var activeTimeNStack: UIStackView!
     private var buyStack: UIStackView!
     private var sellStack: UIStackView!
+    private var specialSellStack: UIStackView!
     private var weatherStack: UIStackView!
     private var activeTimeStack: UIStackView!
     private var variationStack: UIStackView!
@@ -99,6 +102,7 @@ class DetailViewController: UIViewController {
             activeTimeStack.isHidden = true
             weatherStack.isHidden = true
             rarityLabel.isHidden = true
+            specialSellStack.isHidden = true
             
         case .critters:
             renderCritter()
@@ -110,6 +114,7 @@ class DetailViewController: UIViewController {
             activeTimeStack.isHidden = true
             weatherStack.isHidden = true
             rarityLabel.isHidden = true
+            specialSellStack.isHidden = true
             
         default: fatalError("Attempt to render an invalid object group or groupOrigin is still nil!")
         }
@@ -125,6 +130,7 @@ class DetailViewController: UIViewController {
         subtitleLabel.text = itemObj.obtainedFrom
         buyLabel.attributedText = PriceEngine.renderPrice(amount: itemObj.buy!, with: .none, of: buyLabel.font.pointSize)
         sellLabel.attributedText = PriceEngine.renderPrice(amount: itemObj.sell!, with: .none, of: buyLabel.font.pointSize)
+        
         if itemObj.variants == nil {
             variationImageCollectionView.isHidden = true
             variationTitleLabel.text = "This item has no variations."
@@ -141,6 +147,8 @@ class DetailViewController: UIViewController {
         titleLabel.text = critterObj.name
         subtitleLabel.text = critterObj.obtainedFrom
         sellLabel.attributedText = PriceEngine.renderPrice(amount: critterObj.sell!, with: .none, of: sellLabel.font.pointSize)
+        let specialSell = critterObj.sell!
+        specialSellLabel.attributedText = PriceEngine.renderPrice(amount: Int(Double(specialSell) * 1.5), with: .none, of: buyLabel.font.pointSize)
         weatherLabel.text = critterObj.weather
         rarityLabel.setTitle(critterObj.rarity, for: .normal)
         activeTimeN.text = TimeEngine.renderMonths(with: critterObj.activeMonthsN)
@@ -187,6 +195,7 @@ class DetailViewController: UIViewController {
         titleLabel = UILabel()
         subtitleLabel = UILabel()
         rarityLabel = UIButton()
+        specialSellLabel = UILabel()
         
         // create master scrollView
         scrollView = UIScrollView()
@@ -265,14 +274,27 @@ class DetailViewController: UIViewController {
         
         buyLabel.textColor = UIColor(named: ColourUtil.gold1.rawValue)
         sellLabel.textColor = UIColor(named: ColourUtil.gold1.rawValue)
+        specialSellLabel.textColor = UIColor(named: ColourUtil.gold1.rawValue)
         weatherLabel.textColor = UIColor(named: ColourUtil.gold1.rawValue)
 
         buyStack = createInfoStackView(title: "Buy", with: buyLabel)
         sellStack = createInfoStackView(title: "Sell", with: sellLabel)
+        specialSellStack = createInfoStackView(title: "Special sell price", with: specialSellLabel)
+        if let critterObj = critterObj {
+            switch critterObj.category {
+            case "Fish - South":
+                specialSellStack = createInfoStackView(title: "CJ sell price", with: specialSellLabel)
+            case "Bugs - South":
+                specialSellStack = createInfoStackView(title: "Flick sell price", with: specialSellLabel)
+            default:
+                fatalError("Invalid category detected for critter! (attempt to render special sell price")
+            }
+        }
         weatherStack = createInfoStackView(title: "Weather", with: weatherLabel)
         
         infoStackView.addArrangedSubview(buyStack)
         infoStackView.addArrangedSubview(sellStack)
+        infoStackView.addArrangedSubview(specialSellStack)
         infoStackView.addArrangedSubview(weatherStack)
         
         
