@@ -15,11 +15,10 @@ enum Categories: String {
     case wallpaper, floors, rugs, photos, posters, fencing, tools
     case tops, bottoms, dresses, headwear, accessories, socks, shoes, bags
     case umbrellas, songs, recipes, fossils, construction, nookmiles, other
-    case bugsNorth = "bugs-north"
-    case bugsSouth = "bugs-south"
-    case fishesNorth = "fish-north"
-    case fishesSouth = "fish-south"
-    case bugs, fishes
+    case worldBugs = "bugs"
+    case worldFishes = "fishes"
+    case bugs = "bugsV2"
+    case fishes = "fishesV2"
     
     // Static functions to returns the filtered categories
     static func items() -> [Categories] {
@@ -34,6 +33,6 @@ enum Categories: String {
     }
     
     static func critters() -> [Categories] {
-        return [.bugsNorth, .bugsSouth, .fishesNorth, .fishesSouth]
+        return [.worldBugs, .worldFishes]
     }
 }

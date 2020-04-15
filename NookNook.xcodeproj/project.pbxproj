@@ -12,8 +12,8 @@
 		0A295B4A244494F9001CF828 /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A295B49244494F9001CF828 /* Categories.swift */; };
 		0A295B4C2444AAD0001CF828 /* Taptic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A295B4B2444AAD0001CF828 /* Taptic.swift */; };
 		0A36427E244695FE0081315A /* Critter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A36427D244695FE0081315A /* Critter.swift */; };
-		0A36428024469C600081315A /* bugs.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A36427F24469C600081315A /* bugs.json */; };
-		0A36428224469CAC0081315A /* fishes.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A36428124469CAC0081315A /* fishes.json */; };
+		0A36428024469C600081315A /* bugsV2.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A36427F24469C600081315A /* bugsV2.json */; };
+		0A36428224469CAC0081315A /* fishesV2.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A36428124469CAC0081315A /* fishesV2.json */; };
 		0A3642862446CC070081315A /* TimeEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3642852446CC070081315A /* TimeEngine.swift */; };
 		0A370B5F2443223D00A72048 /* VC+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A370B5E2443223D00A72048 /* VC+.swift */; };
 		0A370B61244322F100A72048 /* ColourUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A370B60244322F100A72048 /* ColourUtil.swift */; };
@@ -28,11 +28,11 @@
 		0A370B922444543200A72048 /* tools.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A370B752444543000A72048 /* tools.json */; };
 		0A370B932444543200A72048 /* bugs-north.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A370B762444543000A72048 /* bugs-north.json */; };
 		0A370B942444543200A72048 /* fish-north.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A370B772444543000A72048 /* fish-north.json */; };
-		0A370B952444543200A72048 /* bugs-south.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A370B782444543000A72048 /* bugs-south.json */; };
+		0A370B952444543200A72048 /* bugs.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A370B782444543000A72048 /* bugs.json */; };
 		0A370B962444543200A72048 /* rugs.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A370B792444543000A72048 /* rugs.json */; };
 		0A370B972444543200A72048 /* miscellaneous.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A370B7A2444543000A72048 /* miscellaneous.json */; };
 		0A370B982444543200A72048 /* dresses.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A370B7B2444543000A72048 /* dresses.json */; };
-		0A370B992444543200A72048 /* fish-south.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A370B7C2444543100A72048 /* fish-south.json */; };
+		0A370B992444543200A72048 /* fishes.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A370B7C2444543100A72048 /* fishes.json */; };
 		0A370B9A2444543200A72048 /* other.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A370B7D2444543100A72048 /* other.json */; };
 		0A370B9B2444543200A72048 /* posters.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A370B7E2444543100A72048 /* posters.json */; };
 		0A370B9C2444543200A72048 /* recipes.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A370B7F2444543100A72048 /* recipes.json */; };
@@ -72,8 +72,8 @@
 		0A295B49244494F9001CF828 /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
 		0A295B4B2444AAD0001CF828 /* Taptic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Taptic.swift; sourceTree = "<group>"; };
 		0A36427D244695FE0081315A /* Critter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Critter.swift; sourceTree = "<group>"; };
-		0A36427F24469C600081315A /* bugs.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bugs.json; sourceTree = "<group>"; };
-		0A36428124469CAC0081315A /* fishes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fishes.json; sourceTree = "<group>"; };
+		0A36427F24469C600081315A /* bugsV2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bugsV2.json; sourceTree = "<group>"; };
+		0A36428124469CAC0081315A /* fishesV2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fishesV2.json; sourceTree = "<group>"; };
 		0A3642852446CC070081315A /* TimeEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeEngine.swift; sourceTree = "<group>"; };
 		0A370B5E2443223D00A72048 /* VC+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VC+.swift"; sourceTree = "<group>"; };
 		0A370B60244322F100A72048 /* ColourUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColourUtil.swift; sourceTree = "<group>"; };
@@ -88,11 +88,11 @@
 		0A370B752444543000A72048 /* tools.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tools.json; sourceTree = "<group>"; };
 		0A370B762444543000A72048 /* bugs-north.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "bugs-north.json"; sourceTree = "<group>"; };
 		0A370B772444543000A72048 /* fish-north.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "fish-north.json"; sourceTree = "<group>"; };
-		0A370B782444543000A72048 /* bugs-south.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "bugs-south.json"; sourceTree = "<group>"; };
+		0A370B782444543000A72048 /* bugs.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bugs.json; sourceTree = "<group>"; };
 		0A370B792444543000A72048 /* rugs.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = rugs.json; sourceTree = "<group>"; };
 		0A370B7A2444543000A72048 /* miscellaneous.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = miscellaneous.json; sourceTree = "<group>"; };
 		0A370B7B2444543000A72048 /* dresses.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dresses.json; sourceTree = "<group>"; };
-		0A370B7C2444543100A72048 /* fish-south.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "fish-south.json"; sourceTree = "<group>"; };
+		0A370B7C2444543100A72048 /* fishes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fishes.json; sourceTree = "<group>"; };
 		0A370B7D2444543100A72048 /* other.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = other.json; sourceTree = "<group>"; };
 		0A370B7E2444543100A72048 /* posters.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = posters.json; sourceTree = "<group>"; };
 		0A370B7F2444543100A72048 /* recipes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = recipes.json; sourceTree = "<group>"; };
@@ -196,15 +196,15 @@
 				0A370B702444543000A72048 /* accessories.json */,
 				0A370B882444543200A72048 /* bags.json */,
 				0A370B742444543000A72048 /* bottoms.json */,
-				0A36427F24469C600081315A /* bugs.json */,
+				0A36427F24469C600081315A /* bugsV2.json */,
 				0A370B762444543000A72048 /* bugs-north.json */,
-				0A370B782444543000A72048 /* bugs-south.json */,
+				0A370B782444543000A72048 /* bugs.json */,
 				0A370B8B2444543200A72048 /* construction.json */,
 				0A370B7B2444543000A72048 /* dresses.json */,
 				0A370B822444543100A72048 /* fencing.json */,
-				0A36428124469CAC0081315A /* fishes.json */,
+				0A36428124469CAC0081315A /* fishesV2.json */,
 				0A370B772444543000A72048 /* fish-north.json */,
-				0A370B7C2444543100A72048 /* fish-south.json */,
+				0A370B7C2444543100A72048 /* fishes.json */,
 				0A370B842444543100A72048 /* floors.json */,
 				0A370B862444543200A72048 /* fossils.json */,
 				0A370B832444543100A72048 /* headwear.json */,
@@ -376,10 +376,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A370B9E2444543200A72048 /* socks.json in Resources */,
-				0A36428224469CAC0081315A /* fishes.json in Resources */,
+				0A36428224469CAC0081315A /* fishesV2.json in Resources */,
 				0A370BA22444543200A72048 /* songs.json in Resources */,
 				0A370B982444543200A72048 /* dresses.json in Resources */,
-				0A370B992444543200A72048 /* fish-south.json in Resources */,
+				0A370B992444543200A72048 /* fishes.json in Resources */,
 				0A370B8E2444543200A72048 /* umbrellas.json in Resources */,
 				0A370BA62444543200A72048 /* photos.json in Resources */,
 				0A370B8C2444543200A72048 /* housewares.json in Resources */,
@@ -397,9 +397,9 @@
 				0A370B962444543200A72048 /* rugs.json in Resources */,
 				0A370B912444543200A72048 /* bottoms.json in Resources */,
 				0A370B9B2444543200A72048 /* posters.json in Resources */,
-				0A370B952444543200A72048 /* bugs-south.json in Resources */,
+				0A370B952444543200A72048 /* bugs.json in Resources */,
 				0A370BA02444543200A72048 /* headwear.json in Resources */,
-				0A36428024469C600081315A /* bugs.json in Resources */,
+				0A36428024469C600081315A /* bugsV2.json in Resources */,
 				0A370BA82444543200A72048 /* construction.json in Resources */,
 				0AFD705624419DD300957BE6 /* Main.storyboard in Resources */,
 				0A370BA52444543200A72048 /* bags.json in Resources */,

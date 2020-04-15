@@ -51,7 +51,7 @@ struct DataEngine {
                 fatalError("parse error: \(error.localizedDescription)")
             }
         } else {
-            fatalError("Invalid filename/path.")
+            fatalError("Invalid filename/path on items")
         }
         
         return items
@@ -76,6 +76,7 @@ struct DataEngine {
                 // save active months array from the other JSON file.
                 var activeMonthsN: [[Int]] = []
                 var activeMonthsS: [[Int]] = []
+                var weathers: [String] = []
                 var rarities: [String] = []
                 
                 if let path = Bundle.main.path(forResource: Categories.bugs.rawValue, ofType: "json") {
@@ -88,12 +89,13 @@ struct DataEngine {
                             activeMonthsN.append(data["activeMonthsNorth"].arrayObject as! [Int])
                             activeMonthsS.append(data["activeMonthsSouth"].arrayObject as! [Int])
                             rarities.append(data["rarity"].stringValue)
+                            weathers.append(data["weather"].stringValue)
                         }
                     } catch let error {
                         fatalError("parse error: \(error.localizedDescription)")
                     }
                 } else {
-                    fatalError("Invalid filename/path.")
+                    fatalError("Invalid filename/path on V2 critters")
                 }
                 
                 var critterCount = 0
@@ -101,7 +103,7 @@ struct DataEngine {
                     let newCritter = Critter(
                         name: critter["name"].stringValue,
                         image: critter["image"].stringValue,
-                        weather: critter["weather"].stringValue,
+                        weather: weathers[critterCount],
                         obtainedFrom: critter["obtainedFrom"].stringValue,
                         startTime: critter["startTime"],
                         endTime: critter["endTime"],
@@ -118,7 +120,7 @@ struct DataEngine {
                 print("parse error: \(error.localizedDescription)")
             }
         } else {
-            print("Invalid filename/path.")
+            print("Invalid filename/path on critters")
         }
         
         

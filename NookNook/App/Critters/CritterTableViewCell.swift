@@ -85,17 +85,17 @@ class CritterTableViewCell: UITableViewCell {
         weatherLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
         weatherLabel.textColor = .darkGray
         
-        timeLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
-        timeLabel.translatesAutoresizingMaskIntoConstraints = false
-        timeLabel.numberOfLines = 0
-        timeLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
-        timeLabel.textColor = .darkGray
-        
         sellLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         sellLabel.translatesAutoresizingMaskIntoConstraints = false
         sellLabel.numberOfLines = 0
         sellLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
         sellLabel.textColor = .darkGray
+        
+        timeLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
+        timeLabel.translatesAutoresizingMaskIntoConstraints = false
+        timeLabel.numberOfLines = 0
+        timeLabel.font = UIFont.systemFont(ofSize: sellLabel.font!.pointSize, weight: .semibold)
+        timeLabel.textColor = .darkGray
         
         infoStackView = UIStackView()
         infoStackView.alignment = .leading

@@ -22,20 +22,25 @@ class DetailViewController: UIViewController {
     private var infoStackView: UIStackView!
     
     private var itemObj: Item!
+    private var critterObj: Critter!
+    
     private var groupOrigin: DataEngine.Group!
     
     private var detailImageView: UIImageView!
     private var titleLabel: UILabel!
     private var subtitleLabel: UILabel!
+    private var titleRarityStack: UIStackView!
     private var buyLabel: UILabel!
     private var sellLabel: UILabel!
     private var weatherLabel: UILabel!
-    private var rarityLabel: UILabel!
-    private var activeTimeLabel: UILabel!
+    private var rarityLabel: UIButton!
+    private var activeTimeN: UILabel!
+    private var activeTimeS: UILabel!
+    private var activeTimeSStack: UIStackView!
+    private var activeTimeNStack: UIStackView!
     private var buyStack: UIStackView!
     private var sellStack: UIStackView!
     private var weatherStack: UIStackView!
-    private var rarityStack: UIStackView!
     private var activeTimeStack: UIStackView!
     private var variationStack: UIStackView!
     private var variationTitleLabel: UILabel!
@@ -74,7 +79,8 @@ class DetailViewController: UIViewController {
             self.groupOrigin = .items
             
         case .critters:
-            print("Attempt to parse an object from Critters")
+            self.critterObj = object as? Critter
+            self.groupOrigin = .critters
             
         case .wardrobes:
             print("Attempt to parse an object from Wardrobes")
@@ -85,16 +91,19 @@ class DetailViewController: UIViewController {
      Method to render each object accordingly (hides the component that is not dependent to each group.
      */
     private func renderObj() {
-        
         switch groupOrigin {
         case .items:
             renderItem()
             activeTimeStack.isHidden = true
             weatherStack.isHidden = true
-            rarityStack.isHidden = true
+            rarityLabel.isHidden = true
+            activeTimeStack.isHidden = true
             
         case .critters:
-            print("Attempt to render an object from Wardrobes")
+            renderCritter()
+            variationStack.isHidden = true
+            buyStack.isHidden = true
+            
         case .wardrobes:
             print("Attempt to render an object from Wardrobes")
         default: fatalError("Attempt to render an invalid object group or groupOrigin is still nil!")
@@ -119,12 +128,48 @@ class DetailViewController: UIViewController {
     }
     
     
+    /**
+     Method to render item object
+     */
+    private func renderCritter() {
+        detailImageView.sd_setImage(with: ImageEngine.parseURL(of: critterObj.image!), completed: nil)
+        titleLabel.text = critterObj.name
+        subtitleLabel.text = critterObj.obtainedFrom
+        sellLabel.attributedText = PriceEngine.renderPrice(amount: critterObj.sell!, with: .none, of: sellLabel.font.pointSize)
+        weatherLabel.text = critterObj.weather
+        rarityLabel.setTitle(critterObj.rarity, for: .normal)
+        activeTimeN.text = TimeEngine.renderMonths(with: critterObj.activeMonthsN)
+        activeTimeS.text = TimeEngine.renderMonths(with: critterObj.activeMonthsS)
+    }
+    
+    
+    
+    
+    
+    /**
+     ------------------------------
+     ------------------------------
+     ------------------------------
+     */
     
     private func setupView() {
+        buyStack = UIStackView()
+        sellStack = UIStackView()
+        weatherStack = UIStackView()
+        activeTimeStack = UIStackView()
+        buyLabel = UILabel()
+        sellLabel = UILabel()
+        weatherLabel = UILabel()
+        activeTimeN = UILabel()
+        activeTimeS = UILabel()
+        titleLabel = UILabel()
+        subtitleLabel = UILabel()
+        rarityLabel = UIButton()
+        
         // create master scrollView
         scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-//        scrollView.backgroundColor = .red
+
         
         // Create master stackView
         mStackView = UIStackView()
@@ -133,14 +178,14 @@ class DetailViewController: UIViewController {
         mStackView.spacing = MARGIN * 4
         mStackView.alignment = .center
         mStackView.distribution = .equalSpacing
-//        mStackView.addBackground(color: .brown)
+
         
         self.view.addSubview(scrollView)
         scrollView.addSubview(mStackView)
         
+        
         // detailImageView
         detailImageView = UIImageView()
-//        detailImageView.backgroundColor = .blue
         detailImageView.translatesAutoresizingMaskIntoConstraints = false
         detailImageView.contentMode = .scaleAspectFit
         detailImageView.sd_imageTransition = .fade
@@ -154,22 +199,39 @@ class DetailViewController: UIViewController {
         tsStackView.spacing = MARGIN
         tsStackView.alignment = .leading
         tsStackView.distribution = .equalSpacing
-//        tsStackView.addBackground(color: .green)
         
-        titleLabel = UILabel()
-        subtitleLabel = UILabel()
+        titleRarityStack = UIStackView()
+        titleRarityStack.translatesAutoresizingMaskIntoConstraints = false
+        titleRarityStack.axis = .horizontal
+        titleRarityStack.spacing = MARGIN
+        titleRarityStack.alignment = .lastBaseline
+        titleRarityStack.distribution = .equalSpacing
+        
+        
+        // Title and subtitle section
         titleLabel.numberOfLines = 0
         titleLabel.font = UIFont.preferredFont(forTextStyle: .largeTitle)
         titleLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)
         subtitleLabel.numberOfLines = 0
-        subtitleLabel.font = UIFont.preferredFont(forTextStyle: .title1)
+        subtitleLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         subtitleLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
         
-        tsStackView.addArrangedSubview(titleLabel)
-        tsStackView.addArrangedSubview(subtitleLabel)
-        tsStackView.isLayoutMarginsRelativeArrangement = true
-        tsStackView.layoutMargins = UIEdgeInsets(top: 0, left: MARGIN*4, bottom: 0, right: MARGIN*4)
         
+        // Rarity section
+        rarityLabel.setTitleColor(UIColor(named: ColourUtil.gold1.rawValue), for: .normal)
+        rarityLabel.titleLabel?.font = UIFont.preferredFont(forTextStyle: .caption1)
+        rarityLabel.contentEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        rarityLabel.isUserInteractionEnabled = false
+        rarityLabel.addBlurEffect(style: .light, cornerRadius: 5, padding: .zero)
+        
+        titleRarityStack.addArrangedSubview(titleLabel, withMargin: UIEdgeInsets(top: 0, left: MARGIN * 4, bottom: 0, right: 0))
+        titleRarityStack.addArrangedSubview(rarityLabel, withMargin: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: -MARGIN * 4))
+        
+        tsStackView.addArrangedSubview(titleRarityStack)
+        tsStackView.addArrangedSubview(subtitleLabel, withMargin: UIEdgeInsets(top: 0, left: MARGIN * 4, bottom: 0, right: 0))
+        
+        
+        // Info stack views section
         infoStackView = UIStackView()
         infoStackView.translatesAutoresizingMaskIntoConstraints = false
         infoStackView.axis = .vertical
@@ -178,37 +240,48 @@ class DetailViewController: UIViewController {
         infoStackView.distribution = .equalSpacing
         infoStackView.isLayoutMarginsRelativeArrangement = true
         infoStackView.layoutMargins = UIEdgeInsets(top: 0, left: MARGIN*4, bottom: 0, right: MARGIN*4)
-//        infoStackView.addBackground(color: .green)
-        
-        buyStack = UIStackView()
-        sellStack = UIStackView()
-        weatherStack = UIStackView()
-        rarityStack = UIStackView()
-        activeTimeStack = UIStackView()
-        buyLabel = UILabel()
-        sellLabel = UILabel()
-        rarityLabel = UILabel()
-        weatherLabel = UILabel()
-        activeTimeLabel = UILabel()
         
         buyLabel.textColor = UIColor(named: ColourUtil.gold1.rawValue)
         sellLabel.textColor = UIColor(named: ColourUtil.gold1.rawValue)
-        rarityLabel.textColor = UIColor(named: ColourUtil.gold1.rawValue)
         weatherLabel.textColor = UIColor(named: ColourUtil.gold1.rawValue)
-        activeTimeLabel.textColor = UIColor(named: ColourUtil.gold1.rawValue)
 
         buyStack = createInfoStackView(title: "Buy", with: buyLabel)
         sellStack = createInfoStackView(title: "Sell", with: sellLabel)
         weatherStack = createInfoStackView(title: "Weather", with: weatherLabel)
-        rarityStack = createInfoStackView(title: "Rarity", with: rarityLabel)
-        activeTimeStack = createInfoStackView(title: "Active Time", with: activeTimeLabel)
         
         infoStackView.addArrangedSubview(buyStack)
         infoStackView.addArrangedSubview(sellStack)
-        infoStackView.addArrangedSubview(activeTimeStack)
         infoStackView.addArrangedSubview(weatherStack)
-        infoStackView.addArrangedSubview(rarityStack)
         
+        
+        // Active time period section
+        activeTimeStack = UIStackView()
+        activeTimeStack.translatesAutoresizingMaskIntoConstraints = false
+        activeTimeStack.axis = .vertical
+        activeTimeStack.spacing = MARGIN * 2
+        activeTimeStack.alignment = .fill
+        activeTimeStack.distribution = .equalSpacing
+        activeTimeStack.isLayoutMarginsRelativeArrangement = true
+        activeTimeStack.layoutMargins = UIEdgeInsets(top: 0, left: MARGIN*4, bottom: 0, right: MARGIN*4)
+        
+        activeTimeN.textColor = UIColor(named: ColourUtil.gold1.rawValue)
+        activeTimeS.textColor = UIColor(named: ColourUtil.gold1.rawValue)
+        
+        activeTimeNStack = createInfoStackView(title: "Northern Hemisphere", with: activeTimeN)
+        activeTimeSStack = createInfoStackView(title: "Southern Hemisphere", with: activeTimeS)
+        
+        let activeTimeLabel = UILabel()
+        activeTimeLabel.text = "Active Time"
+        activeTimeLabel.numberOfLines = 0
+        activeTimeLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        activeTimeLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
+        
+        activeTimeStack.addArrangedSubview(activeTimeLabel)
+        activeTimeStack.addArrangedSubview(activeTimeNStack)
+        activeTimeStack.addArrangedSubview(activeTimeSStack)
+
+        
+        // Variation Section
         variationStack = UIStackView()
         variationStack.translatesAutoresizingMaskIntoConstraints = false
         variationStack.axis = .vertical
@@ -217,12 +290,11 @@ class DetailViewController: UIViewController {
         variationStack.distribution = .fill
         variationStack.isLayoutMarginsRelativeArrangement = true
         variationStack.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-//        variationStackView.addBackground(color: .green)
         
         variationTitleLabel = UILabel()
         variationTitleLabel.text = "Variation"
         variationTitleLabel.numberOfLines = 0
-        variationTitleLabel.font = UIFont.preferredFont(forTextStyle: .title1)
+        variationTitleLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         variationTitleLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
         
         layout.scrollDirection = .vertical
@@ -240,6 +312,7 @@ class DetailViewController: UIViewController {
         mStackView.addArrangedSubview(detailImageView)
         mStackView.addArrangedSubview(tsStackView)
         mStackView.addArrangedSubview(infoStackView)
+        mStackView.addArrangedSubview(activeTimeStack)
         mStackView.addArrangedSubview(variationStack)
         
     }
@@ -263,8 +336,14 @@ class DetailViewController: UIViewController {
             detailImageView.heightAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: itemImageViewSize),
             
             tsStackView.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
+            titleRarityStack.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
+            
+            titleLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.55),
             
             infoStackView.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
+            
+            activeTimeStack.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
+            
             
             variationStack.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
             
@@ -344,6 +423,8 @@ extension DetailViewController: UICollectionViewDelegateFlowLayout, UICollection
             if let itemObjArr = itemObj.variants {
                 return itemObjArr.count
             }
+        case .critters:
+            return 0
         default: fatalError("Attempt to create cells from an unkown group origin or, groupOrigin is nul!")
         }
 

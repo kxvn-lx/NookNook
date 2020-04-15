@@ -17,7 +17,7 @@ class CrittersTableViewController: UITableViewController {
     var favouritedCritters: [Critter] = []
     var critters: [Critter] = []
     var filteredCritters: [Critter] = []
-    var currentCategory: Categories = Categories.bugsSouth
+    var currentCategory: Categories = Categories.worldBugs
     
     let searchController = UISearchController(searchResultsController: nil)
     var isSearchBarEmpty: Bool {
@@ -78,7 +78,7 @@ class CrittersTableViewController: UITableViewController {
             
             critterCell.imgView.sd_setImage(with: ImageEngine.parseURL(of: critter.image!), placeholderImage: nil)
             critterCell.nameLabel.text = critter.name
-            critterCell.obtainedFromLabel.text = critter.obtainedFrom
+            critterCell.obtainedFromLabel.text = critter.obtainedFrom.isEmpty ? "Location unknown" : critter.obtainedFrom
             critterCell.timeLabel.text = TimeEngine.renderTime(of: critter.startTime, and: critter.endTime)
             critterCell.sellLabel.attributedText = PriceEngine.renderPrice(amount: critter.sell, with: .sell, of: 12)
             critterCell.weatherLabel.text = critter.weather
@@ -98,22 +98,22 @@ class CrittersTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        //        let selectedItem: Item
-        //        if isFiltering {
-        //            selectedItem = filteredItems[indexPath.row]
-        //        } else {
-        //            selectedItem = items[indexPath.row]
-        //        }
-        //
-        //
-        //        let vc = self.storyboard!.instantiateViewController(withIdentifier: DETAIL_ID) as! DetailViewController
-        //
-        //        vc.parseOject(from: .items, object: selectedItem)
-        //
-        //        let navController = UINavigationController(rootViewController: vc)
-        //        self.present(navController, animated:true, completion: nil)
-        //
-        //        tableView.deselectRow(at: indexPath, animated: true)
+        let selectedCritter: Critter
+        if isFiltering {
+            selectedCritter = filteredCritters[indexPath.row]
+        } else {
+            selectedCritter = critters[indexPath.row]
+        }
+        
+        
+        let vc = self.storyboard!.instantiateViewController(withIdentifier: DETAIL_ID) as! DetailViewController
+        
+        vc.parseOject(from: .critters, object: selectedCritter)
+        
+        let navController = UINavigationController(rootViewController: vc)
+        self.present(navController, animated:true, completion: nil)
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -121,7 +121,14 @@ class CrittersTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "\(currentCategory.rawValue)"
+        switch currentCategory {
+        case .worldBugs:
+            return "Bugs"
+        case .worldFishes:
+            return "Fishes"
+        default:
+            return "No Category found!"
+        }
     }
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
