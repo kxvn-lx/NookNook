@@ -24,7 +24,7 @@ enum Categories: String {
     static func items() -> [Categories] {
         return [.housewares, .miscellaneous, .wallMounted,
                 .wallpaper, .floors, .rugs, .photos, .fencing, .tools, .songs,
-                .recipes, .other, .fossils]
+                .other, .fossils]
     }
     
     static func wardrobes() -> [Categories] {
