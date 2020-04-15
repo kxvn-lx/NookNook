@@ -23,6 +23,7 @@ class DetailViewController: UIViewController {
     
     private var itemObj: Item!
     private var critterObj: Critter!
+    private var wardrobeObj: Wardrobe!
     
     private var groupOrigin: DataEngine.Group!
     
@@ -83,7 +84,8 @@ class DetailViewController: UIViewController {
             self.groupOrigin = .critters
             
         case .wardrobes:
-            print("Attempt to parse an object from Wardrobes")
+            self.wardrobeObj = object as? Wardrobe
+            self.groupOrigin = .wardrobes
         }
     }
     
@@ -97,7 +99,6 @@ class DetailViewController: UIViewController {
             activeTimeStack.isHidden = true
             weatherStack.isHidden = true
             rarityLabel.isHidden = true
-            activeTimeStack.isHidden = true
             
         case .critters:
             renderCritter()
@@ -105,7 +106,11 @@ class DetailViewController: UIViewController {
             buyStack.isHidden = true
             
         case .wardrobes:
-            print("Attempt to render an object from Wardrobes")
+            renderWardrobe()
+            activeTimeStack.isHidden = true
+            weatherStack.isHidden = true
+            rarityLabel.isHidden = true
+            
         default: fatalError("Attempt to render an invalid object group or groupOrigin is still nil!")
         }
         
@@ -140,6 +145,23 @@ class DetailViewController: UIViewController {
         rarityLabel.setTitle(critterObj.rarity, for: .normal)
         activeTimeN.text = TimeEngine.renderMonths(with: critterObj.activeMonthsN)
         activeTimeS.text = TimeEngine.renderMonths(with: critterObj.activeMonthsS)
+    }
+    
+    
+    /**
+     Method to render item object
+     */
+    private func renderWardrobe() {
+        detailImageView.sd_setImage(with: ImageEngine.parseURL(of: wardrobeObj.image!), completed: nil)
+        titleLabel.text = wardrobeObj.name
+        subtitleLabel.text = wardrobeObj.obtainedFrom
+        buyLabel.attributedText = PriceEngine.renderPrice(amount: wardrobeObj.buy!, with: .none, of: buyLabel.font.pointSize)
+        sellLabel.attributedText = PriceEngine.renderPrice(amount: wardrobeObj.sell!, with: .none, of: buyLabel.font.pointSize)
+        if wardrobeObj.variants == nil {
+            variationImageCollectionView.isHidden = true
+            variationTitleLabel.text = "This item has no variations."
+            variationTitleLabel.font = UIFont.preferredFont(forTextStyle: .body)
+        }
     }
     
     
@@ -425,6 +447,12 @@ extension DetailViewController: UICollectionViewDelegateFlowLayout, UICollection
             }
         case .critters:
             return 0
+            
+        case .wardrobes:
+            if let wardrobeObjArr = wardrobeObj.variants {
+                return wardrobeObjArr.count
+            }
+            
         default: fatalError("Attempt to create cells from an unkown group origin or, groupOrigin is nul!")
         }
 

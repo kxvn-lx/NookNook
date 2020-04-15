@@ -127,4 +127,43 @@ struct DataEngine {
         
         return critters
     }
+    
+    
+    /**
+     Load Wardrobes datas from the datasrouce - and return them for view.
+     - Parameters:
+        - category: The category  that needs to be loaded to the VC.
+     - Returns:
+        - An array of wardrobes, ready to be rendered.
+     */
+    static func loadWardrobesJSON(from category: Categories) -> [Wardrobe] {
+        var wardrobes: [Wardrobe] = []
+        
+        if let path = Bundle.main.path(forResource: category.rawValue, ofType: "json") {
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped)
+                let jsonObj = try JSON(data: data)["results"].array!
+                
+                
+                for wardrobe in jsonObj {
+                    let newWardrobe = Wardrobe(name: wardrobe["name"].stringValue,
+                                               image: wardrobe["image"].stringValue,
+                                               obtainedFrom: wardrobe["obtainedFrom"].stringValue,
+                                               isDIY: wardrobe["dIY"].boolValue,
+                                               variants: wardrobe["variants"].arrayObject as? [String],
+                                               category: wardrobe["category"].stringValue,
+                                               buy: wardrobe["buy"].intValue,
+                                               sell: wardrobe["sell"].intValue
+                    )
+                    wardrobes.append(newWardrobe)
+                }
+            } catch let error {
+                fatalError("parse error: \(error.localizedDescription)")
+            }
+        } else {
+            fatalError("Invalid filename/path on wardrobes")
+        }
+        
+        return wardrobes
+    }
 }

@@ -27,7 +27,7 @@ enum Categories: String {
                 .recipes, .other, .fossils]
     }
     
-    static func wardrobe() -> [Categories] {
+    static func wardrobes() -> [Categories] {
         return [.tops, .bottoms, .dresses, .headwear,
                 .accessories, .socks, .shoes, .bags, .umbrellas]
     }

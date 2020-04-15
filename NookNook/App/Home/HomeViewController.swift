@@ -21,6 +21,10 @@ class HomeViewController: UITabBarController {
             tbManager[1].title = "Critters"
             tbManager[1].image = UIImage(systemName: "ant")
             tbManager[1].selectedImage = UIImage(systemName: "ant.fill")
+            
+            tbManager[2].title = "Wardrobes"
+            tbManager[2].image = UIImage(systemName: "briefcase")
+            tbManager[2].selectedImage = UIImage(systemName: "briefcase.fill")
         } else {
             fatalError("TabBar index out of bound.")
         }
