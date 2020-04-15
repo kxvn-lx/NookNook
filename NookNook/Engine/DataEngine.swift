@@ -12,6 +12,10 @@ import SwiftyJSON
 
 struct DataEngine {
     
+    enum Group {
+        case items, critters, wardrobes
+    }
+    
     /**
      Load Item datas from the datasrouce - and return them for view.
      - Parameters:
@@ -70,7 +74,9 @@ struct DataEngine {
                 let jsonObj = try JSON(data: data)["results"].array!
                 
                 // save active months array from the other JSON file.
-                var activeMonths: [[Int]] = []
+                var activeMonthsN: [[Int]] = []
+                var activeMonthsS: [[Int]] = []
+                var rarities: [String] = []
                 
                 if let path = Bundle.main.path(forResource: Categories.bugs.rawValue, ofType: "json") {
                     do {
@@ -78,19 +84,11 @@ struct DataEngine {
                         let jsonObj = try JSON(data: data)["results"].array!
                         
                         // iterate the data and ONLY get the active months
-                        switch category {
-                        case .bugsNorth, .fishesNorth:
-                            for data in jsonObj {
-                                activeMonths.append(data["activeMonthsNorth"].arrayObject as! [Int])
-                            }
-                        case .bugsSouth, .fishesSouth:
-                            for data in jsonObj {
-                                activeMonths.append(data["activeMonthsSouth"].arrayObject as! [Int])
-                            }
-                        default:
-                            fatalError("Attempt to parse a JSON files not belonging to critters")
+                        for data in jsonObj {
+                            activeMonthsN.append(data["activeMonthsNorth"].arrayObject as! [Int])
+                            activeMonthsS.append(data["activeMonthsSouth"].arrayObject as! [Int])
+                            rarities.append(data["rarity"].stringValue)
                         }
-                        
                     } catch let error {
                         fatalError("parse error: \(error.localizedDescription)")
                     }
@@ -107,7 +105,9 @@ struct DataEngine {
                         obtainedFrom: critter["obtainedFrom"].stringValue,
                         startTime: critter["startTime"],
                         endTime: critter["endTime"],
-                        activeMonths: activeMonths[critterCount],
+                        activeMonthsN: activeMonthsN[critterCount],
+                        activeMonthsS: activeMonthsS[critterCount],
+                        rarity: rarities[critterCount],
                         category: critter["category"].stringValue,
                         sell: critter["sell"].intValue
                     )

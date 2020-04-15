@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class CrittersTableViewController: UITableViewController {
     
@@ -64,7 +65,28 @@ class CrittersTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CRITTER_CELL, for: indexPath)
         
-        // Configure the cell...
+        if let critterCell = cell as? CritterTableViewCell {
+            critterCell.imgView.sd_imageTransition = .fade
+            critterCell.imgView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            
+            let critter: Critter
+            if isFiltering {
+                critter = filteredCritters[indexPath.row]
+            } else {
+                critter = critters[indexPath.row]
+            }
+            
+            critterCell.imgView.sd_setImage(with: ImageEngine.parseURL(of: critter.image!), placeholderImage: nil)
+            critterCell.nameLabel.text = critter.name
+            critterCell.obtainedFromLabel.text = critter.obtainedFrom
+            critterCell.timeLabel.text = TimeEngine.renderTime(of: critter.startTime, and: critter.endTime)
+            critterCell.sellLabel.attributedText = PriceEngine.renderPrice(amount: critter.sell, with: .sell, of: 12)
+            critterCell.weatherLabel.text = critter.weather
+            
+            critterCell.isFavImageView.image = favouritedCritters.contains(critter) ?  IconUtil.systemIcon(of: IconUtil.IconName.starFill, weight: .thin) : nil
+            critterCell.rarityLabel.setTitle(critter.rarity, for: .normal)
+            
+        }
         
         return cell
     }

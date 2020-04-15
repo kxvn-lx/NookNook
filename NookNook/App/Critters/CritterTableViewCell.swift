@@ -13,7 +13,7 @@ class CritterTableViewCell: UITableViewCell {
     private let MARGIN: CGFloat = 10
     
     var imgView: UIImageView!
-    var rarityImageView: UIImageView!
+    var rarityLabel: UIButton!
     var isFavImageView: UIImageView!
     var nameLabel: UILabel!
     var obtainedFromLabel : UILabel!
@@ -43,18 +43,21 @@ class CritterTableViewCell: UITableViewCell {
         iconStackView.axis = .vertical
         iconStackView.distribution = .equalCentering
         iconStackView.spacing = MARGIN
+            
         
-        rarityImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-        rarityImageView.translatesAutoresizingMaskIntoConstraints = false
-        rarityImageView.contentMode = .scaleAspectFit
-        rarityImageView.tintColor = .darkGray
+        rarityLabel = UIButton()
+        rarityLabel.contentEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        rarityLabel.setTitleColor(.darkGray, for: .normal)
+        rarityLabel.titleLabel?.font = UIFont.preferredFont(forTextStyle: .caption1)
+        rarityLabel.isUserInteractionEnabled = false
+        rarityLabel.addBlurEffect(style: .light, cornerRadius: 5, padding: .zero)
         
         isFavImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         isFavImageView.translatesAutoresizingMaskIntoConstraints = false
         isFavImageView.contentMode = .scaleAspectFit
         isFavImageView.tintColor = .darkGray
         
-        iconStackView.addArrangedSubview(rarityImageView)
+        iconStackView.addArrangedSubview(rarityLabel)
         iconStackView.addArrangedSubview(isFavImageView)
         
         imgView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
@@ -153,9 +156,6 @@ class CritterTableViewCell: UITableViewCell {
             
             isFavImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: smallIconSize),
             isFavImageView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: smallIconSize),
-            
-            rarityImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: smallIconSize),
-            rarityImageView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: smallIconSize),
         ])
     }
 

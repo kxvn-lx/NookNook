@@ -14,6 +14,7 @@
 		0A36427E244695FE0081315A /* Critter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A36427D244695FE0081315A /* Critter.swift */; };
 		0A36428024469C600081315A /* bugs.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A36427F24469C600081315A /* bugs.json */; };
 		0A36428224469CAC0081315A /* fishes.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A36428124469CAC0081315A /* fishes.json */; };
+		0A3642862446CC070081315A /* TimeEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3642852446CC070081315A /* TimeEngine.swift */; };
 		0A370B5F2443223D00A72048 /* VC+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A370B5E2443223D00A72048 /* VC+.swift */; };
 		0A370B61244322F100A72048 /* ColourUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A370B60244322F100A72048 /* ColourUtil.swift */; };
 		0A370B6C2444467900A72048 /* PriceEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A370B6B2444467900A72048 /* PriceEngine.swift */; };
@@ -73,6 +74,7 @@
 		0A36427D244695FE0081315A /* Critter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Critter.swift; sourceTree = "<group>"; };
 		0A36427F24469C600081315A /* bugs.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bugs.json; sourceTree = "<group>"; };
 		0A36428124469CAC0081315A /* fishes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fishes.json; sourceTree = "<group>"; };
+		0A3642852446CC070081315A /* TimeEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeEngine.swift; sourceTree = "<group>"; };
 		0A370B5E2443223D00A72048 /* VC+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VC+.swift"; sourceTree = "<group>"; };
 		0A370B60244322F100A72048 /* ColourUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColourUtil.swift; sourceTree = "<group>"; };
 		0A370B6B2444467900A72048 /* PriceEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceEngine.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 				0A01F31124431724001499D5 /* ImageEngine.swift */,
 				0A370B6B2444467900A72048 /* PriceEngine.swift */,
 				0A370B6D24444BD800A72048 /* DataEngine.swift */,
+				0A3642852446CC070081315A /* TimeEngine.swift */,
 			);
 			path = Engine;
 			sourceTree = "<group>";
@@ -428,6 +431,7 @@
 				0A370B61244322F100A72048 /* ColourUtil.swift in Sources */,
 				0AFD70752441D9BF00957BE6 /* Item.swift in Sources */,
 				0A72C3752445FD93009FA0D4 /* VariantCollectionViewCell.swift in Sources */,
+				0A3642862446CC070081315A /* TimeEngine.swift in Sources */,
 				0A72C3712445AD8F009FA0D4 /* DetailViewController.swift in Sources */,
 				0AFD706C2441BFEE00957BE6 /* ItemsTableViewController.swift in Sources */,
 				0A01F31224431725001499D5 /* ImageEngine.swift in Sources */,

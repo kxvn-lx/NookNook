@@ -20,8 +20,11 @@ struct Critter: Codable, Equatable, Identifiable {
     
     let startTime: JSON
     let endTime: JSON
-    let activeMonths: [Int]
     
+    let activeMonthsN: [Int]
+    let activeMonthsS: [Int]
+    
+    let rarity: String
     
     let category: String
     
