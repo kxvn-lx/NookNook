@@ -77,6 +77,7 @@ class CrittersTableViewController: UITableViewController {
             }
             
             critterCell.imgView.sd_setImage(with: ImageEngine.parseURL(of: critter.image!), placeholderImage: nil)
+            
             critterCell.nameLabel.text = critter.name
             critterCell.obtainedFromLabel.text = critter.obtainedFrom.isEmpty ? "Location unknown" : critter.obtainedFrom
             critterCell.timeLabel.text = TimeEngine.renderTime(of: critter.startTime, and: critter.endTime)

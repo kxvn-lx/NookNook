@@ -470,7 +470,9 @@ extension DetailViewController: UICollectionViewDelegateFlowLayout, UICollection
         case .critters:
             print("Attempt to access critter cell.")
         case .wardrobes:
-            print("Attempt to access wardrobe cell")
+            if let wardrobeObjArr = wardrobeObj.variants {
+                cell.variantImage.sd_setImage(with: ImageEngine.parseURL(of: wardrobeObjArr[indexPath.row]), placeholderImage: nil)
+            }
         default: fatalError("Attempt to access an invalid object group or groupOrigin is still nil!")
         }
         
