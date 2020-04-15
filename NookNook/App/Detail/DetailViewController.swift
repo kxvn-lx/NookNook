@@ -82,7 +82,7 @@ class DetailViewController: UIViewController {
     }
     
     /**
-     Method to render each object accordingly
+     Method to render each object accordingly (hides the component that is not dependent to each group.
      */
     private func renderObj() {
         
@@ -112,7 +112,9 @@ class DetailViewController: UIViewController {
         buyLabel.attributedText = PriceEngine.renderPrice(amount: itemObj.buy!, with: .none, of: buyLabel.font.pointSize)
         sellLabel.attributedText = PriceEngine.renderPrice(amount: itemObj.sell!, with: .none, of: buyLabel.font.pointSize)
         if itemObj.variants == nil {
-            variationStack.isHidden = true
+            variationImageCollectionView.isHidden = true
+            variationTitleLabel.text = "This item has no variations."
+            variationTitleLabel.font = UIFont.preferredFont(forTextStyle: .body)
         }
     }
     
@@ -161,7 +163,7 @@ class DetailViewController: UIViewController {
         titleLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)
         subtitleLabel.numberOfLines = 0
         subtitleLabel.font = UIFont.preferredFont(forTextStyle: .title1)
-        subtitleLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.8)
+        subtitleLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
         
         tsStackView.addArrangedSubview(titleLabel)
         tsStackView.addArrangedSubview(subtitleLabel)
@@ -214,14 +216,14 @@ class DetailViewController: UIViewController {
         variationStack.alignment = .leading
         variationStack.distribution = .fill
         variationStack.isLayoutMarginsRelativeArrangement = true
-        variationStack.layoutMargins = UIEdgeInsets(top: 0, left: MARGIN*4, bottom: 0, right: MARGIN*4)
+        variationStack.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
 //        variationStackView.addBackground(color: .green)
         
         variationTitleLabel = UILabel()
         variationTitleLabel.text = "Variation"
         variationTitleLabel.numberOfLines = 0
         variationTitleLabel.font = UIFont.preferredFont(forTextStyle: .title1)
-        variationTitleLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.8)
+        variationTitleLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
         
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 10
@@ -229,12 +231,10 @@ class DetailViewController: UIViewController {
         variationImageCollectionView.delegate = self
         variationImageCollectionView.dataSource = self
         variationImageCollectionView.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
-        variationImageCollectionView.layer.cornerRadius = 10
         
-        variationStack.addArrangedSubview(variationTitleLabel)
+        
+        variationStack.addArrangedSubview(variationTitleLabel, withMargin: UIEdgeInsets(top: 0, left: MARGIN * 4, bottom: 0, right: 0))
         variationStack.addArrangedSubview(variationImageCollectionView)
-        
-        
         
         // Add to stackView
         mStackView.addArrangedSubview(detailImageView)
@@ -268,8 +268,8 @@ class DetailViewController: UIViewController {
             
             variationStack.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
             
-            variationImageCollectionView.widthAnchor.constraint(equalTo:self.variationStack.widthAnchor),
-            variationImageCollectionView.heightAnchor.constraint(equalToConstant: 200)
+            variationImageCollectionView.widthAnchor.constraint(equalTo: self.variationStack.widthAnchor),
+            variationImageCollectionView.heightAnchor.constraint(equalToConstant: 150)
 
         ])
     }
@@ -300,7 +300,7 @@ class DetailViewController: UIViewController {
         let label1 = UILabel()
         label1.numberOfLines = 0
         label1.text = title
-        label1.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.8)
+        label1.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
         
         stackView.addBackground(color: UIColor(named: ColourUtil.cream1.rawValue)!, cornerRadius: 10)
         
@@ -319,8 +319,8 @@ class DetailViewController: UIViewController {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                               heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 0)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
+        item.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8)
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.4),
                                                heightDimension: .fractionalHeight(1))
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize,
                                                          subitem: item, count: 1)
