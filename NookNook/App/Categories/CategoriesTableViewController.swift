@@ -23,8 +23,8 @@ class CategoriesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 200
+//        tableView.rowHeight = UITableView.automaticDimension
+//        tableView.estimatedRowHeight = 200
         
         tableView.tableFooterView = UIView()
         
@@ -44,14 +44,20 @@ class CategoriesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CAT_CELL, for: indexPath)
         
+        var cat = filteredCategories[indexPath.row].rawValue
+        
+        if cat == Categories.bugsMain.rawValue {
+            cat = "Bugs"
+        }
+        else if cat == Categories.fishesMain.rawValue {
+            cat = "Fishes"
+        }
+        
         if let categoryCell = cell as? CategoryTableViewCell {
-            categoryCell.categoryNameLabel.text = filteredCategories[indexPath.row].rawValue
-            
+            categoryCell.categoryNameLabel.text = cat
             if filteredCategories[indexPath.row] == currentCategory {
                 categoryCell.accessoryType = .checkmark
             }
-            
-            categoryCell.categoryNameLabel.text = filteredCategories[indexPath.row].rawValue
         }
         
         return cell

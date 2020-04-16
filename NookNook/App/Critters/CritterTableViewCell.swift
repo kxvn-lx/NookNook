@@ -23,7 +23,7 @@ class CritterTableViewCell: UITableViewCell {
     
     private var infoStackView: UIStackView!
     private var mStackView: UIStackView!
-    private var iconStackView: UIStackView!
+//    private var iconStackView: UIStackView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -37,15 +37,16 @@ class CritterTableViewCell: UITableViewCell {
     }
     
     private func setupView() {
-        iconStackView = UIStackView()
-        iconStackView.translatesAutoresizingMaskIntoConstraints = false
-        iconStackView.alignment = .leading
-        iconStackView.axis = .vertical
-        iconStackView.distribution = .equalCentering
-        iconStackView.spacing = MARGIN
+//        iconStackView = UIStackView()
+//        iconStackView.translatesAutoresizingMaskIntoConstraints = false
+//        iconStackView.alignment = .leading
+//        iconStackView.axis = .vertical
+//        iconStackView.distribution = .equalCentering
+//        iconStackView.spacing = MARGIN
+//        iconStackView.addBackground(color: .red, cornerRadius: 0)
             
         
-        rarityLabel = UIButton()
+        rarityLabel = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         rarityLabel.contentEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         rarityLabel.setTitleColor(.darkGray, for: .normal)
         rarityLabel.titleLabel?.font = UIFont.preferredFont(forTextStyle: .caption1)
@@ -57,14 +58,16 @@ class CritterTableViewCell: UITableViewCell {
         isFavImageView.contentMode = .scaleAspectFit
         isFavImageView.tintColor = .darkGray
         
-        iconStackView.addArrangedSubview(rarityLabel)
-        iconStackView.addArrangedSubview(isFavImageView)
+//        iconStackView.addArrangedSubview(rarityLabel)
+//        iconStackView.addArrangedSubview(isFavImageView)
         
         imgView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         imgView.translatesAutoresizingMaskIntoConstraints = false
         imgView.contentMode = .scaleAspectFit
         
-        imgView.addSubview(iconStackView)
+//        imgView.addSubview(iconStackView)
+        imgView.addSubview(rarityLabel)
+        imgView.addSubview(isFavImageView)
         
         
         nameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
@@ -105,7 +108,7 @@ class CritterTableViewCell: UITableViewCell {
         infoStackView.spacing = MARGIN
         
         let bsStackView = UIStackView()
-        bsStackView.alignment = .leading
+        bsStackView.alignment = .center
         bsStackView.translatesAutoresizingMaskIntoConstraints = false
         bsStackView.axis = .horizontal
         bsStackView.distribution = .equalSpacing
@@ -123,7 +126,7 @@ class CritterTableViewCell: UITableViewCell {
 
         mStackView = UIStackView()
         mStackView.translatesAutoresizingMaskIntoConstraints = false
-        mStackView.alignment = .leading
+        mStackView.alignment = .center
         mStackView.axis = .horizontal
         mStackView.distribution = .fill
         mStackView.spacing = MARGIN
@@ -138,21 +141,23 @@ class CritterTableViewCell: UITableViewCell {
     }
     
     private func setupConstraint() {
-        let itemImageViewSize: CGFloat = 0.25
-        let smallIconSize: CGFloat = itemImageViewSize / 6
+        let critterImageViewSize: CGFloat = 0.20
+        let smallIconSize: CGFloat = critterImageViewSize / 6
         
         NSLayoutConstraint.activate([
-            imgView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: itemImageViewSize),
-            imgView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: itemImageViewSize),
+            imgView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: critterImageViewSize),
+            imgView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: critterImageViewSize),
             
             mStackView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: MARGIN),
             mStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: MARGIN),
             mStackView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -MARGIN),
             mStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -MARGIN),
             
-            iconStackView.leftAnchor.constraint(equalTo: imgView.leftAnchor),
-            iconStackView.topAnchor.constraint(equalTo: imgView.topAnchor),
-            iconStackView.bottomAnchor.constraint(equalTo: imgView.bottomAnchor, constant: -MARGIN),
+            rarityLabel.leftAnchor.constraint(equalTo: imgView.leftAnchor),
+            rarityLabel.topAnchor.constraint(equalTo: imgView.topAnchor),
+            
+            isFavImageView.leftAnchor.constraint(equalTo: imgView.leftAnchor),
+            isFavImageView.bottomAnchor.constraint(equalTo: imgView.bottomAnchor),
             
             isFavImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: smallIconSize),
             isFavImageView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: smallIconSize),

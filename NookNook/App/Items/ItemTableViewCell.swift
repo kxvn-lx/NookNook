@@ -112,7 +112,7 @@ class ItemTableViewCell: UITableViewCell {
 
         mStackView = UIStackView()
         mStackView.translatesAutoresizingMaskIntoConstraints = false
-        mStackView.alignment = .leading
+        mStackView.alignment = .center
         mStackView.axis = .horizontal
         mStackView.distribution = .fill
         mStackView.spacing = MARGIN
@@ -127,7 +127,7 @@ class ItemTableViewCell: UITableViewCell {
     }
     
     private func setupConstraint() {
-        let itemImageViewSize: CGFloat = 0.25
+        let itemImageViewSize: CGFloat = 0.20
         let smallIconSize: CGFloat = itemImageViewSize / 6
         
         NSLayoutConstraint.activate([

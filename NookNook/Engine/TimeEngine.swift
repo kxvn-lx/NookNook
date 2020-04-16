@@ -13,53 +13,45 @@ import SwiftyJSON
 struct TimeEngine {
     
     /**
-     Render a time format
+     Render a time format for better viewing. Since we only assume that Critters are the one dependent with time, this method is explicit for Critter object.
      - Parameters:
-     - startTime: The start time in JSON format.
-     - endTime: The end time in JSON format.
+        - time: The time in string format.
      - Returns:
-     - A rendered value of time in String format.
+        - The rendered formatted time
      */
-    static func renderTime(of startTime: JSON?, and endTime: JSON?) -> String {
+    static func formatTime(of time: String) -> String {
         
-        var finalTimeString = ""
+        var renderedTime = ""
         
-        
-        
-        guard let startTime = startTime?.stringValue, let endTime = endTime?.stringValue else {
-            finalTimeString = "Error"
-            return finalTimeString
+        if time.contains("-") {
+            let timeArr = time.components(separatedBy: " - ")
+            renderedTime = "\(timeArr[0].uppercased()) - \(timeArr[1].uppercased())"
         }
-        
-        if startTime == "All day" && endTime == "All day" {
-            finalTimeString = "All day"
+        else if time.contains("to") {
+            let timeArr = time.components(separatedBy: " to ")
+            renderedTime = "\(timeArr[0].uppercased()) - \(timeArr[1].uppercased())"
         }
-        else if startTime.contains("\n") && endTime.contains("\n") {
-            finalTimeString = "Multiple times"
-        }
-        else if startTime.isFloat && endTime.isFloat {
-            let sTime = convertTime(with: Float(startTime)!)
-            let eTime = convertTime(with: Float(endTime)!)
-            
-            finalTimeString = "\(renderTime(sTime).clean) \(renderDelim(time: sTime)) - \(renderTime(eTime).clean) \(renderDelim(time: eTime))"
+        else if time.isEmpty {
+            renderedTime = "All day"
         }
         else {
-            fatalError("Unable to render time!")
+            print(time)
+            fatalError("Unable to format time!")
         }
         
-        
-        return finalTimeString
+        return renderedTime
     }
     
+    
     /**
-     Render a month format
+     Render a month format for better viewing. Since we only assume that Critters are the one dependent with time, this method is explicit for Critter object.
      - Parameters:
-     
+        - month: The month in string format.
      - Returns:
-     - A rendered value of months in String format.
+        - The rendered formatted time
      */
-    static func renderMonths(with monthSpan: [Int]) -> String {
-        let months = [
+    static func formatMonth(of month: String) -> String {
+        let monthNames = [
             "Jan",
             "Feb",
             "Mar",
@@ -71,20 +63,23 @@ struct TimeEngine {
             "Sep",
             "Oct",
             "Nov",
-            "Dec"
+            "Dec",
         ]
-        return "\(months[monthSpan.first!]) - \(months.last!)"
-    }
-    
-    private static func convertTime(with time: Float) -> Float {
-        return time * 24
-    }
-    
-    private static func renderDelim(time: Float) -> String {
-        return time < 12 ? "AM" : "PM"
-    }
-    
-    private static func renderTime(_ time: Float) -> Float {
-        return time > 12 ? time - 12 : time
+        
+        var renderedMonth = ""
+        
+        if month.contains("-") {
+            let monthArr = month.components(separatedBy: "-")
+            renderedMonth = "\(monthNames[Int(monthArr[0])! - 1]) - \(monthNames[Int(monthArr[1])! - 1])"
+        }
+        else if month.isEmpty {
+            renderedMonth = "All Seasons"
+        }
+        else {
+            print(month)
+            fatalError("Unable to format months!")
+        }
+        
+        return renderedMonth
     }
 }

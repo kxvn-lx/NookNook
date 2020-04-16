@@ -14,15 +14,14 @@ struct Critter: Codable, Equatable, Identifiable {
     var id: String { name }
     
     let name: String
-    let image: String?
+    let image: String
     let weather: String
     let obtainedFrom: String
     
-    let startTime: JSON
-    let endTime: JSON
+    let time: String
     
-    let activeMonthsN: [Int]
-    let activeMonthsS: [Int]
+    let activeMonthsN: String
+    let activeMonthsS: String
     
     let rarity: String
     

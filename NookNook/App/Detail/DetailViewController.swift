@@ -125,7 +125,7 @@ class DetailViewController: UIViewController {
      Method to render item object
      */
     private func renderItem() {
-        detailImageView.sd_setImage(with: ImageEngine.parseURL(of: itemObj.image!), completed: nil)
+        detailImageView.sd_setImage(with: ImageEngine.parseURL(with: itemObj.image!), completed: nil)
         titleLabel.text = itemObj.name
         subtitleLabel.text = itemObj.obtainedFrom
         buyLabel.attributedText = PriceEngine.renderPrice(amount: itemObj.buy!, with: .none, of: buyLabel.font.pointSize)
@@ -143,7 +143,7 @@ class DetailViewController: UIViewController {
      Method to render item object
      */
     private func renderCritter() {
-        detailImageView.sd_setImage(with: ImageEngine.parseURL(of: critterObj.image!), completed: nil)
+        detailImageView.sd_setImage(with: ImageEngine.parseAcnhURL(with: critterObj.image, of: critterObj.category), completed: nil)
         titleLabel.text = critterObj.name
         subtitleLabel.text = critterObj.obtainedFrom
         sellLabel.attributedText = PriceEngine.renderPrice(amount: critterObj.sell!, with: .none, of: sellLabel.font.pointSize)
@@ -151,8 +151,14 @@ class DetailViewController: UIViewController {
         specialSellLabel.attributedText = PriceEngine.renderPrice(amount: Int(Double(specialSell) * 1.5), with: .none, of: buyLabel.font.pointSize)
         weatherLabel.text = critterObj.weather
         rarityLabel.setTitle(critterObj.rarity, for: .normal)
-        activeTimeN.text = TimeEngine.renderMonths(with: critterObj.activeMonthsN)
-        activeTimeS.text = TimeEngine.renderMonths(with: critterObj.activeMonthsS)
+        activeTimeN.text = TimeEngine.formatMonth(of: critterObj.activeMonthsN)
+        activeTimeS.text = TimeEngine.formatMonth(of: critterObj.activeMonthsS)
+        if critterObj.category == Categories.fishes.rawValue {
+            rarityLabel.isHidden = true
+        }
+        if critterObj.weather.isEmpty {
+            weatherStack.isHidden = true
+        }
     }
     
     
@@ -160,14 +166,14 @@ class DetailViewController: UIViewController {
      Method to render item object
      */
     private func renderWardrobe() {
-        detailImageView.sd_setImage(with: ImageEngine.parseURL(of: wardrobeObj.image!), completed: nil)
+        detailImageView.sd_setImage(with: ImageEngine.parseURL(with: wardrobeObj.image!), completed: nil)
         titleLabel.text = wardrobeObj.name
         subtitleLabel.text = wardrobeObj.obtainedFrom
         buyLabel.attributedText = PriceEngine.renderPrice(amount: wardrobeObj.buy!, with: .none, of: buyLabel.font.pointSize)
         sellLabel.attributedText = PriceEngine.renderPrice(amount: wardrobeObj.sell!, with: .none, of: buyLabel.font.pointSize)
         if wardrobeObj.variants == nil {
             variationImageCollectionView.isHidden = true
-            variationTitleLabel.text = "This item has no variations."
+            variationTitleLabel.text = "This clothing has no variations."
             variationTitleLabel.font = UIFont.preferredFont(forTextStyle: .body)
         }
     }
@@ -282,9 +288,9 @@ class DetailViewController: UIViewController {
         specialSellStack = createInfoStackView(title: "Special sell price", with: specialSellLabel)
         if let critterObj = critterObj {
             switch critterObj.category {
-            case "Fish - South":
+            case Categories.fishes.rawValue:
                 specialSellStack = createInfoStackView(title: "CJ sell price", with: specialSellLabel)
-            case "Bugs - South":
+            case Categories.bugs.rawValue:
                 specialSellStack = createInfoStackView(title: "Flick sell price", with: specialSellLabel)
             default:
                 fatalError("Invalid category detected for critter! (attempt to render special sell price")
@@ -362,7 +368,7 @@ class DetailViewController: UIViewController {
     }
     
     private func setupConstraint() {
-        let itemImageViewSize: CGFloat = 0.5
+        let itemImageViewSize: CGFloat = 0.35
         
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: MARGIN),
@@ -392,7 +398,7 @@ class DetailViewController: UIViewController {
             variationStack.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
             
             variationImageCollectionView.widthAnchor.constraint(equalTo: self.variationStack.widthAnchor),
-            variationImageCollectionView.heightAnchor.constraint(equalToConstant: 150)
+            variationImageCollectionView.heightAnchor.constraint(equalToConstant: 135)
 
         ])
     }
@@ -443,7 +449,7 @@ class DetailViewController: UIViewController {
                                               heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.4),
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.35),
                                                heightDimension: .fractionalHeight(1))
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize,
                                                          subitem: item, count: 1)
@@ -487,13 +493,13 @@ extension DetailViewController: UICollectionViewDelegateFlowLayout, UICollection
         switch groupOrigin {
         case .items:
             if let itemObjArr = itemObj.variants {
-                cell.variantImage.sd_setImage(with: ImageEngine.parseURL(of: itemObjArr[indexPath.row]), placeholderImage: nil)
+                cell.variantImage.sd_setImage(with: ImageEngine.parseURL(with: itemObjArr[indexPath.row]), placeholderImage: nil)
             }
         case .critters:
             print("Attempt to access critter cell.")
         case .wardrobes:
             if let wardrobeObjArr = wardrobeObj.variants {
-                cell.variantImage.sd_setImage(with: ImageEngine.parseURL(of: wardrobeObjArr[indexPath.row]), placeholderImage: nil)
+                cell.variantImage.sd_setImage(with: ImageEngine.parseURL(with: wardrobeObjArr[indexPath.row]), placeholderImage: nil)
             }
         default: fatalError("Attempt to access an invalid object group or groupOrigin is still nil!")
         }

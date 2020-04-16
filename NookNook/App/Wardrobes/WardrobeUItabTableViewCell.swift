@@ -113,7 +113,7 @@ class WardrobeUItabTableViewCell: UITableViewCell {
 
         mStackView = UIStackView()
         mStackView.translatesAutoresizingMaskIntoConstraints = false
-        mStackView.alignment = .leading
+        mStackView.alignment = .center
         mStackView.axis = .horizontal
         mStackView.distribution = .fill
         mStackView.spacing = MARGIN
@@ -128,12 +128,12 @@ class WardrobeUItabTableViewCell: UITableViewCell {
     }
     
     private func setupConstraint() {
-        let itemImageViewSize: CGFloat = 0.25
-        let smallIconSize: CGFloat = itemImageViewSize / 6
+        let wardrobeImageViewSize: CGFloat = 0.20
+        let smallIconSize: CGFloat = wardrobeImageViewSize / 6
         
         NSLayoutConstraint.activate([
-            imgView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: itemImageViewSize),
-            imgView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: itemImageViewSize),
+            imgView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: wardrobeImageViewSize),
+            imgView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: wardrobeImageViewSize),
             
             mStackView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: MARGIN),
             mStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: MARGIN),

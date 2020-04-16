@@ -17,7 +17,7 @@ class CrittersTableViewController: UITableViewController {
     var favouritedCritters: [Critter] = []
     var critters: [Critter] = []
     var filteredCritters: [Critter] = []
-    var currentCategory: Categories = Categories.worldBugs
+    var currentCategory: Categories = Categories.bugsMain
     
     let searchController = UISearchController(searchResultsController: nil)
     var isSearchBarEmpty: Bool {
@@ -76,16 +76,19 @@ class CrittersTableViewController: UITableViewController {
                 critter = critters[indexPath.row]
             }
             
-            critterCell.imgView.sd_setImage(with: ImageEngine.parseURL(of: critter.image!), placeholderImage: nil)
+            critterCell.imgView.sd_setImage(with: ImageEngine.parseAcnhURL(with: critter.image, of: critter.category), placeholderImage: nil)
             
             critterCell.nameLabel.text = critter.name
             critterCell.obtainedFromLabel.text = critter.obtainedFrom.isEmpty ? "Location unknown" : critter.obtainedFrom
-            critterCell.timeLabel.text = TimeEngine.renderTime(of: critter.startTime, and: critter.endTime)
+            critterCell.timeLabel.text = TimeEngine.formatTime(of: critter.time)
             critterCell.sellLabel.attributedText = PriceEngine.renderPrice(amount: critter.sell, with: .sell, of: 12)
             critterCell.weatherLabel.text = critter.weather
             
             critterCell.isFavImageView.image = favouritedCritters.contains(critter) ?  IconUtil.systemIcon(of: IconUtil.IconName.starFill, weight: .thin) : nil
+            
             critterCell.rarityLabel.setTitle(critter.rarity, for: .normal)
+            critterCell.rarityLabel.sizeToFit()
+            critterCell.rarityLabel.isHidden = critter.category == Categories.fishes.rawValue ? true : false
             
         }
         
@@ -123,9 +126,9 @@ class CrittersTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch currentCategory {
-        case .worldBugs:
+        case .bugsMain:
             return "Bugs"
-        case .worldFishes:
+        case .fishesMain:
             return "Fishes"
         default:
             return "No Category found!"

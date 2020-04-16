@@ -77,7 +77,7 @@ class ItemsTableViewController: UITableViewController {
                 item = items[indexPath.row]
             }
             
-            itemCell.imgView.sd_setImage(with: ImageEngine.parseURL(of: item.image!), placeholderImage: nil)
+            itemCell.imgView.sd_setImage(with: ImageEngine.parseURL(with: item.image!), placeholderImage: nil)
             itemCell.nameLabel.text = item.name
             itemCell.obtainedFromLabel.text = item.obtainedFrom
             itemCell.buyLabel.attributedText = PriceEngine.renderPrice(amount: item.buy, with: .buy, of: 12)
