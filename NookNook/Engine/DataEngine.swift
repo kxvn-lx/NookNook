@@ -70,17 +70,16 @@ struct DataEngine {
         var critters: [Critter] = []
         
         var weathers: [String: String] = [:]
-        var rarities: [String: String] = [:]
         
         var cat: String!
         
         // Load datas from secondary JSON files (bugsSecondary.JSON)
         switch category {
         case .bugsMain:
-            (weathers, rarities) = loadSecondCritterJSON(with: .bugsSecondary)
+            (weathers) = loadSecondCritterJSON(with: .bugsSecondary)
             cat = Categories.bugs.rawValue
         case .fishesMain:
-            (weathers, rarities) = loadSecondCritterJSON(with: .fishesSecondary)
+            (weathers) = loadSecondCritterJSON(with: .fishesSecondary)
             cat = Categories.fishes.rawValue
         default:
             fatalError("Passing an invalid categories to loadCritterJSON method. Check the category to make sure you have passed the right categories!")
@@ -97,8 +96,6 @@ struct DataEngine {
                 for k in obj {
                     let key = jsonObj[k]!
                     let weather = weathers[key["name"]["name-en"].stringValue] != nil ? weathers[key["name"]["name-en"].stringValue]! : "Unknown"
-                    let rarity = rarities[key["name"]["name-en"].stringValue] != nil ? rarities[key["name"]["name-en"].stringValue]! : "Unknown"
-                    
                     
                     let newCritter = Critter(name: key["name"]["name-en"].stringValue,
                                              image: key["id"].stringValue,
@@ -107,7 +104,7 @@ struct DataEngine {
                                              time: key["availability"]["time"].stringValue,
                                              activeMonthsN: key["availability"]["month-northern"].stringValue,
                                              activeMonthsS: key["availability"]["month-southern"].stringValue,
-                                             rarity: rarity,
+                                             rarity: key["availability"]["rarity"].stringValue,
                                              category: cat,
                                              sell: key["price"].intValue
                     )
@@ -131,10 +128,9 @@ struct DataEngine {
     }
     
     // This function will only load JSON files from NOOKPLAZA
-    static private func loadSecondCritterJSON(with category: Categories) -> ( [String: String], [String: String] ) {
+    static private func loadSecondCritterJSON(with category: Categories) -> ( [String: String] ) {
         // save active months array from the other JSON file.
         var weathers: [String: String] = [:]
-        var rarities: [String: String] = [:]
         
         if let path = Bundle.main.path(forResource: category.rawValue, ofType: "json") {
             do {
@@ -143,7 +139,6 @@ struct DataEngine {
                 
                 // iterate the data and ONLY get the active months
                 for data in jsonObj {
-                    rarities[data["name"].stringValue] = data["rarity"].stringValue
                     weathers[data["name"].stringValue] = data["weather"].stringValue
                 }
                 
@@ -154,7 +149,7 @@ struct DataEngine {
             fatalError("Invalid filename/path on loading secondary critters data.")
         }
         
-        return (weathers, rarities)
+        return (weathers)
     }
     
     

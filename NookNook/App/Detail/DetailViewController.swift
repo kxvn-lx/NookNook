@@ -153,12 +153,7 @@ class DetailViewController: UIViewController {
         rarityLabel.setTitle(critterObj.rarity, for: .normal)
         activeTimeN.text = TimeEngine.formatMonth(of: critterObj.activeMonthsN)
         activeTimeS.text = TimeEngine.formatMonth(of: critterObj.activeMonthsS)
-        if critterObj.category == Categories.fishes.rawValue {
-            rarityLabel.isHidden = true
-        }
-        if critterObj.weather.isEmpty {
-            weatherStack.isHidden = true
-        }
+        weatherStack.isHidden = critterObj.weather.isEmpty ? true : false
     }
     
     

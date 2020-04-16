@@ -88,7 +88,6 @@ class CrittersTableViewController: UITableViewController {
             
             critterCell.rarityLabel.setTitle(critter.rarity, for: .normal)
             critterCell.rarityLabel.sizeToFit()
-            critterCell.rarityLabel.isHidden = critter.category == Categories.fishes.rawValue ? true : false
             
         }
         

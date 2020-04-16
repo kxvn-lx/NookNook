@@ -52,9 +52,9 @@
 		0A72C3752445FD93009FA0D4 /* VariantCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A72C3742445FD93009FA0D4 /* VariantCollectionViewCell.swift */; };
 		0A7FA6A32445971900921079 /* CrittersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7FA6A22445971900921079 /* CrittersTableViewController.swift */; };
 		0A7FA6A52445972A00921079 /* CritterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7FA6A42445972A00921079 /* CritterTableViewCell.swift */; };
-		0AADD40E244869B8004FDA33 /* bugsMain.json in Resources */ = {isa = PBXBuildFile; fileRef = 0AADD40D244869B7004FDA33 /* bugsMain.json */; };
 		0AADD410244870D9004FDA33 /* fishesSecondary.json in Resources */ = {isa = PBXBuildFile; fileRef = 0AADD40F244870D9004FDA33 /* fishesSecondary.json */; };
-		0AADD412244870E1004FDA33 /* fishesMain.json in Resources */ = {isa = PBXBuildFile; fileRef = 0AADD411244870E1004FDA33 /* fishesMain.json */; };
+		0AADD4192448ADB4004FDA33 /* bugsMain.json in Resources */ = {isa = PBXBuildFile; fileRef = 0AADD4172448ADB4004FDA33 /* bugsMain.json */; };
+		0AADD41A2448ADB4004FDA33 /* fishesMain.json in Resources */ = {isa = PBXBuildFile; fileRef = 0AADD4182448ADB4004FDA33 /* fishesMain.json */; };
 		0AEFF82B24470EAF0032156C /* WardrobesUITableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEFF82A24470EAF0032156C /* WardrobesUITableViewController.swift */; };
 		0AEFF82D24470EC30032156C /* WardrobeUItabTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEFF82C24470EC30032156C /* WardrobeUItabTableViewCell.swift */; };
 		0AEFF82F24471CD90032156C /* Wardrobe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEFF82E24471CD90032156C /* Wardrobe.swift */; };
@@ -115,9 +115,9 @@
 		0A72C3742445FD93009FA0D4 /* VariantCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariantCollectionViewCell.swift; sourceTree = "<group>"; };
 		0A7FA6A22445971900921079 /* CrittersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrittersTableViewController.swift; sourceTree = "<group>"; };
 		0A7FA6A42445972A00921079 /* CritterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CritterTableViewCell.swift; sourceTree = "<group>"; };
-		0AADD40D244869B7004FDA33 /* bugsMain.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bugsMain.json; sourceTree = "<group>"; };
 		0AADD40F244870D9004FDA33 /* fishesSecondary.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fishesSecondary.json; sourceTree = "<group>"; };
-		0AADD411244870E1004FDA33 /* fishesMain.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fishesMain.json; sourceTree = "<group>"; };
+		0AADD4172448ADB4004FDA33 /* bugsMain.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bugsMain.json; sourceTree = "<group>"; };
+		0AADD4182448ADB4004FDA33 /* fishesMain.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fishesMain.json; sourceTree = "<group>"; };
 		0AEFF82A24470EAF0032156C /* WardrobesUITableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WardrobesUITableViewController.swift; sourceTree = "<group>"; };
 		0AEFF82C24470EC30032156C /* WardrobeUItabTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WardrobeUItabTableViewCell.swift; sourceTree = "<group>"; };
 		0AEFF82E24471CD90032156C /* Wardrobe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wardrobe.swift; sourceTree = "<group>"; };
@@ -200,9 +200,9 @@
 		0A370B682444417800A72048 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				0AADD40D244869B7004FDA33 /* bugsMain.json */,
+				0AADD4172448ADB4004FDA33 /* bugsMain.json */,
+				0AADD4182448ADB4004FDA33 /* fishesMain.json */,
 				0A36427F24469C600081315A /* bugsSecondary.json */,
-				0AADD411244870E1004FDA33 /* fishesMain.json */,
 				0AADD40F244870D9004FDA33 /* fishesSecondary.json */,
 				0A26E7B624475B6300D80594 /* villagers.json */,
 				0A370B702444543000A72048 /* accessories.json */,
@@ -401,9 +401,9 @@
 				0AADD410244870D9004FDA33 /* fishesSecondary.json in Resources */,
 				0A370B8C2444543200A72048 /* housewares.json in Resources */,
 				0A370BA12444543200A72048 /* floors.json in Resources */,
-				0AADD40E244869B8004FDA33 /* bugsMain.json in Resources */,
 				0A370B922444543200A72048 /* tools.json in Resources */,
 				0A370BA72444543200A72048 /* tops.json in Resources */,
+				0AADD4192448ADB4004FDA33 /* bugsMain.json in Resources */,
 				0A370B8D2444543200A72048 /* accessories.json in Resources */,
 				0A370B9F2444543200A72048 /* fencing.json in Resources */,
 				0A370BA32444543200A72048 /* fossils.json in Resources */,
@@ -411,7 +411,7 @@
 				0AFD705824419DD500957BE6 /* Assets.xcassets in Resources */,
 				0A370B8F2444543200A72048 /* wallpaper.json in Resources */,
 				0A370B962444543200A72048 /* rugs.json in Resources */,
-				0AADD412244870E1004FDA33 /* fishesMain.json in Resources */,
+				0AADD41A2448ADB4004FDA33 /* fishesMain.json in Resources */,
 				0A370B912444543200A72048 /* bottoms.json in Resources */,
 				0A370B9B2444543200A72048 /* posters.json in Resources */,
 				0A370BA02444543200A72048 /* headwear.json in Resources */,
