@@ -55,8 +55,10 @@
 		0AADD410244870D9004FDA33 /* fishesSecondary.json in Resources */ = {isa = PBXBuildFile; fileRef = 0AADD40F244870D9004FDA33 /* fishesSecondary.json */; };
 		0AADD4192448ADB4004FDA33 /* bugsMain.json in Resources */ = {isa = PBXBuildFile; fileRef = 0AADD4172448ADB4004FDA33 /* bugsMain.json */; };
 		0AADD41A2448ADB4004FDA33 /* fishesMain.json in Resources */ = {isa = PBXBuildFile; fileRef = 0AADD4182448ADB4004FDA33 /* fishesMain.json */; };
-		0AEFF82B24470EAF0032156C /* WardrobesUITableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEFF82A24470EAF0032156C /* WardrobesUITableViewController.swift */; };
-		0AEFF82D24470EC30032156C /* WardrobeUItabTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEFF82C24470EC30032156C /* WardrobeUItabTableViewCell.swift */; };
+		0AC89E402449418B009ADB18 /* VillagerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC89E3F2449418B009ADB18 /* VillagerTableViewCell.swift */; };
+		0AC89E422449419A009ADB18 /* VillagersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC89E412449419A009ADB18 /* VillagersTableViewController.swift */; };
+		0AEFF82B24470EAF0032156C /* WardrobesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEFF82A24470EAF0032156C /* WardrobesTableViewController.swift */; };
+		0AEFF82D24470EC30032156C /* WardrobetabTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEFF82C24470EC30032156C /* WardrobetabTableViewCell.swift */; };
 		0AEFF82F24471CD90032156C /* Wardrobe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEFF82E24471CD90032156C /* Wardrobe.swift */; };
 		0AFD704F24419DD300957BE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFD704E24419DD300957BE6 /* AppDelegate.swift */; };
 		0AFD705124419DD300957BE6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFD705024419DD300957BE6 /* SceneDelegate.swift */; };
@@ -118,8 +120,10 @@
 		0AADD40F244870D9004FDA33 /* fishesSecondary.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fishesSecondary.json; sourceTree = "<group>"; };
 		0AADD4172448ADB4004FDA33 /* bugsMain.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bugsMain.json; sourceTree = "<group>"; };
 		0AADD4182448ADB4004FDA33 /* fishesMain.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fishesMain.json; sourceTree = "<group>"; };
-		0AEFF82A24470EAF0032156C /* WardrobesUITableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WardrobesUITableViewController.swift; sourceTree = "<group>"; };
-		0AEFF82C24470EC30032156C /* WardrobeUItabTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WardrobeUItabTableViewCell.swift; sourceTree = "<group>"; };
+		0AC89E3F2449418B009ADB18 /* VillagerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VillagerTableViewCell.swift; sourceTree = "<group>"; };
+		0AC89E412449419A009ADB18 /* VillagersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VillagersTableViewController.swift; sourceTree = "<group>"; };
+		0AEFF82A24470EAF0032156C /* WardrobesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WardrobesTableViewController.swift; sourceTree = "<group>"; };
+		0AEFF82C24470EC30032156C /* WardrobetabTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WardrobetabTableViewCell.swift; sourceTree = "<group>"; };
 		0AEFF82E24471CD90032156C /* Wardrobe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wardrobe.swift; sourceTree = "<group>"; };
 		0AFD704B24419DD300957BE6 /* NookNook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NookNook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AFD704E24419DD300957BE6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -166,6 +170,7 @@
 				0A7FA6A1244596FD00921079 /* Critters */,
 				0A370BAB2444794000A72048 /* Categories */,
 				0AEFF82924470D1A0032156C /* Wardrobes */,
+				0AC89E3E24494174009ADB18 /* Villagers */,
 				0A72C36F2445AD73009FA0D4 /* Detail */,
 			);
 			path = App;
@@ -261,11 +266,20 @@
 			path = Critters;
 			sourceTree = "<group>";
 		};
+		0AC89E3E24494174009ADB18 /* Villagers */ = {
+			isa = PBXGroup;
+			children = (
+				0AC89E412449419A009ADB18 /* VillagersTableViewController.swift */,
+				0AC89E3F2449418B009ADB18 /* VillagerTableViewCell.swift */,
+			);
+			path = Villagers;
+			sourceTree = "<group>";
+		};
 		0AEFF82924470D1A0032156C /* Wardrobes */ = {
 			isa = PBXGroup;
 			children = (
-				0AEFF82A24470EAF0032156C /* WardrobesUITableViewController.swift */,
-				0AEFF82C24470EC30032156C /* WardrobeUItabTableViewCell.swift */,
+				0AEFF82A24470EAF0032156C /* WardrobesTableViewController.swift */,
+				0AEFF82C24470EC30032156C /* WardrobetabTableViewCell.swift */,
 			);
 			path = Wardrobes;
 			sourceTree = "<group>";
@@ -435,6 +449,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AC89E402449418B009ADB18 /* VillagerTableViewCell.swift in Sources */,
 				0A295B4A244494F9001CF828 /* Categories.swift in Sources */,
 				0A370B5F2443223D00A72048 /* VC+.swift in Sources */,
 				0A7FA6A32445971900921079 /* CrittersTableViewController.swift in Sources */,
@@ -447,14 +462,15 @@
 				0A370B61244322F100A72048 /* ColourUtil.swift in Sources */,
 				0AFD70752441D9BF00957BE6 /* Item.swift in Sources */,
 				0A26E7B5244758C500D80594 /* Villager.swift in Sources */,
-				0AEFF82B24470EAF0032156C /* WardrobesUITableViewController.swift in Sources */,
+				0AEFF82B24470EAF0032156C /* WardrobesTableViewController.swift in Sources */,
 				0A72C3752445FD93009FA0D4 /* VariantCollectionViewCell.swift in Sources */,
 				0A3642862446CC070081315A /* TimeEngine.swift in Sources */,
 				0A72C3712445AD8F009FA0D4 /* DetailViewController.swift in Sources */,
+				0AC89E422449419A009ADB18 /* VillagersTableViewController.swift in Sources */,
 				0AFD706C2441BFEE00957BE6 /* ItemsTableViewController.swift in Sources */,
 				0A01F31224431725001499D5 /* ImageEngine.swift in Sources */,
 				0AFD70732441D2B200957BE6 /* ItemTableViewCell.swift in Sources */,
-				0AEFF82D24470EC30032156C /* WardrobeUItabTableViewCell.swift in Sources */,
+				0AEFF82D24470EC30032156C /* WardrobetabTableViewCell.swift in Sources */,
 				0AFD706A2441BA7500957BE6 /* HomeViewController.swift in Sources */,
 				0AEFF82F24471CD90032156C /* Wardrobe.swift in Sources */,
 				0A295B4C2444AAD0001CF828 /* Taptic.swift in Sources */,

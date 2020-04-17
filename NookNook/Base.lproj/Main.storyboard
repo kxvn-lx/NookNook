@@ -20,6 +20,7 @@
                         <segue destination="3Kg-QY-xFh" kind="relationship" relationship="viewControllers" id="q90-gB-d7V"/>
                         <segue destination="nW4-cy-Sx0" kind="relationship" relationship="viewControllers" id="s6C-Qb-2O1"/>
                         <segue destination="n84-bG-hUe" kind="relationship" relationship="viewControllers" id="uws-Ny-5lS"/>
+                        <segue destination="2w1-OA-HzY" kind="relationship" relationship="viewControllers" id="kEx-nH-CRT"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rf3-yR-aZf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -101,7 +102,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zuy-fO-FD0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1906" y="-224"/>
+            <point key="canvasLocation" x="2816" y="-250"/>
         </scene>
         <!--Critters-->
         <scene sceneID="omT-t6-fSa">
@@ -130,7 +131,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JBO-en-zih" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-509" y="1195"/>
+            <point key="canvasLocation" x="-714" y="1191"/>
         </scene>
         <!--Critters-->
         <scene sceneID="9hP-sb-L2X">
@@ -149,18 +150,18 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="im4-eh-6Vd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-509" y="475"/>
+            <point key="canvasLocation" x="-714" y="475"/>
         </scene>
         <!--Wardrobes-->
         <scene sceneID="SlD-wc-MuI">
             <objects>
-                <tableViewController title="Wardrobes" id="W2u-P9-SB1" customClass="WardrobesUITableViewController" customModule="NookNook" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Wardrobes" id="W2u-P9-SB1" customClass="WardrobesTableViewController" customModule="NookNook" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="esg-5n-k6w">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="WardrobeCell" id="GLt-lX-zde" customClass="WardrobeUItabTableViewCell" customModule="NookNook" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="WardrobeCell" id="GLt-lX-zde" customClass="WardrobetabTableViewCell" customModule="NookNook" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GLt-lX-zde" id="6wU-T2-blJ">
@@ -178,7 +179,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s7a-tO-MSL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="680" y="1221"/>
+            <point key="canvasLocation" x="112" y="1191"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="2tn-iY-J51">
@@ -193,7 +194,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z4D-az-GMq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2815.9420289855075" y="582.58928571428567"/>
+            <point key="canvasLocation" x="3726.0869565217395" y="582.58928571428567"/>
         </scene>
         <!--Wardrobes-->
         <scene sceneID="VTd-cm-UvJ">
@@ -212,7 +213,55 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tsi-IL-XsK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="679.71014492753625" y="489.50892857142856"/>
+            <point key="canvasLocation" x="112" y="475"/>
+        </scene>
+        <!--Villagers-->
+        <scene sceneID="fB8-TY-lb8">
+            <objects>
+                <tableViewController title="Villagers" id="jNS-9k-keT" customClass="VillagersTableViewController" customModule="NookNook" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="b8f-B8-jCj">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="VillagerCell" id="msr-pv-omS" customClass="VillagerTableViewCell" customModule="NookNook" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="msr-pv-omS" id="IXZ-z2-TfK">
+                                    <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="jNS-9k-keT" id="PQx-vL-coY"/>
+                            <outlet property="delegate" destination="jNS-9k-keT" id="DYI-Mj-6Re"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Villagers" id="ctr-AC-XYj"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tXl-qG-frc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="974" y="1191"/>
+        </scene>
+        <!--Villagers-->
+        <scene sceneID="5gt-Yo-Xe7">
+            <objects>
+                <navigationController title="Villagers" automaticallyAdjustsScrollViewInsets="NO" id="2w1-OA-HzY" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="GwF-xr-lyL"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Qgb-eB-YIE">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="jNS-9k-keT" kind="relationship" relationship="rootViewController" id="eLs-QV-NBl"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Uf4-nd-Ev0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="974" y="475"/>
         </scene>
     </scenes>
 </document>

@@ -13,7 +13,7 @@ import SwiftyJSON
 struct DataEngine {
     
     enum Group {
-        case items, critters, wardrobes
+        case items, critters, wardrobes, villagers
     }
     
     /**
@@ -207,15 +207,17 @@ struct DataEngine {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped)
                 let jsonObj = try JSON(data: data).dictionary!
                 
-                for key in jsonObj {
-                    let v = key.value
-                    let newVillager = Villager(name: v["name"]["name-en"].stringValue,
-                                               image: v["id"].stringValue,
-                                               personality: v["personality"].stringValue,
-                                               bdayString: v["birthday-string"].stringValue,
-                                               species: v["species"].stringValue,
-                                               gender: v["gender"].stringValue,
-                                               catchphrase: v["catch-phrase"].stringValue
+                let obj = jsonObj.keys.sorted()
+                
+                for k in obj {
+                    let key = jsonObj[k]!
+                    let newVillager = Villager(name: key["name"]["name-en"].stringValue,
+                                               image: key["id"].stringValue,
+                                               personality: key["personality"].stringValue,
+                                               bdayString: key["birthday-string"].stringValue,
+                                               species: key["species"].stringValue,
+                                               gender: key["gender"].stringValue,
+                                               catchphrase: key["catch-phrase"].stringValue
                     )
                     villagers.append(newVillager)
                 }

@@ -22,9 +22,9 @@ class CategoriesTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        tableView.rowHeight = UITableView.automaticDimension
-//        tableView.estimatedRowHeight = 200
+
+        tableView.rowHeight = 50
+
         
         tableView.tableFooterView = UIView()
         

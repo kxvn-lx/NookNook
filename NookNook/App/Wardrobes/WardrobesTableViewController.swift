@@ -1,5 +1,5 @@
 //
-//  WardrobesUITableViewController.swift
+//  WardrobesTableViewController.swift
 //  NookNook
 //
 //  Created by Kevin Laminto on 15/4/20.
@@ -9,7 +9,7 @@
 import UIKit
 import SDWebImage
 
-class WardrobesUITableViewController: UITableViewController {
+class WardrobesTableViewController: UITableViewController {
     
     let WARDROBE_CELL = "WardrobeCell"
     private let DETAIL_ID = "Detail"
@@ -31,6 +31,9 @@ class WardrobesUITableViewController: UITableViewController {
         super.viewDidLoad()
         
         setBar()
+        
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 100
         
         // Default categories to be presented
         wardrobes = DataEngine.loadWardrobesJSON(from: currentCategory)
@@ -60,7 +63,7 @@ class WardrobesUITableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: WARDROBE_CELL, for: indexPath)
         
-        if let wardrobeCell = cell as? WardrobeUItabTableViewCell {
+        if let wardrobeCell = cell as? WardrobetabTableViewCell {
             wardrobeCell.imgView.sd_imageTransition = .fade
             wardrobeCell.imgView.sd_imageIndicator = SDWebImageActivityIndicator.gray
             
@@ -184,7 +187,7 @@ class WardrobesUITableViewController: UITableViewController {
     
 }
 
-extension WardrobesUITableViewController: CatDelegate {
+extension WardrobesTableViewController: CatDelegate {
     func parseNewCategory(of category: Categories) {
         currentCategory = category
         wardrobes = DataEngine.loadWardrobesJSON(from: currentCategory)
@@ -193,7 +196,7 @@ extension WardrobesUITableViewController: CatDelegate {
     }
 }
 
-extension WardrobesUITableViewController: UISearchResultsUpdating {
+extension WardrobesTableViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar
         filterContentForSearchText(searchBar.text!)

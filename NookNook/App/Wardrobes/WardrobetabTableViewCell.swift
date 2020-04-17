@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WardrobeUItabTableViewCell: UITableViewCell {
+class WardrobetabTableViewCell: UITableViewCell {
 
     private let MARGIN: CGFloat = 10
     

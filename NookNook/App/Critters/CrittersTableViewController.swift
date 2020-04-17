@@ -33,7 +33,7 @@ class CrittersTableViewController: UITableViewController {
         self.clearsSelectionOnViewWillAppear = true
         
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 200
+        tableView.estimatedRowHeight = 100
         
         setBar()
         

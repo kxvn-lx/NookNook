@@ -24,6 +24,7 @@ class DetailViewController: UIViewController {
     private var itemObj: Item!
     private var critterObj: Critter!
     private var wardrobeObj: Wardrobe!
+    private var villagerObj: Villager!
     
     private var groupOrigin: DataEngine.Group!
     
@@ -89,7 +90,12 @@ class DetailViewController: UIViewController {
         case .wardrobes:
             self.wardrobeObj = object as? Wardrobe
             self.groupOrigin = .wardrobes
+            
+        case .villagers:
+            self.villagerObj = object as? Villager
+            self.groupOrigin = .villagers
         }
+        
     }
     
     /**
@@ -116,6 +122,22 @@ class DetailViewController: UIViewController {
             rarityLabel.isHidden = true
             specialSellStack.isHidden = true
             
+        case .villagers:
+            renderVillager()
+            variationStack.isHidden = true
+            activeTimeStack.isHidden = true
+            specialSellStack.isHidden = true
+            let species = sellStack.viewWithTag(1) as! UILabel
+            species.text = "Species"
+            
+            let bday = buyStack.viewWithTag(1) as! UILabel
+            bday.text = "Birthday"
+            
+            let gender = weatherStack.viewWithTag(1) as! UILabel
+            gender.text = "Gender"
+            
+            
+            
         default: fatalError("Attempt to render an invalid object group or groupOrigin is still nil!")
         }
         
@@ -140,7 +162,7 @@ class DetailViewController: UIViewController {
     
     
     /**
-     Method to render item object
+     Method to render critter object
      */
     private func renderCritter() {
         detailImageView.sd_setImage(with: ImageEngine.parseAcnhURL(with: critterObj.image, of: critterObj.category), completed: nil)
@@ -158,7 +180,7 @@ class DetailViewController: UIViewController {
     
     
     /**
-     Method to render item object
+     Method to render wardrobe object
      */
     private func renderWardrobe() {
         detailImageView.sd_setImage(with: ImageEngine.parseURL(with: wardrobeObj.image!), completed: nil)
@@ -171,6 +193,20 @@ class DetailViewController: UIViewController {
             variationTitleLabel.text = "This clothing has no variations."
             variationTitleLabel.font = UIFont.preferredFont(forTextStyle: .body)
         }
+    }
+    
+    /**
+     Method to render Villager object
+     */
+    private func renderVillager() {
+        detailImageView.sd_setImage(with: ImageEngine.parseVillagerURL(with: villagerObj.image, of: 1), completed: nil)
+        titleLabel.text = villagerObj.name
+        buyLabel.text = villagerObj.bdayString
+        subtitleLabel.text = "Catch-phrase: \(villagerObj.catchphrase)"
+        sellLabel.text = villagerObj.species
+        weatherLabel.text = villagerObj.gender
+        rarityLabel.setTitle(villagerObj.personality, for: .normal)
+
     }
     
     
@@ -427,6 +463,7 @@ class DetailViewController: UIViewController {
         let label1 = UILabel()
         label1.numberOfLines = 0
         label1.text = title
+        label1.tag = 1
         label1.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
         
         stackView.addBackground(color: UIColor(named: ColourUtil.cream1.rawValue)!, cornerRadius: 10)
@@ -478,6 +515,9 @@ extension DetailViewController: UICollectionViewDelegateFlowLayout, UICollection
             if let wardrobeObjArr = wardrobeObj.variants {
                 return wardrobeObjArr.count
             }
+            
+        case .villagers:
+            return 0
             
         default: fatalError("Attempt to create cells from an unkown group origin or, groupOrigin is nul!")
         }

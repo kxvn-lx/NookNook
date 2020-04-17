@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-struct Villager {
+struct Villager: Codable, Equatable, Identifiable {
     var id: String { name }
     
     let name: String
