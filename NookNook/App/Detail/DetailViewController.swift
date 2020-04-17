@@ -243,6 +243,7 @@ class DetailViewController: UIViewController {
         // Title and subtitle section
         titleLabel.numberOfLines = 0
         titleLabel.font = UIFont.preferredFont(forTextStyle: .largeTitle)
+        titleLabel.font = UIFont.systemFont(ofSize: titleLabel.font.pointSize, weight: .semibold)
         titleLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)
         subtitleLabel.numberOfLines = 0
         subtitleLabel.font = UIFont.preferredFont(forTextStyle: .title3)
@@ -383,8 +384,6 @@ class DetailViewController: UIViewController {
             tsStackView.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
             titleRarityStack.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
             
-            titleLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.55),
-            
             infoStackView.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
             
             activeTimeStack.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
@@ -396,6 +395,10 @@ class DetailViewController: UIViewController {
             variationImageCollectionView.heightAnchor.constraint(equalToConstant: 135)
 
         ])
+        
+        if critterObj != nil {
+            titleLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.6).isActive = true
+        }
     }
     
     private func setBar() {
