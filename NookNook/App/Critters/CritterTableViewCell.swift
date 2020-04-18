@@ -14,16 +14,18 @@ class CritterTableViewCell: UITableViewCell {
     
     var imgView: UIImageView!
     var rarityLabel: UIButton!
-    var isFavImageView: UIImageView!
     var nameLabel: UILabel!
     var obtainedFromLabel : UILabel!
     var weatherLabel: UILabel!
     var timeLabel: UILabel!
     var sellLabel: UILabel!
     
+    var isCaughtLabel: UILabel!
+    var isDonatedLabel: UILabel!
+    
     private var infoStackView: UIStackView!
     private var mStackView: UIStackView!
-//    private var iconStackView: UIStackView!
+
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -37,37 +39,36 @@ class CritterTableViewCell: UITableViewCell {
     }
     
     private func setupView() {
-//        iconStackView = UIStackView()
-//        iconStackView.translatesAutoresizingMaskIntoConstraints = false
-//        iconStackView.alignment = .leading
-//        iconStackView.axis = .vertical
-//        iconStackView.distribution = .equalCentering
-//        iconStackView.spacing = MARGIN
-//        iconStackView.addBackground(color: .red, cornerRadius: 0)
-            
-        
         rarityLabel = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        rarityLabel.translatesAutoresizingMaskIntoConstraints = false
         rarityLabel.contentEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         rarityLabel.setTitleColor(.darkGray, for: .normal)
         rarityLabel.titleLabel?.font = UIFont.preferredFont(forTextStyle: .caption1)
         rarityLabel.isUserInteractionEnabled = false
         rarityLabel.addBlurEffect(style: .light, cornerRadius: 5, padding: .zero)
         
-        isFavImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-        isFavImageView.translatesAutoresizingMaskIntoConstraints = false
-        isFavImageView.contentMode = .scaleAspectFit
-        isFavImageView.tintColor = .darkGray
-        
-//        iconStackView.addArrangedSubview(rarityLabel)
-//        iconStackView.addArrangedSubview(isFavImageView)
         
         imgView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         imgView.translatesAutoresizingMaskIntoConstraints = false
         imgView.contentMode = .scaleAspectFit
         
-//        imgView.addSubview(iconStackView)
+        
+        isCaughtLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        isCaughtLabel.textColor = .darkGray
+        isCaughtLabel.translatesAutoresizingMaskIntoConstraints = false
+        isCaughtLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
+        isCaughtLabel.font = UIFont.systemFont(ofSize: isCaughtLabel.font.pointSize, weight: .black)
+        
+        isDonatedLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        isDonatedLabel.translatesAutoresizingMaskIntoConstraints = false
+        isDonatedLabel.textColor = .darkGray
+        isDonatedLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
+        isDonatedLabel.font = UIFont.systemFont(ofSize: isDonatedLabel.font.pointSize, weight: .black)
+
+        
         imgView.addSubview(rarityLabel)
-        imgView.addSubview(isFavImageView)
+        imgView.addSubview(isCaughtLabel)
+        imgView.addSubview(isDonatedLabel)
         
         
         nameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
@@ -75,6 +76,7 @@ class CritterTableViewCell: UITableViewCell {
         nameLabel.numberOfLines = 0
         nameLabel.font = UIFont.systemFont(ofSize: nameLabel.font!.pointSize, weight: .semibold)
         nameLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)
+        
         
         obtainedFromLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         obtainedFromLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -142,7 +144,6 @@ class CritterTableViewCell: UITableViewCell {
     
     private func setupConstraint() {
         let critterImageViewSize: CGFloat = 0.20
-        let smallIconSize: CGFloat = critterImageViewSize / 6
         
         NSLayoutConstraint.activate([
             imgView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: critterImageViewSize),
@@ -156,11 +157,12 @@ class CritterTableViewCell: UITableViewCell {
             rarityLabel.leftAnchor.constraint(equalTo: imgView.leftAnchor),
             rarityLabel.topAnchor.constraint(equalTo: imgView.topAnchor),
             
-            isFavImageView.leftAnchor.constraint(equalTo: imgView.leftAnchor),
-            isFavImageView.bottomAnchor.constraint(equalTo: imgView.bottomAnchor),
+            isCaughtLabel.rightAnchor.constraint(equalTo: imgView.rightAnchor),
+            isCaughtLabel.bottomAnchor.constraint(equalTo: imgView.bottomAnchor),
             
-            isFavImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: smallIconSize),
-            isFavImageView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: smallIconSize),
+            isDonatedLabel.bottomAnchor.constraint(equalTo: imgView.bottomAnchor),
+            isDonatedLabel.leftAnchor.constraint(equalTo: imgView.leftAnchor)
+            
         ])
     }
 

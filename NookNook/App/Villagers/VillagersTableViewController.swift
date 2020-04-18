@@ -50,6 +50,15 @@ class VillagersTableViewController: UITableViewController {
         
         setBar()
     }
+    
+    override func viewDidLayoutSubviews() {
+        setupSearchBar(searchBar: searchController.searchBar)
+    }
+    
+    private func setupSearchBar(searchBar : UISearchBar) {
+        searchBar.setPlaceholderTextColorTo(color: UIColor.lightGray)
+        
+    }
 
     // MARK: - Table view data source
 
@@ -86,8 +95,11 @@ class VillagersTableViewController: UITableViewController {
             villagerCell.personalityLabel.sizeToFit()
             villagerCell.bdayLabel.text = villager.bdayString
             villagerCell.genderLabel.text = villager.gender
-
-            villagerCell.isFavImageView.image = self.favouritesManager.villagers.contains(villager) ?  IconUtil.systemIcon(of: IconUtil.IconName.starFill, weight: .thin) : nil
+            
+            villagerCell.isFavImageView.image = self.favouritesManager.favouritedVillagers.contains(villager) ?  IconUtil.systemIcon(of: IconUtil.IconName.starFill, weight: .thin) : nil
+            
+            let isResident = self.favouritesManager.residentVillagers.contains(villager) ? "R" : ""
+            villagerCell.isResidentLabel.text = isResident
         }
 
         return cell
@@ -134,17 +146,22 @@ class VillagersTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView,
                             leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
     {
-        let favouriteAction = UIContextualAction(style: .normal, title:  "", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-            self.favouritesManager.saveVillager(villager: self.villagers[indexPath.row])
+        let favouriteAction = UIContextualAction(style: .normal, title:  "Favourite", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            self.favouritesManager.saveFavouritedVillager(villager: self.villagers[indexPath.row])
             self.tableView.reloadRows(at: [indexPath], with: .left)
             
             success(true)
         })
-        let starOption = self.favouritesManager.villagers.contains(self.villagers[indexPath.row]) ? IconUtil.IconName.starFill : IconUtil.IconName.star
-        favouriteAction.image = IconUtil.systemIcon(of: starOption, weight: .thin)
-        favouriteAction.backgroundColor = UIColor(named: ColourUtil.grass2.rawValue)
         
-        return UISwipeActionsConfiguration(actions: [favouriteAction])
+        let residentAction = UIContextualAction(style: .normal, title:  "Resident", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            self.favouritesManager.saveResidentVillager(villager: self.villagers[indexPath.row])
+            self.tableView.reloadRows(at: [indexPath], with: .left)
+            success(true)
+        })
+        favouriteAction.backgroundColor = UIColor(named: ColourUtil.grass2.rawValue)
+        residentAction.backgroundColor = UIColor(named: ColourUtil.gold1.rawValue)
+        
+        return UISwipeActionsConfiguration(actions: [favouriteAction, residentAction])
         
     }
     
@@ -167,10 +184,12 @@ class VillagersTableViewController: UITableViewController {
         
         let barButton = UIBarButtonItem(customView: button)
         self.navigationItem.leftBarButtonItem = barButton
+        
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
     }
     
     @objc private func sortButtonPressed() {
-        let alert = UIAlertController(title: "Sort villagers by:", message: nil, preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "Sort villagers", message: nil, preferredStyle: .actionSheet)
         
         alert.addAction(UIAlertAction(title: "Name", style: .default , handler:{ (UIAlertAction) in
             self.villagers = SortEngine.sortVillagers(villagers: self.villagers, with: .name)
@@ -178,6 +197,7 @@ class VillagersTableViewController: UITableViewController {
             self.tableView.reloadData()
             let indexPath = IndexPath(row: 0, section: 0)
             self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+            Taptic.lightTaptic()
             
         }))
         alert.addAction(UIAlertAction(title: "Species", style: .default , handler:{ (UIAlertAction) in
@@ -186,6 +206,7 @@ class VillagersTableViewController: UITableViewController {
             self.tableView.reloadData()
             let indexPath = IndexPath(row: 0, section: 0)
             self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+            Taptic.lightTaptic()
         }))
         alert.addAction(UIAlertAction(title: "Personality", style: .default , handler:{ (UIAlertAction) in
             self.villagers = SortEngine.sortVillagers(villagers: self.villagers, with: .personality)
@@ -193,6 +214,7 @@ class VillagersTableViewController: UITableViewController {
             self.tableView.reloadData()
             let indexPath = IndexPath(row: 0, section: 0)
             self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+            Taptic.lightTaptic()
         }))
         alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel))
 

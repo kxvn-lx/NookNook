@@ -10,6 +10,8 @@
 		0A01F3102442DB8A001499D5 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 0A01F30F2442DB8A001499D5 /* SDWebImage */; };
 		0A01F31224431725001499D5 /* ImageEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A01F31124431724001499D5 /* ImageEngine.swift */; };
 		0A23BBCC244ACE94009B5178 /* SortEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A23BBCB244ACE94009B5178 /* SortEngine.swift */; };
+		0A23BBCE244ADFE6009B5178 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A23BBCD244ADFE6009B5178 /* User.swift */; };
+		0A23BBD0244AE1D5009B5178 /* Fruits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A23BBCF244AE1D5009B5178 /* Fruits.swift */; };
 		0A26E7B5244758C500D80594 /* Villager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A26E7B4244758C500D80594 /* Villager.swift */; };
 		0A26E7B724475B6300D80594 /* villagers.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A26E7B624475B6300D80594 /* villagers.json */; };
 		0A295B4A244494F9001CF828 /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A295B49244494F9001CF828 /* Categories.swift */; };
@@ -77,6 +79,8 @@
 /* Begin PBXFileReference section */
 		0A01F31124431724001499D5 /* ImageEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEngine.swift; sourceTree = "<group>"; };
 		0A23BBCB244ACE94009B5178 /* SortEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortEngine.swift; sourceTree = "<group>"; };
+		0A23BBCD244ADFE6009B5178 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		0A23BBCF244AE1D5009B5178 /* Fruits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fruits.swift; sourceTree = "<group>"; };
 		0A26E7B4244758C500D80594 /* Villager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Villager.swift; sourceTree = "<group>"; };
 		0A26E7B624475B6300D80594 /* villagers.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = villagers.json; sourceTree = "<group>"; };
 		0A295B49244494F9001CF828 /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
@@ -329,8 +333,8 @@
 				0A370B5E2443223D00A72048 /* VC+.swift */,
 				0A370B60244322F100A72048 /* ColourUtil.swift */,
 				0A370BA924446D7B00A72048 /* IconUtil.swift */,
-				0A295B49244494F9001CF828 /* Categories.swift */,
 				0A295B4B2444AAD0001CF828 /* Taptic.swift */,
+				0A295B49244494F9001CF828 /* Categories.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -342,6 +346,8 @@
 				0A36427D244695FE0081315A /* Critter.swift */,
 				0AEFF82E24471CD90032156C /* Wardrobe.swift */,
 				0A26E7B4244758C500D80594 /* Villager.swift */,
+				0A23BBCD244ADFE6009B5178 /* User.swift */,
+				0A23BBCF244AE1D5009B5178 /* Fruits.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -459,6 +465,8 @@
 				0A23BBCC244ACE94009B5178 /* SortEngine.swift in Sources */,
 				0A295B4A244494F9001CF828 /* Categories.swift in Sources */,
 				0A370B5F2443223D00A72048 /* VC+.swift in Sources */,
+				0A23BBD0244AE1D5009B5178 /* Fruits.swift in Sources */,
+				0A23BBCE244ADFE6009B5178 /* User.swift in Sources */,
 				0A7FA6A32445971900921079 /* CrittersTableViewController.swift in Sources */,
 				0A7FA6A52445972A00921079 /* CritterTableViewCell.swift in Sources */,
 				0A36427E244695FE0081315A /* Critter.swift in Sources */,

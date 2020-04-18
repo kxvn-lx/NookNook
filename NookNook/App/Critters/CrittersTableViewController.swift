@@ -49,6 +49,15 @@ class CrittersTableViewController: UITableViewController {
         definesPresentationContext = true
     }
     
+    override func viewDidLayoutSubviews() {
+        setupSearchBar(searchBar: searchController.searchBar)
+    }
+    
+    private func setupSearchBar(searchBar : UISearchBar) {
+        searchBar.setPlaceholderTextColorTo(color: UIColor.lightGray)
+        
+    }
+    
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -85,10 +94,15 @@ class CrittersTableViewController: UITableViewController {
             critterCell.sellLabel.attributedText = PriceEngine.renderPrice(amount: critter.sell, with: .sell, of: 12)
             critterCell.weatherLabel.text = critter.weather
             
-            critterCell.isFavImageView.image = favouritesManager.critters.contains(critter) ?  IconUtil.systemIcon(of: IconUtil.IconName.starFill, weight: .thin) : nil
-            
             critterCell.rarityLabel.setTitle(critter.rarity, for: .normal)
             critterCell.rarityLabel.sizeToFit()
+            
+            let isDonated = self.favouritesManager.donatedCritters.contains(critter) ? "D" : ""
+            let isCaught = self.favouritesManager.caughtCritters.contains(critter) ? "C" : ""
+            
+            critterCell.isDonatedLabel.text = isDonated
+            
+            critterCell.isCaughtLabel.text = isCaught
             
         }
         
@@ -144,18 +158,27 @@ class CrittersTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView,
                             leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
     {
-        let favouriteAction = UIContextualAction(style: .normal, title:  "", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-
-            self.favouritesManager.saveCritter(critter: self.critters[indexPath.row])
+        let caughtAction = UIContextualAction(style: .normal, title:  "Caught", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            
+            self.favouritesManager.saveCaughtCritter(critter: self.critters[indexPath.row])
             self.tableView.reloadRows(at: [indexPath], with: .left)
             
             success(true)
         })
-        let starOption = self.favouritesManager.critters.contains(self.critters[indexPath.row]) ? IconUtil.IconName.starFill : IconUtil.IconName.star
-        favouriteAction.image = IconUtil.systemIcon(of: starOption, weight: .thin)
-        favouriteAction.backgroundColor = UIColor(named: ColourUtil.grass2.rawValue)
         
-        return UISwipeActionsConfiguration(actions: [favouriteAction])
+        let donatedAction = UIContextualAction(style: .normal, title:  "Donated", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            
+            self.favouritesManager.saveDonatedCritter(critter: self.critters[indexPath.row])
+            self.tableView.reloadRows(at: [indexPath], with: .left)
+            
+            success(true)
+        })
+        
+        
+        caughtAction.backgroundColor = UIColor(named: ColourUtil.gold1.rawValue)
+        donatedAction.backgroundColor = UIColor(named: ColourUtil.grass2.rawValue)
+        
+        return UISwipeActionsConfiguration(actions: [donatedAction, caughtAction])
         
     }
     
@@ -175,6 +198,8 @@ class CrittersTableViewController: UITableViewController {
         
         let barButton = UIBarButtonItem(customView: button)
         self.navigationItem.rightBarButtonItem = barButton
+        
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
     }
     
     @objc private func filterButtonPressed() {

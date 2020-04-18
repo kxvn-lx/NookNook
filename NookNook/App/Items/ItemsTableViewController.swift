@@ -46,8 +46,20 @@ class ItemsTableViewController: UITableViewController {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search \(items.count) items..."
+        searchController.searchBar.tintColor = .lightGray
         navigationItem.searchController = searchController
         definesPresentationContext = true
+        
+        
+    }
+    
+    override func viewDidLayoutSubviews() {
+        setupSearchBar(searchBar: searchController.searchBar)
+    }
+    
+    private func setupSearchBar(searchBar : UISearchBar) {
+        searchBar.setPlaceholderTextColorTo(color: UIColor.lightGray)
+        
     }
     
     
@@ -135,14 +147,12 @@ class ItemsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView,
                             leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
     {
-        let favouriteAction = UIContextualAction(style: .normal, title:  "", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+        let favouriteAction = UIContextualAction(style: .normal, title:  "Favourite", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             self.favouritesManager.saveItem(item: self.items[indexPath.row])
             self.tableView.reloadRows(at: [indexPath], with: .left)
             
             success(true)
         })
-        let starOption = self.favouritesManager.items.contains(self.items[indexPath.row]) ? IconUtil.IconName.starFill : IconUtil.IconName.star
-        favouriteAction.image = IconUtil.systemIcon(of: starOption, weight: .thin)
         favouriteAction.backgroundColor = UIColor(named: ColourUtil.grass2.rawValue)
         
         return UISwipeActionsConfiguration(actions: [favouriteAction])
@@ -166,6 +176,8 @@ class ItemsTableViewController: UITableViewController {
         
         let barButton = UIBarButtonItem(customView: button)
         self.navigationItem.rightBarButtonItem = barButton
+        
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
     }
     
     @objc private func filterButtonPressed() {

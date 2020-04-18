@@ -391,7 +391,7 @@ class DetailViewController: UIViewController {
         variationStack.addArrangedSubview(variationImageCollectionView)
         
         // Add to stackView
-        mStackView.addArrangedSubview(detailImageView)
+        mStackView.addArrangedSubview(detailImageView, withMargin: UIEdgeInsets(top: MARGIN * 4, left: 0, bottom: 0, right: 0))
         mStackView.addArrangedSubview(tsStackView)
         mStackView.addArrangedSubview(infoStackView)
         mStackView.addArrangedSubview(activeTimeStack)

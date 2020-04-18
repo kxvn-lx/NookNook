@@ -47,6 +47,15 @@ class WardrobesTableViewController: UITableViewController {
         definesPresentationContext = true
     }
     
+    override func viewDidLayoutSubviews() {
+        setupSearchBar(searchBar: searchController.searchBar)
+    }
+    
+    private func setupSearchBar(searchBar : UISearchBar) {
+        searchBar.setPlaceholderTextColorTo(color: UIColor.lightGray)
+        
+    }
+    
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -134,14 +143,13 @@ class WardrobesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView,
                             leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
     {
-        let favouriteAction = UIContextualAction(style: .normal, title:  "", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+        let favouriteAction = UIContextualAction(style: .normal, title:  "Favourite", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             self.favouritesManager.saveWardrobe(wardrobe: self.wardrobes[indexPath.row])
             self.tableView.reloadRows(at: [indexPath], with: .left)
             
             success(true)
         })
-        let starOption = self.favouritesManager.wardrobes.contains(self.wardrobes[indexPath.row]) ? IconUtil.IconName.starFill : IconUtil.IconName.star
-        favouriteAction.image = IconUtil.systemIcon(of: starOption, weight: .thin)
+
         favouriteAction.backgroundColor = UIColor(named: ColourUtil.grass2.rawValue)
         
         return UISwipeActionsConfiguration(actions: [favouriteAction])
@@ -165,6 +173,8 @@ class WardrobesTableViewController: UITableViewController {
         
         let barButton = UIBarButtonItem(customView: button)
         self.navigationItem.rightBarButtonItem = barButton
+        
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
     }
     
     @objc private func filterButtonPressed() {

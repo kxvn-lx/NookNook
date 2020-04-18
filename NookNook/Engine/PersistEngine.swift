@@ -12,17 +12,27 @@ import Foundation
 struct PersistEngine {
 
     var items: [Item] = []
-    var critters: [Critter] = []
+    
+    var caughtCritters: [Critter] = []
+    var donatedCritters: [Critter] = []
+    
     var wardrobes: [Wardrobe] = []
-    var villagers: [Villager] = []
+    
+    var favouritedVillagers: [Villager] = []
+    var residentVillagers: [Villager] = []
     
     var categories: [String] = []
     
     struct SavedData: Codable {
         let items: [Item]
-        let critters: [Critter]
+        
+        let caughtCritters: [Critter]
+        let donatedCritters: [Critter]
+        
         let wardrobes: [Wardrobe]
-        let villagers: [Villager]
+        
+        let favouritedVillagers: [Villager]
+        let residentVillagers: [Villager]
     }
     
     private let filePath: URL
@@ -34,7 +44,7 @@ struct PersistEngine {
             filePath = try FileManager.default.url(for: .documentDirectory,
                                                    in: .userDomainMask,
                                                    appropriateFor: nil,
-                                                   create: false).appendingPathComponent("favourites")
+                                                   create: false).appendingPathComponent("SavedDatas")
             if let data = try? Data(contentsOf: filePath) {
                 decoder.dataDecodingStrategy = .base64
                 let savedData = try decoder.decode(SavedData.self, from: data)
@@ -44,9 +54,14 @@ struct PersistEngine {
 //                    }
 //                }
                 self.items = savedData.items
-                self.critters = savedData.critters
+                
+                self.caughtCritters = savedData.caughtCritters
+                self.donatedCritters = savedData.donatedCritters
+                
                 self.wardrobes = savedData.wardrobes
-                self.villagers = savedData.villagers
+                
+                self.favouritedVillagers = savedData.favouritedVillagers
+                self.residentVillagers = savedData.residentVillagers
             }
         } catch let error {
             fatalError(error.localizedDescription)
@@ -65,15 +80,21 @@ struct PersistEngine {
         save()
     }
     
-    mutating func saveCritter(critter: Critter) {
-        if critters.contains(critter) {
-            critters.removeAll(where: { $0 == critter })
+    mutating func saveDonatedCritter(critter: Critter) {
+        if donatedCritters.contains(critter) {
+            donatedCritters.removeAll(where: {$0 == critter} )
         } else {
-            critters.append(critter)
+            donatedCritters.append(critter)
         }
-//        if !categories.contains(critter.category) {
-//            categories.append(critter.category)
-//        }
+        save()
+    }
+    
+    mutating func saveCaughtCritter(critter: Critter) {
+        if caughtCritters.contains(critter) {
+            caughtCritters.removeAll(where: {$0 == critter} )
+        } else {
+            caughtCritters.append(critter)
+        }
         save()
     }
     
@@ -89,11 +110,20 @@ struct PersistEngine {
         save()
     }
     
-    mutating func saveVillager(villager: Villager) {
-        if villagers.contains(villager) {
-            villagers.removeAll(where: { $0 == villager })
+    mutating func saveResidentVillager(villager: Villager) {
+        if residentVillagers.contains(villager) {
+            residentVillagers.removeAll(where: { $0 == villager })
         } else {
-            villagers.append(villager)
+            residentVillagers.append(villager)
+        }
+        save()
+    }
+    
+    mutating func saveFavouritedVillager(villager: Villager) {
+        if favouritedVillagers.contains(villager) {
+            favouritedVillagers.removeAll(where: {$0 == villager} )
+        } else {
+            favouritedVillagers.append(villager)
         }
         save()
     }
@@ -102,7 +132,7 @@ struct PersistEngine {
     
     private func save() {
         do {
-            let savedData = SavedData(items: items, critters: critters, wardrobes: wardrobes, villagers: villagers)
+            let savedData = SavedData(items: items, caughtCritters: caughtCritters, donatedCritters: donatedCritters, wardrobes: wardrobes, favouritedVillagers: favouritedVillagers, residentVillagers: residentVillagers)
             let data = try encoder.encode(savedData)
             try data.write(to: filePath, options: .atomicWrite)
         } catch let error {

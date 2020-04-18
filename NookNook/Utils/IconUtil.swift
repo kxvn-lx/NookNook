@@ -34,4 +34,18 @@ struct IconUtil {
         
         return icon
     }
+    
+    /**
+     This method will render a custom icon based.
+     - Parameters:
+        - icon: The icon's system name.
+     - Returns:
+        - A UIImage of the icon.
+     */
+    static func customIcon(of icon: IconName) -> UIImage {
+        let icon = UIImage(named: icon.rawValue)!
+        
+        
+        return icon
+    }
 }
