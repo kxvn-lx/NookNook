@@ -14,7 +14,8 @@ class WardrobesTableViewController: UITableViewController {
     let WARDROBE_CELL = "WardrobeCell"
     private let DETAIL_ID = "Detail"
     
-    var favouritedWardrobes: [Wardrobe] = []
+    private var favouritesManager = PersistEngine()
+    
     var wardrobes: [Wardrobe] = []
     var filteredWardrobes: [Wardrobe] = []
     var currentCategory: Categories = Categories.tops
@@ -80,7 +81,7 @@ class WardrobesTableViewController: UITableViewController {
             wardrobeCell.buyLabel.attributedText = PriceEngine.renderPrice(amount: wardrobe.buy, with: .buy, of: 12)
             wardrobeCell.sellLabel.attributedText = PriceEngine.renderPrice(amount: wardrobe.sell, with: .sell, of: 12)
             
-            wardrobeCell.isFavImageView.image = favouritedWardrobes.contains(wardrobe) ?  IconUtil.systemIcon(of: IconUtil.IconName.starFill, weight: .thin) : nil
+            wardrobeCell.isFavImageView.image = self.favouritesManager.wardrobes.contains(wardrobe) ?  IconUtil.systemIcon(of: IconUtil.IconName.starFill, weight: .thin) : nil
             if wardrobe.variants != nil {
                 wardrobeCell.customisableImageView.image = IconUtil.systemIcon(of: IconUtil.IconName.paintbrush, weight: .thin)
             } else {
@@ -134,19 +135,12 @@ class WardrobesTableViewController: UITableViewController {
                             leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
     {
         let favouriteAction = UIContextualAction(style: .normal, title:  "", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-            if !self.favouritedWardrobes.contains(self.wardrobes[indexPath.row]) {
-                self.favouritedWardrobes.append(self.wardrobes[indexPath.row])
-            } else {
-                if let index = self.favouritedWardrobes.firstIndex(of: self.wardrobes[indexPath.row]) {
-                    self.favouritedWardrobes.remove(at: index)
-                }
-            }
-            
+            self.favouritesManager.saveWardrobe(wardrobe: self.wardrobes[indexPath.row])
             self.tableView.reloadRows(at: [indexPath], with: .left)
             
             success(true)
         })
-        let starOption = favouritedWardrobes.contains(self.wardrobes[indexPath.row]) ? IconUtil.IconName.starFill : IconUtil.IconName.star
+        let starOption = self.favouritesManager.wardrobes.contains(self.wardrobes[indexPath.row]) ? IconUtil.IconName.starFill : IconUtil.IconName.star
         favouriteAction.image = IconUtil.systemIcon(of: starOption, weight: .thin)
         favouriteAction.backgroundColor = UIColor(named: ColourUtil.grass2.rawValue)
         

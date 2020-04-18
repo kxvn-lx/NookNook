@@ -14,9 +14,10 @@ class VillagersTableViewController: UITableViewController {
     private let VILLAGER_CELL = "VillagerCell"
     private let DETAIL_ID = "Detail"
     
-    var isSorted = false
+    private var isSorted = false
     
-    var favouriteVillagers: [Villager] = []
+    private var favouritesManager = PersistEngine()
+    
     var villagers: [Villager] = []
     var filteredVillagers: [Villager] = []
     var currentCategory: Categories = Categories.villagers
@@ -88,7 +89,7 @@ class VillagersTableViewController: UITableViewController {
             villagerCell.bdayLabel.text = villager.bdayString
             villagerCell.genderLabel.text = villager.gender
 
-            villagerCell.isFavImageView.image = favouriteVillagers.contains(villager) ?  IconUtil.systemIcon(of: IconUtil.IconName.starFill, weight: .thin) : nil
+            villagerCell.isFavImageView.image = self.favouritesManager.villagers.contains(villager) ?  IconUtil.systemIcon(of: IconUtil.IconName.starFill, weight: .thin) : nil
         }
 
         return cell
@@ -136,19 +137,12 @@ class VillagersTableViewController: UITableViewController {
                             leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
     {
         let favouriteAction = UIContextualAction(style: .normal, title:  "", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-            if !self.favouriteVillagers.contains(self.villagers[indexPath.row]) {
-                self.favouriteVillagers.append(self.villagers[indexPath.row])
-            } else {
-                if let index = self.favouriteVillagers.firstIndex(of: self.villagers[indexPath.row]) {
-                    self.favouriteVillagers.remove(at: index)
-                }
-            }
-            
+            self.favouritesManager.saveVillager(villager: self.villagers[indexPath.row])
             self.tableView.reloadRows(at: [indexPath], with: .left)
             
             success(true)
         })
-        let starOption = favouriteVillagers.contains(self.villagers[indexPath.row]) ? IconUtil.IconName.starFill : IconUtil.IconName.star
+        let starOption = self.favouritesManager.villagers.contains(self.villagers[indexPath.row]) ? IconUtil.IconName.starFill : IconUtil.IconName.star
         favouriteAction.image = IconUtil.systemIcon(of: starOption, weight: .thin)
         favouriteAction.backgroundColor = UIColor(named: ColourUtil.grass2.rawValue)
         

@@ -15,10 +15,11 @@ class ItemsTableViewController: UITableViewController {
     private let ITEM_CELL = "ItemCell"
     private let DETAIL_ID = "Detail"
     
-    var favouritedItems: [Item] = []
     var items: [Item] = []
     var filteredItems: [Item] = []
     var currentCategory: Categories = Categories.housewares
+    
+    private var favouritesManager = PersistEngine()
     
     let searchController = UISearchController(searchResultsController: nil)
     var isSearchBarEmpty: Bool {
@@ -83,7 +84,7 @@ class ItemsTableViewController: UITableViewController {
             itemCell.buyLabel.attributedText = PriceEngine.renderPrice(amount: item.buy, with: .buy, of: 12)
             itemCell.sellLabel.attributedText = PriceEngine.renderPrice(amount: item.sell, with: .sell, of: 12)
             
-            itemCell.isFavImageView.image = favouritedItems.contains(item) ?  IconUtil.systemIcon(of: IconUtil.IconName.starFill, weight: .thin) : nil
+            itemCell.isFavImageView.image = self.favouritesManager.items.contains(item) ?  IconUtil.systemIcon(of: IconUtil.IconName.starFill, weight: .thin) : nil
             if item.variants != nil {
                 itemCell.customisableImageView.image = IconUtil.systemIcon(of: IconUtil.IconName.paintbrush, weight: .thin)
             } else {
@@ -135,19 +136,12 @@ class ItemsTableViewController: UITableViewController {
                             leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
     {
         let favouriteAction = UIContextualAction(style: .normal, title:  "", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-            if !self.favouritedItems.contains(self.items[indexPath.row]) {
-                self.favouritedItems.append(self.items[indexPath.row])
-            } else {
-                if let index = self.favouritedItems.firstIndex(of: self.items[indexPath.row]) {
-                    self.favouritedItems.remove(at: index)
-                }
-            }
-            
+            self.favouritesManager.saveItem(item: self.items[indexPath.row])
             self.tableView.reloadRows(at: [indexPath], with: .left)
             
             success(true)
         })
-        let starOption = favouritedItems.contains(self.items[indexPath.row]) ? IconUtil.IconName.starFill : IconUtil.IconName.star
+        let starOption = self.favouritesManager.items.contains(self.items[indexPath.row]) ? IconUtil.IconName.starFill : IconUtil.IconName.star
         favouriteAction.image = IconUtil.systemIcon(of: starOption, weight: .thin)
         favouriteAction.backgroundColor = UIColor(named: ColourUtil.grass2.rawValue)
         

@@ -11,13 +11,8 @@ import UIKit
 class HomeViewController: UITabBarController {
     
     
-    let persistEngine = PersistEngine()
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        persistEngine.save()
         
         if let tbManager = tabBar.items {
             tbManager[0].title = "Items"
@@ -38,7 +33,5 @@ class HomeViewController: UITabBarController {
         } else {
             fatalError("TabBar index out of bound.")
         }
-        
-        
     }
 }

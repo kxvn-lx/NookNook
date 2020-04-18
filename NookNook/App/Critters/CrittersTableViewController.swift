@@ -14,7 +14,8 @@ class CrittersTableViewController: UITableViewController {
     let CRITTER_CELL = "CritterCell"
     private let DETAIL_ID = "Detail"
     
-    var favouritedCritters: [Critter] = []
+    private var favouritesManager = PersistEngine()
+    
     var critters: [Critter] = []
     var filteredCritters: [Critter] = []
     var currentCategory: Categories = Categories.bugsMain
@@ -84,7 +85,7 @@ class CrittersTableViewController: UITableViewController {
             critterCell.sellLabel.attributedText = PriceEngine.renderPrice(amount: critter.sell, with: .sell, of: 12)
             critterCell.weatherLabel.text = critter.weather
             
-            critterCell.isFavImageView.image = favouritedCritters.contains(critter) ?  IconUtil.systemIcon(of: IconUtil.IconName.starFill, weight: .thin) : nil
+            critterCell.isFavImageView.image = favouritesManager.critters.contains(critter) ?  IconUtil.systemIcon(of: IconUtil.IconName.starFill, weight: .thin) : nil
             
             critterCell.rarityLabel.setTitle(critter.rarity, for: .normal)
             critterCell.rarityLabel.sizeToFit()
@@ -144,19 +145,13 @@ class CrittersTableViewController: UITableViewController {
                             leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
     {
         let favouriteAction = UIContextualAction(style: .normal, title:  "", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-            if !self.favouritedCritters.contains(self.critters[indexPath.row]) {
-                self.favouritedCritters.append(self.critters[indexPath.row])
-            } else {
-                if let index = self.favouritedCritters.firstIndex(of: self.critters[indexPath.row]) {
-                    self.favouritedCritters.remove(at: index)
-                }
-            }
-            
+
+            self.favouritesManager.saveCritter(critter: self.critters[indexPath.row])
             self.tableView.reloadRows(at: [indexPath], with: .left)
             
             success(true)
         })
-        let starOption = favouritedCritters.contains(self.critters[indexPath.row]) ? IconUtil.IconName.starFill : IconUtil.IconName.star
+        let starOption = self.favouritesManager.critters.contains(self.critters[indexPath.row]) ? IconUtil.IconName.starFill : IconUtil.IconName.star
         favouriteAction.image = IconUtil.systemIcon(of: starOption, weight: .thin)
         favouriteAction.backgroundColor = UIColor(named: ColourUtil.grass2.rawValue)
         

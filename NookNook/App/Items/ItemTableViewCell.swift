@@ -131,6 +131,7 @@ class ItemTableViewCell: UITableViewCell {
         let smallIconSize: CGFloat = itemImageViewSize / 6
         
         NSLayoutConstraint.activate([
+            
             imgView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: itemImageViewSize),
             imgView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: itemImageViewSize),
             
