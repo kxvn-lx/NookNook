@@ -14,9 +14,9 @@ class VillagersTableViewController: UITableViewController {
     private let VILLAGER_CELL = "VillagerCell"
     private let DETAIL_ID = "Detail"
     
-    private var isSorted = false
-    
     private var favouritesManager = PersistEngine()
+    
+    private var sortType: SortEngine.Sort!
     
     var villagers: [Villager] = []
     var filteredVillagers: [Villager] = []
@@ -30,6 +30,7 @@ class VillagersTableViewController: UITableViewController {
       return searchController.isActive && !isSearchBarEmpty
     }
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -39,11 +40,8 @@ class VillagersTableViewController: UITableViewController {
         tableView.estimatedRowHeight = 100
         
         // Default categories to be presented
-        villagers = DataEngine.loadVillagersJSON(from: currentCategory)
-        // Sort by species by default
-        villagers.sort(by: {$0.species < $1.species} )
+        villagers = DataEngine.loadVillagersJSON(from: currentCategory).sorted(by: { $0.name < $1.name } )
         
-          
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search \(villagers.count) villagers..."
@@ -124,7 +122,7 @@ class VillagersTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return isSorted ? "\(currentCategory.rawValue.capitalizingFirstLetter()): by personality" : "\(currentCategory.rawValue.capitalizingFirstLetter()): by species"
+        return "\(currentCategory.rawValue.capitalizingFirstLetter())\(self.sortType == nil ? ": by name" : ": by \(self.sortType.rawValue)")"
     }
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -172,15 +170,33 @@ class VillagersTableViewController: UITableViewController {
     }
     
     @objc private func sortButtonPressed() {
-        if isSorted {
-            villagers.sort(by: {$0.species < $1.species} )
-        } else {
-            villagers.sort(by: { $0.personality > $1.personality} )
-        }
-        isSorted = !isSorted
-        self.tableView.reloadData()
-        let indexPath = IndexPath(row: 0, section: 0)
-        self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+        let alert = UIAlertController(title: "Sort villagers by:", message: nil, preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(title: "Name", style: .default , handler:{ (UIAlertAction) in
+            self.villagers = SortEngine.sortVillagers(villagers: self.villagers, with: .name)
+            self.sortType = .name
+            self.tableView.reloadData()
+            let indexPath = IndexPath(row: 0, section: 0)
+            self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+            
+        }))
+        alert.addAction(UIAlertAction(title: "Species", style: .default , handler:{ (UIAlertAction) in
+            self.villagers = SortEngine.sortVillagers(villagers: self.villagers, with: .species)
+            self.sortType = .species
+            self.tableView.reloadData()
+            let indexPath = IndexPath(row: 0, section: 0)
+            self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+        }))
+        alert.addAction(UIAlertAction(title: "Personality", style: .default , handler:{ (UIAlertAction) in
+            self.villagers = SortEngine.sortVillagers(villagers: self.villagers, with: .personality)
+            self.sortType = .personality
+            self.tableView.reloadData()
+            let indexPath = IndexPath(row: 0, section: 0)
+            self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+        }))
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel))
+
+        self.present(alert, animated: true, completion: nil)
     }
 }
 

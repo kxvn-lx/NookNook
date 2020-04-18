@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0A01F3102442DB8A001499D5 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 0A01F30F2442DB8A001499D5 /* SDWebImage */; };
 		0A01F31224431725001499D5 /* ImageEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A01F31124431724001499D5 /* ImageEngine.swift */; };
+		0A23BBCC244ACE94009B5178 /* SortEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A23BBCB244ACE94009B5178 /* SortEngine.swift */; };
 		0A26E7B5244758C500D80594 /* Villager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A26E7B4244758C500D80594 /* Villager.swift */; };
 		0A26E7B724475B6300D80594 /* villagers.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A26E7B624475B6300D80594 /* villagers.json */; };
 		0A295B4A244494F9001CF828 /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A295B49244494F9001CF828 /* Categories.swift */; };
@@ -75,6 +76,7 @@
 
 /* Begin PBXFileReference section */
 		0A01F31124431724001499D5 /* ImageEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEngine.swift; sourceTree = "<group>"; };
+		0A23BBCB244ACE94009B5178 /* SortEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortEngine.swift; sourceTree = "<group>"; };
 		0A26E7B4244758C500D80594 /* Villager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Villager.swift; sourceTree = "<group>"; };
 		0A26E7B624475B6300D80594 /* villagers.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = villagers.json; sourceTree = "<group>"; };
 		0A295B49244494F9001CF828 /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 				0A370B6D24444BD800A72048 /* DataEngine.swift */,
 				0A3642852446CC070081315A /* TimeEngine.swift */,
 				0A65203024499B6400692E74 /* PersistEngine.swift */,
+				0A23BBCB244ACE94009B5178 /* SortEngine.swift */,
 			);
 			path = Engine;
 			sourceTree = "<group>";
@@ -453,6 +456,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0AC89E402449418B009ADB18 /* VillagerTableViewCell.swift in Sources */,
+				0A23BBCC244ACE94009B5178 /* SortEngine.swift in Sources */,
 				0A295B4A244494F9001CF828 /* Categories.swift in Sources */,
 				0A370B5F2443223D00A72048 /* VC+.swift in Sources */,
 				0A7FA6A32445971900921079 /* CrittersTableViewController.swift in Sources */,
