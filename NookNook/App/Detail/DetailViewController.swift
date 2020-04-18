@@ -147,7 +147,7 @@ class DetailViewController: UIViewController {
      Method to render item object
      */
     private func renderItem() {
-        detailImageView.sd_setImage(with: ImageEngine.parseURL(with: itemObj.image!), completed: nil)
+        detailImageView.sd_setImage(with: ImageEngine.parseNPURL(with: itemObj.image!), completed: nil)
         titleLabel.text = itemObj.name
         subtitleLabel.text = itemObj.obtainedFrom
         buyLabel.attributedText = PriceEngine.renderPrice(amount: itemObj.buy!, with: .none, of: buyLabel.font.pointSize)
@@ -165,7 +165,7 @@ class DetailViewController: UIViewController {
      Method to render critter object
      */
     private func renderCritter() {
-        detailImageView.sd_setImage(with: ImageEngine.parseAcnhURL(with: critterObj.image, of: critterObj.category), completed: nil)
+        detailImageView.sd_setImage(with: ImageEngine.parseAcnhURL(with: critterObj.image, of: critterObj.category, mediaType: .images), completed: nil)
         titleLabel.text = critterObj.name
         subtitleLabel.text = critterObj.obtainedFrom
         sellLabel.attributedText = PriceEngine.renderPrice(amount: critterObj.sell!, with: .none, of: sellLabel.font.pointSize)
@@ -183,7 +183,7 @@ class DetailViewController: UIViewController {
      Method to render wardrobe object
      */
     private func renderWardrobe() {
-        detailImageView.sd_setImage(with: ImageEngine.parseURL(with: wardrobeObj.image!), completed: nil)
+        detailImageView.sd_setImage(with: ImageEngine.parseNPURL(with: wardrobeObj.image!), completed: nil)
         titleLabel.text = wardrobeObj.name
         subtitleLabel.text = wardrobeObj.obtainedFrom
         buyLabel.attributedText = PriceEngine.renderPrice(amount: wardrobeObj.buy!, with: .none, of: buyLabel.font.pointSize)
@@ -199,7 +199,7 @@ class DetailViewController: UIViewController {
      Method to render Villager object
      */
     private func renderVillager() {
-        detailImageView.sd_setImage(with: ImageEngine.parseVillagerURL(with: villagerObj.image, of: 1), completed: nil)
+        detailImageView.sd_setImage(with: ImageEngine.parseAcnhURL(with: villagerObj.image, of: villagerObj.category, mediaType: .images), completed: nil)
         titleLabel.text = villagerObj.name
         buyLabel.text = villagerObj.bdayString
         subtitleLabel.text = "Catch-phrase: \(villagerObj.catchphrase)"
@@ -531,13 +531,13 @@ extension DetailViewController: UICollectionViewDelegateFlowLayout, UICollection
         switch groupOrigin {
         case .items:
             if let itemObjArr = itemObj.variants {
-                cell.variantImage.sd_setImage(with: ImageEngine.parseURL(with: itemObjArr[indexPath.row]), placeholderImage: nil)
+                cell.variantImage.sd_setImage(with: ImageEngine.parseNPURL(with: itemObjArr[indexPath.row]), placeholderImage: nil)
             }
         case .critters:
             print("Attempt to access critter cell.")
         case .wardrobes:
             if let wardrobeObjArr = wardrobeObj.variants {
-                cell.variantImage.sd_setImage(with: ImageEngine.parseURL(with: wardrobeObjArr[indexPath.row]), placeholderImage: nil)
+                cell.variantImage.sd_setImage(with: ImageEngine.parseNPURL(with: wardrobeObjArr[indexPath.row]), placeholderImage: nil)
             }
         default: fatalError("Attempt to access an invalid object group or groupOrigin is still nil!")
         }

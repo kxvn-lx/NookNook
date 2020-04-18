@@ -48,6 +48,7 @@
 		0A370BAA24446D7B00A72048 /* IconUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A370BA924446D7B00A72048 /* IconUtil.swift */; };
 		0A370BAD2444795700A72048 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A370BAC2444795700A72048 /* CategoryTableViewCell.swift */; };
 		0A370BAF2444796400A72048 /* CategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A370BAE2444796400A72048 /* CategoriesTableViewController.swift */; };
+		0A65203124499B6400692E74 /* PersistEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A65203024499B6400692E74 /* PersistEngine.swift */; };
 		0A72C3712445AD8F009FA0D4 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A72C3702445AD8F009FA0D4 /* DetailViewController.swift */; };
 		0A72C3752445FD93009FA0D4 /* VariantCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A72C3742445FD93009FA0D4 /* VariantCollectionViewCell.swift */; };
 		0A7FA6A32445971900921079 /* CrittersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7FA6A22445971900921079 /* CrittersTableViewController.swift */; };
@@ -113,6 +114,7 @@
 		0A370BA924446D7B00A72048 /* IconUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconUtil.swift; sourceTree = "<group>"; };
 		0A370BAC2444795700A72048 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		0A370BAE2444796400A72048 /* CategoriesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesTableViewController.swift; sourceTree = "<group>"; };
+		0A65203024499B6400692E74 /* PersistEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistEngine.swift; sourceTree = "<group>"; };
 		0A72C3702445AD8F009FA0D4 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		0A72C3742445FD93009FA0D4 /* VariantCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariantCollectionViewCell.swift; sourceTree = "<group>"; };
 		0A7FA6A22445971900921079 /* CrittersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrittersTableViewController.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 				0A370B6B2444467900A72048 /* PriceEngine.swift */,
 				0A370B6D24444BD800A72048 /* DataEngine.swift */,
 				0A3642852446CC070081315A /* TimeEngine.swift */,
+				0A65203024499B6400692E74 /* PersistEngine.swift */,
 			);
 			path = Engine;
 			sourceTree = "<group>";
@@ -464,6 +467,7 @@
 				0A26E7B5244758C500D80594 /* Villager.swift in Sources */,
 				0AEFF82B24470EAF0032156C /* WardrobesTableViewController.swift in Sources */,
 				0A72C3752445FD93009FA0D4 /* VariantCollectionViewCell.swift in Sources */,
+				0A65203124499B6400692E74 /* PersistEngine.swift in Sources */,
 				0A3642862446CC070081315A /* TimeEngine.swift in Sources */,
 				0A72C3712445AD8F009FA0D4 /* DetailViewController.swift in Sources */,
 				0AC89E422449419A009ADB18 /* VillagersTableViewController.swift in Sources */,

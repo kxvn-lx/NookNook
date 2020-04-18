@@ -22,4 +22,6 @@ struct Villager: Codable, Equatable, Identifiable {
     let gender: String
     
     let catchphrase: String
+    
+    let category: String
 }

@@ -217,7 +217,8 @@ struct DataEngine {
                                                bdayString: key["birthday-string"].stringValue,
                                                species: key["species"].stringValue,
                                                gender: key["gender"].stringValue,
-                                               catchphrase: key["catch-phrase"].stringValue
+                                               catchphrase: key["catch-phrase"].stringValue,
+                                               category: Categories.villagers.rawValue
                     )
                     villagers.append(newVillager)
                 }
