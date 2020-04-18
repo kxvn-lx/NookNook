@@ -162,15 +162,18 @@ class CrittersTableViewController: UITableViewController {
             
             self.favouritesManager.saveCaughtCritter(critter: self.critters[indexPath.row])
             self.tableView.reloadRows(at: [indexPath], with: .left)
-            
+            Taptic.lightTaptic()
             success(true)
         })
         
         let donatedAction = UIContextualAction(style: .normal, title:  "Donated", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             
+            if !self.favouritesManager.caughtCritters.contains(self.critters[indexPath.row]) {
+                self.favouritesManager.saveCaughtCritter(critter: self.critters[indexPath.row])
+            }
             self.favouritesManager.saveDonatedCritter(critter: self.critters[indexPath.row])
             self.tableView.reloadRows(at: [indexPath], with: .left)
-            
+            Taptic.lightTaptic()
             success(true)
         })
         

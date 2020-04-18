@@ -149,13 +149,14 @@ class VillagersTableViewController: UITableViewController {
         let favouriteAction = UIContextualAction(style: .normal, title:  "Favourite", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             self.favouritesManager.saveFavouritedVillager(villager: self.villagers[indexPath.row])
             self.tableView.reloadRows(at: [indexPath], with: .left)
-            
+            Taptic.lightTaptic()
             success(true)
         })
         
         let residentAction = UIContextualAction(style: .normal, title:  "Resident", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             self.favouritesManager.saveResidentVillager(villager: self.villagers[indexPath.row])
             self.tableView.reloadRows(at: [indexPath], with: .left)
+            Taptic.lightTaptic()
             success(true)
         })
         favouriteAction.backgroundColor = UIColor(named: ColourUtil.grass2.rawValue)
@@ -219,15 +220,6 @@ class VillagersTableViewController: UITableViewController {
         alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel))
 
         self.present(alert, animated: true, completion: nil)
-    }
-}
-
-extension VillagersTableViewController: CatDelegate {
-    func parseNewCategory(of category: Categories) {
-        currentCategory = category
-        villagers = DataEngine.loadVillagersJSON(from: currentCategory)
-        tableView.reloadData()
-        searchController.searchBar.placeholder = "Search \(villagers.count) villagers..."
     }
 }
 
