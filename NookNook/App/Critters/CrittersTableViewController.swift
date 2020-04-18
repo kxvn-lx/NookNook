@@ -201,6 +201,8 @@ extension CrittersTableViewController: CatDelegate {
         currentCategory = category
         critters = DataEngine.loadCritterJSON(from: currentCategory)
         tableView.reloadData()
+        let indexPath = IndexPath(row: 0, section: 0)
+        self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
         searchController.searchBar.placeholder = "Search \(critters.count) critters..."
     }
 }

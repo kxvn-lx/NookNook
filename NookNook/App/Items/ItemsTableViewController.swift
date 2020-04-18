@@ -122,7 +122,7 @@ class ItemsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "\(currentCategory.rawValue)"
+        return "\(currentCategory.rawValue.capitalizingFirstLetter())"
     }
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -193,6 +193,8 @@ extension ItemsTableViewController: CatDelegate {
         currentCategory = category
         items = DataEngine.loadItemJSON(from: currentCategory)
         tableView.reloadData()
+        let indexPath = IndexPath(row: 0, section: 0)
+        self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
         searchController.searchBar.placeholder = "Search \(items.count) items..."
     }
 }

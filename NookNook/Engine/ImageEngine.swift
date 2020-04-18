@@ -38,6 +38,8 @@ struct ImageEngine {
         - The url of the image
      */
     static func parseAcnhURL(with imageID: String, of catType: String, mediaType: MediaType) -> URL {
+        let catType = catType == Categories.fishes.rawValue ? "fish" : catType
+        
         return URL(string: "\(ImageEngine.ACNH_API_URL)\(mediaType)/\(catType)/\(imageID)")!
     }
     

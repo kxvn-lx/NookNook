@@ -52,9 +52,8 @@ class CategoriesTableViewController: UITableViewController {
         else if cat == Categories.fishesMain.rawValue {
             cat = "Fishes"
         }
-        
         if let categoryCell = cell as? CategoryTableViewCell {
-            categoryCell.categoryNameLabel.text = cat
+            categoryCell.categoryNameLabel.text = cat.capitalizingFirstLetter()
             if filteredCategories[indexPath.row] == currentCategory {
                 categoryCell.accessoryType = .checkmark
             }

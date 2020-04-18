@@ -121,7 +121,7 @@ class WardrobesTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "\(currentCategory.rawValue)"
+        return "\(currentCategory.rawValue.capitalizingFirstLetter())"
     }
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -192,6 +192,8 @@ extension WardrobesTableViewController: CatDelegate {
         currentCategory = category
         wardrobes = DataEngine.loadWardrobesJSON(from: currentCategory)
         tableView.reloadData()
+        let indexPath = IndexPath(row: 0, section: 0)
+        self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
         searchController.searchBar.placeholder = "Search \(wardrobes.count) wardrobes..."
     }
 }

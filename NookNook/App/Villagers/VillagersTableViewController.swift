@@ -14,6 +14,8 @@ class VillagersTableViewController: UITableViewController {
     private let VILLAGER_CELL = "VillagerCell"
     private let DETAIL_ID = "Detail"
     
+    var isSorted = false
+    
     var favouriteVillagers: [Villager] = []
     var villagers: [Villager] = []
     var filteredVillagers: [Villager] = []
@@ -37,6 +39,8 @@ class VillagersTableViewController: UITableViewController {
         
         // Default categories to be presented
         villagers = DataEngine.loadVillagersJSON(from: currentCategory)
+        // Sort by species by default
+        villagers.sort(by: {$0.species < $1.species} )
         
           
         searchController.searchResultsUpdater = self
@@ -119,7 +123,7 @@ class VillagersTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "\(currentCategory.rawValue)"
+        return isSorted ? "\(currentCategory.rawValue.capitalizingFirstLetter()): by personality" : "\(currentCategory.rawValue.capitalizingFirstLetter()): by species"
     }
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -161,6 +165,28 @@ class VillagersTableViewController: UITableViewController {
         self.tableView.backgroundColor = UIColor(named: ColourUtil.cream2.rawValue)
         
         tabBarController?.tabBar.tintColor = .white
+        
+        // add Left bar button item
+        let button: UIButton = UIButton(type: .custom)
+        button.setImage(IconUtil.systemIcon(of: .sort, weight: .regular), for: .normal)
+        button.addTarget(self, action: #selector(sortButtonPressed), for: .touchUpInside)
+        button.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        button.imageView?.contentMode = .scaleAspectFill
+        
+        let barButton = UIBarButtonItem(customView: button)
+        self.navigationItem.leftBarButtonItem = barButton
+    }
+    
+    @objc private func sortButtonPressed() {
+        if isSorted {
+            villagers.sort(by: {$0.species < $1.species} )
+        } else {
+            villagers.sort(by: { $0.personality > $1.personality} )
+        }
+        isSorted = !isSorted
+        self.tableView.reloadData()
+        let indexPath = IndexPath(row: 0, section: 0)
+        self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
     }
 }
 

@@ -90,6 +90,14 @@ extension String {
     var isInteger: Bool { return Int(self) != nil }
     var isFloat: Bool { return Float(self) != nil }
     var isDouble: Bool { return Double(self) != nil }
+    
+    func capitalizingFirstLetter() -> String {
+        return prefix(1).capitalized + dropFirst()
+    }
+
+    mutating func capitalizeFirstLetter() {
+        self = self.capitalizingFirstLetter()
+    }
 }
 
 extension Float {

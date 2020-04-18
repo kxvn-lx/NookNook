@@ -17,6 +17,7 @@ struct IconUtil {
         case paintbrush = "paintbrush.fill"
         case filter = "line.horizontal.3.decrease.circle"
         case xmark
+        case sort = "arrow.up.arrow.down.circle"
     }
     
     /**
