@@ -8,6 +8,6 @@
 
 import Foundation
 
-enum Fruits {
+enum Fruits: String {
     case apples, cherries, coconuts, peaches, pears, oranges
 }

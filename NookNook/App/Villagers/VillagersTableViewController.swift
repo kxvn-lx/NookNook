@@ -148,14 +148,18 @@ class VillagersTableViewController: UITableViewController {
     {
         let favouriteAction = UIContextualAction(style: .normal, title:  "Favourite", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             self.favouritesManager.saveFavouritedVillager(villager: self.villagers[indexPath.row])
-            self.tableView.reloadRows(at: [indexPath], with: .left)
+            DispatchQueue.main.async {
+                self.tableView.reloadRows(at: [indexPath], with: .left)
+            }
             Taptic.lightTaptic()
             success(true)
         })
         
         let residentAction = UIContextualAction(style: .normal, title:  "Resident", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             self.favouritesManager.saveResidentVillager(villager: self.villagers[indexPath.row])
-            self.tableView.reloadRows(at: [indexPath], with: .left)
+            DispatchQueue.main.async {
+                self.tableView.reloadRows(at: [indexPath], with: .left)
+            }
             Taptic.lightTaptic()
             success(true)
         })
@@ -195,7 +199,9 @@ class VillagersTableViewController: UITableViewController {
         alert.addAction(UIAlertAction(title: "Name", style: .default , handler:{ (UIAlertAction) in
             self.villagers = SortEngine.sortVillagers(villagers: self.villagers, with: .name)
             self.sortType = .name
-            self.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
             let indexPath = IndexPath(row: 0, section: 0)
             self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
             Taptic.lightTaptic()
@@ -204,7 +210,9 @@ class VillagersTableViewController: UITableViewController {
         alert.addAction(UIAlertAction(title: "Species", style: .default , handler:{ (UIAlertAction) in
             self.villagers = SortEngine.sortVillagers(villagers: self.villagers, with: .species)
             self.sortType = .species
-            self.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
             let indexPath = IndexPath(row: 0, section: 0)
             self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
             Taptic.lightTaptic()
@@ -212,7 +220,9 @@ class VillagersTableViewController: UITableViewController {
         alert.addAction(UIAlertAction(title: "Personality", style: .default , handler:{ (UIAlertAction) in
             self.villagers = SortEngine.sortVillagers(villagers: self.villagers, with: .personality)
             self.sortType = .personality
-            self.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
             let indexPath = IndexPath(row: 0, section: 0)
             self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
             Taptic.lightTaptic()
@@ -234,7 +244,9 @@ extension VillagersTableViewController: UISearchResultsUpdating {
         return item.name.lowercased().contains(searchText.lowercased())
       }
       
-      tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
 }
 

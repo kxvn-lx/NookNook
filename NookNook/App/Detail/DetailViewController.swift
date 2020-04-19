@@ -304,7 +304,7 @@ class DetailViewController: UIViewController {
         infoStackView = UIStackView()
         infoStackView.translatesAutoresizingMaskIntoConstraints = false
         infoStackView.axis = .vertical
-        infoStackView.spacing = MARGIN * 2
+        infoStackView.spacing = MARGIN
         infoStackView.alignment = .fill
         infoStackView.distribution = .equalSpacing
         infoStackView.isLayoutMarginsRelativeArrangement = true
@@ -367,11 +367,9 @@ class DetailViewController: UIViewController {
         variationStack = UIStackView()
         variationStack.translatesAutoresizingMaskIntoConstraints = false
         variationStack.axis = .vertical
-        variationStack.spacing = MARGIN * 2
+        variationStack.spacing = MARGIN
         variationStack.alignment = .leading
         variationStack.distribution = .fill
-        variationStack.isLayoutMarginsRelativeArrangement = true
-        variationStack.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         
         variationTitleLabel = UILabel()
         variationTitleLabel.text = "Variation"

@@ -149,7 +149,9 @@ class ItemsTableViewController: UITableViewController {
     {
         let favouriteAction = UIContextualAction(style: .normal, title:  "Favourite", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             self.favouritesManager.saveItem(item: self.items[indexPath.row])
-            self.tableView.reloadRows(at: [indexPath], with: .left)
+            DispatchQueue.main.async {
+                self.tableView.reloadRows(at: [indexPath], with: .left)
+            }
             
             success(true)
         })
@@ -198,7 +200,9 @@ extension ItemsTableViewController: CatDelegate {
     func parseNewCategory(of category: Categories) {
         currentCategory = category
         items = DataEngine.loadItemJSON(from: currentCategory)
-        tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
         let indexPath = IndexPath(row: 0, section: 0)
         self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
         searchController.searchBar.placeholder = "Search \(items.count) items..."
@@ -216,6 +220,8 @@ extension ItemsTableViewController: UISearchResultsUpdating {
         return item.name.lowercased().contains(searchText.lowercased())
       }
       
-      tableView.reloadData()
+      DispatchQueue.main.async {
+          self.tableView.reloadData()
+      }
     }
 }

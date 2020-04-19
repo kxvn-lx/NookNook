@@ -10,31 +10,31 @@ import Foundation
 import UIKit
 
 extension UIViewController {
-func configureNavigationBar(largeTitleColor: UIColor, backgoundColor: UIColor, tintColor: UIColor, title: String, preferredLargeTitle: Bool) {
-    if #available(iOS 13.0, *) {
-        let navBarAppearance = UINavigationBarAppearance()
-        navBarAppearance.configureWithOpaqueBackground()
-        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: largeTitleColor]
-        navBarAppearance.titleTextAttributes = [.foregroundColor: largeTitleColor]
-        navBarAppearance.backgroundColor = backgoundColor
-
-        navigationController?.navigationBar.standardAppearance = navBarAppearance
-        navigationController?.navigationBar.compactAppearance = navBarAppearance
-        navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
-
-        navigationController?.navigationBar.prefersLargeTitles = preferredLargeTitle
-        navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.tintColor = tintColor
-        navigationItem.title = title
-
-    } else {
-        // Fallback on earlier versions
-        navigationController?.navigationBar.barTintColor = backgoundColor
-        navigationController?.navigationBar.tintColor = tintColor
-        navigationController?.navigationBar.isTranslucent = false
-        navigationItem.title = title
-    }
-}}
+    func configureNavigationBar(largeTitleColor: UIColor, backgoundColor: UIColor, tintColor: UIColor, title: String, preferredLargeTitle: Bool) {
+        if #available(iOS 13.0, *) {
+            let navBarAppearance = UINavigationBarAppearance()
+            navBarAppearance.configureWithOpaqueBackground()
+            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: largeTitleColor]
+            navBarAppearance.titleTextAttributes = [.foregroundColor: largeTitleColor]
+            navBarAppearance.backgroundColor = backgoundColor
+            
+            navigationController?.navigationBar.standardAppearance = navBarAppearance
+            navigationController?.navigationBar.compactAppearance = navBarAppearance
+            navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+            
+            navigationController?.navigationBar.prefersLargeTitles = preferredLargeTitle
+            navigationController?.navigationBar.isTranslucent = false
+            navigationController?.navigationBar.tintColor = tintColor
+            navigationItem.title = title
+            
+        } else {
+            // Fallback on earlier versions
+            navigationController?.navigationBar.barTintColor = backgoundColor
+            navigationController?.navigationBar.tintColor = tintColor
+            navigationController?.navigationBar.isTranslucent = false
+            navigationItem.title = title
+        }
+    }}
 
 extension UIStackView {
     func addBackground(color: UIColor, cornerRadius: CGFloat) {
@@ -56,7 +56,7 @@ extension UIStackView {
             v.leftAnchor.constraint(equalTo: containerForMargin.leftAnchor, constant: m.left),
             v.rightAnchor.constraint(equalTo: containerForMargin.rightAnchor, constant: m.right)
         ])
-
+        
         addArrangedSubview(containerForMargin)
     }
 }
@@ -72,13 +72,13 @@ extension UIButton {
             blurView.layer.masksToBounds = true
         }
         self.insertSubview(blurView, at: 0)
-
+        
         blurView.translatesAutoresizingMaskIntoConstraints = false
         self.leadingAnchor.constraint(equalTo: blurView.leadingAnchor, constant: padding).isActive = true
         self.trailingAnchor.constraint(equalTo: blurView.trailingAnchor, constant: -padding).isActive = true
         self.topAnchor.constraint(equalTo: blurView.topAnchor, constant: padding).isActive = true
         self.bottomAnchor.constraint(equalTo: blurView.bottomAnchor, constant: -padding).isActive = true
-
+        
         if let imageView = self.imageView {
             imageView.backgroundColor = .clear
             self.bringSubviewToFront(imageView)
@@ -94,7 +94,7 @@ extension String {
     func capitalizingFirstLetter() -> String {
         return prefix(1).capitalized + dropFirst()
     }
-
+    
     mutating func capitalizeFirstLetter() {
         self = self.capitalizingFirstLetter()
     }
@@ -102,38 +102,38 @@ extension String {
 
 extension Float {
     var clean: String {
-       return self.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", self) : String(self)
+        return self.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", self) : String(self)
     }
 }
 
 extension UIImage {
     func resize(withWidth newWidth: CGFloat) -> UIImage? {
-
+        
         let scale = newWidth / self.size.width
         let newHeight = self.size.height * scale
         UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
         self.draw(in: CGRect(x: 0, y: 0, width: newWidth, height: newHeight))
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-
+        
         return newImage
     }
     
     func maskWithColor(color: UIColor) -> UIImage? {
         let maskImage = cgImage!
-
+        
         let width = size.width
         let height = size.height
         let bounds = CGRect(x: 0, y: 0, width: width, height: height)
-
+        
         let colorSpace = CGColorSpaceCreateDeviceRGB()
         let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
         let context = CGContext(data: nil, width: Int(width), height: Int(height), bitsPerComponent: 8, bytesPerRow: 0, space: colorSpace, bitmapInfo: bitmapInfo.rawValue)!
-
+        
         context.clip(to: bounds, mask: maskImage)
         context.setFillColor(color.cgColor)
         context.fill(bounds)
-
+        
         if let cgImage = context.makeImage() {
             let coloredImage = UIImage(cgImage: cgImage)
             return coloredImage
@@ -152,3 +152,4 @@ extension UISearchBar
         textFieldInsideSearchBarLabel?.textColor = color
     }
 }
+

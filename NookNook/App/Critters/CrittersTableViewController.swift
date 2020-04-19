@@ -161,7 +161,9 @@ class CrittersTableViewController: UITableViewController {
         let caughtAction = UIContextualAction(style: .normal, title:  "Caught", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             
             self.favouritesManager.saveCaughtCritter(critter: self.critters[indexPath.row])
-            self.tableView.reloadRows(at: [indexPath], with: .left)
+            DispatchQueue.main.async {
+                self.tableView.reloadRows(at: [indexPath], with: .left)
+            }
             Taptic.lightTaptic()
             success(true)
         })
@@ -172,7 +174,9 @@ class CrittersTableViewController: UITableViewController {
                 self.favouritesManager.saveCaughtCritter(critter: self.critters[indexPath.row])
             }
             self.favouritesManager.saveDonatedCritter(critter: self.critters[indexPath.row])
-            self.tableView.reloadRows(at: [indexPath], with: .left)
+            DispatchQueue.main.async {
+                self.tableView.reloadRows(at: [indexPath], with: .left)
+            }
             Taptic.lightTaptic()
             success(true)
         })
@@ -223,7 +227,9 @@ extension CrittersTableViewController: CatDelegate {
     func parseNewCategory(of category: Categories) {
         currentCategory = category
         critters = DataEngine.loadCritterJSON(from: currentCategory)
-        tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
         let indexPath = IndexPath(row: 0, section: 0)
         self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
         searchController.searchBar.placeholder = "Search \(critters.count) critters..."
@@ -241,6 +247,8 @@ extension CrittersTableViewController: UISearchResultsUpdating {
             return critter.name.lowercased().contains(searchText.lowercased())
         }
         
-        tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
 }

@@ -145,7 +145,9 @@ class WardrobesTableViewController: UITableViewController {
     {
         let favouriteAction = UIContextualAction(style: .normal, title:  "Favourite", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             self.favouritesManager.saveWardrobe(wardrobe: self.wardrobes[indexPath.row])
-            self.tableView.reloadRows(at: [indexPath], with: .left)
+            DispatchQueue.main.async {
+                self.tableView.reloadRows(at: [indexPath], with: .left)
+            }
             
             success(true)
         })
@@ -195,7 +197,9 @@ extension WardrobesTableViewController: CatDelegate {
     func parseNewCategory(of category: Categories) {
         currentCategory = category
         wardrobes = DataEngine.loadWardrobesJSON(from: currentCategory)
-        tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
         let indexPath = IndexPath(row: 0, section: 0)
         self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
         searchController.searchBar.placeholder = "Search \(wardrobes.count) wardrobes..."
@@ -213,6 +217,8 @@ extension WardrobesTableViewController: UISearchResultsUpdating {
             return item.name.lowercased().contains(searchText.lowercased())
         }
         
-        tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
 }
