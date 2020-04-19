@@ -11,6 +11,8 @@ import SDWebImage
 
 class DetailViewController: UIViewController {
     
+    private var favouriteManager = PersistEngine()
+    
     private let MARGIN: CGFloat = 10
     
     private var scrollView: UIScrollView!
@@ -40,6 +42,10 @@ class DetailViewController: UIViewController {
     private var activeTimeN: UILabel!
     private var activeTimeS: UILabel!
     
+    private var firstIconLabel: PaddingLabel!
+    private var secondIconLabel: PaddingLabel!
+    
+    private var iconStackView: UIStackView!
     private var activeTimeSStack: UIStackView!
     private var activeTimeNStack: UIStackView!
     private var buyStack: UIStackView!
@@ -109,6 +115,7 @@ class DetailViewController: UIViewController {
             weatherStack.isHidden = true
             rarityLabel.isHidden = true
             specialSellStack.isHidden = true
+            iconStackView.isHidden = true
             
         case .critters:
             renderCritter()
@@ -117,6 +124,7 @@ class DetailViewController: UIViewController {
             
         case .wardrobes:
             renderWardrobe()
+            iconStackView.isHidden = true
             activeTimeStack.isHidden = true
             weatherStack.isHidden = true
             rarityLabel.isHidden = true
@@ -124,6 +132,7 @@ class DetailViewController: UIViewController {
             
         case .villagers:
             renderVillager()
+            firstIconLabel.isHidden = true
             variationStack.isHidden = true
             activeTimeStack.isHidden = true
             specialSellStack.isHidden = true
@@ -176,6 +185,18 @@ class DetailViewController: UIViewController {
         activeTimeN.text = TimeEngine.formatMonth(of: critterObj.activeMonthsN)
         activeTimeS.text = TimeEngine.formatMonth(of: critterObj.activeMonthsS)
         weatherStack.isHidden = critterObj.weather.isEmpty ? true : false
+        
+        firstIconLabel.text = self.favouriteManager.donatedCritters.contains(critterObj) ? "Donated" : ""
+        secondIconLabel.text = self.favouriteManager.caughtCritters.contains(critterObj) ? "Caught" : ""
+        
+        firstIconLabel.isHidden =  self.favouriteManager.donatedCritters.contains(critterObj) ? false : true
+        secondIconLabel.isHidden =  self.favouriteManager.caughtCritters.contains(critterObj) ? false : true
+        
+        if !self.favouriteManager.donatedCritters.contains(critterObj) && !self.favouriteManager.caughtCritters.contains(critterObj) {
+            iconStackView.isHidden = true
+        } else {
+            iconStackView.isHidden = false
+        }
     }
     
     
@@ -206,6 +227,10 @@ class DetailViewController: UIViewController {
         sellLabel.text = villagerObj.species
         weatherLabel.text = villagerObj.gender
         rarityLabel.setTitle(villagerObj.personality, for: .normal)
+        
+        secondIconLabel.text = self.favouriteManager.residentVillagers.contains(villagerObj) ? "In Resident" : ""
+        
+        iconStackView.isHidden = self.favouriteManager.residentVillagers.contains(villagerObj) ? false : true
 
     }
     
@@ -233,6 +258,8 @@ class DetailViewController: UIViewController {
         subtitleLabel = UILabel()
         rarityLabel = UIButton()
         specialSellLabel = UILabel()
+        firstIconLabel = PaddingLabel(withInsets: 5, 5, 10, 10)
+        secondIconLabel = PaddingLabel(withInsets: 5, 5, 10, 10)
         
         // create master scrollView
         scrollView = UIScrollView()
@@ -240,13 +267,7 @@ class DetailViewController: UIViewController {
 
         
         // Create master stackView
-        mStackView = UIStackView()
-        mStackView.translatesAutoresizingMaskIntoConstraints = false
-        mStackView.axis = .vertical
-        mStackView.spacing = MARGIN * 4
-        mStackView.alignment = .center
-        mStackView.distribution = .equalSpacing
-
+        mStackView = SVHelper.createSV(axis: .vertical, spacing: MARGIN * 4, alignment: .center, distribution: .equalSpacing)
         
         self.view.addSubview(scrollView)
         scrollView.addSubview(mStackView)
@@ -261,19 +282,9 @@ class DetailViewController: UIViewController {
         
 
         // Object Title and Subtitle stackView
-        tsStackView = UIStackView()
-        tsStackView.translatesAutoresizingMaskIntoConstraints = false
-        tsStackView.axis = .vertical
-        tsStackView.spacing = MARGIN
-        tsStackView.alignment = .leading
-        tsStackView.distribution = .equalSpacing
-        
-        titleRarityStack = UIStackView()
-        titleRarityStack.translatesAutoresizingMaskIntoConstraints = false
-        titleRarityStack.axis = .horizontal
-        titleRarityStack.spacing = MARGIN
-        titleRarityStack.alignment = .lastBaseline
-        titleRarityStack.distribution = .equalSpacing
+        tsStackView = SVHelper.createSV(axis: .vertical, spacing: MARGIN, alignment: .leading, distribution: .equalSpacing)
+
+        titleRarityStack = SVHelper.createSV(axis: .horizontal, spacing: MARGIN, alignment: .lastBaseline, distribution: .equalSpacing)
         
         
         // Title and subtitle section
@@ -299,16 +310,41 @@ class DetailViewController: UIViewController {
         tsStackView.addArrangedSubview(titleRarityStack)
         tsStackView.addArrangedSubview(subtitleLabel, withMargin: UIEdgeInsets(top: 0, left: MARGIN * 4, bottom: 0, right: 0))
         
+        firstIconLabel.numberOfLines = 0
+        firstIconLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
+        firstIconLabel.font = UIFont.systemFont(ofSize: firstIconLabel.font.pointSize, weight: .semibold)
+        firstIconLabel.textColor =  .white
+        firstIconLabel.layer.borderColor = UIColor(named: ColourUtil.grass2.rawValue)?.cgColor
+        firstIconLabel.backgroundColor = UIColor(named: ColourUtil.grass2.rawValue)
+        firstIconLabel.layer.borderWidth = 1
+        firstIconLabel.layer.cornerRadius = 5
+        firstIconLabel.clipsToBounds = true
+        firstIconLabel.textAlignment = .center
+        
+        secondIconLabel.numberOfLines = 0
+        secondIconLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
+        secondIconLabel.font = UIFont.systemFont(ofSize: secondIconLabel.font.pointSize, weight: .semibold)
+        secondIconLabel.textColor =  .white
+        secondIconLabel.layer.borderColor = UIColor(named: ColourUtil.gold1.rawValue)?.cgColor
+        secondIconLabel.backgroundColor = UIColor(named: ColourUtil.gold1.rawValue)
+        secondIconLabel.textAlignment = .center
+        secondIconLabel.layer.borderWidth = 1
+        secondIconLabel.clipsToBounds = true
+        secondIconLabel.layer.cornerRadius = 5
+        
+        
+        iconStackView = SVHelper.createSV(axis: .horizontal, spacing: MARGIN, alignment: .center, distribution: .fillEqually)
+        iconStackView.isLayoutMarginsRelativeArrangement = true
+        iconStackView.layoutMargins = UIEdgeInsets(top: 0, left: MARGIN*4, bottom: 0, right: MARGIN*4)
+        
+        iconStackView.addArrangedSubview(firstIconLabel)
+        iconStackView.addArrangedSubview(secondIconLabel)
         
         // Info stack views section
-        infoStackView = UIStackView()
-        infoStackView.translatesAutoresizingMaskIntoConstraints = false
-        infoStackView.axis = .vertical
-        infoStackView.spacing = MARGIN
-        infoStackView.alignment = .fill
-        infoStackView.distribution = .equalSpacing
+        infoStackView = SVHelper.createSV(axis: .vertical, spacing: MARGIN, alignment: .fill, distribution: .equalSpacing)
         infoStackView.isLayoutMarginsRelativeArrangement = true
         infoStackView.layoutMargins = UIEdgeInsets(top: 0, left: MARGIN*4, bottom: 0, right: MARGIN*4)
+        
         
         buyLabel.textColor = UIColor(named: ColourUtil.gold1.rawValue)
         sellLabel.textColor = UIColor(named: ColourUtil.gold1.rawValue)
@@ -318,16 +354,12 @@ class DetailViewController: UIViewController {
         buyStack = createInfoStackView(title: "Buy", with: buyLabel)
         sellStack = createInfoStackView(title: "Sell", with: sellLabel)
         specialSellStack = createInfoStackView(title: "Special sell price", with: specialSellLabel)
+
         if let critterObj = critterObj {
-            switch critterObj.category {
-            case Categories.fishes.rawValue:
-                specialSellStack = createInfoStackView(title: "CJ sell price", with: specialSellLabel)
-            case Categories.bugs.rawValue:
-                specialSellStack = createInfoStackView(title: "Flick sell price", with: specialSellLabel)
-            default:
-                fatalError("Invalid category detected for critter! (attempt to render special sell price")
-            }
+            let t = critterObj.category == Categories.fishes.rawValue ? "CJ sell price" : "Flick sell price"
+            specialSellStack = createInfoStackView(title: t, with: specialSellLabel)
         }
+        
         weatherStack = createInfoStackView(title: "Weather", with: weatherLabel)
         
         infoStackView.addArrangedSubview(buyStack)
@@ -337,14 +369,10 @@ class DetailViewController: UIViewController {
         
         
         // Active time period section
-        activeTimeStack = UIStackView()
-        activeTimeStack.translatesAutoresizingMaskIntoConstraints = false
-        activeTimeStack.axis = .vertical
-        activeTimeStack.spacing = MARGIN * 2
-        activeTimeStack.alignment = .fill
-        activeTimeStack.distribution = .equalSpacing
+        activeTimeStack = SVHelper.createSV(axis: .vertical, spacing: MARGIN * 2, alignment: .fill, distribution: .equalSpacing)
         activeTimeStack.isLayoutMarginsRelativeArrangement = true
         activeTimeStack.layoutMargins = UIEdgeInsets(top: 0, left: MARGIN*4, bottom: 0, right: MARGIN*4)
+        
         
         activeTimeN.textColor = UIColor(named: ColourUtil.gold1.rawValue)
         activeTimeS.textColor = UIColor(named: ColourUtil.gold1.rawValue)
@@ -364,12 +392,7 @@ class DetailViewController: UIViewController {
 
         
         // Variation Section
-        variationStack = UIStackView()
-        variationStack.translatesAutoresizingMaskIntoConstraints = false
-        variationStack.axis = .vertical
-        variationStack.spacing = MARGIN
-        variationStack.alignment = .leading
-        variationStack.distribution = .fill
+        variationStack = SVHelper.createSV(axis: .vertical, spacing: MARGIN, alignment: .leading, distribution: .fill)
         
         variationTitleLabel = UILabel()
         variationTitleLabel.text = "Variation"
@@ -391,6 +414,7 @@ class DetailViewController: UIViewController {
         // Add to stackView
         mStackView.addArrangedSubview(detailImageView, withMargin: UIEdgeInsets(top: MARGIN * 4, left: 0, bottom: 0, right: 0))
         mStackView.addArrangedSubview(tsStackView)
+        mStackView.addArrangedSubview(iconStackView)
         mStackView.addArrangedSubview(infoStackView)
         mStackView.addArrangedSubview(activeTimeStack)
         mStackView.addArrangedSubview(variationStack)
@@ -417,6 +441,7 @@ class DetailViewController: UIViewController {
             
             tsStackView.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
             titleRarityStack.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
+            
             
             infoStackView.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
             

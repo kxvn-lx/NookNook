@@ -20,8 +20,8 @@ class CritterTableViewCell: UITableViewCell {
     var timeLabel: UILabel!
     var sellLabel: UILabel!
     
-    var isCaughtLabel: UILabel!
-    var isDonatedLabel: UILabel!
+    var isCaughtLabel: PaddingLabel!
+    var isDonatedLabel: PaddingLabel!
     
     private var infoStackView: UIStackView!
     private var mStackView: UIStackView!
@@ -53,17 +53,31 @@ class CritterTableViewCell: UITableViewCell {
         imgView.contentMode = .scaleAspectFit
         
         
-        isCaughtLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-        isCaughtLabel.textColor = .darkGray
+        isCaughtLabel = PaddingLabel(withInsets: 2.5, 2.5, 5, 5)
         isCaughtLabel.translatesAutoresizingMaskIntoConstraints = false
+        isCaughtLabel.numberOfLines = 0
         isCaughtLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
-        isCaughtLabel.font = UIFont.systemFont(ofSize: isCaughtLabel.font.pointSize, weight: .black)
+        isCaughtLabel.font = UIFont.systemFont(ofSize: isCaughtLabel.font.pointSize, weight: .semibold)
+        isCaughtLabel.textColor =  .white
+        isCaughtLabel.layer.borderColor = UIColor(named: ColourUtil.gold1.rawValue)?.cgColor
+        isCaughtLabel.backgroundColor = UIColor(named: ColourUtil.gold1.rawValue)
+        isCaughtLabel.layer.borderWidth = 1
+        isCaughtLabel.layer.cornerRadius = 5
+        isCaughtLabel.clipsToBounds = true
+        isCaughtLabel.textAlignment = .center
         
-        isDonatedLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        isDonatedLabel = PaddingLabel(withInsets: 2.5, 2.5, 5, 5)
         isDonatedLabel.translatesAutoresizingMaskIntoConstraints = false
-        isDonatedLabel.textColor = .darkGray
+        isDonatedLabel.numberOfLines = 0
         isDonatedLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
-        isDonatedLabel.font = UIFont.systemFont(ofSize: isDonatedLabel.font.pointSize, weight: .black)
+        isDonatedLabel.font = UIFont.systemFont(ofSize: isDonatedLabel.font.pointSize, weight: .semibold)
+        isDonatedLabel.textColor =  .white
+        isDonatedLabel.layer.borderColor = UIColor(named: ColourUtil.grass2.rawValue)?.cgColor
+        isDonatedLabel.backgroundColor = UIColor(named: ColourUtil.grass2.rawValue)
+        isDonatedLabel.layer.borderWidth = 1
+        isDonatedLabel.layer.cornerRadius = 5
+        isDonatedLabel.clipsToBounds = true
+        isDonatedLabel.textAlignment = .center
 
         
         imgView.addSubview(rarityLabel)

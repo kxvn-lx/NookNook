@@ -49,11 +49,18 @@ class VillagerTableViewCell: UITableViewCell {
         imgView.translatesAutoresizingMaskIntoConstraints = false
         imgView.contentMode = .scaleAspectFit
         
-        isResidentLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-        isResidentLabel.textColor = .darkGray
+        isResidentLabel = PaddingLabel(withInsets: 2.5, 2.5, 5, 5)
         isResidentLabel.translatesAutoresizingMaskIntoConstraints = false
+        isResidentLabel.numberOfLines = 0
         isResidentLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
-        isResidentLabel.font = UIFont.systemFont(ofSize: isResidentLabel.font.pointSize, weight: .black)
+        isResidentLabel.font = UIFont.systemFont(ofSize: isResidentLabel.font.pointSize, weight: .semibold)
+        isResidentLabel.textColor =  .white
+        isResidentLabel.layer.borderColor = UIColor(named: ColourUtil.gold1.rawValue)?.cgColor
+        isResidentLabel.backgroundColor = UIColor(named: ColourUtil.gold1.rawValue)
+        isResidentLabel.layer.borderWidth = 1
+        isResidentLabel.layer.cornerRadius = 5
+        isResidentLabel.clipsToBounds = true
+        isResidentLabel.textAlignment = .center
         
         isFavImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         isFavImageView.translatesAutoresizingMaskIntoConstraints = false

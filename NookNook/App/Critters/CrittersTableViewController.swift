@@ -101,8 +101,10 @@ class CrittersTableViewController: UITableViewController {
             let isCaught = self.favouritesManager.caughtCritters.contains(critter) ? "C" : ""
             
             critterCell.isDonatedLabel.text = isDonated
-            
             critterCell.isCaughtLabel.text = isCaught
+            
+            critterCell.isDonatedLabel.isHidden =  self.favouritesManager.donatedCritters.contains(critter) ? false : true
+            critterCell.isCaughtLabel.isHidden =  self.favouritesManager.caughtCritters.contains(critter) ? false : true
             
         }
         

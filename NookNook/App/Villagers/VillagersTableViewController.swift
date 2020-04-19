@@ -100,6 +100,8 @@ class VillagersTableViewController: UITableViewController {
             
             let isResident = self.favouritesManager.residentVillagers.contains(villager) ? "R" : ""
             villagerCell.isResidentLabel.text = isResident
+            
+            villagerCell.isResidentLabel.isHidden =  self.favouritesManager.residentVillagers.contains(villager) ? false : true
         }
 
         return cell
@@ -146,7 +148,7 @@ class VillagersTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView,
                             leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
     {
-        let favouriteAction = UIContextualAction(style: .normal, title:  "Favourite", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+        let favouriteAction = UIContextualAction(style: .normal, title:  "", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             self.favouritesManager.saveFavouritedVillager(villager: self.villagers[indexPath.row])
             DispatchQueue.main.async {
                 self.tableView.reloadRows(at: [indexPath], with: .left)
@@ -154,6 +156,8 @@ class VillagersTableViewController: UITableViewController {
             Taptic.lightTaptic()
             success(true)
         })
+        
+        favouriteAction.image = self.favouritesManager.favouritedVillagers.contains(self.villagers[indexPath.row]) ? IconUtil.systemIcon(of: .starFill, weight: .thin) : IconUtil.systemIcon(of: .star, weight: .thin)
         
         let residentAction = UIContextualAction(style: .normal, title:  "Resident", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             if self.favouritesManager.residentVillagers.count <= 9 {

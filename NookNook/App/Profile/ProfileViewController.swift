@@ -80,12 +80,8 @@ class ProfileViewController: UIViewController {
         self.view.addSubview(scrollView)
         
         // Create master stackView
-        mStackView = UIStackView()
-        mStackView.translatesAutoresizingMaskIntoConstraints = false
-        mStackView.axis = .vertical
-        mStackView.spacing = MARGIN * 4
-        mStackView.alignment = .center
-        mStackView.distribution = .equalSpacing
+        mStackView = SVHelper.createSV(axis: .vertical, spacing: MARGIN * 4, alignment: .center, distribution: .equalSpacing)
+        
         
         profileImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -99,26 +95,16 @@ class ProfileViewController: UIViewController {
         profileNameLabel.font = UIFont.preferredFont(forTextStyle: .largeTitle)
         profileNameLabel.font = UIFont.systemFont(ofSize: profileNameLabel.font.pointSize, weight: .semibold)
         
-        
-        profileNameStackView = UIStackView()
-        profileNameStackView.translatesAutoresizingMaskIntoConstraints = false
-        profileNameStackView.axis = .horizontal
-        profileNameStackView.spacing = MARGIN * 2
-        profileNameStackView.alignment = .center
-        profileNameStackView.distribution = .fill
+        profileNameStackView = SVHelper.createSV(axis: .horizontal, spacing: MARGIN * 2, alignment: .center, distribution: .fill)
         
         profileNameStackView.addArrangedSubview(profileImageView, withMargin: UIEdgeInsets(top: 0, left: MARGIN*4, bottom: 0, right: 0))
         profileNameStackView.addArrangedSubview(profileNameLabel)
         
         
-        passportStackView = UIStackView()
-        passportStackView.translatesAutoresizingMaskIntoConstraints = false
-        passportStackView.axis = .vertical
-        passportStackView.spacing = MARGIN
-        passportStackView.alignment = .fill
-        passportStackView.distribution = .equalSpacing
+        passportStackView = SVHelper.createSV(axis: .vertical, spacing: MARGIN, alignment: .fill, distribution: .equalSpacing)
         passportStackView.isLayoutMarginsRelativeArrangement = true
         passportStackView.layoutMargins = UIEdgeInsets(top: 0, left: MARGIN*4, bottom: 0, right: MARGIN*4)
+        
         
         islandNameLabel = UILabel()
         islandNameLabel.textColor = UIColor(named: ColourUtil.gold1.rawValue)
@@ -130,12 +116,7 @@ class ProfileViewController: UIViewController {
         passportStackView.addArrangedSubview(createSV(title: "Native Fruit", with: nativeFruitLabel))
         
         
-        residentStack = UIStackView()
-        residentStack.translatesAutoresizingMaskIntoConstraints = false
-        residentStack.axis = .vertical
-        residentStack.spacing = MARGIN
-        residentStack.alignment = .leading
-        residentStack.distribution = .fill
+        residentStack = SVHelper.createSV(axis: .vertical, spacing: MARGIN, alignment: .leading, distribution: .fill)
         
         residentLabel = UILabel()
         residentLabel.text = "Your Resident"
@@ -153,10 +134,7 @@ class ProfileViewController: UIViewController {
         
         residentStack.addArrangedSubview(residentLabel, withMargin: UIEdgeInsets(top: 0, left: MARGIN * 4, bottom: 0, right: 0))
         residentStack.addArrangedSubview(variationImageCollectionView)
-        
-        
-        
-        
+
         
         mStackView.addArrangedSubview(profileNameStackView, withMargin: UIEdgeInsets(top: MARGIN*4, left: 0, bottom: 0, right: 0))
         mStackView.addArrangedSubview(passportStackView)

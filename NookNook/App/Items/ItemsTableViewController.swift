@@ -147,7 +147,7 @@ class ItemsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView,
                             leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
     {
-        let favouriteAction = UIContextualAction(style: .normal, title:  "Favourite", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+        let favouriteAction = UIContextualAction(style: .normal, title:  "", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             self.favouritesManager.saveItem(item: self.items[indexPath.row])
             DispatchQueue.main.async {
                 self.tableView.reloadRows(at: [indexPath], with: .left)
@@ -155,6 +155,7 @@ class ItemsTableViewController: UITableViewController {
             
             success(true)
         })
+        favouriteAction.image = self.favouritesManager.items.contains(self.items[indexPath.row]) ? IconUtil.systemIcon(of: .starFill, weight: .thin) : IconUtil.systemIcon(of: .star, weight: .thin)
         favouriteAction.backgroundColor = UIColor(named: ColourUtil.grass2.rawValue)
         
         return UISwipeActionsConfiguration(actions: [favouriteAction])

@@ -58,6 +58,7 @@
 		0A739A43244BE55600002B89 /* ResidentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A739A42244BE55600002B89 /* ResidentCollectionViewCell.swift */; };
 		0A7FA6A32445971900921079 /* CrittersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7FA6A22445971900921079 /* CrittersTableViewController.swift */; };
 		0A7FA6A52445972A00921079 /* CritterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7FA6A42445972A00921079 /* CritterTableViewCell.swift */; };
+		0AA3616E244C520500D326AF /* SVHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA3616D244C520500D326AF /* SVHelper.swift */; };
 		0AADD410244870D9004FDA33 /* fishesSecondary.json in Resources */ = {isa = PBXBuildFile; fileRef = 0AADD40F244870D9004FDA33 /* fishesSecondary.json */; };
 		0AADD4192448ADB4004FDA33 /* bugsMain.json in Resources */ = {isa = PBXBuildFile; fileRef = 0AADD4172448ADB4004FDA33 /* bugsMain.json */; };
 		0AADD41A2448ADB4004FDA33 /* fishesMain.json in Resources */ = {isa = PBXBuildFile; fileRef = 0AADD4182448ADB4004FDA33 /* fishesMain.json */; };
@@ -129,6 +130,7 @@
 		0A739A42244BE55600002B89 /* ResidentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResidentCollectionViewCell.swift; sourceTree = "<group>"; };
 		0A7FA6A22445971900921079 /* CrittersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrittersTableViewController.swift; sourceTree = "<group>"; };
 		0A7FA6A42445972A00921079 /* CritterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CritterTableViewCell.swift; sourceTree = "<group>"; };
+		0AA3616D244C520500D326AF /* SVHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVHelper.swift; sourceTree = "<group>"; };
 		0AADD40F244870D9004FDA33 /* fishesSecondary.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fishesSecondary.json; sourceTree = "<group>"; };
 		0AADD4172448ADB4004FDA33 /* bugsMain.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bugsMain.json; sourceTree = "<group>"; };
 		0AADD4182448ADB4004FDA33 /* fishesMain.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fishesMain.json; sourceTree = "<group>"; };
@@ -349,6 +351,7 @@
 				0A370BA924446D7B00A72048 /* IconUtil.swift */,
 				0A295B4B2444AAD0001CF828 /* Taptic.swift */,
 				0A295B49244494F9001CF828 /* Categories.swift */,
+				0AA3616D244C520500D326AF /* SVHelper.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -483,6 +486,7 @@
 				0A23BBD0244AE1D5009B5178 /* Fruits.swift in Sources */,
 				0A23BBCE244ADFE6009B5178 /* User.swift in Sources */,
 				0A739A41244B592300002B89 /* ProfileViewController.swift in Sources */,
+				0AA3616E244C520500D326AF /* SVHelper.swift in Sources */,
 				0A7FA6A32445971900921079 /* CrittersTableViewController.swift in Sources */,
 				0A7FA6A52445972A00921079 /* CritterTableViewCell.swift in Sources */,
 				0A36427E244695FE0081315A /* Critter.swift in Sources */,
