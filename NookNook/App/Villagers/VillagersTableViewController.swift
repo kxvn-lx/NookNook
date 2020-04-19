@@ -156,12 +156,30 @@ class VillagersTableViewController: UITableViewController {
         })
         
         let residentAction = UIContextualAction(style: .normal, title:  "Resident", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-            self.favouritesManager.saveResidentVillager(villager: self.villagers[indexPath.row])
-            DispatchQueue.main.async {
-                self.tableView.reloadRows(at: [indexPath], with: .left)
+            if self.favouritesManager.residentVillagers.count <= 9 {
+                self.favouritesManager.saveResidentVillager(villager: self.villagers[indexPath.row])
+                DispatchQueue.main.async {
+                    self.tableView.reloadRows(at: [indexPath], with: .left)
+                }
+                Taptic.lightTaptic()
+                success(true)
             }
-            Taptic.lightTaptic()
-            success(true)
+            else if self.favouritesManager.residentVillagers.count <= 10 && self.favouritesManager.residentVillagers.contains(self.villagers[indexPath.row]) {
+                self.favouritesManager.saveResidentVillager(villager: self.villagers[indexPath.row])
+                DispatchQueue.main.async {
+                    self.tableView.reloadRows(at: [indexPath], with: .left)
+                }
+                Taptic.lightTaptic()
+                success(true)
+            }
+            else {
+                let alert = UIAlertController(title: "Woah there!", message: "It appears that you have the max number of residents! (10 max)", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+
+                self.present(alert, animated: true)
+                Taptic.errorTaptic()
+                success(false)
+            }
         })
         favouriteAction.backgroundColor = UIColor(named: ColourUtil.grass2.rawValue)
         residentAction.backgroundColor = UIColor(named: ColourUtil.gold1.rawValue)

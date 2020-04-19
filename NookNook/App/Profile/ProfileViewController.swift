@@ -53,6 +53,8 @@ class ProfileViewController: UIViewController {
         }
         favouritesManager = PersistEngine()
         
+        residentLabel.text = "Your Resident: \(self.favouritesManager.residentVillagers.count)/10"
+        
     }
 
     // Modify the UI
@@ -101,7 +103,7 @@ class ProfileViewController: UIViewController {
         profileNameStackView = UIStackView()
         profileNameStackView.translatesAutoresizingMaskIntoConstraints = false
         profileNameStackView.axis = .horizontal
-        profileNameStackView.spacing = MARGIN
+        profileNameStackView.spacing = MARGIN * 2
         profileNameStackView.alignment = .center
         profileNameStackView.distribution = .fill
         
@@ -156,7 +158,7 @@ class ProfileViewController: UIViewController {
         
         
         
-        mStackView.addArrangedSubview(profileNameStackView)
+        mStackView.addArrangedSubview(profileNameStackView, withMargin: UIEdgeInsets(top: MARGIN*4, left: 0, bottom: 0, right: 0))
         mStackView.addArrangedSubview(passportStackView)
         mStackView.addArrangedSubview(residentStack)
         scrollView.addSubview(mStackView)
