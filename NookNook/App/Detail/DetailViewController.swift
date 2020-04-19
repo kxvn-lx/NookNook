@@ -304,11 +304,11 @@ class DetailViewController: UIViewController {
         rarityLabel.isUserInteractionEnabled = false
         rarityLabel.addBlurEffect(style: .light, cornerRadius: 5, padding: .zero)
         
-        titleRarityStack.addArrangedSubview(titleLabel, withMargin: UIEdgeInsets(top: 0, left: MARGIN * 4, bottom: 0, right: 0))
-        titleRarityStack.addArrangedSubview(rarityLabel, withMargin: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: -MARGIN * 4))
+        titleRarityStack.addArrangedSubview(titleLabel, withMargin: UIEdgeInsets(top: 0, left: MARGIN * 2, bottom: 0, right: 0))
+        titleRarityStack.addArrangedSubview(rarityLabel, withMargin: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: -MARGIN * 2))
         
         tsStackView.addArrangedSubview(titleRarityStack)
-        tsStackView.addArrangedSubview(subtitleLabel, withMargin: UIEdgeInsets(top: 0, left: MARGIN * 4, bottom: 0, right: 0))
+        tsStackView.addArrangedSubview(subtitleLabel, withMargin: UIEdgeInsets(top: 0, left: MARGIN * 2, bottom: 0, right: 0))
         
         firstIconLabel.numberOfLines = 0
         firstIconLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
@@ -335,7 +335,7 @@ class DetailViewController: UIViewController {
         
         iconStackView = SVHelper.createSV(axis: .horizontal, spacing: MARGIN, alignment: .center, distribution: .fillEqually)
         iconStackView.isLayoutMarginsRelativeArrangement = true
-        iconStackView.layoutMargins = UIEdgeInsets(top: 0, left: MARGIN*4, bottom: 0, right: MARGIN*4)
+        iconStackView.layoutMargins = UIEdgeInsets(top: 0, left: MARGIN*2, bottom: 0, right: MARGIN*2)
         
         iconStackView.addArrangedSubview(firstIconLabel)
         iconStackView.addArrangedSubview(secondIconLabel)
@@ -343,7 +343,7 @@ class DetailViewController: UIViewController {
         // Info stack views section
         infoStackView = SVHelper.createSV(axis: .vertical, spacing: MARGIN, alignment: .fill, distribution: .equalSpacing)
         infoStackView.isLayoutMarginsRelativeArrangement = true
-        infoStackView.layoutMargins = UIEdgeInsets(top: 0, left: MARGIN*4, bottom: 0, right: MARGIN*4)
+        infoStackView.layoutMargins = UIEdgeInsets(top: 0, left: MARGIN*2, bottom: 0, right: MARGIN*2)
         
         
         buyLabel.textColor = UIColor(named: ColourUtil.gold1.rawValue)
@@ -371,7 +371,7 @@ class DetailViewController: UIViewController {
         // Active time period section
         activeTimeStack = SVHelper.createSV(axis: .vertical, spacing: MARGIN * 2, alignment: .fill, distribution: .equalSpacing)
         activeTimeStack.isLayoutMarginsRelativeArrangement = true
-        activeTimeStack.layoutMargins = UIEdgeInsets(top: 0, left: MARGIN*4, bottom: 0, right: MARGIN*4)
+        activeTimeStack.layoutMargins = UIEdgeInsets(top: 0, left: MARGIN*2, bottom: 0, right: MARGIN*2)
         
         
         activeTimeN.textColor = UIColor(named: ColourUtil.gold1.rawValue)
@@ -408,7 +408,7 @@ class DetailViewController: UIViewController {
         variationImageCollectionView.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
         
         
-        variationStack.addArrangedSubview(variationTitleLabel, withMargin: UIEdgeInsets(top: 0, left: MARGIN * 4, bottom: 0, right: 0))
+        variationStack.addArrangedSubview(variationTitleLabel, withMargin: UIEdgeInsets(top: 0, left: MARGIN * 2, bottom: 0, right: 0))
         variationStack.addArrangedSubview(variationImageCollectionView)
         
         // Add to stackView

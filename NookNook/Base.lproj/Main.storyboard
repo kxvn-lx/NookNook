@@ -275,14 +275,24 @@
                     <view key="view" contentMode="scaleToFill" id="KVZ-7I-NN1">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k0G-io-A8A">
+                                <rect key="frame" x="174" y="355" width="71" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Favourites"/>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="5bo-VI-llV"/>
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="uxd-2w-zdn"/>
+                    <connections>
+                        <outlet property="goToFavButton" destination="k0G-io-A8A" id="lE6-qq-clh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PTl-wW-mKX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1881" y="1203"/>
+            <point key="canvasLocation" x="1879.7101449275365" y="1202.6785714285713"/>
         </scene>
         <!--Profile-->
         <scene sceneID="RYl-xM-zwH">

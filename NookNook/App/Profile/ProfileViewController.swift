@@ -12,7 +12,7 @@ class ProfileViewController: UIViewController {
     
     private var favouritesManager: PersistEngine!
     
-
+    
     private let VARIANT_CELL = "VariantCell"
     
     private let MARGIN: CGFloat = 10
@@ -24,6 +24,8 @@ class ProfileViewController: UIViewController {
     private var passportStackView: UIStackView!
     private var residentStack: UIStackView!
     
+    @IBOutlet weak var goToFavButton: UIButton!
+    
     var profileImageView: UIImageView!
     var profileNameLabel: UILabel!
     var islandNameLabel: UILabel!
@@ -34,7 +36,7 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         favouritesManager = PersistEngine()
         
         setBar()
@@ -56,7 +58,7 @@ class ProfileViewController: UIViewController {
         residentLabel.text = "Your Resident: \(self.favouritesManager.residentVillagers.count)/10"
         
     }
-
+    
     // Modify the UI
     private func setBar() {
         self.configureNavigationBar(largeTitleColor: .white, backgoundColor: UIColor(named: ColourUtil.grass1.rawValue)!, tintColor: .white, title: "Profile", preferredLargeTitle: true)
@@ -103,7 +105,7 @@ class ProfileViewController: UIViewController {
         
         passportStackView = SVHelper.createSV(axis: .vertical, spacing: MARGIN, alignment: .fill, distribution: .equalSpacing)
         passportStackView.isLayoutMarginsRelativeArrangement = true
-        passportStackView.layoutMargins = UIEdgeInsets(top: 0, left: MARGIN*4, bottom: 0, right: MARGIN*4)
+        passportStackView.layoutMargins = UIEdgeInsets(top: 0, left: MARGIN*2, bottom: 0, right: MARGIN*2)
         
         
         islandNameLabel = UILabel()
@@ -132,14 +134,38 @@ class ProfileViewController: UIViewController {
         variationImageCollectionView.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
         
         
-        residentStack.addArrangedSubview(residentLabel, withMargin: UIEdgeInsets(top: 0, left: MARGIN * 4, bottom: 0, right: 0))
+        residentStack.addArrangedSubview(residentLabel, withMargin: UIEdgeInsets(top: 0, left: MARGIN * 2, bottom: 0, right: 0))
         residentStack.addArrangedSubview(variationImageCollectionView)
-
+        
+        
+        // Go to fav VC Button
+        goToFavButton.translatesAutoresizingMaskIntoConstraints = false
+        goToFavButton.contentEdgeInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
+        goToFavButton.backgroundColor = .clear
+        goToFavButton.layer.borderWidth = 1
+        goToFavButton.layer.borderColor = UIColor(named: ColourUtil.dirt1.rawValue)?.cgColor
+        goToFavButton.layer.cornerRadius = 5
+        goToFavButton.setTitleColor(UIColor(named: ColourUtil.dirt1.rawValue), for: .normal)
+        goToFavButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
+        goToFavButton.titleLabel?.font = UIFont.systemFont(ofSize: (goToFavButton.titleLabel?.font.pointSize)!, weight: .semibold)
+        goToFavButton.setTitle("Favourites", for: .normal)
+        goToFavButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        
+        
+        
+        let buttonWrapperSV = SVHelper.createSV(axis: .horizontal, spacing: MARGIN, alignment: .center, distribution: .fillEqually)
+        buttonWrapperSV.addArrangedSubview(goToFavButton)
+        
         
         mStackView.addArrangedSubview(profileNameStackView, withMargin: UIEdgeInsets(top: MARGIN*4, left: 0, bottom: 0, right: 0))
         mStackView.addArrangedSubview(passportStackView)
         mStackView.addArrangedSubview(residentStack)
+        mStackView.addArrangedSubview(buttonWrapperSV)
         scrollView.addSubview(mStackView)
+    }
+    
+    @objc private func buttonAction(sender: UIButton!) {
+        print("Button tapped")
     }
     
     private func setConstraint() {
@@ -167,7 +193,8 @@ class ProfileViewController: UIViewController {
             residentStack.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
             
             variationImageCollectionView.widthAnchor.constraint(equalTo: self.residentStack.widthAnchor),
-            variationImageCollectionView.heightAnchor.constraint(equalToConstant: 140)
+            variationImageCollectionView.heightAnchor.constraint(equalToConstant: 140),
+            
         ])
     }
     
@@ -198,7 +225,7 @@ class ProfileViewController: UIViewController {
         
         return stackView
     }
-
+    
     func calculateCVLayout() -> UICollectionViewCompositionalLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                               heightDimension: .fractionalHeight(1))
@@ -207,7 +234,7 @@ class ProfileViewController: UIViewController {
         let groupSize = NSCollectionLayoutSize(widthDimension:.fractionalWidth(0.3),
                                                heightDimension: .fractionalHeight(0.8))
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize,
-                                                         subitem: item, count: 1)
+                                                     subitem: item, count: 1)
         
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
@@ -227,7 +254,7 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VARIANT_CELL, for: indexPath) as! ResidentCollectionViewCell
-
+        
         cell.variantImage.sd_setImage(with: ImageEngine.parseAcnhURL(with: self.favouritesManager.residentVillagers[indexPath.row].image, of: Categories.villagers.rawValue, mediaType: .icons), completed: nil)
         
         cell.variantName.text = self.favouritesManager.residentVillagers[indexPath.row].name
