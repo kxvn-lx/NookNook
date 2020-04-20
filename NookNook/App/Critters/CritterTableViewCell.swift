@@ -56,7 +56,7 @@ class CritterTableViewCell: UITableViewCell {
         isCaughtLabel = PaddingLabel(withInsets: 2.5, 2.5, 5, 5)
         isCaughtLabel.translatesAutoresizingMaskIntoConstraints = false
         isCaughtLabel.numberOfLines = 0
-        isCaughtLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
+        isCaughtLabel.font = UIFont.preferredFont(forTextStyle: .caption2)
         isCaughtLabel.font = UIFont.systemFont(ofSize: isCaughtLabel.font.pointSize, weight: .semibold)
         isCaughtLabel.textColor =  .white
         isCaughtLabel.layer.borderColor = UIColor(named: ColourUtil.gold1.rawValue)?.cgColor
@@ -69,7 +69,7 @@ class CritterTableViewCell: UITableViewCell {
         isDonatedLabel = PaddingLabel(withInsets: 2.5, 2.5, 5, 5)
         isDonatedLabel.translatesAutoresizingMaskIntoConstraints = false
         isDonatedLabel.numberOfLines = 0
-        isDonatedLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
+        isDonatedLabel.font = UIFont.preferredFont(forTextStyle: .caption2)
         isDonatedLabel.font = UIFont.systemFont(ofSize: isDonatedLabel.font.pointSize, weight: .semibold)
         isDonatedLabel.textColor =  .white
         isDonatedLabel.layer.borderColor = UIColor(named: ColourUtil.grass2.rawValue)?.cgColor

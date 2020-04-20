@@ -52,7 +52,7 @@ class VillagerTableViewCell: UITableViewCell {
         isResidentLabel = PaddingLabel(withInsets: 2.5, 2.5, 5, 5)
         isResidentLabel.translatesAutoresizingMaskIntoConstraints = false
         isResidentLabel.numberOfLines = 0
-        isResidentLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
+        isResidentLabel.font = UIFont.preferredFont(forTextStyle: .caption2)
         isResidentLabel.font = UIFont.systemFont(ofSize: isResidentLabel.font.pointSize, weight: .semibold)
         isResidentLabel.textColor =  .white
         isResidentLabel.layer.borderColor = UIColor(named: ColourUtil.gold1.rawValue)?.cgColor

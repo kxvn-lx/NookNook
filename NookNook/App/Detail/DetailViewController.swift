@@ -311,7 +311,7 @@ class DetailViewController: UIViewController {
         tsStackView.addArrangedSubview(subtitleLabel, withMargin: UIEdgeInsets(top: 0, left: MARGIN * 2, bottom: 0, right: 0))
         
         firstIconLabel.numberOfLines = 0
-        firstIconLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
+        firstIconLabel.font = UIFont.preferredFont(forTextStyle: .caption2)
         firstIconLabel.font = UIFont.systemFont(ofSize: firstIconLabel.font.pointSize, weight: .semibold)
         firstIconLabel.textColor =  .white
         firstIconLabel.layer.borderColor = UIColor(named: ColourUtil.grass2.rawValue)?.cgColor
@@ -322,7 +322,7 @@ class DetailViewController: UIViewController {
         firstIconLabel.textAlignment = .center
         
         secondIconLabel.numberOfLines = 0
-        secondIconLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
+        secondIconLabel.font = UIFont.preferredFont(forTextStyle: .caption2)
         secondIconLabel.font = UIFont.systemFont(ofSize: secondIconLabel.font.pointSize, weight: .semibold)
         secondIconLabel.textColor =  .white
         secondIconLabel.layer.borderColor = UIColor(named: ColourUtil.gold1.rawValue)?.cgColor

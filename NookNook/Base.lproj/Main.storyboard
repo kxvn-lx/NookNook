@@ -199,7 +199,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z4D-az-GMq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4636.231884057971" y="582.58928571428567"/>
+            <point key="canvasLocation" x="3939" y="520"/>
         </scene>
         <!--Wardrobes-->
         <scene sceneID="VTd-cm-UvJ">
@@ -312,6 +312,34 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mAw-Rt-nI7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1881.1594202898552" y="496.875"/>
+        </scene>
+        <!--Favourites-->
+        <scene sceneID="gsU-z2-iCN">
+            <objects>
+                <tableViewController storyboardIdentifier="FavouritesVC" title="Favourites" id="JqN-iJ-1XT" customClass="FavouritesTableViewController" customModule="NookNook" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="Igm-WF-1n3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FavouriteCell" id="mwT-D9-v4A" customClass="FavouriteTableViewCell" customModule="NookNook" customModuleProvider="target">
+                                <rect key="frame" x="20" y="55.5" width="374" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mwT-D9-v4A" id="Jom-20-k2d">
+                                    <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="JqN-iJ-1XT" id="j0d-nh-Vtw"/>
+                            <outlet property="delegate" destination="JqN-iJ-1XT" id="mTs-M7-Jyh"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lYZ-HK-s6I" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2961" y="635"/>
         </scene>
     </scenes>
 </document>

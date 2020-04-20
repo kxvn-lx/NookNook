@@ -165,7 +165,10 @@ class ProfileViewController: UIViewController {
     }
     
     @objc private func buttonAction(sender: UIButton!) {
-        print("Button tapped")
+        let vc = self.storyboard!.instantiateViewController(withIdentifier: "FavouritesVC") as! FavouritesTableViewController
+        
+        let navController = UINavigationController(rootViewController: vc)
+        self.present(navController, animated:true, completion: nil)
     }
     
     private func setConstraint() {
