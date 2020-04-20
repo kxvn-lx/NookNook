@@ -14,7 +14,7 @@ class CrittersTableViewController: UITableViewController {
     let CRITTER_CELL = "CritterCell"
     private let DETAIL_ID = "Detail"
     
-    private var favouritesManager = PersistEngine()
+    private var favouritesManager: PersistEngine!
     
     var critters: [Critter] = []
     var filteredCritters: [Critter] = []
@@ -47,6 +47,11 @@ class CrittersTableViewController: UITableViewController {
         searchController.searchBar.placeholder = "Search \(critters.count) critters..."
         navigationItem.searchController = searchController
         definesPresentationContext = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        favouritesManager = PersistEngine()
     }
     
     override func viewDidLayoutSubviews() {

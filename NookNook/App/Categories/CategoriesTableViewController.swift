@@ -27,6 +27,7 @@ class CategoriesTableViewController: UITableViewController {
 
         
         tableView.tableFooterView = UIView()
+        self.tableView.separatorStyle = .none
         
         setBar()
     }
@@ -53,7 +54,7 @@ class CategoriesTableViewController: UITableViewController {
             cat = "Fishes"
         }
         if let categoryCell = cell as? CategoryTableViewCell {
-            categoryCell.categoryNameLabel.text = cat.capitalizingFirstLetter()
+            categoryCell.textLabel!.text = cat.capitalizingFirstLetter()
             if filteredCategories[indexPath.row] == currentCategory {
                 categoryCell.accessoryType = .checkmark
             }
@@ -63,7 +64,6 @@ class CategoriesTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         if let catDelegate = catDelegate {
             catDelegate.parseNewCategory(of: filteredCategories[indexPath.row])
             Taptic.lightTaptic()

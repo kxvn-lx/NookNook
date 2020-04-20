@@ -14,7 +14,7 @@ class WardrobesTableViewController: UITableViewController {
     let WARDROBE_CELL = "WardrobeCell"
     private let DETAIL_ID = "Detail"
     
-    private var favouritesManager = PersistEngine()
+    private var favouritesManager: PersistEngine!
     
     var wardrobes: [Wardrobe] = []
     var filteredWardrobes: [Wardrobe] = []
@@ -45,6 +45,11 @@ class WardrobesTableViewController: UITableViewController {
         searchController.searchBar.placeholder = "Search \(wardrobes.count) wardrobes..."
         navigationItem.searchController = searchController
         definesPresentationContext = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        favouritesManager = PersistEngine()
     }
     
     override func viewDidLayoutSubviews() {

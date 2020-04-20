@@ -53,6 +53,7 @@
 		0A370BAF2444796400A72048 /* CategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A370BAE2444796400A72048 /* CategoriesTableViewController.swift */; };
 		0A65203124499B6400692E74 /* PersistEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A65203024499B6400692E74 /* PersistEngine.swift */; };
 		0A6862A6244D3DAB00E06C74 /* SCHeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6862A5244D3DAB00E06C74 /* SCHeper.swift */; };
+		0A6862A9244D499C00E06C74 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6862A8244D499C00E06C74 /* SettingsTableViewController.swift */; };
 		0A72C3712445AD8F009FA0D4 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A72C3702445AD8F009FA0D4 /* DetailViewController.swift */; };
 		0A72C3752445FD93009FA0D4 /* VariantCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A72C3742445FD93009FA0D4 /* VariantCollectionViewCell.swift */; };
 		0A739A41244B592300002B89 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A739A40244B592200002B89 /* ProfileViewController.swift */; };
@@ -128,6 +129,7 @@
 		0A370BAE2444796400A72048 /* CategoriesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesTableViewController.swift; sourceTree = "<group>"; };
 		0A65203024499B6400692E74 /* PersistEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistEngine.swift; sourceTree = "<group>"; };
 		0A6862A5244D3DAB00E06C74 /* SCHeper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCHeper.swift; sourceTree = "<group>"; };
+		0A6862A8244D499C00E06C74 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		0A72C3702445AD8F009FA0D4 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		0A72C3742445FD93009FA0D4 /* VariantCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariantCollectionViewCell.swift; sourceTree = "<group>"; };
 		0A739A40244B592200002B89 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 		0A01F31324431BB2001499D5 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				0A6862A7244D498800E06C74 /* Settings */,
 				0A97C2F9244C94EE0062B136 /* Favourites */,
 				0A739A3F244B58C500002B89 /* Profile */,
 				0A01F31524431BDF001499D5 /* Home */,
@@ -270,6 +273,14 @@
 				0A370BAC2444795700A72048 /* CategoryTableViewCell.swift */,
 			);
 			path = Categories;
+			sourceTree = "<group>";
+		};
+		0A6862A7244D498800E06C74 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				0A6862A8244D499C00E06C74 /* SettingsTableViewController.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		0A72C36F2445AD73009FA0D4 /* Detail */ = {
@@ -509,6 +520,7 @@
 				0A7FA6A52445972A00921079 /* CritterTableViewCell.swift in Sources */,
 				0A36427E244695FE0081315A /* Critter.swift in Sources */,
 				0AFD704F24419DD300957BE6 /* AppDelegate.swift in Sources */,
+				0A6862A9244D499C00E06C74 /* SettingsTableViewController.swift in Sources */,
 				0A370B6E24444BD800A72048 /* DataEngine.swift in Sources */,
 				0AFD705124419DD300957BE6 /* SceneDelegate.swift in Sources */,
 				0A370BAA24446D7B00A72048 /* IconUtil.swift in Sources */,

@@ -14,7 +14,7 @@ class VillagersTableViewController: UITableViewController {
     private let VILLAGER_CELL = "VillagerCell"
     private let DETAIL_ID = "Detail"
     
-    private var favouritesManager = PersistEngine()
+    private var favouritesManager: PersistEngine!
     
     private var sortType: SortEngine.Sort!
     
@@ -49,6 +49,11 @@ class VillagersTableViewController: UITableViewController {
         definesPresentationContext = true
         
         setBar()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        favouritesManager = PersistEngine()
     }
     
     override func viewDidLayoutSubviews() {
@@ -112,7 +117,6 @@ class VillagersTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         let selectedVillager: Villager
         if isFiltering {
             selectedVillager = filteredVillagers[indexPath.row]

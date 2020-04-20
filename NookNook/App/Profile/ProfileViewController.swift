@@ -14,6 +14,7 @@ class ProfileViewController: UIViewController {
     
     
     private let VARIANT_CELL = "VariantCell"
+    private let SETTING_ID = "SettingsVC"
     
     private let MARGIN: CGFloat = 10
     
@@ -66,6 +67,22 @@ class ProfileViewController: UIViewController {
         self.view.backgroundColor = UIColor(named: ColourUtil.cream2.rawValue)
         
         self.view.tintColor = .white
+        
+        let button: UIButton = UIButton(type: .custom)
+        button.setImage(IconUtil.systemIcon(of: .gear, weight: .regular), for: .normal)
+        button.addTarget(self, action: #selector(settingsButtonPressed), for: .touchUpInside)
+        button.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        button.imageView?.contentMode = .scaleAspectFit
+        
+        let barButton = UIBarButtonItem(customView: button)
+        self.navigationItem.rightBarButtonItem = barButton
+    }
+    
+    @objc private func settingsButtonPressed() {
+        let vc = self.storyboard!.instantiateViewController(withIdentifier: SETTING_ID) as! SettingsTableViewController
+        
+        let navController = UINavigationController(rootViewController: vc)
+        self.present(navController, animated:true, completion: nil)
     }
     
     func setupProfile() {
@@ -218,7 +235,7 @@ class ProfileViewController: UIViewController {
         label1.tag = 1
         label1.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
         
-        stackView.addBackground(color: UIColor(named: ColourUtil.cream1.rawValue)!, cornerRadius: 10)
+        stackView.addBackground(color: UIColor(named: ColourUtil.cream1.rawValue)!, cornerRadius: 5)
         
         stackView.addArrangedSubview(label1)
         stackView.addArrangedSubview(body)

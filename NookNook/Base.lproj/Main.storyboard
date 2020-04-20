@@ -331,5 +331,24 @@
             </objects>
             <point key="canvasLocation" x="2961" y="635"/>
         </scene>
+        <!--Settings-->
+        <scene sceneID="pIJ-Xp-rho">
+            <objects>
+                <tableViewController storyboardIdentifier="SettingsVC" title="Settings" id="0Us-tP-g41" customClass="SettingsTableViewController" customModule="NookNook" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="A1l-f8-cs7">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="0Us-tP-g41" id="WPi-ug-H7U"/>
+                            <outlet property="delegate" destination="0Us-tP-g41" id="7zY-oh-206"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FB4-82-zdO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="857" y="-297"/>
+        </scene>
     </scenes>
 </document>

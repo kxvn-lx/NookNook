@@ -7,8 +7,6 @@
 //
 
 import Foundation
-
-// struct inspired from https://github.com/Dimillian/ACHNBrowserUI/blob/master/ACHNBrowserUI/ACHNBrowserUI/viewModels/CollectionViewModel.swift
 struct PersistEngine {
 
     var items: [Item] = []
@@ -22,6 +20,7 @@ struct PersistEngine {
     var residentVillagers: [Villager] = []
     
     var categories: [String] = []
+    
     
     struct SavedData: Codable {
         let items: [Item]

@@ -62,7 +62,7 @@ class CritterTableViewCell: UITableViewCell {
         isCaughtLabel.layer.borderColor = UIColor(named: ColourUtil.gold1.rawValue)?.cgColor
         isCaughtLabel.backgroundColor = UIColor(named: ColourUtil.gold1.rawValue)
         isCaughtLabel.layer.borderWidth = 1
-        isCaughtLabel.layer.cornerRadius = 5
+        isCaughtLabel.layer.cornerRadius = 2.5
         isCaughtLabel.clipsToBounds = true
         isCaughtLabel.textAlignment = .center
         
@@ -75,7 +75,7 @@ class CritterTableViewCell: UITableViewCell {
         isDonatedLabel.layer.borderColor = UIColor(named: ColourUtil.grass2.rawValue)?.cgColor
         isDonatedLabel.backgroundColor = UIColor(named: ColourUtil.grass2.rawValue)
         isDonatedLabel.layer.borderWidth = 1
-        isDonatedLabel.layer.cornerRadius = 5
+        isDonatedLabel.layer.cornerRadius = 2.5
         isDonatedLabel.clipsToBounds = true
         isDonatedLabel.textAlignment = .center
 

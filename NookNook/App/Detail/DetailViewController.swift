@@ -317,7 +317,7 @@ class DetailViewController: UIViewController {
         firstIconLabel.layer.borderColor = UIColor(named: ColourUtil.grass2.rawValue)?.cgColor
         firstIconLabel.backgroundColor = UIColor(named: ColourUtil.grass2.rawValue)
         firstIconLabel.layer.borderWidth = 1
-        firstIconLabel.layer.cornerRadius = 5
+        firstIconLabel.layer.cornerRadius = 2.5
         firstIconLabel.clipsToBounds = true
         firstIconLabel.textAlignment = .center
         
@@ -330,7 +330,7 @@ class DetailViewController: UIViewController {
         secondIconLabel.textAlignment = .center
         secondIconLabel.layer.borderWidth = 1
         secondIconLabel.clipsToBounds = true
-        secondIconLabel.layer.cornerRadius = 5
+        secondIconLabel.layer.cornerRadius = 2.5
         
         
         iconStackView = SVHelper.createSV(axis: .horizontal, spacing: MARGIN, alignment: .center, distribution: .fillEqually)
@@ -369,7 +369,7 @@ class DetailViewController: UIViewController {
         
         
         // Active time period section
-        activeTimeStack = SVHelper.createSV(axis: .vertical, spacing: MARGIN * 2, alignment: .fill, distribution: .equalSpacing)
+        activeTimeStack = SVHelper.createSV(axis: .vertical, spacing: MARGIN, alignment: .fill, distribution: .equalSpacing)
         activeTimeStack.isLayoutMarginsRelativeArrangement = true
         activeTimeStack.layoutMargins = UIEdgeInsets(top: 0, left: MARGIN*2, bottom: 0, right: MARGIN*2)
         
@@ -489,7 +489,7 @@ class DetailViewController: UIViewController {
         label1.tag = 1
         label1.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
         
-        stackView.addBackground(color: UIColor(named: ColourUtil.cream1.rawValue)!, cornerRadius: 10)
+        stackView.addBackground(color: UIColor(named: ColourUtil.cream1.rawValue)!, cornerRadius: 5)
         
         stackView.addArrangedSubview(label1)
         stackView.addArrangedSubview(body)

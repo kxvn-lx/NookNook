@@ -18,6 +18,10 @@ struct IconUtil {
         case filter = "line.horizontal.3.decrease.circle"
         case xmark
         case sort = "arrow.up.arrow.down.circle"
+        case gear
+        case edit = "square.and.pencil"
+        case bug = "bandage"
+        case share = "square.and.arrow.up"
     }
     
     /**

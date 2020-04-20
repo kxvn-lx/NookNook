@@ -19,7 +19,7 @@ class ItemsTableViewController: UITableViewController {
     var filteredItems: [Item] = []
     var currentCategory: Categories = Categories.housewares
     
-    private var favouritesManager = PersistEngine()
+    private var favouritesManager: PersistEngine!
     
     let searchController = UISearchController(searchResultsController: nil)
     var isSearchBarEmpty: Bool {
@@ -51,6 +51,11 @@ class ItemsTableViewController: UITableViewController {
         definesPresentationContext = true
         
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        favouritesManager = PersistEngine()
     }
     
     override func viewDidLayoutSubviews() {

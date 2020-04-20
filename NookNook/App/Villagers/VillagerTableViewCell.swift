@@ -58,7 +58,7 @@ class VillagerTableViewCell: UITableViewCell {
         isResidentLabel.layer.borderColor = UIColor(named: ColourUtil.gold1.rawValue)?.cgColor
         isResidentLabel.backgroundColor = UIColor(named: ColourUtil.gold1.rawValue)
         isResidentLabel.layer.borderWidth = 1
-        isResidentLabel.layer.cornerRadius = 5
+        isResidentLabel.layer.cornerRadius = 2.5
         isResidentLabel.clipsToBounds = true
         isResidentLabel.textAlignment = .center
         
