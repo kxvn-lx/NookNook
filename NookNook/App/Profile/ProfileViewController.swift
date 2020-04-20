@@ -24,7 +24,7 @@ class ProfileViewController: UIViewController {
     private var passportStackView: UIStackView!
     private var residentStack: UIStackView!
     
-    @IBOutlet weak var goToFavButton: UIButton!
+    private var goToFavButton: UIButton!
     
     var profileImageView: UIImageView!
     var profileNameLabel: UILabel!
@@ -139,6 +139,7 @@ class ProfileViewController: UIViewController {
         
         
         // Go to fav VC Button
+        goToFavButton = UIButton()
         goToFavButton.translatesAutoresizingMaskIntoConstraints = false
         goToFavButton.contentEdgeInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
         goToFavButton.backgroundColor = .clear
@@ -146,6 +147,7 @@ class ProfileViewController: UIViewController {
         goToFavButton.layer.borderColor = UIColor(named: ColourUtil.dirt1.rawValue)?.cgColor
         goToFavButton.layer.cornerRadius = 5
         goToFavButton.setTitleColor(UIColor(named: ColourUtil.dirt1.rawValue), for: .normal)
+        goToFavButton.setTitleColor(UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5), for: .highlighted)
         goToFavButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
         goToFavButton.titleLabel?.font = UIFont.systemFont(ofSize: (goToFavButton.titleLabel?.font.pointSize)!, weight: .semibold)
         goToFavButton.setTitle("Favourites", for: .normal)

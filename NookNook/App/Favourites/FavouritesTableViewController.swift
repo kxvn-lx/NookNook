@@ -12,6 +12,8 @@ import SDWebImage
 class FavouritesTableViewController: UITableViewController {
 
     private let FAVOURITE_CELL = "FavouriteCell"
+    private let DETAIL_ID = "Detail"
+    
     private let favouritesManager = PersistEngine()
     
     private var currentGroup = GroupType.items
@@ -28,6 +30,10 @@ class FavouritesTableViewController: UITableViewController {
         case items, wardrobes, villagers
     }
     
+    private var favItems: [Item] = []
+    private var favWardrobes: [Wardrobe] = []
+    private var favVillagers: [Villager] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,6 +47,10 @@ class FavouritesTableViewController: UITableViewController {
         sc = scView.viewWithTag(1) as? UISegmentedControl
         sc.selectedSegmentIndex = 0
         sc.addTarget(self, action:  #selector(changeSource), for: .valueChanged)
+        
+        favItems = favouritesManager.items
+        favVillagers = favouritesManager.favouritedVillagers
+        favWardrobes = favouritesManager.wardrobes
     }
 
     // MARK: - Table view data source
@@ -65,7 +75,7 @@ class FavouritesTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: FAVOURITE_CELL, for: indexPath)
         switch currentGroup {
         case .items:
-            let objs = favouritesManager.items[indexPath.row]
+            let objs = favItems[indexPath.row]
             sc.selectedSegmentIndex = 0
             if let cell = cell as? FavouriteTableViewCell {
                 cell.imgView.sd_imageTransition = .fade
@@ -84,7 +94,7 @@ class FavouritesTableViewController: UITableViewController {
                 cell.label3.font = UIFont.systemFont(ofSize: cell.label3.font!.pointSize, weight: .regular)
             }
         case .villagers:
-            let objs = favouritesManager.favouritedVillagers[indexPath.row]
+            let objs = favVillagers[indexPath.row]
             sc.selectedSegmentIndex = 2
             if let cell = cell as? FavouriteTableViewCell {
                 cell.imgView.sd_imageTransition = .fade
@@ -101,7 +111,7 @@ class FavouritesTableViewController: UITableViewController {
                 cell.label3.font = UIFont.systemFont(ofSize: cell.label3.font!.pointSize, weight: .semibold)
             }
         case.wardrobes:
-            let objs = favouritesManager.wardrobes[indexPath.row]
+            let objs = favWardrobes[indexPath.row]
             sc.selectedSegmentIndex = 1
             if let cell = cell as? FavouriteTableViewCell {
                 cell.imgView.sd_imageTransition = .fade
@@ -131,6 +141,23 @@ class FavouritesTableViewController: UITableViewController {
         cell.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
     }
 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = self.storyboard!.instantiateViewController(withIdentifier: DETAIL_ID) as! DetailViewController
+        
+        switch currentGroup {
+        case .items:
+            vc.parseOject(from: .items, object: favItems[indexPath.row])
+        case .wardrobes:
+            vc.parseOject(from: .wardrobes, object: favWardrobes[indexPath.row])
+        case .villagers:
+            vc.parseOject(from: .villagers, object: favVillagers[indexPath.row])
+        }
+        
+        let navController = UINavigationController(rootViewController: vc)
+        self.present(navController, animated:true, completion: nil)
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return scView
