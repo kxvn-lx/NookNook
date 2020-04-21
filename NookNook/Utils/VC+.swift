@@ -155,12 +155,12 @@ extension UISearchBar
 }
 
 class PaddingLabel: UILabel {
-
+    
     var topInset: CGFloat
     var bottomInset: CGFloat
     var leftInset: CGFloat
     var rightInset: CGFloat
-
+    
     required init(withInsets top: CGFloat, _ bottom: CGFloat,_ left: CGFloat,_ right: CGFloat) {
         self.topInset = top
         self.bottomInset = bottom
@@ -168,16 +168,16 @@ class PaddingLabel: UILabel {
         self.rightInset = right
         super.init(frame: CGRect.zero)
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     override func drawText(in rect: CGRect) {
         let insets = UIEdgeInsets(top: topInset, left: leftInset, bottom: bottomInset, right: rightInset)
         super.drawText(in: rect.inset(by: insets))
     }
-
+    
     override var intrinsicContentSize: CGSize {
         get {
             var contentSize = super.intrinsicContentSize
@@ -195,8 +195,30 @@ extension UIViewController {
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
     }
-
+    
     @objc func dismissKeyboard() {
         view.endEditing(true)
+    }
+}
+
+
+extension UITableView {
+    
+    func setEmptyMessage(_ message: String) {
+        let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.bounds.size.width * 0.3, height: self.bounds.size.height * 0.5))
+        messageLabel.text = message
+        messageLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
+        messageLabel.numberOfLines = 0
+        messageLabel.textAlignment = .center
+        messageLabel.font = UIFont.preferredFont(forTextStyle: .body)
+        messageLabel.sizeToFit()
+        
+        self.backgroundView = messageLabel
+        self.separatorStyle = .none
+    }
+    
+    func restore() {
+        self.backgroundView = nil
+        self.separatorStyle = .singleLine
     }
 }

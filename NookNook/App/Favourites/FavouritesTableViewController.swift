@@ -63,10 +63,25 @@ class FavouritesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch currentGroup {
         case .items:
+            if favItems.count == 0 {
+                self.tableView.setEmptyMessage("Swipe right and press ⭑ to\nadd an item to your collection!")
+            } else {
+                self.tableView.restore()
+            }
             return favouritesManager.items.count
         case .wardrobes:
+            if favWardrobes.count == 0 {
+                self.tableView.setEmptyMessage("Swipe right and press ⭑ to\nadd a clothings to your collection!")
+            } else {
+                self.tableView.restore()
+            }
             return favouritesManager.wardrobes.count
         case .villagers:
+            if favVillagers.count == 0 {
+                self.tableView.setEmptyMessage("Swipe right and press ⭑ to\nadd a villager to your collection!")
+            } else {
+                self.tableView.restore()
+            }
             return favouritesManager.favouritedVillagers.count
         }
     }
@@ -187,6 +202,7 @@ class FavouritesTableViewController: UITableViewController {
     }
     
     @objc func changeSource(sender: UISegmentedControl) {
+        Taptic.lightTaptic()
         switch sender.selectedSegmentIndex {
         case 0:
             self.currentGroup = .items
