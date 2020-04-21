@@ -31,9 +31,9 @@ class SettingsTableViewController: UITableViewController {
         
         editInfoCell = setupCell(text: "Edit Info", icon:  IconUtil.systemIcon(of: .edit, weight: .regular), accesoryType: .disclosureIndicator)
         
-        shareCell = setupCell(text: "Share", icon:  IconUtil.systemIcon(of: .bug, weight: .regular), accesoryType: .disclosureIndicator)
+        shareCell = setupCell(text: "Share", icon:  IconUtil.systemIcon(of: .share, weight: .regular), accesoryType: .disclosureIndicator)
         
-        reportBugCell = setupCell(text: "Report a Bug", icon:  IconUtil.systemIcon(of: .share, weight: .regular), accesoryType: .disclosureIndicator)
+        reportBugCell = setupCell(text: "Report a Bug", icon:  IconUtil.systemIcon(of: .bug, weight: .regular), accesoryType: .disclosureIndicator)
     }
 
     // MARK: - Table view data source

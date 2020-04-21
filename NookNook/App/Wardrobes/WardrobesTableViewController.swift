@@ -50,6 +50,7 @@ class WardrobesTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         favouritesManager = PersistEngine()
+        self.tableView.reloadData()
     }
     
     override func viewDidLayoutSubviews() {

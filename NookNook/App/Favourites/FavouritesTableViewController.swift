@@ -14,7 +14,7 @@ class FavouritesTableViewController: UITableViewController {
     private let FAVOURITE_CELL = "FavouriteCell"
     private let DETAIL_ID = "Detail"
     
-    private let favouritesManager = PersistEngine()
+    private var favouritesManager = PersistEngine()
     
     private var currentGroup = GroupType.items
     
@@ -52,6 +52,7 @@ class FavouritesTableViewController: UITableViewController {
         favVillagers = favouritesManager.favouritedVillagers
         favWardrobes = favouritesManager.wardrobes
     }
+    
 
     // MARK: - Table view data source
 
@@ -165,6 +166,24 @@ class FavouritesTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 100
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            switch currentGroup {
+            case .items:
+                self.favouritesManager.saveItem(item: favItems[indexPath.row])
+                self.favItems.remove(at: indexPath.row)
+            case .villagers:
+                self.favouritesManager.saveFavouritedVillager(villager: favVillagers[indexPath
+                    .row])
+                self.favVillagers.remove(at: indexPath.row)
+            case .wardrobes:
+                self.favouritesManager.saveWardrobe(wardrobe: favWardrobes[indexPath.row])
+                self.favWardrobes.remove(at: indexPath.row)
+            }
+            tableView.deleteRows(at: [indexPath], with: .left)
+        }
     }
     
     @objc func changeSource(sender: UISegmentedControl) {
