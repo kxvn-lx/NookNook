@@ -10,6 +10,7 @@ import UIKit
 
 class SettingsTableViewController: UITableViewController {
     private var editInfoCell = UITableViewCell()
+    private let EDIT_INFO_VC = "EditInfoVC"
     
     private var shareCell = UITableViewCell()
     
@@ -90,8 +91,32 @@ class SettingsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.row)
-        print(indexPath.section)
+        switch indexPath.section {
+        case 0:
+            switch indexPath.row {
+            case 0:
+                let vc = self.storyboard!.instantiateViewController(withIdentifier: EDIT_INFO_VC) as! EditInfoViewController
+                
+                
+                let navController = UINavigationController(rootViewController: vc)
+                self.present(navController, animated:true, completion: nil)
+                
+                tableView.deselectRow(at: indexPath, animated: true)
+            default: fatalError("Invalid row")
+            }
+        case 1:
+            switch indexPath.row {
+            case 0: print(1)
+            default: fatalError("Invalid row")
+            }
+        case 2:
+            switch indexPath.row {
+            case 0: print(2)
+            default: fatalError("Invalid row")
+            }
+        default:
+            fatalError("Invalid sections")
+        }
         
     }
     

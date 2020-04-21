@@ -15,7 +15,9 @@ struct User: Codable, Equatable, Identifiable {
     var name: String
     var islandName: String
     var nativeFruit: String
+    
+    var image: String?
 }
 
 
-let static_user = User(name: "Kevin", islandName: "Tonkotsu", nativeFruit: Fruits.cherries.rawValue)
+let static_user = User(name: "Kevin", islandName: "Tonkotsu", nativeFruit: Fruits.cherries.rawValue, image: nil)

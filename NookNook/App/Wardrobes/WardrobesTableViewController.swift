@@ -148,8 +148,16 @@ class WardrobesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView,
                             leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
     {
+        
+        let wardrobe: Wardrobe
+        if self.isFiltering {
+            wardrobe = self.filteredWardrobes[indexPath.row]
+        } else {
+            wardrobe = self.wardrobes[indexPath.row]
+        }
+        
         let favouriteAction = UIContextualAction(style: .normal, title:  "", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-            self.favouritesManager.saveWardrobe(wardrobe: self.wardrobes[indexPath.row])
+            self.favouritesManager.saveWardrobe(wardrobe: wardrobe)
             DispatchQueue.main.async {
                 self.tableView.reloadRows(at: [indexPath], with: .left)
             }
@@ -157,7 +165,7 @@ class WardrobesTableViewController: UITableViewController {
             success(true)
         })
 
-        favouriteAction.image = self.favouritesManager.wardrobes.contains(self.wardrobes[indexPath.row]) ? IconUtil.systemIcon(of: .starFill, weight: .thin) : IconUtil.systemIcon(of: .star, weight: .thin)
+        favouriteAction.image = self.favouritesManager.wardrobes.contains(wardrobe) ? IconUtil.systemIcon(of: .starFill, weight: .thin) : IconUtil.systemIcon(of: .star, weight: .thin)
         favouriteAction.backgroundColor = UIColor(named: ColourUtil.grass2.rawValue)
         
         return UISwipeActionsConfiguration(actions: [favouriteAction])

@@ -165,9 +165,17 @@ class CrittersTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView,
                             leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
     {
+        
+        let critter: Critter
+        if self.isFiltering {
+            critter = self.filteredCritters[indexPath.row]
+        } else {
+            critter = self.critters[indexPath.row]
+        }
+        
         let caughtAction = UIContextualAction(style: .normal, title:  "Caught", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             
-            self.favouritesManager.saveCaughtCritter(critter: self.critters[indexPath.row])
+            self.favouritesManager.saveCaughtCritter(critter: critter)
             DispatchQueue.main.async {
                 self.tableView.reloadRows(at: [indexPath], with: .left)
             }
@@ -177,10 +185,10 @@ class CrittersTableViewController: UITableViewController {
         
         let donatedAction = UIContextualAction(style: .normal, title:  "Donated", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             
-            if !self.favouritesManager.caughtCritters.contains(self.critters[indexPath.row]) {
-                self.favouritesManager.saveCaughtCritter(critter: self.critters[indexPath.row])
+            if !self.favouritesManager.caughtCritters.contains(critter) {
+                self.favouritesManager.saveCaughtCritter(critter: critter)
             }
-            self.favouritesManager.saveDonatedCritter(critter: self.critters[indexPath.row])
+            self.favouritesManager.saveDonatedCritter(critter: critter)
             DispatchQueue.main.async {
                 self.tableView.reloadRows(at: [indexPath], with: .left)
             }

@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import UIKit
+
 struct PersistEngine {
 
     var items: [Item] = []
@@ -18,8 +20,6 @@ struct PersistEngine {
     
     var favouritedVillagers: [Villager] = []
     var residentVillagers: [Villager] = []
-    
-    var categories: [String] = []
     
     
     struct SavedData: Codable {
@@ -47,11 +47,6 @@ struct PersistEngine {
             if let data = try? Data(contentsOf: filePath) {
                 decoder.dataDecodingStrategy = .base64
                 let savedData = try decoder.decode(SavedData.self, from: data)
-//                for item in savedData.items {
-//                    if !categories.contains(item.category) {
-//                        categories.append(item.category)
-//                    }
-//                }
                 self.items = savedData.items
                 
                 self.caughtCritters = savedData.caughtCritters
@@ -73,9 +68,6 @@ struct PersistEngine {
         } else {
             items.append(item)
         }
-//        if !categories.contains(item.category) {
-//            categories.append(item.category)
-//        }
         save()
     }
     
@@ -103,9 +95,6 @@ struct PersistEngine {
         } else {
             wardrobes.append(wardrobe)
         }
-//        if !categories.contains(wardrobe.category) {
-//            categories.append(wardrobe.category)
-//        }
         save()
     }
     
@@ -126,8 +115,7 @@ struct PersistEngine {
         }
         save()
     }
-    
-    
+
     
     private func save() {
         do {

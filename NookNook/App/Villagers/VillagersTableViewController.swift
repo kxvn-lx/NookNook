@@ -10,7 +10,7 @@ import UIKit
 import SDWebImage
 
 class VillagersTableViewController: UITableViewController {
-
+    
     private let VILLAGER_CELL = "VillagerCell"
     private let DETAIL_ID = "Detail"
     
@@ -24,16 +24,16 @@ class VillagersTableViewController: UITableViewController {
     
     let searchController = UISearchController(searchResultsController: nil)
     var isSearchBarEmpty: Bool {
-      return searchController.searchBar.text?.isEmpty ?? true
+        return searchController.searchBar.text?.isEmpty ?? true
     }
     var isFiltering: Bool {
-      return searchController.isActive && !isSearchBarEmpty
+        return searchController.isActive && !isSearchBarEmpty
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.clearsSelectionOnViewWillAppear = true
         
         tableView.rowHeight = UITableView.automaticDimension
@@ -64,35 +64,35 @@ class VillagersTableViewController: UITableViewController {
         searchBar.setPlaceholderTextColorTo(color: UIColor.lightGray)
         
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isFiltering {
             return filteredVillagers.count
         }
         return villagers.count
     }
-
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: VILLAGER_CELL, for: indexPath)
-
+        
         if let villagerCell = cell as? VillagerTableViewCell {
             villagerCell.imgView.sd_imageTransition = .fade
             villagerCell.imgView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-
+            
             let villager: Villager
             if isFiltering {
                 villager = filteredVillagers[indexPath.row]
             } else {
                 villager = villagers[indexPath.row]
             }
-
+            
             villagerCell.imgView.sd_setImage(with: ImageEngine.parseAcnhURL(with: villager.image, of: villager.category, mediaType: .icons), placeholderImage: nil)
             villagerCell.nameLabel.text = villager.name
             villagerCell.speciesLabel.text = villager.species
@@ -108,7 +108,7 @@ class VillagersTableViewController: UITableViewController {
             
             villagerCell.isResidentLabel.isHidden =  self.favouritesManager.residentVillagers.contains(villager) ? false : true
         }
-
+        
         return cell
     }
     
@@ -126,9 +126,9 @@ class VillagersTableViewController: UITableViewController {
         
         
         let vc = self.storyboard!.instantiateViewController(withIdentifier: DETAIL_ID) as! DetailViewController
-
+        
         vc.parseOject(from: .villagers, object: selectedVillager)
-
+        
         let navController = UINavigationController(rootViewController: vc)
         self.present(navController, animated:true, completion: nil)
         
@@ -152,8 +152,17 @@ class VillagersTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView,
                             leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
     {
+        
+        let villager: Villager
+        if self.isFiltering {
+            villager = self.filteredVillagers[indexPath.row]
+        } else {
+            villager = self.villagers[indexPath.row]
+        }
+        
         let favouriteAction = UIContextualAction(style: .normal, title:  "", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-            self.favouritesManager.saveFavouritedVillager(villager: self.villagers[indexPath.row])
+            
+            self.favouritesManager.saveFavouritedVillager(villager: villager)
             DispatchQueue.main.async {
                 self.tableView.reloadRows(at: [indexPath], with: .left)
             }
@@ -161,19 +170,27 @@ class VillagersTableViewController: UITableViewController {
             success(true)
         })
         
-        favouriteAction.image = self.favouritesManager.favouritedVillagers.contains(self.villagers[indexPath.row]) ? IconUtil.systemIcon(of: .starFill, weight: .thin) : IconUtil.systemIcon(of: .star, weight: .thin)
+        favouriteAction.image = self.favouritesManager.favouritedVillagers.contains(villager) ? IconUtil.systemIcon(of: .starFill, weight: .thin) : IconUtil.systemIcon(of: .star, weight: .thin)
         
         let residentAction = UIContextualAction(style: .normal, title:  "Resident", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            
+            let villager: Villager
+            if self.isFiltering {
+                villager = self.filteredVillagers[indexPath.row]
+            } else {
+                villager = self.villagers[indexPath.row]
+            }
+            
             if self.favouritesManager.residentVillagers.count <= 9 {
-                self.favouritesManager.saveResidentVillager(villager: self.villagers[indexPath.row])
+                self.favouritesManager.saveResidentVillager(villager: villager)
                 DispatchQueue.main.async {
                     self.tableView.reloadRows(at: [indexPath], with: .left)
                 }
                 Taptic.lightTaptic()
                 success(true)
             }
-            else if self.favouritesManager.residentVillagers.count <= 10 && self.favouritesManager.residentVillagers.contains(self.villagers[indexPath.row]) {
-                self.favouritesManager.saveResidentVillager(villager: self.villagers[indexPath.row])
+            else if self.favouritesManager.residentVillagers.count <= 10 && self.favouritesManager.residentVillagers.contains(villager) {
+                self.favouritesManager.saveResidentVillager(villager: villager)
                 DispatchQueue.main.async {
                     self.tableView.reloadRows(at: [indexPath], with: .left)
                 }
@@ -183,7 +200,7 @@ class VillagersTableViewController: UITableViewController {
             else {
                 let alert = UIAlertController(title: "Woah there!", message: "It appears that you have the max number of residents! (10 max)", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-
+                
                 self.present(alert, animated: true)
                 Taptic.errorTaptic()
                 success(false)
@@ -196,7 +213,7 @@ class VillagersTableViewController: UITableViewController {
         
     }
     
-
+    
     // Modify the UI
     private func setBar() {
         tabBarController?.tabBar.barTintColor = UIColor(named: ColourUtil.grass1.rawValue)
@@ -254,22 +271,22 @@ class VillagersTableViewController: UITableViewController {
             Taptic.lightTaptic()
         }))
         alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel))
-
+        
         self.present(alert, animated: true, completion: nil)
     }
 }
 
 extension VillagersTableViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-    let searchBar = searchController.searchBar
-    filterContentForSearchText(searchBar.text!)
+        let searchBar = searchController.searchBar
+        filterContentForSearchText(searchBar.text!)
     }
     
     func filterContentForSearchText(_ searchText: String) {
-      filteredVillagers = villagers.filter { (item: Villager) -> Bool in
-        return item.name.lowercased().contains(searchText.lowercased())
-      }
-      
+        filteredVillagers = villagers.filter { (item: Villager) -> Bool in
+            return item.name.lowercased().contains(searchText.lowercased())
+        }
+        
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }

@@ -51,21 +51,25 @@
 		0A370BAA24446D7B00A72048 /* IconUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A370BA924446D7B00A72048 /* IconUtil.swift */; };
 		0A370BAD2444795700A72048 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A370BAC2444795700A72048 /* CategoryTableViewCell.swift */; };
 		0A370BAF2444796400A72048 /* CategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A370BAE2444796400A72048 /* CategoriesTableViewController.swift */; };
+		0A55912F244DF0110018CF99 /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0A65203124499B6400692E74 /* PersistEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A65203024499B6400692E74 /* PersistEngine.swift */; };
 		0A6862A6244D3DAB00E06C74 /* SCHeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6862A5244D3DAB00E06C74 /* SCHeper.swift */; };
 		0A6862A9244D499C00E06C74 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6862A8244D499C00E06C74 /* SettingsTableViewController.swift */; };
+		0A6862AC244D63A700E06C74 /* EditInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6862AB244D63A700E06C74 /* EditInfoViewController.swift */; };
 		0A72C3712445AD8F009FA0D4 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A72C3702445AD8F009FA0D4 /* DetailViewController.swift */; };
 		0A72C3752445FD93009FA0D4 /* VariantCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A72C3742445FD93009FA0D4 /* VariantCollectionViewCell.swift */; };
 		0A739A41244B592300002B89 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A739A40244B592200002B89 /* ProfileViewController.swift */; };
 		0A739A43244BE55600002B89 /* ResidentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A739A42244BE55600002B89 /* ResidentCollectionViewCell.swift */; };
 		0A7FA6A32445971900921079 /* CrittersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7FA6A22445971900921079 /* CrittersTableViewController.swift */; };
 		0A7FA6A52445972A00921079 /* CritterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7FA6A42445972A00921079 /* CritterTableViewCell.swift */; };
+		0A964998244E5FBE00C8E19D /* TweeTextField in Frameworks */ = {isa = PBXBuildFile; productRef = 0A964997244E5FBE00C8E19D /* TweeTextField */; };
 		0A97C2FB244C95290062B136 /* FavouritesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A97C2FA244C95290062B136 /* FavouritesTableViewController.swift */; };
 		0A97C2FD244C95360062B136 /* FavouriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A97C2FC244C95360062B136 /* FavouriteTableViewCell.swift */; };
 		0AA3616E244C520500D326AF /* SVHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA3616D244C520500D326AF /* SVHelper.swift */; };
 		0AADD410244870D9004FDA33 /* fishesSecondary.json in Resources */ = {isa = PBXBuildFile; fileRef = 0AADD40F244870D9004FDA33 /* fishesSecondary.json */; };
 		0AADD4192448ADB4004FDA33 /* bugsMain.json in Resources */ = {isa = PBXBuildFile; fileRef = 0AADD4172448ADB4004FDA33 /* bugsMain.json */; };
 		0AADD41A2448ADB4004FDA33 /* fishesMain.json in Resources */ = {isa = PBXBuildFile; fileRef = 0AADD4182448ADB4004FDA33 /* fishesMain.json */; };
+		0AC54AF2244DF17600AD1188 /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0AC89E402449418B009ADB18 /* VillagerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC89E3F2449418B009ADB18 /* VillagerTableViewCell.swift */; };
 		0AC89E422449419A009ADB18 /* VillagersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC89E412449419A009ADB18 /* VillagersTableViewController.swift */; };
 		0AEFF82B24470EAF0032156C /* WardrobesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEFF82A24470EAF0032156C /* WardrobesTableViewController.swift */; };
@@ -82,6 +86,21 @@
 		0AFD70732441D2B200957BE6 /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFD70722441D2B200957BE6 /* ItemTableViewCell.swift */; };
 		0AFD70752441D9BF00957BE6 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFD70742441D9BF00957BE6 /* Item.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		0A559127244DCE120018CF99 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				0AC54AF2244DF17600AD1188 /* (null) in Embed Frameworks */,
+				0A55912F244DF0110018CF99 /* (null) in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0A01F31124431724001499D5 /* ImageEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEngine.swift; sourceTree = "<group>"; };
@@ -127,9 +146,13 @@
 		0A370BA924446D7B00A72048 /* IconUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconUtil.swift; sourceTree = "<group>"; };
 		0A370BAC2444795700A72048 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		0A370BAE2444796400A72048 /* CategoriesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesTableViewController.swift; sourceTree = "<group>"; };
+		0A559121244DCDAD0018CF99 /* RAGTextField.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RAGTextField.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A559128244DCE170018CF99 /* RAGTextField.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RAGTextField.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A55912B244DF0000018CF99 /* RAGTextField.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RAGTextField.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A65203024499B6400692E74 /* PersistEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistEngine.swift; sourceTree = "<group>"; };
 		0A6862A5244D3DAB00E06C74 /* SCHeper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCHeper.swift; sourceTree = "<group>"; };
 		0A6862A8244D499C00E06C74 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		0A6862AB244D63A700E06C74 /* EditInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditInfoViewController.swift; sourceTree = "<group>"; };
 		0A72C3702445AD8F009FA0D4 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		0A72C3742445FD93009FA0D4 /* VariantCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariantCollectionViewCell.swift; sourceTree = "<group>"; };
 		0A739A40244B592200002B89 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -142,6 +165,7 @@
 		0AADD40F244870D9004FDA33 /* fishesSecondary.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fishesSecondary.json; sourceTree = "<group>"; };
 		0AADD4172448ADB4004FDA33 /* bugsMain.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bugsMain.json; sourceTree = "<group>"; };
 		0AADD4182448ADB4004FDA33 /* fishesMain.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fishesMain.json; sourceTree = "<group>"; };
+		0AC54AF3244DF17B00AD1188 /* RAGTextField.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RAGTextField.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AC89E3F2449418B009ADB18 /* VillagerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VillagerTableViewCell.swift; sourceTree = "<group>"; };
 		0AC89E412449419A009ADB18 /* VillagersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VillagersTableViewController.swift; sourceTree = "<group>"; };
 		0AEFF82A24470EAF0032156C /* WardrobesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WardrobesTableViewController.swift; sourceTree = "<group>"; };
@@ -165,6 +189,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A964998244E5FBE00C8E19D /* TweeTextField in Frameworks */,
 				0A01F3102442DB8A001499D5 /* SDWebImage in Frameworks */,
 				0AFD70642441B80500957BE6 /* SwiftyJSON in Frameworks */,
 			);
@@ -278,9 +303,18 @@
 		0A6862A7244D498800E06C74 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				0A6862AA244D638E00E06C74 /* Edit Info */,
 				0A6862A8244D499C00E06C74 /* SettingsTableViewController.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		0A6862AA244D638E00E06C74 /* Edit Info */ = {
+			isa = PBXGroup;
+			children = (
+				0A6862AB244D63A700E06C74 /* EditInfoViewController.swift */,
+			);
+			path = "Edit Info";
 			sourceTree = "<group>";
 		};
 		0A72C36F2445AD73009FA0D4 /* Detail */ = {
@@ -343,6 +377,8 @@
 			children = (
 				0AFD704D24419DD300957BE6 /* NookNook */,
 				0AFD704C24419DD300957BE6 /* Products */,
+				C90B8FB39C18578AEBBBFC4B /* Pods */,
+				26589D3C1D6EDD4DE75F7739 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -397,6 +433,24 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		26589D3C1D6EDD4DE75F7739 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0AC54AF3244DF17B00AD1188 /* RAGTextField.framework */,
+				0A55912B244DF0000018CF99 /* RAGTextField.framework */,
+				0A559128244DCE170018CF99 /* RAGTextField.framework */,
+				0A559121244DCDAD0018CF99 /* RAGTextField.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C90B8FB39C18578AEBBBFC4B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -407,6 +461,7 @@
 				0AFD704724419DD300957BE6 /* Sources */,
 				0AFD704824419DD300957BE6 /* Frameworks */,
 				0AFD704924419DD300957BE6 /* Resources */,
+				0A559127244DCE120018CF99 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -416,6 +471,7 @@
 			packageProductDependencies = (
 				0AFD70632441B80500957BE6 /* SwiftyJSON */,
 				0A01F30F2442DB8A001499D5 /* SDWebImage */,
+				0A964997244E5FBE00C8E19D /* TweeTextField */,
 			);
 			productName = NookNook;
 			productReference = 0AFD704B24419DD300957BE6 /* NookNook.app */;
@@ -448,6 +504,7 @@
 			packageReferences = (
 				0AFD70622441B80500957BE6 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				0A01F30E2442DB8A001499D5 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				0A964996244E5FBE00C8E19D /* XCRemoteSwiftPackageReference "TweeTextField" */,
 			);
 			productRefGroup = 0AFD704C24419DD300957BE6 /* Products */;
 			projectDirPath = "";
@@ -514,6 +571,7 @@
 				0A370B5F2443223D00A72048 /* VC+.swift in Sources */,
 				0A23BBD0244AE1D5009B5178 /* Fruits.swift in Sources */,
 				0A23BBCE244ADFE6009B5178 /* User.swift in Sources */,
+				0A6862AC244D63A700E06C74 /* EditInfoViewController.swift in Sources */,
 				0A739A41244B592300002B89 /* ProfileViewController.swift in Sources */,
 				0AA3616E244C520500D326AF /* SVHelper.swift in Sources */,
 				0A7FA6A32445971900921079 /* CrittersTableViewController.swift in Sources */,
@@ -752,6 +810,14 @@
 				minimumVersion = 5.7.2;
 			};
 		};
+		0A964996244E5FBE00C8E19D /* XCRemoteSwiftPackageReference "TweeTextField" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/oleghnidets/TweeTextField.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.6.3;
+			};
+		};
 		0AFD70622441B80500957BE6 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON";
@@ -767,6 +833,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0A01F30E2442DB8A001499D5 /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImage;
+		};
+		0A964997244E5FBE00C8E19D /* TweeTextField */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0A964996244E5FBE00C8E19D /* XCRemoteSwiftPackageReference "TweeTextField" */;
+			productName = TweeTextField;
 		};
 		0AFD70632441B80500957BE6 /* SwiftyJSON */ = {
 			isa = XCSwiftPackageProductDependency;

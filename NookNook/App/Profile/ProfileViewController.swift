@@ -11,6 +11,7 @@ import UIKit
 class ProfileViewController: UIViewController {
     
     private var favouritesManager: PersistEngine!
+    private var user: User!
     
     
     private let VARIANT_CELL = "VariantCell"
@@ -159,12 +160,12 @@ class ProfileViewController: UIViewController {
         goToFavButton = UIButton()
         goToFavButton.translatesAutoresizingMaskIntoConstraints = false
         goToFavButton.contentEdgeInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
-        goToFavButton.backgroundColor = .clear
+        goToFavButton.backgroundColor = UIColor(named: ColourUtil.grass2.rawValue)
         goToFavButton.layer.borderWidth = 1
-        goToFavButton.layer.borderColor = UIColor(named: ColourUtil.dirt1.rawValue)?.cgColor
-        goToFavButton.layer.cornerRadius = 5
-        goToFavButton.setTitleColor(UIColor(named: ColourUtil.dirt1.rawValue), for: .normal)
-        goToFavButton.setTitleColor(UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5), for: .highlighted)
+        goToFavButton.layer.borderColor = UIColor(named: ColourUtil.grass2.rawValue)?.cgColor
+        goToFavButton.layer.cornerRadius = 2.5
+        goToFavButton.setTitleColor(UIColor.white, for: .normal)
+        goToFavButton.setTitleColor(UIColor.white.withAlphaComponent(0.5), for: .highlighted)
         goToFavButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
         goToFavButton.titleLabel?.font = UIFont.systemFont(ofSize: (goToFavButton.titleLabel?.font.pointSize)!, weight: .semibold)
         goToFavButton.setTitle("Favourites", for: .normal)

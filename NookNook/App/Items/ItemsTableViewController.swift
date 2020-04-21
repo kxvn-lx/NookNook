@@ -23,10 +23,10 @@ class ItemsTableViewController: UITableViewController {
     
     let searchController = UISearchController(searchResultsController: nil)
     var isSearchBarEmpty: Bool {
-      return searchController.searchBar.text?.isEmpty ?? true
+        return searchController.searchBar.text?.isEmpty ?? true
     }
     var isFiltering: Bool {
-      return searchController.isActive && !isSearchBarEmpty
+        return searchController.isActive && !isSearchBarEmpty
     }
     
     override func viewDidLoad() {
@@ -42,7 +42,7 @@ class ItemsTableViewController: UITableViewController {
         // Default categories to be presented
         items = DataEngine.loadItemJSON(from: currentCategory)
         
-          
+        
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search \(items.count) items..."
@@ -76,7 +76,7 @@ class ItemsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isFiltering {
-          return filteredItems.count
+            return filteredItems.count
         }
         return items.count
     }
@@ -152,15 +152,24 @@ class ItemsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView,
                             leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
     {
+        let item: Item
+        if self.isFiltering {
+            item = self.filteredItems[indexPath.row]
+        } else {
+            item = self.items[indexPath.row]
+        }
+        
         let favouriteAction = UIContextualAction(style: .normal, title:  "", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-            self.favouritesManager.saveItem(item: self.items[indexPath.row])
+
+            
+            self.favouritesManager.saveItem(item: item)
             DispatchQueue.main.async {
                 self.tableView.reloadRows(at: [indexPath], with: .left)
             }
             
             success(true)
         })
-        favouriteAction.image = self.favouritesManager.items.contains(self.items[indexPath.row]) ? IconUtil.systemIcon(of: .starFill, weight: .thin) : IconUtil.systemIcon(of: .star, weight: .thin)
+        favouriteAction.image = self.favouritesManager.items.contains(item) ? IconUtil.systemIcon(of: .starFill, weight: .thin) : IconUtil.systemIcon(of: .star, weight: .thin)
         favouriteAction.backgroundColor = UIColor(named: ColourUtil.grass2.rawValue)
         
         return UISwipeActionsConfiguration(actions: [favouriteAction])
@@ -217,17 +226,17 @@ extension ItemsTableViewController: CatDelegate {
 
 extension ItemsTableViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-    let searchBar = searchController.searchBar
-    filterContentForSearchText(searchBar.text!)
+        let searchBar = searchController.searchBar
+        filterContentForSearchText(searchBar.text!)
     }
     
     func filterContentForSearchText(_ searchText: String) {
-      filteredItems = items.filter { (item: Item) -> Bool in
-        return item.name.lowercased().contains(searchText.lowercased())
-      }
-      
-      DispatchQueue.main.async {
-          self.tableView.reloadData()
-      }
+        filteredItems = items.filter { (item: Item) -> Bool in
+            return item.name.lowercased().contains(searchText.lowercased())
+        }
+        
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
 }
