@@ -9,5 +9,9 @@
 import Foundation
 
 enum Fruits: String {
-    case apples, cherries, peaches, pears, oranges
+    case apples = "Apples 🍎"
+    case cherries = "Cherries 🍒"
+    case peaches = "Peaches 🍑"
+    case pears = "Pears 🍐"
+    case oranges = "Oranges 🍊"
 }

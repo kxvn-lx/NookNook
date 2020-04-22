@@ -128,4 +128,56 @@ struct PersistEngine {
         encoder.dataEncodingStrategy = .base64
     }
     
+    /**
+     This function will delete the cached images stored inside the app.
+     */
+    static func deleteCacheData() {
+        let fileManager = FileManager.default
+        let documentsUrl =  FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first! as NSURL
+        let documentsPath = documentsUrl.path
+
+        do {
+            if let documentPath = documentsPath
+            {
+                let fileNames = try fileManager.contentsOfDirectory(atPath: "\(documentPath)")
+                for fileName in fileNames {
+                    print(fileName)
+                    if fileName == "com.hackemist.SDImageCache" {
+                        let filePathName = "\(documentPath)/\(fileName)"
+                        try fileManager.removeItem(atPath: filePathName)
+                    }
+                }
+            }
+
+        } catch {
+            print("Could not clear temp folder: \(error)")
+        }
+    }
+    
+    /**
+     This function will delete the stored datas inside the app. (faovurited items, resident, etc)
+     */
+    static func deleteAppData() {
+        let fileManager = FileManager.default
+        let documentsUrl =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first! as NSURL
+        let documentsPath = documentsUrl.path
+
+        do {
+            if let documentPath = documentsPath
+            {
+                let fileNames = try fileManager.contentsOfDirectory(atPath: "\(documentPath)")
+                for fileName in fileNames {
+                    print(fileName)
+                    if fileName == "SavedDatas" {
+                        let filePathName = "\(documentPath)/\(fileName)"
+                        try fileManager.removeItem(atPath: filePathName)
+                    }
+                }
+            }
+
+        } catch {
+            print("Could not clear temp folder: \(error)")
+        }
+    }
+    
 }

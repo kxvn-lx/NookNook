@@ -167,7 +167,7 @@ class ItemsTableViewController: UITableViewController {
             DispatchQueue.main.async {
                 self.tableView.reloadRows(at: [indexPath], with: .left)
             }
-            
+            Taptic.lightTaptic()
             success(true)
         })
         favouriteAction.image = self.favouritesManager.items.contains(item) ? IconUtil.systemIcon(of: .starFill, weight: .thin) : IconUtil.systemIcon(of: .star, weight: .thin)

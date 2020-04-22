@@ -204,11 +204,11 @@
 			isa = PBXGroup;
 			children = (
 				0A01F31124431724001499D5 /* ImageEngine.swift */,
-				0A370B6B2444467900A72048 /* PriceEngine.swift */,
 				0A370B6D24444BD800A72048 /* DataEngine.swift */,
 				0A3642852446CC070081315A /* TimeEngine.swift */,
 				0A65203024499B6400692E74 /* PersistEngine.swift */,
 				0A23BBCB244ACE94009B5178 /* SortEngine.swift */,
+				0A370B6B2444467900A72048 /* PriceEngine.swift */,
 			);
 			path = Engine;
 			sourceTree = "<group>";

@@ -163,6 +163,7 @@ class WardrobesTableViewController: UITableViewController {
                 self.tableView.reloadRows(at: [indexPath], with: .left)
             }
             
+            Taptic.lightTaptic()
             success(true)
         })
 

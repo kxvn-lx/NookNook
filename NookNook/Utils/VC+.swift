@@ -222,3 +222,22 @@ extension UITableView {
         self.separatorStyle = .singleLine
     }
 }
+
+extension UICollectionView {
+
+    func setEmptyMessage(_ message: String) {
+        let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.bounds.size.width * 0.3, height: self.bounds.size.height * 0.5))
+        messageLabel.text = message
+        messageLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
+        messageLabel.numberOfLines = 0
+        messageLabel.textAlignment = .center
+        messageLabel.font = UIFont.preferredFont(forTextStyle: .body)
+        messageLabel.sizeToFit()
+
+        self.backgroundView = messageLabel;
+    }
+
+    func restore() {
+        self.backgroundView = nil
+    }
+}

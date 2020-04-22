@@ -26,13 +26,14 @@ class ProfileViewController: UIViewController {
     private var nameStackView: UIStackView!
     private var passportStackView: UIStackView!
     private var residentStack: UIStackView!
+    private var phraseStack: UIStackView!
     
     private var goToFavButton: UIButton!
     
+    var phraseLabel: UILabel!
     
     var profileImageView: UIImageView!
     var profileNameLabel: UILabel!
-    var dateLabel: UILabel!
     var islandNameLabel: UILabel!
     var nativeFruitLabel: UILabel!
     var residentLabel: UILabel!
@@ -91,11 +92,12 @@ class ProfileViewController: UIViewController {
     
     func setupProfile() {
         profileNameLabel.text = static_user.name
-        islandNameLabel.text = static_user.islandName
+        islandNameLabel.text = "\(static_user.islandName) 🏝"
         nativeFruitLabel.text = static_user.nativeFruit
         profileImageView.image = UIImage(named: "profile")
         
-        dateLabel.text = "\(DateHelper.renderDate()) - \(DateHelper.renderSeason(hemisphere: static_user.hemisphere))"
+        phraseLabel.text = "Good \(DateHelper.renderGreet())!\nIt's \(DateHelper.renderSeason(hemisphere: static_user.hemisphere)) ━ \(DateHelper.renderDate())."
+        
     }
     
     private func setUI() {
@@ -121,26 +123,26 @@ class ProfileViewController: UIViewController {
         profileNameLabel.font = UIFont.preferredFont(forTextStyle: .largeTitle)
         profileNameLabel.font = UIFont.systemFont(ofSize: profileNameLabel.font.pointSize, weight: .semibold)
         
-        dateLabel = UILabel()
-        dateLabel.translatesAutoresizingMaskIntoConstraints = false
-        dateLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
-        dateLabel.font = UIFont.preferredFont(forTextStyle: .body)
-        
         nameStackView.addArrangedSubview(profileNameLabel)
-        nameStackView.addArrangedSubview(dateLabel)
-        
-        
-        
         
         profileNameStackView = SVHelper.createSV(axis: .horizontal, spacing: MARGIN * 2, alignment: .center, distribution: .fill)
         profileNameStackView.addArrangedSubview(profileImageView, withMargin: UIEdgeInsets(top: 0, left: MARGIN*4, bottom: 0, right: 0))
         profileNameStackView.addArrangedSubview(nameStackView)
         
         
+        phraseLabel = UILabel()
+        phraseLabel.numberOfLines = 0
+        phraseLabel.translatesAutoresizingMaskIntoConstraints = false
+        phraseLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)
+        phraseLabel.font = UIFont.preferredFont(forTextStyle: .headline)
+        
+        phraseStack = SVHelper.createSV(axis: .vertical, spacing: MARGIN, alignment: .leading, distribution: .fillEqually)
+        phraseStack.addArrangedSubview(phraseLabel, withMargin: UIEdgeInsets(top: 0, left: MARGIN * 2, bottom: 0, right: 0))
+        
+        
         passportStackView = SVHelper.createSV(axis: .vertical, spacing: MARGIN, alignment: .fill, distribution: .equalSpacing)
         passportStackView.isLayoutMarginsRelativeArrangement = true
         passportStackView.layoutMargins = UIEdgeInsets(top: 0, left: MARGIN*2, bottom: 0, right: MARGIN*2)
-        
         
         islandNameLabel = UILabel()
         islandNameLabel.textColor = UIColor(named: ColourUtil.gold1.rawValue)
@@ -175,7 +177,7 @@ class ProfileViewController: UIViewController {
         // Go to fav VC Button
         goToFavButton = UIButton()
         goToFavButton.translatesAutoresizingMaskIntoConstraints = false
-        goToFavButton.contentEdgeInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
+        goToFavButton.contentEdgeInsets = UIEdgeInsets(top: 10, left: 30, bottom: 10, right: 30)
         goToFavButton.backgroundColor = UIColor(named: ColourUtil.grassBtn.rawValue)
         goToFavButton.layer.borderWidth = 1
         goToFavButton.layer.borderColor = UIColor(named: ColourUtil.grassBtn.rawValue)?.cgColor
@@ -184,7 +186,7 @@ class ProfileViewController: UIViewController {
         goToFavButton.setTitleColor(UIColor(named: ColourUtil.grass2.rawValue)?.withAlphaComponent(0.5), for: .highlighted)
         goToFavButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
         goToFavButton.titleLabel?.font = UIFont.systemFont(ofSize: (goToFavButton.titleLabel?.font.pointSize)!, weight: .semibold)
-        goToFavButton.setTitle("Favourites", for: .normal)
+        goToFavButton.setTitle("⭑ Favourites", for: .normal)
         goToFavButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         
         
@@ -194,6 +196,7 @@ class ProfileViewController: UIViewController {
         
         
         mStackView.addArrangedSubview(profileNameStackView, withMargin: UIEdgeInsets(top: MARGIN*4, left: 0, bottom: 0, right: 0))
+        mStackView.addArrangedSubview(phraseStack)
         mStackView.addArrangedSubview(passportStackView)
         mStackView.addArrangedSubview(residentStack)
         mStackView.addArrangedSubview(buttonWrapperSV)
@@ -211,7 +214,7 @@ class ProfileViewController: UIViewController {
         let itemImageViewSize: CGFloat = 0.25
         
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: MARGIN),
+            scrollView.topAnchor.constraint(equalTo: self.view.topAnchor),
             scrollView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
             scrollView.rightAnchor.constraint(equalTo: self.view.rightAnchor),
             scrollView.bottomAnchor.constraint(equalTo: self.view.layoutMarginsGuide.bottomAnchor),
@@ -219,10 +222,12 @@ class ProfileViewController: UIViewController {
             mStackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             mStackView.leftAnchor.constraint(equalTo: scrollView.leftAnchor),
             mStackView.rightAnchor.constraint(equalTo: scrollView.rightAnchor),
-            mStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            mStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -MARGIN * 2),
             mStackView.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor),
             
             profileNameStackView.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
+            
+            phraseStack.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
             
             passportStackView.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
             
@@ -288,6 +293,12 @@ class ProfileViewController: UIViewController {
 
 extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if (favouritesManager.residentVillagers.count == 0) {
+            collectionView.setEmptyMessage("Swipe right and press Resident to\nadd a villager to your resident collection!")
+        } else {
+            collectionView.restore()
+        }
+
         return favouritesManager.residentVillagers.count
     }
     

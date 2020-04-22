@@ -22,6 +22,8 @@ struct IconUtil {
         case edit = "square.and.pencil"
         case bug = "bandage"
         case share = "square.and.arrow.up"
+        case deleteCache = "bin.xmark"
+        case deleteData = "tray"
     }
     
     /**

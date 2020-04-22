@@ -15,6 +15,8 @@ class SettingsTableViewController: UITableViewController {
     private var shareCell = UITableViewCell()
     
     private var reportBugCell = UITableViewCell()
+    private var deleteDatasCell = UITableViewCell()
+    private var deleteCacheCell = UITableViewCell()
     
     
     override func viewDidLoad() {
@@ -34,6 +36,14 @@ class SettingsTableViewController: UITableViewController {
         shareCell = setupCell(text: "Share", icon:  IconUtil.systemIcon(of: .share, weight: .regular), accesoryType: .disclosureIndicator)
         
         reportBugCell = setupCell(text: "Report a Bug", icon:  IconUtil.systemIcon(of: .bug, weight: .regular), accesoryType: .disclosureIndicator)
+        
+        deleteDatasCell  = setupCell(text: "Delete App data", icon:  IconUtil.systemIcon(of: .deleteData, weight: .regular), accesoryType: .none)
+        deleteDatasCell.textLabel?.textColor = .red
+        deleteDatasCell.imageView?.tintColor = .red
+        
+        deleteCacheCell  = setupCell(text: "Delete cached data", icon:  IconUtil.systemIcon(of: .deleteCache, weight: .regular), accesoryType: .none)
+        deleteCacheCell.textLabel?.textColor = .red
+        deleteCacheCell.imageView?.tintColor = .red
     }
 
     // MARK: - Table view data source
@@ -47,9 +57,9 @@ class SettingsTableViewController: UITableViewController {
         case 0:
             return 1
         case 1:
-            return 1
+            return 2
         case 2:
-            return 1
+            return 2
         default:
             return 0
         }
@@ -67,12 +77,14 @@ class SettingsTableViewController: UITableViewController {
         case 1:
             switch (indexPath.row) {
             case 0: return self.shareCell
+            case 1: return self.reportBugCell
             default: fatalError("Unknown row in section 1")
             }
             
         case 2:
             switch (indexPath.row) {
-            case 0: return self.reportBugCell
+            case 0: return self.deleteCacheCell
+            case 1: return self.deleteDatasCell
             default: fatalError("Unknown row in section 2")
             }
             
@@ -85,7 +97,7 @@ class SettingsTableViewController: UITableViewController {
         switch(section) {
         case 0: return "Edit info"
         case 1: return ""
-        case 2: return ""
+        case 2: return "Danger Zone"
         default: fatalError("Unknown section")
         }
     }
@@ -96,12 +108,8 @@ class SettingsTableViewController: UITableViewController {
             switch indexPath.row {
             case 0:
                 let vc = self.storyboard!.instantiateViewController(withIdentifier: EDIT_INFO_VC) as! EditInfoViewController
-                
-                
                 let navController = UINavigationController(rootViewController: vc)
                 self.present(navController, animated:true, completion: nil)
-                
-                tableView.deselectRow(at: indexPath, animated: true)
             default: fatalError("Invalid row")
             }
         case 1:
@@ -111,13 +119,39 @@ class SettingsTableViewController: UITableViewController {
             }
         case 2:
             switch indexPath.row {
-            case 0: print(2)
+            case 0:
+                let alertController = UIAlertController(title: "Delete cached data?", message: "Cached images will be deleted and could free up some spaces in your device. This will exit the app.", preferredStyle: .alert)
+
+                let destructiveAction = UIAlertAction(title: "Delete", style: .destructive) { (action:UIAlertAction) in
+                    PersistEngine.deleteCacheData()
+                    self.presentAlert()
+                }
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action:UIAlertAction) in
+                }
+
+                alertController.addAction(destructiveAction)
+                alertController.addAction(cancelAction)
+                self.present(alertController, animated: true, completion: nil)
+                
+            case 1:
+                let alertController = UIAlertController(title: "Delete app datas?", message: "Your favourites, Donated/Caught, and residents data will be deleted. This will exit the app.", preferredStyle: .alert)
+
+                let destructiveAction = UIAlertAction(title: "Delete", style: .destructive) { (action:UIAlertAction) in
+                    PersistEngine.deleteAppData()
+                    self.presentAlert()
+                }
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action:UIAlertAction) in
+                }
+
+                alertController.addAction(destructiveAction)
+                alertController.addAction(cancelAction)
+                self.present(alertController, animated: true, completion: nil)
             default: fatalError("Invalid row")
             }
         default:
             fatalError("Invalid sections")
         }
-        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
 
@@ -140,7 +174,6 @@ class SettingsTableViewController: UITableViewController {
         ])
     }
     
-    
     private func setupCell(text: String, icon: UIImage, accesoryType: UITableViewCell.AccessoryType) -> UITableViewCell {
         let cell = UITableViewCell()
         
@@ -152,6 +185,17 @@ class SettingsTableViewController: UITableViewController {
         cell.accessoryType = accesoryType
         
         return cell
+    }
+    
+    private func presentAlert() {
+        let alertController = UIAlertController(title: "Success!", message: "Please restart the app now so that the change is updated.", preferredStyle: .alert)
+
+        let okAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
+            PersistEngine.deleteAppData()
+        }
+
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
     }
 
 }

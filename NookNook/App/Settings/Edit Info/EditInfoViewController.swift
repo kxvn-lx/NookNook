@@ -209,7 +209,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
     }
     
     @objc private func saveTapped(sender: UIButton!) {
-        
+        print("Saving user changes...")
     }
     
     @objc private func fruitPicker(sender: UIButton!) {
@@ -223,12 +223,6 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         
         alert.addAction(UIAlertAction(title: Fruits.cherries.rawValue, style: .default , handler:{ (UIAlertAction)in
             let selectedFruit = Fruits.cherries.rawValue
-            self.fruitLabel.attributedText = self.renderFruitLabel(text: selectedFruit)
-            Taptic.lightTaptic()
-        }))
-        
-        alert.addAction(UIAlertAction(title: Fruits.coconuts.rawValue, style: .default , handler:{ (UIAlertAction)in
-            let selectedFruit = Fruits.coconuts.rawValue
             self.fruitLabel.attributedText = self.renderFruitLabel(text: selectedFruit)
             Taptic.lightTaptic()
         }))
@@ -275,7 +269,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
             mStackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             mStackView.leftAnchor.constraint(equalTo: scrollView.leftAnchor),
             mStackView.rightAnchor.constraint(equalTo: scrollView.rightAnchor),
-            mStackView.bottomAnchor.constraint(equalTo: scrollView.frameLayoutGuide.bottomAnchor, constant: -MARGIN),
+            mStackView.bottomAnchor.constraint(equalTo: scrollView.frameLayoutGuide.bottomAnchor, constant: -MARGIN * 2),
             mStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             
             profileNameStackView.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
