@@ -9,5 +9,5 @@
 import Foundation
 
 enum Fruits: String {
-    case apples, cherries, coconuts, peaches, pears, oranges
+    case apples, cherries, peaches, pears, oranges
 }

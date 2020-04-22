@@ -108,7 +108,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         self.view.addSubview(scrollView)
         
         // Create master stackView
-        mStackView = SVHelper.createSV(axis: .vertical, spacing: MARGIN * 4, alignment: .center, distribution: .fill)
+        mStackView = SVHelper.createSV(axis: .vertical, spacing: MARGIN * 4, alignment: .center, distribution: .equalCentering)
         mStackView.translatesAutoresizingMaskIntoConstraints = false
         
         profileImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
@@ -151,10 +151,10 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         islandNameTF.placeholderColor = (UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5))!
         islandNameTF.tweePlaceholder = "Island Name"
         
-        profileNameStackView = SVHelper.createSV(axis: .horizontal, spacing: MARGIN * 4, alignment: .top, distribution: .fill)
+        profileNameStackView = SVHelper.createSV(axis: .vertical, spacing: MARGIN * 4, alignment: .leading, distribution: .fill)
         profileNameStackView.translatesAutoresizingMaskIntoConstraints = false
         
-        labelSV = SVHelper.createSV(axis: .vertical, spacing: MARGIN * 2, alignment: .leading, distribution: .fill)
+        labelSV = SVHelper.createSV(axis: .vertical, spacing: MARGIN * 2, alignment: .center, distribution: .fillProportionally)
         labelSV.translatesAutoresizingMaskIntoConstraints = false
 
         fruitLabel = UILabel()
@@ -165,14 +165,14 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         nativeFruitButton = UIButton()
         nativeFruitButton.translatesAutoresizingMaskIntoConstraints = false
         nativeFruitButton.contentEdgeInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
-        nativeFruitButton.backgroundColor = UIColor(named: ColourUtil.grass2.rawValue)
+        nativeFruitButton.backgroundColor = UIColor(named: ColourUtil.grassBtn.rawValue)
         nativeFruitButton.layer.borderWidth = 1
         nativeFruitButton.titleLabel?.numberOfLines = 2
-        nativeFruitButton.layer.borderColor = UIColor(named: ColourUtil.grass2.rawValue)?.cgColor
+        nativeFruitButton.layer.borderColor = UIColor(named: ColourUtil.grassBtn.rawValue)?.cgColor
         nativeFruitButton.layer.cornerRadius = 2.5
         nativeFruitButton.titleLabel?.textAlignment = .center
-        nativeFruitButton.setTitleColor(UIColor.white, for: .normal)
-        nativeFruitButton.setTitleColor(UIColor.white.withAlphaComponent(0.5), for: .highlighted)
+        nativeFruitButton.setTitleColor(UIColor(named: ColourUtil.grass2.rawValue), for: .normal)
+        nativeFruitButton.setTitleColor(UIColor(named: ColourUtil.grass2.rawValue)?.withAlphaComponent(0.5), for: .highlighted)
         nativeFruitButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
         nativeFruitButton.titleLabel?.font = UIFont.systemFont(ofSize: (nativeFruitButton.titleLabel?.font.pointSize)!, weight: .semibold)
         nativeFruitButton.addTarget(self, action: #selector(fruitPicker), for: .touchUpInside)
@@ -180,12 +180,11 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         
         saveButton = UIButton()
         saveButton.translatesAutoresizingMaskIntoConstraints = false
-        saveButton.contentEdgeInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
+        saveButton.contentEdgeInsets = UIEdgeInsets(top: 15, left: 20, bottom: 15, right: 20)
         saveButton.backgroundColor = UIColor(named: ColourUtil.grass2.rawValue)
         saveButton.layer.borderWidth = 1
         saveButton.titleLabel?.numberOfLines = 2
         saveButton.layer.borderColor = UIColor(named: ColourUtil.grass2.rawValue)?.cgColor
-        saveButton.layer.cornerRadius = 2.5
         saveButton.titleLabel?.textAlignment = .center
         saveButton.setTitleColor(UIColor.white, for: .normal)
         saveButton.setTitleColor(UIColor.white.withAlphaComponent(0.5), for: .highlighted)
@@ -280,11 +279,12 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
             mStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             
             profileNameStackView.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
+            labelSV.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
             
             nameTF.widthAnchor.constraint(equalTo: self.labelSV.widthAnchor, multiplier: 0.8),
             islandNameTF.widthAnchor.constraint(equalTo: self.labelSV.widthAnchor, multiplier: 0.8),
             nativeFruitButton.widthAnchor.constraint(equalTo: self.labelSV.widthAnchor, multiplier: 0.8),
-            saveButton.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor, multiplier: 0.8),
+            saveButton.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor),
             
             profileImageView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: itemImageViewSize),
             profileImageView.heightAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: itemImageViewSize),

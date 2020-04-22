@@ -23,13 +23,16 @@ class ProfileViewController: UIViewController {
     private var mStackView: UIStackView!
     
     private var profileNameStackView: UIStackView!
+    private var nameStackView: UIStackView!
     private var passportStackView: UIStackView!
     private var residentStack: UIStackView!
     
     private var goToFavButton: UIButton!
     
+    
     var profileImageView: UIImageView!
     var profileNameLabel: UILabel!
+    var dateLabel: UILabel!
     var islandNameLabel: UILabel!
     var nativeFruitLabel: UILabel!
     var residentLabel: UILabel!
@@ -91,6 +94,8 @@ class ProfileViewController: UIViewController {
         islandNameLabel.text = static_user.islandName
         nativeFruitLabel.text = static_user.nativeFruit
         profileImageView.image = UIImage(named: "profile")
+        
+        dateLabel.text = "\(DateHelper.renderDate()) - \(DateHelper.renderSeason(hemisphere: static_user.hemisphere))"
     }
     
     private func setUI() {
@@ -102,6 +107,7 @@ class ProfileViewController: UIViewController {
         // Create master stackView
         mStackView = SVHelper.createSV(axis: .vertical, spacing: MARGIN * 4, alignment: .center, distribution: .equalSpacing)
         
+        nameStackView = SVHelper.createSV(axis: .vertical, spacing: MARGIN, alignment: .leading, distribution: .fill)
         
         profileImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -115,10 +121,20 @@ class ProfileViewController: UIViewController {
         profileNameLabel.font = UIFont.preferredFont(forTextStyle: .largeTitle)
         profileNameLabel.font = UIFont.systemFont(ofSize: profileNameLabel.font.pointSize, weight: .semibold)
         
-        profileNameStackView = SVHelper.createSV(axis: .horizontal, spacing: MARGIN * 2, alignment: .center, distribution: .fill)
+        dateLabel = UILabel()
+        dateLabel.translatesAutoresizingMaskIntoConstraints = false
+        dateLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
+        dateLabel.font = UIFont.preferredFont(forTextStyle: .body)
         
+        nameStackView.addArrangedSubview(profileNameLabel)
+        nameStackView.addArrangedSubview(dateLabel)
+        
+        
+        
+        
+        profileNameStackView = SVHelper.createSV(axis: .horizontal, spacing: MARGIN * 2, alignment: .center, distribution: .fill)
         profileNameStackView.addArrangedSubview(profileImageView, withMargin: UIEdgeInsets(top: 0, left: MARGIN*4, bottom: 0, right: 0))
-        profileNameStackView.addArrangedSubview(profileNameLabel)
+        profileNameStackView.addArrangedSubview(nameStackView)
         
         
         passportStackView = SVHelper.createSV(axis: .vertical, spacing: MARGIN, alignment: .fill, distribution: .equalSpacing)
@@ -160,12 +176,12 @@ class ProfileViewController: UIViewController {
         goToFavButton = UIButton()
         goToFavButton.translatesAutoresizingMaskIntoConstraints = false
         goToFavButton.contentEdgeInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
-        goToFavButton.backgroundColor = UIColor(named: ColourUtil.grass2.rawValue)
+        goToFavButton.backgroundColor = UIColor(named: ColourUtil.grassBtn.rawValue)
         goToFavButton.layer.borderWidth = 1
-        goToFavButton.layer.borderColor = UIColor(named: ColourUtil.grass2.rawValue)?.cgColor
+        goToFavButton.layer.borderColor = UIColor(named: ColourUtil.grassBtn.rawValue)?.cgColor
         goToFavButton.layer.cornerRadius = 2.5
-        goToFavButton.setTitleColor(UIColor.white, for: .normal)
-        goToFavButton.setTitleColor(UIColor.white.withAlphaComponent(0.5), for: .highlighted)
+        goToFavButton.setTitleColor(UIColor(named: ColourUtil.grass2.rawValue), for: .normal)
+        goToFavButton.setTitleColor(UIColor(named: ColourUtil.grass2.rawValue)?.withAlphaComponent(0.5), for: .highlighted)
         goToFavButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
         goToFavButton.titleLabel?.font = UIFont.systemFont(ofSize: (goToFavButton.titleLabel?.font.pointSize)!, weight: .semibold)
         goToFavButton.setTitle("Favourites", for: .normal)

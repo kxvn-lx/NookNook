@@ -56,6 +56,7 @@
 		0A6862A6244D3DAB00E06C74 /* SCHeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6862A5244D3DAB00E06C74 /* SCHeper.swift */; };
 		0A6862A9244D499C00E06C74 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6862A8244D499C00E06C74 /* SettingsTableViewController.swift */; };
 		0A6862AC244D63A700E06C74 /* EditInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6862AB244D63A700E06C74 /* EditInfoViewController.swift */; };
+		0A6B5638244FCE9400AA0B86 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6B5637244FCE9400AA0B86 /* DateHelper.swift */; };
 		0A72C3712445AD8F009FA0D4 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A72C3702445AD8F009FA0D4 /* DetailViewController.swift */; };
 		0A72C3752445FD93009FA0D4 /* VariantCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A72C3742445FD93009FA0D4 /* VariantCollectionViewCell.swift */; };
 		0A739A41244B592300002B89 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A739A40244B592200002B89 /* ProfileViewController.swift */; };
@@ -153,6 +154,7 @@
 		0A6862A5244D3DAB00E06C74 /* SCHeper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCHeper.swift; sourceTree = "<group>"; };
 		0A6862A8244D499C00E06C74 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		0A6862AB244D63A700E06C74 /* EditInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditInfoViewController.swift; sourceTree = "<group>"; };
+		0A6B5637244FCE9400AA0B86 /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 		0A72C3702445AD8F009FA0D4 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		0A72C3742445FD93009FA0D4 /* VariantCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariantCollectionViewCell.swift; sourceTree = "<group>"; };
 		0A739A40244B592200002B89 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -416,6 +418,7 @@
 				0A295B4B2444AAD0001CF828 /* Taptic.swift */,
 				0A295B49244494F9001CF828 /* Categories.swift */,
 				0AA3616D244C520500D326AF /* SVHelper.swift */,
+				0A6B5637244FCE9400AA0B86 /* DateHelper.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -598,6 +601,7 @@
 				0AFD70732441D2B200957BE6 /* ItemTableViewCell.swift in Sources */,
 				0AEFF82D24470EC30032156C /* WardrobetabTableViewCell.swift in Sources */,
 				0AFD706A2441BA7500957BE6 /* HomeViewController.swift in Sources */,
+				0A6B5638244FCE9400AA0B86 /* DateHelper.swift in Sources */,
 				0AEFF82F24471CD90032156C /* Wardrobe.swift in Sources */,
 				0A295B4C2444AAD0001CF828 /* Taptic.swift in Sources */,
 				0A370BAD2444795700A72048 /* CategoryTableViewCell.swift in Sources */,
