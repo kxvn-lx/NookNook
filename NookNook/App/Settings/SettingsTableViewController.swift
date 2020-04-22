@@ -120,10 +120,11 @@ class SettingsTableViewController: UITableViewController {
         case 2:
             switch indexPath.row {
             case 0:
-                let alertController = UIAlertController(title: "Delete cached data?", message: "Cached images will be deleted and could free up some spaces in your device. This will exit the app.", preferredStyle: .alert)
+                let alertController = UIAlertController(title: "Delete cached datas?", message: "Cached images will be deleted and could free up some space in your device. This will exit the app.", preferredStyle: .alert)
 
                 let destructiveAction = UIAlertAction(title: "Delete", style: .destructive) { (action:UIAlertAction) in
                     PersistEngine.deleteCacheData()
+                    Taptic.successTaptic()
                     self.presentAlert()
                 }
                 let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action:UIAlertAction) in
@@ -138,6 +139,7 @@ class SettingsTableViewController: UITableViewController {
 
                 let destructiveAction = UIAlertAction(title: "Delete", style: .destructive) { (action:UIAlertAction) in
                     PersistEngine.deleteAppData()
+                    Taptic.successTaptic()
                     self.presentAlert()
                 }
                 let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action:UIAlertAction) in
