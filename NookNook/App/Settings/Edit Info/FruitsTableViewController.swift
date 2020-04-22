@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol fruitsDelegate : NSObjectProtocol {
+protocol FruitsDelegate : NSObjectProtocol {
     func changeFruit(fruit: Fruits)
 }
 
@@ -18,7 +18,7 @@ class FruitsTableViewController: UITableViewController {
     
     private var fruits: [Fruits] = []
     
-    weak var fruitsDelegate: fruitsDelegate!
+    weak var fruitsDelegate: FruitsDelegate!
     
      override func viewDidLoad() {
         super.viewDidLoad()

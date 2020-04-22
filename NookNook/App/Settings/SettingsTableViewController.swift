@@ -8,9 +8,15 @@
 
 import UIKit
 
+protocol ProfileDelegate: NSObjectProtocol {
+    func updateprofile()
+}
+
 class SettingsTableViewController: UITableViewController {
     private var editInfoCell = UITableViewCell()
     private let EDIT_INFO_VC = "EditInfoVC"
+    
+    weak var profileDelegate: ProfileDelegate!
     
     private var shareCell = UITableViewCell()
     
@@ -26,6 +32,8 @@ class SettingsTableViewController: UITableViewController {
         setupConstraint()
         tableView.rowHeight = 50
         tableView.allowsSelection = true
+        
+         self.isModalInPresentation = true
     }
     
     override func loadView() {
@@ -167,6 +175,9 @@ class SettingsTableViewController: UITableViewController {
     }
     
     @objc private func closeTapped() {
+        if let profileDelegate = profileDelegate {
+            profileDelegate.updateprofile()
+        }
         navigationController?.popViewController(animated: true)
         dismiss(animated: true, completion: nil)
     }
@@ -193,7 +204,6 @@ class SettingsTableViewController: UITableViewController {
         let alertController = UIAlertController(title: "Success!", message: "Please restart the app now so that the change is updated.", preferredStyle: .alert)
 
         let okAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
-            PersistEngine.deleteAppData()
         }
 
         alertController.addAction(okAction)

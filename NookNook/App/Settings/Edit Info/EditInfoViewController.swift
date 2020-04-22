@@ -11,7 +11,10 @@ import TweeTextField
 
 class EditInfoViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
+    private var userDict: [String: String]!
+    
     private let MARGIN: CGFloat = 10
+    
     
     private var scrollView: UIScrollView!
     private var mStackView: UIStackView!
@@ -26,18 +29,21 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
 
     
     var profileImageView: UIImageView!
-    var nameTF: TweeBorderedTextField!
-    var islandNameTF: TweeBorderedTextField!
+    var nameTF: TweeAttributedTextField!
+    var islandNameTF: TweeAttributedTextField!
     var nativeFruitButton: UIButton!
     var fruitLabel: UILabel!
+    var selectedFruit: String!
     
     var saveButton: UIButton!
     
     var imagePicker = UIImagePickerController()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        userDict = UDHelper.getUser()
         setBar()
         setUI()
         setConstraint()
@@ -52,6 +58,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
+        userDict = UDHelper.getUser()
         favouritesManager = PersistEngine()
     }
     
@@ -95,10 +102,13 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
     }
     
     
-    func setupProfile() {
-        nameTF.text = static_user.name
-        islandNameTF.text = static_user.islandName
-        fruitLabel.attributedText = renderFruitLabel(text: static_user.nativeFruit)
+    private func setupProfile() {
+        userDict = UDHelper.getUser()
+        
+        nameTF.text = userDict["name"]
+        islandNameTF.text = "\(userDict["islandName"] ?? "")"
+        selectedFruit = userDict["nativeFruit"] ?? ""
+        fruitLabel.attributedText = renderFruitLabel(text: userDict["nativeFruit"] ?? "")
 //        profileImageView.image = UIImage(named: "profile")
     }
     
@@ -131,31 +141,49 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         imgWrapper.addSubview(iconView)
         
         
-        nameTF = TweeBorderedTextField()
+        nameTF = TweeAttributedTextField()
+        nameTF.addTarget(self, action: #selector(textfieldEventEnd), for: .editingDidEnd)
+        nameTF.addTarget(self, action: #selector(textfieldEventBegin), for: .editingDidBegin)
+        nameTF.infoTextColor = UIColor.red.withAlphaComponent(0.8)
+        nameTF.infoLabel.font = UIFont.preferredFont(forTextStyle: .caption2)
+        nameTF.infoAnimationDuration = 0.05
+        nameTF.clearButtonMode = .always
+        nameTF.clearButtonMode = .whileEditing
+        nameTF.animationDuration = 0.25
+        nameTF.activeLineColor = (UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.8))!
         nameTF.textColor = UIColor(named: ColourUtil.dirt1.rawValue)
-        nameTF.lineColor = (UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.8))!
+        nameTF.lineColor = (UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5))!
         nameTF.lineWidth = 1
-        nameTF.minimumPlaceholderFontSize = 11
-        nameTF.originalPlaceholderFontSize = nameTF.font!.pointSize
+        nameTF.minimumPlaceholderFontSize = nameTF.font!.pointSize - 6
+        nameTF.originalPlaceholderFontSize = nameTF.font!.pointSize - 2
         nameTF.placeholderDuration = 0.2
         nameTF.placeholderColor = (UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5))!
         nameTF.tweePlaceholder = "Name"
 
         
-        islandNameTF = TweeBorderedTextField()
+        islandNameTF = TweeAttributedTextField()
+        islandNameTF.addTarget(self, action: #selector(textfieldEventEnd), for: .editingDidEnd)
+        islandNameTF.addTarget(self, action: #selector(textfieldEventBegin), for: .editingDidBegin)
+        islandNameTF.infoTextColor = UIColor.red.withAlphaComponent(0.8)
+        islandNameTF.infoAnimationDuration = 0.05
+        islandNameTF.infoLabel.font = UIFont.preferredFont(forTextStyle: .caption2)
+        islandNameTF.animationDuration = 0.25
+        islandNameTF.activeLineColor = (UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.8))!
+        islandNameTF.clearButtonMode = .always
+        islandNameTF.clearButtonMode = .whileEditing
         islandNameTF.textColor = UIColor(named: ColourUtil.dirt1.rawValue)
-        islandNameTF.lineColor = (UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.8))!
+        islandNameTF.lineColor = (UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.4))!
         islandNameTF.lineWidth = 1
-        islandNameTF.minimumPlaceholderFontSize = 11
-        islandNameTF.originalPlaceholderFontSize = nameTF.font!.pointSize
+        islandNameTF.minimumPlaceholderFontSize = nameTF.font!.pointSize - 6
+        islandNameTF.originalPlaceholderFontSize = nameTF.font!.pointSize - 2
         islandNameTF.placeholderDuration = 0.2
         islandNameTF.placeholderColor = (UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5))!
-        islandNameTF.tweePlaceholder = "Island Name"
+        islandNameTF.tweePlaceholder = "Island Name 🏝"
         
         profileNameStackView = SVHelper.createSV(axis: .vertical, spacing: MARGIN * 4, alignment: .leading, distribution: .fill)
         profileNameStackView.translatesAutoresizingMaskIntoConstraints = false
         
-        labelSV = SVHelper.createSV(axis: .vertical, spacing: MARGIN * 2, alignment: .center, distribution: .fillProportionally)
+        labelSV = SVHelper.createSV(axis: .vertical, spacing: MARGIN * 5, alignment: .center, distribution: .fillProportionally)
         labelSV.translatesAutoresizingMaskIntoConstraints = false
 
         fruitLabel = UILabel()
@@ -195,7 +223,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         saveButton.setTitle("Save", for: .normal)
 
         labelSV.addArrangedSubview(nameTF)
-        labelSV.addArrangedSubview(islandNameTF, withMargin: UIEdgeInsets(top: MARGIN, left: 0, bottom: 0, right: 0))
+        labelSV.addArrangedSubview(islandNameTF)
         labelSV.addArrangedSubview(fruitLabel)
         labelSV.addArrangedSubview(nativeFruitButton)
         
@@ -209,8 +237,32 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         scrollView.addSubview(mStackView)
     }
     
+    @objc func textfieldEventEnd(_ sender: TweeAttributedTextField) {
+        if sender.text!.trimmingCharacters(in: .whitespaces).isEmpty {
+            if nameTF == sender {
+                sender.showInfo("You cannot have an empty name.")
+            } else if islandNameTF == sender {
+                sender.showInfo("You cannot have an empty island name.")
+            }
+        }
+    }
+    
+    @objc func textfieldEventBegin(_ sender: TweeAttributedTextField) {
+        sender.hideInfo()
+    }
+    
     @objc private func saveTapped(sender: UIButton!) {
-        print("Saving user changes...")
+        if !nameTF.text!.trimmingCharacters(in: .whitespaces).isEmpty || !islandNameTF.text!.trimmingCharacters(in: .whitespaces).isEmpty {
+            let user = User(name: nameTF.text!, islandName: islandNameTF.text!, nativeFruit: selectedFruit, hemisphere: .South, image: nil)
+            UDHelper.saveUser(user: user)
+            Taptic.successTaptic()
+            self.closeTapped()
+        }
+        else {
+            presentAlert(title: "Oh bummer!", message: "Please make sure you did not leave any text fields empty!")
+            Taptic.errorTaptic()
+        }
+
     }
     
     @objc private func fruitPicker(sender: UIButton!) {
@@ -306,10 +358,22 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         return attributedString
     }
     
+    private func presentAlert(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+
+        let okAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
+            PersistEngine.deleteAppData()
+        }
+
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
 }
 
-extension EditInfoViewController: fruitsDelegate {
+extension EditInfoViewController: FruitsDelegate {
     func changeFruit(fruit: Fruits) {
+        selectedFruit = fruit.rawValue
         self.fruitLabel.text = fruit.rawValue
     }
 }

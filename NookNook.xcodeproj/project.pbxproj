@@ -64,6 +64,7 @@
 		0A7FA6A32445971900921079 /* CrittersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7FA6A22445971900921079 /* CrittersTableViewController.swift */; };
 		0A7FA6A52445972A00921079 /* CritterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7FA6A42445972A00921079 /* CritterTableViewCell.swift */; };
 		0A887F8D2450890C0044EAEA /* FruitsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A887F8C2450890C0044EAEA /* FruitsTableViewController.swift */; };
+		0A887F9124508F280044EAEA /* UDHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A887F9024508F280044EAEA /* UDHelper.swift */; };
 		0A964998244E5FBE00C8E19D /* TweeTextField in Frameworks */ = {isa = PBXBuildFile; productRef = 0A964997244E5FBE00C8E19D /* TweeTextField */; };
 		0A97C2FB244C95290062B136 /* FavouritesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A97C2FA244C95290062B136 /* FavouritesTableViewController.swift */; };
 		0A97C2FD244C95360062B136 /* FavouriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A97C2FC244C95360062B136 /* FavouriteTableViewCell.swift */; };
@@ -163,6 +164,7 @@
 		0A7FA6A22445971900921079 /* CrittersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrittersTableViewController.swift; sourceTree = "<group>"; };
 		0A7FA6A42445972A00921079 /* CritterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CritterTableViewCell.swift; sourceTree = "<group>"; };
 		0A887F8C2450890C0044EAEA /* FruitsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitsTableViewController.swift; sourceTree = "<group>"; };
+		0A887F9024508F280044EAEA /* UDHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UDHelper.swift; sourceTree = "<group>"; };
 		0A97C2FA244C95290062B136 /* FavouritesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesTableViewController.swift; sourceTree = "<group>"; };
 		0A97C2FC244C95360062B136 /* FavouriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteTableViewCell.swift; sourceTree = "<group>"; };
 		0AA3616D244C520500D326AF /* SVHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVHelper.swift; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 				0A65203024499B6400692E74 /* PersistEngine.swift */,
 				0A23BBCB244ACE94009B5178 /* SortEngine.swift */,
 				0A370B6B2444467900A72048 /* PriceEngine.swift */,
+				0A887F9024508F280044EAEA /* UDHelper.swift */,
 			);
 			path = Engine;
 			sourceTree = "<group>";
@@ -581,6 +584,7 @@
 				0A739A41244B592300002B89 /* ProfileViewController.swift in Sources */,
 				0AA3616E244C520500D326AF /* SVHelper.swift in Sources */,
 				0A7FA6A32445971900921079 /* CrittersTableViewController.swift in Sources */,
+				0A887F9124508F280044EAEA /* UDHelper.swift in Sources */,
 				0A7FA6A52445972A00921079 /* CritterTableViewCell.swift in Sources */,
 				0A36427E244695FE0081315A /* Critter.swift in Sources */,
 				0AFD704F24419DD300957BE6 /* AppDelegate.swift in Sources */,

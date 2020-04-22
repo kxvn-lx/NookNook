@@ -17,6 +17,8 @@ class ProfileViewController: UIViewController {
     private let VARIANT_CELL = "VariantCell"
     private let SETTING_ID = "SettingsVC"
     
+    private var userDict: [String: String]!
+    
     private let MARGIN: CGFloat = 10
     
     private var scrollView: UIScrollView!
@@ -44,6 +46,7 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         
         favouritesManager = PersistEngine()
+        userDict = UDHelper.getUser()
         
         setBar()
         setUI()
@@ -52,6 +55,10 @@ class ProfileViewController: UIViewController {
         setupProfile()
         
         self.variationImageCollectionView.register(ResidentCollectionViewCell.self, forCellWithReuseIdentifier: VARIANT_CELL)
+        
+        if isEmptyLists(dicts: userDict) {
+            presentAlert(title: "hey there!", message: "Please head to setting and fill out the user detail form for a better app experience (:")
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,10 +67,13 @@ class ProfileViewController: UIViewController {
             self.variationImageCollectionView.reloadData()
         }
         favouritesManager = PersistEngine()
+        userDict = UDHelper.getUser()
         
+        setupProfile()
         residentLabel.text = "Your Resident: \(self.favouritesManager.residentVillagers.count)/10"
         
     }
+    
     
     // Modify the UI
     private func setBar() {
@@ -85,14 +95,16 @@ class ProfileViewController: UIViewController {
     
     @objc private func settingsButtonPressed() {
         let vc = self.storyboard!.instantiateViewController(withIdentifier: SETTING_ID) as! SettingsTableViewController
+        vc.profileDelegate = self
         let navController = UINavigationController(rootViewController: vc)
+        navController.presentationController?.delegate = self
         self.present(navController, animated:true, completion: nil)
     }
     
     func setupProfile() {
-        profileNameLabel.text = static_user.name
-        islandNameLabel.text = "\(static_user.islandName) 🏝"
-        nativeFruitLabel.text = static_user.nativeFruit
+        profileNameLabel.text = userDict["name"] ?? "Not provided"
+        islandNameLabel.text = "\(userDict["islandName"] ?? "Not provided") 🏝"
+        nativeFruitLabel.text = userDict["nativeFruit"] ?? "Not provided"
         profileImageView.image = UIImage(named: "profile")
         
         phraseLabel.text = "Good \(DateHelper.renderGreet())!\nIt's \(DateHelper.renderSeason(hemisphere: static_user.hemisphere)) ━ \(DateHelper.renderDate())."
@@ -267,7 +279,7 @@ class ProfileViewController: UIViewController {
         return stackView
     }
     
-    func calculateCVLayout() -> UICollectionViewCompositionalLayout {
+    private func calculateCVLayout() -> UICollectionViewCompositionalLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                               heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -285,6 +297,23 @@ class ProfileViewController: UIViewController {
         let layout = UICollectionViewCompositionalLayout(section: section, configuration:config)
         
         return layout
+    }
+    
+    private func presentAlert(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+
+        let okAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
+        }
+
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    private func isEmptyLists(dicts: [String: String]?) -> Bool {
+        for list in dicts!.values {
+            if !list.isEmpty { return false }
+        }
+        return true
     }
 }
 
@@ -307,5 +336,21 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
         cell.variantName.text = self.favouritesManager.residentVillagers[indexPath.row].name
         
         return cell
+    }
+}
+
+extension ProfileViewController: UIAdaptivePresentationControllerDelegate {
+    func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
+        userDict = UDHelper.getUser()
+        setupProfile()
+        self.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension ProfileViewController: ProfileDelegate {
+    func updateprofile() {
+        userDict = UDHelper.getUser()
+        setupProfile()
+        self.dismiss(animated: true, completion: nil)
     }
 }
