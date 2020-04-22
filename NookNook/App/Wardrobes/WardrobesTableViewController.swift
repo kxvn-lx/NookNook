@@ -44,7 +44,6 @@ class WardrobesTableViewController: UITableViewController {
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search \(wardrobes.count) wardrobes..."
         navigationItem.searchController = searchController
-        definesPresentationContext = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,7 +58,6 @@ class WardrobesTableViewController: UITableViewController {
     
     private func setupSearchBar(searchBar : UISearchBar) {
         searchBar.setPlaceholderTextColorTo(color: UIColor.lightGray)
-        
     }
     
     // MARK: - Table view data source

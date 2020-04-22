@@ -141,7 +141,6 @@ struct PersistEngine {
             {
                 let fileNames = try fileManager.contentsOfDirectory(atPath: "\(documentPath)")
                 for fileName in fileNames {
-                    print(fileName)
                     if fileName == "com.hackemist.SDImageCache" {
                         let filePathName = "\(documentPath)/\(fileName)"
                         try fileManager.removeItem(atPath: filePathName)
@@ -167,7 +166,6 @@ struct PersistEngine {
             {
                 let fileNames = try fileManager.contentsOfDirectory(atPath: "\(documentPath)")
                 for fileName in fileNames {
-                    print(fileName)
                     if fileName == "SavedDatas" {
                         let filePathName = "\(documentPath)/\(fileName)"
                         try fileManager.removeItem(atPath: filePathName)

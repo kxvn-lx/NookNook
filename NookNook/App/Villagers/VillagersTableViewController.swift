@@ -46,7 +46,6 @@ class VillagersTableViewController: UITableViewController {
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search \(villagers.count) villagers..."
         navigationItem.searchController = searchController
-        definesPresentationContext = true
         
         setBar()
     }

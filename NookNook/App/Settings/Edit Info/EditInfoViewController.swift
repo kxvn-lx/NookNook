@@ -23,6 +23,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
     
     var iconView: UIImageView!
     var imgWrapper: UIView!
+
     
     var profileImageView: UIImageView!
     var nameTF: TweeBorderedTextField!
@@ -164,7 +165,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         
         nativeFruitButton = UIButton()
         nativeFruitButton.translatesAutoresizingMaskIntoConstraints = false
-        nativeFruitButton.contentEdgeInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
+        nativeFruitButton.contentEdgeInsets = UIEdgeInsets(top: 15, left: 20, bottom: 15, right: 20)
         nativeFruitButton.backgroundColor = UIColor(named: ColourUtil.grassBtn.rawValue)
         nativeFruitButton.layer.borderWidth = 1
         nativeFruitButton.titleLabel?.numberOfLines = 2
@@ -213,41 +214,12 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
     }
     
     @objc private func fruitPicker(sender: UIButton!) {
-        let alert = UIAlertController(title: "Pick your native fruit", message: nil, preferredStyle: .actionSheet)
+        let FRUIT_ID = "FruitsVC"
         
-        alert.addAction(UIAlertAction(title: Fruits.apples.rawValue, style: .default , handler:{ (UIAlertAction)in
-            let selectedFruit = Fruits.apples.rawValue
-            self.fruitLabel.attributedText = self.renderFruitLabel(text: selectedFruit)
-            Taptic.lightTaptic()
-        }))
-        
-        alert.addAction(UIAlertAction(title: Fruits.cherries.rawValue, style: .default , handler:{ (UIAlertAction)in
-            let selectedFruit = Fruits.cherries.rawValue
-            self.fruitLabel.attributedText = self.renderFruitLabel(text: selectedFruit)
-            Taptic.lightTaptic()
-        }))
-        
-        alert.addAction(UIAlertAction(title: Fruits.peaches.rawValue, style: .default , handler:{ (UIAlertAction)in
-            let  selectedFruit = Fruits.peaches.rawValue
-            self.fruitLabel.attributedText = self.renderFruitLabel(text: selectedFruit)
-            Taptic.lightTaptic()
-        }))
-        
-        alert.addAction(UIAlertAction(title: Fruits.oranges.rawValue, style: .default , handler:{ (UIAlertAction)in
-            let  selectedFruit = Fruits.oranges.rawValue
-            self.fruitLabel.attributedText = self.renderFruitLabel(text: selectedFruit)
-            Taptic.lightTaptic()
-        }))
-        
-        alert.addAction(UIAlertAction(title: Fruits.pears.rawValue, style: .default , handler:{ (UIAlertAction)in
-            let selectedFruit = Fruits.pears.rawValue
-            self.fruitLabel.attributedText = self.renderFruitLabel(text: selectedFruit)
-            Taptic.lightTaptic()
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
-        
-        self.present(alert, animated: true, completion: nil)
+        let vc = self.storyboard!.instantiateViewController(withIdentifier: FRUIT_ID) as! FruitsTableViewController
+        vc.fruitsDelegate = self
+        let navController = UINavigationController(rootViewController: vc)
+        self.present(navController, animated:true, completion: nil)
     }
     
     @objc private func imageTapped(sender: UIButton!) {
@@ -269,7 +241,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
             mStackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             mStackView.leftAnchor.constraint(equalTo: scrollView.leftAnchor),
             mStackView.rightAnchor.constraint(equalTo: scrollView.rightAnchor),
-            mStackView.bottomAnchor.constraint(equalTo: scrollView.frameLayoutGuide.bottomAnchor, constant: -MARGIN * 2),
+            mStackView.bottomAnchor.constraint(equalTo: scrollView.frameLayoutGuide.bottomAnchor),
             mStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             
             profileNameStackView.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
@@ -277,7 +249,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
             
             nameTF.widthAnchor.constraint(equalTo: self.labelSV.widthAnchor, multiplier: 0.8),
             islandNameTF.widthAnchor.constraint(equalTo: self.labelSV.widthAnchor, multiplier: 0.8),
-            nativeFruitButton.widthAnchor.constraint(equalTo: self.labelSV.widthAnchor, multiplier: 0.8),
+            nativeFruitButton.widthAnchor.constraint(equalTo: self.labelSV.widthAnchor, multiplier: 0.7),
             saveButton.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor),
             
             profileImageView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: itemImageViewSize),
@@ -285,11 +257,12 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
             
             imgWrapper.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: itemImageViewSize * 1.05),
             imgWrapper.heightAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: itemImageViewSize * 1.05),
-            iconView.widthAnchor.constraint(equalTo: self.profileImageView.widthAnchor, multiplier: itemImageViewSize),
-            iconView.heightAnchor.constraint(equalTo: self.profileImageView.widthAnchor, multiplier: itemImageViewSize),
+            iconView.widthAnchor.constraint(equalTo: self.profileImageView.widthAnchor, multiplier: itemImageViewSize - 0.05),
+            iconView.heightAnchor.constraint(equalTo: self.profileImageView.widthAnchor, multiplier: itemImageViewSize - 0.05),
             
             iconView.rightAnchor.constraint(equalTo: imgWrapper.rightAnchor),
             iconView.bottomAnchor.constraint(equalTo: imgWrapper.bottomAnchor),
+            
             
         ])
     }
@@ -333,4 +306,10 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         return attributedString
     }
     
+}
+
+extension EditInfoViewController: fruitsDelegate {
+    func changeFruit(fruit: Fruits) {
+        self.fruitLabel.text = fruit.rawValue
+    }
 }

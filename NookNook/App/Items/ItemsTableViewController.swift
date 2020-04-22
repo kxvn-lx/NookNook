@@ -48,7 +48,6 @@ class ItemsTableViewController: UITableViewController {
         searchController.searchBar.placeholder = "Search \(items.count) items..."
         searchController.searchBar.tintColor = .lightGray
         navigationItem.searchController = searchController
-        definesPresentationContext = true
         
         
     }

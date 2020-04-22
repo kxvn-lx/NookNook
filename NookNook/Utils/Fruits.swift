@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum Fruits: String {
+enum Fruits: String, CaseIterable {
     case apples = "Apples 🍎"
     case cherries = "Cherries 🍒"
     case peaches = "Peaches 🍑"

@@ -54,7 +54,7 @@ struct DateHelper {
         }
     }
     
-    
+     
     static func renderGreet() -> String {
         let hour = Calendar.current.component(.hour, from: Date())
 

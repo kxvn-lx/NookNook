@@ -10,7 +10,7 @@ import UIKit
 import SDWebImage
 
 class FavouritesTableViewController: UITableViewController {
-
+    
     private let FAVOURITE_CELL = "FavouriteCell"
     private let DETAIL_ID = "Detail"
     
@@ -22,9 +22,11 @@ class FavouritesTableViewController: UITableViewController {
     private var scView: UIView!
     
     private let items: [String] = [GroupType.items.rawValue.capitalizingFirstLetter(),
-                           GroupType.wardrobes.rawValue.capitalizingFirstLetter(),
-                           GroupType.villagers.rawValue.capitalizingFirstLetter()
+                                   GroupType.wardrobes.rawValue.capitalizingFirstLetter(),
+                                   GroupType.villagers.rawValue.capitalizingFirstLetter()
     ]
+    
+    let search = UISearchController(searchResultsController: nil)
     
     enum GroupType: String {
         case items, wardrobes, villagers
@@ -33,6 +35,19 @@ class FavouritesTableViewController: UITableViewController {
     private var favItems: [Item] = []
     private var favWardrobes: [Wardrobe] = []
     private var favVillagers: [Villager] = []
+    
+    private var filteredItems: [Item] = []
+    private var filteredWardrobes: [Wardrobe] = []
+    private var filteredVillagers: [Villager] = []
+    
+    var isSearchBarEmpty: Bool {
+        return search.searchBar.text?.isEmpty ?? true
+    }
+    
+    var isFiltering: Bool {
+        return search.isActive && !isSearchBarEmpty
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,57 +66,84 @@ class FavouritesTableViewController: UITableViewController {
         favItems = favouritesManager.items
         favVillagers = favouritesManager.favouritedVillagers
         favWardrobes = favouritesManager.wardrobes
+        
+        search.searchResultsUpdater = self
+        search.obscuresBackgroundDuringPresentation = false
+        search.searchBar.placeholder = "Search favourites..."
     }
     
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        navigationItem.searchController = search
+    }
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch currentGroup {
         case .items:
-            if favItems.count == 0 {
-                self.tableView.setEmptyMessage("Swipe right and press ⭑ to\nadd an item to your collection!")
+            if isFiltering {
+                return filteredItems.count
             } else {
-                self.tableView.restore()
+                if favItems.count == 0 {
+                    self.tableView.setEmptyMessage("Swipe right and press ⭑ to\nadd an item to your collection!")
+                } else {
+                    self.tableView.restore()
+                }
             }
             return favouritesManager.items.count
         case .wardrobes:
-            if favWardrobes.count == 0 {
-                self.tableView.setEmptyMessage("Swipe right and press ⭑ to\nadd a clothings to your collection!")
+            if isFiltering {
+                return filteredWardrobes.count
             } else {
-                self.tableView.restore()
+                if favWardrobes.count == 0 {
+                    self.tableView.setEmptyMessage("Swipe right and press ⭑ to\nadd a clothings to your collection!")
+                } else {
+                    self.tableView.restore()
+                }
             }
             return favouritesManager.wardrobes.count
         case .villagers:
-            if favVillagers.count == 0 {
-                self.tableView.setEmptyMessage("Swipe right and press ⭑ to\nadd a villager to your collection!")
+            if isFiltering {
+                return filteredVillagers.count
             } else {
-                self.tableView.restore()
+                if favVillagers.count == 0 {
+                    self.tableView.setEmptyMessage("Swipe right and press ⭑ to\nadd a villager to your collection!")
+                } else {
+                    self.tableView.restore()
+                }
             }
             return favouritesManager.favouritedVillagers.count
         }
     }
-
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FAVOURITE_CELL, for: indexPath)
         switch currentGroup {
         case .items:
-            let objs = favItems[indexPath.row]
             sc.selectedSegmentIndex = 0
+            
+            let item: Item
+            if isFiltering {
+                item = filteredItems[indexPath.row]
+            } else {
+                item = favItems[indexPath.row]
+            }
+            
             if let cell = cell as? FavouriteTableViewCell {
                 cell.imgView.sd_imageTransition = .fade
                 cell.imgView.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 
-                cell.imgView.sd_setImage(with: ImageEngine.parseNPURL(with: objs.image!), placeholderImage: nil)
-                cell.nameLabel.text = objs.name
-                cell.label1.text = objs.obtainedFrom
-                cell.label3.attributedText = PriceEngine.renderPrice(amount: objs.buy, with: .buy, of: 12)
-                cell.label4.attributedText = PriceEngine.renderPrice(amount: objs.sell, with: .sell, of: 12)
+                cell.imgView.sd_setImage(with: ImageEngine.parseNPURL(with: item.image!), placeholderImage: nil)
+                cell.nameLabel.text = item.name
+                cell.label1.text = item.obtainedFrom
+                cell.label3.attributedText = PriceEngine.renderPrice(amount: item.buy, with: .buy, of: 12)
+                cell.label4.attributedText = PriceEngine.renderPrice(amount: item.sell, with: .sell, of: 12)
                 
                 
                 cell.iconLabel1.isHidden = true
@@ -110,34 +152,45 @@ class FavouritesTableViewController: UITableViewController {
                 cell.label3.font = UIFont.systemFont(ofSize: cell.label3.font!.pointSize, weight: .regular)
             }
         case .villagers:
-            let objs = favVillagers[indexPath.row]
+            let villager: Villager
+            if isFiltering {
+                villager = filteredVillagers[indexPath.row]
+            } else {
+                villager = favVillagers[indexPath.row]
+            }
+            
             sc.selectedSegmentIndex = 2
             if let cell = cell as? FavouriteTableViewCell {
                 cell.imgView.sd_imageTransition = .fade
                 cell.imgView.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 
-                cell.imgView.sd_setImage(with: ImageEngine.parseAcnhURL(with: objs.image, of: objs.category, mediaType: .icons), placeholderImage: nil)
-                cell.nameLabel.text = objs.name
-                cell.label1.text = objs.species
-                cell.tagLabel.setTitle(objs.personality, for: .normal)
-                cell.label3.text = objs.bdayString
-                cell.label4.text = objs.gender
+                cell.imgView.sd_setImage(with: ImageEngine.parseAcnhURL(with: villager.image, of: villager.category, mediaType: .icons), placeholderImage: nil)
+                cell.nameLabel.text = villager.name
+                cell.label1.text = villager.species
+                cell.tagLabel.setTitle(villager.personality, for: .normal)
+                cell.label3.text = villager.bdayString
+                cell.label4.text = villager.gender
                 
                 cell.tagLabel.isHidden = false
                 cell.label3.font = UIFont.systemFont(ofSize: cell.label3.font!.pointSize, weight: .semibold)
             }
         case.wardrobes:
-            let objs = favWardrobes[indexPath.row]
+            let wardrobe: Wardrobe
+            if isFiltering {
+                wardrobe = filteredWardrobes[indexPath.row]
+            } else {
+                wardrobe = favWardrobes[indexPath.row]
+            }
             sc.selectedSegmentIndex = 1
             if let cell = cell as? FavouriteTableViewCell {
                 cell.imgView.sd_imageTransition = .fade
                 cell.imgView.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 
-                cell.imgView.sd_setImage(with: ImageEngine.parseNPURL(with: objs.image!), placeholderImage: nil)
-                cell.nameLabel.text = objs.name
-                cell.label1.text = objs.obtainedFrom
-                cell.label3.attributedText = PriceEngine.renderPrice(amount: objs.buy, with: .buy, of: 12)
-                cell.label4.attributedText = PriceEngine.renderPrice(amount: objs.sell, with: .sell, of: 12)
+                cell.imgView.sd_setImage(with: ImageEngine.parseNPURL(with: wardrobe.image!), placeholderImage: nil)
+                cell.nameLabel.text = wardrobe.name
+                cell.label1.text = wardrobe.obtainedFrom
+                cell.label3.attributedText = PriceEngine.renderPrice(amount: wardrobe.buy, with: .buy, of: 12)
+                cell.label4.attributedText = PriceEngine.renderPrice(amount: wardrobe.sell, with: .sell, of: 12)
                 
                 
                 cell.iconLabel1.isHidden = true
@@ -149,14 +202,14 @@ class FavouritesTableViewController: UITableViewController {
         }
         
         
-
+        
         return cell
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
     }
-
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = self.storyboard!.instantiateViewController(withIdentifier: DETAIL_ID) as! DetailViewController
         
@@ -237,5 +290,34 @@ class FavouritesTableViewController: UITableViewController {
         navigationController?.popViewController(animated: true)
         dismiss(animated: true, completion: nil)
     }
+    
+    func filterContentForSearchText(_ searchText: String) {
+        switch currentGroup {
+        case .items:
+            filteredItems = favItems.filter { (item: Item) -> Bool in
+                return item.name.lowercased().contains(searchText.lowercased())
+            }
+            
+        case .wardrobes:
+            filteredWardrobes = favWardrobes.filter { (wardrobe: Wardrobe) -> Bool in
+                return wardrobe.name.lowercased().contains(searchText.lowercased())
+            }
+            
+        case .villagers:
+            filteredVillagers = favVillagers.filter { (villager: Villager) -> Bool in
+                return villager.name.lowercased().contains(searchText.lowercased())
+            }
+            
+        }
+        
+        tableView.reloadData()
+    }
+    
+}
 
+extension FavouritesTableViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text else { return }
+        filterContentForSearchText(text)
+    }
 }

@@ -85,7 +85,6 @@ class ProfileViewController: UIViewController {
     
     @objc private func settingsButtonPressed() {
         let vc = self.storyboard!.instantiateViewController(withIdentifier: SETTING_ID) as! SettingsTableViewController
-        
         let navController = UINavigationController(rootViewController: vc)
         self.present(navController, animated:true, completion: nil)
     }
@@ -109,6 +108,7 @@ class ProfileViewController: UIViewController {
         // Create master stackView
         mStackView = SVHelper.createSV(axis: .vertical, spacing: MARGIN * 4, alignment: .center, distribution: .equalSpacing)
         
+        // Name stack view
         nameStackView = SVHelper.createSV(axis: .vertical, spacing: MARGIN, alignment: .leading, distribution: .fill)
         
         profileImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
@@ -130,16 +130,18 @@ class ProfileViewController: UIViewController {
         profileNameStackView.addArrangedSubview(nameStackView)
         
         
+        // phrase
         phraseLabel = UILabel()
         phraseLabel.numberOfLines = 0
         phraseLabel.translatesAutoresizingMaskIntoConstraints = false
         phraseLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)
-        phraseLabel.font = UIFont.preferredFont(forTextStyle: .headline)
+        phraseLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         
         phraseStack = SVHelper.createSV(axis: .vertical, spacing: MARGIN, alignment: .leading, distribution: .fillEqually)
         phraseStack.addArrangedSubview(phraseLabel, withMargin: UIEdgeInsets(top: 0, left: MARGIN * 2, bottom: 0, right: 0))
         
         
+        // Passport
         passportStackView = SVHelper.createSV(axis: .vertical, spacing: MARGIN, alignment: .fill, distribution: .equalSpacing)
         passportStackView.isLayoutMarginsRelativeArrangement = true
         passportStackView.layoutMargins = UIEdgeInsets(top: 0, left: MARGIN*2, bottom: 0, right: MARGIN*2)
@@ -177,35 +179,31 @@ class ProfileViewController: UIViewController {
         // Go to fav VC Button
         goToFavButton = UIButton()
         goToFavButton.translatesAutoresizingMaskIntoConstraints = false
-        goToFavButton.contentEdgeInsets = UIEdgeInsets(top: 10, left: 30, bottom: 10, right: 30)
+        goToFavButton.contentEdgeInsets = UIEdgeInsets(top: 15, left: 5, bottom: 15, right: 5)
         goToFavButton.backgroundColor = UIColor(named: ColourUtil.grassBtn.rawValue)
         goToFavButton.layer.borderWidth = 1
+        goToFavButton.titleLabel?.textAlignment = .center
         goToFavButton.layer.borderColor = UIColor(named: ColourUtil.grassBtn.rawValue)?.cgColor
         goToFavButton.layer.cornerRadius = 2.5
         goToFavButton.setTitleColor(UIColor(named: ColourUtil.grass2.rawValue), for: .normal)
         goToFavButton.setTitleColor(UIColor(named: ColourUtil.grass2.rawValue)?.withAlphaComponent(0.5), for: .highlighted)
         goToFavButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
         goToFavButton.titleLabel?.font = UIFont.systemFont(ofSize: (goToFavButton.titleLabel?.font.pointSize)!, weight: .semibold)
-        goToFavButton.setTitle("⭑ Favourites", for: .normal)
-        goToFavButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        goToFavButton.setTitle("Favourites", for: .normal)
+        goToFavButton.addTarget(self, action: #selector(favouriteButtonTapped), for: .touchUpInside)
         
-        
-        
-        let buttonWrapperSV = SVHelper.createSV(axis: .horizontal, spacing: MARGIN, alignment: .center, distribution: .fillEqually)
-        buttonWrapperSV.addArrangedSubview(goToFavButton)
         
         
         mStackView.addArrangedSubview(profileNameStackView, withMargin: UIEdgeInsets(top: MARGIN*4, left: 0, bottom: 0, right: 0))
         mStackView.addArrangedSubview(phraseStack)
         mStackView.addArrangedSubview(passportStackView)
         mStackView.addArrangedSubview(residentStack)
-        mStackView.addArrangedSubview(buttonWrapperSV)
+        mStackView.addArrangedSubview(goToFavButton)
         scrollView.addSubview(mStackView)
     }
     
-    @objc private func buttonAction(sender: UIButton!) {
+    @objc private func favouriteButtonTapped(sender: UIButton!) {
         let vc = self.storyboard!.instantiateViewController(withIdentifier: "FavouritesVC") as! FavouritesTableViewController
-        
         let navController = UINavigationController(rootViewController: vc)
         self.present(navController, animated:true, completion: nil)
     }
@@ -226,10 +224,9 @@ class ProfileViewController: UIViewController {
             mStackView.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor),
             
             profileNameStackView.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
-            
             phraseStack.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
-            
             passportStackView.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
+            goToFavButton.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor, multiplier: 0.7),
             
             profileImageView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: itemImageViewSize),
             profileImageView.heightAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: itemImageViewSize),

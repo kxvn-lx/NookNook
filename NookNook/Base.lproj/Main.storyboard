@@ -366,5 +366,33 @@
             </objects>
             <point key="canvasLocation" x="1804" y="-297"/>
         </scene>
+        <!--Fruits-->
+        <scene sceneID="5D5-J5-izQ">
+            <objects>
+                <tableViewController storyboardIdentifier="FruitsVC" title="Fruits" id="UUc-yJ-UXU" customClass="FruitsTableViewController" customModule="NookNook" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="bTs-8n-Fs6">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FruitCell" id="bC5-B9-Qj4">
+                                <rect key="frame" x="20" y="55.5" width="374" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bC5-B9-Qj4" id="mCN-Yl-hy5">
+                                    <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="UUc-yJ-UXU" id="z3S-R5-Z4J"/>
+                            <outlet property="delegate" destination="UUc-yJ-UXU" id="SKx-eC-6rG"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AUP-MC-Bv4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2734" y="-255"/>
+        </scene>
     </scenes>
 </document>
