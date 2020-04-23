@@ -31,7 +31,7 @@ class HomeViewController: UITabBarController {
             tbManager[3].image = UIImage(systemName: "person.2")
             tbManager[3].selectedImage = UIImage(systemName: "person.2.fill")
             
-            tbManager[4].title = "Profile"
+            tbManager[4].title = "Dashboard"
             tbManager[4].image = UIImage(systemName: "person.crop.circle")
             tbManager[4].selectedImage = UIImage(systemName: "person.crop.circle.fill")
         } else {

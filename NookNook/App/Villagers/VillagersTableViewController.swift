@@ -51,7 +51,7 @@ class VillagersTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        super.viewWillAppear(animated)
         favouritesManager = PersistEngine()
         self.tableView.reloadData()
     }

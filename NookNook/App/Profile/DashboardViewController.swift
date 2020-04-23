@@ -1,5 +1,5 @@
 //
-//  ProfileViewController.swift
+//  DashboardViewController.swift
 //  NookNook
 //
 //  Created by Kevin Laminto on 19/4/20.
@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import SDWebImage
 
-class ProfileViewController: UIViewController {
+class DashboardViewController: UIViewController {
     
     private var favouritesManager: PersistEngine!
     private var user: User!
@@ -16,6 +17,7 @@ class ProfileViewController: UIViewController {
     
     private let VARIANT_CELL = "VariantCell"
     private let SETTING_ID = "SettingsVC"
+    private let DETAIL_ID = "Detail"
     
     private var userDict: [String: String]!
     
@@ -42,23 +44,27 @@ class ProfileViewController: UIViewController {
     let variationImageCollectionView:UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     let layout:UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
     
+    private var birthdayResidents: [Villager] = []
+    
+    // MARK: - Table view properties
+    private let BIRTHDAY_CELL = "BirthdayCell"
+    private let CRITTER_CELL = "CritterCell"
+    private var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        favouritesManager = PersistEngine()
-        userDict = UDHelper.getUser()
-        
         setBar()
         setUI()
         setConstraint()
         
-        setupProfile()
-        
         self.variationImageCollectionView.register(ResidentCollectionViewCell.self, forCellWithReuseIdentifier: VARIANT_CELL)
+        
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 100
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        super.viewWillAppear(animated)
         DispatchQueue.main.async {
             self.variationImageCollectionView.reloadData()
         }
@@ -68,10 +74,11 @@ class ProfileViewController: UIViewController {
         setupProfile()
         residentLabel.text = "Your Resident: \(self.favouritesManager.residentVillagers.count)/10"
         
+        birthdayResidents = ResidentHelper.getMonthsBirthday(residents: self.favouritesManager.residentVillagers)
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
+        super.viewDidAppear(animated)
         if isEmptyLists(dicts: userDict) {
             presentAlert(title: "hey there!", message: "Please head to setting and fill out the user detail form for a better app experience (:")
         }
@@ -80,7 +87,7 @@ class ProfileViewController: UIViewController {
     
     // Modify the UI
     private func setBar() {
-        self.configureNavigationBar(largeTitleColor: .white, backgoundColor: UIColor(named: ColourUtil.grass1.rawValue)!, tintColor: .white, title: "Profile", preferredLargeTitle: true)
+        self.configureNavigationBar(largeTitleColor: .white, backgoundColor: UIColor(named: ColourUtil.grass1.rawValue)!, tintColor: .white, title: "Dashboard", preferredLargeTitle: true)
         
         self.view.backgroundColor = UIColor(named: ColourUtil.cream2.rawValue)
         
@@ -194,6 +201,20 @@ class ProfileViewController: UIViewController {
         residentStack.addArrangedSubview(residentLabel, withMargin: UIEdgeInsets(top: 0, left: MARGIN * 2, bottom: 0, right: 0))
         residentStack.addArrangedSubview(variationImageCollectionView)
         
+        // Table view
+        tableView = UITableView(frame: CGRect(x: 0, y: 0, width:0, height: 0), style: .grouped)
+        tableView.backgroundColor = UIColor(named: ColourUtil.cream2.rawValue)
+        tableView.dataSource = self
+        tableView.delegate = self
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: BIRTHDAY_CELL)
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: CRITTER_CELL)
+        
+        
+        
+        
+        
+        
+        
         
         // Go to fav VC Button
         goToFavButton = UIButton()
@@ -217,6 +238,7 @@ class ProfileViewController: UIViewController {
         mStackView.addArrangedSubview(phraseStack)
         mStackView.addArrangedSubview(passportStackView)
         mStackView.addArrangedSubview(residentStack)
+        mStackView.addArrangedSubview(tableView)
         mStackView.addArrangedSubview(goToFavButton)
         scrollView.addSubview(mStackView)
     }
@@ -249,6 +271,9 @@ class ProfileViewController: UIViewController {
             
             profileImageView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: itemImageViewSize),
             profileImageView.heightAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: itemImageViewSize),
+            
+            tableView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
+            tableView.heightAnchor.constraint(equalToConstant: 200),
             
             residentStack.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
             
@@ -324,7 +349,7 @@ class ProfileViewController: UIViewController {
     }
 }
 
-extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+extension DashboardViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if (favouritesManager.residentVillagers.count == 0) {
             collectionView.setEmptyMessage("Swipe right and press Resident to\nadd a villager to your resident collection!")
@@ -346,7 +371,7 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout, UICollectio
     }
 }
 
-extension ProfileViewController: UIAdaptivePresentationControllerDelegate {
+extension DashboardViewController: UIAdaptivePresentationControllerDelegate {
     func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
         userDict = UDHelper.getUser()
         setupProfile()
@@ -354,10 +379,95 @@ extension ProfileViewController: UIAdaptivePresentationControllerDelegate {
     }
 }
 
-extension ProfileViewController: ProfileDelegate {
+extension DashboardViewController: ProfileDelegate {
     func updateprofile() {
         userDict = UDHelper.getUser()
         setupProfile()
         self.dismiss(animated: true, completion: nil)
     }
+}
+
+extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        switch indexPath.section {
+        // Birthday section
+        case 0:
+            let cell: UITableViewCell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: BIRTHDAY_CELL)
+            let villager = birthdayResidents[indexPath.row]
+            cell.imageView?.sd_imageTransition = .fade
+            cell.imageView?.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            
+            cell.imageView?.sd_setImage(with: ImageEngine.parseAcnhURL(with: villager.image, of: villager.category, mediaType: .icons)) { (image, error, cache, urls) in
+                if (error != nil) {
+                    // Failed to load image
+                } else {
+                    // Successful in loading image
+                    cell.imageView?.image = image
+                    self.tableView.reloadRows(at: [indexPath], with: .automatic)
+                }
+            }
+
+            cell.textLabel?.text = villager.name
+            cell.detailTextLabel?.text = villager.bdayString
+            cell.accessoryType = .disclosureIndicator
+
+            
+            return cell
+        case 1:
+            let cell: UITableViewCell = self.tableView.dequeueReusableCell(withIdentifier: CRITTER_CELL)! as UITableViewCell
+            cell.textLabel!.text = "Critter cell"
+            return cell
+        default: fatalError("Indexpath out of range.")
+        }
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch section {
+        case 0: return self.birthdayResidents.count
+        default: fatalError("Invalid rows detected.")
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 0: return self.birthdayResidents.count > 1 ? "Birthdays this month" : "Birthday this month"
+        case 1: return "Critters this month"
+        default: return " "
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        switch indexPath.section {
+        case 0:
+            let selectedVillager = birthdayResidents[indexPath.row]
+            
+            let vc = self.storyboard!.instantiateViewController(withIdentifier: DETAIL_ID) as! DetailViewController
+            
+            vc.parseOject(from: .villagers, object: selectedVillager)
+            
+            let navController = UINavigationController(rootViewController: vc)
+            self.present(navController, animated:true, completion: nil)
+
+        case 1: print(1)
+        default: fatalError("Invalid section detected")
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
+        header.textLabel?.font = UIFont.preferredFont(forTextStyle: .title3)
+        header.textLabel?.text? = header.textLabel?.text?.capitalized ?? ""
+    }
+
 }

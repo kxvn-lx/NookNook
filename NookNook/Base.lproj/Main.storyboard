@@ -272,7 +272,7 @@
         <!--Profile-->
         <scene sceneID="WWF-dP-VEX">
             <objects>
-                <viewController title="Profile" id="jQw-TP-56d" customClass="ProfileViewController" customModule="NookNook" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Profile" id="jQw-TP-56d" customClass="DashboardViewController" customModule="NookNook" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KVZ-7I-NN1">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
