@@ -13,16 +13,23 @@ protocol ProfileDelegate: NSObjectProtocol {
 }
 
 class SettingsTableViewController: UITableViewController {
-    private var editInfoCell = UITableViewCell()
     private let EDIT_INFO_VC = "EditInfoVC"
     
     weak var profileDelegate: ProfileDelegate!
     
+    private var editInfoCell = UITableViewCell()
+    
     private var shareCell = UITableViewCell()
+    private var twitCell = UITableViewCell()
     
     private var reportBugCell = UITableViewCell()
+    private var appVersionCell = UITableViewCell()
+    
     private var deleteDatasCell = UITableViewCell()
     private var deleteCacheCell = UITableViewCell()
+    
+    private var instagramCell = UITableViewCell()
+    private var twitterCell = UITableViewCell()
     
     
     override func viewDidLoad() {
@@ -30,7 +37,8 @@ class SettingsTableViewController: UITableViewController {
         
         setBar()
         setupConstraint()
-        tableView.rowHeight = 50
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 50
         tableView.allowsSelection = true
         
          self.isModalInPresentation = true
@@ -52,12 +60,23 @@ class SettingsTableViewController: UITableViewController {
         deleteCacheCell  = setupCell(text: "Delete cached data", icon:  IconUtil.systemIcon(of: .deleteCache, weight: .regular), accesoryType: .none)
         deleteCacheCell.textLabel?.textColor = .red
         deleteCacheCell.imageView?.tintColor = .red
+        
+        instagramCell = setupCell(text: "Instagram", icon: IconUtil.systemIcon(of: .socialMedia, weight: .regular), accesoryType: .disclosureIndicator)
+        instagramCell.detailTextLabel?.text = "@kxvn.lx"
+        twitterCell = setupCell(text: "Twitter", icon: IconUtil.systemIcon(of: .socialMedia, weight: .regular), accesoryType: .disclosureIndicator)
+        twitterCell.detailTextLabel?.text = "@kevinlx_"
+        
+        appVersionCell = setupCell(text: "App version", icon: IconUtil.systemIcon(of: .info, weight: .regular), accesoryType: .none)
+        appVersionCell.detailTextLabel?.text = "1.0.0"
+        
+        twitCell = setupCell(text: "Tweet it!", icon: IconUtil.systemIcon(of: .socialMedia, weight: .regular), accesoryType: .disclosureIndicator)
+        twitCell.detailTextLabel?.text = "@NookNook"
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 5
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -67,6 +86,10 @@ class SettingsTableViewController: UITableViewController {
         case 1:
             return 2
         case 2:
+            return 2
+        case 3:
+            return 2
+        case 4:
             return 2
         default:
             return 0
@@ -85,15 +108,27 @@ class SettingsTableViewController: UITableViewController {
         case 1:
             switch (indexPath.row) {
             case 0: return self.shareCell
-            case 1: return self.reportBugCell
+            case 1: return self.twitCell
             default: fatalError("Unknown row in section 1")
             }
             
         case 2:
             switch (indexPath.row) {
+            case 0: return self.instagramCell
+            case 1: return self.twitterCell
+            default: fatalError("Unknown row in section 2")
+            }
+        case 3:
+            switch (indexPath.row) {
+            case 0: return self.reportBugCell
+            case 1: return self.appVersionCell
+            default: fatalError("Unkown row ins ection 3")
+            }
+        case 4:
+            switch (indexPath.row) {
             case 0: return self.deleteCacheCell
             case 1: return self.deleteDatasCell
-            default: fatalError("Unknown row in section 2")
+            default: fatalError("Unknown row in section 4")
             }
             
         default: fatalError("Unknown section")
@@ -103,23 +138,17 @@ class SettingsTableViewController: UITableViewController {
     // Customize the section headings for each section
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch(section) {
-        case 0: return "Edit info"
-        case 1: return ""
-        case 2: return "Danger Zone"
-        default: fatalError("Unknown section")
-        }
-    }
-    
-    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        switch section {
-        case 0: return ""
-        case 1: return ""
-        case 2: return "Delete cached data: The app will clear all cached images and could potentially could free up some space.\n\nDelete app data: The app will clear all stored favourites, donated/caught critters, and residents data. This could also free up some space."
+        case 0: return " "
+        case 1: return "Share it if you ❤️ it."
+        case 2: return ""
+        case 3: return ""
+        case 4: return "Danger Zone"
         default: fatalError("Unknown section")
         }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.tableView.deselectRow(at: indexPath, animated: true)
         switch indexPath.section {
         case 0:
             switch indexPath.row {
@@ -127,14 +156,53 @@ class SettingsTableViewController: UITableViewController {
                 let vc = self.storyboard!.instantiateViewController(withIdentifier: EDIT_INFO_VC) as! EditInfoViewController
                 let navController = UINavigationController(rootViewController: vc)
                 self.present(navController, animated:true, completion: nil)
-            default: fatalError("Invalid row")
+            default: break
             }
         case 1:
             switch indexPath.row {
-            case 0: print(1)
-            default: fatalError("Invalid row")
+            case 0: share(sender: self.view)
+            case 1:
+                guard let url = URL(string: "https://twitter.com/nooknook")  else { return }
+                if UIApplication.shared.canOpenURL(url) {
+                    if #available(iOS 10.0, *) {
+                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    } else {
+                        UIApplication.shared.openURL(url)
+                    }
+                }
+            default: break
             }
         case 2:
+            switch indexPath.row {
+            case 0:
+                guard let url = URL(string: "https://instagram.com/kxvn.lx")  else { return }
+                if UIApplication.shared.canOpenURL(url) {
+                    if #available(iOS 10.0, *) {
+                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    } else {
+                        UIApplication.shared.openURL(url)
+                    }
+                }
+                
+            case 1:
+                guard let url = URL(string: "https://twitter.com/kevinlx_")  else { return }
+                if UIApplication.shared.canOpenURL(url) {
+                    if #available(iOS 10.0, *) {
+                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    } else {
+                        UIApplication.shared.openURL(url)
+                    }
+                }
+                
+            default: break
+            }
+        case 3:
+            switch indexPath.row {
+            case 0: print(1)
+            case 1: print(2)
+            default: break
+            }
+        case 4:
             switch indexPath.row {
             case 0:
                 let alertController = UIAlertController(title: "Delete cached datas?", message: "Cached images will be deleted and could free up some space in your device. This will exit the app.", preferredStyle: .alert)
@@ -165,12 +233,16 @@ class SettingsTableViewController: UITableViewController {
                 alertController.addAction(destructiveAction)
                 alertController.addAction(cancelAction)
                 self.present(alertController, animated: true, completion: nil)
-            default: fatalError("Invalid row")
+            default: break
             }
         default:
             fatalError("Invalid sections")
         }
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return .leastNormalMagnitude
     }
     
 
@@ -197,7 +269,7 @@ class SettingsTableViewController: UITableViewController {
     }
     
     private func setupCell(text: String, icon: UIImage, accesoryType: UITableViewCell.AccessoryType) -> UITableViewCell {
-        let cell = UITableViewCell()
+        let cell = UITableViewCell(style: .value1, reuseIdentifier: "cell")
         
         cell.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
         cell.imageView?.image = icon.withRenderingMode(.alwaysTemplate)
@@ -217,6 +289,27 @@ class SettingsTableViewController: UITableViewController {
 
         alertController.addAction(okAction)
         self.present(alertController, animated: true, completion: nil)
+    }
+    
+    @objc func share(sender:UIView){
+        UIGraphicsBeginImageContext(view.frame.size)
+        view.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        let textToShare = "Animal Crossing: New Horizons is much better with this app! 😍"
+        
+        if let myWebsite = URL(string: "http://itunes.apple.com/app/idXXXXXXXXX") {//Enter link to your app here
+            let objectsToShare = [textToShare, myWebsite, image ?? #imageLiteral(resourceName: "app-logo")] as [Any]
+            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+            
+            //Excluded Activities
+            activityVC.excludedActivityTypes = [UIActivity.ActivityType.airDrop, UIActivity.ActivityType.addToReadingList, UIActivity.ActivityType.saveToCameraRoll]
+            
+            
+            activityVC.popoverPresentationController?.sourceView = sender
+            self.present(activityVC, animated: true, completion: nil)
+        }
     }
 
 }

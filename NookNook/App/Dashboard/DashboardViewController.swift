@@ -68,7 +68,8 @@ class DashboardViewController: UIViewController {
         
         self.variationImageCollectionView.register(ResidentCollectionViewCell.self, forCellWithReuseIdentifier: VARIANT_CELL)
         
-        tableView.rowHeight = 50
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 50
     }
     
     override func viewDidAppear(_ animated: Bool) {

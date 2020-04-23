@@ -24,6 +24,8 @@ struct IconUtil {
         case share = "square.and.arrow.up"
         case deleteCache = "bin.xmark"
         case deleteData = "tray"
+        case info = "info.circle"
+        case socialMedia = "bubble.right"
     }
     
     /**
