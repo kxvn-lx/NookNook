@@ -21,6 +21,7 @@ class ResidentCollectionViewCell: UICollectionViewCell {
         
         variantName.translatesAutoresizingMaskIntoConstraints = false
         variantName.textAlignment = .center
+        variantName.numberOfLines = 0
         variantName.textColor = UIColor(named: ColourUtil.dirt1.rawValue)
         
         variantImage.translatesAutoresizingMaskIntoConstraints = false

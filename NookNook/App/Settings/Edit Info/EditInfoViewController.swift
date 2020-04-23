@@ -116,7 +116,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         selectedFruit = userDict["nativeFruit"] ?? ""
         fruitLabel.attributedText = renderFruitLabel(text: userDict["nativeFruit"] ?? "")
         hemispherePicker.selectedSegmentIndex = userDict["hemisphere"] == DateHelper.Hemisphere.Northern.rawValue ? 0 : 1
-        selectedHemisphere = userDict["hemisphere"].map { DateHelper.Hemisphere(rawValue: $0)! }
+        selectedHemisphere = userDict["hemisphere"].map { DateHelper.Hemisphere(rawValue: $0) ?? DateHelper.Hemisphere(rawValue: DateHelper.Hemisphere.Southern.rawValue)! }
         
         if let img = ImagePersistEngine.loadImage() {
             profileImageView.image = img

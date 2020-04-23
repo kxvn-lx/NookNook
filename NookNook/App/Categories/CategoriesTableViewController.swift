@@ -27,7 +27,6 @@ class CategoriesTableViewController: UITableViewController {
 
         
         tableView.tableFooterView = UIView()
-        self.tableView.separatorStyle = .none
         
         setBar()
     }
@@ -75,6 +74,7 @@ class CategoriesTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
+        cell.textLabel?.textColor = UIColor(named: ColourUtil.dirt1.rawValue)
     }
     
     private func setBar() {

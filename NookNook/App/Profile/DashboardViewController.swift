@@ -32,8 +32,6 @@ class DashboardViewController: UIViewController {
     private var residentStack: UIStackView!
     private var phraseStack: UIStackView!
     
-    private var goToFavButton: UIButton!
-    
     var phraseLabel: UILabel!
     
     var profileImageView: UIImageView!
@@ -47,8 +45,8 @@ class DashboardViewController: UIViewController {
     private var birthdayResidents: [Villager] = []
     
     // MARK: - Table view properties
-    private let BIRTHDAY_CELL = "BirthdayCell"
     private let CRITTER_CELL = "CritterCell"
+    private let FAVOURITE_CELL = "FavouriteCell"
     private var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -58,9 +56,8 @@ class DashboardViewController: UIViewController {
         setConstraint()
         
         self.variationImageCollectionView.register(ResidentCollectionViewCell.self, forCellWithReuseIdentifier: VARIANT_CELL)
-        
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 100
+
+        tableView.rowHeight = 50
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,6 +72,8 @@ class DashboardViewController: UIViewController {
         residentLabel.text = "Your Resident: \(self.favouritesManager.residentVillagers.count)/10"
         
         birthdayResidents = ResidentHelper.getMonthsBirthday(residents: self.favouritesManager.residentVillagers)
+        self.tableView.reloadData()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -202,51 +201,19 @@ class DashboardViewController: UIViewController {
         residentStack.addArrangedSubview(variationImageCollectionView)
         
         // Table view
-        tableView = UITableView(frame: CGRect(x: 0, y: 0, width:0, height: 0), style: .grouped)
+        tableView = UITableView(frame: CGRect(x: 0, y: 0, width:0, height: 0), style: .insetGrouped)
         tableView.backgroundColor = UIColor(named: ColourUtil.cream2.rawValue)
         tableView.dataSource = self
         tableView.delegate = self
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: BIRTHDAY_CELL)
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: CRITTER_CELL)
-        
-        
-        
-        
-        
-        
-        
-        
-        // Go to fav VC Button
-        goToFavButton = UIButton()
-        goToFavButton.translatesAutoresizingMaskIntoConstraints = false
-        goToFavButton.contentEdgeInsets = UIEdgeInsets(top: 15, left: 5, bottom: 15, right: 5)
-        goToFavButton.backgroundColor = UIColor(named: ColourUtil.grassBtn.rawValue)
-        goToFavButton.layer.borderWidth = 1
-        goToFavButton.titleLabel?.textAlignment = .center
-        goToFavButton.layer.borderColor = UIColor(named: ColourUtil.grassBtn.rawValue)?.cgColor
-        goToFavButton.layer.cornerRadius = 2.5
-        goToFavButton.setTitleColor(UIColor(named: ColourUtil.grass2.rawValue), for: .normal)
-        goToFavButton.setTitleColor(UIColor(named: ColourUtil.grass2.rawValue)?.withAlphaComponent(0.5), for: .highlighted)
-        goToFavButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
-        goToFavButton.titleLabel?.font = UIFont.systemFont(ofSize: (goToFavButton.titleLabel?.font.pointSize)!, weight: .semibold)
-        goToFavButton.setTitle("Favourites", for: .normal)
-        goToFavButton.addTarget(self, action: #selector(favouriteButtonTapped), for: .touchUpInside)
-        
-        
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: FAVOURITE_CELL)
         
         mStackView.addArrangedSubview(profileNameStackView, withMargin: UIEdgeInsets(top: MARGIN*4, left: 0, bottom: 0, right: 0))
         mStackView.addArrangedSubview(phraseStack)
         mStackView.addArrangedSubview(passportStackView)
         mStackView.addArrangedSubview(residentStack)
         mStackView.addArrangedSubview(tableView)
-        mStackView.addArrangedSubview(goToFavButton)
         scrollView.addSubview(mStackView)
-    }
-    
-    @objc private func favouriteButtonTapped(sender: UIButton!) {
-        let vc = self.storyboard!.instantiateViewController(withIdentifier: "FavouritesVC") as! FavouritesTableViewController
-        let navController = UINavigationController(rootViewController: vc)
-        self.present(navController, animated:true, completion: nil)
     }
     
     private func setConstraint() {
@@ -267,13 +234,12 @@ class DashboardViewController: UIViewController {
             profileNameStackView.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
             phraseStack.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
             passportStackView.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
-            goToFavButton.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor, multiplier: 0.7),
             
             profileImageView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: itemImageViewSize),
             profileImageView.heightAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: itemImageViewSize),
             
             tableView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-            tableView.heightAnchor.constraint(equalToConstant: 200),
+            tableView.heightAnchor.constraint(equalToConstant: 320),
             
             residentStack.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
             
@@ -365,9 +331,34 @@ extension DashboardViewController: UICollectionViewDelegateFlowLayout, UICollect
         
         cell.variantImage.sd_setImage(with: ImageEngine.parseAcnhURL(with: self.favouritesManager.residentVillagers[indexPath.row].image, of: Categories.villagers.rawValue, mediaType: .icons), completed: nil)
         
-        cell.variantName.text = self.favouritesManager.residentVillagers[indexPath.row].name
+        let villagerName = self.birthdayResidents.contains(self.favouritesManager.residentVillagers[indexPath.row]) ? "\(self.favouritesManager.residentVillagers[indexPath.row].name) 🎂" : self.favouritesManager.residentVillagers[indexPath.row].name
+        cell.variantName.text = villagerName
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        
+        let selectedVillager = self.favouritesManager.residentVillagers[indexPath.row]
+        let vc = self.storyboard!.instantiateViewController(withIdentifier: DETAIL_ID) as! DetailViewController
+        
+        vc.parseOject(from: .villagers, object: selectedVillager)
+        
+        let navController = UINavigationController(rootViewController: vc)
+        self.present(navController, animated:true, completion: nil)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) {
+            cell.contentView.backgroundColor = UIColor(named: ColourUtil.cream2.rawValue)?.withAlphaComponent(0.5)
+        }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) {
+            cell.contentView.backgroundColor = nil
+        }
     }
 }
 
@@ -387,77 +378,77 @@ extension DashboardViewController: ProfileDelegate {
     }
 }
 
+
 extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         switch indexPath.section {
-        // Birthday section
         case 0:
-            let cell: UITableViewCell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: BIRTHDAY_CELL)
-            let villager = birthdayResidents[indexPath.row]
-            cell.imageView?.sd_imageTransition = .fade
-            cell.imageView?.sd_imageIndicator = SDWebImageActivityIndicator.gray
-            
-            cell.imageView?.sd_setImage(with: ImageEngine.parseAcnhURL(with: villager.image, of: villager.category, mediaType: .icons)) { (image, error, cache, urls) in
-                if (error != nil) {
-                    // Failed to load image
-                } else {
-                    // Successful in loading image
-                    cell.imageView?.image = image
-                    self.tableView.reloadRows(at: [indexPath], with: .automatic)
-                }
-            }
-
-            cell.textLabel?.text = villager.name
-            cell.detailTextLabel?.text = villager.bdayString
+            let cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: FAVOURITE_CELL)
+            cell.textLabel!.text = "Favourites"
+            cell.imageView?.image = IconUtil.systemIcon(of: .starFill, weight: .regular).withRenderingMode(.alwaysTemplate)
             cell.accessoryType = .disclosureIndicator
-
-            
             return cell
         case 1:
-            let cell: UITableViewCell = self.tableView.dequeueReusableCell(withIdentifier: CRITTER_CELL)! as UITableViewCell
-            cell.textLabel!.text = "Critter cell"
-            return cell
+            switch indexPath.row {
+            case 0:
+                let cell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: CRITTER_CELL)
+                cell.textLabel!.text = "Critters this month"
+                cell.detailTextLabel?.text = "Bugs: 2/34 | Fishes: 4/32"
+                cell.accessoryType = .disclosureIndicator
+                return cell
+            case 1:
+                let cell = UITableViewCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: CRITTER_CELL)
+                cell.textLabel!.text = "Total caught bugs"
+                cell.detailTextLabel?.text = "2/80"
+                return cell
+            case 2:
+                let cell = UITableViewCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: CRITTER_CELL)
+                cell.textLabel!.text = "Total caught fishes"
+                cell.detailTextLabel?.text = "2/80"
+                
+                return cell
+            default: fatalError("Index out of range")
+            }
         default: fatalError("Indexpath out of range.")
         }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case 0: return self.birthdayResidents.count
+        case 0:
+            return 1
+        case 1:
+            return 3
         default: fatalError("Invalid rows detected.")
         }
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
-        case 0: return self.birthdayResidents.count > 1 ? "Birthdays this month" : "Birthday this month"
-        case 1: return "Critters this month"
+        case 0: return ""
+        case 1: return "Critters Information"
         default: return " "
         }
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
+        cell.tintColor =  UIColor(named: ColourUtil.dirt1.rawValue)
+        cell.textLabel?.textColor = UIColor(named: ColourUtil.dirt1.rawValue)
+        cell.detailTextLabel?.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         switch indexPath.section {
         case 0:
-            let selectedVillager = birthdayResidents[indexPath.row]
-            
-            let vc = self.storyboard!.instantiateViewController(withIdentifier: DETAIL_ID) as! DetailViewController
-            
-            vc.parseOject(from: .villagers, object: selectedVillager)
-            
+            let vc = self.storyboard!.instantiateViewController(withIdentifier: "FavouritesVC") as! FavouritesTableViewController
             let navController = UINavigationController(rootViewController: vc)
             self.present(navController, animated:true, completion: nil)
-
         case 1: print(1)
         default: fatalError("Invalid section detected")
         }
