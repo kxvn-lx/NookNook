@@ -109,6 +109,34 @@
             </objects>
             <point key="canvasLocation" x="3726" y="-296"/>
         </scene>
+        <!--Critters this Month-->
+        <scene sceneID="B73-bp-uW3">
+            <objects>
+                <tableViewController storyboardIdentifier="CrittersMonthlyVC" title="Critters this Month" id="di5-PC-bbr" customClass="CrittersMonthlyTableViewController" customModule="NookNook" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Cye-3Z-5Mc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="CritterCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="v6h-G6-MBS">
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="v6h-G6-MBS" id="3M9-JF-oJF">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="di5-PC-bbr" id="cDG-Gr-scT"/>
+                            <outlet property="delegate" destination="di5-PC-bbr" id="gce-1G-PpH"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ctN-KT-OxS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4521" y="-298"/>
+        </scene>
         <!--Critters-->
         <scene sceneID="omT-t6-fSa">
             <objects>

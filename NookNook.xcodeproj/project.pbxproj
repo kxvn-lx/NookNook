@@ -11,6 +11,7 @@
 		0A01F31224431725001499D5 /* ImageEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A01F31124431724001499D5 /* ImageEngine.swift */; };
 		0A149FF224512E7B0080941A /* ImagePersistEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A149FF124512E7B0080941A /* ImagePersistEngine.swift */; };
 		0A14A002245155A10080941A /* ResidentHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A14A001245155A10080941A /* ResidentHelper.swift */; };
+		0A14A0072451986B0080941A /* CrittersMonthlyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A14A0062451986B0080941A /* CrittersMonthlyTableViewController.swift */; };
 		0A23BBCC244ACE94009B5178 /* SortEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A23BBCB244ACE94009B5178 /* SortEngine.swift */; };
 		0A23BBCE244ADFE6009B5178 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A23BBCD244ADFE6009B5178 /* User.swift */; };
 		0A23BBD0244AE1D5009B5178 /* Fruits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A23BBCF244AE1D5009B5178 /* Fruits.swift */; };
@@ -111,6 +112,7 @@
 		0A01F31124431724001499D5 /* ImageEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEngine.swift; sourceTree = "<group>"; };
 		0A149FF124512E7B0080941A /* ImagePersistEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePersistEngine.swift; sourceTree = "<group>"; };
 		0A14A001245155A10080941A /* ResidentHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResidentHelper.swift; sourceTree = "<group>"; };
+		0A14A0062451986B0080941A /* CrittersMonthlyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrittersMonthlyTableViewController.swift; sourceTree = "<group>"; };
 		0A23BBCB244ACE94009B5178 /* SortEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortEngine.swift; sourceTree = "<group>"; };
 		0A23BBCD244ADFE6009B5178 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0A23BBCF244AE1D5009B5178 /* Fruits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fruits.swift; sourceTree = "<group>"; };
@@ -228,7 +230,7 @@
 			children = (
 				0A6862A7244D498800E06C74 /* Settings */,
 				0A97C2F9244C94EE0062B136 /* Favourites */,
-				0A739A3F244B58C500002B89 /* Profile */,
+				0A739A3F244B58C500002B89 /* Dashboard */,
 				0A01F31524431BDF001499D5 /* Home */,
 				0A01F31424431BBB001499D5 /* Items */,
 				0A7FA6A1244596FD00921079 /* Critters */,
@@ -255,6 +257,14 @@
 				0AFD70692441BA7500957BE6 /* HomeViewController.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		0A14A0052451984B0080941A /* CrittersMonthly */ = {
+			isa = PBXGroup;
+			children = (
+				0A14A0062451986B0080941A /* CrittersMonthlyTableViewController.swift */,
+			);
+			path = CrittersMonthly;
 			sourceTree = "<group>";
 		};
 		0A370B5D2443221100A72048 /* System */ = {
@@ -339,14 +349,15 @@
 			path = Detail;
 			sourceTree = "<group>";
 		};
-		0A739A3F244B58C500002B89 /* Profile */ = {
+		0A739A3F244B58C500002B89 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
+				0A14A0052451984B0080941A /* CrittersMonthly */,
 				0A739A40244B592200002B89 /* DashboardViewController.swift */,
 				0A739A42244BE55600002B89 /* ResidentCollectionViewCell.swift */,
 				0A14A001245155A10080941A /* ResidentHelper.swift */,
 			);
-			path = Profile;
+			path = Dashboard;
 			sourceTree = "<group>";
 		};
 		0A7FA6A1244596FD00921079 /* Critters */ = {
@@ -583,6 +594,7 @@
 				0AC89E402449418B009ADB18 /* VillagerTableViewCell.swift in Sources */,
 				0A23BBCC244ACE94009B5178 /* SortEngine.swift in Sources */,
 				0A295B4A244494F9001CF828 /* Categories.swift in Sources */,
+				0A14A0072451986B0080941A /* CrittersMonthlyTableViewController.swift in Sources */,
 				0A370B5F2443223D00A72048 /* VC+.swift in Sources */,
 				0A23BBD0244AE1D5009B5178 /* Fruits.swift in Sources */,
 				0A23BBCE244ADFE6009B5178 /* User.swift in Sources */,

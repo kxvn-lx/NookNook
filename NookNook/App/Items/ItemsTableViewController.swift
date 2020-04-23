@@ -95,11 +95,14 @@ class ItemsTableViewController: UITableViewController {
                 item = items[indexPath.row]
             }
             
+            itemCell.buyLabel.font = UIFont.preferredFont(forTextStyle: .caption2)
+            itemCell.sellLabel.font = UIFont.preferredFont(forTextStyle: .caption2)
+            
             itemCell.imgView.sd_setImage(with: ImageEngine.parseNPURL(with: item.image!), placeholderImage: nil)
             itemCell.nameLabel.text = item.name
             itemCell.obtainedFromLabel.text = item.obtainedFrom
-            itemCell.buyLabel.attributedText = PriceEngine.renderPrice(amount: item.buy, with: .buy, of: 12)
-            itemCell.sellLabel.attributedText = PriceEngine.renderPrice(amount: item.sell, with: .sell, of: 12)
+            itemCell.buyLabel.attributedText = PriceEngine.renderPrice(amount: item.buy, with: .buy, of: itemCell.buyLabel.font.pointSize)
+            itemCell.sellLabel.attributedText = PriceEngine.renderPrice(amount: item.sell, with: .sell, of: itemCell.sellLabel.font.pointSize)
             
             itemCell.isFavImageView.image = self.favouritesManager.items.contains(item) ?  IconUtil.systemIcon(of: IconUtil.IconName.starFill, weight: .thin) : nil
             if item.variants != nil {

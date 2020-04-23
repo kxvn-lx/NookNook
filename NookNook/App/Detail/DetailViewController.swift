@@ -41,6 +41,7 @@ class DetailViewController: UIViewController {
     private var rarityLabel: UIButton!
     private var activeTimeN: UILabel!
     private var activeTimeS: UILabel!
+    private var timeLabel: UILabel!
     
     private var firstIconLabel: PaddingLabel!
     private var secondIconLabel: PaddingLabel!
@@ -53,6 +54,7 @@ class DetailViewController: UIViewController {
     private var specialSellStack: UIStackView!
     private var weatherStack: UIStackView!
     private var activeTimeStack: UIStackView!
+    private var timeStack: UIStackView!
     private var variationStack: UIStackView!
     private var variationTitleLabel: UILabel!
     let variationImageCollectionView:UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
@@ -116,6 +118,7 @@ class DetailViewController: UIViewController {
             rarityLabel.isHidden = true
             specialSellStack.isHidden = true
             iconStackView.isHidden = true
+            timeStack.isHidden = true
             
         case .critters:
             renderCritter()
@@ -129,6 +132,7 @@ class DetailViewController: UIViewController {
             weatherStack.isHidden = true
             rarityLabel.isHidden = true
             specialSellStack.isHidden = true
+            timeStack.isHidden = true
             
         case .villagers:
             renderVillager()
@@ -136,6 +140,7 @@ class DetailViewController: UIViewController {
             variationStack.isHidden = true
             activeTimeStack.isHidden = true
             specialSellStack.isHidden = true
+            timeStack.isHidden = true
             let species = sellStack.viewWithTag(1) as! UILabel
             species.text = "Species"
             
@@ -182,9 +187,10 @@ class DetailViewController: UIViewController {
         specialSellLabel.attributedText = PriceEngine.renderPrice(amount: Int(Double(specialSell) * 1.5), with: .none, of: buyLabel.font.pointSize)
         weatherLabel.text = critterObj.weather
         rarityLabel.setTitle(critterObj.rarity, for: .normal)
-        activeTimeN.text = TimeEngine.formatMonth(of: critterObj.activeMonthsN)
-        activeTimeS.text = TimeEngine.formatMonth(of: critterObj.activeMonthsS)
+        activeTimeN.text = TimeEngine.renderMonth(monthInString: critterObj.activeMonthsN)
+        activeTimeS.text = TimeEngine.renderMonth(monthInString: critterObj.activeMonthsS)
         weatherStack.isHidden = critterObj.weather.isEmpty ? true : false
+        timeLabel.text = TimeEngine.formatTime(of: critterObj.time)
         
         firstIconLabel.text = self.favouriteManager.donatedCritters.contains(critterObj) ? "Donated" : ""
         secondIconLabel.text = self.favouriteManager.caughtCritters.contains(critterObj) ? "Caught" : ""
@@ -258,6 +264,7 @@ class DetailViewController: UIViewController {
         subtitleLabel = UILabel()
         rarityLabel = UIButton()
         specialSellLabel = UILabel()
+        timeLabel = UILabel()
         firstIconLabel = PaddingLabel(withInsets: 5, 5, 10, 10)
         secondIconLabel = PaddingLabel(withInsets: 5, 5, 10, 10)
         
@@ -350,10 +357,12 @@ class DetailViewController: UIViewController {
         sellLabel.textColor = UIColor(named: ColourUtil.gold1.rawValue)
         specialSellLabel.textColor = UIColor(named: ColourUtil.gold1.rawValue)
         weatherLabel.textColor = UIColor(named: ColourUtil.gold1.rawValue)
+        timeLabel.textColor = UIColor(named: ColourUtil.gold1.rawValue)
 
         buyStack = createInfoStackView(title: "Buy", with: buyLabel)
         sellStack = createInfoStackView(title: "Sell", with: sellLabel)
         specialSellStack = createInfoStackView(title: "Special sell price", with: specialSellLabel)
+        timeStack = createInfoStackView(title: "Active time", with: timeLabel)
 
         if let critterObj = critterObj {
             let t = critterObj.category == Categories.fishes.rawValue ? "CJ sell price" : "Flick sell price"
@@ -366,6 +375,7 @@ class DetailViewController: UIViewController {
         infoStackView.addArrangedSubview(sellStack)
         infoStackView.addArrangedSubview(specialSellStack)
         infoStackView.addArrangedSubview(weatherStack)
+        infoStackView.addArrangedSubview(timeStack)
         
         
         // Active time period section
@@ -376,12 +386,16 @@ class DetailViewController: UIViewController {
         
         activeTimeN.textColor = UIColor(named: ColourUtil.gold1.rawValue)
         activeTimeS.textColor = UIColor(named: ColourUtil.gold1.rawValue)
+        activeTimeN.numberOfLines = 0
+        activeTimeS.numberOfLines = 0
+        activeTimeN.textAlignment = .right
+        activeTimeS.textAlignment = .right
         
         activeTimeNStack = createInfoStackView(title: "Northern Hemisphere", with: activeTimeN)
         activeTimeSStack = createInfoStackView(title: "Southern Hemisphere", with: activeTimeS)
         
         let activeTimeLabel = UILabel()
-        activeTimeLabel.text = "Active Time"
+        activeTimeLabel.text = "Active Months"
         activeTimeLabel.numberOfLines = 0
         activeTimeLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         activeTimeLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)

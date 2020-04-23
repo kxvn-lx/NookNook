@@ -239,7 +239,7 @@ class DashboardViewController: UIViewController {
             profileImageView.heightAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: itemImageViewSize),
             
             tableView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-            tableView.heightAnchor.constraint(equalToConstant: 320),
+            tableView.heightAnchor.constraint(equalToConstant: 340),
             
             residentStack.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
             
@@ -397,15 +397,22 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.accessoryType = .disclosureIndicator
                 return cell
             case 1:
+                let totalBugsCount = DataEngine.loadCritterJSON(from: .bugsMain).count
+                let caughtBugsCount = self.favouritesManager.caughtCritters.filter( {$0.category == Categories.bugs.rawValue} ).count
+                let percentageCount = (Float(caughtBugsCount) / Float(totalBugsCount)) * 100
+                
                 let cell = UITableViewCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: CRITTER_CELL)
-                cell.textLabel!.text = "Total caught bugs"
-                cell.detailTextLabel?.text = "2/80"
+                cell.textLabel!.text = "Total bugs caught (\(percentageCount)%)"
+                cell.detailTextLabel?.text = "\(caughtBugsCount)/\(totalBugsCount)"
                 return cell
             case 2:
-                let cell = UITableViewCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: CRITTER_CELL)
-                cell.textLabel!.text = "Total caught fishes"
-                cell.detailTextLabel?.text = "2/80"
+                let totalFishesCount = DataEngine.loadCritterJSON(from: .fishesMain).count
+                let caughtFishesCount = self.favouritesManager.caughtCritters.filter( {$0.category == Categories.fishes.rawValue} ).count
+                let percentageCount = (Float(caughtFishesCount) / Float(totalFishesCount)) * 100
                 
+                let cell = UITableViewCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: CRITTER_CELL)
+                cell.textLabel!.text = "Total fishes caught (\(percentageCount)%)"
+                cell.detailTextLabel?.text = "\(caughtFishesCount)/\(totalFishesCount)"
                 return cell
             default: fatalError("Index out of range")
             }
@@ -449,7 +456,16 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
             let vc = self.storyboard!.instantiateViewController(withIdentifier: "FavouritesVC") as! FavouritesTableViewController
             let navController = UINavigationController(rootViewController: vc)
             self.present(navController, animated:true, completion: nil)
-        case 1: print(1)
+        case 1:
+            switch indexPath.row {
+            case 0:
+                let vc = self.storyboard!.instantiateViewController(withIdentifier: "CrittersMonthlyVC") as! CrittersMonthlyTableViewController
+                let navController = UINavigationController(rootViewController: vc)
+                self.present(navController, animated:true, completion: nil)
+            case 1: break
+            case 2: break
+            default: fatalError("Invalid index")
+            }
         default: fatalError("Invalid section detected")
         }
     }

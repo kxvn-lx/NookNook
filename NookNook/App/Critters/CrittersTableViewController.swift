@@ -11,7 +11,7 @@ import SDWebImage
 
 class CrittersTableViewController: UITableViewController {
     
-    let CRITTER_CELL = "CritterCell"
+    private let CRITTER_CELL = "CritterCell"
     private let DETAIL_ID = "Detail"
     
     private var favouritesManager: PersistEngine!
@@ -46,6 +46,7 @@ class CrittersTableViewController: UITableViewController {
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search \(critters.count) critters..."
         navigationItem.searchController = searchController
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
