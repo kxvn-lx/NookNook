@@ -73,7 +73,7 @@ class FavouritesTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        super.viewWillAppear(animated)
         navigationItem.searchController = search
     }
     
@@ -253,6 +253,8 @@ class FavouritesTableViewController: UITableViewController {
             tableView.deleteRows(at: [indexPath], with: .left)
         }
     }
+    
+    
     
     @objc func changeSource(sender: UISegmentedControl) {
         Taptic.lightTaptic()

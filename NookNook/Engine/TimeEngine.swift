@@ -46,7 +46,7 @@ struct TimeEngine {
     
 
     /**
-     Render a month format for better viewing. Since we only assume that Critters are the one dependent with time, this method is explicit for Critter object.
+     Render a month format in an array of Int. Since we only assume that Critters are the one dependent with time, this method is explicit for Critter object.
      - Parameters:
         - month: The month in string format.
      - Returns:
@@ -54,7 +54,7 @@ struct TimeEngine {
                 - -1 means empty
                 - -2 means function does not meet any requirements.
      */
-    private static func formatMonths(month: String) -> [Int] {
+    static func formatMonths(month: String) -> [Int] {
         if month.isEmpty {
             return [-1]
         }
