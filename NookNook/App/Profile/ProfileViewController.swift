@@ -55,10 +55,6 @@ class ProfileViewController: UIViewController {
         setupProfile()
         
         self.variationImageCollectionView.register(ResidentCollectionViewCell.self, forCellWithReuseIdentifier: VARIANT_CELL)
-        
-        if isEmptyLists(dicts: userDict) {
-            presentAlert(title: "hey there!", message: "Please head to setting and fill out the user detail form for a better app experience (:")
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -72,6 +68,13 @@ class ProfileViewController: UIViewController {
         setupProfile()
         residentLabel.text = "Your Resident: \(self.favouritesManager.residentVillagers.count)/10"
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        if isEmptyLists(dicts: userDict) {
+            presentAlert(title: "hey there!", message: "Please head to setting and fill out the user detail form for a better app experience (:")
+        }
     }
     
     

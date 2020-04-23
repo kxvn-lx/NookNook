@@ -9,7 +9,7 @@
 import UIKit
 import TweeTextField
 
-class EditInfoViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class EditInfoViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate {
     
     private var userDict: [String: String]!
     
@@ -50,6 +50,9 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         
         setupProfile()
         
+        self.nameTF.delegate = self
+        self.islandNameTF.delegate = self
+        
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
         imgWrapper.isUserInteractionEnabled = true
         imgWrapper.addGestureRecognizer(tapGestureRecognizer)
@@ -61,6 +64,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         userDict = UDHelper.getUser()
         favouritesManager = PersistEngine()
     }
+    
     
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
         if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum){
@@ -152,7 +156,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         nameTF.animationDuration = 0.25
         nameTF.activeLineColor = (UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.8))!
         nameTF.textColor = UIColor(named: ColourUtil.dirt1.rawValue)
-        nameTF.lineColor = (UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5))!
+        nameTF.lineColor = (UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.3))!
         nameTF.lineWidth = 1
         nameTF.minimumPlaceholderFontSize = nameTF.font!.pointSize - 6
         nameTF.originalPlaceholderFontSize = nameTF.font!.pointSize - 2
@@ -172,7 +176,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         islandNameTF.clearButtonMode = .always
         islandNameTF.clearButtonMode = .whileEditing
         islandNameTF.textColor = UIColor(named: ColourUtil.dirt1.rawValue)
-        islandNameTF.lineColor = (UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.4))!
+        islandNameTF.lineColor = (UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.3))!
         islandNameTF.lineWidth = 1
         islandNameTF.minimumPlaceholderFontSize = nameTF.font!.pointSize - 6
         islandNameTF.originalPlaceholderFontSize = nameTF.font!.pointSize - 2
@@ -251,8 +255,13 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         sender.hideInfo()
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+    
     @objc private func saveTapped(sender: UIButton!) {
-        if !nameTF.text!.trimmingCharacters(in: .whitespaces).isEmpty || !islandNameTF.text!.trimmingCharacters(in: .whitespaces).isEmpty {
+        if !nameTF.text!.trimmingCharacters(in: .whitespaces).isEmpty && !islandNameTF.text!.trimmingCharacters(in: .whitespaces).isEmpty {
             let user = User(name: nameTF.text!, islandName: islandNameTF.text!, nativeFruit: selectedFruit, hemisphere: .South, image: nil)
             UDHelper.saveUser(user: user)
             Taptic.successTaptic()
@@ -374,6 +383,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
 extension EditInfoViewController: FruitsDelegate {
     func changeFruit(fruit: Fruits) {
         selectedFruit = fruit.rawValue
-        self.fruitLabel.text = fruit.rawValue
+        self.fruitLabel.attributedText = renderFruitLabel(text: selectedFruit)
+        
     }
 }
