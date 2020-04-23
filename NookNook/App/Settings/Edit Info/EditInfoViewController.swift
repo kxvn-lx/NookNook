@@ -114,10 +114,9 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         nameTF.text = userDict["name"]
         islandNameTF.text = "\(userDict["islandName"] ?? "")"
         selectedFruit = userDict["nativeFruit"] ?? ""
-        fruitLabel.attributedText = renderFruitLabel(text: userDict["nativeFruit"] ?? "")
+        fruitLabel.attributedText = renderFruitLabel(text: userDict["nativeFruit"] ?? "Not selected")
         hemispherePicker.selectedSegmentIndex = userDict["hemisphere"] == DateHelper.Hemisphere.Northern.rawValue ? 0 : 1
-        selectedHemisphere = userDict["hemisphere"].map { DateHelper.Hemisphere(rawValue: $0) ?? DateHelper.Hemisphere(rawValue: DateHelper.Hemisphere.Southern.rawValue)! }
-        
+        selectedHemisphere = userDict["hemisphere"].map { DateHelper.Hemisphere(rawValue: $0) ?? DateHelper.Hemisphere.Southern } == nil ? DateHelper.Hemisphere.Southern : userDict["hemisphere"].map { DateHelper.Hemisphere(rawValue: $0)! }
         if let img = ImagePersistEngine.loadImage() {
             profileImageView.image = img
         } 
@@ -287,7 +286,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
     }
     
     @objc private func saveTapped(sender: UIButton!) {
-        if !nameTF.text!.trimmingCharacters(in: .whitespaces).isEmpty && !islandNameTF.text!.trimmingCharacters(in: .whitespaces).isEmpty {
+        if !nameTF.text!.trimmingCharacters(in: .whitespaces).isEmpty && !islandNameTF.text!.trimmingCharacters(in: .whitespaces).isEmpty && !selectedFruit.isEmpty {
             let user = User(name: nameTF.text!, islandName: islandNameTF.text!, nativeFruit: selectedFruit, hemisphere: selectedHemisphere)
             UDHelper.saveUser(user: user)
             

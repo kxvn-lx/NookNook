@@ -32,6 +32,8 @@ class DashboardViewController: UIViewController {
     private var residentStack: UIStackView!
     private var phraseStack: UIStackView!
     
+    private var isFirstLoad = true
+    
     var phraseLabel: UILabel!
     
     var profileImageView: UIImageView!
@@ -67,9 +69,15 @@ class DashboardViewController: UIViewController {
         self.variationImageCollectionView.register(ResidentCollectionViewCell.self, forCellWithReuseIdentifier: VARIANT_CELL)
         
         tableView.rowHeight = 50
-        
-        if isEmptyLists(dicts: userDict) {
-            presentAlert(title: "hey there!", message: "Please head to settings and fill out the user detail for a better app experience! 😁")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if isFirstLoad {
+            if isEmptyLists(dicts: userDict) {
+                presentAlert(title: "hey there!", message: "Please head to settings and fill out the user detail for a better app experience! 😁")
+            }
+            isFirstLoad = false
         }
     }
     

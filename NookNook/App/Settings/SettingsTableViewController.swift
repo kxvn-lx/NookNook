@@ -45,7 +45,7 @@ class SettingsTableViewController: UITableViewController {
         
         reportBugCell = setupCell(text: "Report a Bug", icon:  IconUtil.systemIcon(of: .bug, weight: .regular), accesoryType: .disclosureIndicator)
         
-        deleteDatasCell  = setupCell(text: "Delete App data", icon:  IconUtil.systemIcon(of: .deleteData, weight: .regular), accesoryType: .none)
+        deleteDatasCell  = setupCell(text: "Delete app data", icon:  IconUtil.systemIcon(of: .deleteData, weight: .regular), accesoryType: .none)
         deleteDatasCell.textLabel?.textColor = .red
         deleteDatasCell.imageView?.tintColor = .red
         
@@ -106,6 +106,15 @@ class SettingsTableViewController: UITableViewController {
         case 0: return "Edit info"
         case 1: return ""
         case 2: return "Danger Zone"
+        default: fatalError("Unknown section")
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        switch section {
+        case 0: return ""
+        case 1: return ""
+        case 2: return "Delete cached data: The app will clear all cached images and could potentially could free up some space.\n\nDelete app data: The app will clear all stored favourites, donated/caught critters, and residents data. This could also free up some space."
         default: fatalError("Unknown section")
         }
     }
