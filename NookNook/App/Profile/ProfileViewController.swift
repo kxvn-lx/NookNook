@@ -113,7 +113,7 @@ class ProfileViewController: UIViewController {
             profileImageView.image = img
         }
         
-        phraseLabel.text = "Good \(DateHelper.renderGreet())!\nIt's \(DateHelper.renderSeason(hemisphere: static_user.hemisphere)) ━ \(DateHelper.renderDate())."
+        phraseLabel.text = "Good \(DateHelper.renderGreet())!\nIt's \(DateHelper.renderSeason(hemisphere: userDict["hemisphere"] ?? DateHelper.Hemisphere.Southern.rawValue)) ━ \(DateHelper.renderDate())."
         
     }
     

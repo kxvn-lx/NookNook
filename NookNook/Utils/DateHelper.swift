@@ -18,7 +18,8 @@ struct DateHelper {
     }
     
     enum Hemisphere: String, Codable {
-        case North, South
+        case Northern = "Northern Hemisphere"
+        case Southern = "Southern Hemisphere"
     }
     
     private static let days = ["Sunday", "Monday", "Tuesday", "Wedneday", "Thursday", "Friday", "Saturday"]
@@ -31,8 +32,8 @@ struct DateHelper {
     - Returns:
         - The season
      */
-    static func renderSeason(hemisphere: Hemisphere) -> Seasons {
-        let isNorthern = hemisphere == Hemisphere.North
+    static func renderSeason(hemisphere: String) -> Seasons {
+        let isNorthern = hemisphere == Hemisphere.Northern.rawValue
         let date = Date()
         let format = DateFormatter()
         format.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -60,8 +61,7 @@ struct DateHelper {
 
         switch hour {
         case 6..<12 : return "Morning"
-        case 12 : return "Noon"
-        case 13..<17 : return "Afternoon"
+        case 12..<17 : return "Afternoon"
         case 17..<22 : return "Evening"
         case 23,24,1..<6 : return "Evening"
         default: return "Day"

@@ -34,6 +34,8 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
     var nativeFruitButton: UIButton!
     var fruitLabel: UILabel!
     var selectedFruit: String!
+    var selectedHemisphere: DateHelper.Hemisphere!
+    var hemispherePicker: UISegmentedControl!
     
     var saveButton: UIButton!
     
@@ -113,6 +115,8 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         islandNameTF.text = "\(userDict["islandName"] ?? "")"
         selectedFruit = userDict["nativeFruit"] ?? ""
         fruitLabel.attributedText = renderFruitLabel(text: userDict["nativeFruit"] ?? "")
+        hemispherePicker.selectedSegmentIndex = userDict["hemisphere"] == DateHelper.Hemisphere.Northern.rawValue ? 0 : 1
+        selectedHemisphere = userDict["hemisphere"].map { DateHelper.Hemisphere(rawValue: $0)! }
         
         if let img = ImagePersistEngine.loadImage() {
             profileImageView.image = img
@@ -190,7 +194,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         profileNameStackView = SVHelper.createSV(axis: .vertical, spacing: MARGIN * 4, alignment: .leading, distribution: .fill)
         profileNameStackView.translatesAutoresizingMaskIntoConstraints = false
         
-        labelSV = SVHelper.createSV(axis: .vertical, spacing: MARGIN * 5, alignment: .center, distribution: .fillProportionally)
+        labelSV = SVHelper.createSV(axis: .vertical, spacing: MARGIN * 4, alignment: .center, distribution: .fillProportionally)
         labelSV.translatesAutoresizingMaskIntoConstraints = false
 
         fruitLabel = UILabel()
@@ -214,6 +218,11 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         nativeFruitButton.addTarget(self, action: #selector(fruitPicker), for: .touchUpInside)
         nativeFruitButton.setTitle("Change fruit", for: .normal)
         
+        
+        hemispherePicker = UISegmentedControl(items: [DateHelper.Hemisphere.Northern.rawValue, DateHelper.Hemisphere.Southern.rawValue])
+        hemispherePicker.addTarget(self, action:  #selector(hemispherePickerChanged), for: .valueChanged)
+        
+        
         saveButton = UIButton()
         saveButton.translatesAutoresizingMaskIntoConstraints = false
         saveButton.contentEdgeInsets = UIEdgeInsets(top: 15, left: 20, bottom: 15, right: 20)
@@ -231,6 +240,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
 
         labelSV.addArrangedSubview(nameTF)
         labelSV.addArrangedSubview(islandNameTF)
+        labelSV.addArrangedSubview(hemispherePicker)
         labelSV.addArrangedSubview(fruitLabel)
         labelSV.addArrangedSubview(nativeFruitButton)
         
@@ -244,7 +254,20 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         scrollView.addSubview(mStackView)
     }
     
-    @objc func textfieldEventEnd(_ sender: TweeAttributedTextField) {
+    @objc func hemispherePickerChanged(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            selectedHemisphere = .Northern
+            Taptic.lightTaptic()
+        case 1:
+            selectedHemisphere = .Southern
+            Taptic.lightTaptic()
+        default:
+            fatalError("Hemisphere Picker out of range")
+        }
+    }
+    
+    @objc private func textfieldEventEnd(_ sender: TweeAttributedTextField) {
         if sender.text!.trimmingCharacters(in: .whitespaces).isEmpty {
             if nameTF == sender {
                 sender.showInfo("You cannot have an empty name.")
@@ -254,7 +277,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         }
     }
     
-    @objc func textfieldEventBegin(_ sender: TweeAttributedTextField) {
+    @objc private func textfieldEventBegin(_ sender: TweeAttributedTextField) {
         sender.hideInfo()
     }
     
@@ -265,13 +288,14 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
     
     @objc private func saveTapped(sender: UIButton!) {
         if !nameTF.text!.trimmingCharacters(in: .whitespaces).isEmpty && !islandNameTF.text!.trimmingCharacters(in: .whitespaces).isEmpty {
-            let user = User(name: nameTF.text!, islandName: islandNameTF.text!, nativeFruit: selectedFruit, hemisphere: .South, image: nil)
+            let user = User(name: nameTF.text!, islandName: islandNameTF.text!, nativeFruit: selectedFruit, hemisphere: selectedHemisphere)
             UDHelper.saveUser(user: user)
             
             // Save user image
             if let img = self.profileImageView.image {
                 ImagePersistEngine.saveImage(image: img)
             }
+            
             
             Taptic.successTaptic()
             self.closeTapped()
