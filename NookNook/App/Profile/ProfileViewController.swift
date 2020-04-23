@@ -108,7 +108,10 @@ class ProfileViewController: UIViewController {
         profileNameLabel.text = userDict["name"] ?? "Not provided"
         islandNameLabel.text = "\(userDict["islandName"] ?? "Not provided") 🏝"
         nativeFruitLabel.text = userDict["nativeFruit"] ?? "Not provided"
-        profileImageView.image = UIImage(named: "profile")
+        
+        if let img = ImagePersistEngine.loadImage() {
+            profileImageView.image = img
+        }
         
         phraseLabel.text = "Good \(DateHelper.renderGreet())!\nIt's \(DateHelper.renderSeason(hemisphere: static_user.hemisphere)) ━ \(DateHelper.renderDate())."
         
@@ -131,6 +134,7 @@ class ProfileViewController: UIViewController {
         profileImageView.contentMode = .scaleAspectFill
         profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2
         profileImageView.clipsToBounds = true
+        profileImageView.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
         
         profileNameLabel = UILabel()
         profileNameLabel.translatesAutoresizingMaskIntoConstraints = false

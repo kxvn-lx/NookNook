@@ -67,9 +67,9 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
     
     
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
-        if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum){
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
             imagePicker.delegate = self
-            imagePicker.sourceType = .savedPhotosAlbum
+            imagePicker.sourceType = .photoLibrary
             imagePicker.allowsEditing = false
             present(imagePicker, animated: true, completion: nil)
         }
@@ -113,7 +113,10 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         islandNameTF.text = "\(userDict["islandName"] ?? "")"
         selectedFruit = userDict["nativeFruit"] ?? ""
         fruitLabel.attributedText = renderFruitLabel(text: userDict["nativeFruit"] ?? "")
-//        profileImageView.image = UIImage(named: "profile")
+        
+        if let img = ImagePersistEngine.loadImage() {
+            profileImageView.image = img
+        } 
     }
     
     private func setUI() {
@@ -264,6 +267,12 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         if !nameTF.text!.trimmingCharacters(in: .whitespaces).isEmpty && !islandNameTF.text!.trimmingCharacters(in: .whitespaces).isEmpty {
             let user = User(name: nameTF.text!, islandName: islandNameTF.text!, nativeFruit: selectedFruit, hemisphere: .South, image: nil)
             UDHelper.saveUser(user: user)
+            
+            // Save user image
+            if let img = self.profileImageView.image {
+                ImagePersistEngine.saveImage(image: img)
+            }
+            
             Taptic.successTaptic()
             self.closeTapped()
         }
@@ -279,13 +288,6 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         
         let vc = self.storyboard!.instantiateViewController(withIdentifier: FRUIT_ID) as! FruitsTableViewController
         vc.fruitsDelegate = self
-        let navController = UINavigationController(rootViewController: vc)
-        self.present(navController, animated:true, completion: nil)
-    }
-    
-    @objc private func imageTapped(sender: UIButton!) {
-        let vc = self.storyboard!.instantiateViewController(withIdentifier: "FavouritesVC") as! FavouritesTableViewController
-        
         let navController = UINavigationController(rootViewController: vc)
         self.present(navController, animated:true, completion: nil)
     }

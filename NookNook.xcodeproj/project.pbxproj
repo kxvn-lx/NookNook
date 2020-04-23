@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0A01F3102442DB8A001499D5 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 0A01F30F2442DB8A001499D5 /* SDWebImage */; };
 		0A01F31224431725001499D5 /* ImageEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A01F31124431724001499D5 /* ImageEngine.swift */; };
+		0A149FF224512E7B0080941A /* ImagePersistEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A149FF124512E7B0080941A /* ImagePersistEngine.swift */; };
 		0A23BBCC244ACE94009B5178 /* SortEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A23BBCB244ACE94009B5178 /* SortEngine.swift */; };
 		0A23BBCE244ADFE6009B5178 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A23BBCD244ADFE6009B5178 /* User.swift */; };
 		0A23BBD0244AE1D5009B5178 /* Fruits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A23BBCF244AE1D5009B5178 /* Fruits.swift */; };
@@ -107,6 +108,7 @@
 
 /* Begin PBXFileReference section */
 		0A01F31124431724001499D5 /* ImageEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEngine.swift; sourceTree = "<group>"; };
+		0A149FF124512E7B0080941A /* ImagePersistEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePersistEngine.swift; sourceTree = "<group>"; };
 		0A23BBCB244ACE94009B5178 /* SortEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortEngine.swift; sourceTree = "<group>"; };
 		0A23BBCD244ADFE6009B5178 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0A23BBCF244AE1D5009B5178 /* Fruits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fruits.swift; sourceTree = "<group>"; };
@@ -214,6 +216,7 @@
 				0A23BBCB244ACE94009B5178 /* SortEngine.swift */,
 				0A370B6B2444467900A72048 /* PriceEngine.swift */,
 				0A887F9024508F280044EAEA /* UDHelper.swift */,
+				0A149FF124512E7B0080941A /* ImagePersistEngine.swift */,
 			);
 			path = Engine;
 			sourceTree = "<group>";
@@ -606,6 +609,7 @@
 				0AC89E422449419A009ADB18 /* VillagersTableViewController.swift in Sources */,
 				0AFD706C2441BFEE00957BE6 /* ItemsTableViewController.swift in Sources */,
 				0A01F31224431725001499D5 /* ImageEngine.swift in Sources */,
+				0A149FF224512E7B0080941A /* ImagePersistEngine.swift in Sources */,
 				0AFD70732441D2B200957BE6 /* ItemTableViewCell.swift in Sources */,
 				0AEFF82D24470EC30032156C /* WardrobetabTableViewCell.swift in Sources */,
 				0AFD706A2441BA7500957BE6 /* HomeViewController.swift in Sources */,
