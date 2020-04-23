@@ -17,8 +17,10 @@ class CrittersMonthlyTableViewController: UITableViewController {
     
     private var favouritesManager = PersistEngine()
     
+    weak var profileDelegate: ProfileDelegate!
+    
     private var currentGroup = GroupType.bugs
-    private var userHemisphere: DateHelper.Hemisphere!
+    private var userHemisphere: DateHelper.Hemisphere?
     
     private var sc: UISegmentedControl!
     private var scView: UIView!
@@ -56,25 +58,27 @@ class CrittersMonthlyTableViewController: UITableViewController {
         tableView.estimatedRowHeight = 100
         
         userHemisphere = UDHelper.getUser()["hemisphere"].map { (DateHelper.Hemisphere(rawValue: $0) ?? DateHelper.Hemisphere.Southern) }
-        (bugs, fishes) = parseCritter(userHemisphere: userHemisphere)
+        (bugs, fishes) = CritterHelper.parseCritter(userHemisphere: userHemisphere ?? DateHelper.Hemisphere.Southern)
         
         setBar()
+        
         scView = SCHelper.createSC(items: items)
         sc = scView.viewWithTag(1) as? UISegmentedControl
         sc.selectedSegmentIndex = 0
         sc.addTarget(self, action:  #selector(changeSource), for: .valueChanged)
         
-        
         search.searchResultsUpdater = self
         search.obscuresBackgroundDuringPresentation = false
         search.searchBar.placeholder = "Search critters..."
+        
+        self.isModalInPresentation = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         userHemisphere = UDHelper.getUser()["hemisphere"].map { (DateHelper.Hemisphere(rawValue: $0) ?? DateHelper.Hemisphere.Southern) }
-        (bugs, fishes) = parseCritter(userHemisphere: userHemisphere)
+        ( bugs, fishes ) = CritterHelper.parseCritter(userHemisphere: userHemisphere ?? DateHelper.Hemisphere.Southern)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -184,7 +188,7 @@ class CrittersMonthlyTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return scView
     }
-    
+
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 100
     }
@@ -212,6 +216,10 @@ class CrittersMonthlyTableViewController: UITableViewController {
         }
         
         let caughtAction = UIContextualAction(style: .normal, title:  "Caught", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            
+            if self.favouritesManager.donatedCritters.contains(critter) {
+                self.favouritesManager.saveDonatedCritter(critter: critter)
+            }
             
             self.favouritesManager.saveCaughtCritter(critter: critter)
             DispatchQueue.main.async {
@@ -270,6 +278,9 @@ class CrittersMonthlyTableViewController: UITableViewController {
     }
     
     @objc private func closeTapped() {
+        if let profileDelegate = profileDelegate {
+            profileDelegate.updateprofile()
+        }
         navigationController?.popViewController(animated: true)
         dismiss(animated: true, completion: nil)
     }
@@ -289,60 +300,6 @@ class CrittersMonthlyTableViewController: UITableViewController {
         
         tableView.reloadData()
     }
-    
-    private func parseCritter(userHemisphere: DateHelper.Hemisphere) -> ([Critter], [Critter]) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "M"
-        let currMonthInt = Int(dateFormatter.string(from: Date()))!
-        
-        
-        var northernBugs: [Critter] = []
-        var northernFishes: [Critter] = []
-        
-        var southernBugs: [Critter] = []
-        var southernFishes: [Critter] = []
-        
-        let allBugs = DataEngine.loadCritterJSON(from: .bugsMain)
-        let allFishes = DataEngine.loadCritterJSON(from: .fishesMain)
-        
-        switch userHemisphere {
-        case .Northern:
-            allBugs.forEach({
-                if TimeEngine.formatMonths(month: $0.activeMonthsN).contains(currMonthInt) || TimeEngine.formatMonths(month: $0.activeMonthsN) == [-1] {
-                    // bug is in season for northern region.
-                    northernBugs.append($0)
-                }
-            })
-            allFishes.forEach({
-                if TimeEngine.formatMonths(month: $0.activeMonthsN).contains(currMonthInt) || TimeEngine.formatMonths(month: $0.activeMonthsN) == [-1] {
-                    // fish is in season for northern region.
-                    northernFishes.append($0)
-                }
-            })
-        case .Southern:
-            allBugs.forEach({
-                if TimeEngine.formatMonths(month: $0.activeMonthsS).contains(currMonthInt) || TimeEngine.formatMonths(month: $0.activeMonthsS) == [-1] {
-                    // bug is in season for northern region.
-                    southernBugs.append($0)
-                }
-            })
-            allFishes.forEach({
-                if TimeEngine.formatMonths(month: $0.activeMonthsS).contains(currMonthInt) || TimeEngine.formatMonths(month: $0.activeMonthsS) == [-1] {
-                    // fish is in season for northern region.
-                    southernFishes.append($0)
-                }
-            })
-        }
-        
-        
-        switch userHemisphere {
-        case .Northern:
-            return (northernBugs, northernFishes)
-        case .Southern:
-            return (southernBugs, southernFishes)
-        }
-    }
-    
 }
 
 extension CrittersMonthlyTableViewController: UISearchResultsUpdating {

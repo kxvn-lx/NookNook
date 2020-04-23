@@ -176,6 +176,9 @@ class CrittersTableViewController: UITableViewController {
         
         let caughtAction = UIContextualAction(style: .normal, title:  "Caught", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             
+            if !self.favouritesManager.donatedCritters.contains(critter) {
+                self.favouritesManager.saveDonatedCritter(critter: critter)
+            }
             self.favouritesManager.saveCaughtCritter(critter: critter)
             DispatchQueue.main.async {
                 self.tableView.reloadRows(at: [indexPath], with: .left)

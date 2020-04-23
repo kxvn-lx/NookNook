@@ -76,6 +76,7 @@
 		0AADD4192448ADB4004FDA33 /* bugsMain.json in Resources */ = {isa = PBXBuildFile; fileRef = 0AADD4172448ADB4004FDA33 /* bugsMain.json */; };
 		0AADD41A2448ADB4004FDA33 /* fishesMain.json in Resources */ = {isa = PBXBuildFile; fileRef = 0AADD4182448ADB4004FDA33 /* fishesMain.json */; };
 		0AC54AF2244DF17600AD1188 /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0AC703B42451C749008D7C77 /* CritterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC703B32451C749008D7C77 /* CritterHelper.swift */; };
 		0AC89E402449418B009ADB18 /* VillagerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC89E3F2449418B009ADB18 /* VillagerTableViewCell.swift */; };
 		0AC89E422449419A009ADB18 /* VillagersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC89E412449419A009ADB18 /* VillagersTableViewController.swift */; };
 		0AEFF82B24470EAF0032156C /* WardrobesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEFF82A24470EAF0032156C /* WardrobesTableViewController.swift */; };
@@ -178,6 +179,7 @@
 		0AADD4172448ADB4004FDA33 /* bugsMain.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bugsMain.json; sourceTree = "<group>"; };
 		0AADD4182448ADB4004FDA33 /* fishesMain.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fishesMain.json; sourceTree = "<group>"; };
 		0AC54AF3244DF17B00AD1188 /* RAGTextField.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RAGTextField.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0AC703B32451C749008D7C77 /* CritterHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CritterHelper.swift; sourceTree = "<group>"; };
 		0AC89E3F2449418B009ADB18 /* VillagerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VillagerTableViewCell.swift; sourceTree = "<group>"; };
 		0AC89E412449419A009ADB18 /* VillagersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VillagersTableViewController.swift; sourceTree = "<group>"; };
 		0AEFF82A24470EAF0032156C /* WardrobesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WardrobesTableViewController.swift; sourceTree = "<group>"; };
@@ -356,6 +358,7 @@
 				0A739A40244B592200002B89 /* DashboardViewController.swift */,
 				0A739A42244BE55600002B89 /* ResidentCollectionViewCell.swift */,
 				0A14A001245155A10080941A /* ResidentHelper.swift */,
+				0AC703B32451C749008D7C77 /* CritterHelper.swift */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -402,7 +405,6 @@
 			children = (
 				0AFD704D24419DD300957BE6 /* NookNook */,
 				0AFD704C24419DD300957BE6 /* Products */,
-				C90B8FB39C18578AEBBBFC4B /* Pods */,
 				26589D3C1D6EDD4DE75F7739 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -468,13 +470,6 @@
 				0A559121244DCDAD0018CF99 /* RAGTextField.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		C90B8FB39C18578AEBBBFC4B /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -633,6 +628,7 @@
 				0A295B4C2444AAD0001CF828 /* Taptic.swift in Sources */,
 				0A370BAD2444795700A72048 /* CategoryTableViewCell.swift in Sources */,
 				0A370B6C2444467900A72048 /* PriceEngine.swift in Sources */,
+				0AC703B42451C749008D7C77 /* CritterHelper.swift in Sources */,
 				0A370BAF2444796400A72048 /* CategoriesTableViewController.swift in Sources */,
 				0A14A002245155A10080941A /* ResidentHelper.swift in Sources */,
 			);

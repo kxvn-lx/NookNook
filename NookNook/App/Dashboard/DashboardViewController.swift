@@ -44,6 +44,12 @@ class DashboardViewController: UIViewController {
     
     private var birthdayResidents: [Villager] = []
     
+    // Critter Monthly properties
+    private var monthlyBug: [Critter]!
+    private var monthlyFish: [Critter]!
+    private var caughtBugsMonth: [Critter] = []
+    private var caughtFishesMonth: [Critter] = []
+    
     // MARK: - Table view properties
     private let CRITTER_CELL = "CritterCell"
     private let FAVOURITE_CELL = "FavouriteCell"
@@ -51,13 +57,20 @@ class DashboardViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        favouritesManager = PersistEngine()
+        userDict = UDHelper.getUser()
+        
         setBar()
         setUI()
         setConstraint()
         
         self.variationImageCollectionView.register(ResidentCollectionViewCell.self, forCellWithReuseIdentifier: VARIANT_CELL)
-
+        
         tableView.rowHeight = 50
+        
+        if isEmptyLists(dicts: userDict) {
+            presentAlert(title: "hey there!", message: "Please head to settings and fill out the user detail for a better app experience! 😁")
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -72,15 +85,13 @@ class DashboardViewController: UIViewController {
         residentLabel.text = "Your Resident: \(self.favouritesManager.residentVillagers.count)/10"
         
         birthdayResidents = ResidentHelper.getMonthsBirthday(residents: self.favouritesManager.residentVillagers)
+        
+        
+        // Calculate monthly bug and fish count
+        calculateMonthlyCritter()
+        
         self.tableView.reloadData()
         
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        if isEmptyLists(dicts: userDict) {
-            presentAlert(title: "hey there!", message: "Please head to setting and fill out the user detail form for a better app experience (:")
-        }
     }
     
     
@@ -299,10 +310,10 @@ class DashboardViewController: UIViewController {
     
     private func presentAlert(title: String, message: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-
+        
         let okAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
         }
-
+        
         alertController.addAction(okAction)
         self.present(alertController, animated: true, completion: nil)
     }
@@ -313,6 +324,13 @@ class DashboardViewController: UIViewController {
         }
         return true
     }
+    
+    private func calculateMonthlyCritter() {
+        caughtBugsMonth = favouritesManager.caughtCritters.filter({ $0.category == Categories.bugs.rawValue })
+        caughtFishesMonth = favouritesManager.caughtCritters.filter({ $0.category == Categories.fishes.rawValue })
+        
+        ( monthlyBug, monthlyFish ) = CritterHelper.parseCritter(userHemisphere:userDict!["hemisphere"].map { DateHelper.Hemisphere(rawValue: $0)! } ?? DateHelper.Hemisphere.Southern)
+    }
 }
 
 extension DashboardViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
@@ -322,7 +340,7 @@ extension DashboardViewController: UICollectionViewDelegateFlowLayout, UICollect
         } else {
             collectionView.restore()
         }
-
+        
         return favouritesManager.residentVillagers.count
     }
     
@@ -354,7 +372,7 @@ extension DashboardViewController: UICollectionViewDelegateFlowLayout, UICollect
             cell.contentView.backgroundColor = UIColor(named: ColourUtil.cream2.rawValue)?.withAlphaComponent(0.5)
         }
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) {
             cell.contentView.backgroundColor = nil
@@ -366,6 +384,10 @@ extension DashboardViewController: UIAdaptivePresentationControllerDelegate {
     func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
         userDict = UDHelper.getUser()
         setupProfile()
+        
+        favouritesManager = PersistEngine()
+        calculateMonthlyCritter()
+        self.tableView.reloadData()
         self.dismiss(animated: true, completion: nil)
     }
 }
@@ -374,6 +396,10 @@ extension DashboardViewController: ProfileDelegate {
     func updateprofile() {
         userDict = UDHelper.getUser()
         setupProfile()
+        
+        favouritesManager = PersistEngine()
+        calculateMonthlyCritter()
+        self.tableView.reloadData()
         self.dismiss(animated: true, completion: nil)
     }
 }
@@ -393,7 +419,7 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
             case 0:
                 let cell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: CRITTER_CELL)
                 cell.textLabel!.text = "Critters this month"
-                cell.detailTextLabel?.text = "Bugs: 2/34 | Fishes: 4/32"
+                cell.detailTextLabel?.text = "Bugs: \(caughtBugsMonth.count)/\(monthlyBug.count) | Fishes: \(caughtFishesMonth.count)/\(monthlyFish.count)"
                 cell.accessoryType = .disclosureIndicator
                 return cell
             case 1:
@@ -460,7 +486,9 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
             switch indexPath.row {
             case 0:
                 let vc = self.storyboard!.instantiateViewController(withIdentifier: "CrittersMonthlyVC") as! CrittersMonthlyTableViewController
+                vc.profileDelegate = self
                 let navController = UINavigationController(rootViewController: vc)
+                navController.presentationController?.delegate = self
                 self.present(navController, animated:true, completion: nil)
             case 1: break
             case 2: break
@@ -476,5 +504,4 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
         header.textLabel?.font = UIFont.preferredFont(forTextStyle: .title3)
         header.textLabel?.text? = header.textLabel?.text?.capitalized ?? ""
     }
-
 }

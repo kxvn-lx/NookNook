@@ -442,7 +442,7 @@ class DetailViewController: UIViewController {
             scrollView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: MARGIN),
             scrollView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 0),
             scrollView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -0),
-            scrollView.bottomAnchor.constraint(equalTo: self.view.layoutMarginsGuide.bottomAnchor, constant: -MARGIN),
+            scrollView.bottomAnchor.constraint(equalTo: self.view.layoutMarginsGuide.bottomAnchor),
             
             mStackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             mStackView.leftAnchor.constraint(equalTo: scrollView.leftAnchor),
