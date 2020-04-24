@@ -178,17 +178,27 @@ struct DataEngine {
                 
                 
                 for wardrobe in jsonObj {
-                    let newWardrobe = Wardrobe(name: wardrobe["name"].stringValue,
-                                               image: wardrobe["image"].stringValue,
-                                               obtainedFrom: wardrobe["obtainedFrom"].stringValue,
-                                               isDIY: wardrobe["dIY"].boolValue,
-                                               variants: wardrobe["variants"].arrayObject as? [String],
-                                               category: wardrobe["category"].stringValue,
-                                               buy: wardrobe["buy"].intValue,
-                                               sell: wardrobe["sell"].intValue
-                    )
+                    var imagesArr: [String] = []
+                    
+                    for variant in wardrobe["variants"] {
+                        imagesArr.append(variant.1["filename"].stringValue)
+                    }
+                    
+                    let name = wardrobe["name"].stringValue
+                    let image = wardrobe["filename"].stringValue
+                    let obtainedFrom = wardrobe["obtainedFrom"].stringValue
+                    let isDIY = wardrobe["dIY"].boolValue
+                    let variants = imagesArr.count > 1 ? Array(imagesArr.dropFirst()) : nil
+                    let category = wardrobe["category"].stringValue
+                    let buy = wardrobe["buy"].intValue
+                    let sell = wardrobe["sell"].intValue
+
+                    let newWardrobe = Wardrobe(name: name, image: image, obtainedFrom: obtainedFrom, isDIY: isDIY, variants: variants, category: category, buy: buy, sell: sell)
                     wardrobes.append(newWardrobe)
                 }
+                
+                
+                
             } catch let error {
                 fatalError("parse error: \(error.localizedDescription)")
             }
