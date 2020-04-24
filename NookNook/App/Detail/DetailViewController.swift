@@ -161,7 +161,7 @@ class DetailViewController: UIViewController {
      Method to render item object
      */
     private func renderItem() {
-        detailImageView.sd_setImage(with: ImageEngine.parseNPURL(with: itemObj.image!), completed: nil)
+        detailImageView.sd_setImage(with: ImageEngine.parseNPURL(with: itemObj.image!, category: itemObj.category), completed: nil)
         titleLabel.text = itemObj.name
         subtitleLabel.text = itemObj.obtainedFrom
         buyLabel.attributedText = PriceEngine.renderPrice(amount: itemObj.buy!, with: .none, of: buyLabel.font.pointSize)
@@ -210,7 +210,7 @@ class DetailViewController: UIViewController {
      Method to render wardrobe object
      */
     private func renderWardrobe() {
-        detailImageView.sd_setImage(with: ImageEngine.parseNPURL(with: wardrobeObj.image!), completed: nil)
+        detailImageView.sd_setImage(with: ImageEngine.parseNPURL(with: wardrobeObj.image!, category: wardrobeObj.category), completed: nil)
         titleLabel.text = wardrobeObj.name
         subtitleLabel.text = wardrobeObj.obtainedFrom
         buyLabel.attributedText = PriceEngine.renderPrice(amount: wardrobeObj.buy!, with: .none, of: buyLabel.font.pointSize)
@@ -568,13 +568,13 @@ extension DetailViewController: UICollectionViewDelegateFlowLayout, UICollection
         switch groupOrigin {
         case .items:
             if let itemObjArr = itemObj.variants {
-                cell.variantImage.sd_setImage(with: ImageEngine.parseNPURL(with: itemObjArr[indexPath.row]), placeholderImage: nil)
+                cell.variantImage.sd_setImage(with: ImageEngine.parseNPURL(with: itemObjArr[indexPath.row], category: itemObj.category), placeholderImage: nil)
             }
         case .critters:
             print("Attempt to access critter cell.")
         case .wardrobes:
             if let wardrobeObjArr = wardrobeObj.variants {
-                cell.variantImage.sd_setImage(with: ImageEngine.parseNPURL(with: wardrobeObjArr[indexPath.row]), placeholderImage: nil)
+                cell.variantImage.sd_setImage(with: ImageEngine.parseNPURL(with: wardrobeObjArr[indexPath.row], category: wardrobeObj.category), placeholderImage: nil)
             }
         default: fatalError("Attempt to access an invalid object group or groupOrigin is still nil!")
         }

@@ -139,7 +139,7 @@ class FavouritesTableViewController: UITableViewController {
                 cell.imgView.sd_imageTransition = .fade
                 cell.imgView.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 
-                cell.imgView.sd_setImage(with: ImageEngine.parseNPURL(with: item.image!), placeholderImage: nil)
+                cell.imgView.sd_setImage(with: ImageEngine.parseNPURL(with: item.image!, category: item.category), placeholderImage: nil)
                 cell.nameLabel.text = item.name
                 cell.label1.text = item.obtainedFrom
                 cell.label3.attributedText = PriceEngine.renderPrice(amount: item.buy, with: .buy, of: 12)
@@ -186,7 +186,7 @@ class FavouritesTableViewController: UITableViewController {
                 cell.imgView.sd_imageTransition = .fade
                 cell.imgView.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 
-                cell.imgView.sd_setImage(with: ImageEngine.parseNPURL(with: wardrobe.image!), placeholderImage: nil)
+                cell.imgView.sd_setImage(with: ImageEngine.parseNPURL(with: wardrobe.image!, category: wardrobe.category), placeholderImage: nil)
                 cell.nameLabel.text = wardrobe.name
                 cell.label1.text = wardrobe.obtainedFrom
                 cell.label3.attributedText = PriceEngine.renderPrice(amount: wardrobe.buy, with: .buy, of: 12)

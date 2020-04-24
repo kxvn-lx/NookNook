@@ -98,7 +98,7 @@ class ItemsTableViewController: UITableViewController {
             itemCell.buyLabel.font = UIFont.preferredFont(forTextStyle: .caption2)
             itemCell.sellLabel.font = UIFont.preferredFont(forTextStyle: .caption2)
             
-            itemCell.imgView.sd_setImage(with: ImageEngine.parseNPURL(with: item.image!), placeholderImage: nil)
+            itemCell.imgView.sd_setImage(with: ImageEngine.parseNPURL(with: item.image!, category: item.category), placeholderImage: nil)
             itemCell.nameLabel.text = item.name
             itemCell.obtainedFromLabel.text = item.obtainedFrom
             itemCell.buyLabel.attributedText = PriceEngine.renderPrice(amount: item.buy, with: .buy, of: itemCell.buyLabel.font.pointSize)

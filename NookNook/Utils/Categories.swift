@@ -11,10 +11,11 @@ import UIKit
 
 enum Categories: String {
     case housewares, miscellaneous
+    case art
     case wallMounted = "wall-mounted"
-    case wallpaper, floors, rugs, photos, posters, fencing, tools
+    case wallpapers, floors, rugs, photos, posters, fencing, tools
     case tops, bottoms, dresses, headwear, accessories, socks, shoes, bags
-    case umbrellas, songs, recipes, fossils, construction, nookmiles, other
+    case umbrellas, music, recipes, fossils, construction, nookmiles, other
     
     case bugs, fishes
     
@@ -28,9 +29,9 @@ enum Categories: String {
     
     // Static functions to returns the filtered categories
     static func items() -> [Categories] {
-        return [.housewares, .miscellaneous, .wallMounted,
-                .wallpaper, .floors, .rugs, .photos, .fencing, .tools, .songs,
-                .other, .fossils]
+        return [.housewares, .miscellaneous, .wallMounted, .art,
+                .wallpapers, .floors, .rugs, .photos, .fencing, .tools, .music,
+                .fossils]
     }
     
     static func wardrobes() -> [Categories] {

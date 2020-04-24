@@ -132,8 +132,8 @@ class SettingsTableViewController: UITableViewController {
     // Customize the section headings for each section
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch(section) {
-        case 0: return " "
-        case 1: return "Share it if you ❤️ it."
+        case 0: return "Share it if you ❤️ it."
+        case 1: return ""
         case 2: return ""
         case 3: return "Danger Zone"
         default: return ""
@@ -232,7 +232,6 @@ class SettingsTableViewController: UITableViewController {
         default: return 35
         }
     }
-    
 
     private func setBar() {
         self.configureNavigationBar(largeTitleColor: .white, backgoundColor: UIColor(named: ColourUtil.grass1.rawValue)!, tintColor: .white, title: "Settings", preferredLargeTitle: true)

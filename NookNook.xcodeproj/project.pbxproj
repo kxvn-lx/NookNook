@@ -26,35 +26,36 @@
 		0A370B61244322F100A72048 /* ColourUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A370B60244322F100A72048 /* ColourUtil.swift */; };
 		0A370B6C2444467900A72048 /* PriceEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A370B6B2444467900A72048 /* PriceEngine.swift */; };
 		0A370B6E24444BD800A72048 /* DataEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A370B6D24444BD800A72048 /* DataEngine.swift */; };
-		0A370B8C2444543200A72048 /* housewares.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A370B6F2444542F00A72048 /* housewares.json */; };
 		0A370B8D2444543200A72048 /* accessories.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A370B702444543000A72048 /* accessories.json */; };
 		0A370B8E2444543200A72048 /* umbrellas.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A370B712444543000A72048 /* umbrellas.json */; };
-		0A370B8F2444543200A72048 /* wallpaper.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A370B722444543000A72048 /* wallpaper.json */; };
 		0A370B902444543200A72048 /* shoes.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A370B732444543000A72048 /* shoes.json */; };
 		0A370B912444543200A72048 /* bottoms.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A370B742444543000A72048 /* bottoms.json */; };
-		0A370B922444543200A72048 /* tools.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A370B752444543000A72048 /* tools.json */; };
-		0A370B962444543200A72048 /* rugs.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A370B792444543000A72048 /* rugs.json */; };
-		0A370B972444543200A72048 /* miscellaneous.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A370B7A2444543000A72048 /* miscellaneous.json */; };
 		0A370B982444543200A72048 /* dresses.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A370B7B2444543000A72048 /* dresses.json */; };
-		0A370B9A2444543200A72048 /* other.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A370B7D2444543100A72048 /* other.json */; };
 		0A370B9B2444543200A72048 /* posters.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A370B7E2444543100A72048 /* posters.json */; };
 		0A370B9C2444543200A72048 /* recipes.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A370B7F2444543100A72048 /* recipes.json */; };
 		0A370B9D2444543200A72048 /* nookmiles.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A370B802444543100A72048 /* nookmiles.json */; };
 		0A370B9E2444543200A72048 /* socks.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A370B812444543100A72048 /* socks.json */; };
-		0A370B9F2444543200A72048 /* fencing.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A370B822444543100A72048 /* fencing.json */; };
 		0A370BA02444543200A72048 /* headwear.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A370B832444543100A72048 /* headwear.json */; };
-		0A370BA12444543200A72048 /* floors.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A370B842444543100A72048 /* floors.json */; };
-		0A370BA22444543200A72048 /* songs.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A370B852444543200A72048 /* songs.json */; };
-		0A370BA32444543200A72048 /* fossils.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A370B862444543200A72048 /* fossils.json */; };
-		0A370BA42444543200A72048 /* wall-mounted.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A370B872444543200A72048 /* wall-mounted.json */; };
 		0A370BA52444543200A72048 /* bags.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A370B882444543200A72048 /* bags.json */; };
-		0A370BA62444543200A72048 /* photos.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A370B892444543200A72048 /* photos.json */; };
 		0A370BA72444543200A72048 /* tops.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A370B8A2444543200A72048 /* tops.json */; };
 		0A370BA82444543200A72048 /* construction.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A370B8B2444543200A72048 /* construction.json */; };
 		0A370BAA24446D7B00A72048 /* IconUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A370BA924446D7B00A72048 /* IconUtil.swift */; };
 		0A370BAD2444795700A72048 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A370BAC2444795700A72048 /* CategoryTableViewCell.swift */; };
 		0A370BAF2444796400A72048 /* CategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A370BAE2444796400A72048 /* CategoriesTableViewController.swift */; };
 		0A55912F244DF0110018CF99 /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0A595B912453252D00F37E15 /* housewares.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A595B902453252D00F37E15 /* housewares.json */; };
+		0A595B932453334C00F37E15 /* wallpapers.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A595B922453334C00F37E15 /* wallpapers.json */; };
+		0A595B952453344A00F37E15 /* miscellaneous.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A595B942453344A00F37E15 /* miscellaneous.json */; };
+		0A595B972453349B00F37E15 /* art.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A595B962453349B00F37E15 /* art.json */; };
+		0A595B992453393400F37E15 /* wall-mounted.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A595B982453393400F37E15 /* wall-mounted.json */; };
+		0A595B9B245339B000F37E15 /* floors.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A595B9A245339AF00F37E15 /* floors.json */; };
+		0A595B9D245339DD00F37E15 /* rugs.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A595B9C245339DD00F37E15 /* rugs.json */; };
+		0A595B9F24533A1D00F37E15 /* photos.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A595B9E24533A1D00F37E15 /* photos.json */; };
+		0A595BA124533A4E00F37E15 /* fencing.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A595BA024533A4E00F37E15 /* fencing.json */; };
+		0A595BA324533A6600F37E15 /* tools.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A595BA224533A6500F37E15 /* tools.json */; };
+		0A595BA524533AB200F37E15 /* music.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A595BA424533AB200F37E15 /* music.json */; };
+		0A595BA824533B3F00F37E15 /* other.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A595BA624533B3F00F37E15 /* other.json */; };
+		0A595BA924533B3F00F37E15 /* fossils.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A595BA724533B3F00F37E15 /* fossils.json */; };
 		0A65203124499B6400692E74 /* PersistEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A65203024499B6400692E74 /* PersistEngine.swift */; };
 		0A6862A6244D3DAB00E06C74 /* SCHeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6862A5244D3DAB00E06C74 /* SCHeper.swift */; };
 		0A6862A9244D499C00E06C74 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6862A8244D499C00E06C74 /* SettingsTableViewController.swift */; };
@@ -129,29 +130,17 @@
 		0A370B60244322F100A72048 /* ColourUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColourUtil.swift; sourceTree = "<group>"; };
 		0A370B6B2444467900A72048 /* PriceEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceEngine.swift; sourceTree = "<group>"; };
 		0A370B6D24444BD800A72048 /* DataEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataEngine.swift; sourceTree = "<group>"; };
-		0A370B6F2444542F00A72048 /* housewares.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = housewares.json; sourceTree = "<group>"; };
 		0A370B702444543000A72048 /* accessories.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = accessories.json; sourceTree = "<group>"; };
 		0A370B712444543000A72048 /* umbrellas.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = umbrellas.json; sourceTree = "<group>"; };
-		0A370B722444543000A72048 /* wallpaper.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = wallpaper.json; sourceTree = "<group>"; };
 		0A370B732444543000A72048 /* shoes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = shoes.json; sourceTree = "<group>"; };
 		0A370B742444543000A72048 /* bottoms.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bottoms.json; sourceTree = "<group>"; };
-		0A370B752444543000A72048 /* tools.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tools.json; sourceTree = "<group>"; };
-		0A370B792444543000A72048 /* rugs.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = rugs.json; sourceTree = "<group>"; };
-		0A370B7A2444543000A72048 /* miscellaneous.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = miscellaneous.json; sourceTree = "<group>"; };
 		0A370B7B2444543000A72048 /* dresses.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dresses.json; sourceTree = "<group>"; };
-		0A370B7D2444543100A72048 /* other.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = other.json; sourceTree = "<group>"; };
 		0A370B7E2444543100A72048 /* posters.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = posters.json; sourceTree = "<group>"; };
 		0A370B7F2444543100A72048 /* recipes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = recipes.json; sourceTree = "<group>"; };
 		0A370B802444543100A72048 /* nookmiles.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = nookmiles.json; sourceTree = "<group>"; };
 		0A370B812444543100A72048 /* socks.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = socks.json; sourceTree = "<group>"; };
-		0A370B822444543100A72048 /* fencing.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fencing.json; sourceTree = "<group>"; };
 		0A370B832444543100A72048 /* headwear.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = headwear.json; sourceTree = "<group>"; };
-		0A370B842444543100A72048 /* floors.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = floors.json; sourceTree = "<group>"; };
-		0A370B852444543200A72048 /* songs.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = songs.json; sourceTree = "<group>"; };
-		0A370B862444543200A72048 /* fossils.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fossils.json; sourceTree = "<group>"; };
-		0A370B872444543200A72048 /* wall-mounted.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "wall-mounted.json"; sourceTree = "<group>"; };
 		0A370B882444543200A72048 /* bags.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bags.json; sourceTree = "<group>"; };
-		0A370B892444543200A72048 /* photos.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = photos.json; sourceTree = "<group>"; };
 		0A370B8A2444543200A72048 /* tops.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tops.json; sourceTree = "<group>"; };
 		0A370B8B2444543200A72048 /* construction.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = construction.json; sourceTree = "<group>"; };
 		0A370BA924446D7B00A72048 /* IconUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconUtil.swift; sourceTree = "<group>"; };
@@ -160,6 +149,19 @@
 		0A559121244DCDAD0018CF99 /* RAGTextField.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RAGTextField.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A559128244DCE170018CF99 /* RAGTextField.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RAGTextField.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A55912B244DF0000018CF99 /* RAGTextField.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RAGTextField.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A595B902453252D00F37E15 /* housewares.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = housewares.json; sourceTree = "<group>"; };
+		0A595B922453334C00F37E15 /* wallpapers.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = wallpapers.json; sourceTree = "<group>"; };
+		0A595B942453344A00F37E15 /* miscellaneous.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = miscellaneous.json; sourceTree = "<group>"; };
+		0A595B962453349B00F37E15 /* art.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = art.json; sourceTree = "<group>"; };
+		0A595B982453393400F37E15 /* wall-mounted.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "wall-mounted.json"; sourceTree = "<group>"; };
+		0A595B9A245339AF00F37E15 /* floors.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = floors.json; sourceTree = "<group>"; };
+		0A595B9C245339DD00F37E15 /* rugs.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = rugs.json; sourceTree = "<group>"; };
+		0A595B9E24533A1D00F37E15 /* photos.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = photos.json; sourceTree = "<group>"; };
+		0A595BA024533A4E00F37E15 /* fencing.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fencing.json; sourceTree = "<group>"; };
+		0A595BA224533A6500F37E15 /* tools.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tools.json; sourceTree = "<group>"; };
+		0A595BA424533AB200F37E15 /* music.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = music.json; sourceTree = "<group>"; };
+		0A595BA624533B3F00F37E15 /* other.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = other.json; sourceTree = "<group>"; };
+		0A595BA724533B3F00F37E15 /* fossils.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fossils.json; sourceTree = "<group>"; };
 		0A65203024499B6400692E74 /* PersistEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistEngine.swift; sourceTree = "<group>"; };
 		0A6862A5244D3DAB00E06C74 /* SCHeper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCHeper.swift; sourceTree = "<group>"; };
 		0A6862A8244D499C00E06C74 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
@@ -283,36 +285,37 @@
 		0A370B682444417800A72048 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				0A595B902453252D00F37E15 /* housewares.json */,
+				0A595B962453349B00F37E15 /* art.json */,
 				0AADD4172448ADB4004FDA33 /* bugsMain.json */,
 				0AADD4182448ADB4004FDA33 /* fishesMain.json */,
 				0A36427F24469C600081315A /* bugsSecondary.json */,
 				0AADD40F244870D9004FDA33 /* fishesSecondary.json */,
 				0A26E7B624475B6300D80594 /* villagers.json */,
+				0A595BA724533B3F00F37E15 /* fossils.json */,
+				0A595BA624533B3F00F37E15 /* other.json */,
 				0A370B702444543000A72048 /* accessories.json */,
 				0A370B882444543200A72048 /* bags.json */,
 				0A370B742444543000A72048 /* bottoms.json */,
 				0A370B8B2444543200A72048 /* construction.json */,
 				0A370B7B2444543000A72048 /* dresses.json */,
-				0A370B822444543100A72048 /* fencing.json */,
-				0A370B842444543100A72048 /* floors.json */,
-				0A370B862444543200A72048 /* fossils.json */,
+				0A595B9A245339AF00F37E15 /* floors.json */,
 				0A370B832444543100A72048 /* headwear.json */,
-				0A370B6F2444542F00A72048 /* housewares.json */,
-				0A370B7A2444543000A72048 /* miscellaneous.json */,
 				0A370B802444543100A72048 /* nookmiles.json */,
-				0A370B7D2444543100A72048 /* other.json */,
-				0A370B892444543200A72048 /* photos.json */,
+				0A595BA024533A4E00F37E15 /* fencing.json */,
+				0A595B9E24533A1D00F37E15 /* photos.json */,
 				0A370B7E2444543100A72048 /* posters.json */,
+				0A595B9C245339DD00F37E15 /* rugs.json */,
 				0A370B7F2444543100A72048 /* recipes.json */,
-				0A370B792444543000A72048 /* rugs.json */,
+				0A595B942453344A00F37E15 /* miscellaneous.json */,
 				0A370B732444543000A72048 /* shoes.json */,
+				0A595BA224533A6500F37E15 /* tools.json */,
 				0A370B812444543100A72048 /* socks.json */,
-				0A370B852444543200A72048 /* songs.json */,
-				0A370B752444543000A72048 /* tools.json */,
+				0A595BA424533AB200F37E15 /* music.json */,
 				0A370B8A2444543200A72048 /* tops.json */,
 				0A370B712444543000A72048 /* umbrellas.json */,
-				0A370B872444543200A72048 /* wall-mounted.json */,
-				0A370B722444543000A72048 /* wallpaper.json */,
+				0A595B982453393400F37E15 /* wall-mounted.json */,
+				0A595B922453334C00F37E15 /* wallpapers.json */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -552,38 +555,39 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A595B932453334C00F37E15 /* wallpapers.json in Resources */,
 				0A370B9E2444543200A72048 /* socks.json in Resources */,
+				0A595BA124533A4E00F37E15 /* fencing.json in Resources */,
 				0A26E7B724475B6300D80594 /* villagers.json in Resources */,
-				0A370BA22444543200A72048 /* songs.json in Resources */,
 				0A370B982444543200A72048 /* dresses.json in Resources */,
+				0A595B972453349B00F37E15 /* art.json in Resources */,
+				0A595BA324533A6600F37E15 /* tools.json in Resources */,
 				0A370B8E2444543200A72048 /* umbrellas.json in Resources */,
-				0A370BA62444543200A72048 /* photos.json in Resources */,
+				0A595B9B245339B000F37E15 /* floors.json in Resources */,
 				0AADD410244870D9004FDA33 /* fishesSecondary.json in Resources */,
-				0A370B8C2444543200A72048 /* housewares.json in Resources */,
-				0A370BA12444543200A72048 /* floors.json in Resources */,
-				0A370B922444543200A72048 /* tools.json in Resources */,
 				0A370BA72444543200A72048 /* tops.json in Resources */,
 				0AADD4192448ADB4004FDA33 /* bugsMain.json in Resources */,
 				0A370B8D2444543200A72048 /* accessories.json in Resources */,
-				0A370B9F2444543200A72048 /* fencing.json in Resources */,
-				0A370BA32444543200A72048 /* fossils.json in Resources */,
+				0A595B992453393400F37E15 /* wall-mounted.json in Resources */,
+				0A595B9D245339DD00F37E15 /* rugs.json in Resources */,
+				0A595BA924533B3F00F37E15 /* fossils.json in Resources */,
 				0AFD705B24419DD500957BE6 /* LaunchScreen.storyboard in Resources */,
 				0AFD705824419DD500957BE6 /* Assets.xcassets in Resources */,
-				0A370B8F2444543200A72048 /* wallpaper.json in Resources */,
-				0A370B962444543200A72048 /* rugs.json in Resources */,
+				0A595B952453344A00F37E15 /* miscellaneous.json in Resources */,
 				0AADD41A2448ADB4004FDA33 /* fishesMain.json in Resources */,
 				0A370B912444543200A72048 /* bottoms.json in Resources */,
 				0A370B9B2444543200A72048 /* posters.json in Resources */,
+				0A595BA524533AB200F37E15 /* music.json in Resources */,
 				0A370BA02444543200A72048 /* headwear.json in Resources */,
 				0A36428024469C600081315A /* bugsSecondary.json in Resources */,
 				0A370BA82444543200A72048 /* construction.json in Resources */,
 				0AFD705624419DD300957BE6 /* Main.storyboard in Resources */,
+				0A595B912453252D00F37E15 /* housewares.json in Resources */,
 				0A370BA52444543200A72048 /* bags.json in Resources */,
-				0A370B9A2444543200A72048 /* other.json in Resources */,
-				0A370B972444543200A72048 /* miscellaneous.json in Resources */,
 				0A370B9D2444543200A72048 /* nookmiles.json in Resources */,
-				0A370BA42444543200A72048 /* wall-mounted.json in Resources */,
+				0A595BA824533B3F00F37E15 /* other.json in Resources */,
 				0A370B9C2444543200A72048 /* recipes.json in Resources */,
+				0A595B9F24533A1D00F37E15 /* photos.json in Resources */,
 				0A370B902444543200A72048 /* shoes.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

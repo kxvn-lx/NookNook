@@ -10,7 +10,8 @@ import Foundation
 
 struct ImageEngine {
     
-    private static let SERVICE_URL = "https://i.imgur.com/"
+    private static let SERVICE_URL = "https://acnhcdn.com/acdb/"
+    private static let SERVICE_ART_URL = "https://acnhcdn.com/latest/FtrIcon/"
     private static let ACNH_API_URL = "http://acnhapi.com/"
     
     enum MediaType {
@@ -24,8 +25,11 @@ struct ImageEngine {
      - Returns:
         - The url of the image
      */
-    static func parseNPURL(with imageID: String) -> URL {
-        return URL(string: "\(ImageEngine.SERVICE_URL)\(imageID).png")!
+    static func parseNPURL(with filename: String, category: String) -> URL {
+        if category.lowercased() == Categories.art.rawValue {
+            return URL(string: "\(ImageEngine.SERVICE_ART_URL)\(filename).png")!
+        }
+        return URL(string: "\(ImageEngine.SERVICE_URL)\(category.lowercased())/\(filename).png")!
     }
     
     /**
