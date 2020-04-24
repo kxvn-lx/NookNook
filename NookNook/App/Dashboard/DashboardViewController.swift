@@ -139,7 +139,9 @@ class DashboardViewController: UIViewController {
             profileImageView.image = img
         }
         
-        phraseLabel.text = "Good \(DateHelper.renderGreet())!\nIt's \(DateHelper.renderSeason(hemisphere: userDict["hemisphere"] ?? DateHelper.Hemisphere.Southern.rawValue)) ━ \(DateHelper.renderDate())."
+        let firstText = "Good \(DateHelper.renderGreet())!"
+        let secondText = "\nIt's \(DateHelper.renderSeason(hemisphere: userDict["hemisphere"] ?? DateHelper.Hemisphere.Southern.rawValue)) ━ \(DateHelper.renderDate())."
+        phraseLabel.attributedText = renderPhraseLabel(withString: secondText, boldString: firstText, font: phraseLabel.font)
         
     }
     
@@ -259,7 +261,7 @@ class DashboardViewController: UIViewController {
             profileImageView.heightAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: itemImageViewSize),
             
             tableView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-            tableView.heightAnchor.constraint(equalToConstant: 340),
+            tableView.heightAnchor.constraint(equalToConstant: 320),
             
             residentStack.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
             
@@ -339,6 +341,18 @@ class DashboardViewController: UIViewController {
         caughtFishesMonth = favouritesManager.caughtCritters.filter({ $0.category == Categories.fishes.rawValue })
         
         ( monthlyBug, monthlyFish ) = CritterHelper.parseCritter(userHemisphere:userDict!["hemisphere"].map { DateHelper.Hemisphere(rawValue: $0)! } ?? DateHelper.Hemisphere.Southern)
+    }
+    
+    private func renderPhraseLabel(withString string: String, boldString: String, font: UIFont) -> NSAttributedString {
+        let boldText = boldString
+        let attrs = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: font.pointSize)]
+        let attributedString = NSMutableAttributedString(string:boldText, attributes:attrs)
+
+        let normalText = string
+        let normalString = NSMutableAttributedString(string:normalText)
+
+        attributedString.append(normalString)
+        return attributedString
     }
 }
 
@@ -513,4 +527,9 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
         header.textLabel?.font = UIFont.preferredFont(forTextStyle: .title3)
         header.textLabel?.text? = header.textLabel?.text?.capitalized ?? ""
     }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return .leastNormalMagnitude
+    }
+    
 }

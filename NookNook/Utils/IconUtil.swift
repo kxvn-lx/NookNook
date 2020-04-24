@@ -26,6 +26,7 @@ struct IconUtil {
         case deleteData = "tray"
         case info = "info.circle"
         case socialMedia = "bubble.right"
+        case about = "questionmark.circle"
     }
     
     /**

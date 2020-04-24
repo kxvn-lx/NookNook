@@ -79,6 +79,7 @@
 		0AC703B42451C749008D7C77 /* CritterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC703B32451C749008D7C77 /* CritterHelper.swift */; };
 		0AC89E402449418B009ADB18 /* VillagerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC89E3F2449418B009ADB18 /* VillagerTableViewCell.swift */; };
 		0AC89E422449419A009ADB18 /* VillagersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC89E412449419A009ADB18 /* VillagersTableViewController.swift */; };
+		0AEF52642452742E0056286B /* PatchLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEF52632452742E0056286B /* PatchLogViewController.swift */; };
 		0AEFF82B24470EAF0032156C /* WardrobesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEFF82A24470EAF0032156C /* WardrobesTableViewController.swift */; };
 		0AEFF82D24470EC30032156C /* WardrobetabTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEFF82C24470EC30032156C /* WardrobetabTableViewCell.swift */; };
 		0AEFF82F24471CD90032156C /* Wardrobe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEFF82E24471CD90032156C /* Wardrobe.swift */; };
@@ -182,6 +183,7 @@
 		0AC703B32451C749008D7C77 /* CritterHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CritterHelper.swift; sourceTree = "<group>"; };
 		0AC89E3F2449418B009ADB18 /* VillagerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VillagerTableViewCell.swift; sourceTree = "<group>"; };
 		0AC89E412449419A009ADB18 /* VillagersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VillagersTableViewController.swift; sourceTree = "<group>"; };
+		0AEF52632452742E0056286B /* PatchLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchLogViewController.swift; sourceTree = "<group>"; };
 		0AEFF82A24470EAF0032156C /* WardrobesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WardrobesTableViewController.swift; sourceTree = "<group>"; };
 		0AEFF82C24470EC30032156C /* WardrobetabTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WardrobetabTableViewCell.swift; sourceTree = "<group>"; };
 		0AEFF82E24471CD90032156C /* Wardrobe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wardrobe.swift; sourceTree = "<group>"; };
@@ -327,6 +329,7 @@
 		0A6862A7244D498800E06C74 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				0AEF5262245273FF0056286B /* Patch Log */,
 				0A6862AA244D638E00E06C74 /* Edit Info */,
 				0A6862A8244D499C00E06C74 /* SettingsTableViewController.swift */,
 			);
@@ -389,6 +392,14 @@
 				0AC89E3F2449418B009ADB18 /* VillagerTableViewCell.swift */,
 			);
 			path = Villagers;
+			sourceTree = "<group>";
+		};
+		0AEF5262245273FF0056286B /* Patch Log */ = {
+			isa = PBXGroup;
+			children = (
+				0AEF52632452742E0056286B /* PatchLogViewController.swift */,
+			);
+			path = "Patch Log";
 			sourceTree = "<group>";
 		};
 		0AEFF82924470D1A0032156C /* Wardrobes */ = {
@@ -592,6 +603,7 @@
 				0A14A0072451986B0080941A /* CrittersMonthlyTableViewController.swift in Sources */,
 				0A370B5F2443223D00A72048 /* VC+.swift in Sources */,
 				0A23BBD0244AE1D5009B5178 /* Fruits.swift in Sources */,
+				0AEF52642452742E0056286B /* PatchLogViewController.swift in Sources */,
 				0A23BBCE244ADFE6009B5178 /* User.swift in Sources */,
 				0A6862AC244D63A700E06C74 /* EditInfoViewController.swift in Sources */,
 				0A739A41244B592300002B89 /* DashboardViewController.swift in Sources */,

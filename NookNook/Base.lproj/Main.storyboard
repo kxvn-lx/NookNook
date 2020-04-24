@@ -229,6 +229,21 @@
             </objects>
             <point key="canvasLocation" x="3939" y="520"/>
         </scene>
+        <!--Patch Log-->
+        <scene sceneID="v25-0F-CJ6">
+            <objects>
+                <viewController storyboardIdentifier="PatchLogVC" title="Patch Log" id="TgZ-gh-x5W" customClass="PatchLogViewController" customModule="NookNook" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XH2-Q8-uYJ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="TEV-ID-WR1"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ECu-0f-eal" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5265" y="481"/>
+        </scene>
         <!--Wardrobes-->
         <scene sceneID="VTd-cm-UvJ">
             <objects>
