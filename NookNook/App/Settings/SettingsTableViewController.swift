@@ -25,6 +25,7 @@ class SettingsTableViewController: UITableViewController {
     private var creatorCell = UITableViewCell()
     
     private var aboutCell = UITableViewCell()
+    private var requestFeatureCell = UITableViewCell()
     private var reportBugCell = UITableViewCell()
     private var appVersionCell = UITableViewCell()
     
@@ -51,11 +52,11 @@ class SettingsTableViewController: UITableViewController {
     override func loadView() {
         super.loadView()
         
-        editInfoCell = setupCell(text: "Edit Info", icon:  IconUtil.systemIcon(of: .edit, weight: .regular), accesoryType: .disclosureIndicator)
+        editInfoCell = setupCell(text: "Edit info", icon:  IconUtil.systemIcon(of: .edit, weight: .regular), accesoryType: .disclosureIndicator)
         
         shareCell = setupCell(text: "Share", icon:  IconUtil.systemIcon(of: .share, weight: .regular), accesoryType: .disclosureIndicator)
         
-        reportBugCell = setupCell(text: "Report a Bug", icon:  IconUtil.systemIcon(of: .bug, weight: .regular), accesoryType: .disclosureIndicator)
+        reportBugCell = setupCell(text: "Report a bug", icon:  IconUtil.systemIcon(of: .bug, weight: .regular), accesoryType: .disclosureIndicator)
         
         deleteDatasCell  = setupCell(text: "Delete app data", icon:  IconUtil.systemIcon(of: .deleteData, weight: .regular), accesoryType: .none)
         deleteDatasCell.textLabel?.textColor = destColour
@@ -73,6 +74,8 @@ class SettingsTableViewController: UITableViewController {
         twitCell = setupCell(text: "Tweet it!", icon: IconUtil.systemIcon(of: .socialMedia, weight: .regular), accesoryType: .disclosureIndicator)
         
         aboutCell = setupCell(text: "About", icon: IconUtil.systemIcon(of: .about, weight: .regular), accesoryType: .disclosureIndicator)
+        requestFeatureCell = setupCell(text: "Request a feature", icon: IconUtil.systemIcon(of: .feature, weight: .regular), accesoryType: .disclosureIndicator)
+        
     }
     
     // MARK: - Table view data source
@@ -88,7 +91,7 @@ class SettingsTableViewController: UITableViewController {
         case 1:
             return 3
         case 2:
-            return 3
+            return 4
         case 3:
             return 2
         default:
@@ -115,8 +118,9 @@ class SettingsTableViewController: UITableViewController {
         case 2:
             switch (indexPath.row) {
             case 0: return self.aboutCell
-            case 1: return self.reportBugCell
-            case 2: return self.appVersionCell
+            case 1: return self.requestFeatureCell
+            case 2: return self.reportBugCell
+            case 3: return self.appVersionCell
             default: fatalError("Unkown row ins ection 3")
             }
         case 3:
@@ -181,8 +185,9 @@ class SettingsTableViewController: UITableViewController {
         case 2:
             switch indexPath.row {
             case 0: print("About VC")
-            case 1: print(1)
-            case 2:
+            case 1: print("Request feature")
+            case 2: print(1)
+            case 3:
                 let vc = self.storyboard!.instantiateViewController(withIdentifier: PATCH_LOG_VC) as! PatchLogViewController
                 let navController = UINavigationController(rootViewController: vc)
                 self.present(navController, animated:true, completion: nil)
