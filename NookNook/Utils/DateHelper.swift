@@ -63,7 +63,7 @@ struct DateHelper {
         case 6..<12 : return "Morning"
         case 12..<17 : return "Afternoon"
         case 17..<22 : return "Evening"
-        case 23,24,1..<6 : return "Evening"
+        case 23,24,0..<6 : return "Evening"
         default: return "Day"
         }
     }

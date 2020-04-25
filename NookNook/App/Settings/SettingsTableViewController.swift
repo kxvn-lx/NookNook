@@ -31,7 +31,7 @@ class SettingsTableViewController: UITableViewController {
     private var deleteDatasCell = UITableViewCell()
     private var deleteCacheCell = UITableViewCell()
     
-    private let destColour = UIColor(red: 252/255, green: 63/255, blue: 56/255, alpha: 1)
+    private let destColour = UIColor(red: 242/255, green: 67/255, blue: 51/255, alpha: 1)
     
     
     
@@ -243,6 +243,18 @@ class SettingsTableViewController: UITableViewController {
         case 2: header.textLabel?.text! = ""
         case 3: header.textLabel?.text! = "Danger Zone"
         default: header.textLabel?.text! = ""
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
+        switch section {
+        case 0: break
+        case 1: break
+        case 2: break
+        case 3: header.textLabel?.text = "Made with ❤️ by Kevin Laminto"
+        default: header.textLabel?.text = ""
         }
     }
     

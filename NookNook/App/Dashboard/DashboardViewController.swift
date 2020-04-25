@@ -11,18 +11,19 @@ import SDWebImage
 
 class DashboardViewController: UIViewController {
     
+    // Data variables
     private var favouritesManager: PersistEngine!
     private var user: User!
+    private var userDict: [String: String]!
     
-    
+    // Constant variables
     private let VARIANT_CELL = "VariantCell"
     private let SETTING_ID = "SettingsVC"
     private let DETAIL_ID = "Detail"
-    
-    private var userDict: [String: String]!
-    
     private let MARGIN: CGFloat = 10
+    private var isFirstLoad = true
     
+    // Views variables
     private var scrollView: UIScrollView!
     private var mStackView: UIStackView!
     
@@ -32,10 +33,7 @@ class DashboardViewController: UIViewController {
     private var residentStack: UIStackView!
     private var phraseStack: UIStackView!
     
-    private var isFirstLoad = true
-    
     var phraseLabel: UILabel!
-    
     var profileImageView: UIImageView!
     var profileNameLabel: UILabel!
     var islandNameLabel: UILabel!
@@ -70,6 +68,7 @@ class DashboardViewController: UIViewController {
         
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 50
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -147,34 +146,35 @@ class DashboardViewController: UIViewController {
     }
     
     private func setUI() {
+        
         scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        
+ 
         self.view.addSubview(scrollView)
         
         // Create master stackView
         mStackView = SVHelper.createSV(axis: .vertical, spacing: MARGIN * 4, alignment: .center, distribution: .equalSpacing)
         
         // Name stack view
-        nameStackView = SVHelper.createSV(axis: .vertical, spacing: MARGIN, alignment: .leading, distribution: .fill)
+        nameStackView = SVHelper.createSV(axis: .vertical, spacing: MARGIN, alignment: .center, distribution: .fill)
         
-        profileImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        profileImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 120, height: 120))
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
         profileImageView.contentMode = .scaleAspectFill
-        profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2
         profileImageView.clipsToBounds = true
         profileImageView.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
+        profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2
         
         profileNameLabel = UILabel()
         profileNameLabel.translatesAutoresizingMaskIntoConstraints = false
         profileNameLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)
-        profileNameLabel.font = UIFont.preferredFont(forTextStyle: .largeTitle)
+        profileNameLabel.font = UIFont.preferredFont(forTextStyle: .title1)
         profileNameLabel.font = UIFont.systemFont(ofSize: profileNameLabel.font.pointSize, weight: .semibold)
         
         nameStackView.addArrangedSubview(profileNameLabel)
         
-        profileNameStackView = SVHelper.createSV(axis: .horizontal, spacing: MARGIN * 2, alignment: .center, distribution: .fill)
-        profileNameStackView.addArrangedSubview(profileImageView, withMargin: UIEdgeInsets(top: 0, left: MARGIN*4, bottom: 0, right: 0))
+        profileNameStackView = SVHelper.createSV(axis: .vertical, spacing: MARGIN * 2, alignment: .center, distribution: .fill)
+        profileNameStackView.addArrangedSubview(profileImageView)
         profileNameStackView.addArrangedSubview(nameStackView)
         
         
@@ -225,7 +225,7 @@ class DashboardViewController: UIViewController {
         
         // Table view
         tableView = UITableView(frame: CGRect(x: 0, y: 0, width:0, height: 0), style: .grouped)
-        tableView.backgroundColor = UIColor(named: ColourUtil.cream2.rawValue)
+        tableView.backgroundColor = .clear
         tableView.dataSource = self
         tableView.delegate = self
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: CRITTER_CELL)
@@ -240,7 +240,7 @@ class DashboardViewController: UIViewController {
     }
     
     private func setConstraint() {
-        let itemImageViewSize: CGFloat = 0.25
+        let itemImageViewSize: CGFloat = 0.3
         
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: self.view.topAnchor),

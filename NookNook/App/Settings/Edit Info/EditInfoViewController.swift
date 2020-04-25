@@ -132,7 +132,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         mStackView = SVHelper.createSV(axis: .vertical, spacing: MARGIN * 4, alignment: .center, distribution: .equalCentering)
         mStackView.translatesAutoresizingMaskIntoConstraints = false
         
-        profileImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        profileImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 120, height: 120))
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
         profileImageView.contentMode = .scaleAspectFill
         profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2
@@ -190,7 +190,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         islandNameTF.placeholderColor = (UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5))!
         islandNameTF.tweePlaceholder = "Island Name 🏝"
         
-        profileNameStackView = SVHelper.createSV(axis: .vertical, spacing: MARGIN * 4, alignment: .leading, distribution: .fill)
+        profileNameStackView = SVHelper.createSV(axis: .vertical, spacing: MARGIN * 4, alignment: .center, distribution: .fill)
         profileNameStackView.translatesAutoresizingMaskIntoConstraints = false
         
         labelSV = SVHelper.createSV(axis: .vertical, spacing: MARGIN * 4, alignment: .center, distribution: .fillProportionally)
@@ -244,7 +244,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         labelSV.addArrangedSubview(nativeFruitButton)
         
 
-        profileNameStackView.addArrangedSubview(imgWrapper, withMargin: UIEdgeInsets(top: 0, left: MARGIN*4, bottom: 0, right: 0))
+        profileNameStackView.addArrangedSubview(imgWrapper, withMargin: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
         profileNameStackView.addArrangedSubview(labelSV, withMargin: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
         
         mStackView.addArrangedSubview(profileNameStackView, withMargin: UIEdgeInsets(top: MARGIN*4, left: 0, bottom: 0, right: 0))
@@ -316,7 +316,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
     }
     
     private func setConstraint() {
-        let itemImageViewSize: CGFloat = 0.25
+        let itemImageViewSize: CGFloat = 0.3
         
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: MARGIN),
@@ -343,8 +343,8 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
             
             imgWrapper.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: itemImageViewSize * 1.05),
             imgWrapper.heightAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: itemImageViewSize * 1.05),
-            iconView.widthAnchor.constraint(equalTo: self.profileImageView.widthAnchor, multiplier: itemImageViewSize - 0.05),
-            iconView.heightAnchor.constraint(equalTo: self.profileImageView.widthAnchor, multiplier: itemImageViewSize - 0.05),
+            iconView.widthAnchor.constraint(equalTo: self.profileImageView.widthAnchor, multiplier: itemImageViewSize - 0.1),
+            iconView.heightAnchor.constraint(equalTo: self.profileImageView.widthAnchor, multiplier: itemImageViewSize - 0.1),
             
             iconView.rightAnchor.constraint(equalTo: imgWrapper.rightAnchor),
             iconView.bottomAnchor.constraint(equalTo: imgWrapper.bottomAnchor),

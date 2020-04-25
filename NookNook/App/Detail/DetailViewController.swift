@@ -272,12 +272,6 @@ class DetailViewController: UIViewController {
         scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         
-        let v = GeometryView(frame: CGRect(origin: CGPoint(), size: CGSize(width: self.view.bounds.width, height: 220)))
-        v.translatesAutoresizingMaskIntoConstraints = false
-        
-        self.view.addSubview(v)
-
-        
         // Create master stackView
         mStackView = SVHelper.createSV(axis: .vertical, spacing: MARGIN * 4, alignment: .center, distribution: .equalSpacing)
         
@@ -444,7 +438,7 @@ class DetailViewController: UIViewController {
         let itemImageViewSize: CGFloat = 0.35
         
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: MARGIN),
+            scrollView.topAnchor.constraint(equalTo: self.view.topAnchor),
             scrollView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 0),
             scrollView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -0),
             scrollView.bottomAnchor.constraint(equalTo: self.view.layoutMarginsGuide.bottomAnchor),
