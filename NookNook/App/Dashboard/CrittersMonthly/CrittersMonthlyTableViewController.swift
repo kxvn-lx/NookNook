@@ -136,7 +136,7 @@ class CrittersMonthlyTableViewController: UITableViewController {
             
             critterCell.nameLabel.text = critter.name
             critterCell.obtainedFromLabel.text = critter.obtainedFrom.isEmpty ? "Location unknown" : critter.obtainedFrom
-            critterCell.timeLabel.text = TimeEngine.formatTime(of: critter.time)
+            critterCell.timeLabel.text = TimeMonthEngine.formatTime(of: critter.time)
             critterCell.sellLabel.attributedText = PriceEngine.renderPrice(amount: critter.sell, with: .sell, of: 12)
             critterCell.weatherLabel.text = critter.weather
             

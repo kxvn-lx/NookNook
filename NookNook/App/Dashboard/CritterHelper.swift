@@ -20,7 +20,7 @@ struct CritterHelper {
     static func parseCritter(userHemisphere: DateHelper.Hemisphere) -> ([Critter], [Critter]) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "M"
-        let currMonthInt = Int(dateFormatter.string(from: Date()))!
+        let currMonthInt = Int(dateFormatter.string(from: Date()))! - 1
         
         
         var northernBugs: [Critter] = []
@@ -35,26 +35,26 @@ struct CritterHelper {
         switch userHemisphere {
         case .Northern:
             allBugs.forEach({
-                if TimeEngine.formatMonths(month: $0.activeMonthsN).contains(currMonthInt) || TimeEngine.formatMonths(month: $0.activeMonthsN) == [-1] {
+                if TimeMonthEngine.formatMonths(month: $0.activeMonthsN).contains(currMonthInt) || TimeMonthEngine.formatMonths(month: $0.activeMonthsN) == [-1] {
                     // bug is in season for northern region.
                     northernBugs.append($0)
                 }
             })
             allFishes.forEach({
-                if TimeEngine.formatMonths(month: $0.activeMonthsN).contains(currMonthInt) || TimeEngine.formatMonths(month: $0.activeMonthsN) == [-1] {
+                if TimeMonthEngine.formatMonths(month: $0.activeMonthsN).contains(currMonthInt) || TimeMonthEngine.formatMonths(month: $0.activeMonthsN) == [-1] {
                     // fish is in season for northern region.
                     northernFishes.append($0)
                 }
             })
         case .Southern:
             allBugs.forEach({
-                if TimeEngine.formatMonths(month: $0.activeMonthsS).contains(currMonthInt) || TimeEngine.formatMonths(month: $0.activeMonthsS) == [-1] {
+                if TimeMonthEngine.formatMonths(month: $0.activeMonthsS).contains(currMonthInt) || TimeMonthEngine.formatMonths(month: $0.activeMonthsS) == [-1] {
                     // bug is in season for northern region.
                     southernBugs.append($0)
                 }
             })
             allFishes.forEach({
-                if TimeEngine.formatMonths(month: $0.activeMonthsS).contains(currMonthInt) || TimeEngine.formatMonths(month: $0.activeMonthsS) == [-1] {
+                if TimeMonthEngine.formatMonths(month: $0.activeMonthsS).contains(currMonthInt) || TimeMonthEngine.formatMonths(month: $0.activeMonthsS) == [-1] {
                     // fish is in season for northern region.
                     southernFishes.append($0)
                 }
@@ -72,7 +72,7 @@ struct CritterHelper {
     
     
     /**
-     Method to calculate caught critters this month
+     Method to calculate caught critters ONLY on this month
      - Parameters:
         - caughtBugs: The user's overall caught bugs
         - caughtFishes: The user's overall caught fishes

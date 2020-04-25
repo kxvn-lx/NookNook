@@ -99,8 +99,9 @@ class DashboardViewController: UIViewController {
         // Calculate monthly bug and fish count
         calculateMonthlyCritter()
         
-        self.tableView.reloadData()
-        
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
     
@@ -223,7 +224,7 @@ class DashboardViewController: UIViewController {
         residentStack.addArrangedSubview(variationImageCollectionView)
         
         // Table view
-        tableView = UITableView(frame: CGRect(x: 0, y: 0, width:0, height: 0), style: .insetGrouped)
+        tableView = UITableView(frame: CGRect(x: 0, y: 0, width:0, height: 0), style: .grouped)
         tableView.backgroundColor = UIColor(named: ColourUtil.cream2.rawValue)
         tableView.dataSource = self
         tableView.delegate = self
@@ -354,8 +355,21 @@ class DashboardViewController: UIViewController {
         attributedString.append(normalString)
         return attributedString
     }
+    
+    private func reloadProfile() {
+        userDict = UDHelper.getUser()
+        setupProfile()
+        
+        favouritesManager = PersistEngine()
+        calculateMonthlyCritter()
+        DispatchQueue.main.async {
+            self.variationImageCollectionView.reloadData()
+            self.tableView.reloadData()
+        }
+    }
 }
 
+// MARK:- UICollectionView data source
 extension DashboardViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if (favouritesManager.residentVillagers.count == 0) {
@@ -405,29 +419,19 @@ extension DashboardViewController: UICollectionViewDelegateFlowLayout, UICollect
 
 extension DashboardViewController: UIAdaptivePresentationControllerDelegate {
     func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
-        userDict = UDHelper.getUser()
-        setupProfile()
-        
-        favouritesManager = PersistEngine()
-        calculateMonthlyCritter()
-        self.tableView.reloadData()
+        self.reloadProfile()
         self.dismiss(animated: true, completion: nil)
     }
 }
 
 extension DashboardViewController: ProfileDelegate {
     func updateprofile() {
-        userDict = UDHelper.getUser()
-        setupProfile()
-        
-        favouritesManager = PersistEngine()
-        calculateMonthlyCritter()
-        self.tableView.reloadData()
+        self.reloadProfile()
         self.dismiss(animated: true, completion: nil)
     }
 }
 
-
+// MARK:- UITableView data source
 extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {

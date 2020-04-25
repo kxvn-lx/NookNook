@@ -96,7 +96,7 @@ class CrittersTableViewController: UITableViewController {
             
             critterCell.nameLabel.text = critter.name
             critterCell.obtainedFromLabel.text = critter.obtainedFrom.isEmpty ? "Location unknown" : critter.obtainedFrom
-            critterCell.timeLabel.text = TimeEngine.formatTime(of: critter.time)
+            critterCell.timeLabel.text = TimeMonthEngine.formatTime(of: critter.time)
             critterCell.sellLabel.attributedText = PriceEngine.renderPrice(amount: critter.sell, with: .sell, of: 12)
             critterCell.weatherLabel.text = critter.weather
             
@@ -176,9 +176,6 @@ class CrittersTableViewController: UITableViewController {
         
         let caughtAction = UIContextualAction(style: .normal, title:  "Caught", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             
-            if !self.favouritesManager.donatedCritters.contains(critter) {
-                self.favouritesManager.saveDonatedCritter(critter: critter)
-            }
             self.favouritesManager.saveCaughtCritter(critter: critter)
             DispatchQueue.main.async {
                 self.tableView.reloadRows(at: [indexPath], with: .left)
@@ -188,18 +185,26 @@ class CrittersTableViewController: UITableViewController {
         })
         
         let donatedAction = UIContextualAction(style: .normal, title:  "Donated", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            var finished = false
             
             if !self.favouritesManager.caughtCritters.contains(critter) {
                 self.favouritesManager.saveCaughtCritter(critter: critter)
+                
+                if self.favouritesManager.caughtCritters.contains(critter) && self.favouritesManager.donatedCritters.contains(critter) {
+                    self.favouritesManager.saveDonatedCritter(critter: critter)
+                    self.favouritesManager.saveCaughtCritter(critter: critter)
+                    finished = true
+                }
             }
-            self.favouritesManager.saveDonatedCritter(critter: critter)
+            if !finished {
+                self.favouritesManager.saveDonatedCritter(critter: critter)
+            }
             DispatchQueue.main.async {
                 self.tableView.reloadRows(at: [indexPath], with: .left)
             }
             Taptic.lightTaptic()
             success(true)
         })
-        
         
         caughtAction.backgroundColor = UIColor(named: ColourUtil.gold1.rawValue)
         donatedAction.backgroundColor = UIColor(named: ColourUtil.grass2.rawValue)

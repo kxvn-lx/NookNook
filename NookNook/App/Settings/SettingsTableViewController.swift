@@ -43,8 +43,9 @@ class SettingsTableViewController: UITableViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 50
         tableView.allowsSelection = true
+        tableView.separatorStyle = .none
         
-         self.isModalInPresentation = true
+        self.isModalInPresentation = true
     }
     
     override func loadView() {
@@ -73,13 +74,13 @@ class SettingsTableViewController: UITableViewController {
         
         aboutCell = setupCell(text: "About", icon: IconUtil.systemIcon(of: .about, weight: .regular), accesoryType: .disclosureIndicator)
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 4
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
@@ -132,7 +133,7 @@ class SettingsTableViewController: UITableViewController {
     // Customize the section headings for each section
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch(section) {
-        case 0: return "Share it if you ❤️ it."
+        case 0: return "Share it if you love it."
         case 1: return ""
         case 2: return ""
         case 3: return "Danger Zone"
@@ -190,31 +191,31 @@ class SettingsTableViewController: UITableViewController {
         case 3:
             switch indexPath.row {
             case 0:
-                let alertController = UIAlertController(title: "Delete cached datas?", message: "Cached images will be deleted and could free up some space in your device. This will exit the app.", preferredStyle: .alert)
-
+                let alertController = UIAlertController(title: "Delete cached datas?", message: "Cached images will be deleted and could free up some space in your device.", preferredStyle: .alert)
+                
                 let destructiveAction = UIAlertAction(title: "Delete", style: .destructive) { (action:UIAlertAction) in
                     PersistEngine.deleteCacheData()
                     Taptic.successTaptic()
-                    self.presentAlert()
+                    self.presentAlert(title: "Cached datas deleted.", message: "Please restart the app to ensure the changes have been updated.")
                 }
                 let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action:UIAlertAction) in
                 }
-
+                
                 alertController.addAction(destructiveAction)
                 alertController.addAction(cancelAction)
                 self.present(alertController, animated: true, completion: nil)
                 
             case 1:
-                let alertController = UIAlertController(title: "Delete app datas?", message: "Your favourites, Donated/Caught, and residents data will be deleted. This will exit the app.", preferredStyle: .alert)
-
+                let alertController = UIAlertController(title: "Delete app datas?", message: "Your favourites, donated, caught, and residents data will be deleted.", preferredStyle: .alert)
+                
                 let destructiveAction = UIAlertAction(title: "Delete", style: .destructive) { (action:UIAlertAction) in
                     PersistEngine.deleteAppData()
                     Taptic.successTaptic()
-                    self.presentAlert()
+                    self.presentAlert(title: "App datas deleted.", message: "Please restart the app to ensure the changes have been updated.")
                 }
                 let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action:UIAlertAction) in
                 }
-
+                
                 alertController.addAction(destructiveAction)
                 alertController.addAction(cancelAction)
                 self.present(alertController, animated: true, completion: nil)
@@ -225,14 +226,26 @@ class SettingsTableViewController: UITableViewController {
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
-
+    
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         switch section {
         case 0, 1, 2: return 5
         default: return 35
         }
     }
-
+    
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
+        switch(section) {
+        case 0: header.textLabel?.text! = "Share it if you love it."
+        case 1: header.textLabel?.text! = ""
+        case 2: header.textLabel?.text! = ""
+        case 3: header.textLabel?.text! = "Danger Zone"
+        default: header.textLabel?.text! = ""
+        }
+    }
+    
     private func setBar() {
         self.configureNavigationBar(largeTitleColor: .white, backgoundColor: UIColor(named: ColourUtil.grass1.rawValue)!, tintColor: .white, title: "Settings", preferredLargeTitle: true)
         
@@ -263,12 +276,12 @@ class SettingsTableViewController: UITableViewController {
         return cell
     }
     
-    private func presentAlert() {
-        let alertController = UIAlertController(title: "Success!", message: "Please restart the app now so that the change is updated.", preferredStyle: .alert)
-
+    private func presentAlert(title: String, message: String?) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
         let okAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
         }
-
+        
         alertController.addAction(okAction)
         self.present(alertController, animated: true, completion: nil)
     }
@@ -293,5 +306,5 @@ class SettingsTableViewController: UITableViewController {
             self.present(activityVC, animated: true, completion: nil)
         }
     }
-
+    
 }

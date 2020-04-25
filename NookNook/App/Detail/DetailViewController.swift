@@ -187,10 +187,10 @@ class DetailViewController: UIViewController {
         specialSellLabel.attributedText = PriceEngine.renderPrice(amount: Int(Double(specialSell) * 1.5), with: .none, of: buyLabel.font.pointSize)
         weatherLabel.text = critterObj.weather
         rarityLabel.setTitle(critterObj.rarity, for: .normal)
-        activeTimeN.text = TimeEngine.renderMonth(monthInString: critterObj.activeMonthsN)
-        activeTimeS.text = TimeEngine.renderMonth(monthInString: critterObj.activeMonthsS)
+        activeTimeN.text = TimeMonthEngine.renderMonth(monthInString: critterObj.activeMonthsN)
+        activeTimeS.text = TimeMonthEngine.renderMonth(monthInString: critterObj.activeMonthsS)
         weatherStack.isHidden = critterObj.weather.isEmpty ? true : false
-        timeLabel.text = TimeEngine.formatTime(of: critterObj.time)
+        timeLabel.text = TimeMonthEngine.formatTime(of: critterObj.time)
         
         firstIconLabel.text = self.favouriteManager.donatedCritters.contains(critterObj) ? "Donated" : ""
         secondIconLabel.text = self.favouriteManager.caughtCritters.contains(critterObj) ? "Caught" : ""
@@ -271,6 +271,11 @@ class DetailViewController: UIViewController {
         // create master scrollView
         scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let v = GeometryView(frame: CGRect(origin: CGPoint(), size: CGSize(width: self.view.bounds.width, height: 220)))
+        v.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.view.addSubview(v)
 
         
         // Create master stackView

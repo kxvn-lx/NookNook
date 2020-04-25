@@ -21,7 +21,7 @@
 		0A295B4C2444AAD0001CF828 /* Taptic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A295B4B2444AAD0001CF828 /* Taptic.swift */; };
 		0A36427E244695FE0081315A /* Critter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A36427D244695FE0081315A /* Critter.swift */; };
 		0A36428024469C600081315A /* bugsSecondary.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A36427F24469C600081315A /* bugsSecondary.json */; };
-		0A3642862446CC070081315A /* TimeEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3642852446CC070081315A /* TimeEngine.swift */; };
+		0A3642862446CC070081315A /* TimeMonthEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3642852446CC070081315A /* TimeMonthEngine.swift */; };
 		0A370B5F2443223D00A72048 /* VC+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A370B5E2443223D00A72048 /* VC+.swift */; };
 		0A370B61244322F100A72048 /* ColourUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A370B60244322F100A72048 /* ColourUtil.swift */; };
 		0A370B6C2444467900A72048 /* PriceEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A370B6B2444467900A72048 /* PriceEngine.swift */; };
@@ -56,6 +56,7 @@
 		0A595BA824533B3F00F37E15 /* other.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A595BA624533B3F00F37E15 /* other.json */; };
 		0A595BA924533B3F00F37E15 /* fossils.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A595BA724533B3F00F37E15 /* fossils.json */; };
 		0A595BAB24533C8C00F37E15 /* tops.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A595BAA24533C8C00F37E15 /* tops.json */; };
+		0A595BAD24533F6800F37E15 /* GeometryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A595BAC24533F6800F37E15 /* GeometryView.swift */; };
 		0A65203124499B6400692E74 /* PersistEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A65203024499B6400692E74 /* PersistEngine.swift */; };
 		0A6862A6244D3DAB00E06C74 /* SCHeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6862A5244D3DAB00E06C74 /* SCHeper.swift */; };
 		0A6862A9244D499C00E06C74 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6862A8244D499C00E06C74 /* SettingsTableViewController.swift */; };
@@ -125,7 +126,7 @@
 		0A295B4B2444AAD0001CF828 /* Taptic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Taptic.swift; sourceTree = "<group>"; };
 		0A36427D244695FE0081315A /* Critter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Critter.swift; sourceTree = "<group>"; };
 		0A36427F24469C600081315A /* bugsSecondary.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bugsSecondary.json; sourceTree = "<group>"; };
-		0A3642852446CC070081315A /* TimeEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeEngine.swift; sourceTree = "<group>"; };
+		0A3642852446CC070081315A /* TimeMonthEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeMonthEngine.swift; sourceTree = "<group>"; };
 		0A370B5E2443223D00A72048 /* VC+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VC+.swift"; sourceTree = "<group>"; };
 		0A370B60244322F100A72048 /* ColourUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColourUtil.swift; sourceTree = "<group>"; };
 		0A370B6B2444467900A72048 /* PriceEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceEngine.swift; sourceTree = "<group>"; };
@@ -162,6 +163,7 @@
 		0A595BA624533B3F00F37E15 /* other.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = other.json; sourceTree = "<group>"; };
 		0A595BA724533B3F00F37E15 /* fossils.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fossils.json; sourceTree = "<group>"; };
 		0A595BAA24533C8C00F37E15 /* tops.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tops.json; sourceTree = "<group>"; };
+		0A595BAC24533F6800F37E15 /* GeometryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryView.swift; sourceTree = "<group>"; };
 		0A65203024499B6400692E74 /* PersistEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistEngine.swift; sourceTree = "<group>"; };
 		0A6862A5244D3DAB00E06C74 /* SCHeper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCHeper.swift; sourceTree = "<group>"; };
 		0A6862A8244D499C00E06C74 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
@@ -221,7 +223,7 @@
 			children = (
 				0A01F31124431724001499D5 /* ImageEngine.swift */,
 				0A370B6D24444BD800A72048 /* DataEngine.swift */,
-				0A3642852446CC070081315A /* TimeEngine.swift */,
+				0A3642852446CC070081315A /* TimeMonthEngine.swift */,
 				0A65203024499B6400692E74 /* PersistEngine.swift */,
 				0A23BBCB244ACE94009B5178 /* SortEngine.swift */,
 				0A370B6B2444467900A72048 /* PriceEngine.swift */,
@@ -353,6 +355,7 @@
 			children = (
 				0A72C3702445AD8F009FA0D4 /* DetailViewController.swift */,
 				0A72C3742445FD93009FA0D4 /* VariantCollectionViewCell.swift */,
+				0A595BAC24533F6800F37E15 /* GeometryView.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -451,6 +454,7 @@
 		0AFD70652441B85F00957BE6 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				0A6B5637244FCE9400AA0B86 /* DateHelper.swift */,
 				0A23BBCF244AE1D5009B5178 /* Fruits.swift */,
 				0A370B5E2443223D00A72048 /* VC+.swift */,
 				0A370B60244322F100A72048 /* ColourUtil.swift */,
@@ -458,7 +462,6 @@
 				0A295B4B2444AAD0001CF828 /* Taptic.swift */,
 				0A295B49244494F9001CF828 /* Categories.swift */,
 				0AA3616D244C520500D326AF /* SVHelper.swift */,
-				0A6B5637244FCE9400AA0B86 /* DateHelper.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -630,7 +633,7 @@
 				0AEFF82B24470EAF0032156C /* WardrobesTableViewController.swift in Sources */,
 				0A72C3752445FD93009FA0D4 /* VariantCollectionViewCell.swift in Sources */,
 				0A65203124499B6400692E74 /* PersistEngine.swift in Sources */,
-				0A3642862446CC070081315A /* TimeEngine.swift in Sources */,
+				0A3642862446CC070081315A /* TimeMonthEngine.swift in Sources */,
 				0A72C3712445AD8F009FA0D4 /* DetailViewController.swift in Sources */,
 				0AC89E422449419A009ADB18 /* VillagersTableViewController.swift in Sources */,
 				0AFD706C2441BFEE00957BE6 /* ItemsTableViewController.swift in Sources */,
@@ -646,6 +649,7 @@
 				0A370B6C2444467900A72048 /* PriceEngine.swift in Sources */,
 				0AC703B42451C749008D7C77 /* CritterHelper.swift in Sources */,
 				0A370BAF2444796400A72048 /* CategoriesTableViewController.swift in Sources */,
+				0A595BAD24533F6800F37E15 /* GeometryView.swift in Sources */,
 				0A14A002245155A10080941A /* ResidentHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
