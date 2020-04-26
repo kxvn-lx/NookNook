@@ -54,24 +54,25 @@ struct CritterHelper {
             })
         case .Southern:
             allBugs.forEach({
-                let lowerBounds = TimeMonthEngine.formatMonths(month: $0.activeMonthsN) != [-1] ? TimeMonthEngine.formatMonths(month: $0.activeMonthsN).sorted(by: { $0 < $1 })[0] : -1
-                let upperBounds = TimeMonthEngine.formatMonths(month: $0.activeMonthsN) != [-1] ? TimeMonthEngine.formatMonths(month: $0.activeMonthsN).sorted(by: { $0 < $1 }).last! : -1
+                let lowerBounds = TimeMonthEngine.formatMonths(month: $0.activeMonthsS) != [-1] ? TimeMonthEngine.formatMonths(month: $0.activeMonthsS).sorted(by: { $0 < $1 })[0] : -1
+                let upperBounds = TimeMonthEngine.formatMonths(month: $0.activeMonthsS) != [-1] ? TimeMonthEngine.formatMonths(month: $0.activeMonthsS).sorted(by: { $0 < $1 }).last! : -1
                 
                 if (lowerBounds...upperBounds).contains(currMonthInt) || TimeMonthEngine.formatMonths(month: $0.activeMonthsS) == [-1] {
-                    // bug is in season for northern region.
+                    // bug is in season for southern region.
                     southernBugs.append($0)
                 }
             })
             allFishes.forEach({
-                let lowerBounds = TimeMonthEngine.formatMonths(month: $0.activeMonthsN) != [-1] ? TimeMonthEngine.formatMonths(month: $0.activeMonthsN).sorted(by: { $0 < $1 })[0] : -1
-                let upperBounds = TimeMonthEngine.formatMonths(month: $0.activeMonthsN) != [-1] ? TimeMonthEngine.formatMonths(month: $0.activeMonthsN).sorted(by: { $0 < $1 }).last! : -1
+                let lowerBounds = TimeMonthEngine.formatMonths(month: $0.activeMonthsS) != [-1] ? TimeMonthEngine.formatMonths(month: $0.activeMonthsS).sorted(by: { $0 < $1 })[0] : -1
+                let upperBounds = TimeMonthEngine.formatMonths(month: $0.activeMonthsS) != [-1] ? TimeMonthEngine.formatMonths(month: $0.activeMonthsS).sorted(by: { $0 < $1 }).last! : -1
                 
                 if (lowerBounds...upperBounds).contains(currMonthInt) || TimeMonthEngine.formatMonths(month: $0.activeMonthsS) == [-1] {
-                    // fish is in season for northern region.
+                    // fish is in season for southern region.
                     southernFishes.append($0)
                 }
             })
         }
+        
         
         switch userHemisphere {
         case .Northern:
