@@ -89,7 +89,7 @@ class WardrobesTableViewController: UITableViewController {
                 wardrobe = wardrobes[indexPath.row]
             }
             
-            wardrobeCell.imgView.sd_setImage(with: ImageEngine.parseNPURL(with: wardrobe.image!, category: wardrobe.category), placeholderImage: nil)
+            wardrobeCell.imgView.sd_setImage(with: ImageEngine.parseNPURL(with: wardrobe.image!, category: wardrobe.category), placeholderImage: UIImage(named: "placeholder"))
             wardrobeCell.nameLabel.text = wardrobe.name
             wardrobeCell.obtainedFromLabel.text = wardrobe.obtainedFrom
             wardrobeCell.buyLabel.attributedText = PriceEngine.renderPrice(amount: wardrobe.buy, with: .buy, of: 12)

@@ -356,9 +356,10 @@ class DashboardViewController: UIViewController {
     
     private func reloadProfile() {
         userDict = UDHelper.getUser()
+        favouritesManager = PersistEngine()
         setupProfile()
         
-        favouritesManager = PersistEngine()
+        residentLabel.text = "Your Resident: \(self.favouritesManager.residentVillagers.count)/10"
         calculateMonthlyCritter()
         DispatchQueue.main.async {
             self.variationImageCollectionView.reloadData()
@@ -382,7 +383,7 @@ extension DashboardViewController: UICollectionViewDelegateFlowLayout, UICollect
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VARIANT_CELL, for: indexPath) as! ResidentCollectionViewCell
         
-        cell.variantImage.sd_setImage(with: ImageEngine.parseAcnhURL(with: self.favouritesManager.residentVillagers[indexPath.row].image, of: Categories.villagers.rawValue, mediaType: .icons), completed: nil)
+        cell.variantImage.sd_setImage(with: ImageEngine.parseAcnhURL(with: self.favouritesManager.residentVillagers[indexPath.row].image, of: Categories.villagers.rawValue, mediaType: .icons), placeholderImage: UIImage(named: "placeholder"))
         
         let villagerName = self.birthdayResidents.contains(self.favouritesManager.residentVillagers[indexPath.row]) ? "\(self.favouritesManager.residentVillagers[indexPath.row].name) 🎂" : self.favouritesManager.residentVillagers[indexPath.row].name
         cell.variantName.text = villagerName

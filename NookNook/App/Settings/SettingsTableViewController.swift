@@ -203,7 +203,7 @@ class SettingsTableViewController: UITableViewController {
                     present(mailVC, animated: true, completion: nil)
                 }
                 else {
-                    self.presentAlert(title: "No mail accounts", message: "Please configure a mail account in order to send email. Or, manually email it to kevin.laminto@gmail.com")
+                    self.presentAlert(title: "No mail accounts", message: "Please configure a mail account in order to send email.\nOr, manually email it to kevin.laminto@gmail.com")
                 }
 
                     
@@ -219,7 +219,7 @@ class SettingsTableViewController: UITableViewController {
                     present(mailVC, animated: true, completion: nil)
                 }
                 else {
-                    self.presentAlert(title: "No mail accounts", message: "Please configure a mail account in order to send email. Or, manually email it to kevin.laminto@gmail.com")
+                    self.presentAlert(title: "No mail accounts", message: "Please configure a mail account in order to send email.\nOr, manually email it to kevin.laminto@gmail.com")
                 }
                 
                 // App version
@@ -233,7 +233,7 @@ class SettingsTableViewController: UITableViewController {
             switch indexPath.row {
                 // Delete cached data
             case 0:
-                let alertController = UIAlertController(title: "Delete cached datas?", message: "Cached images will be deleted and could free up some space in your device.", preferredStyle: .alert)
+                let alertController = UIAlertController(title: "Delete cached datas?", message: "Cached images will be deleted. This could free up some space in your device.", preferredStyle: .alert)
                 
                 let destructiveAction = UIAlertAction(title: "Delete", style: .destructive) { (action:UIAlertAction) in
                     PersistEngine.deleteCacheData()

@@ -132,7 +132,7 @@ class CrittersMonthlyTableViewController: UITableViewController {
                 }
             }
             
-            critterCell.imgView.sd_setImage(with: ImageEngine.parseAcnhURL(with: critter.image, of: critter.category, mediaType: .images), placeholderImage: nil)
+            critterCell.imgView.sd_setImage(with: ImageEngine.parseAcnhURL(with: critter.image, of: critter.category, mediaType: .images), placeholderImage: UIImage(named: "placeholder"))
             
             critterCell.nameLabel.text = critter.name
             critterCell.obtainedFromLabel.text = critter.obtainedFrom.isEmpty ? "Location unknown" : critter.obtainedFrom
