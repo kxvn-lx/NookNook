@@ -22,4 +22,6 @@ struct Wardrobe: Codable, Equatable, Identifiable {
     
     let buy: Int?
     let sell: Int?
+    
+    let sourceNote: String?
 }

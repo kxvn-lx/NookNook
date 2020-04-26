@@ -48,8 +48,9 @@ struct DataEngine {
                     let buy = item["buy"].intValue
                     let sell = item["sell"].intValue
                     let set = item["set"].stringValue
+                    let sourceNote = item["sourceNotes"].stringValue.isEmpty ? nil : item["sourceNotes"].stringValue
                     
-                    let newItem = Item(name: name, image: image, obtainedFrom: obtainedFrom, isDIY: isDIY, isCustomisable: isCustomisable, variants: variants, category: category, buy: buy, sell: sell, set: set)
+                    let newItem = Item(name: name, image: image, obtainedFrom: obtainedFrom, isDIY: isDIY, isCustomisable: isCustomisable, variants: variants, category: category, buy: buy, sell: sell, set: set, sourceNote: sourceNote)
                     items.append(newItem)
                 }
                 
@@ -192,8 +193,9 @@ struct DataEngine {
                     let category = wardrobe["category"].stringValue
                     let buy = wardrobe["buy"].intValue
                     let sell = wardrobe["sell"].intValue
+                    let sourceNote = wardrobe["sourceNotes"].stringValue.isEmpty ? nil : wardrobe["sourceNotes"].stringValue
 
-                    let newWardrobe = Wardrobe(name: name, image: image, obtainedFrom: obtainedFrom, isDIY: isDIY, variants: variants, category: category, buy: buy, sell: sell)
+                    let newWardrobe = Wardrobe(name: name, image: image, obtainedFrom: obtainedFrom, isDIY: isDIY, variants: variants, category: category, buy: buy, sell: sell, sourceNote: sourceNote)
                     wardrobes.append(newWardrobe)
                 }
                 

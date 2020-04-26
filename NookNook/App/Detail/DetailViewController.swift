@@ -33,6 +33,7 @@ class DetailViewController: UIViewController {
     private var detailImageView: UIImageView!
     private var titleLabel: UILabel!
     private var subtitleLabel: UILabel!
+    private var sourceNoteLabel: UILabel!
     private var titleRarityStack: UIStackView!
     private var buyLabel: UILabel!
     private var sellLabel: UILabel!
@@ -124,6 +125,7 @@ class DetailViewController: UIViewController {
             renderCritter()
             variationStack.isHidden = true
             buyStack.isHidden = true
+            sourceNoteLabel.isHidden = true
             
         case .wardrobes:
             renderWardrobe()
@@ -140,6 +142,7 @@ class DetailViewController: UIViewController {
             variationStack.isHidden = true
             activeTimeStack.isHidden = true
             specialSellStack.isHidden = true
+            sourceNoteLabel.isHidden = true
             timeStack.isHidden = true
             let species = sellStack.viewWithTag(1) as! UILabel
             species.text = "Species"
@@ -166,6 +169,8 @@ class DetailViewController: UIViewController {
         subtitleLabel.text = itemObj.obtainedFrom
         buyLabel.attributedText = PriceEngine.renderPrice(amount: itemObj.buy!, with: .none, of: buyLabel.font.pointSize)
         sellLabel.attributedText = PriceEngine.renderPrice(amount: itemObj.sell!, with: .none, of: buyLabel.font.pointSize)
+        sourceNoteLabel.text = itemObj.sourceNote
+
         
         if itemObj.variants == nil {
             variationImageCollectionView.isHidden = true
@@ -244,25 +249,25 @@ class DetailViewController: UIViewController {
     
     
     
-    /**
-     ------------------------------
-     ------------------------------
-     ------------------------------
-     */
-    
+
+    // MARK:- Views data source
     private func setupView() {
         buyStack = UIStackView()
         sellStack = UIStackView()
         weatherStack = UIStackView()
         activeTimeStack = UIStackView()
+        
         buyLabel = UILabel()
         sellLabel = UILabel()
         weatherLabel = UILabel()
         activeTimeN = UILabel()
         activeTimeS = UILabel()
+        
         titleLabel = UILabel()
         subtitleLabel = UILabel()
+        sourceNoteLabel = UILabel()
         rarityLabel = UIButton()
+        
         specialSellLabel = UILabel()
         timeLabel = UILabel()
         firstIconLabel = PaddingLabel(withInsets: 5, 5, 10, 10)
@@ -293,7 +298,7 @@ class DetailViewController: UIViewController {
         titleRarityStack = SVHelper.createSV(axis: .horizontal, spacing: MARGIN, alignment: .lastBaseline, distribution: .equalSpacing)
         
         
-        // Title and subtitle section
+        // Title, subtitle, and sourcenote section
         titleLabel.numberOfLines = 0
         titleLabel.font = UIFont.preferredFont(forTextStyle: .largeTitle)
         titleLabel.font = UIFont.systemFont(ofSize: titleLabel.font.pointSize, weight: .semibold)
@@ -301,6 +306,9 @@ class DetailViewController: UIViewController {
         subtitleLabel.numberOfLines = 0
         subtitleLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         subtitleLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
+        sourceNoteLabel.numberOfLines = 0
+        sourceNoteLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        sourceNoteLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
         
         
         // Rarity section
@@ -370,6 +378,7 @@ class DetailViewController: UIViewController {
         
         weatherStack = createInfoStackView(title: "Weather", with: weatherLabel)
         
+        infoStackView.addArrangedSubview(sourceNoteLabel)
         infoStackView.addArrangedSubview(buyStack)
         infoStackView.addArrangedSubview(sellStack)
         infoStackView.addArrangedSubview(specialSellStack)
