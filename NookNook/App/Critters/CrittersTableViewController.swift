@@ -41,6 +41,7 @@ class CrittersTableViewController: UITableViewController {
         // Default categories to be presented
         critters = DataEngine.loadCritterJSON(from: currentCategory)
         
+        self.tabBarController?.delegate = self
         
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false

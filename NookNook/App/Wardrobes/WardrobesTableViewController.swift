@@ -39,6 +39,7 @@ class WardrobesTableViewController: UITableViewController {
         // Default categories to be presented
         wardrobes = DataEngine.loadWardrobesJSON(from: currentCategory)
         
+        self.tabBarController?.delegate = self
         
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false

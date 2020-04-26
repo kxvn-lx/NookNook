@@ -42,14 +42,13 @@ class ItemsTableViewController: UITableViewController {
         // Default categories to be presented
         items = DataEngine.loadItemJSON(from: currentCategory)
         
+        self.tabBarController?.delegate = self
         
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search \(items.count) items..."
         searchController.searchBar.tintColor = .lightGray
         navigationItem.searchController = searchController
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {

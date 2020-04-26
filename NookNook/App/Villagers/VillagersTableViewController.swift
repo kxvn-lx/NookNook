@@ -42,6 +42,8 @@ class VillagersTableViewController: UITableViewController {
         // Default categories to be presented
         villagers = DataEngine.loadVillagersJSON(from: currentCategory).sorted(by: { $0.name < $1.name } )
         
+        self.tabBarController?.delegate = self
+        
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search \(villagers.count) villagers..."

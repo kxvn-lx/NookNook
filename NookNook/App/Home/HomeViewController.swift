@@ -39,3 +39,17 @@ class HomeViewController: UITabBarController {
         }
     }
 }
+
+extension UITableViewController: UITabBarControllerDelegate {
+    public func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+
+        let tabBarIndex = tabBarController.selectedIndex
+        switch tabBarIndex {
+        case 0: self.tableView.setContentOffset(CGPoint.zero, animated: true)
+        case 1: self.tableView.setContentOffset(CGPoint.zero, animated: true)
+        case 2: self.tableView.setContentOffset(CGPoint.zero, animated: true)
+        case 3: self.tableView.setContentOffset(CGPoint.zero, animated: true)
+        default: break
+        }
+    }
+}
