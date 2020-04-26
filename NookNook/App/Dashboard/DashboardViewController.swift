@@ -158,7 +158,7 @@ class DashboardViewController: UIViewController {
         // Name stack view
         nameStackView = SVHelper.createSV(axis: .vertical, spacing: MARGIN, alignment: .center, distribution: .fill)
         
-        profileImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 120, height: 120))
+        profileImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 130, height: 130))
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
         profileImageView.contentMode = .scaleAspectFill
         profileImageView.clipsToBounds = true
@@ -240,8 +240,6 @@ class DashboardViewController: UIViewController {
     }
     
     private func setConstraint() {
-        let itemImageViewSize: CGFloat = 0.3
-        
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: self.view.topAnchor),
             scrollView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
@@ -258,8 +256,8 @@ class DashboardViewController: UIViewController {
             phraseStack.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
             passportStackView.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
             
-            profileImageView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: itemImageViewSize),
-            profileImageView.heightAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: itemImageViewSize),
+            profileImageView.widthAnchor.constraint(equalToConstant: 130),
+            profileImageView.heightAnchor.constraint(equalToConstant: 130),
             
             tableView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
             tableView.heightAnchor.constraint(equalToConstant: 320),

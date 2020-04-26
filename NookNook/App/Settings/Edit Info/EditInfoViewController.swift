@@ -19,9 +19,6 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
     private var scrollView: UIScrollView!
     private var mStackView: UIStackView!
     
-    private var labelSV: UIStackView!
-    private var profileNameStackView: UIStackView!
-    
     private var favouritesManager: PersistEngine!
     
     var iconView: UIImageView!
@@ -129,10 +126,10 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         self.view.addSubview(scrollView)
         
         // Create master stackView
-        mStackView = SVHelper.createSV(axis: .vertical, spacing: MARGIN * 4, alignment: .center, distribution: .equalCentering)
+        mStackView = SVHelper.createSV(axis: .vertical, spacing: MARGIN * 4, alignment: .center, distribution: .equalSpacing)
         mStackView.translatesAutoresizingMaskIntoConstraints = false
         
-        profileImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 120, height: 120))
+        profileImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 130, height: 130))
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
         profileImageView.contentMode = .scaleAspectFill
         profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2
@@ -152,6 +149,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         
         
         nameTF = TweeAttributedTextField()
+        nameTF.translatesAutoresizingMaskIntoConstraints = false
         nameTF.addTarget(self, action: #selector(textfieldEventEnd), for: .editingDidEnd)
         nameTF.addTarget(self, action: #selector(textfieldEventBegin), for: .editingDidBegin)
         nameTF.infoTextColor = UIColor.red.withAlphaComponent(0.8)
@@ -172,6 +170,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
 
         
         islandNameTF = TweeAttributedTextField()
+        islandNameTF.translatesAutoresizingMaskIntoConstraints = false
         islandNameTF.addTarget(self, action: #selector(textfieldEventEnd), for: .editingDidEnd)
         islandNameTF.addTarget(self, action: #selector(textfieldEventBegin), for: .editingDidBegin)
         islandNameTF.infoTextColor = UIColor.red.withAlphaComponent(0.8)
@@ -189,12 +188,6 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         islandNameTF.placeholderDuration = 0.2
         islandNameTF.placeholderColor = (UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5))!
         islandNameTF.tweePlaceholder = "Island Name 🏝"
-        
-        profileNameStackView = SVHelper.createSV(axis: .vertical, spacing: MARGIN * 4, alignment: .center, distribution: .fill)
-        profileNameStackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        labelSV = SVHelper.createSV(axis: .vertical, spacing: MARGIN * 4, alignment: .center, distribution: .fillProportionally)
-        labelSV.translatesAutoresizingMaskIntoConstraints = false
 
         fruitLabel = UILabel()
         fruitLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -219,6 +212,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         
         
         hemispherePicker = UISegmentedControl(items: [DateHelper.Hemisphere.Northern.rawValue, DateHelper.Hemisphere.Southern.rawValue])
+        hemispherePicker.translatesAutoresizingMaskIntoConstraints = false
         hemispherePicker.addTarget(self, action:  #selector(hemispherePickerChanged), for: .valueChanged)
         
         
@@ -227,6 +221,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         saveButton.contentEdgeInsets = UIEdgeInsets(top: 15, left: 20, bottom: 15, right: 20)
         saveButton.backgroundColor = UIColor(named: ColourUtil.grass2.rawValue)
         saveButton.layer.borderWidth = 1
+        saveButton.layer.cornerRadius = 2.5
         saveButton.titleLabel?.numberOfLines = 2
         saveButton.layer.borderColor = UIColor(named: ColourUtil.grass2.rawValue)?.cgColor
         saveButton.titleLabel?.textAlignment = .center
@@ -236,18 +231,13 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         saveButton.titleLabel?.font = UIFont.systemFont(ofSize: (nativeFruitButton.titleLabel?.font.pointSize)!, weight: .semibold)
         saveButton.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)
         saveButton.setTitle("Save", for: .normal)
-
-        labelSV.addArrangedSubview(nameTF)
-        labelSV.addArrangedSubview(islandNameTF)
-        labelSV.addArrangedSubview(hemispherePicker)
-        labelSV.addArrangedSubview(fruitLabel)
-        labelSV.addArrangedSubview(nativeFruitButton)
         
-
-        profileNameStackView.addArrangedSubview(imgWrapper, withMargin: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
-        profileNameStackView.addArrangedSubview(labelSV, withMargin: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
-        
-        mStackView.addArrangedSubview(profileNameStackView, withMargin: UIEdgeInsets(top: MARGIN*4, left: 0, bottom: 0, right: 0))
+        mStackView.addArrangedSubview(imgWrapper, withMargin: UIEdgeInsets(top: MARGIN*4, left: 0, bottom: 0, right: 0))
+        mStackView.addArrangedSubview(nameTF)
+        mStackView.addArrangedSubview(islandNameTF)
+        mStackView.addArrangedSubview(hemispherePicker)
+        mStackView.addArrangedSubview(fruitLabel)
+        mStackView.addArrangedSubview(nativeFruitButton)
         mStackView.addArrangedSubview(saveButton)
         
         scrollView.addSubview(mStackView)
@@ -317,9 +307,8 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
     
     private func setConstraint() {
         let itemImageViewSize: CGFloat = 0.3
-        
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: MARGIN),
+            scrollView.topAnchor.constraint(equalTo: self.view.topAnchor),
             scrollView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
             scrollView.rightAnchor.constraint(equalTo: self.view.rightAnchor),
             scrollView.bottomAnchor.constraint(equalTo: self.view.layoutMarginsGuide.bottomAnchor),
@@ -327,19 +316,16 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
             mStackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             mStackView.leftAnchor.constraint(equalTo: scrollView.leftAnchor),
             mStackView.rightAnchor.constraint(equalTo: scrollView.rightAnchor),
-            mStackView.bottomAnchor.constraint(equalTo: scrollView.frameLayoutGuide.bottomAnchor),
-            mStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            mStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -MARGIN * 4),
+            mStackView.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor),
             
-            profileNameStackView.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
-            labelSV.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
+            nameTF.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor, multiplier: 0.8),
+            islandNameTF.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor, multiplier: 0.8),
+            nativeFruitButton.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor, multiplier: 0.7),
+            saveButton.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor, multiplier: 0.7),
             
-            nameTF.widthAnchor.constraint(equalTo: self.labelSV.widthAnchor, multiplier: 0.8),
-            islandNameTF.widthAnchor.constraint(equalTo: self.labelSV.widthAnchor, multiplier: 0.8),
-            nativeFruitButton.widthAnchor.constraint(equalTo: self.labelSV.widthAnchor, multiplier: 0.7),
-            saveButton.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor),
-            
-            profileImageView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: itemImageViewSize),
-            profileImageView.heightAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: itemImageViewSize),
+            profileImageView.widthAnchor.constraint(equalToConstant: 130),
+            profileImageView.heightAnchor.constraint(equalToConstant: 130),
             
             imgWrapper.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: itemImageViewSize * 1.05),
             imgWrapper.heightAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: itemImageViewSize * 1.05),
