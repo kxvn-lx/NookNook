@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MessageUI
 
 protocol ProfileDelegate: NSObjectProtocol {
     func updateprofile()
@@ -161,6 +162,7 @@ class SettingsTableViewController: UITableViewController {
         switch indexPath.section {
         case 0:
             switch indexPath.row {
+                // Edit info
             case 0:
                 let vc = self.storyboard!.instantiateViewController(withIdentifier: EDIT_INFO_VC) as! EditInfoViewController
                 let navController = UINavigationController(rootViewController: vc)
@@ -169,9 +171,11 @@ class SettingsTableViewController: UITableViewController {
             }
         case 1:
             switch indexPath.row {
+                // Share
             case 0: share(sender: self.view)
+                // Tweet it!
             case 1:
-                guard let url = URL(string: "https://twitter.com/nooknook")  else { return }
+                guard let url = URL(string: "https://twitter.com/kevinlx_")  else { return }
                 if UIApplication.shared.canOpenURL(url) {
                     if #available(iOS 10.0, *) {
                         UIApplication.shared.open(url, options: [:], completionHandler: nil)
@@ -179,14 +183,46 @@ class SettingsTableViewController: UITableViewController {
                         UIApplication.shared.openURL(url)
                     }
                 }
+                // Creator
             case 2: print(1)
             default: break
             }
         case 2:
             switch indexPath.row {
+                // About VC
             case 0: print("About VC")
-            case 1: print("Request feature")
-            case 2: print(1)
+                // Request a feature
+            case 1:
+                if (MFMailComposeViewController.canSendMail()) {
+                    let mailVC = MFMailComposeViewController()
+                    mailVC.mailComposeDelegate = self
+                    mailVC.setToRecipients(["kevin.laminto@gmail.com"])
+                    mailVC.setSubject("Feature request! 🚀 [NookNook]")
+                    mailVC.setMessageBody("Hi! I have a cool feature idea that could improve the app.", isHTML: false)
+
+                    present(mailVC, animated: true, completion: nil)
+                }
+                else {
+                    self.presentAlert(title: "No mail accounts", message: "Please configure a mail account in order to send email. Or, manually email it to kevin.laminto@gmail.com")
+                }
+
+                    
+                // Report a bug
+            case 2:
+                if (MFMailComposeViewController.canSendMail()) {
+                    let mailVC = MFMailComposeViewController()
+                    mailVC.mailComposeDelegate = self
+                    mailVC.setToRecipients(["kevin.laminto@gmail.com"])
+                    mailVC.setSubject("Bug report! 🐜 [NookNook]")
+                    mailVC.setMessageBody("Hi! I found a bug.", isHTML: false)
+
+                    present(mailVC, animated: true, completion: nil)
+                }
+                else {
+                    self.presentAlert(title: "No mail accounts", message: "Please configure a mail account in order to send email. Or, manually email it to kevin.laminto@gmail.com")
+                }
+                
+                // App version
             case 3:
                 let vc = self.storyboard!.instantiateViewController(withIdentifier: PATCH_LOG_VC) as! PatchLogViewController
                 let navController = UINavigationController(rootViewController: vc)
@@ -195,6 +231,7 @@ class SettingsTableViewController: UITableViewController {
             }
         case 3:
             switch indexPath.row {
+                // Delete cached data
             case 0:
                 let alertController = UIAlertController(title: "Delete cached datas?", message: "Cached images will be deleted and could free up some space in your device.", preferredStyle: .alert)
                 
@@ -210,6 +247,7 @@ class SettingsTableViewController: UITableViewController {
                 alertController.addAction(cancelAction)
                 self.present(alertController, animated: true, completion: nil)
                 
+                // Delete app data
             case 1:
                 let alertController = UIAlertController(title: "Delete app datas?", message: "Your favourites, donated, caught, and residents data will be deleted.", preferredStyle: .alert)
                 
@@ -324,4 +362,11 @@ class SettingsTableViewController: UITableViewController {
         }
     }
     
+}
+
+//MARK: - MFMail compose method
+extension SettingsTableViewController: MFMailComposeViewControllerDelegate {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
+    }
 }
