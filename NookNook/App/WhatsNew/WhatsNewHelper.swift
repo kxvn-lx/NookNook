@@ -15,26 +15,11 @@ struct WhatsNewHelper {
     // MARK: Properties
     var view: WhatsNewViewController?
     
-    private var swipeRightIcon: UIImage = {
-        let icon = IconUtil.systemIcon(of: .swipeRight, weight: .light).withRenderingMode(.alwaysTemplate)
-        icon.withTintColor(UIColor(named: ColourUtil.dirt1.rawValue )!)
-        return icon
-    }()
-    private var favouriteIcon: UIImage = {
-        let icon = IconUtil.systemIcon(of: .star, weight: .light).withRenderingMode(.alwaysTemplate)
-        icon.withTintColor(UIColor(named: ColourUtil.dirt1.rawValue )!)
-        return icon
-    }()
-    private var birthdayIcon: UIImage = {
-        let icon = IconUtil.systemIcon(of: .birthday, weight: .light).withRenderingMode(.alwaysTemplate)
-        icon.withTintColor(UIColor(named: ColourUtil.dirt1.rawValue )!)
-        return icon
-    }()
-    private var critterIcon: UIImage = {
-        let icon = IconUtil.systemIcon(of: .critter, weight: .light).withRenderingMode(.alwaysTemplate)
-        icon.withTintColor(UIColor(named: ColourUtil.dirt1.rawValue )!)
-        return icon
-    }()
+    private var swipeRightIcon = IconUtil.systemIcon(of: .swipeRight, weight: .light)
+    private var favouriteIcon = IconUtil.systemIcon(of: .star, weight: .light)
+    private var birthdayIcon = IconUtil.systemIcon(of: .birthday, weight: .light)
+    private var critterIcon = IconUtil.systemIcon(of: .critter, weight: .light)
+    private var profileIcon = IconUtil.systemIcon(of: .dashbnoard, weight: .light)
     
     // MARK: Initialiser
     init() {
@@ -60,6 +45,11 @@ struct WhatsNewHelper {
                     title: "Critters this month",
                     subtitle: "All available critters this month, under your fingertip.",
                     image: critterIcon
+                ),
+                WhatsNew.Item(
+                    title: "Personalised dashboard",
+                    subtitle: "Make NookNook your very own ACNH companion app.",
+                    image: profileIcon
                 )
             ]
         )

@@ -31,6 +31,7 @@ struct IconUtil {
         case swipeRight = "hand.draw"
         case birthday = "gift"
         case critter = "ant"
+        case dashbnoard = "person.crop.circle"
     }
     
     /**

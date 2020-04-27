@@ -131,9 +131,9 @@ class DashboardViewController: UIViewController {
     }
     
     func setupProfile() {
-        profileNameLabel.text = userDict["name"] ?? "Not provided"
-        islandNameLabel.text = "\(userDict["islandName"] ?? "Not provided") 🏝"
-        nativeFruitLabel.text = userDict["nativeFruit"] ?? "Not provided"
+        profileNameLabel.text = userDict["name"] ?? "NookNook"
+        islandNameLabel.text = "\(userDict["islandName"] ?? "Nook Island") 🏝"
+        nativeFruitLabel.text = userDict["nativeFruit"] ?? "Nook Fruit 🧃"
         
         if let img = ImagePersistEngine.loadImage() {
             profileImageView.image = img

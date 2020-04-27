@@ -119,6 +119,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         } 
     }
     
+    // MARK: - Set the views
     private func setUI() {
         scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -243,7 +244,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         scrollView.addSubview(mStackView)
     }
     
-    @objc func hemispherePickerChanged(_ sender: UISegmentedControl) {
+    @objc private func hemispherePickerChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
             selectedHemisphere = .Northern
