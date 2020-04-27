@@ -75,6 +75,12 @@ class VillagersTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isFiltering {
+            if filteredVillagers.count == 0 {
+                self.tableView.setEmptyMessage("No villager(s) found 😢. Perhaps you made a mistake?")
+            }
+            else {
+                self.tableView.restore()
+            }
             return filteredVillagers.count
         }
         return villagers.count

@@ -73,6 +73,12 @@ class CrittersTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isFiltering {
+            if filteredCritters.count == 0 {
+                self.tableView.setEmptyMessage("No critter(s) found 😢. Perhaps you made a mistake?")
+            }
+            else {
+                self.tableView.restore()
+            }
             return filteredCritters.count
         }
         return critters.count

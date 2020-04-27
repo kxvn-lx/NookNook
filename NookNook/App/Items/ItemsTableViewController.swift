@@ -84,6 +84,11 @@ class ItemsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isFiltering {
+            if filteredItems.count == 0 {
+                self.tableView.setEmptyMessage("No item(s) found 😢. Perhaps you made a mistake?")
+            } else {
+                self.tableView.restore()
+            }
             return filteredItems.count
         }
         return items.count

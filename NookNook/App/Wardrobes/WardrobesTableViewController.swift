@@ -69,6 +69,11 @@ class WardrobesTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isFiltering {
+            if filteredWardrobes.count == 0 {
+                self.tableView.setEmptyMessage("No wardrobe(s) found 😢. Perhaps you made a mistake?")
+            } else {
+                self.tableView.restore()
+            }
             return filteredWardrobes.count
         }
         return wardrobes.count
