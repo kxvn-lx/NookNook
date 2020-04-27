@@ -290,9 +290,9 @@ class SettingsTableViewController: UITableViewController {
     }
     
     private func setBar() {
-        self.configureNavigationBar(largeTitleColor: .white, backgoundColor: UIColor(named: ColourUtil.grass1.rawValue)!, tintColor: .white, title: "Settings", preferredLargeTitle: true)
+        self.configureNavigationBar(largeTitleColor: UIColor(named: ColourUtil.dirt1.rawValue)!, backgoundColor: UIColor(named: ColourUtil.cream1.rawValue)!, tintColor: UIColor(named: ColourUtil.dirt1.rawValue)!, title: "Settings", preferredLargeTitle: true)
         
-        self.view.backgroundColor = UIColor(named: ColourUtil.cream2.rawValue)
+        self.view.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
         
         let close = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(closeTapped))
         navigationItem.leftBarButtonItem = close
@@ -309,7 +309,7 @@ class SettingsTableViewController: UITableViewController {
     private func setupCell(text: String, icon: UIImage, accesoryType: UITableViewCell.AccessoryType) -> UITableViewCell {
         let cell = UITableViewCell(style: .value1, reuseIdentifier: "cell")
         
-        cell.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
+        cell.backgroundColor = UIColor(named: ColourUtil.cream2.rawValue)
         cell.imageView?.image = icon.withRenderingMode(.alwaysTemplate)
         cell.imageView?.tintColor = UIColor(named: ColourUtil.dirt1.rawValue)
         cell.textLabel?.text = text

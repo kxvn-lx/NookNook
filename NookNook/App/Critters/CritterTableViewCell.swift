@@ -72,8 +72,8 @@ class CritterTableViewCell: UITableViewCell {
         isDonatedLabel.font = UIFont.preferredFont(forTextStyle: .caption2)
         isDonatedLabel.font = UIFont.systemFont(ofSize: isDonatedLabel.font.pointSize, weight: .semibold)
         isDonatedLabel.textColor =  .white
-        isDonatedLabel.layer.borderColor = UIColor(named: ColourUtil.grass2.rawValue)?.cgColor
-        isDonatedLabel.backgroundColor = UIColor(named: ColourUtil.grass2.rawValue)
+        isDonatedLabel.layer.borderColor = UIColor(named: ColourUtil.grass1.rawValue)?.cgColor
+        isDonatedLabel.backgroundColor = UIColor(named: ColourUtil.grass1.rawValue)
         isDonatedLabel.layer.borderWidth = 1
         isDonatedLabel.layer.cornerRadius = 2.5
         isDonatedLabel.clipsToBounds = true

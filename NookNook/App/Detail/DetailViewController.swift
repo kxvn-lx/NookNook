@@ -312,7 +312,7 @@ class DetailViewController: UIViewController {
         
         
         // Rarity section
-        rarityLabel.setTitleColor(UIColor(named: ColourUtil.gold1.rawValue), for: .normal)
+        rarityLabel.setTitleColor(.darkGray, for: .normal)
         rarityLabel.titleLabel?.font = UIFont.preferredFont(forTextStyle: .caption1)
         rarityLabel.contentEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         rarityLabel.isUserInteractionEnabled = false
@@ -328,8 +328,8 @@ class DetailViewController: UIViewController {
         firstIconLabel.font = UIFont.preferredFont(forTextStyle: .caption2)
         firstIconLabel.font = UIFont.systemFont(ofSize: firstIconLabel.font.pointSize, weight: .semibold)
         firstIconLabel.textColor =  .white
-        firstIconLabel.layer.borderColor = UIColor(named: ColourUtil.grass2.rawValue)?.cgColor
-        firstIconLabel.backgroundColor = UIColor(named: ColourUtil.grass2.rawValue)
+        firstIconLabel.layer.borderColor = UIColor(named: ColourUtil.grass1.rawValue)?.cgColor
+        firstIconLabel.backgroundColor = UIColor(named: ColourUtil.grass1.rawValue)
         firstIconLabel.layer.borderWidth = 1
         firstIconLabel.layer.cornerRadius = 2.5
         firstIconLabel.clipsToBounds = true
@@ -427,7 +427,7 @@ class DetailViewController: UIViewController {
         variationImageCollectionView.setCollectionViewLayout(calculateCVLayout(), animated: true)
         variationImageCollectionView.delegate = self
         variationImageCollectionView.dataSource = self
-        variationImageCollectionView.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
+        variationImageCollectionView.backgroundColor = UIColor(named: ColourUtil.cream2.rawValue)
         
         
         variationStack.addArrangedSubview(variationTitleLabel, withMargin: UIEdgeInsets(top: 0, left: MARGIN * 2, bottom: 0, right: 0))
@@ -483,9 +483,9 @@ class DetailViewController: UIViewController {
     }
     
     private func setBar() {
-        self.configureNavigationBar(largeTitleColor: .white, backgoundColor: UIColor(named: ColourUtil.grass1.rawValue)!, tintColor: .white, title: "Detail", preferredLargeTitle: false)
+        self.configureNavigationBar(largeTitleColor: UIColor(named: ColourUtil.dirt1.rawValue)!, backgoundColor: UIColor(named: ColourUtil.cream1.rawValue)!, tintColor: UIColor(named: ColourUtil.dirt1.rawValue)!, title: "Detail", preferredLargeTitle: false)
         
-        self.view.backgroundColor = UIColor(named: ColourUtil.cream2.rawValue)
+        self.view.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
         
         let cancel = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(closeTapped))
         navigationItem.rightBarButtonItems = [cancel]
@@ -511,7 +511,7 @@ class DetailViewController: UIViewController {
         label1.tag = 1
         label1.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
         
-        stackView.addBackground(color: UIColor(named: ColourUtil.cream1.rawValue)!, cornerRadius: 5)
+        stackView.addBackground(color: UIColor(named: ColourUtil.cream2.rawValue)!, cornerRadius: 5)
         
         stackView.addArrangedSubview(label1)
         stackView.addArrangedSubview(body)

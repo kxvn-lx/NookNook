@@ -19,7 +19,7 @@ class PatchLogViewController: UIViewController {
     var titleLabel: UILabel!
     
     var logArray = [
-        "V1.0.0 - 27 April 2020\nInternal beta testing released! 🤩",
+        "V1.0.0 (27042020)\nBeta testing released! 🤩",
     ]
 
     override func viewDidLoad() {
@@ -80,7 +80,7 @@ class PatchLogViewController: UIViewController {
     }
     
     private func setBar() {
-        self.configureNavigationBar(largeTitleColor: .white, backgoundColor: UIColor(named: ColourUtil.grass1.rawValue)!, tintColor: .white, title: "Patch Log", preferredLargeTitle: false)
+        self.configureNavigationBar(largeTitleColor: UIColor(named: ColourUtil.dirt1.rawValue)!, backgoundColor: UIColor(named: ColourUtil.cream1.rawValue)!, tintColor: UIColor(named: ColourUtil.dirt1.rawValue)!, title: "Patch Log", preferredLargeTitle: false)
         
         self.view.backgroundColor = UIColor(named: ColourUtil.cream2.rawValue)
         

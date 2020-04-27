@@ -165,7 +165,7 @@ class CrittersTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        (view as! UITableViewHeaderFooterView).contentView.backgroundColor = UIColor(named: ColourUtil.cream2.rawValue)
+        (view as! UITableViewHeaderFooterView).contentView.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
         (view as! UITableViewHeaderFooterView).textLabel?.textColor = UIColor(named: ColourUtil.dirt1.rawValue)
     }
     
@@ -214,7 +214,7 @@ class CrittersTableViewController: UITableViewController {
         })
         
         caughtAction.backgroundColor = UIColor(named: ColourUtil.gold1.rawValue)
-        donatedAction.backgroundColor = UIColor(named: ColourUtil.grass2.rawValue)
+        donatedAction.backgroundColor = UIColor(named: ColourUtil.grass1.rawValue)
         
         return UISwipeActionsConfiguration(actions: [donatedAction, caughtAction])
         
@@ -224,9 +224,9 @@ class CrittersTableViewController: UITableViewController {
     // Modify the UI
     private func setBar() {
         tabBarController?.tabBar.barTintColor = UIColor(named: ColourUtil.grass1.rawValue)
-        self.configureNavigationBar(largeTitleColor: .white, backgoundColor: UIColor(named: ColourUtil.grass1.rawValue)!, tintColor: .white, title: "Critters", preferredLargeTitle: true)
+        self.configureNavigationBar(largeTitleColor: UIColor(named: ColourUtil.dirt1.rawValue)!, backgoundColor: UIColor(named: ColourUtil.cream1.rawValue)!, tintColor: UIColor(named: ColourUtil.dirt1.rawValue)!, title: "Critters", preferredLargeTitle: true)
         
-        self.tableView.backgroundColor = UIColor(named: ColourUtil.cream2.rawValue)
+        self.tableView.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
         
         let button: UIButton = UIButton(type: .custom)
         button.setImage(IconUtil.systemIcon(of: .filter, weight: .regular), for: .normal)

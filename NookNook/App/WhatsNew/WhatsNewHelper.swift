@@ -86,7 +86,7 @@ struct WhatsNewHelper {
             title: "Get started",
             action: .dismiss,
             hapticFeedback: .notification(.success),
-            backgroundColor: UIColor(named: ColourUtil.grass2.rawValue)!,
+            backgroundColor: UIColor(named: ColourUtil.grass1.rawValue)!,
             titleColor: .white,
             cornerRadius: 2.5,
             animation: .slideRight
@@ -105,5 +105,10 @@ struct WhatsNewHelper {
             configuration: configuration,
             versionStore: versionStore
         )
+        
+//        view = WhatsNewViewController(
+//            whatsNew: whatsNew,
+//            configuration: configuration
+//        )
     }
 }

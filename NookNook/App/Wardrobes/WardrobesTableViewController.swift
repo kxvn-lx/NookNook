@@ -145,7 +145,7 @@ class WardrobesTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        (view as! UITableViewHeaderFooterView).contentView.backgroundColor = UIColor(named: ColourUtil.cream2.rawValue)
+        (view as! UITableViewHeaderFooterView).contentView.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
         (view as! UITableViewHeaderFooterView).textLabel?.textColor = UIColor(named: ColourUtil.dirt1.rawValue)
     }
     
@@ -172,7 +172,7 @@ class WardrobesTableViewController: UITableViewController {
         })
 
         favouriteAction.image = self.favouritesManager.wardrobes.contains(wardrobe) ? IconUtil.systemIcon(of: .starFill, weight: .thin) : IconUtil.systemIcon(of: .star, weight: .thin)
-        favouriteAction.backgroundColor = UIColor(named: ColourUtil.grass2.rawValue)
+        favouriteAction.backgroundColor = UIColor(named: ColourUtil.grass1.rawValue)
         
         return UISwipeActionsConfiguration(actions: [favouriteAction])
         
@@ -181,7 +181,7 @@ class WardrobesTableViewController: UITableViewController {
     // Modify the UI
     private func setBar() {
         tabBarController?.tabBar.barTintColor = UIColor(named: ColourUtil.grass1.rawValue)
-        self.configureNavigationBar(largeTitleColor: .white, backgoundColor: UIColor(named: ColourUtil.grass1.rawValue)!, tintColor: .white, title: "Wardrobes", preferredLargeTitle: true)
+        self.configureNavigationBar(largeTitleColor: UIColor(named: ColourUtil.dirt1.rawValue)!, backgoundColor: UIColor(named: ColourUtil.cream1.rawValue)!, tintColor: UIColor(named: ColourUtil.dirt1.rawValue)!, title: "Wardrobes", preferredLargeTitle: true)
         
         self.tableView.backgroundColor = UIColor(named: ColourUtil.cream2.rawValue)
         

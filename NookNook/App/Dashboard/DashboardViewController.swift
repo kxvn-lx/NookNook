@@ -106,9 +106,9 @@ class DashboardViewController: UIViewController {
     
     // Modify the UI
     private func setBar() {
-        self.configureNavigationBar(largeTitleColor: .white, backgoundColor: UIColor(named: ColourUtil.grass1.rawValue)!, tintColor: .white, title: "Dashboard", preferredLargeTitle: true)
+        self.configureNavigationBar(largeTitleColor: UIColor(named: ColourUtil.dirt1.rawValue)!, backgoundColor: UIColor(named: ColourUtil.cream1.rawValue)!, tintColor: UIColor(named: ColourUtil.dirt1.rawValue)!, title: "Dashboard", preferredLargeTitle: true)
         
-        self.view.backgroundColor = UIColor(named: ColourUtil.cream2.rawValue)
+        self.view.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
         
         self.view.tintColor = .white
         
@@ -162,7 +162,7 @@ class DashboardViewController: UIViewController {
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
         profileImageView.contentMode = .scaleAspectFill
         profileImageView.clipsToBounds = true
-        profileImageView.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
+        profileImageView.backgroundColor = UIColor(named: ColourUtil.cream2.rawValue)
         profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2
         
         profileNameLabel = UILabel()
@@ -217,7 +217,7 @@ class DashboardViewController: UIViewController {
         variationImageCollectionView.setCollectionViewLayout(calculateCVLayout(), animated: true)
         variationImageCollectionView.delegate = self
         variationImageCollectionView.dataSource = self
-        variationImageCollectionView.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
+        variationImageCollectionView.backgroundColor = UIColor(named: ColourUtil.cream2.rawValue)
         
         
         residentStack.addArrangedSubview(residentLabel, withMargin: UIEdgeInsets(top: 0, left: MARGIN * 2, bottom: 0, right: 0))
@@ -285,7 +285,7 @@ class DashboardViewController: UIViewController {
         label1.tag = 1
         label1.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
         
-        stackView.addBackground(color: UIColor(named: ColourUtil.cream1.rawValue)!, cornerRadius: 5)
+        stackView.addBackground(color: UIColor(named: ColourUtil.cream2.rawValue)!, cornerRadius: 5)
         
         stackView.addArrangedSubview(label1)
         stackView.addArrangedSubview(body)

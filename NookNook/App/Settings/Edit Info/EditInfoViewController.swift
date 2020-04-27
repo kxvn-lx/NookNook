@@ -87,9 +87,9 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
     
     // Modify the UI
     private func setBar() {
-        self.configureNavigationBar(largeTitleColor: .white, backgoundColor: UIColor(named: ColourUtil.grass1.rawValue)!, tintColor: .white, title: "Edit Info", preferredLargeTitle: false)
+        self.configureNavigationBar(largeTitleColor: UIColor(named: ColourUtil.dirt1.rawValue)!, backgoundColor: UIColor(named: ColourUtil.cream1.rawValue)!, tintColor: UIColor(named: ColourUtil.dirt1.rawValue)!, title: "Edit Info", preferredLargeTitle: false)
         
-        self.view.backgroundColor = UIColor(named: ColourUtil.cream2.rawValue)
+        self.view.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
         
         self.view.tintColor = .white
         
@@ -135,7 +135,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         profileImageView.contentMode = .scaleAspectFill
         profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2
         profileImageView.clipsToBounds = true
-        profileImageView.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
+        profileImageView.backgroundColor = UIColor(named: ColourUtil.cream2.rawValue)
         
         
         iconView = UIImageView()
@@ -204,8 +204,8 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         nativeFruitButton.layer.borderColor = UIColor(named: ColourUtil.grassBtn.rawValue)?.cgColor
         nativeFruitButton.layer.cornerRadius = 2.5
         nativeFruitButton.titleLabel?.textAlignment = .center
-        nativeFruitButton.setTitleColor(UIColor(named: ColourUtil.grass2.rawValue), for: .normal)
-        nativeFruitButton.setTitleColor(UIColor(named: ColourUtil.grass2.rawValue)?.withAlphaComponent(0.5), for: .highlighted)
+        nativeFruitButton.setTitleColor(UIColor(named: ColourUtil.grass1.rawValue), for: .normal)
+        nativeFruitButton.setTitleColor(UIColor(named: ColourUtil.grass1.rawValue)?.withAlphaComponent(0.5), for: .highlighted)
         nativeFruitButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
         nativeFruitButton.titleLabel?.font = UIFont.systemFont(ofSize: (nativeFruitButton.titleLabel?.font.pointSize)!, weight: .semibold)
         nativeFruitButton.addTarget(self, action: #selector(fruitPicker), for: .touchUpInside)
@@ -220,11 +220,11 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         saveButton = UIButton()
         saveButton.translatesAutoresizingMaskIntoConstraints = false
         saveButton.contentEdgeInsets = UIEdgeInsets(top: 15, left: 20, bottom: 15, right: 20)
-        saveButton.backgroundColor = UIColor(named: ColourUtil.grass2.rawValue)
+        saveButton.backgroundColor = UIColor(named: ColourUtil.grass1.rawValue)
         saveButton.layer.borderWidth = 1
         saveButton.layer.cornerRadius = 2.5
         saveButton.titleLabel?.numberOfLines = 2
-        saveButton.layer.borderColor = UIColor(named: ColourUtil.grass2.rawValue)?.cgColor
+        saveButton.layer.borderColor = UIColor(named: ColourUtil.grass1.rawValue)?.cgColor
         saveButton.titleLabel?.textAlignment = .center
         saveButton.setTitleColor(UIColor.white, for: .normal)
         saveButton.setTitleColor(UIColor.white.withAlphaComponent(0.5), for: .highlighted)

@@ -72,8 +72,8 @@ class FavouriteTableViewCell: UITableViewCell {
         iconLabel2.font = UIFont.preferredFont(forTextStyle: .caption2)
         iconLabel2.font = UIFont.systemFont(ofSize: iconLabel2.font.pointSize, weight: .semibold)
         iconLabel2.textColor =  .white
-        iconLabel2.layer.borderColor = UIColor(named: ColourUtil.grass2.rawValue)?.cgColor
-        iconLabel2.backgroundColor = UIColor(named: ColourUtil.grass2.rawValue)
+        iconLabel2.layer.borderColor = UIColor(named: ColourUtil.grass1.rawValue)?.cgColor
+        iconLabel2.backgroundColor = UIColor(named: ColourUtil.grass1.rawValue)
         iconLabel2.layer.borderWidth = 1
         iconLabel2.layer.cornerRadius = 5
         iconLabel2.clipsToBounds = true
@@ -81,9 +81,6 @@ class FavouriteTableViewCell: UITableViewCell {
 
         
         imgView.addSubview(tagLabel)
-//        imgView.addSubview(iconLabel1)
-//        imgView.addSubview(iconLabel2)
-        
         
         nameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -108,6 +105,7 @@ class FavouriteTableViewCell: UITableViewCell {
         label4.translatesAutoresizingMaskIntoConstraints = false
         label4.numberOfLines = 0
         label4.font = UIFont.preferredFont(forTextStyle: .caption1)
+        label4.font = UIFont.systemFont(ofSize: label4.font!.pointSize, weight: .semibold)
         label4.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
         
         label3 = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
