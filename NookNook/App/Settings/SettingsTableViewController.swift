@@ -22,10 +22,8 @@ class SettingsTableViewController: UITableViewController {
     private var editInfoCell = UITableViewCell()
     
     private var shareCell = UITableViewCell()
-    private var twitCell = UITableViewCell()
     private var creatorCell = UITableViewCell()
     
-    private var aboutCell = UITableViewCell()
     private var requestFeatureCell = UITableViewCell()
     private var reportBugCell = UITableViewCell()
     private var appVersionCell = UITableViewCell()
@@ -72,11 +70,7 @@ class SettingsTableViewController: UITableViewController {
         appVersionCell = setupCell(text: "App version", icon: IconUtil.systemIcon(of: .info, weight: .regular), accesoryType: .disclosureIndicator)
         appVersionCell.detailTextLabel?.text = "1.0.0"
         
-        twitCell = setupCell(text: "Tweet it!", icon: IconUtil.systemIcon(of: .socialMedia, weight: .regular), accesoryType: .disclosureIndicator)
-        
-        aboutCell = setupCell(text: "About", icon: IconUtil.systemIcon(of: .about, weight: .regular), accesoryType: .disclosureIndicator)
         requestFeatureCell = setupCell(text: "Request a feature", icon: IconUtil.systemIcon(of: .feature, weight: .regular), accesoryType: .disclosureIndicator)
-        
     }
     
     // MARK: - Table view data source
@@ -90,9 +84,9 @@ class SettingsTableViewController: UITableViewController {
         case 0:
             return 1
         case 1:
-            return 3
+            return 2
         case 2:
-            return 4
+            return 3
         case 3:
             return 2
         default:
@@ -112,16 +106,14 @@ class SettingsTableViewController: UITableViewController {
         case 1:
             switch (indexPath.row) {
             case 0: return self.shareCell
-            case 1: return self.twitCell
-            case 2: return self.creatorCell
+            case 1: return self.creatorCell
             default: fatalError("Unknown row in section 1")
             }
         case 2:
             switch (indexPath.row) {
-            case 0: return self.aboutCell
-            case 1: return self.requestFeatureCell
-            case 2: return self.reportBugCell
-            case 3: return self.appVersionCell
+            case 0: return self.requestFeatureCell
+            case 1: return self.reportBugCell
+            case 2: return self.appVersionCell
             default: fatalError("Unkown row ins ection 3")
             }
         case 3:
@@ -173,7 +165,7 @@ class SettingsTableViewController: UITableViewController {
             switch indexPath.row {
                 // Share
             case 0: share(sender: self.view)
-                // Tweet it!
+                // Creator
             case 1:
                 guard let url = URL(string: "https://twitter.com/kevinlx_")  else { return }
                 if UIApplication.shared.canOpenURL(url) {
@@ -183,16 +175,12 @@ class SettingsTableViewController: UITableViewController {
                         UIApplication.shared.openURL(url)
                     }
                 }
-                // Creator
-            case 2: print(1)
             default: break
             }
         case 2:
             switch indexPath.row {
-                // About VC
-            case 0: print("About VC")
                 // Request a feature
-            case 1:
+            case 0:
                 if (MFMailComposeViewController.canSendMail()) {
                     let mailVC = MFMailComposeViewController()
                     mailVC.mailComposeDelegate = self
@@ -208,7 +196,7 @@ class SettingsTableViewController: UITableViewController {
 
                     
                 // Report a bug
-            case 2:
+            case 1:
                 if (MFMailComposeViewController.canSendMail()) {
                     let mailVC = MFMailComposeViewController()
                     mailVC.mailComposeDelegate = self
@@ -223,7 +211,7 @@ class SettingsTableViewController: UITableViewController {
                 }
                 
                 // App version
-            case 3:
+            case 2:
                 let vc = self.storyboard!.instantiateViewController(withIdentifier: PATCH_LOG_VC) as! PatchLogViewController
                 let navController = UINavigationController(rootViewController: vc)
                 self.present(navController, animated:true, completion: nil)

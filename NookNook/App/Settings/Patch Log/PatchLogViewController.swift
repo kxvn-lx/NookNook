@@ -19,7 +19,7 @@ class PatchLogViewController: UIViewController {
     var titleLabel: UILabel!
     
     var logArray = [
-        "V1.0.0 - 24 April 2020\nApp release! Enjoy the app! 🤩",
+        "V1.0.0 - 27 April 2020\nInternal beta testing released! 🤩",
     ]
 
     override func viewDidLoad() {
