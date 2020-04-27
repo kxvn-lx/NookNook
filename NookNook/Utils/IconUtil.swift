@@ -28,6 +28,9 @@ struct IconUtil {
         case socialMedia = "bubble.right"
         case about = "questionmark.circle"
         case feature = "hand.raised"
+        case swipeRight = "hand.draw"
+        case birthday = "gift"
+        case critter = "ant"
     }
     
     /**

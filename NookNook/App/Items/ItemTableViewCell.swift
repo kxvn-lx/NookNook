@@ -73,19 +73,19 @@ class ItemTableViewCell: UITableViewCell {
         obtainedFromLabel.translatesAutoresizingMaskIntoConstraints = false
         obtainedFromLabel.numberOfLines = 0
         obtainedFromLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
-        obtainedFromLabel.textColor = .darkGray
+        obtainedFromLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
         
         buyLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         buyLabel.translatesAutoresizingMaskIntoConstraints = false
         buyLabel.numberOfLines = 0
         buyLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
-        buyLabel.textColor = .darkGray
+        buyLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
         
         sellLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         sellLabel.translatesAutoresizingMaskIntoConstraints = false
         sellLabel.numberOfLines = 0
         sellLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
-        sellLabel.textColor = .darkGray
+        sellLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
         
         infoStackView = UIStackView()
         infoStackView.alignment = .leading

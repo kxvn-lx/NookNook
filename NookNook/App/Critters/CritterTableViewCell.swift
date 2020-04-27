@@ -96,25 +96,25 @@ class CritterTableViewCell: UITableViewCell {
         obtainedFromLabel.translatesAutoresizingMaskIntoConstraints = false
         obtainedFromLabel.numberOfLines = 0
         obtainedFromLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
-        obtainedFromLabel.textColor = .darkGray
+        obtainedFromLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
         
         weatherLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         weatherLabel.translatesAutoresizingMaskIntoConstraints = false
         weatherLabel.numberOfLines = 0
         weatherLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
-        weatherLabel.textColor = .darkGray
+        weatherLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
         
         sellLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         sellLabel.translatesAutoresizingMaskIntoConstraints = false
         sellLabel.numberOfLines = 0
         sellLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
-        sellLabel.textColor = .darkGray
+        sellLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
         
         timeLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         timeLabel.translatesAutoresizingMaskIntoConstraints = false
         timeLabel.numberOfLines = 0
         timeLabel.font = UIFont.systemFont(ofSize: sellLabel.font!.pointSize, weight: .semibold)
-        timeLabel.textColor = .darkGray
+        timeLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
         
         infoStackView = UIStackView()
         infoStackView.alignment = .leading

@@ -96,25 +96,25 @@ class FavouriteTableViewCell: UITableViewCell {
         label1.translatesAutoresizingMaskIntoConstraints = false
         label1.numberOfLines = 0
         label1.font = UIFont.preferredFont(forTextStyle: .caption1)
-        label1.textColor = .darkGray
+        label1.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
         
         label2 = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         label2.translatesAutoresizingMaskIntoConstraints = false
         label2.numberOfLines = 0
         label2.font = UIFont.preferredFont(forTextStyle: .caption1)
-        label2.textColor = .darkGray
+        label2.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
         
         label4 = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         label4.translatesAutoresizingMaskIntoConstraints = false
         label4.numberOfLines = 0
         label4.font = UIFont.preferredFont(forTextStyle: .caption1)
-        label4.textColor = .darkGray
+        label4.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
         
         label3 = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         label3.translatesAutoresizingMaskIntoConstraints = false
         label3.numberOfLines = 0
         label3.font = UIFont.systemFont(ofSize: label4.font!.pointSize, weight: .semibold)
-        label3.textColor = .darkGray
+        label3.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
         
         infoStackView = UIStackView()
         infoStackView.alignment = .leading

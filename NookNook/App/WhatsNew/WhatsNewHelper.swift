@@ -1,0 +1,119 @@
+//
+//  WhatsNewHelper.swift
+//  NookNook
+//
+//  Created by Kevin Laminto on 27/4/20.
+//  Copyright © 2020 Kevin Laminto. All rights reserved.
+//
+
+import Foundation
+import UIKit
+import WhatsNewKit
+
+struct WhatsNewHelper {
+    
+    // MARK: Properties
+    var view: WhatsNewViewController?
+    
+    private var swipeRightIcon: UIImage = {
+        let icon = IconUtil.systemIcon(of: .swipeRight, weight: .light).withRenderingMode(.alwaysTemplate)
+        icon.withTintColor(UIColor(named: ColourUtil.dirt1.rawValue )!)
+        return icon
+    }()
+    private var favouriteIcon: UIImage = {
+        let icon = IconUtil.systemIcon(of: .star, weight: .light).withRenderingMode(.alwaysTemplate)
+        icon.withTintColor(UIColor(named: ColourUtil.dirt1.rawValue )!)
+        return icon
+    }()
+    private var birthdayIcon: UIImage = {
+        let icon = IconUtil.systemIcon(of: .birthday, weight: .light).withRenderingMode(.alwaysTemplate)
+        icon.withTintColor(UIColor(named: ColourUtil.dirt1.rawValue )!)
+        return icon
+    }()
+    private var critterIcon: UIImage = {
+        let icon = IconUtil.systemIcon(of: .critter, weight: .light).withRenderingMode(.alwaysTemplate)
+        icon.withTintColor(UIColor(named: ColourUtil.dirt1.rawValue )!)
+        return icon
+    }()
+    
+    // MARK: Initialiser
+    init() {
+        let whatsNew = WhatsNew(
+            title: "Welcome\nto NookNook!",
+            items: [
+                WhatsNew.Item(
+                    title: "Swipe right action",
+                    subtitle: "All actions, one swipe away.",
+                    image: swipeRightIcon
+                ),
+                WhatsNew.Item(
+                    title: "Save anything, anyone!",
+                    subtitle: "Favourited? Donated/Caught? In resident? we got it.",
+                    image: favouriteIcon
+                ),
+                WhatsNew.Item(
+                    title: "Resident's birthday",
+                    subtitle: "See who's in your resident list their birthday this month.",
+                    image: birthdayIcon
+                ),
+                WhatsNew.Item(
+                    title: "Critters this month",
+                    subtitle: "All available critters this month, under your fingertip.",
+                    image: critterIcon
+                )
+            ]
+        )
+        
+        /// Configurations
+        var configuration = WhatsNewViewController.Configuration()
+
+        configuration.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue )!
+        configuration.apply(animation: .slideRight)
+        
+        // Title
+        configuration.titleView.secondaryColor = .init(
+            startIndex: 11,
+            length: 8,
+            color: UIColor(named: ColourUtil.grass1.rawValue )!
+        )
+        configuration.titleView.titleColor = UIColor(named: ColourUtil.dirt1.rawValue )!
+        configuration.titleView.titleFont = UIFont.preferredFont(forTextStyle: .largeTitle)
+        configuration.titleView.titleFont = .systemFont(ofSize: configuration.titleView.titleFont.pointSize, weight: .bold)
+        configuration.titleView.titleAlignment = .left
+        configuration.titleView.insets = UIEdgeInsets(top: 50 * 2, left: 20, bottom: 15, right: 20)
+        
+        // Items
+        configuration.itemsView.titleFont = .preferredFont(forTextStyle: .title3)
+        configuration.itemsView.titleFont = .systemFont(ofSize: configuration.itemsView.titleFont.pointSize, weight: .semibold)
+        configuration.itemsView.subtitleFont = .preferredFont(forTextStyle: .body)
+        configuration.itemsView.titleColor = UIColor(named: ColourUtil.dirt1.rawValue )!
+        configuration.itemsView.subtitleColor = UIColor(named: ColourUtil.dirt1.rawValue )!.withAlphaComponent(0.5)
+        configuration.itemsView.layout = .left
+        configuration.itemsView.contentMode = .top
+        
+        // Button
+        let completionButton = WhatsNewViewController.CompletionButton(
+            title: "Get started",
+            action: .dismiss,
+            hapticFeedback: .notification(.success),
+            backgroundColor: UIColor(named: ColourUtil.grass2.rawValue)!,
+            titleColor: .white,
+            cornerRadius: 2.5,
+            animation: .slideRight
+        )
+        
+        configuration.completionButton = completionButton
+
+        
+        
+        
+         let versionStore: WhatsNewVersionStore = KeyValueWhatsNewVersionStore()
+        
+        // MARK:  Initialize
+        view = WhatsNewViewController(
+            whatsNew: whatsNew,
+            configuration: configuration,
+            versionStore: versionStore
+        )
+    }
+}

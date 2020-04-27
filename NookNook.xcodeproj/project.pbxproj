@@ -80,6 +80,8 @@
 		0AC703B42451C749008D7C77 /* CritterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC703B32451C749008D7C77 /* CritterHelper.swift */; };
 		0AC89E402449418B009ADB18 /* VillagerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC89E3F2449418B009ADB18 /* VillagerTableViewCell.swift */; };
 		0AC89E422449419A009ADB18 /* VillagersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC89E412449419A009ADB18 /* VillagersTableViewController.swift */; };
+		0ACCF3A924567BB200F9C62E /* WhatsNewKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0ACCF3A824567BB200F9C62E /* WhatsNewKit */; };
+		0ACCF3AC2456830A00F9C62E /* WhatsNewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACCF3AB2456830A00F9C62E /* WhatsNewHelper.swift */; };
 		0AEF52642452742E0056286B /* PatchLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEF52632452742E0056286B /* PatchLogViewController.swift */; };
 		0AEFF82B24470EAF0032156C /* WardrobesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEFF82A24470EAF0032156C /* WardrobesTableViewController.swift */; };
 		0AEFF82D24470EC30032156C /* WardrobetabTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEFF82C24470EC30032156C /* WardrobetabTableViewCell.swift */; };
@@ -185,6 +187,7 @@
 		0AC703B32451C749008D7C77 /* CritterHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CritterHelper.swift; sourceTree = "<group>"; };
 		0AC89E3F2449418B009ADB18 /* VillagerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VillagerTableViewCell.swift; sourceTree = "<group>"; };
 		0AC89E412449419A009ADB18 /* VillagersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VillagersTableViewController.swift; sourceTree = "<group>"; };
+		0ACCF3AB2456830A00F9C62E /* WhatsNewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsNewHelper.swift; sourceTree = "<group>"; };
 		0AEF52632452742E0056286B /* PatchLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchLogViewController.swift; sourceTree = "<group>"; };
 		0AEFF82A24470EAF0032156C /* WardrobesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WardrobesTableViewController.swift; sourceTree = "<group>"; };
 		0AEFF82C24470EC30032156C /* WardrobetabTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WardrobetabTableViewCell.swift; sourceTree = "<group>"; };
@@ -207,6 +210,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0ACCF3A924567BB200F9C62E /* WhatsNewKit in Frameworks */,
 				0A964998244E5FBE00C8E19D /* TweeTextField in Frameworks */,
 				0A01F3102442DB8A001499D5 /* SDWebImage in Frameworks */,
 				0AFD70642441B80500957BE6 /* SwiftyJSON in Frameworks */,
@@ -234,6 +238,7 @@
 		0A01F31324431BB2001499D5 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				0ACCF3AA245682F200F9C62E /* WhatsNew */,
 				0A6862A7244D498800E06C74 /* Settings */,
 				0A97C2F9244C94EE0062B136 /* Favourites */,
 				0A739A3F244B58C500002B89 /* Dashboard */,
@@ -397,6 +402,14 @@
 			path = Villagers;
 			sourceTree = "<group>";
 		};
+		0ACCF3AA245682F200F9C62E /* WhatsNew */ = {
+			isa = PBXGroup;
+			children = (
+				0ACCF3AB2456830A00F9C62E /* WhatsNewHelper.swift */,
+			);
+			path = WhatsNew;
+			sourceTree = "<group>";
+		};
 		0AEF5262245273FF0056286B /* Patch Log */ = {
 			isa = PBXGroup;
 			children = (
@@ -507,6 +520,7 @@
 				0AFD70632441B80500957BE6 /* SwiftyJSON */,
 				0A01F30F2442DB8A001499D5 /* SDWebImage */,
 				0A964997244E5FBE00C8E19D /* TweeTextField */,
+				0ACCF3A824567BB200F9C62E /* WhatsNewKit */,
 			);
 			productName = NookNook;
 			productReference = 0AFD704B24419DD300957BE6 /* NookNook.app */;
@@ -540,6 +554,7 @@
 				0AFD70622441B80500957BE6 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				0A01F30E2442DB8A001499D5 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 				0A964996244E5FBE00C8E19D /* XCRemoteSwiftPackageReference "TweeTextField" */,
+				0ACCF3A724567BB200F9C62E /* XCRemoteSwiftPackageReference "WhatsNewKit" */,
 			);
 			productRefGroup = 0AFD704C24419DD300957BE6 /* Products */;
 			projectDirPath = "";
@@ -645,6 +660,7 @@
 				0A370BAD2444795700A72048 /* CategoryTableViewCell.swift in Sources */,
 				0A370B6C2444467900A72048 /* PriceEngine.swift in Sources */,
 				0AC703B42451C749008D7C77 /* CritterHelper.swift in Sources */,
+				0ACCF3AC2456830A00F9C62E /* WhatsNewHelper.swift in Sources */,
 				0A370BAF2444796400A72048 /* CategoriesTableViewController.swift in Sources */,
 				0A14A002245155A10080941A /* ResidentHelper.swift in Sources */,
 			);
@@ -864,6 +880,14 @@
 				minimumVersion = 1.6.3;
 			};
 		};
+		0ACCF3A724567BB200F9C62E /* XCRemoteSwiftPackageReference "WhatsNewKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SvenTiigi/WhatsNewKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.2;
+			};
+		};
 		0AFD70622441B80500957BE6 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON";
@@ -884,6 +908,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0A964996244E5FBE00C8E19D /* XCRemoteSwiftPackageReference "TweeTextField" */;
 			productName = TweeTextField;
+		};
+		0ACCF3A824567BB200F9C62E /* WhatsNewKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0ACCF3A724567BB200F9C62E /* XCRemoteSwiftPackageReference "WhatsNewKit" */;
+			productName = WhatsNewKit;
 		};
 		0AFD70632441B80500957BE6 /* SwiftyJSON */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -9,6 +9,7 @@
 import UIKit
 import SDWebImage
 import SwiftyJSON
+import WhatsNewKit
 
 class ItemsTableViewController: UITableViewController {
     
@@ -20,6 +21,7 @@ class ItemsTableViewController: UITableViewController {
     var currentCategory: Categories = Categories.housewares
     
     private var favouritesManager: PersistEngine!
+    private var whatsNewVC = WhatsNewHelper()
     
     let searchController = UISearchController(searchResultsController: nil)
     var isSearchBarEmpty: Bool {
@@ -49,6 +51,13 @@ class ItemsTableViewController: UITableViewController {
         searchController.searchBar.placeholder = "Search \(items.count) items..."
         searchController.searchBar.tintColor = .lightGray
         navigationItem.searchController = searchController
+
+        
+        
+        guard let vc = whatsNewVC.view else {
+            return
+        }
+        self.present(vc, animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -210,7 +219,6 @@ class ItemsTableViewController: UITableViewController {
         let navController = UINavigationController(rootViewController: vc)
         self.present(navController, animated:true, completion: nil)
     }
-    
 }
 
 extension ItemsTableViewController: CatDelegate {

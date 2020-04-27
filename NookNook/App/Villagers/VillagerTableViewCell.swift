@@ -83,19 +83,19 @@ class VillagerTableViewCell: UITableViewCell {
         speciesLabel.translatesAutoresizingMaskIntoConstraints = false
         speciesLabel.numberOfLines = 0
         speciesLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
-        speciesLabel.textColor = .darkGray
+        speciesLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
         
         genderLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         genderLabel.translatesAutoresizingMaskIntoConstraints = false
         genderLabel.numberOfLines = 0
         genderLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
-        genderLabel.textColor = .darkGray
+        genderLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
         
         bdayLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         bdayLabel.translatesAutoresizingMaskIntoConstraints = false
         bdayLabel.numberOfLines = 0
         bdayLabel.font = UIFont.systemFont(ofSize: genderLabel.font!.pointSize, weight: .semibold)
-        bdayLabel.textColor = .darkGray
+        bdayLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
         
         infoStackView = UIStackView()
         infoStackView.alignment = .leading
