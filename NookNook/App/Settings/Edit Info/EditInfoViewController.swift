@@ -116,7 +116,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         selectedHemisphere = userDict["hemisphere"].map { DateHelper.Hemisphere(rawValue: $0) ?? DateHelper.Hemisphere.Southern } == nil ? DateHelper.Hemisphere.Southern : userDict["hemisphere"].map { DateHelper.Hemisphere(rawValue: $0)! }
         if let img = ImagePersistEngine.loadImage() {
             profileImageView.image = img
-        } 
+        }
     }
     
     // MARK: - Set the views
@@ -136,6 +136,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2
         profileImageView.clipsToBounds = true
         profileImageView.backgroundColor = UIColor(named: ColourUtil.cream2.rawValue)
+        profileImageView.image = UIImage(named: "appIcon-Ori")
         
         
         iconView = UIImageView()

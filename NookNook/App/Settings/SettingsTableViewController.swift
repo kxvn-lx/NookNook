@@ -282,7 +282,7 @@ class SettingsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         switch section {
         case 0, 1, 2: return 5
-        default: return 35
+        default: return 50
         }
     }
     
@@ -305,7 +305,7 @@ class SettingsTableViewController: UITableViewController {
         case 0: break
         case 1: break
         case 2: break
-        case 3: header.textLabel?.text = "Made with ❤️ by Kevin Laminto"
+        case 3: header.textLabel?.text = "Made with ❤️ by Kevin Laminto\n#NookNook"
         default: header.textLabel?.text = ""
         }
     }
@@ -346,10 +346,11 @@ class SettingsTableViewController: UITableViewController {
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        let textToShare = "Animal Crossing: New Horizons is much better with this app! 😍"
+        let textToShare = "Animal Crossing: New Horizons is so much better with this companion app! 😍 #NookNook"
         
-        if let myWebsite = URL(string: "http://itunes.apple.com/app/idXXXXXXXXX") {//Enter link to your app here
-            let objectsToShare = [textToShare, myWebsite, image ?? #imageLiteral(resourceName: "app-logo")] as [Any]
+        // http://itunes.apple.com/app/idXXXXXXXXX
+        if let myWebsite = URL(string: "https://cutt.ly/nooknook") {//Enter link to your app here
+            let objectsToShare = [textToShare, myWebsite, image ?? #imageLiteral(resourceName: "appIcon-Ori")] as [Any]
             let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
             
             //Excluded Activities

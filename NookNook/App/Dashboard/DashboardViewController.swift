@@ -168,6 +168,7 @@ class DashboardViewController: UIViewController {
         profileImageView.contentMode = .scaleAspectFill
         profileImageView.clipsToBounds = true
         profileImageView.backgroundColor = UIColor(named: ColourUtil.cream2.rawValue)
+        profileImageView.image = UIImage(named: "appIcon-Ori")
         profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2
         
         profileNameLabel = UILabel()

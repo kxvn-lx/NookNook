@@ -285,6 +285,8 @@ class FavouritesTableViewController: UITableViewController {
         
         let close = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(closeTapped))
         navigationItem.leftBarButtonItem = close
+        
+                UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: ColourUtil.dirt1.rawValue)!]
     }
     
     @objc private func closeTapped() {

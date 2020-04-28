@@ -74,7 +74,7 @@ class CrittersTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isFiltering {
             if filteredCritters.count == 0 {
-                self.tableView.setEmptyMessage("No critter(s) found 😢. Perhaps you made a mistake?")
+                self.tableView.setEmptyMessage("No critter(s) found 😢.\nPerhaps you made a mistake?")
             }
             else {
                 self.tableView.restore()
@@ -237,7 +237,7 @@ class CrittersTableViewController: UITableViewController {
         let barButton = UIBarButtonItem(customView: button)
         self.navigationItem.rightBarButtonItem = barButton
         
-        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: ColourUtil.dirt1.rawValue)!]
     }
     
     @objc private func filterButtonPressed() {
