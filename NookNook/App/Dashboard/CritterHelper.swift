@@ -22,7 +22,6 @@ struct CritterHelper {
         dateFormatter.dateFormat = "M"
         let currMonthInt = Int(dateFormatter.string(from: Date()))!
         
-        
         var northernBugs: [Critter] = []
         var northernFishes: [Critter] = []
         
@@ -35,39 +34,47 @@ struct CritterHelper {
         switch userHemisphere {
         case .Northern:
             allBugs.forEach({
-                let lowerBounds = TimeMonthEngine.formatMonths(month: $0.activeMonthsN) != [-1] ? TimeMonthEngine.formatMonths(month: $0.activeMonthsN).sorted(by: { $0 < $1 })[0] : -1
-                let upperBounds = TimeMonthEngine.formatMonths(month: $0.activeMonthsN) != [-1] ? TimeMonthEngine.formatMonths(month: $0.activeMonthsN).sorted(by: { $0 < $1 }).last! : -1
+                let monthsArr = TimeMonthEngine.formatMonths(month: $0.activeMonthsN)
                 
-                if (lowerBounds...upperBounds).contains(currMonthInt) || TimeMonthEngine.formatMonths(month: $0.activeMonthsN) == [-1] {
-                    // bug is in season for northern region.
+                let initRange = monthsArr != [-1] ? monthsArr[0] : -1
+                let finalRange = monthsArr != [1] ? monthsArr.last! : -1
+                
+                if currMonthInt >= initRange || currMonthInt <= finalRange || monthsArr == [-1] {
+                    // bugs is in season for northern region.
                     northernBugs.append($0)
                 }
             })
             allFishes.forEach({
-                let lowerBounds = TimeMonthEngine.formatMonths(month: $0.activeMonthsN) != [-1] ? TimeMonthEngine.formatMonths(month: $0.activeMonthsN).sorted(by: { $0 < $1 })[0] : -1
-                let upperBounds = TimeMonthEngine.formatMonths(month: $0.activeMonthsN) != [-1] ? TimeMonthEngine.formatMonths(month: $0.activeMonthsN).sorted(by: { $0 < $1 }).last! : -1
+                let monthsArr = TimeMonthEngine.formatMonths(month: $0.activeMonthsN)
                 
-                if (lowerBounds...upperBounds).contains(currMonthInt) || TimeMonthEngine.formatMonths(month: $0.activeMonthsN) == [-1] {
-                    // fish is in season for northern region.
+                let initRange = monthsArr != [-1] ? monthsArr[0] : -1
+                let finalRange = monthsArr != [1] ? monthsArr.last! : -1
+                
+                if currMonthInt >= initRange || currMonthInt <= finalRange || monthsArr == [-1] {
+                    // fishes is in season for northern region.
                     northernFishes.append($0)
                 }
             })
         case .Southern:
             allBugs.forEach({
-                let lowerBounds = TimeMonthEngine.formatMonths(month: $0.activeMonthsS) != [-1] ? TimeMonthEngine.formatMonths(month: $0.activeMonthsS).sorted(by: { $0 < $1 })[0] : -1
-                let upperBounds = TimeMonthEngine.formatMonths(month: $0.activeMonthsS) != [-1] ? TimeMonthEngine.formatMonths(month: $0.activeMonthsS).sorted(by: { $0 < $1 }).last! : -1
+                let monthsArr = TimeMonthEngine.formatMonths(month: $0.activeMonthsS)
                 
-                if (lowerBounds...upperBounds).contains(currMonthInt) || TimeMonthEngine.formatMonths(month: $0.activeMonthsS) == [-1] {
-                    // bug is in season for southern region.
+                let initRange = monthsArr != [-1] ? monthsArr[0] : -1
+                let finalRange = monthsArr != [1] ? monthsArr.last! : -1
+                
+                if currMonthInt >= initRange || currMonthInt <= finalRange || monthsArr == [-1] {
+                    // bugs is in season for southern region.
                     southernBugs.append($0)
                 }
             })
             allFishes.forEach({
-                let lowerBounds = TimeMonthEngine.formatMonths(month: $0.activeMonthsS) != [-1] ? TimeMonthEngine.formatMonths(month: $0.activeMonthsS).sorted(by: { $0 < $1 })[0] : -1
-                let upperBounds = TimeMonthEngine.formatMonths(month: $0.activeMonthsS) != [-1] ? TimeMonthEngine.formatMonths(month: $0.activeMonthsS).sorted(by: { $0 < $1 }).last! : -1
+                let monthsArr = TimeMonthEngine.formatMonths(month: $0.activeMonthsS)
                 
-                if (lowerBounds...upperBounds).contains(currMonthInt) || TimeMonthEngine.formatMonths(month: $0.activeMonthsS) == [-1] {
-                    // fish is in season for southern region.
+                let initRange = monthsArr != [-1] ? monthsArr[0] : -1
+                let finalRange = monthsArr != [1] ? monthsArr.last! : -1
+                
+                if currMonthInt >= initRange || currMonthInt <= finalRange || monthsArr == [-1] {
+                    // fishes is in season for southern region.
                     southernFishes.append($0)
                 }
             })
