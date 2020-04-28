@@ -8,6 +8,7 @@
 
 import UIKit
 import MessageUI
+import SwiftEntryKit
 
 protocol ProfileDelegate: NSObjectProtocol {
     func updateprofile()
@@ -154,7 +155,7 @@ class SettingsTableViewController: UITableViewController {
         switch indexPath.section {
         case 0:
             switch indexPath.row {
-                // Edit info
+            // Edit info
             case 0:
                 let vc = self.storyboard!.instantiateViewController(withIdentifier: EDIT_INFO_VC) as! EditInfoViewController
                 let navController = UINavigationController(rootViewController: vc)
@@ -163,9 +164,9 @@ class SettingsTableViewController: UITableViewController {
             }
         case 1:
             switch indexPath.row {
-                // Share
+            // Share
             case 0: share(sender: self.view)
-                // Creator
+            // Creator
             case 1:
                 guard let url = URL(string: "https://twitter.com/kevinlx_")  else { return }
                 if UIApplication.shared.canOpenURL(url) {
@@ -179,38 +180,42 @@ class SettingsTableViewController: UITableViewController {
             }
         case 2:
             switch indexPath.row {
-                // Request a feature
+            // Request a feature
             case 0:
                 if (MFMailComposeViewController.canSendMail()) {
                     let mailVC = MFMailComposeViewController()
                     mailVC.mailComposeDelegate = self
                     mailVC.setToRecipients(["kevin.laminto@gmail.com"])
-                    mailVC.setSubject("Feature request! 🚀 [NookNook]")
+                    mailVC.setSubject("[NookNook] Feature request! 🚀")
                     mailVC.setMessageBody("Hi! I have a cool feature idea that could improve the app.", isHTML: false)
-
+                    
                     present(mailVC, animated: true, completion: nil)
                 }
                 else {
-                    self.presentAlert(title: "No mail accounts", message: "Please configure a mail account in order to send email.\nOr, manually email it to kevin.laminto@gmail.com")
-                }
-
+                    let ( view, attributes ) = ModalFactory.showPopupMessage(title: "No mail accounts", description: "Please configure a mail account in order to send email. Or, manually email it to kevin.laminto@gmail.com", image: UIImage(named: "sad"))
                     
-                // Report a bug
+                    SwiftEntryKit.display(entry: view, using: attributes)
+                }
+                
+                
+            // Report a bug
             case 1:
                 if (MFMailComposeViewController.canSendMail()) {
                     let mailVC = MFMailComposeViewController()
                     mailVC.mailComposeDelegate = self
                     mailVC.setToRecipients(["kevin.laminto@gmail.com"])
-                    mailVC.setSubject("Bug report! 🐜 [NookNook]")
+                    mailVC.setSubject("[NookNook] Bug report! 🐜")
                     mailVC.setMessageBody("Hi! I found a bug.", isHTML: false)
-
+                    
                     present(mailVC, animated: true, completion: nil)
                 }
                 else {
-                    self.presentAlert(title: "No mail accounts", message: "Please configure a mail account in order to send email.\nOr, manually email it to kevin.laminto@gmail.com")
+                    let ( view, attributes ) = ModalFactory.showPopupMessage(title: "No mail accounts", description: "Please configure a mail account in order to send email. Or, manually email it to kevin.laminto@gmail.com", image: UIImage(named: "sad"))
+                    
+                    SwiftEntryKit.display(entry: view, using: attributes)
                 }
                 
-                // App version
+            // App version
             case 2:
                 let vc = self.storyboard!.instantiateViewController(withIdentifier: PATCH_LOG_VC) as! PatchLogViewController
                 let navController = UINavigationController(rootViewController: vc)
@@ -219,37 +224,53 @@ class SettingsTableViewController: UITableViewController {
             }
         case 3:
             switch indexPath.row {
-                // Delete cached data
+            // Delete cached data
             case 0:
-                let alertController = UIAlertController(title: "Delete cached datas?", message: "Cached images will be deleted. This could free up some space in your device.", preferredStyle: .alert)
-                
-                let destructiveAction = UIAlertAction(title: "Delete", style: .destructive) { (action:UIAlertAction) in
-                    PersistEngine.deleteCacheData()
-                    Taptic.successTaptic()
-                    self.presentAlert(title: "Cached datas deleted.", message: "Please restart the app to ensure the changes have been updated.")
+                let actionButton = EKProperty.ButtonContent(
+                    label: .init(
+                        text: "Delete",
+                        style: .init(
+                            font: .preferredFont(forTextStyle: .body),
+                            color: EKColor(UIColor(red: 242/255, green: 67/255, blue: 51/255, alpha: 1)),
+                            displayMode: .inferred
+                        )
+                    ),
+                    backgroundColor: EKColor(ModalFactory.grassBtn),
+                    highlightedBackgroundColor: EKColor(ModalFactory.grassBtn).with(alpha: 0.05),
+                    displayMode: .inferred) {
+                        PersistEngine.deleteCacheData()
+                        Taptic.successTaptic()
+                        let ( view, attributes ) = ModalFactory.showPopupMessage(title: "Cached datas deleted.", description: "Please restart the app to ensure the changes have been updated.", image: UIImage(named: "celebrate"))
+                        SwiftEntryKit.display(entry: view, using: attributes)
                 }
-                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action:UIAlertAction) in
-                }
                 
-                alertController.addAction(destructiveAction)
-                alertController.addAction(cancelAction)
-                self.present(alertController, animated: true, completion: nil)
+                let ( view, attributes ) = ModalFactory.showAlertMessage(title: "Delete cached datas?", description: "Cached images will be deleted. This could free up some space in your device.", image: "danger", actionButton: actionButton)
+                SwiftEntryKit.display(entry: view, using: attributes)
                 
-                // Delete app data
+            // Delete app data
             case 1:
-                let alertController = UIAlertController(title: "Delete app datas?", message: "Your favourites, donated, caught, and residents data will be deleted.", preferredStyle: .alert)
-                
-                let destructiveAction = UIAlertAction(title: "Delete", style: .destructive) { (action:UIAlertAction) in
-                    PersistEngine.deleteAppData()
-                    Taptic.successTaptic()
-                    self.presentAlert(title: "App datas deleted.", message: "Please restart the app to ensure the changes have been updated.")
+                let actionButton = EKProperty.ButtonContent(
+                    label: .init(
+                        text: "Delete",
+                        style: .init(
+                            font: .preferredFont(forTextStyle: .body),
+                            color: EKColor(UIColor(red: 242/255, green: 67/255, blue: 51/255, alpha: 1)),
+                            displayMode: .inferred
+                        )
+                    ),
+                    backgroundColor: .clear,
+                    highlightedBackgroundColor: .clear,
+                    displayMode: .inferred) {
+                        PersistEngine.deleteAppData()
+                        Taptic.successTaptic()
+                        let ( view, attributes ) = ModalFactory.showPopupMessage(title: "App datas deleted.", description: "Please restart the app to ensure the changes have been updated.", image: UIImage(named: "celebrate"))
+                        SwiftEntryKit.display(entry: view, using: attributes)
                 }
-                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action:UIAlertAction) in
-                }
                 
-                alertController.addAction(destructiveAction)
-                alertController.addAction(cancelAction)
-                self.present(alertController, animated: true, completion: nil)
+                let ( view, attributes ) = ModalFactory.showAlertMessage(title: "Delete app datas?", description: "Your favourites, caught/donated, in residents data will be deleted.", image: "danger", actionButton: actionButton)
+                SwiftEntryKit.display(entry: view, using: attributes)
+                
+                
             default: break
             }
         default:
@@ -317,16 +338,6 @@ class SettingsTableViewController: UITableViewController {
         cell.accessoryType = accesoryType
         
         return cell
-    }
-    
-    private func presentAlert(title: String, message: String?) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        
-        let okAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
-        }
-        
-        alertController.addAction(okAction)
-        self.present(alertController, animated: true, completion: nil)
     }
     
     @objc func share(sender:UIView){

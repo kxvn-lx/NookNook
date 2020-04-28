@@ -1,0 +1,3 @@
+${PODS_ROOT}/Target Support Files/Pods-NookNook/Pods-NookNook-frameworks.sh
+${BUILT_PRODUCTS_DIR}/QuickLayout/QuickLayout.framework
+${BUILT_PRODUCTS_DIR}/SwiftEntryKit/SwiftEntryKit.framework

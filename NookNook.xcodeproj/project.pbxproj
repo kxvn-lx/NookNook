@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0A01F3102442DB8A001499D5 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 0A01F30F2442DB8A001499D5 /* SwiftPackageProductDependency */; };
+		0A01F3102442DB8A001499D5 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 0A01F30F2442DB8A001499D5 /* SDWebImage */; };
 		0A01F31224431725001499D5 /* ImageEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A01F31124431724001499D5 /* ImageEngine.swift */; };
+		0A0B89572457A30A00EABF29 /* ModalFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0B89562457A30A00EABF29 /* ModalFactory.swift */; };
 		0A149FF224512E7B0080941A /* ImagePersistEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A149FF124512E7B0080941A /* ImagePersistEngine.swift */; };
 		0A14A002245155A10080941A /* ResidentHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A14A001245155A10080941A /* ResidentHelper.swift */; };
 		0A14A0072451986B0080941A /* CrittersMonthlyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A14A0062451986B0080941A /* CrittersMonthlyTableViewController.swift */; };
@@ -41,7 +42,7 @@
 		0A370BAA24446D7B00A72048 /* IconUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A370BA924446D7B00A72048 /* IconUtil.swift */; };
 		0A370BAD2444795700A72048 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A370BAC2444795700A72048 /* CategoryTableViewCell.swift */; };
 		0A370BAF2444796400A72048 /* CategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A370BAE2444796400A72048 /* CategoriesTableViewController.swift */; };
-		0A55912F244DF0110018CF99 /* BuildFile in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0A55912F244DF0110018CF99 /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0A595B912453252D00F37E15 /* housewares.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A595B902453252D00F37E15 /* housewares.json */; };
 		0A595B932453334C00F37E15 /* wallpapers.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A595B922453334C00F37E15 /* wallpapers.json */; };
 		0A595B952453344A00F37E15 /* miscellaneous.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A595B942453344A00F37E15 /* miscellaneous.json */; };
@@ -69,18 +70,18 @@
 		0A7FA6A52445972A00921079 /* CritterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7FA6A42445972A00921079 /* CritterTableViewCell.swift */; };
 		0A887F8D2450890C0044EAEA /* FruitsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A887F8C2450890C0044EAEA /* FruitsTableViewController.swift */; };
 		0A887F9124508F280044EAEA /* UDHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A887F9024508F280044EAEA /* UDHelper.swift */; };
-		0A964998244E5FBE00C8E19D /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 0A964997244E5FBE00C8E19D /* SwiftPackageProductDependency */; };
+		0A964998244E5FBE00C8E19D /* TweeTextField in Frameworks */ = {isa = PBXBuildFile; productRef = 0A964997244E5FBE00C8E19D /* TweeTextField */; };
 		0A97C2FB244C95290062B136 /* FavouritesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A97C2FA244C95290062B136 /* FavouritesTableViewController.swift */; };
 		0A97C2FD244C95360062B136 /* FavouriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A97C2FC244C95360062B136 /* FavouriteTableViewCell.swift */; };
 		0AA3616E244C520500D326AF /* SVHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA3616D244C520500D326AF /* SVHelper.swift */; };
 		0AADD410244870D9004FDA33 /* fishesSecondary.json in Resources */ = {isa = PBXBuildFile; fileRef = 0AADD40F244870D9004FDA33 /* fishesSecondary.json */; };
 		0AADD4192448ADB4004FDA33 /* bugsMain.json in Resources */ = {isa = PBXBuildFile; fileRef = 0AADD4172448ADB4004FDA33 /* bugsMain.json */; };
 		0AADD41A2448ADB4004FDA33 /* fishesMain.json in Resources */ = {isa = PBXBuildFile; fileRef = 0AADD4182448ADB4004FDA33 /* fishesMain.json */; };
-		0AC54AF2244DF17600AD1188 /* BuildFile in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0AC54AF2244DF17600AD1188 /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0AC703B42451C749008D7C77 /* CritterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC703B32451C749008D7C77 /* CritterHelper.swift */; };
 		0AC89E402449418B009ADB18 /* VillagerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC89E3F2449418B009ADB18 /* VillagerTableViewCell.swift */; };
 		0AC89E422449419A009ADB18 /* VillagersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC89E412449419A009ADB18 /* VillagersTableViewController.swift */; };
-		0ACCF3A924567BB200F9C62E /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 0ACCF3A824567BB200F9C62E /* SwiftPackageProductDependency */; };
+		0ACCF3A924567BB200F9C62E /* WhatsNewKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0ACCF3A824567BB200F9C62E /* WhatsNewKit */; };
 		0ACCF3AC2456830A00F9C62E /* WhatsNewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACCF3AB2456830A00F9C62E /* WhatsNewHelper.swift */; };
 		0AEF52642452742E0056286B /* PatchLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEF52632452742E0056286B /* PatchLogViewController.swift */; };
 		0AEFF82B24470EAF0032156C /* WardrobesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEFF82A24470EAF0032156C /* WardrobesTableViewController.swift */; };
@@ -91,7 +92,7 @@
 		0AFD705624419DD300957BE6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AFD705424419DD300957BE6 /* Main.storyboard */; };
 		0AFD705824419DD500957BE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AFD705724419DD500957BE6 /* Assets.xcassets */; };
 		0AFD705B24419DD500957BE6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AFD705924419DD500957BE6 /* LaunchScreen.storyboard */; };
-		0AFD70642441B80500957BE6 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 0AFD70632441B80500957BE6 /* SwiftPackageProductDependency */; };
+		0AFD70642441B80500957BE6 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 0AFD70632441B80500957BE6 /* SwiftyJSON */; };
 		0AFD706A2441BA7500957BE6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFD70692441BA7500957BE6 /* HomeViewController.swift */; };
 		0AFD706C2441BFEE00957BE6 /* ItemsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFD706B2441BFEE00957BE6 /* ItemsTableViewController.swift */; };
 		0AFD70732441D2B200957BE6 /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFD70722441D2B200957BE6 /* ItemTableViewCell.swift */; };
@@ -106,8 +107,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				0AC54AF2244DF17600AD1188 /* BuildFile in Embed Frameworks */,
-				0A55912F244DF0110018CF99 /* BuildFile in Embed Frameworks */,
+				0AC54AF2244DF17600AD1188 /* (null) in Embed Frameworks */,
+				0A55912F244DF0110018CF99 /* (null) in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -116,6 +117,7 @@
 
 /* Begin PBXFileReference section */
 		0A01F31124431724001499D5 /* ImageEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEngine.swift; sourceTree = "<group>"; };
+		0A0B89562457A30A00EABF29 /* ModalFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalFactory.swift; sourceTree = "<group>"; };
 		0A149FF124512E7B0080941A /* ImagePersistEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePersistEngine.swift; sourceTree = "<group>"; };
 		0A14A001245155A10080941A /* ResidentHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResidentHelper.swift; sourceTree = "<group>"; };
 		0A14A0062451986B0080941A /* CrittersMonthlyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrittersMonthlyTableViewController.swift; sourceTree = "<group>"; };
@@ -214,10 +216,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0ACCF3A924567BB200F9C62E /* BuildFile in Frameworks */,
-				0A964998244E5FBE00C8E19D /* BuildFile in Frameworks */,
-				0A01F3102442DB8A001499D5 /* BuildFile in Frameworks */,
-				0AFD70642441B80500957BE6 /* BuildFile in Frameworks */,
+				0ACCF3A924567BB200F9C62E /* WhatsNewKit in Frameworks */,
+				0A964998244E5FBE00C8E19D /* TweeTextField in Frameworks */,
+				0A01F3102442DB8A001499D5 /* SDWebImage in Frameworks */,
+				0AFD70642441B80500957BE6 /* SwiftyJSON in Frameworks */,
 				D02015DDD8C8A4BAE7285CAB /* Pods_NookNook.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -478,6 +480,7 @@
 				0A295B4B2444AAD0001CF828 /* Taptic.swift */,
 				0A295B49244494F9001CF828 /* Categories.swift */,
 				0AA3616D244C520500D326AF /* SVHelper.swift */,
+				0A0B89562457A30A00EABF29 /* ModalFactory.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -512,7 +515,6 @@
 				5F2D55C25D11CEC5AE82E7DC /* Pods-NookNook.debug.xcconfig */,
 				0FC0B9212811082E98C0131C /* Pods-NookNook.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -536,10 +538,10 @@
 			);
 			name = NookNook;
 			packageProductDependencies = (
-				0AFD70632441B80500957BE6 /* SwiftPackageProductDependency */,
-				0A01F30F2442DB8A001499D5 /* SwiftPackageProductDependency */,
-				0A964997244E5FBE00C8E19D /* SwiftPackageProductDependency */,
-				0ACCF3A824567BB200F9C62E /* SwiftPackageProductDependency */,
+				0AFD70632441B80500957BE6 /* SwiftyJSON */,
+				0A01F30F2442DB8A001499D5 /* SDWebImage */,
+				0A964997244E5FBE00C8E19D /* TweeTextField */,
+				0ACCF3A824567BB200F9C62E /* WhatsNewKit */,
 			);
 			productName = NookNook;
 			productReference = 0AFD704B24419DD300957BE6 /* NookNook.app */;
@@ -570,10 +572,10 @@
 			);
 			mainGroup = 0AFD704224419DD300957BE6;
 			packageReferences = (
-				0AFD70622441B80500957BE6 /* RemoteSwiftPackageReference */,
-				0A01F30E2442DB8A001499D5 /* RemoteSwiftPackageReference */,
-				0A964996244E5FBE00C8E19D /* RemoteSwiftPackageReference */,
-				0ACCF3A724567BB200F9C62E /* RemoteSwiftPackageReference */,
+				0AFD70622441B80500957BE6 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				0A01F30E2442DB8A001499D5 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				0A964996244E5FBE00C8E19D /* XCRemoteSwiftPackageReference "TweeTextField" */,
+				0ACCF3A724567BB200F9C62E /* XCRemoteSwiftPackageReference "WhatsNewKit" */,
 			);
 			productRefGroup = 0AFD704C24419DD300957BE6 /* Products */;
 			projectDirPath = "";
@@ -690,6 +692,7 @@
 				0AA3616E244C520500D326AF /* SVHelper.swift in Sources */,
 				0A7FA6A32445971900921079 /* CrittersTableViewController.swift in Sources */,
 				0A887F9124508F280044EAEA /* UDHelper.swift in Sources */,
+				0A0B89572457A30A00EABF29 /* ModalFactory.swift in Sources */,
 				0A7FA6A52445972A00921079 /* CritterTableViewCell.swift in Sources */,
 				0A36427E244695FE0081315A /* Critter.swift in Sources */,
 				0AFD704F24419DD300957BE6 /* AppDelegate.swift in Sources */,
@@ -927,7 +930,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		0A01F30E2442DB8A001499D5 /* RemoteSwiftPackageReference */ = {
+		0A01F30E2442DB8A001499D5 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
 			requirement = {
@@ -935,7 +938,7 @@
 				minimumVersion = 5.7.2;
 			};
 		};
-		0A964996244E5FBE00C8E19D /* RemoteSwiftPackageReference */ = {
+		0A964996244E5FBE00C8E19D /* XCRemoteSwiftPackageReference "TweeTextField" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/oleghnidets/TweeTextField.git";
 			requirement = {
@@ -943,7 +946,7 @@
 				minimumVersion = 1.6.3;
 			};
 		};
-		0ACCF3A724567BB200F9C62E /* RemoteSwiftPackageReference */ = {
+		0ACCF3A724567BB200F9C62E /* XCRemoteSwiftPackageReference "WhatsNewKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SvenTiigi/WhatsNewKit.git";
 			requirement = {
@@ -951,7 +954,7 @@
 				minimumVersion = 1.3.2;
 			};
 		};
-		0AFD70622441B80500957BE6 /* RemoteSwiftPackageReference */ = {
+		0AFD70622441B80500957BE6 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON";
 			requirement = {
@@ -962,24 +965,24 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		0A01F30F2442DB8A001499D5 /* SwiftPackageProductDependency */ = {
+		0A01F30F2442DB8A001499D5 /* SDWebImage */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0A01F30E2442DB8A001499D5 /* RemoteSwiftPackageReference */;
+			package = 0A01F30E2442DB8A001499D5 /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImage;
 		};
-		0A964997244E5FBE00C8E19D /* SwiftPackageProductDependency */ = {
+		0A964997244E5FBE00C8E19D /* TweeTextField */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0A964996244E5FBE00C8E19D /* RemoteSwiftPackageReference */;
+			package = 0A964996244E5FBE00C8E19D /* XCRemoteSwiftPackageReference "TweeTextField" */;
 			productName = TweeTextField;
 		};
-		0ACCF3A824567BB200F9C62E /* SwiftPackageProductDependency */ = {
+		0ACCF3A824567BB200F9C62E /* WhatsNewKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0ACCF3A724567BB200F9C62E /* RemoteSwiftPackageReference */;
+			package = 0ACCF3A724567BB200F9C62E /* XCRemoteSwiftPackageReference "WhatsNewKit" */;
 			productName = WhatsNewKit;
 		};
-		0AFD70632441B80500957BE6 /* SwiftPackageProductDependency */ = {
+		0AFD70632441B80500957BE6 /* SwiftyJSON */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0AFD70622441B80500957BE6 /* RemoteSwiftPackageReference */;
+			package = 0AFD70622441B80500957BE6 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
 			productName = SwiftyJSON;
 		};
 /* End XCSwiftPackageProductDependency section */

@@ -8,6 +8,7 @@
 
 import UIKit
 import SDWebImage
+import SwiftEntryKit
 
 class DashboardViewController: UIViewController {
     
@@ -55,6 +56,7 @@ class DashboardViewController: UIViewController {
     private let FAVOURITE_CELL = "FavouriteCell"
     private var tableView: UITableView!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         favouritesManager = PersistEngine()
@@ -75,7 +77,10 @@ class DashboardViewController: UIViewController {
         super.viewDidAppear(animated)
         if isFirstLoad {
             if isEmptyLists(dicts: userDict) {
-                presentAlert(title: "hey there!", message: "Please head to settings and fill out the user detail for a better app experience! 😁")
+                let ( view, attributes ) = ModalFactory.showPopupMessage(title: "Hey there!", description: "NookNook is much better when you fill out your user info detail from the settings page.", image: UIImage(named: "hand"))
+                
+                SwiftEntryKit.display(entry: view, using: attributes)
+
             }
             isFirstLoad = false
         }
@@ -316,16 +321,6 @@ class DashboardViewController: UIViewController {
         let layout = UICollectionViewCompositionalLayout(section: section, configuration:config)
         
         return layout
-    }
-    
-    private func presentAlert(title: String, message: String) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        
-        let okAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
-        }
-        
-        alertController.addAction(okAction)
-        self.present(alertController, animated: true, completion: nil)
     }
     
     private func isEmptyLists(dicts: [String: String]?) -> Bool {

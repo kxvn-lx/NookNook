@@ -19,7 +19,10 @@ class PatchLogViewController: UIViewController {
     var titleLabel: UILabel!
     
     var logArray = [
-        "V1.0.0 (27042020)\nBeta testing released! 🤩",
+        """
+        V1.0.0 (27042020)
+        Beta testing released! 🤩
+        """,
     ]
 
     override func viewDidLoad() {
@@ -59,8 +62,8 @@ class PatchLogViewController: UIViewController {
         patchLabel.font = UIFont.preferredFont(forTextStyle: .body)
         patchLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)
         
-        mStackView.addArrangedSubview(titleLabel)
-        mStackView.addArrangedSubview(patchLabel)
+        mStackView.addArrangedSubview(titleLabel, withMargin: UIEdgeInsets(top: MARGIN * 2, left: MARGIN * 2, bottom: 0, right: MARGIN * 2))
+        mStackView.addArrangedSubview(patchLabel, withMargin: UIEdgeInsets(top: MARGIN * 2, left: MARGIN * 2, bottom: 0, right: MARGIN * 2))
         scrollView.addSubview(mStackView)
     }
     
@@ -72,8 +75,8 @@ class PatchLogViewController: UIViewController {
             scrollView.bottomAnchor.constraint(equalTo: self.view.layoutMarginsGuide.bottomAnchor),
             
             mStackView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: MARGIN * 4),
-            mStackView.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: MARGIN * 2),
-            mStackView.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: MARGIN * 2),
+            mStackView.leftAnchor.constraint(equalTo: scrollView.leftAnchor),
+            mStackView.rightAnchor.constraint(equalTo: scrollView.rightAnchor),
             mStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             mStackView.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor),
         ])

@@ -1,0 +1,6 @@
+framework module Pods_NookNook {
+  umbrella header "Pods-NookNook-umbrella.h"
+
+  export *
+  module * { export * }
+}
