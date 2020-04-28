@@ -20,7 +20,7 @@ class PatchLogViewController: UIViewController {
     
     var logArray = [
         """
-        V1.0.0 (27042020)
+        V1.0.0 (28042020)
         Beta testing released! 🤩
         """,
     ]
