@@ -47,6 +47,7 @@ class CrittersTableViewController: UITableViewController {
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search \(critters.count) critters..."
         navigationItem.searchController = searchController
+        
 
     }
     

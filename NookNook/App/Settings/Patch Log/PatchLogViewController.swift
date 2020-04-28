@@ -22,7 +22,8 @@ class PatchLogViewController: UIViewController {
         """
         v1.0.0 (29042020)
         - Fixed 'critters this month' glitch on certain region.
-        - New app icon! courtesy of @lonelyvillagerr
+        - New app icon! courtesy of @lonelyvillagerr.
+        - Resolve an issue regarding images not displaying correctly for some critters.
         
         V1.0.0 (28042020)
         Beta testing released! 🤩
@@ -66,8 +67,8 @@ class PatchLogViewController: UIViewController {
         patchLabel.font = UIFont.preferredFont(forTextStyle: .body)
         patchLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)
         
-        mStackView.addArrangedSubview(titleLabel, withMargin: UIEdgeInsets(top: MARGIN * 2, left: MARGIN * 2, bottom: 0, right: MARGIN * 2))
-        mStackView.addArrangedSubview(patchLabel, withMargin: UIEdgeInsets(top: MARGIN * 2, left: MARGIN * 2, bottom: 0, right: MARGIN * 2))
+        mStackView.addArrangedSubview(titleLabel, withMargin: UIEdgeInsets(top: MARGIN * 2, left: MARGIN * 2, bottom: 0, right: -MARGIN * 2))
+        mStackView.addArrangedSubview(patchLabel, withMargin: UIEdgeInsets(top: MARGIN * 2, left: MARGIN * 2, bottom: 0, right: -MARGIN * 2))
         scrollView.addSubview(mStackView)
     }
     

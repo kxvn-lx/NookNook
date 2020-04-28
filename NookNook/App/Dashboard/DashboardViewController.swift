@@ -450,6 +450,7 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
                 let percentageCount = (Float(caughtBugsCount) / Float(totalBugsCount)) * 100
                 
                 let cell = UITableViewCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: CRITTER_CELL)
+                cell.selectionStyle = .none
                 cell.textLabel!.text = "Total bugs caught (\(percentageCount)%)"
                 cell.detailTextLabel?.text = "\(caughtBugsCount)/\(totalBugsCount)"
                 return cell
@@ -459,6 +460,7 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
                 let percentageCount = (Float(caughtFishesCount) / Float(totalFishesCount)) * 100
                 
                 let cell = UITableViewCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: CRITTER_CELL)
+                cell.selectionStyle = .none
                 cell.textLabel!.text = "Total fishes caught (\(percentageCount)%)"
                 cell.detailTextLabel?.text = "\(caughtFishesCount)/\(totalFishesCount)"
                 return cell

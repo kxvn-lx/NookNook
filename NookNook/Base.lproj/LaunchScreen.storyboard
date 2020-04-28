@@ -17,10 +17,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="94E-Yw-apT">
-                                <rect key="frame" x="0.0" y="826" width="414" height="70"/>
+                                <rect key="frame" x="0.0" y="821" width="414" height="75"/>
                                 <color key="backgroundColor" red="0.25490196078431371" green="0.4392156862745098" blue="0.31764705882352939" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="94E-Yw-apT" secondAttribute="height" multiplier="207:64" constant="187.59375" id="6bf-aA-ahI"/>
+                                    <constraint firstAttribute="width" secondItem="94E-Yw-apT" secondAttribute="height" multiplier="207:64" constant="171.421875" id="6bf-aA-ahI"/>
                                     <constraint firstAttribute="width" constant="414" id="sg7-FP-Xvk"/>
                                 </constraints>
                             </view>
@@ -38,7 +38,7 @@
                             <constraint firstItem="qSN-kS-kVY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="107" id="APp-3i-bZi"/>
                             <constraint firstAttribute="bottom" secondItem="94E-Yw-apT" secondAttribute="bottom" id="Cow-de-LC9"/>
                             <constraint firstItem="qSN-kS-kVY" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="304" id="gA3-9o-UxX"/>
-                            <constraint firstItem="94E-Yw-apT" firstAttribute="top" secondItem="qSN-kS-kVY" secondAttribute="bottom" constant="278" id="gu5-0E-gyA"/>
+                            <constraint firstItem="94E-Yw-apT" firstAttribute="top" secondItem="qSN-kS-kVY" secondAttribute="bottom" constant="273" id="gu5-0E-gyA"/>
                             <constraint firstItem="94E-Yw-apT" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="mUS-iT-uoD"/>
                             <constraint firstItem="94E-Yw-apT" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="pnU-ph-lNc"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qSN-kS-kVY" secondAttribute="trailing" constant="107" id="r5K-yU-3RC"/>
