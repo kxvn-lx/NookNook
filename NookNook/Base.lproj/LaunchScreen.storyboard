@@ -1,7 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,15 +13,48 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="94E-Yw-apT">
+                                <rect key="frame" x="0.0" y="826" width="414" height="70"/>
+                                <color key="backgroundColor" red="0.25490196078431371" green="0.4392156862745098" blue="0.31764705882352939" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="94E-Yw-apT" secondAttribute="height" multiplier="207:64" constant="187.59375" id="6bf-aA-ahI"/>
+                                    <constraint firstAttribute="width" constant="414" id="sg7-FP-Xvk"/>
+                                </constraints>
+                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appIcon-Ori" translatesAutoresizingMaskIntoConstraints="NO" id="qSN-kS-kVY">
+                                <rect key="frame" x="107" y="348" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="qSN-kS-kVY" secondAttribute="height" multiplier="1:1" id="WpB-kw-2Ab"/>
+                                    <constraint firstAttribute="width" constant="200" id="mIh-qL-Weg"/>
+                                    <constraint firstAttribute="height" constant="200" id="vbJ-7J-0ZZ"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" name="Cream-1"/>
+                        <constraints>
+                            <constraint firstItem="qSN-kS-kVY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="107" id="APp-3i-bZi"/>
+                            <constraint firstAttribute="bottom" secondItem="94E-Yw-apT" secondAttribute="bottom" id="Cow-de-LC9"/>
+                            <constraint firstItem="qSN-kS-kVY" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="304" id="gA3-9o-UxX"/>
+                            <constraint firstItem="94E-Yw-apT" firstAttribute="top" secondItem="qSN-kS-kVY" secondAttribute="bottom" constant="278" id="gu5-0E-gyA"/>
+                            <constraint firstItem="94E-Yw-apT" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="mUS-iT-uoD"/>
+                            <constraint firstItem="94E-Yw-apT" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="pnU-ph-lNc"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qSN-kS-kVY" secondAttribute="trailing" constant="107" id="r5K-yU-3RC"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52.173913043478265" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="appIcon-Ori" width="500" height="500"/>
+        <namedColor name="Cream-1">
+            <color red="0.99215686274509807" green="0.96862745098039216" blue="0.90196078431372551" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

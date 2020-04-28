@@ -103,15 +103,15 @@ struct WhatsNewHelper {
          let versionStore: WhatsNewVersionStore = KeyValueWhatsNewVersionStore()
         
         // MARK:  Initialize
-//        view = WhatsNewViewController(
-//            whatsNew: whatsNew,
-//            configuration: configuration,
-//            versionStore: versionStore
-//        )
-        
         view = WhatsNewViewController(
             whatsNew: whatsNew,
-            configuration: configuration
+            configuration: configuration,
+            versionStore: versionStore
         )
+        
+//        view = WhatsNewViewController(
+//            whatsNew: whatsNew,
+//            configuration: configuration
+//        )
     }
 }
