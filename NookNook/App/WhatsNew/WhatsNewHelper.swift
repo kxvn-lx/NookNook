@@ -38,7 +38,7 @@ struct WhatsNewHelper {
                 ),
                 WhatsNew.Item(
                     title: "Resident's birthday",
-                    subtitle: "See who's in your resident list their birthday this month.",
+                    subtitle: "See who's in your resident list are having their birthday this month.",
                     image: birthdayIcon
                 ),
                 WhatsNew.Item(
@@ -54,34 +54,37 @@ struct WhatsNewHelper {
             ]
         )
         
-        /// Configurations
+        
+        // MARK: Configurations
         var configuration = WhatsNewViewController.Configuration()
 
         configuration.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue )!
         configuration.apply(animation: .slideRight)
         
-        // Title
+        
+        // MARK: Title
         configuration.titleView.secondaryColor = .init(
             startIndex: 11,
             length: 8,
             color: UIColor(named: ColourUtil.grass1.rawValue )!
         )
         configuration.titleView.titleColor = UIColor(named: ColourUtil.dirt1.rawValue )!
-        configuration.titleView.titleFont = UIFont.preferredFont(forTextStyle: .largeTitle)
+        configuration.titleView.titleFont = UIFont.preferredFont(forTextStyle: .title1)
         configuration.titleView.titleFont = .systemFont(ofSize: configuration.titleView.titleFont.pointSize, weight: .bold)
         configuration.titleView.titleAlignment = .left
-        configuration.titleView.insets = UIEdgeInsets(top: 50 * 2, left: 20, bottom: 15, right: 20)
         
-        // Items
-        configuration.itemsView.titleFont = .preferredFont(forTextStyle: .title3)
+        
+        // MARK: Items
+        configuration.itemsView.titleFont = .preferredFont(forTextStyle: .callout)
         configuration.itemsView.titleFont = .systemFont(ofSize: configuration.itemsView.titleFont.pointSize, weight: .semibold)
-        configuration.itemsView.subtitleFont = .preferredFont(forTextStyle: .body)
+        configuration.itemsView.subtitleFont = .preferredFont(forTextStyle: .subheadline)
         configuration.itemsView.titleColor = UIColor(named: ColourUtil.dirt1.rawValue )!
         configuration.itemsView.subtitleColor = UIColor(named: ColourUtil.dirt1.rawValue )!.withAlphaComponent(0.5)
         configuration.itemsView.layout = .left
         configuration.itemsView.contentMode = .top
         
-        // Button
+        
+        // MARK: Buttons
         let completionButton = WhatsNewViewController.CompletionButton(
             title: "Get started",
             action: .dismiss,
@@ -100,15 +103,15 @@ struct WhatsNewHelper {
          let versionStore: WhatsNewVersionStore = KeyValueWhatsNewVersionStore()
         
         // MARK:  Initialize
-        view = WhatsNewViewController(
-            whatsNew: whatsNew,
-            configuration: configuration,
-            versionStore: versionStore
-        )
-        
 //        view = WhatsNewViewController(
 //            whatsNew: whatsNew,
-//            configuration: configuration
+//            configuration: configuration,
+//            versionStore: versionStore
 //        )
+        
+        view = WhatsNewViewController(
+            whatsNew: whatsNew,
+            configuration: configuration
+        )
     }
 }

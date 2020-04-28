@@ -258,8 +258,8 @@ class SettingsTableViewController: UITableViewController {
                             displayMode: .inferred
                         )
                     ),
-                    backgroundColor: .clear,
-                    highlightedBackgroundColor: .clear,
+                    backgroundColor: EKColor(ModalFactory.grassBtn),
+                    highlightedBackgroundColor: EKColor(ModalFactory.grassBtn).with(alpha: 0.5),
                     displayMode: .inferred) {
                         PersistEngine.deleteAppData()
                         Taptic.successTaptic()
