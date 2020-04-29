@@ -62,7 +62,7 @@ class CrittersMonthlyTableViewController: UITableViewController {
         
         setBar()
         
-        scView = SCHelper.createSC(items: items)
+        scView = SCHelper.createSCWithTitle(title: userHemisphere?.rawValue ?? DateHelper.Hemisphere.Southern.rawValue, items: items)
         sc = scView.viewWithTag(1) as? UISegmentedControl
         sc.selectedSegmentIndex = 0
         sc.addTarget(self, action:  #selector(changeSource), for: .valueChanged)
@@ -185,7 +185,7 @@ class CrittersMonthlyTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return scView
     }
-
+    
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 100
     }
@@ -252,16 +252,13 @@ class CrittersMonthlyTableViewController: UITableViewController {
         switch sender.selectedSegmentIndex {
         case 0:
             self.currentGroup = .bugs
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
         case 1:
             self.currentGroup = .fishes
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
         default:
             fatalError("Invalid Segmented Control index.")
+        }
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
         }
     }
     

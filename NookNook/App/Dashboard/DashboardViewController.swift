@@ -514,6 +514,7 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
             case 0:
                 let vc = self.storyboard!.instantiateViewController(withIdentifier: "CrittersMonthlyVC") as! CrittersMonthlyTableViewController
                 vc.profileDelegate = self
+                
                 let navController = UINavigationController(rootViewController: vc)
                 navController.presentationController?.delegate = self
                 self.present(navController, animated:true, completion: nil)

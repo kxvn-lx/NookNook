@@ -8,6 +8,7 @@
 
 import UIKit
 import TweeTextField
+import SwiftEntryKit
 
 class EditInfoViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate {
     
@@ -214,6 +215,8 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         
         
         hemispherePicker = UISegmentedControl(items: [DateHelper.Hemisphere.Northern.rawValue, DateHelper.Hemisphere.Southern.rawValue])
+        hemispherePicker.backgroundColor = UIColor(named: ColourUtil.cream2.rawValue)
+        hemispherePicker.tintColor = UIColor(named: ColourUtil.cream1.rawValue)
         hemispherePicker.translatesAutoresizingMaskIntoConstraints = false
         hemispherePicker.addTarget(self, action:  #selector(hemispherePickerChanged), for: .valueChanged)
         
@@ -292,7 +295,9 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
             self.closeTapped()
         }
         else {
-            presentAlert(title: "Oh bummer!", message: "Please make sure you did not leave any text fields empty!")
+            let ( view, attributes ) = ModalFactory.showPopupMessage(title: "Oh bummer!", description: "Please make sure you did not leave any textfields empty!", image: UIImage(named: "hand"))
+            
+            SwiftEntryKit.display(entry: view, using: attributes)
             Taptic.errorTaptic()
         }
 
@@ -303,6 +308,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         
         let vc = self.storyboard!.instantiateViewController(withIdentifier: FRUIT_ID) as! FruitsTableViewController
         vc.fruitsDelegate = self
+        vc.userFruit = selectedFruit
         let navController = UINavigationController(rootViewController: vc)
         self.present(navController, animated:true, completion: nil)
     }
@@ -378,17 +384,6 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
 
         attributedString.append(normalString)
         return attributedString
-    }
-    
-    private func presentAlert(title: String, message: String) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-
-        let okAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
-            PersistEngine.deleteAppData()
-        }
-
-        alertController.addAction(okAction)
-        self.present(alertController, animated: true, completion: nil)
     }
     
 }

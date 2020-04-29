@@ -17,6 +17,7 @@ class FruitsTableViewController: UITableViewController {
     private let FRUIT_CELL = "FruitCell"
     
     private var fruits: [Fruits] = []
+    var userFruit: String!
     
     weak var fruitsDelegate: FruitsDelegate!
     
@@ -26,7 +27,7 @@ class FruitsTableViewController: UITableViewController {
         tableView.rowHeight = 50
 
         tableView.tableFooterView = UIView()
-        self.tableView.separatorStyle = .none
+        self.tableView.separatorStyle = .singleLine
         
         setBar()
         
@@ -48,8 +49,13 @@ class FruitsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FRUIT_CELL, for: indexPath)
-
         cell.textLabel?.text = fruits[indexPath.row].rawValue
+        
+        if let selectedFruit = userFruit {
+            if fruits[indexPath.row].rawValue == selectedFruit {
+                cell.accessoryType = .checkmark
+            }
+        }
 
         return cell
     }
@@ -65,7 +71,7 @@ class FruitsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
+        cell.backgroundColor = UIColor(named: ColourUtil.cream2.rawValue)
     }
     
     private func setBar() {
