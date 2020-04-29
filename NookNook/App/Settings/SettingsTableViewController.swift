@@ -17,7 +17,7 @@ protocol ProfileDelegate: NSObjectProtocol {
 class SettingsTableViewController: UITableViewController {
     private let EDIT_INFO_VC = "EditInfoVC"
     private let PATCH_LOG_VC = "PatchLogVC"
-    private let BUILD_NUMBER = "29042020"
+    private let BUILD_NUMBER = "290420201"
     
     weak var profileDelegate: ProfileDelegate!
     
