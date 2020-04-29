@@ -57,7 +57,7 @@ struct WhatsNewHelper {
         
         // MARK: Configurations
         var configuration = WhatsNewViewController.Configuration()
-
+        
         configuration.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue )!
         configuration.apply(animation: .slideRight)
         
@@ -83,6 +83,14 @@ struct WhatsNewHelper {
         configuration.itemsView.layout = .left
         configuration.itemsView.contentMode = .top
         
+        // MARK: New updates
+        //        let detailButton = WhatsNewViewController.DetailButton(
+        //            title: "See what's new",
+        //            action: .website(url: "https://github.com/SvenTiigi/WhatsNewKit"),
+        //            titleColor: UIColor(named: ColourUtil.grass1.rawValue)!,
+        //            animation: .slideRight
+        //        )
+        //        configuration.detailButton = detailButton
         
         // MARK: Buttons
         let completionButton = WhatsNewViewController.CompletionButton(
@@ -94,13 +102,12 @@ struct WhatsNewHelper {
             cornerRadius: 2.5,
             animation: .slideRight
         )
-        
         configuration.completionButton = completionButton
-
         
         
         
-         let versionStore: WhatsNewVersionStore = KeyValueWhatsNewVersionStore()
+        
+        let versionStore: WhatsNewVersionStore = KeyValueWhatsNewVersionStore()
         
         // MARK:  Initialize
         view = WhatsNewViewController(
@@ -109,9 +116,9 @@ struct WhatsNewHelper {
             versionStore: versionStore
         )
         
-//        view = WhatsNewViewController(
-//            whatsNew: whatsNew,
-//            configuration: configuration
-//        )
+        //        view = WhatsNewViewController(
+        //            whatsNew: whatsNew,
+        //            configuration: configuration
+        //        )
     }
 }
