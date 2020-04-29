@@ -17,6 +17,7 @@ protocol ProfileDelegate: NSObjectProtocol {
 class SettingsTableViewController: UITableViewController {
     private let EDIT_INFO_VC = "EditInfoVC"
     private let PATCH_LOG_VC = "PatchLogVC"
+    private let BUILD_NUMBER = "29042020"
     
     weak var profileDelegate: ProfileDelegate!
     
@@ -69,7 +70,7 @@ class SettingsTableViewController: UITableViewController {
         creatorCell = setupCell(text: "Creator", icon: IconUtil.systemIcon(of: .socialMedia, weight: .regular), accesoryType: .disclosureIndicator)
         
         appVersionCell = setupCell(text: "App version", icon: IconUtil.systemIcon(of: .info, weight: .regular), accesoryType: .disclosureIndicator)
-        appVersionCell.detailTextLabel?.text = "v1.0.0 (553A18)"
+        appVersionCell.detailTextLabel?.text = "v1.0.0 (\(BUILD_NUMBER))"
         appVersionCell.detailTextLabel?.font = .preferredFont(forTextStyle: .caption1)
         
         requestFeatureCell = setupCell(text: "Request a feature", icon: IconUtil.systemIcon(of: .feature, weight: .regular), accesoryType: .disclosureIndicator)
