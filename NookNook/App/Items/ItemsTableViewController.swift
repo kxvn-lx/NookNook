@@ -44,14 +44,13 @@ class ItemsTableViewController: UITableViewController {
         // Default categories to be presented
         items = DataEngine.loadItemJSON(from: currentCategory)
         
-        self.tabBarController?.delegate = self
-        
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search \(items.count) items..."
-        searchController.searchBar.tintColor = .lightGray
         navigationItem.searchController = searchController
-
+        navigationItem.hidesSearchBarWhenScrolling = false
+        
+        setBar()
         
         // Whatsnew Properties
         guard let vc = whatsNewVC.view else {
@@ -63,7 +62,13 @@ class ItemsTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         favouritesManager = PersistEngine()
+        self.navigationController?.navigationBar.sizeToFit()
         self.tableView.reloadData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.tabBarController?.delegate = self
     }
     
     override func viewDidLayoutSubviews() {
@@ -196,7 +201,6 @@ class ItemsTableViewController: UITableViewController {
     private func setBar() {
         tabBarController?.tabBar.barTintColor = UIColor(named: ColourUtil.grass1.rawValue)
         self.configureNavigationBar(largeTitleColor: UIColor(named: ColourUtil.dirt1.rawValue)!, backgoundColor: UIColor(named: ColourUtil.cream1.rawValue)!, tintColor: UIColor(named: ColourUtil.dirt1.rawValue)!, title: "Items", preferredLargeTitle: true)
-        
         self.tableView.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
         
         tabBarController?.tabBar.tintColor = .white
@@ -232,9 +236,9 @@ extension ItemsTableViewController: CatDelegate {
         items = DataEngine.loadItemJSON(from: currentCategory)
         DispatchQueue.main.async {
             self.tableView.reloadData()
+            let indexPath = IndexPath(row: 0, section: 0)
+            self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
         }
-        let indexPath = IndexPath(row: 0, section: 0)
-        self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
         searchController.searchBar.placeholder = "Search \(items.count) items..."
     }
 }

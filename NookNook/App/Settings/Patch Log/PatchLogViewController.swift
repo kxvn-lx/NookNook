@@ -24,6 +24,8 @@ class PatchLogViewController: UIViewController {
         - Fixed 'critters this month' glitch on certain region.
         - New app icon! courtesy of @lonelyvillagerr.
         - Resolve an issue regarding images not displaying correctly for some critters.
+        - All pages should now have a consistent search bar component.
+        - Tap any tab bar to go back to top of the list!
         
         V1.0.0 (28042020)
         Beta testing released! 🤩

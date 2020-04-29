@@ -42,12 +42,11 @@ class VillagersTableViewController: UITableViewController {
         // Default categories to be presented
         villagers = DataEngine.loadVillagersJSON(from: currentCategory).sorted(by: { $0.name < $1.name } )
         
-        self.tabBarController?.delegate = self
-        
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search \(villagers.count) villagers..."
         navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
         
         setBar()
     }
@@ -55,7 +54,13 @@ class VillagersTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         favouritesManager = PersistEngine()
+        self.navigationController?.navigationBar.sizeToFit()
         self.tableView.reloadData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.tabBarController?.delegate = self
     }
     
     override func viewDidLayoutSubviews() {
@@ -226,7 +231,6 @@ class VillagersTableViewController: UITableViewController {
     private func setBar() {
         tabBarController?.tabBar.barTintColor = UIColor(named: ColourUtil.grass1.rawValue)
         self.configureNavigationBar(largeTitleColor: UIColor(named: ColourUtil.dirt1.rawValue)!, backgoundColor: UIColor(named: ColourUtil.cream1.rawValue)!, tintColor: UIColor(named: ColourUtil.dirt1.rawValue)!, title: "Villagers", preferredLargeTitle: true)
-        
         self.tableView.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
         
         tabBarController?.tabBar.tintColor = .white
@@ -236,7 +240,7 @@ class VillagersTableViewController: UITableViewController {
         button.setImage(IconUtil.systemIcon(of: .sort, weight: .regular), for: .normal)
         button.addTarget(self, action: #selector(sortButtonPressed), for: .touchUpInside)
         button.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-        button.imageView?.contentMode = .scaleAspectFill
+        button.imageView?.contentMode = .scaleAspectFit
         
         let barButton = UIBarButtonItem(customView: button)
         self.navigationItem.leftBarButtonItem = barButton
@@ -284,6 +288,7 @@ class VillagersTableViewController: UITableViewController {
     }
 }
 
+// MARK: SearchResultsUpdating
 extension VillagersTableViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar

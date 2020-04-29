@@ -70,6 +70,7 @@ class SettingsTableViewController: UITableViewController {
         
         appVersionCell = setupCell(text: "App version", icon: IconUtil.systemIcon(of: .info, weight: .regular), accesoryType: .disclosureIndicator)
         appVersionCell.detailTextLabel?.text = "v1.0.0 (29042020)"
+        appVersionCell.detailTextLabel?.font = .preferredFont(forTextStyle: .caption1)
         
         requestFeatureCell = setupCell(text: "Request a feature", icon: IconUtil.systemIcon(of: .feature, weight: .regular), accesoryType: .disclosureIndicator)
     }
@@ -308,6 +309,10 @@ class SettingsTableViewController: UITableViewController {
         case 3: header.textLabel?.text = "Made with ❤️ by Kevin Laminto\n#NookNook"
         default: header.textLabel?.text = ""
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.detailTextLabel?.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
     }
     
     private func setBar() {

@@ -43,6 +43,6 @@ class HomeViewController: UITabBarController {
 extension UITableViewController: UITabBarControllerDelegate {
     public func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         self.tableView.setContentOffset(CGPoint.zero, animated: true)
-        }
     }
+}
 

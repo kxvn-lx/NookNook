@@ -70,6 +70,8 @@ class CrittersMonthlyTableViewController: UITableViewController {
         search.searchResultsUpdater = self
         search.obscuresBackgroundDuringPresentation = false
         search.searchBar.placeholder = "Search critters..."
+        navigationItem.searchController = search
+        navigationItem.hidesSearchBarWhenScrolling = false
         
         self.isModalInPresentation = true
     }
@@ -79,11 +81,6 @@ class CrittersMonthlyTableViewController: UITableViewController {
         
         userHemisphere = UDHelper.getUser()["hemisphere"].map { (DateHelper.Hemisphere(rawValue: $0) ?? DateHelper.Hemisphere.Southern) }
         ( bugs, fishes ) = CritterHelper.parseCritter(userHemisphere: userHemisphere ?? DateHelper.Hemisphere.Southern)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        navigationItem.searchController = search
     }
     
     // MARK: - Table view data source

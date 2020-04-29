@@ -444,6 +444,7 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.detailTextLabel?.text = "Bugs: \(caughtBugsMonth.count)/\(monthlyBug.count) | Fishes: \(caughtFishesMonth.count)/\(monthlyFish.count)"
                 cell.accessoryType = .disclosureIndicator
                 return cell
+                // Total bugs count
             case 1:
                 let totalBugsCount = DataEngine.loadCritterJSON(from: .bugsMain).count
                 let caughtBugsCount = self.favouritesManager.caughtCritters.filter( {$0.category == Categories.bugs.rawValue} ).count
@@ -454,6 +455,8 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.textLabel!.text = "Total bugs caught (\(percentageCount)%)"
                 cell.detailTextLabel?.text = "\(caughtBugsCount)/\(totalBugsCount)"
                 return cell
+                
+                // Total fishes count
             case 2:
                 let totalFishesCount = DataEngine.loadCritterJSON(from: .fishesMain).count
                 let caughtFishesCount = self.favouritesManager.caughtCritters.filter( {$0.category == Categories.fishes.rawValue} ).count
