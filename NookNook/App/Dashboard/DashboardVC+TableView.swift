@@ -35,7 +35,7 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 let cell = UITableViewCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: CRITTER_CELL)
                 cell.selectionStyle = .none
-                cell.textLabel!.text = "Total bugs caught (\(percentageCount)%)"
+                cell.textLabel!.text = "Total bugs caught (\(percentageCount.clean)%)"
                 cell.detailTextLabel?.text = "\(caughtBugsCount)/\(totalBugsCount)"
                 return cell
                 
@@ -47,7 +47,7 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 let cell = UITableViewCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: CRITTER_CELL)
                 cell.selectionStyle = .none
-                cell.textLabel!.text = "Total fishes caught (\(percentageCount)%)"
+                cell.textLabel!.text = "Total fishes caught (\(percentageCount.clean)%)"
                 cell.detailTextLabel?.text = "\(caughtFishesCount)/\(totalFishesCount)"
                 return cell
             default: fatalError("Index out of range")

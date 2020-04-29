@@ -125,7 +125,7 @@ class FavouriteTableViewCell: UITableViewCell {
         bsStackView.alignment = .center
         bsStackView.translatesAutoresizingMaskIntoConstraints = false
         bsStackView.axis = .horizontal
-        bsStackView.distribution = .equalSpacing
+        bsStackView.distribution = .fillEqually
         bsStackView.spacing = MARGIN
         
         bsStackView.addArrangedSubview(label3)

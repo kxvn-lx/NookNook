@@ -104,12 +104,8 @@ class VillagerTableViewCell: UITableViewCell {
         infoStackView.distribution = .fill
         infoStackView.spacing = MARGIN
         
-        let bsStackView = UIStackView()
-        bsStackView.alignment = .center
+        let bsStackView = SVHelper.createSV(axis: .horizontal, spacing: MARGIN, alignment: .center, distribution: .fillEqually)
         bsStackView.translatesAutoresizingMaskIntoConstraints = false
-        bsStackView.axis = .horizontal
-        bsStackView.distribution = .equalSpacing
-        bsStackView.spacing = MARGIN
         
         bsStackView.addArrangedSubview(bdayLabel)
         bsStackView.addArrangedSubview(genderLabel)
@@ -120,12 +116,8 @@ class VillagerTableViewCell: UITableViewCell {
         infoStackView.addArrangedSubview(speciesLabel)
         infoStackView.addArrangedSubview(bsStackView)
         
-        mStackView = UIStackView()
+        mStackView = SVHelper.createSV(axis: .horizontal, spacing: MARGIN, alignment: .center, distribution: .fill)
         mStackView.translatesAutoresizingMaskIntoConstraints = false
-        mStackView.alignment = .center
-        mStackView.axis = .horizontal
-        mStackView.distribution = .fill
-        mStackView.spacing = MARGIN
         
         
         mStackView.addArrangedSubview(imgView)

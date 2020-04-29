@@ -146,7 +146,6 @@ class CrittersTableViewController: UITableViewController {
             selectedCritter = critters[indexPath.row]
         }
         
-        
         let vc = self.storyboard!.instantiateViewController(withIdentifier: DETAIL_ID) as! DetailViewController
         
         vc.parseOject(from: .critters, object: selectedCritter)

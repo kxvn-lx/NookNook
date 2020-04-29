@@ -20,6 +20,10 @@ class PatchLogViewController: UIViewController {
     
     var logArray = [
         """
+        v1.0.0 (30042020)
+        - Improved app performance
+        - Fixed minor UI bugs
+
         v1.0.0 (290420201)
         - Fixed 'critters this month' glitch on certain region.
         - New app icon! courtesy of @lonelyvillagerr.

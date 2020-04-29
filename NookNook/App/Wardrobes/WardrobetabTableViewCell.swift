@@ -99,7 +99,7 @@ class WardrobetabTableViewCell: UITableViewCell {
         bsStackView.alignment = .leading
         bsStackView.translatesAutoresizingMaskIntoConstraints = false
         bsStackView.axis = .horizontal
-        bsStackView.distribution = .equalSpacing
+        bsStackView.distribution = .fillEqually
         bsStackView.spacing = MARGIN
         
         bsStackView.addArrangedSubview(buyLabel)
