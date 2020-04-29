@@ -93,12 +93,22 @@ class CrittersMonthlyTableViewController: UITableViewController {
         switch currentGroup {
         case .bugs:
             if isFiltering {
+                if filteredBugs.count == 0 {
+                    self.tableView.setEmptyMessage("No bugs(s) found 😢.\nPerhaps you made a mistake?")
+                } else {
+                    self.tableView.restore()
+                }
                 return filteredBugs.count
             } else {
                 return bugs.count
             }
         case .fishes:
             if isFiltering {
+                if filteredBugs.count == 0 {
+                    self.tableView.setEmptyMessage("No fish(s) found 😢.\nPerhaps you made a mistake?")
+                } else {
+                    self.tableView.restore()
+                }
                 return filteredFishes.count
             } else {
                 return fishes.count
@@ -263,8 +273,7 @@ class CrittersMonthlyTableViewController: UITableViewController {
     }
     
     private func setBar() {
-        self.configureNavigationBar(largeTitleColor: UIColor(named: ColourUtil.dirt1.rawValue)!, backgoundColor: UIColor(named: ColourUtil.cream1.rawValue)!, tintColor: UIColor(named: ColourUtil.dirt1.rawValue)!, title: "Critters this Month", preferredLargeTitle: false)
-        
+        self.configureNavigationBar(title: "Critters this month", preferredLargeTitle: false)
         self.view.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
         
         let close = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(closeTapped))
