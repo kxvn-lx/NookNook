@@ -280,8 +280,7 @@ class FavouritesTableViewController: UITableViewController {
     }
     
     private func setBar() {
-        self.configureNavigationBar(largeTitleColor: UIColor(named: ColourUtil.dirt1.rawValue)!, backgoundColor: UIColor(named: ColourUtil.cream1.rawValue)!, tintColor: UIColor(named: ColourUtil.dirt1.rawValue)!, title: "Favourites", preferredLargeTitle: false)
-        
+        self.configureNavigationBar(title: "Favourites", preferredLargeTitle: false)
         self.view.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
         
         let close = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(closeTapped))

@@ -75,8 +75,7 @@ class FruitsTableViewController: UITableViewController {
     }
     
     private func setBar() {
-        self.configureNavigationBar(largeTitleColor: UIColor(named: ColourUtil.dirt1.rawValue)!, backgoundColor: UIColor(named: ColourUtil.cream1.rawValue)!, tintColor: UIColor(named: ColourUtil.cream1.rawValue)!, title: "Change fruit", preferredLargeTitle: false)
-        
+        self.configureNavigationBar(title: "Change fruit", preferredLargeTitle: false)
         self.tableView.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
         
         let cancel = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(closeTapped))

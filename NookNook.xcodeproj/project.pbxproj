@@ -87,6 +87,9 @@
 		0AEFF82B24470EAF0032156C /* WardrobesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEFF82A24470EAF0032156C /* WardrobesTableViewController.swift */; };
 		0AEFF82D24470EC30032156C /* WardrobetabTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEFF82C24470EC30032156C /* WardrobetabTableViewCell.swift */; };
 		0AEFF82F24471CD90032156C /* Wardrobe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEFF82E24471CD90032156C /* Wardrobe.swift */; };
+		0AF37FB124595EE9004A8944 /* DashboardVC+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF37FB024595EE9004A8944 /* DashboardVC+CollectionView.swift */; };
+		0AF37FB324596040004A8944 /* DashboardVC+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF37FB22459603F004A8944 /* DashboardVC+TableView.swift */; };
+		0AF37FB6245960A7004A8944 /* DetailVC+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF37FB5245960A7004A8944 /* DetailVC+CollectionView.swift */; };
 		0AFD704F24419DD300957BE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFD704E24419DD300957BE6 /* AppDelegate.swift */; };
 		0AFD705124419DD300957BE6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFD705024419DD300957BE6 /* SceneDelegate.swift */; };
 		0AFD705624419DD300957BE6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AFD705424419DD300957BE6 /* Main.storyboard */; };
@@ -195,6 +198,9 @@
 		0AEFF82A24470EAF0032156C /* WardrobesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WardrobesTableViewController.swift; sourceTree = "<group>"; };
 		0AEFF82C24470EC30032156C /* WardrobetabTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WardrobetabTableViewCell.swift; sourceTree = "<group>"; };
 		0AEFF82E24471CD90032156C /* Wardrobe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wardrobe.swift; sourceTree = "<group>"; };
+		0AF37FB024595EE9004A8944 /* DashboardVC+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DashboardVC+CollectionView.swift"; sourceTree = "<group>"; };
+		0AF37FB22459603F004A8944 /* DashboardVC+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DashboardVC+TableView.swift"; sourceTree = "<group>"; };
+		0AF37FB5245960A7004A8944 /* DetailVC+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DetailVC+CollectionView.swift"; sourceTree = "<group>"; };
 		0AFD704B24419DD300957BE6 /* NookNook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NookNook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AFD704E24419DD300957BE6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0AFD705024419DD300957BE6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -365,6 +371,7 @@
 			children = (
 				0A72C3702445AD8F009FA0D4 /* DetailViewController.swift */,
 				0A72C3742445FD93009FA0D4 /* VariantCollectionViewCell.swift */,
+				0AF37FB5245960A7004A8944 /* DetailVC+CollectionView.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -372,11 +379,12 @@
 		0A739A3F244B58C500002B89 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
+				0AF37FB42459607B004A8944 /* Helper */,
 				0A14A0052451984B0080941A /* CrittersMonthly */,
 				0A739A40244B592200002B89 /* DashboardViewController.swift */,
 				0A739A42244BE55600002B89 /* ResidentCollectionViewCell.swift */,
-				0A14A001245155A10080941A /* ResidentHelper.swift */,
-				0AC703B32451C749008D7C77 /* CritterHelper.swift */,
+				0AF37FB024595EE9004A8944 /* DashboardVC+CollectionView.swift */,
+				0AF37FB22459603F004A8944 /* DashboardVC+TableView.swift */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -432,6 +440,15 @@
 				0AEFF82C24470EC30032156C /* WardrobetabTableViewCell.swift */,
 			);
 			path = Wardrobes;
+			sourceTree = "<group>";
+		};
+		0AF37FB42459607B004A8944 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				0A14A001245155A10080941A /* ResidentHelper.swift */,
+				0AC703B32451C749008D7C77 /* CritterHelper.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 		0AFD704224419DD300957BE6 = {
@@ -694,6 +711,7 @@
 				0A887F9124508F280044EAEA /* UDHelper.swift in Sources */,
 				0A0B89572457A30A00EABF29 /* ModalFactory.swift in Sources */,
 				0A7FA6A52445972A00921079 /* CritterTableViewCell.swift in Sources */,
+				0AF37FB324596040004A8944 /* DashboardVC+TableView.swift in Sources */,
 				0A36427E244695FE0081315A /* Critter.swift in Sources */,
 				0AFD704F24419DD300957BE6 /* AppDelegate.swift in Sources */,
 				0A6862A9244D499C00E06C74 /* SettingsTableViewController.swift in Sources */,
@@ -717,12 +735,14 @@
 				0A149FF224512E7B0080941A /* ImagePersistEngine.swift in Sources */,
 				0AFD70732441D2B200957BE6 /* ItemTableViewCell.swift in Sources */,
 				0AEFF82D24470EC30032156C /* WardrobetabTableViewCell.swift in Sources */,
+				0AF37FB6245960A7004A8944 /* DetailVC+CollectionView.swift in Sources */,
 				0AFD706A2441BA7500957BE6 /* HomeViewController.swift in Sources */,
 				0A6B5638244FCE9400AA0B86 /* DateHelper.swift in Sources */,
 				0AEFF82F24471CD90032156C /* Wardrobe.swift in Sources */,
 				0A295B4C2444AAD0001CF828 /* Taptic.swift in Sources */,
 				0A370BAD2444795700A72048 /* CategoryTableViewCell.swift in Sources */,
 				0A370B6C2444467900A72048 /* PriceEngine.swift in Sources */,
+				0AF37FB124595EE9004A8944 /* DashboardVC+CollectionView.swift in Sources */,
 				0AC703B42451C749008D7C77 /* CritterHelper.swift in Sources */,
 				0ACCF3AC2456830A00F9C62E /* WhatsNewHelper.swift in Sources */,
 				0A370BAF2444796400A72048 /* CategoriesTableViewController.swift in Sources */,

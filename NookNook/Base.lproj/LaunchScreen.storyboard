@@ -17,20 +17,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appIcon-Ori" translatesAutoresizingMaskIntoConstraints="NO" id="qSN-kS-kVY">
-                                <rect key="frame" x="107" y="348" width="200" height="200"/>
+                                <rect key="frame" x="132" y="373" width="150" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="qSN-kS-kVY" secondAttribute="height" multiplier="1:1" id="0yr-YS-poA"/>
-                                    <constraint firstAttribute="height" constant="200" id="MR2-5C-A6x"/>
-                                    <constraint firstAttribute="width" constant="200" id="tDE-H7-sTR"/>
+                                    <constraint firstAttribute="height" constant="150" id="MR2-5C-A6x"/>
+                                    <constraint firstAttribute="width" constant="150" id="tDE-H7-sTR"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" name="Cream-1"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qSN-kS-kVY" secondAttribute="trailing" constant="107" id="ARr-Fl-9Cd"/>
-                            <constraint firstItem="qSN-kS-kVY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="107" id="hjs-1y-war"/>
-                            <constraint firstItem="qSN-kS-kVY" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="304" id="mSJ-Df-hsT"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="qSN-kS-kVY" secondAttribute="bottom" constant="314" id="qou-Tq-mOU"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qSN-kS-kVY" secondAttribute="trailing" constant="132" id="ARr-Fl-9Cd"/>
+                            <constraint firstItem="qSN-kS-kVY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="132" id="hjs-1y-war"/>
+                            <constraint firstItem="qSN-kS-kVY" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="329" id="mSJ-Df-hsT"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="qSN-kS-kVY" secondAttribute="bottom" constant="339" id="qou-Tq-mOU"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

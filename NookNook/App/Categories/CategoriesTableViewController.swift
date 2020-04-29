@@ -78,7 +78,7 @@ class CategoriesTableViewController: UITableViewController {
     }
     
     private func setBar() {
-        self.configureNavigationBar(largeTitleColor: UIColor(named: ColourUtil.dirt1.rawValue)!, backgoundColor: UIColor(named: ColourUtil.cream1.rawValue)!, tintColor: UIColor(named: ColourUtil.dirt1.rawValue)!, title: "Categories", preferredLargeTitle: false)
+        self.configureNavigationBar(title: "Categories", preferredLargeTitle: false)
         
         self.tableView.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
         

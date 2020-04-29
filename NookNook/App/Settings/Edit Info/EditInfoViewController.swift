@@ -88,7 +88,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
     
     // Modify the UI
     private func setBar() {
-        self.configureNavigationBar(largeTitleColor: UIColor(named: ColourUtil.dirt1.rawValue)!, backgoundColor: UIColor(named: ColourUtil.cream1.rawValue)!, tintColor: UIColor(named: ColourUtil.dirt1.rawValue)!, title: "Edit Info", preferredLargeTitle: false)
+        self.configureNavigationBar(title: "Edit Info", preferredLargeTitle: false)
         
         self.view.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
         
@@ -295,7 +295,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
             self.closeTapped()
         }
         else {
-            let ( view, attributes ) = ModalFactory.showPopupMessage(title: "Oh bummer!", description: "Please make sure you did not leave any textfields empty!", image: UIImage(named: "hand"))
+            let ( view, attributes ) = ModalFactory.showPopupMessage(title: "Oh bummer!", description: "Please make sure you did not leave any textfields empty!", image: UIImage(named: "sad"))
             
             SwiftEntryKit.display(entry: view, using: attributes)
             Taptic.errorTaptic()

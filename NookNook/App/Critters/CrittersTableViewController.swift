@@ -10,16 +10,19 @@ import UIKit
 import SDWebImage
 
 class CrittersTableViewController: UITableViewController {
-    
+    // constants
     private let CRITTER_CELL = "CritterCell"
     private let DETAIL_ID = "Detail"
     
+    // Instance
     private var favouritesManager: PersistEngine!
     
+    // General variables
     var critters: [Critter] = []
     var filteredCritters: [Critter] = []
     var currentCategory: Categories = Categories.bugsMain
     
+    // SearchController properties
     let searchController = UISearchController(searchResultsController: nil)
     var isSearchBarEmpty: Bool {
         return searchController.searchBar.text?.isEmpty ?? true
@@ -28,6 +31,8 @@ class CrittersTableViewController: UITableViewController {
         return searchController.isActive && !isSearchBarEmpty
     }
     
+    
+    // MARK: - Table view init
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -70,8 +75,8 @@ class CrittersTableViewController: UITableViewController {
         
     }
     
-    // MARK: - Table view data source
     
+    // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -88,7 +93,6 @@ class CrittersTableViewController: UITableViewController {
         }
         return critters.count
     }
-    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CRITTER_CELL, for: indexPath)
@@ -128,7 +132,6 @@ class CrittersTableViewController: UITableViewController {
         
         return cell
     }
-    
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
@@ -226,10 +229,10 @@ class CrittersTableViewController: UITableViewController {
     }
     
     
-    // Modify the UI
+    // MARK: - Modify UI
     private func setBar() {
         tabBarController?.tabBar.barTintColor = UIColor(named: ColourUtil.grass1.rawValue)
-        self.configureNavigationBar(largeTitleColor: UIColor(named: ColourUtil.dirt1.rawValue)!, backgoundColor: UIColor(named: ColourUtil.cream1.rawValue)!, tintColor: UIColor(named: ColourUtil.dirt1.rawValue)!, title: "Critters", preferredLargeTitle: true)
+        self.configureNavigationBar(title: "Critters")
         self.tableView.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
         
         let button: UIButton = UIButton(type: .custom)
@@ -258,6 +261,7 @@ class CrittersTableViewController: UITableViewController {
     
 }
 
+// MARK: - Category Delegate
 extension CrittersTableViewController: CatDelegate {
     func parseNewCategory(of category: Categories) {
         currentCategory = category
@@ -272,6 +276,7 @@ extension CrittersTableViewController: CatDelegate {
     }
 }
 
+// MARK: - Search results delegate
 extension CrittersTableViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar

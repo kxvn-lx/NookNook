@@ -13,8 +13,11 @@ class DetailViewController: UIViewController {
     
     private var favouriteManager = PersistEngine()
     
+    // Constants
     private let MARGIN: CGFloat = 10
+    internal let VARIANT_CELL = "VariantCell"
     
+    // Containers
     private var scrollView: UIScrollView!
     // Master StackView that holds all view
     private var mStackView: UIStackView!
@@ -23,12 +26,13 @@ class DetailViewController: UIViewController {
     // Stackview to hold all the rest of the informations
     private var infoStackView: UIStackView!
     
-    private var itemObj: Item!
-    private var critterObj: Critter!
-    private var wardrobeObj: Wardrobe!
-    private var villagerObj: Villager!
+    /// Objects
+    internal var itemObj: Item!
+    internal var critterObj: Critter!
+    internal var wardrobeObj: Wardrobe!
+    internal var villagerObj: Villager!
     
-    private var groupOrigin: DataEngine.Group!
+    internal var groupOrigin: DataEngine.Group!
     
     private var detailImageView: UIImageView!
     private var titleLabel: UILabel!
@@ -60,13 +64,9 @@ class DetailViewController: UIViewController {
     private var variationTitleLabel: UILabel!
     let variationImageCollectionView:UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     let layout:UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
-    
-    
-    private let VARIANT_CELL = "VariantCell"
-    
-    
 
-    
+
+    // MARK: - Tableview init
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -107,9 +107,7 @@ class DetailViewController: UIViewController {
         
     }
     
-    /**
-     Method to render each object accordingly (hides the component that is not dependent to each group.
-     */
+    /// Method to render each object accordingly (hides the component that is not dependent to each group.
     private func renderObj() {
         switch groupOrigin {
         case .items:
@@ -160,9 +158,7 @@ class DetailViewController: UIViewController {
         
     }
     
-    /**
-     Method to render item object
-     */
+    /// Method to render item object
     private func renderItem() {
         detailImageView.sd_setImage(with: ImageEngine.parseNPURL(with: itemObj.image!, category: itemObj.category), placeholderImage: UIImage(named: "placeholder"))
         titleLabel.text = itemObj.name
@@ -178,11 +174,8 @@ class DetailViewController: UIViewController {
             variationTitleLabel.font = UIFont.preferredFont(forTextStyle: .body)
         }
     }
-    
-    
-    /**
-     Method to render critter object
-     */
+
+    /// Method to render critter object
     private func renderCritter() {
         detailImageView.sd_setImage(with: ImageEngine.parseAcnhURL(with: critterObj.image, of: critterObj.category, mediaType: .images), placeholderImage: UIImage(named: "placeholder"))
         titleLabel.text = critterObj.name
@@ -209,11 +202,8 @@ class DetailViewController: UIViewController {
             iconStackView.isHidden = false
         }
     }
-    
-    
-    /**
-     Method to render wardrobe object
-     */
+
+    /// Method to render wardrobe  object
     private func renderWardrobe() {
         detailImageView.sd_setImage(with: ImageEngine.parseNPURL(with: wardrobeObj.image!, category: wardrobeObj.category), placeholderImage: UIImage(named: "placeholder"))
         titleLabel.text = wardrobeObj.name
@@ -226,10 +216,8 @@ class DetailViewController: UIViewController {
             variationTitleLabel.font = UIFont.preferredFont(forTextStyle: .body)
         }
     }
-    
-    /**
-     Method to render Villager object
-     */
+
+    /// Method to render villager object
     private func renderVillager() {
         detailImageView.sd_setImage(with: ImageEngine.parseAcnhURL(with: villagerObj.image, of: villagerObj.category, mediaType: .images), placeholderImage: UIImage(named: "placeholder"))
         titleLabel.text = villagerObj.name
@@ -244,13 +232,9 @@ class DetailViewController: UIViewController {
         iconStackView.isHidden = self.favouriteManager.residentVillagers.contains(villagerObj) ? false : true
 
     }
-    
-    
-    
-    
-    
 
-    // MARK:- Views data source
+    
+    // MARK:- Modify UI
     private func setupView() {
         buyStack = UIStackView()
         sellStack = UIStackView()
@@ -483,8 +467,7 @@ class DetailViewController: UIViewController {
     }
     
     private func setBar() {
-        self.configureNavigationBar(largeTitleColor: UIColor(named: ColourUtil.dirt1.rawValue)!, backgoundColor: UIColor(named: ColourUtil.cream1.rawValue)!, tintColor: UIColor(named: ColourUtil.dirt1.rawValue)!, title: "Detail", preferredLargeTitle: false)
-        
+        self.configureNavigationBar(title: "Detail", preferredLargeTitle: false)
         self.view.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
         
         let cancel = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(closeTapped))
@@ -544,49 +527,4 @@ class DetailViewController: UIViewController {
         return layout
     }
     
-}
-
-extension DetailViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch groupOrigin {
-        case .items:
-            if let itemObjArr = itemObj.variants {
-                return itemObjArr.count
-            }
-        case .critters:
-            return 0
-            
-        case .wardrobes:
-            if let wardrobeObjArr = wardrobeObj.variants {
-                return wardrobeObjArr.count
-            }
-            
-        case .villagers:
-            return 0
-            
-        default: fatalError("Attempt to create cells from an unkown group origin or, groupOrigin is nul!")
-        }
-
-        return 0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VARIANT_CELL, for: indexPath) as! VariantCollectionViewCell
-        
-        switch groupOrigin {
-        case .items:
-            if let itemObjArr = itemObj.variants {
-                cell.variantImage.sd_setImage(with: ImageEngine.parseNPURL(with: itemObjArr[indexPath.row], category: itemObj.category), placeholderImage: nil)
-            }
-        case .critters:
-            print("Attempt to access critter cell.")
-        case .wardrobes:
-            if let wardrobeObjArr = wardrobeObj.variants {
-                cell.variantImage.sd_setImage(with: ImageEngine.parseNPURL(with: wardrobeObjArr[indexPath.row], category: wardrobeObj.category), placeholderImage: nil)
-            }
-        default: fatalError("Attempt to access an invalid object group or groupOrigin is still nil!")
-        }
-        
-        return cell
-    }
 }

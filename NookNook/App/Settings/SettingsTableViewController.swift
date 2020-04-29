@@ -35,9 +35,7 @@ class SettingsTableViewController: UITableViewController {
     
     private let destColour = UIColor(red: 242/255, green: 67/255, blue: 51/255, alpha: 1)
     
-    
-    
-    
+    // MARK: - Tableview Init
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -76,8 +74,8 @@ class SettingsTableViewController: UITableViewController {
         requestFeatureCell = setupCell(text: "Request a feature", icon: IconUtil.systemIcon(of: .feature, weight: .regular), accesoryType: .disclosureIndicator)
     }
     
-    // MARK: - Table view data source
     
+    // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 4
     }
@@ -317,8 +315,7 @@ class SettingsTableViewController: UITableViewController {
     }
     
     private func setBar() {
-        self.configureNavigationBar(largeTitleColor: UIColor(named: ColourUtil.dirt1.rawValue)!, backgoundColor: UIColor(named: ColourUtil.cream1.rawValue)!, tintColor: UIColor(named: ColourUtil.dirt1.rawValue)!, title: "Settings", preferredLargeTitle: true)
-        
+        self.configureNavigationBar(title: "Settings")
         self.view.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
         
         let close = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(closeTapped))

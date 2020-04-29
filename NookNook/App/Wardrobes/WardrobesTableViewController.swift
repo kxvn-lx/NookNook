@@ -10,16 +10,19 @@ import UIKit
 import SDWebImage
 
 class WardrobesTableViewController: UITableViewController {
-    
+    // Constants
     let WARDROBE_CELL = "WardrobeCell"
     private let DETAIL_ID = "Detail"
     
+    // Instance
     private var favouritesManager: PersistEngine!
     
+    // General variables
     var wardrobes: [Wardrobe] = []
     var filteredWardrobes: [Wardrobe] = []
     var currentCategory: Categories = Categories.tops
     
+    // SearchController properties
     let searchController = UISearchController(searchResultsController: nil)
     var isSearchBarEmpty: Bool {
         return searchController.searchBar.text?.isEmpty ?? true
@@ -28,6 +31,7 @@ class WardrobesTableViewController: UITableViewController {
         return searchController.isActive && !isSearchBarEmpty
     }
     
+    // MARK: - Table views init
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -67,8 +71,8 @@ class WardrobesTableViewController: UITableViewController {
         searchBar.setPlaceholderTextColorTo(color: UIColor.lightGray)
     }
     
-    // MARK: - Table view data source
     
+    // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -84,7 +88,6 @@ class WardrobesTableViewController: UITableViewController {
         }
         return wardrobes.count
     }
-    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: WARDROBE_CELL, for: indexPath)
@@ -116,7 +119,6 @@ class WardrobesTableViewController: UITableViewController {
         
         return cell
     }
-    
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
@@ -184,10 +186,11 @@ class WardrobesTableViewController: UITableViewController {
         
     }
     
-    // Modify the UI
+    
+    // MARK: - Modify UI
     private func setBar() {
         tabBarController?.tabBar.barTintColor = UIColor(named: ColourUtil.grass1.rawValue)
-        self.configureNavigationBar(largeTitleColor: UIColor(named: ColourUtil.dirt1.rawValue)!, backgoundColor: UIColor(named: ColourUtil.cream1.rawValue)!, tintColor: UIColor(named: ColourUtil.dirt1.rawValue)!, title: "Wardrobes", preferredLargeTitle: true)
+        self.configureNavigationBar(title: "Wardrobes")
         self.tableView.backgroundColor = UIColor(named: ColourUtil.cream2.rawValue)
         
         tabBarController?.tabBar.tintColor = .white
@@ -218,6 +221,7 @@ class WardrobesTableViewController: UITableViewController {
     
 }
 
+// MARK: - Category delegate
 extension WardrobesTableViewController: CatDelegate {
     func parseNewCategory(of category: Categories) {
         currentCategory = category
@@ -232,6 +236,7 @@ extension WardrobesTableViewController: CatDelegate {
     }
 }
 
+// MARK: - SearchResults delegegate
 extension WardrobesTableViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar

@@ -12,17 +12,20 @@ import SwiftyJSON
 import WhatsNewKit
 
 class ItemsTableViewController: UITableViewController {
-    
+    // constants
     private let ITEM_CELL = "ItemCell"
     private let DETAIL_ID = "Detail"
     
+    // general variables
     var items: [Item] = []
     var filteredItems: [Item] = []
     var currentCategory: Categories = Categories.housewares
     
+    // instance
     private var favouritesManager: PersistEngine!
     private var whatsNewVC = WhatsNewHelper()
     
+    // SearchController properties
     let searchController = UISearchController(searchResultsController: nil)
     var isSearchBarEmpty: Bool {
         return searchController.searchBar.text?.isEmpty ?? true
@@ -31,6 +34,8 @@ class ItemsTableViewController: UITableViewController {
         return searchController.isActive && !isSearchBarEmpty
     }
     
+    
+    // MARK: - Table view init
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -197,10 +202,10 @@ class ItemsTableViewController: UITableViewController {
         
     }
     
-    // Modify the UI
+    // MARK: - Modify UI
     private func setBar() {
         tabBarController?.tabBar.barTintColor = UIColor(named: ColourUtil.grass1.rawValue)
-        self.configureNavigationBar(largeTitleColor: UIColor(named: ColourUtil.dirt1.rawValue)!, backgoundColor: UIColor(named: ColourUtil.cream1.rawValue)!, tintColor: UIColor(named: ColourUtil.dirt1.rawValue)!, title: "Items", preferredLargeTitle: true)
+        self.configureNavigationBar(title: "Items")
         self.tableView.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
         
         tabBarController?.tabBar.tintColor = .white
@@ -230,6 +235,7 @@ class ItemsTableViewController: UITableViewController {
     }
 }
 
+// MARK: - Category Delegate
 extension ItemsTableViewController: CatDelegate {
     func parseNewCategory(of category: Categories) {
         currentCategory = category
@@ -243,6 +249,7 @@ extension ItemsTableViewController: CatDelegate {
     }
 }
 
+// MARK: - SearchResults Delegate
 extension ItemsTableViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar

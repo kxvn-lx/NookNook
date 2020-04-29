@@ -8,20 +8,24 @@
 
 import UIKit
 import SDWebImage
+import SwiftEntryKit
 
 class VillagersTableViewController: UITableViewController {
     
+    // Constants
     private let VILLAGER_CELL = "VillagerCell"
     private let DETAIL_ID = "Detail"
     
+    // Instance
     private var favouritesManager: PersistEngine!
-    
     private var sortType: SortEngine.Sort!
     
+    // General variables
     var villagers: [Villager] = []
     var filteredVillagers: [Villager] = []
     var currentCategory: Categories = Categories.villagers
     
+    // Search properties
     let searchController = UISearchController(searchResultsController: nil)
     var isSearchBarEmpty: Bool {
         return searchController.searchBar.text?.isEmpty ?? true
@@ -31,6 +35,7 @@ class VillagersTableViewController: UITableViewController {
     }
     
     
+    // MARK: - Tableview init
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -72,8 +77,8 @@ class VillagersTableViewController: UITableViewController {
         
     }
     
-    // MARK: - Table view data source
     
+    // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -211,10 +216,10 @@ class VillagersTableViewController: UITableViewController {
                 success(true)
             }
             else {
-                let alert = UIAlertController(title: "Woah there!", message: "It appears that you have the max number of residents! (10 max)", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                let ( view, attributes ) = ModalFactory.showPopupMessage(title: "Woah there!", description: "It appears that you have the max number of resident.", image: UIImage(named: "sad"))
                 
-                self.present(alert, animated: true)
+                SwiftEntryKit.display(entry: view, using: attributes)
+                
                 Taptic.errorTaptic()
                 success(false)
             }
@@ -227,10 +232,10 @@ class VillagersTableViewController: UITableViewController {
     }
     
     
-    // Modify the UI
+    // MARK: - Modify UI
     private func setBar() {
         tabBarController?.tabBar.barTintColor = UIColor(named: ColourUtil.grass1.rawValue)
-        self.configureNavigationBar(largeTitleColor: UIColor(named: ColourUtil.dirt1.rawValue)!, backgoundColor: UIColor(named: ColourUtil.cream1.rawValue)!, tintColor: UIColor(named: ColourUtil.dirt1.rawValue)!, title: "Villagers", preferredLargeTitle: true)
+        self.configureNavigationBar(title: "Villagers")
         self.tableView.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
         
         tabBarController?.tabBar.tintColor = .white
@@ -288,7 +293,7 @@ class VillagersTableViewController: UITableViewController {
     }
 }
 
-// MARK: SearchResultsUpdating
+// MARK: - Searc Results Delegate
 extension VillagersTableViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar

@@ -13,14 +13,14 @@ import SwiftEntryKit
 class DashboardViewController: UIViewController {
     
     // Data variables
-    private var favouritesManager: PersistEngine!
+    internal var favouritesManager: PersistEngine!
     private var user: User!
     private var userDict: [String: String]!
     
     // Constant variables
-    private let VARIANT_CELL = "VariantCell"
-    private let SETTING_ID = "SettingsVC"
-    private let DETAIL_ID = "Detail"
+    internal let VARIANT_CELL = "VariantCell"
+    internal let SETTING_ID = "SettingsVC"
+    internal let DETAIL_ID = "Detail"
     private let MARGIN: CGFloat = 10
     private var isFirstLoad = true
     
@@ -43,18 +43,18 @@ class DashboardViewController: UIViewController {
     let variationImageCollectionView:UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     let layout:UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
     
-    private var birthdayResidents: [Villager] = []
+    internal var birthdayResidents: [Villager] = []
     
     // Critter Monthly properties
-    private var monthlyBug: [Critter]!
-    private var monthlyFish: [Critter]!
-    private var caughtBugsMonth: [Critter] = []
-    private var caughtFishesMonth: [Critter] = []
+    internal var monthlyBug: [Critter]!
+    internal var monthlyFish: [Critter]!
+    internal var caughtBugsMonth: [Critter] = []
+    internal var caughtFishesMonth: [Critter] = []
     
     // MARK: - Table view properties
-    private let CRITTER_CELL = "CritterCell"
-    private let FAVOURITE_CELL = "FavouriteCell"
-    private var tableView: UITableView!
+    internal let CRITTER_CELL = "CritterCell"
+    internal let FAVOURITE_CELL = "FavouriteCell"
+    internal var tableView: UITableView!
     
     
     override func viewDidLoad() {
@@ -80,7 +80,7 @@ class DashboardViewController: UIViewController {
                 let ( view, attributes ) = ModalFactory.showPopupMessage(title: "Hey there!", description: "NookNook is much better when you fill out your user info detail from the settings page.", image: UIImage(named: "hand"))
                 
                 SwiftEntryKit.display(entry: view, using: attributes)
-
+                
             }
             isFirstLoad = false
         }
@@ -109,7 +109,7 @@ class DashboardViewController: UIViewController {
     }
     
     
-    // Modify the UI
+    // MARK: - Modify UI
     private func setBar() {
         self.configureNavigationBar(largeTitleColor: UIColor(named: ColourUtil.dirt1.rawValue)!, backgoundColor: UIColor(named: ColourUtil.cream1.rawValue)!, tintColor: UIColor(named: ColourUtil.dirt1.rawValue)!, title: "Dashboard", preferredLargeTitle: true)
         
@@ -154,7 +154,7 @@ class DashboardViewController: UIViewController {
         
         scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
- 
+        
         self.view.addSubview(scrollView)
         
         // Create master stackView
@@ -342,10 +342,10 @@ class DashboardViewController: UIViewController {
         let boldText = boldString
         let attrs = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: font.pointSize)]
         let attributedString = NSMutableAttributedString(string:boldText, attributes:attrs)
-
+        
         let normalText = string
         let normalString = NSMutableAttributedString(string:normalText)
-
+        
         attributedString.append(normalString)
         return attributedString
     }
@@ -364,54 +364,6 @@ class DashboardViewController: UIViewController {
     }
 }
 
-// MARK:- UICollectionView data source
-extension DashboardViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if (favouritesManager.residentVillagers.count == 0) {
-            collectionView.setEmptyMessage("Swipe right and press Resident to\nadd a villager to your resident collection!")
-        } else {
-            collectionView.restore()
-        }
-        
-        return favouritesManager.residentVillagers.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VARIANT_CELL, for: indexPath) as! ResidentCollectionViewCell
-        
-        cell.variantImage.sd_setImage(with: ImageEngine.parseAcnhURL(with: self.favouritesManager.residentVillagers[indexPath.row].image, of: Categories.villagers.rawValue, mediaType: .icons), placeholderImage: UIImage(named: "placeholder"))
-        
-        let villagerName = self.birthdayResidents.contains(self.favouritesManager.residentVillagers[indexPath.row]) ? "\(self.favouritesManager.residentVillagers[indexPath.row].name) 🎂" : self.favouritesManager.residentVillagers[indexPath.row].name
-        cell.variantName.text = villagerName
-        
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        collectionView.deselectItem(at: indexPath, animated: true)
-        
-        let selectedVillager = self.favouritesManager.residentVillagers[indexPath.row]
-        let vc = self.storyboard!.instantiateViewController(withIdentifier: DETAIL_ID) as! DetailViewController
-        
-        vc.parseOject(from: .villagers, object: selectedVillager)
-        
-        let navController = UINavigationController(rootViewController: vc)
-        self.present(navController, animated:true, completion: nil)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
-        if let cell = collectionView.cellForItem(at: indexPath) {
-            cell.contentView.backgroundColor = UIColor(named: ColourUtil.cream2.rawValue)?.withAlphaComponent(0.5)
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
-        if let cell = collectionView.cellForItem(at: indexPath) {
-            cell.contentView.backgroundColor = nil
-        }
-    }
-}
-
 extension DashboardViewController: UIAdaptivePresentationControllerDelegate {
     func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
         self.reloadProfile()
@@ -424,117 +376,4 @@ extension DashboardViewController: ProfileDelegate {
         self.reloadProfile()
         self.dismiss(animated: true, completion: nil)
     }
-}
-
-// MARK:- UITableView data source
-extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.section {
-        case 0:
-            let cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: FAVOURITE_CELL)
-            cell.textLabel!.text = "Favourites"
-            cell.imageView?.image = IconUtil.systemIcon(of: .starFill, weight: .regular).withRenderingMode(.alwaysTemplate)
-            cell.accessoryType = .disclosureIndicator
-            return cell
-        case 1:
-            switch indexPath.row {
-            case 0:
-                let cell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: CRITTER_CELL)
-                cell.textLabel!.text = "Critters this month"
-                cell.detailTextLabel?.text = "Bugs: \(caughtBugsMonth.count)/\(monthlyBug.count) | Fishes: \(caughtFishesMonth.count)/\(monthlyFish.count)"
-                cell.accessoryType = .disclosureIndicator
-                return cell
-                // Total bugs count
-            case 1:
-                let totalBugsCount = DataEngine.loadCritterJSON(from: .bugsMain).count
-                let caughtBugsCount = self.favouritesManager.caughtCritters.filter( {$0.category == Categories.bugs.rawValue} ).count
-                let percentageCount = (Float(caughtBugsCount) / Float(totalBugsCount)) * 100
-                
-                let cell = UITableViewCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: CRITTER_CELL)
-                cell.selectionStyle = .none
-                cell.textLabel!.text = "Total bugs caught (\(percentageCount)%)"
-                cell.detailTextLabel?.text = "\(caughtBugsCount)/\(totalBugsCount)"
-                return cell
-                
-                // Total fishes count
-            case 2:
-                let totalFishesCount = DataEngine.loadCritterJSON(from: .fishesMain).count
-                let caughtFishesCount = self.favouritesManager.caughtCritters.filter( {$0.category == Categories.fishes.rawValue} ).count
-                let percentageCount = (Float(caughtFishesCount) / Float(totalFishesCount)) * 100
-                
-                let cell = UITableViewCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: CRITTER_CELL)
-                cell.selectionStyle = .none
-                cell.textLabel!.text = "Total fishes caught (\(percentageCount)%)"
-                cell.detailTextLabel?.text = "\(caughtFishesCount)/\(totalFishesCount)"
-                return cell
-            default: fatalError("Index out of range")
-            }
-        default: fatalError("Indexpath out of range.")
-        }
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return 1
-        case 1:
-            return 3
-        default: fatalError("Invalid rows detected.")
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
-        case 0: return ""
-        case 1: return "Critters Information"
-        default: return " "
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
-        cell.tintColor =  UIColor(named: ColourUtil.dirt1.rawValue)
-        cell.textLabel?.textColor = UIColor(named: ColourUtil.dirt1.rawValue)
-        cell.detailTextLabel?.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        switch indexPath.section {
-        case 0:
-            let vc = self.storyboard!.instantiateViewController(withIdentifier: "FavouritesVC") as! FavouritesTableViewController
-            let navController = UINavigationController(rootViewController: vc)
-            self.present(navController, animated:true, completion: nil)
-        case 1:
-            switch indexPath.row {
-            case 0:
-                let vc = self.storyboard!.instantiateViewController(withIdentifier: "CrittersMonthlyVC") as! CrittersMonthlyTableViewController
-                vc.profileDelegate = self
-                
-                let navController = UINavigationController(rootViewController: vc)
-                navController.presentationController?.delegate = self
-                self.present(navController, animated:true, completion: nil)
-            case 1: break
-            case 2: break
-            default: fatalError("Invalid index")
-            }
-        default: fatalError("Invalid section detected")
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
-        let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
-        header.textLabel?.font = UIFont.preferredFont(forTextStyle: .title3)
-        header.textLabel?.text? = header.textLabel?.text?.capitalized ?? ""
-    }
-    
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return .leastNormalMagnitude
-    }
-    
 }
