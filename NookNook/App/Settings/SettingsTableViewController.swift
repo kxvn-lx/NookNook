@@ -69,7 +69,7 @@ class SettingsTableViewController: UITableViewController {
         creatorCell = setupCell(text: "Creator", icon: IconUtil.systemIcon(of: .socialMedia, weight: .regular), accesoryType: .disclosureIndicator)
         
         appVersionCell = setupCell(text: "App version", icon: IconUtil.systemIcon(of: .info, weight: .regular), accesoryType: .disclosureIndicator)
-        appVersionCell.detailTextLabel?.text = "v1.0.0 (29042020)"
+        appVersionCell.detailTextLabel?.text = "v1.0.0 (553A18)"
         appVersionCell.detailTextLabel?.font = .preferredFont(forTextStyle: .caption1)
         
         requestFeatureCell = setupCell(text: "Request a feature", icon: IconUtil.systemIcon(of: .feature, weight: .regular), accesoryType: .disclosureIndicator)
