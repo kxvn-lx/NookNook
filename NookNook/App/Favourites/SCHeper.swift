@@ -46,6 +46,7 @@ struct SCHelper {
         titleLabel.numberOfLines = 2
         titleLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)
         titleLabel.textAlignment = .center
+        titleLabel.font = .preferredFont(forTextStyle: .callout)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.text = title
         let vw = UIView()
