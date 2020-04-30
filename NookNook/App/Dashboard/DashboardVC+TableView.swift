@@ -105,17 +105,22 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.section {
         case 0:
             switch indexPath.row {
+                // Favourites
             case 0:
                 let vc = self.storyboard!.instantiateViewController(withIdentifier: "FavouritesVC") as! FavouritesTableViewController
                 let navController = UINavigationController(rootViewController: vc)
                 self.present(navController, animated:true, completion: nil)
+                // Turnip Reminder
             case 1:
-                print(1)
+                let vc = self.storyboard!.instantiateViewController(withIdentifier: TURNIP_ID) as! TurnipReminderTableViewController
+                let navController = UINavigationController(rootViewController: vc)
+                self.present(navController, animated:true, completion: nil)
             default: break
             }
-
+            
         case 1:
             switch indexPath.row {
+                // Critters Monthly
             case 0:
                 let vc = self.storyboard!.instantiateViewController(withIdentifier: "CrittersMonthlyVC") as! CrittersMonthlyTableViewController
                 vc.profileDelegate = self

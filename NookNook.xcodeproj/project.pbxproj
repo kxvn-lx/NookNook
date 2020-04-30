@@ -42,6 +42,7 @@
 		0A370BAA24446D7B00A72048 /* IconUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A370BA924446D7B00A72048 /* IconUtil.swift */; };
 		0A370BAD2444795700A72048 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A370BAC2444795700A72048 /* CategoryTableViewCell.swift */; };
 		0A370BAF2444796400A72048 /* CategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A370BAE2444796400A72048 /* CategoriesTableViewController.swift */; };
+		0A4DEC23245B0FF50017A553 /* TurnipTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4DEC22245B0FF50017A553 /* TurnipTableViewCell.swift */; };
 		0A55912F244DF0110018CF99 /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0A595B912453252D00F37E15 /* housewares.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A595B902453252D00F37E15 /* housewares.json */; };
 		0A595B932453334C00F37E15 /* wallpapers.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A595B922453334C00F37E15 /* wallpapers.json */; };
@@ -78,6 +79,7 @@
 		0AADD410244870D9004FDA33 /* fishesSecondary.json in Resources */ = {isa = PBXBuildFile; fileRef = 0AADD40F244870D9004FDA33 /* fishesSecondary.json */; };
 		0AADD4192448ADB4004FDA33 /* bugsMain.json in Resources */ = {isa = PBXBuildFile; fileRef = 0AADD4172448ADB4004FDA33 /* bugsMain.json */; };
 		0AADD41A2448ADB4004FDA33 /* fishesMain.json in Resources */ = {isa = PBXBuildFile; fileRef = 0AADD4182448ADB4004FDA33 /* fishesMain.json */; };
+		0AB4DCD3245AD44A00AB16E6 /* TurnipReminderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB4DCD2245AD44A00AB16E6 /* TurnipReminderTableViewController.swift */; };
 		0AC54AF2244DF17600AD1188 /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0AC703B42451C749008D7C77 /* CritterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC703B32451C749008D7C77 /* CritterHelper.swift */; };
 		0AC89E402449418B009ADB18 /* VillagerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC89E3F2449418B009ADB18 /* VillagerTableViewCell.swift */; };
@@ -154,6 +156,7 @@
 		0A370BA924446D7B00A72048 /* IconUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconUtil.swift; sourceTree = "<group>"; };
 		0A370BAC2444795700A72048 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		0A370BAE2444796400A72048 /* CategoriesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesTableViewController.swift; sourceTree = "<group>"; };
+		0A4DEC22245B0FF50017A553 /* TurnipTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnipTableViewCell.swift; sourceTree = "<group>"; };
 		0A559121244DCDAD0018CF99 /* RAGTextField.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RAGTextField.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A559128244DCE170018CF99 /* RAGTextField.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RAGTextField.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A55912B244DF0000018CF99 /* RAGTextField.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RAGTextField.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -191,6 +194,7 @@
 		0AADD40F244870D9004FDA33 /* fishesSecondary.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fishesSecondary.json; sourceTree = "<group>"; };
 		0AADD4172448ADB4004FDA33 /* bugsMain.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bugsMain.json; sourceTree = "<group>"; };
 		0AADD4182448ADB4004FDA33 /* fishesMain.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fishesMain.json; sourceTree = "<group>"; };
+		0AB4DCD2245AD44A00AB16E6 /* TurnipReminderTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnipReminderTableViewController.swift; sourceTree = "<group>"; };
 		0AC54AF3244DF17B00AD1188 /* RAGTextField.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RAGTextField.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AC703B32451C749008D7C77 /* CritterHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CritterHelper.swift; sourceTree = "<group>"; };
 		0AC89E3F2449418B009ADB18 /* VillagerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VillagerTableViewCell.swift; sourceTree = "<group>"; };
@@ -381,6 +385,7 @@
 		0A739A3F244B58C500002B89 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
+				0AB4DCD1245AD42F00AB16E6 /* TurnipReminder */,
 				0AF37FB42459607B004A8944 /* Helper */,
 				0A14A0052451984B0080941A /* CrittersMonthly */,
 				0A739A40244B592200002B89 /* DashboardViewController.swift */,
@@ -408,6 +413,15 @@
 				0A6862A5244D3DAB00E06C74 /* SCHeper.swift */,
 			);
 			path = Favourites;
+			sourceTree = "<group>";
+		};
+		0AB4DCD1245AD42F00AB16E6 /* TurnipReminder */ = {
+			isa = PBXGroup;
+			children = (
+				0AB4DCD2245AD44A00AB16E6 /* TurnipReminderTableViewController.swift */,
+				0A4DEC22245B0FF50017A553 /* TurnipTableViewCell.swift */,
+			);
+			path = TurnipReminder;
 			sourceTree = "<group>";
 		};
 		0AC89E3E24494174009ADB18 /* Villagers */ = {
@@ -759,6 +773,7 @@
 				0AEFF82D24470EC30032156C /* WardrobetabTableViewCell.swift in Sources */,
 				0AF37FB6245960A7004A8944 /* DetailVC+CollectionView.swift in Sources */,
 				0AFD706A2441BA7500957BE6 /* HomeViewController.swift in Sources */,
+				0AB4DCD3245AD44A00AB16E6 /* TurnipReminderTableViewController.swift in Sources */,
 				0A6B5638244FCE9400AA0B86 /* DateHelper.swift in Sources */,
 				0AEFF82F24471CD90032156C /* Wardrobe.swift in Sources */,
 				0A295B4C2444AAD0001CF828 /* Taptic.swift in Sources */,
@@ -766,6 +781,7 @@
 				0A370B6C2444467900A72048 /* PriceEngine.swift in Sources */,
 				0AF37FB124595EE9004A8944 /* DashboardVC+CollectionView.swift in Sources */,
 				0AC703B42451C749008D7C77 /* CritterHelper.swift in Sources */,
+				0A4DEC23245B0FF50017A553 /* TurnipTableViewCell.swift in Sources */,
 				0ACCF3AC2456830A00F9C62E /* WhatsNewHelper.swift in Sources */,
 				0A370BAF2444796400A72048 /* CategoriesTableViewController.swift in Sources */,
 				0A14A002245155A10080941A /* ResidentHelper.swift in Sources */,

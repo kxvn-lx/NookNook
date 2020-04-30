@@ -21,6 +21,7 @@ class DashboardViewController: UIViewController {
     internal let VARIANT_CELL = "VariantCell"
     internal let SETTING_ID = "SettingsVC"
     internal let DETAIL_ID = "Detail"
+    internal let TURNIP_ID = "TurnipVC"
     private let MARGIN: CGFloat = 10
     private var isFirstLoad = true
     

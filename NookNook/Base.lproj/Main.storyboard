@@ -224,6 +224,25 @@
             </objects>
             <point key="canvasLocation" x="3939" y="520"/>
         </scene>
+        <!--Turnip Reminder-->
+        <scene sceneID="F1A-z0-1jv">
+            <objects>
+                <tableViewController storyboardIdentifier="TurnipVC" title="Turnip Reminder" id="LO8-Ei-NAm" customClass="TurnipReminderTableViewController" customModule="NookNook" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="RaE-jV-HTx">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="LO8-Ei-NAm" id="8JF-Zx-2qn"/>
+                            <outlet property="delegate" destination="LO8-Ei-NAm" id="JgG-ZQ-GTt"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xdu-bN-AiS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3204" y="1432"/>
+        </scene>
         <!--Patch Log-->
         <scene sceneID="v25-0F-CJ6">
             <objects>

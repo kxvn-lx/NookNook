@@ -140,13 +140,6 @@ class SettingsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        switch section {
-        case 0: break
-        case 1: break
-        case 2: break
-        case 3: return "Made with ❤️ by Kevin Laminto"
-        default: return ""
-        }
         return ""
     }
     
