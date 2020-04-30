@@ -266,7 +266,7 @@ class DashboardViewController: UIViewController {
             profileImageView.heightAnchor.constraint(equalToConstant: 130),
             
             tableView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-            tableView.heightAnchor.constraint(equalToConstant: 320),
+            tableView.heightAnchor.constraint(equalToConstant: 350),
             
             residentStack.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
             

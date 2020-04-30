@@ -328,8 +328,8 @@
                 <navigationController title="Profile" automaticallyAdjustsScrollViewInsets="NO" id="cuh-tE-pQB" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="tAx-pj-I0C"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bic-cJ-PMe">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="bic-cJ-PMe">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

@@ -12,7 +12,6 @@ class HomeViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         if let tbManager = tabBar.items {
             tbManager[0].title = "Items"
             tbManager[0].image = UIImage(systemName: "house")
