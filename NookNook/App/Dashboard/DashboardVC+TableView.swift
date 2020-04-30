@@ -14,11 +14,25 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
-            let cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: FAVOURITE_CELL)
-            cell.textLabel!.text = "Favourites"
-            cell.imageView?.image = IconUtil.systemIcon(of: .starFill, weight: .regular).withRenderingMode(.alwaysTemplate)
-            cell.accessoryType = .disclosureIndicator
-            return cell
+            switch indexPath.row {
+            case 0:
+                // favourite cell
+                let cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: FAVOURITE_CELL)
+                cell.textLabel!.text = "Favourites"
+                cell.imageView?.image = IconUtil.systemIcon(of: .starFill, weight: .regular).withRenderingMode(.alwaysTemplate)
+                cell.accessoryType = .disclosureIndicator
+                return cell
+                
+            case 1:
+                // turnip cell
+                let cell = UITableViewCell(style: .default, reuseIdentifier: FAVOURITE_CELL)
+                cell.textLabel!.text = "Turnip reminder"
+                cell.imageView?.image = IconUtil.systemIcon(of: .reminder, weight: .regular).withRenderingMode(.alwaysTemplate)
+                cell.accessoryType = .disclosureIndicator
+                return cell
+            default: break
+            }
+            
         case 1:
             switch indexPath.row {
             case 0:
@@ -50,10 +64,11 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.textLabel!.text = "Total fishes caught (\(percentageCount.clean)%)"
                 cell.detailTextLabel?.text = "\(caughtFishesCount)/\(totalFishesCount)"
                 return cell
-            default: fatalError("Index out of range")
+            default: break
             }
         default: fatalError("Indexpath out of range.")
         }
+        return UITableViewCell()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -63,7 +78,7 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return 1
+            return 2
         case 1:
             return 3
         default: fatalError("Invalid rows detected.")
@@ -89,9 +104,16 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         switch indexPath.section {
         case 0:
-            let vc = self.storyboard!.instantiateViewController(withIdentifier: "FavouritesVC") as! FavouritesTableViewController
-            let navController = UINavigationController(rootViewController: vc)
-            self.present(navController, animated:true, completion: nil)
+            switch indexPath.row {
+            case 0:
+                let vc = self.storyboard!.instantiateViewController(withIdentifier: "FavouritesVC") as! FavouritesTableViewController
+                let navController = UINavigationController(rootViewController: vc)
+                self.present(navController, animated:true, completion: nil)
+            case 1:
+                print(1)
+            default: break
+            }
+
         case 1:
             switch indexPath.row {
             case 0:
@@ -103,7 +125,7 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
                 self.present(navController, animated:true, completion: nil)
             case 1: break
             case 2: break
-            default: fatalError("Invalid index")
+            default: break
             }
         default: fatalError("Invalid section detected")
         }

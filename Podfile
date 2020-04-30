@@ -7,4 +7,7 @@ target 'NookNook' do
 
   # Pods for NookNook
 	pod 'SwiftEntryKit', '1.2.3'
+	pod 'UXCam'
+	pod 'Firebase/Analytics'
+	pod 'GoogleTagManager'
 end
