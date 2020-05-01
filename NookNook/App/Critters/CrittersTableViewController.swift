@@ -292,3 +292,13 @@ extension CrittersTableViewController: UISearchResultsUpdating {
         }
     }
 }
+
+// MARK: - Tabbarcontroller delegate
+extension CrittersTableViewController: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        let tabBarIndex = tabBarController.selectedIndex
+        if tabBarIndex == 1 {
+            self.tableView.setContentOffset(CGPoint.zero, animated: true)
+        }
+    }
+}

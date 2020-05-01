@@ -311,3 +311,12 @@ extension VillagersTableViewController: UISearchResultsUpdating {
     }
 }
 
+// MARK: - Tabbarcontroller delegate
+extension VillagersTableViewController: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        let tabBarIndex = tabBarController.selectedIndex
+        if tabBarIndex == 3 {
+            self.tableView.setContentOffset(CGPoint.zero, animated: true)
+        }
+    }
+}

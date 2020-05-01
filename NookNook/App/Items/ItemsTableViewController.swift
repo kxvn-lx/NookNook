@@ -266,3 +266,13 @@ extension ItemsTableViewController: UISearchResultsUpdating {
         }
     }
 }
+
+// MARK: - Tabbarcontroller delegate
+extension ItemsTableViewController: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        let tabBarIndex = tabBarController.selectedIndex
+        if tabBarIndex == 0 {
+            self.tableView.setContentOffset(CGPoint.zero, animated: true)
+        }
+    }
+}

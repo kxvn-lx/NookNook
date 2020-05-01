@@ -252,3 +252,13 @@ extension WardrobesTableViewController: UISearchResultsUpdating {
         }
     }
 }
+
+// MARK: - Tabbarcontroller delegate
+extension WardrobesTableViewController: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        let tabBarIndex = tabBarController.selectedIndex
+        if tabBarIndex == 2 {
+            self.tableView.setContentOffset(CGPoint.zero, animated: true)
+        }
+    }
+}
