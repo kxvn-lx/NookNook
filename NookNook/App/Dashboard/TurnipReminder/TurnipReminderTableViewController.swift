@@ -8,6 +8,7 @@
 
 import UIKit
 import UserNotifications
+import SwiftEntryKit
 
 class TurnipReminderTableViewController: UITableViewController {
     
@@ -15,6 +16,8 @@ class TurnipReminderTableViewController: UITableViewController {
     private var sellCell = TurnipTableViewCell()
     
     private var notificationsManager = NotificationEngine()
+    private let notificationCenter = UNUserNotificationCenter.current()
+    private let options: UNAuthorizationOptions = [.alert, .sound]
     
     
     override func viewDidLoad() {
@@ -26,7 +29,9 @@ class TurnipReminderTableViewController: UITableViewController {
         tableView.allowsSelection = true
         tableView.separatorStyle = .none
         
-        notificationsManager.requestPermission()
+        
+        let text = "Buy reminder will be always on sunday morning (06:00 AM).\nwhile Sell reminder will be always on friday night. (06:00 PM).\n\nThis is because the app will make sure you buy it before turnip seller leave, and make sure that you sell your turnip before it's too late!"
+        self.setCustomFooterView(text: text, height: 100)
     }
     
     override func loadView() {
@@ -47,6 +52,27 @@ class TurnipReminderTableViewController: UITableViewController {
             }
         }
         sellCell.accessoryView?.tag = 1
+        
+        // check for permission
+        notificationCenter.requestAuthorization(options: options) {
+            (didAllow, error) in
+            if !didAllow {
+                DispatchQueue.main.async {
+                    let ( view, attributes ) = ModalFactory.showPopupMessage(title: "Oh no!", description: "NookNook can't send you reminders if you don't enable notifications. Please go to settings and enable it!", image: UIImage(named: "sad"))
+                    SwiftEntryKit.display(entry: view, using: attributes)
+                }
+                self.notificationsManager.checkStatus { (status) in
+                    DispatchQueue.main.async {
+                        self.buyCell.switchView.isEnabled = status ? true : false
+                        self.sellCell.switchView.isEnabled = status ? true : false
+                        self.buyCell.selectionStyle = .none
+                        self.sellCell.selectionStyle = .none
+                        self.buyCell.textLabel?.textColor = .lightGray
+                        self.sellCell.textLabel?.textColor = .lightGray
+                    }
+                }
+            }
+        }
     }
     
     
@@ -68,23 +94,7 @@ class TurnipReminderTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        switch section {
-        case 0 : return 5
-        default: return 130
-        }
-    }
-    
-    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return ""
-    }
-    
-    override func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
-        let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
-        switch section {
-        case 0: header.textLabel?.text = ""
-        default: header.textLabel?.text = "Buy reminder will be always on sunday morning (06:00 AM).\nwhile Sell reminder will be always on friday night. (06:00 PM).\n\nThis is because the app will make sure you buy it before turnip seller leave, and make sure that you sell your turnip before it's too late!"
-        }
+        return 5
     }
     
     

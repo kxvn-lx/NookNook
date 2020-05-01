@@ -49,19 +49,21 @@ extension UIViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
-    
-    var isModal: Bool {
-        if let index = navigationController?.viewControllers.firstIndex(of: self), index > 0 {
-            return false
-        } else if presentingViewController != nil {
-            return true
-        } else if navigationController?.presentingViewController?.presentedViewController == navigationController {
-            return true
-        } else if tabBarController?.presentingViewController is UITabBarController {
-            return true
-        } else {
-            return false
-        }
+}
+
+extension UITableViewController {
+    func setCustomFooterView(text: String, height: CGFloat) {
+        let customView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: height))
+        customView.backgroundColor = .clear
+        let titleLabel = UILabel(frame: CGRect(x: 30, y: 0, width: self.tableView.frame.width * 0.85, height: height))
+        titleLabel.numberOfLines = 0
+        titleLabel.lineBreakMode = .byWordWrapping
+        titleLabel.backgroundColor = .clear
+        titleLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
+        titleLabel.font = .preferredFont(forTextStyle: .caption2)
+        titleLabel.text  = text
+        customView.addSubview(titleLabel)
+        self.tableView.tableFooterView = customView
     }
 }
 

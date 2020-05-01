@@ -46,6 +46,8 @@ class SettingsTableViewController: UITableViewController {
         tableView.separatorStyle = .none
         
         self.isModalInPresentation = true
+        
+        self.setCustomFooterView(text: "Made with ❤️ by Kevin Laminto\n#NookNook", height: 50)
     }
     
     override func loadView() {
@@ -273,10 +275,7 @@ class SettingsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        switch section {
-        case 0, 1, 2: return 5
-        default: return 50
-        }
+        return 5
     }
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -288,18 +287,6 @@ class SettingsTableViewController: UITableViewController {
         case 2: header.textLabel?.text! = ""
         case 3: header.textLabel?.text! = "Danger Zone"
         default: header.textLabel?.text! = ""
-        }
-    }
-    
-    override func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
-        let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
-        switch section {
-        case 0: break
-        case 1: break
-        case 2: break
-        case 3: header.textLabel?.text = "Made with ❤️ by Kevin Laminto\n#NookNook"
-        default: header.textLabel?.text = ""
         }
     }
     

@@ -22,21 +22,6 @@ struct NotificationEngine {
 
     // MARK: - NotificationEngine methods
     
-    /// RequestPermission method will check if the app has been granted permission or not.
-    /// If not, display a meaningful message.
-    func requestPermission() {
-        notificationCenter.requestAuthorization(options: options) {
-            (didAllow, error) in
-            if !didAllow {
-                DispatchQueue.main.async {
-                    let ( view, attributes ) = ModalFactory.showPopupMessage(title: "Oh no!", description: "NookNook can't send you reminders if you don't enable notifications. Please go to settings and enable it!", image: UIImage(named: "sad"))
-                    SwiftEntryKit.display(entry: view, using: attributes)
-                }
-            }
-        }
-    }
-    
-    
     /// Create a local notification for later use.
     /// - Parameters:
     ///   - title: The title of the notification
@@ -77,4 +62,13 @@ struct NotificationEngine {
     }
     
     
+    /// Quick check if the app has access for notifications
+    /// - Parameter status: the status completion
+    func checkStatus(status: @escaping (Bool) -> Void = {_ in }) {
+        notificationCenter.getNotificationSettings { (settings) in
+          if settings.authorizationStatus != .authorized {
+            status(false)
+          }
+        }
+    }
 }
