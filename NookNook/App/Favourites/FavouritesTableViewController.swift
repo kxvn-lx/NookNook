@@ -58,7 +58,7 @@ class FavouritesTableViewController: UITableViewController {
         tableView.estimatedRowHeight = 100
         
         setBar()
-        scView = SCHelper.createSC(items: items)
+        scView = SCHelper.createSCWithTitle(title: "You can only perform swight right action on the main list.", items: items)
         sc = scView.viewWithTag(1) as? UISegmentedControl
         sc.selectedSegmentIndex = 0
         sc.addTarget(self, action:  #selector(changeSource), for: .valueChanged)
@@ -152,6 +152,7 @@ class FavouritesTableViewController: UITableViewController {
                 cell.tagLabel.isHidden = true
                 cell.label3.font = UIFont.systemFont(ofSize: cell.label3.font!.pointSize, weight: .regular)
             }
+            
         case .villagers:
             let villager: Villager
             if isFiltering {
@@ -171,10 +172,14 @@ class FavouritesTableViewController: UITableViewController {
                 cell.tagLabel.setTitle(villager.personality, for: .normal)
                 cell.label3.text = villager.bdayString
                 cell.label4.text = villager.gender
+                cell.iconLabel1.text = self.favouritesManager.residentVillagers.contains(villager) ? "R" : ""
                 
                 cell.tagLabel.isHidden = false
                 cell.label3.font = UIFont.systemFont(ofSize: cell.label3.font!.pointSize, weight: .semibold)
+                cell.iconLabel2.isHidden = true
+                cell.iconLabel1.isHidden = self.favouritesManager.residentVillagers.contains(villager) ? false : true
             }
+            
         case.wardrobes:
             let wardrobe: Wardrobe
             if isFiltering {
@@ -286,7 +291,7 @@ class FavouritesTableViewController: UITableViewController {
         let close = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(closeTapped))
         navigationItem.leftBarButtonItem = close
         
-                UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: ColourUtil.dirt1.rawValue)!]
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: ColourUtil.dirt1.rawValue)!]
     }
     
     @objc private func closeTapped() {

@@ -81,6 +81,8 @@ class FavouriteTableViewCell: UITableViewCell {
 
         
         imgView.addSubview(tagLabel)
+        imgView.addSubview(iconLabel1)
+        imgView.addSubview(iconLabel2)
         
         nameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -169,11 +171,11 @@ class FavouriteTableViewCell: UITableViewCell {
             tagLabel.leftAnchor.constraint(equalTo: imgView.leftAnchor),
             tagLabel.topAnchor.constraint(equalTo: imgView.topAnchor),
             
-//            iconLabel1.rightAnchor.constraint(equalTo: imgView.rightAnchor),
-//            iconLabel1.bottomAnchor.constraint(equalTo: imgView.bottomAnchor),
-//
-//            iconLabel2.bottomAnchor.constraint(equalTo: imgView.bottomAnchor),
-//            iconLabel2.leftAnchor.constraint(equalTo: imgView.leftAnchor)
+            iconLabel1.rightAnchor.constraint(equalTo: imgView.rightAnchor),
+            iconLabel1.bottomAnchor.constraint(equalTo: imgView.bottomAnchor),
+
+            iconLabel2.bottomAnchor.constraint(equalTo: imgView.bottomAnchor),
+            iconLabel2.leftAnchor.constraint(equalTo: imgView.leftAnchor)
             
         ])
     }

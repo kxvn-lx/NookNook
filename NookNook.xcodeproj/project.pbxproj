@@ -88,6 +88,7 @@
 		0ACCF3AC2456830A00F9C62E /* WhatsNewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACCF3AB2456830A00F9C62E /* WhatsNewHelper.swift */; };
 		0AEC5016245BA7B7004EC912 /* DynamicSizeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEC5015245BA7B7004EC912 /* DynamicSizeTableView.swift */; };
 		0AEC501A245BAABD004EC912 /* NotificationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEC5019245BAABD004EC912 /* NotificationEngine.swift */; };
+		0AEC501C245BF56B004EC912 /* NookTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEC501B245BF56B004EC912 /* NookTabBarController.swift */; };
 		0AEF52642452742E0056286B /* PatchLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEF52632452742E0056286B /* PatchLogViewController.swift */; };
 		0AEFF82B24470EAF0032156C /* WardrobesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEFF82A24470EAF0032156C /* WardrobesTableViewController.swift */; };
 		0AEFF82D24470EC30032156C /* WardrobetabTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEFF82C24470EC30032156C /* WardrobetabTableViewCell.swift */; };
@@ -204,6 +205,7 @@
 		0ACCF3AB2456830A00F9C62E /* WhatsNewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsNewHelper.swift; sourceTree = "<group>"; };
 		0AEC5015245BA7B7004EC912 /* DynamicSizeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicSizeTableView.swift; sourceTree = "<group>"; };
 		0AEC5019245BAABD004EC912 /* NotificationEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationEngine.swift; sourceTree = "<group>"; };
+		0AEC501B245BF56B004EC912 /* NookTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NookTabBarController.swift; sourceTree = "<group>"; };
 		0AEF52632452742E0056286B /* PatchLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchLogViewController.swift; sourceTree = "<group>"; };
 		0AEFF82A24470EAF0032156C /* WardrobesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WardrobesTableViewController.swift; sourceTree = "<group>"; };
 		0AEFF82C24470EC30032156C /* WardrobetabTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WardrobetabTableViewCell.swift; sourceTree = "<group>"; };
@@ -521,6 +523,7 @@
 				0A295B49244494F9001CF828 /* Categories.swift */,
 				0AA3616D244C520500D326AF /* SVHelper.swift */,
 				0A0B89562457A30A00EABF29 /* ModalFactory.swift */,
+				0AEC501B245BF56B004EC912 /* NookTabBarController.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -742,6 +745,7 @@
 				0A23BBCC244ACE94009B5178 /* SortEngine.swift in Sources */,
 				0A295B4A244494F9001CF828 /* Categories.swift in Sources */,
 				0A14A0072451986B0080941A /* CrittersMonthlyTableViewController.swift in Sources */,
+				0AEC501C245BF56B004EC912 /* NookTabBarController.swift in Sources */,
 				0A370B5F2443223D00A72048 /* VC+.swift in Sources */,
 				0A23BBD0244AE1D5009B5178 /* Fruits.swift in Sources */,
 				0AEF52642452742E0056286B /* PatchLogViewController.swift in Sources */,
