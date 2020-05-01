@@ -33,7 +33,7 @@ extension UIViewController {
         navigationController?.navigationBar.standardAppearance = navBarAppearance
         navigationController?.navigationBar.compactAppearance = navBarAppearance
         navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
-
+        
         navigationController?.navigationBar.prefersLargeTitles = prefLargeTitle
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.tintColor = tintColour
@@ -58,7 +58,6 @@ extension UITableViewController {
         let titleLabel = UILabel(frame: CGRect(x: 30, y: 0, width: self.tableView.frame.width * 0.85, height: height))
         titleLabel.numberOfLines = 0
         titleLabel.lineBreakMode = .byWordWrapping
-        titleLabel.backgroundColor = .clear
         titleLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
         titleLabel.font = .preferredFont(forTextStyle: .caption2)
         titleLabel.text  = text
@@ -70,10 +69,10 @@ extension UITableViewController {
 
 // MARK: - UIStackView
 extension UIStackView {
-    func addBackground(color: UIColor, cornerRadius: CGFloat) {
+    func addBackground(color: UIColor, cornerRadius: CGFloat? = 0) {
         let subView = UIView(frame: bounds)
         subView.backgroundColor = color
-        subView.layer.cornerRadius = cornerRadius
+        subView.layer.cornerRadius = cornerRadius!
         subView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         insertSubview(subView, at: 0)
     }

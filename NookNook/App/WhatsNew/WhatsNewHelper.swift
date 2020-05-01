@@ -19,7 +19,7 @@ struct WhatsNewHelper {
     private var favouriteIcon = IconUtil.systemIcon(of: .star, weight: .light)
     private var birthdayIcon = IconUtil.systemIcon(of: .birthday, weight: .light)
     private var critterIcon = IconUtil.systemIcon(of: .critter, weight: .light)
-    private var profileIcon = IconUtil.systemIcon(of: .dashbnoard, weight: .light)
+    private var profileIcon = IconUtil.systemIcon(of: .dashboard, weight: .light)
     
     // MARK: Initialiser
     init() {

@@ -418,7 +418,6 @@
 			children = (
 				0A97C2FA244C95290062B136 /* FavouritesTableViewController.swift */,
 				0A97C2FC244C95360062B136 /* FavouriteTableViewCell.swift */,
-				0A6862A5244D3DAB00E06C74 /* SCHeper.swift */,
 			);
 			path = Favourites;
 			sourceTree = "<group>";
@@ -514,6 +513,7 @@
 		0AFD70652441B85F00957BE6 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				0A6862A5244D3DAB00E06C74 /* SCHeper.swift */,
 				0A6B5637244FCE9400AA0B86 /* DateHelper.swift */,
 				0A23BBCF244AE1D5009B5178 /* Fruits.swift */,
 				0A370B5E2443223D00A72048 /* VC+.swift */,

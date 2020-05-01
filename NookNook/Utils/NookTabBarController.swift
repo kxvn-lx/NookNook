@@ -13,8 +13,8 @@ class NookTabBarController: UITabBarController {
     private var bounceAnimation: CAKeyframeAnimation = {
         let bounceAnimation = CAKeyframeAnimation(keyPath: "transform.scale")
         bounceAnimation.values = [1.0, 0.9, 1.0]
-        bounceAnimation.duration = TimeInterval(0.15)
-        bounceAnimation.calculationMode = CAAnimationCalculationMode.cubic
+        bounceAnimation.duration = TimeInterval(0.125)
+        bounceAnimation.calculationMode = .cubic
         return bounceAnimation
     }()
 

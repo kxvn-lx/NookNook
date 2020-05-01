@@ -98,7 +98,6 @@ class TurnipReminderTableViewController: UITableViewController {
     }
     
     
-    
     // MARK: - Setup views
     private func setBar() {
         self.configureNavigationBar(title: "Turnip reminder", preferredLargeTitle: false)

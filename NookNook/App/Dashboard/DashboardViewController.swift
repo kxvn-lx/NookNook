@@ -85,6 +85,7 @@ class DashboardViewController: UIViewController {
             }
             isFirstLoad = false
         }
+        self.tabBarController?.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -377,3 +378,14 @@ extension DashboardViewController: ProfileDelegate {
         self.dismiss(animated: true, completion: nil)
     }
 }
+
+// MARK: - Tabbarcontroller delegate
+extension DashboardViewController: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        let tabBarIndex = tabBarController.selectedIndex
+        if tabBarIndex == 4 {
+            self.scrollView.setContentOffset(CGPoint.zero, animated: true)
+        }
+    }
+}
+
