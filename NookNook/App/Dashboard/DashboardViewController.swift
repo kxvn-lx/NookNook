@@ -113,10 +113,8 @@ class DashboardViewController: UIViewController {
     
     // MARK: - Modify UI
     private func setBar() {
-        self.configureNavigationBar(largeTitleColor: UIColor(named: ColourUtil.dirt1.rawValue)!, backgoundColor: UIColor(named: ColourUtil.cream1.rawValue)!, tintColor: UIColor(named: ColourUtil.dirt1.rawValue)!, title: "Dashboard", preferredLargeTitle: true)
-        
+        self.configureNavigationBar(title: "Dashboard")
         self.view.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
-        
         self.view.tintColor = .white
         
         let button: UIButton = UIButton(type: .custom)
@@ -128,6 +126,7 @@ class DashboardViewController: UIViewController {
         let barButton = UIBarButtonItem(customView: button)
         self.navigationItem.rightBarButtonItem = barButton
     }
+    
     
     @objc private func settingsButtonPressed() {
         let vc = self.storyboard!.instantiateViewController(withIdentifier: SETTING_ID) as! SettingsTableViewController

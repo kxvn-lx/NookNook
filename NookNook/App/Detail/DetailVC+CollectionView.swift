@@ -30,7 +30,7 @@ extension DetailViewController: UICollectionViewDelegateFlowLayout, UICollection
             
         default: fatalError("Attempt to create cells from an unkown group origin or, groupOrigin is nul!")
         }
-
+        
         return 0
     }
     
@@ -52,6 +52,23 @@ extension DetailViewController: UICollectionViewDelegateFlowLayout, UICollection
         }
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch groupOrigin {
+        case .items:
+            guard let selectedVariant = itemObj.variants?[indexPath.row] else {
+                return
+            }
+            self.detailImageView.sd_setImage(with: ImageEngine.parseNPURL(with: selectedVariant, category: itemObj.category), placeholderImage: UIImage(named: "placeholder"))
+        case .wardrobes:
+            guard let selectedVariant = wardrobeObj.variants?[indexPath.row] else {
+                return
+            }
+            self.detailImageView.sd_setImage(with: ImageEngine.parseNPURL(with: selectedVariant, category: wardrobeObj.category), placeholderImage: UIImage(named: "placeholder"))
+        default: break
+        }
+        Taptic.lightTaptic()
     }
 }
 

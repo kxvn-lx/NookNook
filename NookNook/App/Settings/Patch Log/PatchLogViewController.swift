@@ -23,6 +23,10 @@ class PatchLogViewController: UIViewController {
         v1.0.0 (30042020)
         - Improved app performance
         - Fixed minor UI bugs
+        - Animated tab bars!
+        - Tap any tab bar to go back to the top of the table list.
+        - You can now tap any variants of items or wardrobe! (if exist)
+        - Added turnip reminders! You can no longer forget to buy or sell them!
 
         v1.0.0 (290420201)
         - Fixed 'critters this month' glitch on certain region.

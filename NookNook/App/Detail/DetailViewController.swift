@@ -34,7 +34,7 @@ class DetailViewController: UIViewController {
     
     internal var groupOrigin: DataEngine.Group!
     
-    private var detailImageView: UIImageView!
+    internal var detailImageView: UIImageView!
     private var titleLabel: UILabel!
     private var subtitleLabel: UILabel!
     private var sourceNoteLabel: UILabel!
@@ -467,11 +467,11 @@ class DetailViewController: UIViewController {
     }
     
     private func setBar() {
-        self.configureNavigationBar(title: "Detail", preferredLargeTitle: false)
+        self.configureNavigationBar(title: "Turnip reminder", preferredLargeTitle: false)
         self.view.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
         
-        let cancel = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(closeTapped))
-        navigationItem.rightBarButtonItems = [cancel]
+        let close = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(closeTapped))
+        navigationItem.leftBarButtonItem = close
     }
     
     @objc private func closeTapped() {
