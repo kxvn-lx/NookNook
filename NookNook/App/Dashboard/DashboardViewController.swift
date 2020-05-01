@@ -55,7 +55,7 @@ class DashboardViewController: UIViewController {
     // MARK: - Table view properties
     internal let CRITTER_CELL = "CritterCell"
     internal let FAVOURITE_CELL = "FavouriteCell"
-    internal var tableView: UITableView!
+    internal var tableView: DynamicSizeTableView!
     
     
     override func viewDidLoad() {
@@ -231,7 +231,7 @@ class DashboardViewController: UIViewController {
         residentStack.addArrangedSubview(variationImageCollectionView)
         
         // Table view
-        tableView = UITableView(frame: CGRect(x: 0, y: 0, width:0, height: 0), style: .grouped)
+        tableView = DynamicSizeTableView(frame: .zero, style: .grouped)
         tableView.backgroundColor = .clear
         tableView.dataSource = self
         tableView.delegate = self
@@ -267,7 +267,6 @@ class DashboardViewController: UIViewController {
             profileImageView.heightAnchor.constraint(equalToConstant: 130),
             
             tableView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-            tableView.heightAnchor.constraint(equalToConstant: 400),
             
             residentStack.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
             

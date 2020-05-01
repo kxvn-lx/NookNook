@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import UserNotifications
 
 class TurnipReminderTableViewController: UITableViewController {
     
     private var buyCell = TurnipTableViewCell()
     private var sellCell = TurnipTableViewCell()
     
+    private var notificationsManager = NotificationEngine()
     
     
     override func viewDidLoad() {
@@ -23,14 +25,28 @@ class TurnipReminderTableViewController: UITableViewController {
         tableView.estimatedRowHeight = 50
         tableView.allowsSelection = true
         tableView.separatorStyle = .none
+        
+        notificationsManager.requestPermission()
     }
     
     override func loadView() {
         super.loadView()
         
         buyCell = setupCell(text: "Buy reminder")
-        sellCell = setupCell(text: "Sell reminder")
+        notificationsManager.hasNotification(identifer: .buy) { (isPresent) in
+            DispatchQueue.main.async {
+                self.buyCell.switchView.isOn = isPresent ? true : false
+            }
+        }
+        buyCell.accessoryView?.tag = 0
         
+        sellCell = setupCell(text: "Sell reminder")
+        notificationsManager.hasNotification(identifer: .sell) { (isPresent) in
+            DispatchQueue.main.async {
+                self.sellCell.switchView.isOn = isPresent ? true : false
+            }
+        }
+        sellCell.accessoryView?.tag = 1
     }
     
     
@@ -54,7 +70,7 @@ class TurnipReminderTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         switch section {
         case 0 : return 5
-        default: return 50
+        default: return 130
         }
     }
     
@@ -67,7 +83,7 @@ class TurnipReminderTableViewController: UITableViewController {
         header.textLabel?.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
         switch section {
         case 0: header.textLabel?.text = ""
-        default: header.textLabel?.text = "Buy reminder will be always on sunday morning. while Sell reminder will be always on friday night."
+        default: header.textLabel?.text = "Buy reminder will be always on sunday morning (06:00 AM).\nwhile Sell reminder will be always on friday night. (06:00 PM).\n\nThis is because the app will make sure you buy it before turnip seller leave, and make sure that you sell your turnip before it's too late!"
         }
     }
     
@@ -96,6 +112,7 @@ class TurnipReminderTableViewController: UITableViewController {
         
         return cell
     }
+    
     
     
     

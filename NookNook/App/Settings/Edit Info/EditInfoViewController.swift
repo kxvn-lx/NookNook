@@ -82,6 +82,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         }
 
     }
+    
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion:nil)
     }

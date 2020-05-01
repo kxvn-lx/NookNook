@@ -86,6 +86,8 @@
 		0AC89E422449419A009ADB18 /* VillagersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC89E412449419A009ADB18 /* VillagersTableViewController.swift */; };
 		0ACCF3A924567BB200F9C62E /* WhatsNewKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0ACCF3A824567BB200F9C62E /* WhatsNewKit */; };
 		0ACCF3AC2456830A00F9C62E /* WhatsNewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACCF3AB2456830A00F9C62E /* WhatsNewHelper.swift */; };
+		0AEC5016245BA7B7004EC912 /* DynamicSizeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEC5015245BA7B7004EC912 /* DynamicSizeTableView.swift */; };
+		0AEC501A245BAABD004EC912 /* NotificationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEC5019245BAABD004EC912 /* NotificationEngine.swift */; };
 		0AEF52642452742E0056286B /* PatchLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEF52632452742E0056286B /* PatchLogViewController.swift */; };
 		0AEFF82B24470EAF0032156C /* WardrobesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEFF82A24470EAF0032156C /* WardrobesTableViewController.swift */; };
 		0AEFF82D24470EC30032156C /* WardrobetabTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEFF82C24470EC30032156C /* WardrobetabTableViewCell.swift */; };
@@ -200,6 +202,8 @@
 		0AC89E3F2449418B009ADB18 /* VillagerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VillagerTableViewCell.swift; sourceTree = "<group>"; };
 		0AC89E412449419A009ADB18 /* VillagersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VillagersTableViewController.swift; sourceTree = "<group>"; };
 		0ACCF3AB2456830A00F9C62E /* WhatsNewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsNewHelper.swift; sourceTree = "<group>"; };
+		0AEC5015245BA7B7004EC912 /* DynamicSizeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicSizeTableView.swift; sourceTree = "<group>"; };
+		0AEC5019245BAABD004EC912 /* NotificationEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationEngine.swift; sourceTree = "<group>"; };
 		0AEF52632452742E0056286B /* PatchLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchLogViewController.swift; sourceTree = "<group>"; };
 		0AEFF82A24470EAF0032156C /* WardrobesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WardrobesTableViewController.swift; sourceTree = "<group>"; };
 		0AEFF82C24470EC30032156C /* WardrobetabTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WardrobetabTableViewCell.swift; sourceTree = "<group>"; };
@@ -250,6 +254,7 @@
 				0A370B6B2444467900A72048 /* PriceEngine.swift */,
 				0A887F9024508F280044EAEA /* UDHelper.swift */,
 				0A149FF124512E7B0080941A /* ImagePersistEngine.swift */,
+				0AEC5019245BAABD004EC912 /* NotificationEngine.swift */,
 			);
 			path = Engine;
 			sourceTree = "<group>";
@@ -392,6 +397,7 @@
 				0A739A42244BE55600002B89 /* ResidentCollectionViewCell.swift */,
 				0AF37FB024595EE9004A8944 /* DashboardVC+CollectionView.swift */,
 				0AF37FB22459603F004A8944 /* DashboardVC+TableView.swift */,
+				0AEC5015245BA7B7004EC912 /* DynamicSizeTableView.swift */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -762,6 +768,7 @@
 				0A26E7B5244758C500D80594 /* Villager.swift in Sources */,
 				0AEFF82B24470EAF0032156C /* WardrobesTableViewController.swift in Sources */,
 				0A72C3752445FD93009FA0D4 /* VariantCollectionViewCell.swift in Sources */,
+				0AEC5016245BA7B7004EC912 /* DynamicSizeTableView.swift in Sources */,
 				0A65203124499B6400692E74 /* PersistEngine.swift in Sources */,
 				0A3642862446CC070081315A /* TimeMonthEngine.swift in Sources */,
 				0A72C3712445AD8F009FA0D4 /* DetailViewController.swift in Sources */,
@@ -785,6 +792,7 @@
 				0ACCF3AC2456830A00F9C62E /* WhatsNewHelper.swift in Sources */,
 				0A370BAF2444796400A72048 /* CategoriesTableViewController.swift in Sources */,
 				0A14A002245155A10080941A /* ResidentHelper.swift in Sources */,
+				0AEC501A245BAABD004EC912 /* NotificationEngine.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
