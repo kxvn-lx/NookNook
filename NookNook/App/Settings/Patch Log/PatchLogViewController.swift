@@ -69,13 +69,13 @@ class PatchLogViewController: UIViewController {
         titleLabel.numberOfLines = 0
         titleLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         titleLabel.font = UIFont.systemFont(ofSize: titleLabel.font.pointSize, weight: .bold)
-        titleLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)
+        titleLabel.textColor = .dirt1
         
         patchLabel = UILabel()
         patchLabel.translatesAutoresizingMaskIntoConstraints = false
         patchLabel.numberOfLines = 0
         patchLabel.font = UIFont.preferredFont(forTextStyle: .body)
-        patchLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)
+        patchLabel.textColor = .dirt1
         
         mStackView.addArrangedSubview(titleLabel, withMargin: UIEdgeInsets(top: MARGIN * 2, left: MARGIN * 2, bottom: 0, right: -MARGIN * 2))
         mStackView.addArrangedSubview(patchLabel, withMargin: UIEdgeInsets(top: MARGIN * 2, left: MARGIN * 2, bottom: 0, right: -MARGIN * 2))
@@ -98,9 +98,8 @@ class PatchLogViewController: UIViewController {
     }
     
     private func setBar() {
-        self.configureNavigationBar(largeTitleColor: UIColor(named: ColourUtil.dirt1.rawValue)!, backgoundColor: UIColor(named: ColourUtil.cream1.rawValue)!, tintColor: UIColor(named: ColourUtil.dirt1.rawValue)!, title: "Patch Log", preferredLargeTitle: false)
-        
-        self.view.backgroundColor = UIColor(named: ColourUtil.cream2.rawValue)
+        self.configureNavigationBar(title: "Patch Log", preferredLargeTitle: false)
+        self.view.backgroundColor = .cream2
         
         let close = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(closeTapped))
         navigationItem.leftBarButtonItem = close

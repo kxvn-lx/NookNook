@@ -24,7 +24,6 @@
 		0A36428024469C600081315A /* bugsSecondary.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A36427F24469C600081315A /* bugsSecondary.json */; };
 		0A3642862446CC070081315A /* TimeMonthEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3642852446CC070081315A /* TimeMonthEngine.swift */; };
 		0A370B5F2443223D00A72048 /* VC+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A370B5E2443223D00A72048 /* VC+.swift */; };
-		0A370B61244322F100A72048 /* ColourUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A370B60244322F100A72048 /* ColourUtil.swift */; };
 		0A370B6C2444467900A72048 /* PriceEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A370B6B2444467900A72048 /* PriceEngine.swift */; };
 		0A370B6E24444BD800A72048 /* DataEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A370B6D24444BD800A72048 /* DataEngine.swift */; };
 		0A370B8D2444543200A72048 /* accessories.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A370B702444543000A72048 /* accessories.json */; };
@@ -141,7 +140,6 @@
 		0A36427F24469C600081315A /* bugsSecondary.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bugsSecondary.json; sourceTree = "<group>"; };
 		0A3642852446CC070081315A /* TimeMonthEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeMonthEngine.swift; sourceTree = "<group>"; };
 		0A370B5E2443223D00A72048 /* VC+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VC+.swift"; sourceTree = "<group>"; };
-		0A370B60244322F100A72048 /* ColourUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColourUtil.swift; sourceTree = "<group>"; };
 		0A370B6B2444467900A72048 /* PriceEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceEngine.swift; sourceTree = "<group>"; };
 		0A370B6D24444BD800A72048 /* DataEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataEngine.swift; sourceTree = "<group>"; };
 		0A370B702444543000A72048 /* accessories.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = accessories.json; sourceTree = "<group>"; };
@@ -517,7 +515,6 @@
 				0A6B5637244FCE9400AA0B86 /* DateHelper.swift */,
 				0A23BBCF244AE1D5009B5178 /* Fruits.swift */,
 				0A370B5E2443223D00A72048 /* VC+.swift */,
-				0A370B60244322F100A72048 /* ColourUtil.swift */,
 				0A370BA924446D7B00A72048 /* IconUtil.swift */,
 				0A295B4B2444AAD0001CF828 /* Taptic.swift */,
 				0A295B49244494F9001CF828 /* Categories.swift */,
@@ -764,7 +761,6 @@
 				0A370B6E24444BD800A72048 /* DataEngine.swift in Sources */,
 				0AFD705124419DD300957BE6 /* SceneDelegate.swift in Sources */,
 				0A370BAA24446D7B00A72048 /* IconUtil.swift in Sources */,
-				0A370B61244322F100A72048 /* ColourUtil.swift in Sources */,
 				0A97C2FB244C95290062B136 /* FavouritesTableViewController.swift in Sources */,
 				0AFD70752441D9BF00957BE6 /* Item.swift in Sources */,
 				0A887F8D2450890C0044EAEA /* FruitsTableViewController.swift in Sources */,

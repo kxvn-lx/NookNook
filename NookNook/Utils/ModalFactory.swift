@@ -13,10 +13,10 @@ import SwiftEntryKit
 
 struct ModalFactory {
     
-    private static var cream1 = UIColor(named: ColourUtil.cream1.rawValue)!
-    private static var grass1 = UIColor(named: ColourUtil.grass1.rawValue)!
-    private static var dirt1 = UIColor(named: ColourUtil.dirt1.rawValue)!
-    static var grassBtn = UIColor(named: ColourUtil.grassBtn.rawValue)!
+    private static var cream1 = UIColor.cream1
+    private static var grass1 = UIColor.grass1
+    private static var dirt1 = UIColor.dirt1
+    static var grassBtn = UIColor.grassBtn
     
     private static func getAttr() -> EKAttributes {
         var attributes = EKAttributes.centerFloat

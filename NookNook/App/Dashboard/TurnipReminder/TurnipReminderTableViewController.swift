@@ -32,6 +32,14 @@ class TurnipReminderTableViewController: UITableViewController {
         
         let text = "Buy reminder will be always on sunday morning (06:00 AM).\nwhile Sell reminder will be always on friday night. (06:00 PM).\n\nThis is because the app will make sure you buy it before turnip seller leave, and make sure that you sell your turnip before it's too late!"
         self.setCustomFooterView(text: text, height: 100)
+        
+        let frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 50)
+        let headerImageView = UIImageView(frame: frame)
+        let image: UIImage = IconUtil.systemIcon(of: .reminder, weight: .regular).withRenderingMode(.alwaysTemplate)
+        headerImageView.image = image
+        headerImageView.contentMode = .scaleAspectFit
+//        headerImageView.tintColor = UIColor.dirt1
+        self.tableView.tableHeaderView = headerImageView
     }
     
     override func loadView() {
@@ -101,7 +109,7 @@ class TurnipReminderTableViewController: UITableViewController {
     // MARK: - Setup views
     private func setBar() {
         self.configureNavigationBar(title: "Turnip reminder", preferredLargeTitle: false)
-        self.view.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
+        self.view.backgroundColor = .cream1
         
         let close = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(closeTapped))
         navigationItem.leftBarButtonItem = close
@@ -115,9 +123,9 @@ class TurnipReminderTableViewController: UITableViewController {
     private func setupCell(text: String) -> TurnipTableViewCell {
         let cell = TurnipTableViewCell(style: .value1, reuseIdentifier: "cell")
         
-        cell.backgroundColor = UIColor(named: ColourUtil.cream2.rawValue)
+        cell.backgroundColor = .cream2
         cell.textLabel?.text = text
-        cell.textLabel?.textColor =  UIColor(named: ColourUtil.dirt1.rawValue)
+        cell.textLabel?.textColor = .dirt1
         
         return cell
     }

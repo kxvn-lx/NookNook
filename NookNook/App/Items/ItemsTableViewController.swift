@@ -162,7 +162,7 @@ class ItemsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
+        cell.backgroundColor = .cream1
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -170,8 +170,8 @@ class ItemsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        (view as! UITableViewHeaderFooterView).contentView.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
-        (view as! UITableViewHeaderFooterView).textLabel?.textColor = UIColor(named: ColourUtil.dirt1.rawValue)
+        (view as! UITableViewHeaderFooterView).contentView.backgroundColor = .cream1
+        (view as! UITableViewHeaderFooterView).textLabel?.textColor = .dirt1
     }
     
     // swipe right function
@@ -196,7 +196,7 @@ class ItemsTableViewController: UITableViewController {
             success(true)
         })
         favouriteAction.image = self.favouritesManager.items.contains(item) ? IconUtil.systemIcon(of: .starFill, weight: .thin) : IconUtil.systemIcon(of: .star, weight: .thin)
-        favouriteAction.backgroundColor = UIColor(named: ColourUtil.grass1.rawValue)
+        favouriteAction.backgroundColor = .grass1
         
         return UISwipeActionsConfiguration(actions: [favouriteAction])
         
@@ -204,9 +204,9 @@ class ItemsTableViewController: UITableViewController {
     
     // MARK: - Modify UI
     private func setBar() {
-        tabBarController?.tabBar.barTintColor = UIColor(named: ColourUtil.grass1.rawValue)
+        tabBarController?.tabBar.barTintColor = .grass1
         self.configureNavigationBar(title: "Items")
-        self.tableView.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
+        self.tableView.backgroundColor = .cream1
         
         tabBarController?.tabBar.tintColor = .white
         
@@ -219,7 +219,7 @@ class ItemsTableViewController: UITableViewController {
         let barButton = UIBarButtonItem(customView: button)
         self.navigationItem.rightBarButtonItem = barButton
         
-        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: ColourUtil.dirt1.rawValue)!]
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.dirt1]
     }
     
     @objc private func filterButtonPressed() {

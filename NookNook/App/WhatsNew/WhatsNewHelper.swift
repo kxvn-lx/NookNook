@@ -58,7 +58,7 @@ struct WhatsNewHelper {
         // MARK: Configurations
         var configuration = WhatsNewViewController.Configuration()
         
-        configuration.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue )!
+        configuration.backgroundColor = .cream1
         configuration.apply(animation: .slideRight)
         
         
@@ -66,9 +66,9 @@ struct WhatsNewHelper {
         configuration.titleView.secondaryColor = .init(
             startIndex: 11,
             length: 8,
-            color: UIColor(named: ColourUtil.grass1.rawValue )!
+            color: .grass1
         )
-        configuration.titleView.titleColor = UIColor(named: ColourUtil.dirt1.rawValue )!
+        configuration.titleView.titleColor = .dirt1
         configuration.titleView.titleFont = UIFont.preferredFont(forTextStyle: .title1)
         configuration.titleView.titleFont = .systemFont(ofSize: configuration.titleView.titleFont.pointSize, weight: .bold)
         configuration.titleView.titleAlignment = .left
@@ -78,8 +78,8 @@ struct WhatsNewHelper {
         configuration.itemsView.titleFont = .preferredFont(forTextStyle: .callout)
         configuration.itemsView.titleFont = .systemFont(ofSize: configuration.itemsView.titleFont.pointSize, weight: .semibold)
         configuration.itemsView.subtitleFont = .preferredFont(forTextStyle: .subheadline)
-        configuration.itemsView.titleColor = UIColor(named: ColourUtil.dirt1.rawValue )!
-        configuration.itemsView.subtitleColor = UIColor(named: ColourUtil.dirt1.rawValue )!.withAlphaComponent(0.5)
+        configuration.itemsView.titleColor = .dirt1
+        configuration.itemsView.subtitleColor = UIColor.dirt1.withAlphaComponent(0.5)
         configuration.itemsView.layout = .left
         configuration.itemsView.contentMode = .top
         
@@ -97,7 +97,7 @@ struct WhatsNewHelper {
             title: "Get started",
             action: .dismiss,
             hapticFeedback: .notification(.success),
-            backgroundColor: UIColor(named: ColourUtil.grass1.rawValue)!,
+            backgroundColor: .grass1,
             titleColor: .white,
             cornerRadius: 2.5,
             animation: .slideRight

@@ -154,7 +154,7 @@ class VillagersTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
+        cell.backgroundColor = .cream1
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -162,8 +162,8 @@ class VillagersTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        (view as! UITableViewHeaderFooterView).contentView.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
-        (view as! UITableViewHeaderFooterView).textLabel?.textColor = UIColor(named: ColourUtil.dirt1.rawValue)
+        (view as! UITableViewHeaderFooterView).contentView.backgroundColor = .cream1
+        (view as! UITableViewHeaderFooterView).textLabel?.textColor = .dirt1
     }
     
     // swipe right function
@@ -224,8 +224,8 @@ class VillagersTableViewController: UITableViewController {
                 success(false)
             }
         })
-        favouriteAction.backgroundColor = UIColor(named: ColourUtil.grass1.rawValue)
-        residentAction.backgroundColor = UIColor(named: ColourUtil.gold1.rawValue)
+        favouriteAction.backgroundColor = .grass1
+        residentAction.backgroundColor = .gold1
         
         return UISwipeActionsConfiguration(actions: [favouriteAction, residentAction])
         
@@ -234,9 +234,9 @@ class VillagersTableViewController: UITableViewController {
     
     // MARK: - Modify UI
     private func setBar() {
-        tabBarController?.tabBar.barTintColor = UIColor(named: ColourUtil.grass1.rawValue)
+        tabBarController?.tabBar.barTintColor = .grass1
         self.configureNavigationBar(title: "Villagers")
-        self.tableView.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
+        self.tableView.backgroundColor = .cream1
         
         tabBarController?.tabBar.tintColor = .white
         
@@ -250,7 +250,7 @@ class VillagersTableViewController: UITableViewController {
         let barButton = UIBarButtonItem(customView: button)
         self.navigationItem.leftBarButtonItem = barButton
         
-        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: ColourUtil.dirt1.rawValue)!]
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.dirt1]
     }
     
     @objc private func sortButtonPressed() {

@@ -59,8 +59,8 @@ class CritterTableViewCell: UITableViewCell {
         isCaughtLabel.font = UIFont.preferredFont(forTextStyle: .caption2)
         isCaughtLabel.font = UIFont.systemFont(ofSize: isCaughtLabel.font.pointSize, weight: .semibold)
         isCaughtLabel.textColor =  .white
-        isCaughtLabel.layer.borderColor = UIColor(named: ColourUtil.gold1.rawValue)?.cgColor
-        isCaughtLabel.backgroundColor = UIColor(named: ColourUtil.gold1.rawValue)
+        isCaughtLabel.layer.borderColor = UIColor.gold1.cgColor
+        isCaughtLabel.backgroundColor = .gold1
         isCaughtLabel.layer.borderWidth = 1
         isCaughtLabel.layer.cornerRadius = 2.5
         isCaughtLabel.clipsToBounds = true
@@ -72,8 +72,8 @@ class CritterTableViewCell: UITableViewCell {
         isDonatedLabel.font = UIFont.preferredFont(forTextStyle: .caption2)
         isDonatedLabel.font = UIFont.systemFont(ofSize: isDonatedLabel.font.pointSize, weight: .semibold)
         isDonatedLabel.textColor =  .white
-        isDonatedLabel.layer.borderColor = UIColor(named: ColourUtil.grass1.rawValue)?.cgColor
-        isDonatedLabel.backgroundColor = UIColor(named: ColourUtil.grass1.rawValue)
+        isDonatedLabel.layer.borderColor = UIColor.grass1.cgColor
+        isDonatedLabel.backgroundColor = .grass1
         isDonatedLabel.layer.borderWidth = 1
         isDonatedLabel.layer.cornerRadius = 2.5
         isDonatedLabel.clipsToBounds = true
@@ -89,32 +89,32 @@ class CritterTableViewCell: UITableViewCell {
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.numberOfLines = 0
         nameLabel.font = UIFont.systemFont(ofSize: nameLabel.font!.pointSize, weight: .semibold)
-        nameLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)
+        nameLabel.textColor = .dirt1
         
         
         obtainedFromLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         obtainedFromLabel.translatesAutoresizingMaskIntoConstraints = false
         obtainedFromLabel.numberOfLines = 0
         obtainedFromLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
-        obtainedFromLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
+        obtainedFromLabel.textColor = UIColor.dirt1.withAlphaComponent(0.5)
         
         weatherLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         weatherLabel.translatesAutoresizingMaskIntoConstraints = false
         weatherLabel.numberOfLines = 0
         weatherLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
-        weatherLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
+        weatherLabel.textColor = UIColor.dirt1.withAlphaComponent(0.5)
         
         sellLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         sellLabel.translatesAutoresizingMaskIntoConstraints = false
         sellLabel.numberOfLines = 0
         sellLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
-        sellLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
+        sellLabel.textColor = UIColor.dirt1.withAlphaComponent(0.5)
         
         timeLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         timeLabel.translatesAutoresizingMaskIntoConstraints = false
         timeLabel.numberOfLines = 0
         timeLabel.font = UIFont.systemFont(ofSize: sellLabel.font!.pointSize, weight: .semibold)
-        timeLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
+        timeLabel.textColor = UIColor.dirt1.withAlphaComponent(0.5)
         
         infoStackView = UIStackView()
         infoStackView.alignment = .leading

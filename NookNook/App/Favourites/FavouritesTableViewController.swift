@@ -213,7 +213,7 @@ class FavouritesTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
+        cell.backgroundColor = .cream1
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -286,12 +286,12 @@ class FavouritesTableViewController: UITableViewController {
     
     private func setBar() {
         self.configureNavigationBar(title: "Favourites", preferredLargeTitle: false)
-        self.view.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
+        self.view.backgroundColor = .cream1
         
         let close = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(closeTapped))
         navigationItem.leftBarButtonItem = close
         
-        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: ColourUtil.dirt1.rawValue)!]
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.dirt1]
     }
     
     @objc private func closeTapped() {

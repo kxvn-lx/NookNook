@@ -91,7 +91,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
     private func setBar() {
         self.configureNavigationBar(title: "Edit Info", preferredLargeTitle: false)
         
-        self.view.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
+        self.view.backgroundColor = .cream1
         
         self.view.tintColor = .white
         
@@ -137,14 +137,14 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         profileImageView.contentMode = .scaleAspectFill
         profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2
         profileImageView.clipsToBounds = true
-        profileImageView.backgroundColor = UIColor(named: ColourUtil.cream2.rawValue)
+        profileImageView.backgroundColor = .cream2
         profileImageView.image = UIImage(named: "appIcon-Ori")
         
         
         iconView = UIImageView()
         iconView.translatesAutoresizingMaskIntoConstraints = false
         iconView.image =  IconUtil.systemIcon(of: .edit, weight: .regular).withRenderingMode(.alwaysTemplate)
-        iconView.tintColor = UIColor(named: ColourUtil.dirt1.rawValue)
+        iconView.tintColor = .dirt1
         
         imgWrapper = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         imgWrapper.translatesAutoresizingMaskIntoConstraints = false
@@ -162,14 +162,14 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         nameTF.clearButtonMode = .always
         nameTF.clearButtonMode = .whileEditing
         nameTF.animationDuration = 0.25
-        nameTF.activeLineColor = (UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.8))!
-        nameTF.textColor = UIColor(named: ColourUtil.dirt1.rawValue)
-        nameTF.lineColor = (UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.3))!
+        nameTF.activeLineColor = UIColor.dirt1.withAlphaComponent(0.8)
+        nameTF.textColor = .dirt1
+        nameTF.lineColor = UIColor.dirt1.withAlphaComponent(0.3)
         nameTF.lineWidth = 1
         nameTF.minimumPlaceholderFontSize = nameTF.font!.pointSize - 6
         nameTF.originalPlaceholderFontSize = nameTF.font!.pointSize - 2
         nameTF.placeholderDuration = 0.2
-        nameTF.placeholderColor = (UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5))!
+        nameTF.placeholderColor = UIColor.dirt1.withAlphaComponent(0.5)
         nameTF.tweePlaceholder = "Name"
 
         
@@ -181,34 +181,34 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         islandNameTF.infoAnimationDuration = 0.05
         islandNameTF.infoLabel.font = UIFont.preferredFont(forTextStyle: .caption2)
         islandNameTF.animationDuration = 0.25
-        islandNameTF.activeLineColor = (UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.8))!
+        islandNameTF.activeLineColor = UIColor.dirt1.withAlphaComponent(0.8)
         islandNameTF.clearButtonMode = .always
         islandNameTF.clearButtonMode = .whileEditing
-        islandNameTF.textColor = UIColor(named: ColourUtil.dirt1.rawValue)
-        islandNameTF.lineColor = (UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.3))!
+        islandNameTF.textColor = .dirt1
+        islandNameTF.lineColor = UIColor.dirt1.withAlphaComponent(0.3)
         islandNameTF.lineWidth = 1
         islandNameTF.minimumPlaceholderFontSize = nameTF.font!.pointSize - 6
         islandNameTF.originalPlaceholderFontSize = nameTF.font!.pointSize - 2
         islandNameTF.placeholderDuration = 0.2
-        islandNameTF.placeholderColor = (UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5))!
+        islandNameTF.placeholderColor = UIColor.dirt1.withAlphaComponent(0.5)
         islandNameTF.tweePlaceholder = "Island Name 🏝"
 
         fruitLabel = UILabel()
         fruitLabel.translatesAutoresizingMaskIntoConstraints = false
-        fruitLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)
+        fruitLabel.textColor = .dirt1
         fruitLabel.numberOfLines = 2
         
         nativeFruitButton = UIButton()
         nativeFruitButton.translatesAutoresizingMaskIntoConstraints = false
         nativeFruitButton.contentEdgeInsets = UIEdgeInsets(top: 15, left: 20, bottom: 15, right: 20)
-        nativeFruitButton.backgroundColor = UIColor(named: ColourUtil.grassBtn.rawValue)
+        nativeFruitButton.backgroundColor = .grassBtn
         nativeFruitButton.layer.borderWidth = 1
         nativeFruitButton.titleLabel?.numberOfLines = 2
-        nativeFruitButton.layer.borderColor = UIColor(named: ColourUtil.grassBtn.rawValue)?.cgColor
+        nativeFruitButton.layer.borderColor = UIColor.grassBtn.cgColor
         nativeFruitButton.layer.cornerRadius = 2.5
         nativeFruitButton.titleLabel?.textAlignment = .center
-        nativeFruitButton.setTitleColor(UIColor(named: ColourUtil.grass1.rawValue), for: .normal)
-        nativeFruitButton.setTitleColor(UIColor(named: ColourUtil.grass1.rawValue)?.withAlphaComponent(0.5), for: .highlighted)
+        nativeFruitButton.setTitleColor(.grass1, for: .normal)
+        nativeFruitButton.setTitleColor(UIColor.grass1.withAlphaComponent(0.5), for: .highlighted)
         nativeFruitButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
         nativeFruitButton.titleLabel?.font = UIFont.systemFont(ofSize: (nativeFruitButton.titleLabel?.font.pointSize)!, weight: .semibold)
         nativeFruitButton.addTarget(self, action: #selector(fruitPicker), for: .touchUpInside)
@@ -216,8 +216,8 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         
         
         hemispherePicker = UISegmentedControl(items: [DateHelper.Hemisphere.Northern.rawValue, DateHelper.Hemisphere.Southern.rawValue])
-        hemispherePicker.backgroundColor = UIColor(named: ColourUtil.cream2.rawValue)
-        hemispherePicker.tintColor = UIColor(named: ColourUtil.cream1.rawValue)
+        hemispherePicker.backgroundColor = .cream2
+        hemispherePicker.tintColor = .cream1
         hemispherePicker.translatesAutoresizingMaskIntoConstraints = false
         hemispherePicker.addTarget(self, action:  #selector(hemispherePickerChanged), for: .valueChanged)
         
@@ -225,11 +225,11 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         saveButton = UIButton()
         saveButton.translatesAutoresizingMaskIntoConstraints = false
         saveButton.contentEdgeInsets = UIEdgeInsets(top: 15, left: 20, bottom: 15, right: 20)
-        saveButton.backgroundColor = UIColor(named: ColourUtil.grass1.rawValue)
+        saveButton.backgroundColor = .grass1
         saveButton.layer.borderWidth = 1
         saveButton.layer.cornerRadius = 2.5
         saveButton.titleLabel?.numberOfLines = 2
-        saveButton.layer.borderColor = UIColor(named: ColourUtil.grass1.rawValue)?.cgColor
+        saveButton.layer.borderColor = UIColor.grass1.cgColor
         saveButton.titleLabel?.textAlignment = .center
         saveButton.setTitleColor(UIColor.white, for: .normal)
         saveButton.setTitleColor(UIColor.white.withAlphaComponent(0.5), for: .highlighted)
@@ -361,9 +361,9 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         label1.numberOfLines = 0
         label1.text = title
         label1.tag = 1
-        label1.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
+        label1.textColor = UIColor.dirt1.withAlphaComponent(0.5)
         
-        stackView.addBackground(color: UIColor(named: ColourUtil.cream1.rawValue)!, cornerRadius: 5)
+        stackView.addBackground(color: .cream1, cornerRadius: 5)
         
         stackView.addArrangedSubview(label1)
         stackView.addArrangedSubview(body)

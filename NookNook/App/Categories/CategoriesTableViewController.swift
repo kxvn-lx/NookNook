@@ -73,14 +73,14 @@ class CategoriesTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.backgroundColor = UIColor(named: ColourUtil.cream2.rawValue)
-        cell.textLabel?.textColor = UIColor(named: ColourUtil.dirt1.rawValue)
+        cell.backgroundColor = .cream2
+        cell.textLabel?.textColor = .dirt1
     }
     
     private func setBar() {
         self.configureNavigationBar(title: "Categories", preferredLargeTitle: false)
         
-        self.tableView.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
+        self.tableView.backgroundColor = .cream1
         
         let cancel = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(closeTapped))
         navigationItem.rightBarButtonItems = [cancel]

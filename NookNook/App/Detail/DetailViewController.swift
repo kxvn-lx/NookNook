@@ -286,13 +286,13 @@ class DetailViewController: UIViewController {
         titleLabel.numberOfLines = 0
         titleLabel.font = UIFont.preferredFont(forTextStyle: .largeTitle)
         titleLabel.font = UIFont.systemFont(ofSize: titleLabel.font.pointSize, weight: .semibold)
-        titleLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)
+        titleLabel.textColor = .dirt1
         subtitleLabel.numberOfLines = 0
         subtitleLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-        subtitleLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
+        subtitleLabel.textColor = UIColor.dirt1.withAlphaComponent(0.5)
         sourceNoteLabel.numberOfLines = 0
         sourceNoteLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
-        sourceNoteLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
+        sourceNoteLabel.textColor = UIColor.dirt1.withAlphaComponent(0.5)
         
         
         // Rarity section
@@ -312,8 +312,8 @@ class DetailViewController: UIViewController {
         firstIconLabel.font = UIFont.preferredFont(forTextStyle: .caption2)
         firstIconLabel.font = UIFont.systemFont(ofSize: firstIconLabel.font.pointSize, weight: .semibold)
         firstIconLabel.textColor =  .white
-        firstIconLabel.layer.borderColor = UIColor(named: ColourUtil.grass1.rawValue)?.cgColor
-        firstIconLabel.backgroundColor = UIColor(named: ColourUtil.grass1.rawValue)
+        firstIconLabel.layer.borderColor = UIColor.grass1.cgColor
+        firstIconLabel.backgroundColor = .grass1
         firstIconLabel.layer.borderWidth = 1
         firstIconLabel.layer.cornerRadius = 2.5
         firstIconLabel.clipsToBounds = true
@@ -323,8 +323,8 @@ class DetailViewController: UIViewController {
         secondIconLabel.font = UIFont.preferredFont(forTextStyle: .caption2)
         secondIconLabel.font = UIFont.systemFont(ofSize: secondIconLabel.font.pointSize, weight: .semibold)
         secondIconLabel.textColor =  .white
-        secondIconLabel.layer.borderColor = UIColor(named: ColourUtil.gold1.rawValue)?.cgColor
-        secondIconLabel.backgroundColor = UIColor(named: ColourUtil.gold1.rawValue)
+        secondIconLabel.layer.borderColor = UIColor.gold1.cgColor
+        secondIconLabel.backgroundColor = .gold1
         secondIconLabel.textAlignment = .center
         secondIconLabel.layer.borderWidth = 1
         secondIconLabel.clipsToBounds = true
@@ -344,11 +344,11 @@ class DetailViewController: UIViewController {
         infoStackView.layoutMargins = UIEdgeInsets(top: 0, left: MARGIN*2, bottom: 0, right: MARGIN*2)
         
         
-        buyLabel.textColor = UIColor(named: ColourUtil.gold1.rawValue)
-        sellLabel.textColor = UIColor(named: ColourUtil.gold1.rawValue)
-        specialSellLabel.textColor = UIColor(named: ColourUtil.gold1.rawValue)
-        weatherLabel.textColor = UIColor(named: ColourUtil.gold1.rawValue)
-        timeLabel.textColor = UIColor(named: ColourUtil.gold1.rawValue)
+        buyLabel.textColor = .gold1
+        sellLabel.textColor = .gold1
+        specialSellLabel.textColor = .gold1
+        weatherLabel.textColor = .gold1
+        timeLabel.textColor = .gold1
 
         buyStack = createInfoStackView(title: "Buy", with: buyLabel)
         sellStack = createInfoStackView(title: "Sell", with: sellLabel)
@@ -376,8 +376,8 @@ class DetailViewController: UIViewController {
         activeTimeStack.layoutMargins = UIEdgeInsets(top: 0, left: MARGIN*2, bottom: 0, right: MARGIN*2)
         
         
-        activeTimeN.textColor = UIColor(named: ColourUtil.gold1.rawValue)
-        activeTimeS.textColor = UIColor(named: ColourUtil.gold1.rawValue)
+        activeTimeN.textColor = .gold1
+        activeTimeS.textColor = .gold1
         activeTimeN.numberOfLines = 0
         activeTimeS.numberOfLines = 0
         activeTimeN.textAlignment = .right
@@ -390,7 +390,7 @@ class DetailViewController: UIViewController {
         activeTimeLabel.text = "Active Months"
         activeTimeLabel.numberOfLines = 0
         activeTimeLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-        activeTimeLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
+        activeTimeLabel.textColor = UIColor.dirt1.withAlphaComponent(0.5)
         
         activeTimeStack.addArrangedSubview(activeTimeLabel)
         activeTimeStack.addArrangedSubview(activeTimeNStack)
@@ -404,14 +404,14 @@ class DetailViewController: UIViewController {
         variationTitleLabel.text = "Variation"
         variationTitleLabel.numberOfLines = 0
         variationTitleLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-        variationTitleLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
+        variationTitleLabel.textColor = UIColor.dirt1.withAlphaComponent(0.5)
         
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 10
         variationImageCollectionView.setCollectionViewLayout(calculateCVLayout(), animated: true)
         variationImageCollectionView.delegate = self
         variationImageCollectionView.dataSource = self
-        variationImageCollectionView.backgroundColor = UIColor(named: ColourUtil.cream2.rawValue)
+        variationImageCollectionView.backgroundColor = .cream2
         
         
         variationStack.addArrangedSubview(variationTitleLabel, withMargin: UIEdgeInsets(top: 0, left: MARGIN * 2, bottom: 0, right: 0))
@@ -468,7 +468,7 @@ class DetailViewController: UIViewController {
     
     private func setBar() {
         self.configureNavigationBar(title: "Turnip reminder", preferredLargeTitle: false)
-        self.view.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
+        self.view.backgroundColor = .cream1
         
         let close = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(closeTapped))
         navigationItem.leftBarButtonItem = close
@@ -492,9 +492,9 @@ class DetailViewController: UIViewController {
         label1.numberOfLines = 0
         label1.text = title
         label1.tag = 1
-        label1.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
+        label1.textColor = UIColor.dirt1.withAlphaComponent(0.5)
         
-        stackView.addBackground(color: UIColor(named: ColourUtil.cream2.rawValue)!, cornerRadius: 5)
+        stackView.addBackground(color: .cream2, cornerRadius: 5)
         
         stackView.addArrangedSubview(label1)
         stackView.addArrangedSubview(body)

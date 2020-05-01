@@ -94,10 +94,10 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
-        cell.tintColor =  UIColor(named: ColourUtil.dirt1.rawValue)
-        cell.textLabel?.textColor = UIColor(named: ColourUtil.dirt1.rawValue)
-        cell.detailTextLabel?.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
+        cell.backgroundColor = .cream1
+        cell.tintColor =  .dirt1
+        cell.textLabel?.textColor = .dirt1
+        cell.detailTextLabel?.textColor = UIColor.dirt1.withAlphaComponent(0.5)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -138,7 +138,7 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
         let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
+        header.textLabel?.textColor = UIColor.dirt1.withAlphaComponent(0.5)
         header.textLabel?.font = UIFont.preferredFont(forTextStyle: .title3)
         header.textLabel?.text? = header.textLabel?.text?.capitalized ?? ""
     }

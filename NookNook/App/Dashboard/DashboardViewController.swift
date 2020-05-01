@@ -114,7 +114,7 @@ class DashboardViewController: UIViewController {
     // MARK: - Modify UI
     private func setBar() {
         self.configureNavigationBar(title: "Dashboard")
-        self.view.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
+        self.view.backgroundColor = .cream1
         self.view.tintColor = .white
         
         let button: UIButton = UIButton(type: .custom)
@@ -168,13 +168,13 @@ class DashboardViewController: UIViewController {
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
         profileImageView.contentMode = .scaleAspectFill
         profileImageView.clipsToBounds = true
-        profileImageView.backgroundColor = UIColor(named: ColourUtil.cream2.rawValue)
+        profileImageView.backgroundColor = .cream2
         profileImageView.image = UIImage(named: "appIcon-Ori")
         profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2
         
         profileNameLabel = UILabel()
         profileNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        profileNameLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)
+        profileNameLabel.textColor = .dirt1
         profileNameLabel.font = UIFont.preferredFont(forTextStyle: .title1)
         profileNameLabel.font = UIFont.systemFont(ofSize: profileNameLabel.font.pointSize, weight: .semibold)
         
@@ -189,7 +189,7 @@ class DashboardViewController: UIViewController {
         phraseLabel = UILabel()
         phraseLabel.numberOfLines = 0
         phraseLabel.translatesAutoresizingMaskIntoConstraints = false
-        phraseLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)
+        phraseLabel.textColor = .dirt1
         phraseLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         
         phraseStack = SVHelper.createSV(axis: .vertical, spacing: MARGIN, alignment: .leading, distribution: .fillEqually)
@@ -202,10 +202,10 @@ class DashboardViewController: UIViewController {
         passportStackView.layoutMargins = UIEdgeInsets(top: 0, left: MARGIN*2, bottom: 0, right: MARGIN*2)
         
         islandNameLabel = UILabel()
-        islandNameLabel.textColor = UIColor(named: ColourUtil.gold1.rawValue)
+        islandNameLabel.textColor = .gold1
         
         nativeFruitLabel = UILabel()
-        nativeFruitLabel.textColor = UIColor(named: ColourUtil.gold1.rawValue)
+        nativeFruitLabel.textColor = .gold1
         
         passportStackView.addArrangedSubview(createSV(title: "Island Name", with: islandNameLabel))
         passportStackView.addArrangedSubview(createSV(title: "Native Fruit", with: nativeFruitLabel))
@@ -217,14 +217,14 @@ class DashboardViewController: UIViewController {
         residentLabel.text = "Your Resident"
         residentLabel.numberOfLines = 0
         residentLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-        residentLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
+        residentLabel.textColor = UIColor.dirt1.withAlphaComponent(0.5)
         
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 10
         variationImageCollectionView.setCollectionViewLayout(calculateCVLayout(), animated: true)
         variationImageCollectionView.delegate = self
         variationImageCollectionView.dataSource = self
-        variationImageCollectionView.backgroundColor = UIColor(named: ColourUtil.cream2.rawValue)
+        variationImageCollectionView.backgroundColor = .cream2
         
         
         residentStack.addArrangedSubview(residentLabel, withMargin: UIEdgeInsets(top: 0, left: MARGIN * 2, bottom: 0, right: 0))
@@ -289,9 +289,9 @@ class DashboardViewController: UIViewController {
         label1.numberOfLines = 0
         label1.text = title
         label1.tag = 1
-        label1.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
+        label1.textColor = UIColor.dirt1.withAlphaComponent(0.5)
         
-        stackView.addBackground(color: UIColor(named: ColourUtil.cream2.rawValue)!, cornerRadius: 5)
+        stackView.addBackground(color: .cream2, cornerRadius: 5)
         
         stackView.addArrangedSubview(label1)
         stackView.addArrangedSubview(body)

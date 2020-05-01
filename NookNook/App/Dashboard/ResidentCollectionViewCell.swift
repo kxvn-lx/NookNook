@@ -22,7 +22,7 @@ class ResidentCollectionViewCell: UICollectionViewCell {
         variantName.translatesAutoresizingMaskIntoConstraints = false
         variantName.textAlignment = .center
         variantName.numberOfLines = 0
-        variantName.textColor = UIColor(named: ColourUtil.dirt1.rawValue)
+        variantName.textColor = .dirt1
         
         variantImage.translatesAutoresizingMaskIntoConstraints = false
         variantImage.sd_imageTransition = .fade

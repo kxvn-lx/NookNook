@@ -165,7 +165,7 @@ class CrittersMonthlyTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
+        cell.backgroundColor = .cream1
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -250,8 +250,8 @@ class CrittersMonthlyTableViewController: UITableViewController {
         })
         
         
-        caughtAction.backgroundColor = UIColor(named: ColourUtil.gold1.rawValue)
-        donatedAction.backgroundColor = UIColor(named: ColourUtil.grass1.rawValue)
+        caughtAction.backgroundColor = .gold1
+        donatedAction.backgroundColor = .grass1
         
         return UISwipeActionsConfiguration(actions: [donatedAction, caughtAction])
         
@@ -274,7 +274,7 @@ class CrittersMonthlyTableViewController: UITableViewController {
     
     private func setBar() {
         self.configureNavigationBar(title: "Critters this month", preferredLargeTitle: false)
-        self.view.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
+        self.view.backgroundColor = .cream1
         
         let close = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(closeTapped))
         navigationItem.leftBarButtonItem = close

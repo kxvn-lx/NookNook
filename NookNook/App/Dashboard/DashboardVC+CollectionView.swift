@@ -46,7 +46,7 @@ extension DashboardViewController: UICollectionViewDelegateFlowLayout, UICollect
     
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) {
-            cell.contentView.backgroundColor = UIColor(named: ColourUtil.cream2.rawValue)?.withAlphaComponent(0.5)
+            cell.contentView.backgroundColor = UIColor.cream2.withAlphaComponent(0.5)
         }
     }
     

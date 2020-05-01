@@ -25,8 +25,8 @@ struct SCHelper {
         sc.frame = CGRect(x: xPostion, y: yPostion, width: elementWidth, height: elementHeight)
         
         // Style the Segmented Control
-        sc.backgroundColor = UIColor(named: ColourUtil.cream2.rawValue)
-        sc.tintColor = UIColor(named: ColourUtil.cream1.rawValue)
+        sc.backgroundColor = .cream2
+        sc.tintColor = .cream1
         
         sc.tag = 1
         
@@ -44,7 +44,7 @@ struct SCHelper {
     static func createSCWithTitle(title: String, items: [String]) -> UIView {
         let titleLabel = UILabel()
         titleLabel.numberOfLines = 2
-        titleLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)
+        titleLabel.textColor = .dirt1
         titleLabel.textAlignment = .center
         titleLabel.font = .preferredFont(forTextStyle: .callout)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -63,8 +63,8 @@ struct SCHelper {
         titleLabel.frame = CGRect(x: xPostion, y: yPostion, width: elementWidth, height: elementHeight)
         
         // Style the Segmented Control
-        sc.backgroundColor = UIColor(named: ColourUtil.cream2.rawValue)
-        sc.tintColor = UIColor(named: ColourUtil.cream1.rawValue)
+        sc.backgroundColor = .cream2
+        sc.tintColor = .cream1
         
         titleLabel.tag = 0
         sc.tag = 1

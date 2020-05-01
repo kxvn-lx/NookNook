@@ -280,7 +280,7 @@ class SettingsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
+        header.textLabel?.textColor = UIColor.dirt1.withAlphaComponent(0.5)
         switch(section) {
         case 0: header.textLabel?.text! = "Share it if you love it."
         case 1: header.textLabel?.text! = ""
@@ -291,12 +291,12 @@ class SettingsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.detailTextLabel?.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
+        cell.detailTextLabel?.textColor = UIColor.dirt1.withAlphaComponent(0.5)
     }
     
     private func setBar() {
         self.configureNavigationBar(title: "Settings")
-        self.view.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
+        self.view.backgroundColor = .cream1
         
         let close = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(closeTapped))
         navigationItem.leftBarButtonItem = close
@@ -313,11 +313,11 @@ class SettingsTableViewController: UITableViewController {
     private func setupCell(text: String, icon: UIImage, accesoryType: UITableViewCell.AccessoryType) -> UITableViewCell {
         let cell = UITableViewCell(style: .value1, reuseIdentifier: "cell")
         
-        cell.backgroundColor = UIColor(named: ColourUtil.cream2.rawValue)
+        cell.backgroundColor = .cream2
         cell.imageView?.image = icon.withRenderingMode(.alwaysTemplate)
-        cell.imageView?.tintColor = UIColor(named: ColourUtil.dirt1.rawValue)
+        cell.imageView?.tintColor = .dirt1
         cell.textLabel?.text = text
-        cell.textLabel?.textColor =  UIColor(named: ColourUtil.dirt1.rawValue)
+        cell.textLabel?.textColor =  .dirt1
         cell.accessoryType = accesoryType
         
         return cell

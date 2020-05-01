@@ -157,7 +157,7 @@ class CrittersTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
+        cell.backgroundColor = .cream1
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -172,8 +172,8 @@ class CrittersTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        (view as! UITableViewHeaderFooterView).contentView.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
-        (view as! UITableViewHeaderFooterView).textLabel?.textColor = UIColor(named: ColourUtil.dirt1.rawValue)
+        (view as! UITableViewHeaderFooterView).contentView.backgroundColor = .cream1
+        (view as! UITableViewHeaderFooterView).textLabel?.textColor = .dirt1
     }
     
     // swipe right function
@@ -220,8 +220,8 @@ class CrittersTableViewController: UITableViewController {
             success(true)
         })
         
-        caughtAction.backgroundColor = UIColor(named: ColourUtil.gold1.rawValue)
-        donatedAction.backgroundColor = UIColor(named: ColourUtil.grass1.rawValue)
+        caughtAction.backgroundColor = .gold1
+        donatedAction.backgroundColor = .grass1
         
         return UISwipeActionsConfiguration(actions: [donatedAction, caughtAction])
         
@@ -230,9 +230,9 @@ class CrittersTableViewController: UITableViewController {
     
     // MARK: - Modify UI
     private func setBar() {
-        tabBarController?.tabBar.barTintColor = UIColor(named: ColourUtil.grass1.rawValue)
+        tabBarController?.tabBar.barTintColor = .grass1
         self.configureNavigationBar(title: "Critters")
-        self.tableView.backgroundColor = UIColor(named: ColourUtil.cream1.rawValue)
+        self.tableView.backgroundColor = .cream1
         
         let button: UIButton = UIButton(type: .custom)
         button.setImage(IconUtil.systemIcon(of: .filter, weight: .regular), for: .normal)
@@ -243,7 +243,7 @@ class CrittersTableViewController: UITableViewController {
         let barButton = UIBarButtonItem(customView: button)
         self.navigationItem.rightBarButtonItem = barButton
         
-        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: ColourUtil.dirt1.rawValue)!]
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.dirt1]
     }
     
     @objc private func filterButtonPressed() {

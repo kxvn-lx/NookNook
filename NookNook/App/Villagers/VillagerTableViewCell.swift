@@ -55,8 +55,8 @@ class VillagerTableViewCell: UITableViewCell {
         isResidentLabel.font = UIFont.preferredFont(forTextStyle: .caption2)
         isResidentLabel.font = UIFont.systemFont(ofSize: isResidentLabel.font.pointSize, weight: .semibold)
         isResidentLabel.textColor =  .white
-        isResidentLabel.layer.borderColor = UIColor(named: ColourUtil.gold1.rawValue)?.cgColor
-        isResidentLabel.backgroundColor = UIColor(named: ColourUtil.gold1.rawValue)
+        isResidentLabel.layer.borderColor = UIColor.gold1.cgColor
+        isResidentLabel.backgroundColor = .gold1
         isResidentLabel.layer.borderWidth = 1
         isResidentLabel.layer.cornerRadius = 2.5
         isResidentLabel.clipsToBounds = true
@@ -77,25 +77,25 @@ class VillagerTableViewCell: UITableViewCell {
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.numberOfLines = 0
         nameLabel.font = UIFont.systemFont(ofSize: nameLabel.font!.pointSize, weight: .semibold)
-        nameLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)
+        nameLabel.textColor = .dirt1
         
         speciesLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         speciesLabel.translatesAutoresizingMaskIntoConstraints = false
         speciesLabel.numberOfLines = 0
         speciesLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
-        speciesLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
+        speciesLabel.textColor = UIColor.dirt1.withAlphaComponent(0.5)
         
         genderLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         genderLabel.translatesAutoresizingMaskIntoConstraints = false
         genderLabel.numberOfLines = 0
         genderLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
-        genderLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
+        genderLabel.textColor =  UIColor.dirt1.withAlphaComponent(0.5)
         
         bdayLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         bdayLabel.translatesAutoresizingMaskIntoConstraints = false
         bdayLabel.numberOfLines = 0
         bdayLabel.font = UIFont.systemFont(ofSize: genderLabel.font!.pointSize, weight: .semibold)
-        bdayLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
+        bdayLabel.textColor =  UIColor.dirt1.withAlphaComponent(0.5)
         
         infoStackView = UIStackView()
         infoStackView.alignment = .leading

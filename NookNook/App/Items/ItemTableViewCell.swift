@@ -67,25 +67,25 @@ class ItemTableViewCell: UITableViewCell {
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.numberOfLines = 0
         nameLabel.font = UIFont.systemFont(ofSize: nameLabel.font!.pointSize, weight: .semibold)
-        nameLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)
+        nameLabel.textColor = .dirt1
         
         obtainedFromLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         obtainedFromLabel.translatesAutoresizingMaskIntoConstraints = false
         obtainedFromLabel.numberOfLines = 0
         obtainedFromLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
-        obtainedFromLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
+        obtainedFromLabel.textColor = UIColor.dirt1.withAlphaComponent(0.5)
         
         buyLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         buyLabel.translatesAutoresizingMaskIntoConstraints = false
         buyLabel.numberOfLines = 0
         buyLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
-        buyLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
+        buyLabel.textColor = UIColor.dirt1.withAlphaComponent(0.5)
         
         sellLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         sellLabel.translatesAutoresizingMaskIntoConstraints = false
         sellLabel.numberOfLines = 0
         sellLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
-        sellLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
+        sellLabel.textColor = UIColor.dirt1.withAlphaComponent(0.5)
         
         infoStackView = UIStackView()
         infoStackView.alignment = .leading

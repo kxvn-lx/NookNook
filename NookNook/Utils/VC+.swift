@@ -15,8 +15,8 @@ extension UIViewController {
     func configureNavigationBar(largeTitleColor: UIColor? = nil, backgoundColor: UIColor? = nil, tintColor: UIColor? = nil, title: String, preferredLargeTitle: Bool? = nil) {
         
         // Colours
-        let cream1 = UIColor(named: ColourUtil.cream1.rawValue)
-        let dirt1 = UIColor(named: ColourUtil.dirt1.rawValue)
+        let cream1 = UIColor.cream1
+        let dirt1 = UIColor.dirt1
         
         let largeTitleColour = largeTitleColor == nil ? dirt1 : largeTitleColor
         let backgroundColour = backgoundColor == nil ? cream1 : backgoundColor
@@ -58,7 +58,7 @@ extension UITableViewController {
         let titleLabel = UILabel(frame: CGRect(x: 30, y: 0, width: self.tableView.frame.width * 0.85, height: height))
         titleLabel.numberOfLines = 0
         titleLabel.lineBreakMode = .byWordWrapping
-        titleLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
+        titleLabel.textColor = UIColor.dirt1.withAlphaComponent(0.5)
         titleLabel.font = .preferredFont(forTextStyle: .caption2)
         titleLabel.text  = text
         customView.addSubview(titleLabel)
@@ -155,7 +155,7 @@ extension UITableView {
     func setEmptyMessage(_ message: String) {
         let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.bounds.size.width * 0.3, height: self.bounds.size.height * 0.5))
         messageLabel.text = message
-        messageLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
+        messageLabel.textColor = UIColor.dirt1.withAlphaComponent(0.5)
         messageLabel.numberOfLines = 0
         messageLabel.textAlignment = .center
         messageLabel.font = UIFont.preferredFont(forTextStyle: .body)
@@ -176,7 +176,7 @@ extension UICollectionView {
     func setEmptyMessage(_ message: String) {
         let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.bounds.size.width * 0.3, height: self.bounds.size.height * 0.5))
         messageLabel.text = message
-        messageLabel.textColor = UIColor(named: ColourUtil.dirt1.rawValue)?.withAlphaComponent(0.5)
+        messageLabel.textColor = UIColor.dirt1.withAlphaComponent(0.5)
         messageLabel.numberOfLines = 0
         messageLabel.textAlignment = .center
         messageLabel.font = UIFont.preferredFont(forTextStyle: .body)
@@ -207,6 +207,21 @@ extension UIColor {
             blue: rgb & 0xFF
         )
     }
+    
+    // App colour
+    /// Used for main texts colour and accent colours
+    static let dirt1 = UIColor(named: "Dirt-1")!
+    /// Used for main app secondary background colour and buttons
+    static let grass1 = UIColor(named: "Grass-1")!
+    /// Used for secondary buttons
+    static let grassBtn = UIColor(named: "Grass-Btn")!
+    /// Used for main app background
+    static let cream1 = UIColor(named: "Cream-1")!
+    /// Used for secondary app background
+    static let cream2 = UIColor(named: "Cream-2")!
+    /// Used for secondary texts colour
+    static let gold1 = UIColor(named: "Gold-1")!
+    
 }
 
 

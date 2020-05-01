@@ -40,7 +40,7 @@ struct PriceEngine {
             body = amount != 0 ? String(formattedNumber) : "Not for sale"
         }
         
-        let priceAttr = [NSAttributedString.Key.font :  UIFont.systemFont(ofSize: size, weight: .semibold), NSAttributedString.Key.foregroundColor : UIColor(named: ColourUtil.gold1.rawValue)]
+        let priceAttr = [NSAttributedString.Key.font :  UIFont.systemFont(ofSize: size, weight: .semibold), NSAttributedString.Key.foregroundColor : UIColor.gold1]
         let finalString = NSMutableAttributedString(string: body, attributes: priceAttr as [NSAttributedString.Key : Any])
         
         let bodyString = NSMutableAttributedString(string: price.rawValue)
