@@ -28,18 +28,7 @@ class TurnipReminderTableViewController: UITableViewController {
         tableView.estimatedRowHeight = 50
         tableView.allowsSelection = true
         tableView.separatorStyle = .none
-        
-        
-        let text = "Buy reminder will be always on sunday morning (06:00 AM).\nwhile Sell reminder will be always on friday night. (06:00 PM).\n\nThis is because the app will make sure you buy it before turnip seller leave, and make sure that you sell your turnip before it's too late!"
-        self.setCustomFooterView(text: text, height: 100)
-        
-        let frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 50)
-        let headerImageView = UIImageView(frame: frame)
-        let image: UIImage = IconUtil.systemIcon(of: .reminder, weight: .regular).withRenderingMode(.alwaysTemplate)
-        headerImageView.image = image
-        headerImageView.contentMode = .scaleAspectFit
-//        headerImageView.tintColor = UIColor.dirt1
-        self.tableView.tableHeaderView = headerImageView
+
     }
     
     override func loadView() {
@@ -103,6 +92,54 @@ class TurnipReminderTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 5
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch section {
+        case 0: return 280
+        default: return .nan
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        switch section {
+        case 0:
+            let headerView = UIView()
+            let imageView = UIImageView()
+            let label = UILabel()
+            
+            imageView.contentMode = .scaleAspectFit
+            imageView.tintColor = .dirt1
+            imageView.image = IconUtil.systemIcon(of: .reminder, weight: .regular).withRenderingMode(.alwaysTemplate)
+            
+            
+            label.numberOfLines = 0
+            label.text = "Buy reminder will be always on sunday morning (06:00 AM).\nwhile Sell reminder will be always on friday night. (06:00 PM).\n\nThis is because the app will make sure you buy it before turnip seller leave, and make sure that you sell your turnip before it's too late!"
+            label.lineBreakMode = .byWordWrapping
+            label.textColor = UIColor.dirt1.withAlphaComponent(0.5)
+            label.font = .preferredFont(forTextStyle: .caption1)
+            
+            
+            headerView.addSubview(imageView)
+            headerView.addSubview(label)
+            
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            label.translatesAutoresizingMaskIntoConstraints = false
+            
+            NSLayoutConstraint.activate([
+                imageView.centerXAnchor.constraint(equalTo: headerView.centerXAnchor),
+                imageView.topAnchor.constraint(equalTo: headerView.topAnchor, constant: 20),
+                imageView.heightAnchor.constraint(equalToConstant: 60),
+                imageView.widthAnchor.constraint(equalToConstant: 60),
+                
+                label.centerXAnchor.constraint(equalTo: headerView.centerXAnchor, constant: 0),
+                label.centerYAnchor.constraint(equalTo: headerView.centerYAnchor, constant: 40),
+                label.widthAnchor.constraint(equalTo: headerView.widthAnchor, multiplier: 0.9)
+            ])
+            return headerView
+            
+        default: return nil
+        }
     }
     
     

@@ -44,7 +44,7 @@ struct SCHelper {
     static func createSCWithTitle(title: String, items: [String]) -> UIView {
         let titleLabel = UILabel()
         titleLabel.numberOfLines = 2
-        titleLabel.textColor = .dirt1
+        titleLabel.textColor = UIColor.dirt1.withAlphaComponent(0.5)
         titleLabel.textAlignment = .center
         titleLabel.font = .preferredFont(forTextStyle: .callout)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false

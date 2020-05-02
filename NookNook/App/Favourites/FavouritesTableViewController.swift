@@ -58,7 +58,7 @@ class FavouritesTableViewController: UITableViewController {
         tableView.estimatedRowHeight = 100
         
         setBar()
-        scView = SCHelper.createSCWithTitle(title: "You can only perform swight right action on the main list.", items: items)
+        scView = SCHelper.createSCWithTitle(title: "You can only perform swight right action\non the main list.", items: items)
         sc = scView.viewWithTag(1) as? UISegmentedControl
         sc.selectedSegmentIndex = 0
         sc.addTarget(self, action:  #selector(changeSource), for: .valueChanged)
@@ -203,12 +203,8 @@ class FavouritesTableViewController: UITableViewController {
                 cell.iconLabel2.isHidden = true
                 cell.tagLabel.isHidden = true
                 cell.label3.font = UIFont.systemFont(ofSize: cell.label3.font!.pointSize, weight: .regular)
-                
             }
         }
-        
-        
-        
         return cell
     }
     
