@@ -12,10 +12,14 @@ import SwiftEntryKit
 
 class TurnipReminderTableViewController: UITableViewController {
     
-    private var buyCell = TurnipTableViewCell()
-    private var sellCell = TurnipTableViewCell()
+    lazy private var buyCell = TurnipTableViewCell()
+    lazy private var sellCell = TurnipTableViewCell()
     
-    private var notificationsManager = NotificationEngine()
+    lazy private var customBuyCell = UITableViewCell()
+    lazy private var customSellCell = UITableViewCell()
+    
+    
+    lazy private var notificationsManager = NotificationEngine()
     private let notificationCenter = UNUserNotificationCenter.current()
     private let options: UNAuthorizationOptions = [.alert, .sound]
     
@@ -34,7 +38,7 @@ class TurnipReminderTableViewController: UITableViewController {
     override func loadView() {
         super.loadView()
         
-        buyCell = setupCell(text: "Buy reminder")
+        buyCell = setupToggleCell(text: "Buy reminder")
         notificationsManager.hasNotification(identifer: .buy) { (isPresent) in
             DispatchQueue.main.async {
                 self.buyCell.switchView.isOn = isPresent ? true : false
@@ -42,13 +46,21 @@ class TurnipReminderTableViewController: UITableViewController {
         }
         buyCell.accessoryView?.tag = 0
         
-        sellCell = setupCell(text: "Sell reminder")
+        sellCell = setupToggleCell(text: "Sell reminder")
         notificationsManager.hasNotification(identifer: .sell) { (isPresent) in
             DispatchQueue.main.async {
                 self.sellCell.switchView.isOn = isPresent ? true : false
             }
         }
         sellCell.accessoryView?.tag = 1
+        
+        customBuyCell = setupCell(text: "Set buy reminder:")
+        customSellCell = setupCell(text: "Set sell reminder:")
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         // check for permission
         notificationCenter.requestAuthorization(options: options) {
@@ -59,14 +71,7 @@ class TurnipReminderTableViewController: UITableViewController {
                     SwiftEntryKit.display(entry: view, using: attributes)
                 }
                 self.notificationsManager.checkStatus { (status) in
-                    DispatchQueue.main.async {
-                        self.buyCell.switchView.isEnabled = status ? true : false
-                        self.sellCell.switchView.isEnabled = status ? true : false
-                        self.buyCell.selectionStyle = .none
-                        self.sellCell.selectionStyle = .none
-                        self.buyCell.textLabel?.textColor = .lightGray
-                        self.sellCell.textLabel?.textColor = .lightGray
-                    }
+                    self.disableViews(status: status)
                 }
             }
         }
@@ -75,17 +80,28 @@ class TurnipReminderTableViewController: UITableViewController {
     
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        switch section {
+        case 0,1 : return 1
+        case 2: return 2
+        default: return 0
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0: return buyCell
         case 1: return sellCell
+        case 2:
+            switch indexPath.row {
+            case 0: return customBuyCell
+            case 1: return customSellCell
+            default: fatalError("Invalid rows")
+            }
+            
         default: fatalError("Unknown section")
         }
     }
@@ -97,6 +113,7 @@ class TurnipReminderTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
         case 0: return 280
+        case 2: return 44 * 1.5
         default: return .nan
         }
     }
@@ -137,8 +154,42 @@ class TurnipReminderTableViewController: UITableViewController {
                 label.widthAnchor.constraint(equalTo: headerView.widthAnchor, multiplier: 0.9)
             ])
             return headerView
+        case 2:
+            let headerView = UIView()
+            let label = UILabel()
             
+            label.numberOfLines = 0
+            label.text = "Custom time"
+            label.lineBreakMode = .byWordWrapping
+            label.textColor = UIColor.dirt1.withAlphaComponent(0.5)
+            label.font = .preferredFont(forTextStyle: .title3)
+            
+            
+            headerView.addSubview(label)
+            
+            label.translatesAutoresizingMaskIntoConstraints = false
+            
+            NSLayoutConstraint.activate([
+                label.centerXAnchor.constraint(equalTo: headerView.centerXAnchor, constant: 0),
+                label.bottomAnchor.constraint(equalTo: headerView.bottomAnchor, constant: -10),
+                label.widthAnchor.constraint(equalTo: headerView.widthAnchor, multiplier: 0.9)
+            ])
+            return headerView
         default: return nil
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.tableView.deselectRow(at: indexPath, animated: true)
+        switch indexPath.section {
+        case 0, 1: break
+        case 2:
+            switch indexPath.row {
+            case 0: print("Attempt to present buy reminder picker view")
+            case 1: print("Attempt to present sell reminder picker view")
+            default: break
+            }
+        default: break
         }
     }
     
@@ -157,7 +208,7 @@ class TurnipReminderTableViewController: UITableViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    private func setupCell(text: String) -> TurnipTableViewCell {
+    private func setupToggleCell(text: String) -> TurnipTableViewCell {
         let cell = TurnipTableViewCell(style: .value1, reuseIdentifier: "cell")
         
         cell.backgroundColor = .cream2
@@ -167,7 +218,26 @@ class TurnipReminderTableViewController: UITableViewController {
         return cell
     }
     
-    
-    
+    private func setupCell(text: String) -> UITableViewCell {
+        let cell = UITableViewCell(style: .value1, reuseIdentifier: "cell")
+        
+        cell.backgroundColor = .cream2
+        cell.textLabel?.text = text
+        cell.textLabel?.textColor = .dirt1
+        
+        return cell
+    }
+
+    // MARK: - Utilities functions
+    private func disableViews(status: Bool) {
+        DispatchQueue.main.async {
+            self.buyCell.switchView.isEnabled = status ? true : false
+            self.sellCell.switchView.isEnabled = status ? true : false
+            self.buyCell.selectionStyle = .none
+            self.sellCell.selectionStyle = .none
+            self.buyCell.textLabel?.textColor = .lightGray
+            self.sellCell.textLabel?.textColor = .lightGray
+        }
+    }
     
 }
