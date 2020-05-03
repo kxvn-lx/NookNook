@@ -8,7 +8,6 @@
 
 import UIKit
 import UserNotifications
-import SwiftEntryKit
 import McPicker
 
 class TurnipReminderTableViewController: UITableViewController {
@@ -85,8 +84,8 @@ class TurnipReminderTableViewController: UITableViewController {
             (didAllow, error) in
             if !didAllow {
                 DispatchQueue.main.async {
-                    let ( view, attributes ) = ModalHelper.showPopupMessage(title: "Oh no!", description: "NookNook can't send you reminders if you don't enable notifications. Please go to settings and enable it!", image: UIImage(named: "sad"))
-                    SwiftEntryKit.display(entry: view, using: attributes)
+                    let alert = AlertHelper.createDefaultAction(title: "Oh no ):", message: "NookNook can't send you reminders if you don't enable notifications. Please go to settings and enable it!")
+                    self.present(alert, animated: true)
                 }
                 self.notificationsManager.checkStatus { (status) in
                     self.disableViews(status: status)
@@ -289,6 +288,12 @@ class TurnipReminderTableViewController: UITableViewController {
             self.sellCell.selectionStyle = .none
             self.buyCell.textLabel?.textColor = .lightGray
             self.sellCell.textLabel?.textColor = .lightGray
+            self.customBuyCell.textLabel?.textColor = .lightGray
+            self.customSellCell.textLabel?.textColor = .lightGray
+            self.customBuyCell.selectionStyle = .none
+            self.customSellCell.selectionStyle = .none
+            self.customBuyCell.detailTextLabel?.textColor = .lightGray
+            self.customSellCell.detailTextLabel?.textColor = .lightGray
         }
     }
     

@@ -8,7 +8,6 @@
 
 import UIKit
 import SDWebImage
-import SwiftEntryKit
 
 class VillagersTableViewController: UITableViewController {
     
@@ -216,12 +215,13 @@ class VillagersTableViewController: UITableViewController {
                 success(true)
             }
             else {
-                let ( view, attributes ) = ModalHelper.showPopupMessage(title: "Woah there!", description: "It appears that you have the max number of resident.", image: UIImage(named: "sad"))
-                
-                SwiftEntryKit.display(entry: view, using: attributes)
+                let alert = AlertHelper.createDefaultAction(title: "Woah there!", message: "It appears that you have the max number of residents. (10 max)")
+                self.present(alert, animated: true)
                 
                 Taptic.errorTaptic()
                 success(false)
+                
+
             }
         })
         favouriteAction.backgroundColor = .grass1

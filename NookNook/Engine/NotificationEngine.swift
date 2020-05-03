@@ -9,7 +9,6 @@
 import Foundation
 import UserNotifications
 import UIKit
-import SwiftEntryKit
 
 struct NotificationEngine {
     

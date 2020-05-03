@@ -6,7 +6,6 @@ target 'NookNook' do
   use_frameworks!
 
   # Pods for NookNook
-	pod 'SwiftEntryKit', '1.2.3'
 	pod 'UXCam'
 	pod 'Firebase/Analytics'
 	pod 'GoogleTagManager'

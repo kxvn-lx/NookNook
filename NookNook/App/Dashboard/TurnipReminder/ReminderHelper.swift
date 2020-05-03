@@ -67,8 +67,7 @@ struct ReminderHelper {
             selected = convertToRawSelection(selections: selections)
         }
         
-        
-        
+
         var data: [[String]] = []
         data = getDateTimeArray()
         
@@ -87,7 +86,8 @@ struct ReminderHelper {
         mcPicker.toolbarItemsFont = .preferredFont(forTextStyle: .body)
         mcPicker.toolbarButtonsColor = .dirt1
         mcPicker.toolbarBarTintColor = .cream1
-        mcPicker.backgroundColor = UIColor(white: 0/255.0, alpha: 0.3)
+        mcPicker.backgroundColor = .black
+        mcPicker.backgroundColorAlpha = 0.3
         mcPicker.pickerBackgroundColor = .cream1
         mcPicker.pickerSelectRowsForComponents = selected
         

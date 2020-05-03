@@ -8,7 +8,6 @@
 
 import UIKit
 import SDWebImage
-import SwiftEntryKit
 
 class DashboardViewController: UIViewController {
     
@@ -78,9 +77,8 @@ class DashboardViewController: UIViewController {
         super.viewDidAppear(animated)
         if isFirstLoad {
             if isEmptyLists(dicts: userDict) {
-                let ( view, attributes ) = ModalHelper.showPopupMessage(title: "Hey there!", description: "NookNook is much better when you fill out your user info detail from the settings page.", image: UIImage(named: "hand"))
-                
-                SwiftEntryKit.display(entry: view, using: attributes)
+                let alert = AlertHelper.createDefaultAction(title: "Hey there 👋", message: "NookNook is much better when you fill out your user info detail from the settings page.")
+                self.present(alert, animated: true)
                 
             }
             isFirstLoad = false

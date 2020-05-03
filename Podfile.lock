@@ -76,16 +76,12 @@ PODS:
   - nanopb/decode (0.3.9011)
   - nanopb/encode (0.3.9011)
   - PromisesObjC (1.2.8)
-  - QuickLayout (3.0.0)
-  - SwiftEntryKit (1.2.3):
-    - QuickLayout (= 3.0.0)
   - UXCam (3.2.1)
 
 DEPENDENCIES:
   - Firebase/Analytics
   - GoogleTagManager
   - McPicker (~> 2.0.0)
-  - SwiftEntryKit (= 1.2.3)
   - UXCam
 
 SPEC REPOS:
@@ -107,8 +103,6 @@ SPEC REPOS:
     - McPicker
     - nanopb
     - PromisesObjC
-    - QuickLayout
-    - SwiftEntryKit
     - UXCam
 
 SPEC CHECKSUMS:
@@ -129,10 +123,8 @@ SPEC CHECKSUMS:
   McPicker: a0a6b8ece8f1642e05401a29867463aba501188b
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
-  QuickLayout: 07b45a72b10083fee3f095990cfed1c1e7b27f0a
-  SwiftEntryKit: 340713c2e4a6662c5149629990bf1088bf5f0389
   UXCam: 457f52deaee1cb2807393c134bc232e0d42b8e87
 
-PODFILE CHECKSUM: f96ee422376ed7b1bfb5d05efec64f0815d1fe51
+PODFILE CHECKSUM: 97a4184fbad5bff6eed02e1d27f0262e3a8f4949
 
 COCOAPODS: 1.9.1

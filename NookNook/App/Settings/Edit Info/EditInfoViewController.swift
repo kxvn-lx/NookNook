@@ -8,7 +8,6 @@
 
 import UIKit
 import TweeTextField
-import SwiftEntryKit
 
 class EditInfoViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate {
     
@@ -295,10 +294,9 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
             Taptic.successTaptic()
             self.closeTapped()
         }
-        else {
-            let ( view, attributes ) = ModalHelper.showPopupMessage(title: "Oh bummer!", description: "Please make sure you did not leave any textfields empty!", image: UIImage(named: "sad"))
-            
-            SwiftEntryKit.display(entry: view, using: attributes)
+        else {            
+            let alert = AlertHelper.createDefaultAction(title: "Oh bummer!", message: "Please make sure you did not leave any textfields empty!")
+            self.present(alert, animated: true)
             Taptic.errorTaptic()
         }
 
