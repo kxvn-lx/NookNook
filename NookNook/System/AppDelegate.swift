@@ -7,9 +7,10 @@
 //
 
 import UIKit
-import UXCam
-import Firebase
+//import UXCam
+//import Firebase
 import UserNotifications
+import GoogleMobileAds
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,11 +19,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        UXCam.optIntoSchematicRecordings()
-        UXCam.start(withKey:"pm7prng53jwfhag")
-        
-        FirebaseApp.configure()
+//        UXCam.optIntoSchematicRecordings()
+//        UXCam.start(withKey:"pm7prng53jwfhag")
+//        
+//        FirebaseApp.configure()
         UNUserNotificationCenter.current().delegate = self
+        
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
         return true
     }
 

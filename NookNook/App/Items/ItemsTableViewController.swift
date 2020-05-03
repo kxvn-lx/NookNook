@@ -5,11 +5,14 @@
 //  Created by Kevin Laminto on 11/4/20.
 //  Copyright © 2020 Kevin Laminto. All rights reserved.
 //
+// app id: ca-app-pub-5887492549877876~7928146930
+// ad unit id: ca-app-pub-5887492549877876/4349463188
 
 import UIKit
 import SDWebImage
 import SwiftyJSON
 import WhatsNewKit
+import GoogleMobileAds
 
 class ItemsTableViewController: UITableViewController {
     // constants
@@ -34,11 +37,22 @@ class ItemsTableViewController: UITableViewController {
         return searchController.isActive && !isSearchBarEmpty
     }
     
+    // Google ads banner
+    lazy var adBannerView: GADBannerView = {
+        let adBannerView = GADBannerView(adSize: kGADAdSizeBanner)
+        adBannerView.frame = CGRect(x: 0, y: self.view.frame.height, width: 320, height: 50)
+        adBannerView.translatesAutoresizingMaskIntoConstraints = false
+        adBannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        adBannerView.delegate = self
+        adBannerView.rootViewController = self
+
+        return adBannerView
+    }()
+    
     
     // MARK: - Table view init
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.clearsSelectionOnViewWillAppear = true
         
         tableView.rowHeight = UITableView.automaticDimension
@@ -54,9 +68,12 @@ class ItemsTableViewController: UITableViewController {
         searchController.searchBar.placeholder = "Search \(items.count) items..."
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
+
         
-        setBar()
-        
+        // Setup google ads
+        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ "2077ef9a63d2b398840261c8221a0c9b" ]
+        adBannerView.load(GADRequest())
+
         // Whatsnew Properties
         guard let vc = whatsNewVC.view else {
             return
