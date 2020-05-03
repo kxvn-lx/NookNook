@@ -28,6 +28,7 @@ class PatchLogViewController: UIViewController {
         - You can now tap any variants of items or wardrobe! (if exist)
         - Added turnip reminders! You can no longer forget to buy or sell them!
         - Edit your profile picture with cropping!
+        - Added website link (privacy policy included)
 
         v1.0.0 (290420201)
         - Fixed 'critters this month' glitch on certain region.
