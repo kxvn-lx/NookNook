@@ -24,6 +24,7 @@ class SettingsTableViewController: UITableViewController {
     
     private var shareCell = UITableViewCell()
     private var creatorCell = UITableViewCell()
+    private var websiteCell = UITableViewCell()
     
     private var requestFeatureCell = UITableViewCell()
     private var reportBugCell = UITableViewCell()
@@ -73,6 +74,8 @@ class SettingsTableViewController: UITableViewController {
         appVersionCell.detailTextLabel?.font = .preferredFont(forTextStyle: .caption1)
         
         requestFeatureCell = setupCell(text: "Request a feature", icon: IconUtil.systemIcon(of: .feature, weight: .regular), accesoryType: .disclosureIndicator)
+        
+        websiteCell = setupCell(text: "Website", icon: IconUtil.systemIcon(of: .website, weight: .regular), accesoryType: .disclosureIndicator)
     }
     
     
@@ -86,7 +89,7 @@ class SettingsTableViewController: UITableViewController {
         case 0:
             return 1
         case 1:
-            return 2
+            return 3
         case 2:
             return 3
         case 3:
@@ -109,6 +112,7 @@ class SettingsTableViewController: UITableViewController {
             switch (indexPath.row) {
             case 0: return self.shareCell
             case 1: return self.creatorCell
+            case 2: return self.websiteCell
             default: fatalError("Unknown row in section 1")
             }
         case 2:
@@ -116,13 +120,13 @@ class SettingsTableViewController: UITableViewController {
             case 0: return self.requestFeatureCell
             case 1: return self.reportBugCell
             case 2: return self.appVersionCell
-            default: fatalError("Unkown row ins ection 3")
+            default: fatalError("Unkown row in section 2")
             }
         case 3:
             switch (indexPath.row) {
             case 0: return self.deleteCacheCell
             case 1: return self.deleteDatasCell
-            default: fatalError("Unknown row in section 4")
+            default: fatalError("Unknown row in section 3")
             }
             
         default: fatalError("Unknown section")
@@ -163,6 +167,16 @@ class SettingsTableViewController: UITableViewController {
             // Creator
             case 1:
                 guard let url = URL(string: "https://twitter.com/kevinlx_")  else { return }
+                if UIApplication.shared.canOpenURL(url) {
+                    if #available(iOS 10.0, *) {
+                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    } else {
+                        UIApplication.shared.openURL(url)
+                    }
+                }
+                // Website
+            case 2:
+                guard let url = URL(string: "https://www.notion.so/NookNook-5983d18455354aea846999708a6045b1")  else { return }
                 if UIApplication.shared.canOpenURL(url) {
                     if #available(iOS 10.0, *) {
                         UIApplication.shared.open(url, options: [:], completionHandler: nil)

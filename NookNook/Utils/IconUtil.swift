@@ -33,6 +33,7 @@ struct IconUtil {
         case critter = "ant"
         case dashboard = "person.crop.circle"
         case reminder = "bell.fill"
+        case website = "globe"
     }
     
     /**
