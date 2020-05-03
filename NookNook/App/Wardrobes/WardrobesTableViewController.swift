@@ -15,7 +15,7 @@ class WardrobesTableViewController: UITableViewController {
     private let DETAIL_ID = "Detail"
     
     // Instance
-    private var favouritesManager: PersistEngine!
+    private var favouritesManager: DataPersistEngine!
     
     // General variables
     var wardrobes: [Wardrobe] = []
@@ -53,7 +53,7 @@ class WardrobesTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        favouritesManager = PersistEngine()
+        favouritesManager = DataPersistEngine()
         self.navigationController?.navigationBar.sizeToFit()
         self.tableView.reloadData()
     }

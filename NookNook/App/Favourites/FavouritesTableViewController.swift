@@ -14,7 +14,7 @@ class FavouritesTableViewController: UITableViewController {
     private let FAVOURITE_CELL = "FavouriteCell"
     private let DETAIL_ID = "Detail"
     
-    private var favouritesManager = PersistEngine()
+    private var favouritesManager = DataPersistEngine()
     
     private var currentGroup = GroupType.items
     
@@ -58,7 +58,7 @@ class FavouritesTableViewController: UITableViewController {
         tableView.estimatedRowHeight = 100
         
         setBar()
-        scView = SCHelper.createSCWithTitle(title: "You can only perform swight right action\non the main list.", items: items)
+        scView = SCHelper.createSCWithTitle(title: "You can only perform swipe right action\non the main list.", items: items)
         sc = scView.viewWithTag(1) as? UISegmentedControl
         sc.selectedSegmentIndex = 0
         sc.addTarget(self, action:  #selector(changeSource), for: .valueChanged)

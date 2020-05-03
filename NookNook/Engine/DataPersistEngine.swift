@@ -1,5 +1,5 @@
 //
-//  PersistEngine.swift
+//  DataPersistEngine.swift
 //  NookNook
 //
 //  Created by Kevin Laminto on 17/4/20.
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-struct PersistEngine {
+struct DataPersistEngine {
 
     var items: [Item] = []
     
@@ -123,7 +123,7 @@ struct PersistEngine {
             let data = try encoder.encode(savedData)
             try data.write(to: filePath, options: .atomicWrite)
         } catch let error {
-            print("Error while saving collection: \(error.localizedDescription)")
+            print("Error while saving datas: \(error.localizedDescription)")
         }
         encoder.dataEncodingStrategy = .base64
     }

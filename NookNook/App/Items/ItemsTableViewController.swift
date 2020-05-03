@@ -22,7 +22,7 @@ class ItemsTableViewController: UITableViewController {
     var currentCategory: Categories = Categories.housewares
     
     // instance
-    private var favouritesManager: PersistEngine!
+    private var favouritesManager: DataPersistEngine!
     private var whatsNewVC = WhatsNewHelper()
     
     // SearchController properties
@@ -66,7 +66,7 @@ class ItemsTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        favouritesManager = PersistEngine()
+        favouritesManager = DataPersistEngine()
         self.navigationController?.navigationBar.sizeToFit()
         self.tableView.reloadData()
     }

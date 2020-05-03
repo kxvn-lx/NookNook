@@ -11,7 +11,7 @@ import SDWebImage
 
 class DetailViewController: UIViewController {
     
-    private var favouriteManager = PersistEngine()
+    private var favouriteManager = DataPersistEngine()
     
     // Constants
     private let MARGIN: CGFloat = 10

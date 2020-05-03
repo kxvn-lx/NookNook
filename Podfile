@@ -10,4 +10,5 @@ target 'NookNook' do
 	pod 'UXCam'
 	pod 'Firebase/Analytics'
 	pod 'GoogleTagManager'
+	pod 'McPicker', '~> 2.0.0'
 end

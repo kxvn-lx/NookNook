@@ -20,7 +20,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
     private var scrollView: UIScrollView!
     private var mStackView: UIStackView!
     
-    private var favouritesManager: PersistEngine!
+    private var favouritesManager: DataPersistEngine!
     
     var iconView: UIImageView!
     var imgWrapper: UIView!
@@ -62,7 +62,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         super.viewWillAppear(true)
         
         userDict = UDHelper.getUser()
-        favouritesManager = PersistEngine()
+        favouritesManager = DataPersistEngine()
     }
     
     
@@ -116,7 +116,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         fruitLabel.attributedText = renderFruitLabel(text: userDict["nativeFruit"] ?? "Not selected")
         hemispherePicker.selectedSegmentIndex = userDict["hemisphere"] == DateHelper.Hemisphere.Northern.rawValue ? 0 : 1
         selectedHemisphere = userDict["hemisphere"].map { DateHelper.Hemisphere(rawValue: $0) ?? DateHelper.Hemisphere.Southern } == nil ? DateHelper.Hemisphere.Southern : userDict["hemisphere"].map { DateHelper.Hemisphere(rawValue: $0)! }
-        if let img = ImagePersistEngine.loadImage() {
+        if let img = UserPersistEngine.loadImage() {
             profileImageView.image = img
         }
     }
@@ -288,7 +288,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
             
             // Save user image
             if let img = self.profileImageView.image {
-                ImagePersistEngine.saveImage(image: img)
+                UserPersistEngine.saveImage(image: img)
             }
             
             
@@ -296,7 +296,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
             self.closeTapped()
         }
         else {
-            let ( view, attributes ) = ModalFactory.showPopupMessage(title: "Oh bummer!", description: "Please make sure you did not leave any textfields empty!", image: UIImage(named: "sad"))
+            let ( view, attributes ) = ModalHelper.showPopupMessage(title: "Oh bummer!", description: "Please make sure you did not leave any textfields empty!", image: UIImage(named: "sad"))
             
             SwiftEntryKit.display(entry: view, using: attributes)
             Taptic.errorTaptic()

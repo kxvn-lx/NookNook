@@ -187,7 +187,7 @@ class SettingsTableViewController: UITableViewController {
                     present(mailVC, animated: true, completion: nil)
                 }
                 else {
-                    let ( view, attributes ) = ModalFactory.showPopupMessage(title: "No mail accounts", description: "Please configure a mail account in order to send email. Or, manually email it to kevin.laminto@gmail.com", image: UIImage(named: "sad"))
+                    let ( view, attributes ) = ModalHelper.showPopupMessage(title: "No mail accounts", description: "Please configure a mail account in order to send email. Or, manually email it to kevin.laminto@gmail.com", image: UIImage(named: "sad"))
                     
                     SwiftEntryKit.display(entry: view, using: attributes)
                 }
@@ -205,7 +205,7 @@ class SettingsTableViewController: UITableViewController {
                     present(mailVC, animated: true, completion: nil)
                 }
                 else {
-                    let ( view, attributes ) = ModalFactory.showPopupMessage(title: "No mail accounts", description: "Please configure a mail account in order to send email. Or, manually email it to kevin.laminto@gmail.com", image: UIImage(named: "sad"))
+                    let ( view, attributes ) = ModalHelper.showPopupMessage(title: "No mail accounts", description: "Please configure a mail account in order to send email. Or, manually email it to kevin.laminto@gmail.com", image: UIImage(named: "sad"))
                     
                     SwiftEntryKit.display(entry: view, using: attributes)
                 }
@@ -230,16 +230,16 @@ class SettingsTableViewController: UITableViewController {
                             displayMode: .inferred
                         )
                     ),
-                    backgroundColor: EKColor(ModalFactory.grassBtn),
-                    highlightedBackgroundColor: EKColor(ModalFactory.grassBtn).with(alpha: 0.05),
+                    backgroundColor: EKColor(ModalHelper.grassBtn),
+                    highlightedBackgroundColor: EKColor(ModalHelper.grassBtn).with(alpha: 0.05),
                     displayMode: .inferred) {
-                        PersistEngine.deleteCacheData()
+                        DataPersistEngine.deleteCacheData()
                         Taptic.successTaptic()
-                        let ( view, attributes ) = ModalFactory.showPopupMessage(title: "Cached datas deleted.", description: "Please restart the app to ensure the changes have been updated.", image: UIImage(named: "celebrate"))
+                        let ( view, attributes ) = ModalHelper.showPopupMessage(title: "Cached datas deleted.", description: "Please restart the app to ensure the changes have been updated.", image: UIImage(named: "celebrate"))
                         SwiftEntryKit.display(entry: view, using: attributes)
                 }
                 
-                let ( view, attributes ) = ModalFactory.showAlertMessage(title: "Delete cached datas?", description: "Cached images will be deleted. This could free up some space in your device.", image: "danger", actionButton: actionButton)
+                let ( view, attributes ) = ModalHelper.showAlertMessage(title: "Delete cached datas?", description: "Cached images will be deleted. This could free up some space in your device.", image: "danger", actionButton: actionButton)
                 SwiftEntryKit.display(entry: view, using: attributes)
                 
             // Delete app data
@@ -253,16 +253,16 @@ class SettingsTableViewController: UITableViewController {
                             displayMode: .inferred
                         )
                     ),
-                    backgroundColor: EKColor(ModalFactory.grassBtn),
-                    highlightedBackgroundColor: EKColor(ModalFactory.grassBtn).with(alpha: 0.5),
+                    backgroundColor: EKColor(ModalHelper.grassBtn),
+                    highlightedBackgroundColor: EKColor(ModalHelper.grassBtn).with(alpha: 0.5),
                     displayMode: .inferred) {
-                        PersistEngine.deleteAppData()
+                        DataPersistEngine.deleteAppData()
                         Taptic.successTaptic()
-                        let ( view, attributes ) = ModalFactory.showPopupMessage(title: "App datas deleted.", description: "Please restart the app to ensure the changes have been updated.", image: UIImage(named: "celebrate"))
+                        let ( view, attributes ) = ModalHelper.showPopupMessage(title: "App datas deleted.", description: "Please restart the app to ensure the changes have been updated.", image: UIImage(named: "celebrate"))
                         SwiftEntryKit.display(entry: view, using: attributes)
                 }
                 
-                let ( view, attributes ) = ModalFactory.showAlertMessage(title: "Delete app datas?", description: "Your favourites, caught/donated, in residents data will be deleted.", image: "danger", actionButton: actionButton)
+                let ( view, attributes ) = ModalHelper.showAlertMessage(title: "Delete app datas?", description: "Your favourites, caught/donated, in residents data will be deleted.", image: "danger", actionButton: actionButton)
                 SwiftEntryKit.display(entry: view, using: attributes)
                 
                 

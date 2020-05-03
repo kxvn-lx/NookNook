@@ -15,7 +15,7 @@ class CrittersMonthlyTableViewController: UITableViewController {
     private let CRITTER_CELL = "CritterCell"
     private let DETAIL_ID = "Detail"
     
-    private var favouritesManager = PersistEngine()
+    private var favouritesManager = DataPersistEngine()
     
     weak var profileDelegate: ProfileDelegate!
     

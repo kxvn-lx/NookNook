@@ -17,7 +17,7 @@ class VillagersTableViewController: UITableViewController {
     private let DETAIL_ID = "Detail"
     
     // Instance
-    private var favouritesManager: PersistEngine!
+    private var favouritesManager: DataPersistEngine!
     private var sortType: SortEngine.Sort!
     
     // General variables
@@ -58,7 +58,7 @@ class VillagersTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        favouritesManager = PersistEngine()
+        favouritesManager = DataPersistEngine()
         self.navigationController?.navigationBar.sizeToFit()
         self.tableView.reloadData()
     }
@@ -216,7 +216,7 @@ class VillagersTableViewController: UITableViewController {
                 success(true)
             }
             else {
-                let ( view, attributes ) = ModalFactory.showPopupMessage(title: "Woah there!", description: "It appears that you have the max number of resident.", image: UIImage(named: "sad"))
+                let ( view, attributes ) = ModalHelper.showPopupMessage(title: "Woah there!", description: "It appears that you have the max number of resident.", image: UIImage(named: "sad"))
                 
                 SwiftEntryKit.display(entry: view, using: attributes)
                 

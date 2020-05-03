@@ -69,6 +69,7 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilitiesLegacy (1.3.2):
     - GoogleSymbolUtilities (~> 1.1)
+  - McPicker (2.0.1)
   - nanopb (0.3.9011):
     - nanopb/decode (= 0.3.9011)
     - nanopb/encode (= 0.3.9011)
@@ -83,6 +84,7 @@ PODS:
 DEPENDENCIES:
   - Firebase/Analytics
   - GoogleTagManager
+  - McPicker (~> 2.0.0)
   - SwiftEntryKit (= 1.2.3)
   - UXCam
 
@@ -102,6 +104,7 @@ SPEC REPOS:
     - GoogleTagManager
     - GoogleUtilities
     - GoogleUtilitiesLegacy
+    - McPicker
     - nanopb
     - PromisesObjC
     - QuickLayout
@@ -123,12 +126,13 @@ SPEC CHECKSUMS:
   GoogleTagManager: a5b872a9aae225c83587cc526d816b0323961845
   GoogleUtilities: 39530bc0ad980530298e9c4af8549e991fd033b1
   GoogleUtilitiesLegacy: 5501bedec1646bd284286eb5fc9453f7e23a12f4
+  McPicker: a0a6b8ece8f1642e05401a29867463aba501188b
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   QuickLayout: 07b45a72b10083fee3f095990cfed1c1e7b27f0a
   SwiftEntryKit: 340713c2e4a6662c5149629990bf1088bf5f0389
   UXCam: 457f52deaee1cb2807393c134bc232e0d42b8e87
 
-PODFILE CHECKSUM: 85f73179e4e9436d52d7ba67c2fced0b825047a2
+PODFILE CHECKSUM: f96ee422376ed7b1bfb5d05efec64f0815d1fe51
 
 COCOAPODS: 1.9.1

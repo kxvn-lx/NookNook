@@ -13,7 +13,7 @@ import SwiftEntryKit
 class DashboardViewController: UIViewController {
     
     // Data variables
-    internal var favouritesManager: PersistEngine!
+    internal var favouritesManager: DataPersistEngine!
     private var user: User!
     private var userDict: [String: String]!
     
@@ -60,7 +60,7 @@ class DashboardViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        favouritesManager = PersistEngine()
+        favouritesManager = DataPersistEngine()
         userDict = UDHelper.getUser()
         
         setBar()
@@ -78,7 +78,7 @@ class DashboardViewController: UIViewController {
         super.viewDidAppear(animated)
         if isFirstLoad {
             if isEmptyLists(dicts: userDict) {
-                let ( view, attributes ) = ModalFactory.showPopupMessage(title: "Hey there!", description: "NookNook is much better when you fill out your user info detail from the settings page.", image: UIImage(named: "hand"))
+                let ( view, attributes ) = ModalHelper.showPopupMessage(title: "Hey there!", description: "NookNook is much better when you fill out your user info detail from the settings page.", image: UIImage(named: "hand"))
                 
                 SwiftEntryKit.display(entry: view, using: attributes)
                 
@@ -93,7 +93,7 @@ class DashboardViewController: UIViewController {
         DispatchQueue.main.async {
             self.variationImageCollectionView.reloadData()
         }
-        favouritesManager = PersistEngine()
+        favouritesManager = DataPersistEngine()
         userDict = UDHelper.getUser()
         
         setupProfile()
@@ -141,7 +141,7 @@ class DashboardViewController: UIViewController {
         islandNameLabel.text = "\(userDict["islandName"] ?? "Nook Island") 🏝"
         nativeFruitLabel.text = userDict["nativeFruit"] ?? "Nook Fruit 🧃"
         
-        if let img = ImagePersistEngine.loadImage() {
+        if let img = UserPersistEngine.loadImage() {
             profileImageView.image = img
         }
         
@@ -352,7 +352,7 @@ class DashboardViewController: UIViewController {
     
     private func reloadProfile() {
         userDict = UDHelper.getUser()
-        favouritesManager = PersistEngine()
+        favouritesManager = DataPersistEngine()
         setupProfile()
         
         residentLabel.text = "Your Resident: \(self.favouritesManager.residentVillagers.count)/10"

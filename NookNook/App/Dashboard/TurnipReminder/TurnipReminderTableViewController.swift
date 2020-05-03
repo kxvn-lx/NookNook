@@ -9,6 +9,7 @@
 import UIKit
 import UserNotifications
 import SwiftEntryKit
+import McPicker
 
 class TurnipReminderTableViewController: UITableViewController {
     
@@ -23,6 +24,13 @@ class TurnipReminderTableViewController: UITableViewController {
     private let notificationCenter = UNUserNotificationCenter.current()
     private let options: UNAuthorizationOptions = [.alert, .sound]
     
+    lazy private var dayTimeHelper = ReminderHelper()
+    private var mcPicker: McPicker!
+    
+    
+    private var buyLabel = "Sunday (06:00AM)"
+    private var sellLabel = "Friday (06:00PM)"
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,13 +40,16 @@ class TurnipReminderTableViewController: UITableViewController {
         tableView.estimatedRowHeight = 50
         tableView.allowsSelection = true
         tableView.separatorStyle = .none
-
+        
+        buyLabel = dayTimeHelper.renderTime(timeDict: UserPersistEngine.loadReminder(reminderType: .buy))
+        sellLabel = dayTimeHelper.renderTime(timeDict: UserPersistEngine.loadReminder(reminderType: .sell))
     }
     
     override func loadView() {
         super.loadView()
         
         buyCell = setupToggleCell(text: "Buy reminder")
+        buyCell.selectionStyle = .none
         notificationsManager.hasNotification(identifer: .buy) { (isPresent) in
             DispatchQueue.main.async {
                 self.buyCell.switchView.isOn = isPresent ? true : false
@@ -47,6 +58,7 @@ class TurnipReminderTableViewController: UITableViewController {
         buyCell.accessoryView?.tag = 0
         
         sellCell = setupToggleCell(text: "Sell reminder")
+        sellCell.selectionStyle = .none
         notificationsManager.hasNotification(identifer: .sell) { (isPresent) in
             DispatchQueue.main.async {
                 self.sellCell.switchView.isOn = isPresent ? true : false
@@ -54,8 +66,14 @@ class TurnipReminderTableViewController: UITableViewController {
         }
         sellCell.accessoryView?.tag = 1
         
-        customBuyCell = setupCell(text: "Set buy reminder:")
-        customSellCell = setupCell(text: "Set sell reminder:")
+        customBuyCell = setupCell(text: "Set buy reminder")
+        customBuyCell.textLabel?.textColor = .grass1
+        customBuyCell.detailTextLabel?.font = .preferredFont(forTextStyle: .caption1)
+        
+        
+        customSellCell = setupCell(text: "Set sell reminder")
+        customSellCell.detailTextLabel?.font = .preferredFont(forTextStyle: .caption1)
+        customSellCell.textLabel?.textColor = .grass1
         
     }
     
@@ -67,7 +85,7 @@ class TurnipReminderTableViewController: UITableViewController {
             (didAllow, error) in
             if !didAllow {
                 DispatchQueue.main.async {
-                    let ( view, attributes ) = ModalFactory.showPopupMessage(title: "Oh no!", description: "NookNook can't send you reminders if you don't enable notifications. Please go to settings and enable it!", image: UIImage(named: "sad"))
+                    let ( view, attributes ) = ModalHelper.showPopupMessage(title: "Oh no!", description: "NookNook can't send you reminders if you don't enable notifications. Please go to settings and enable it!", image: UIImage(named: "sad"))
                     SwiftEntryKit.display(entry: view, using: attributes)
                 }
                 self.notificationsManager.checkStatus { (status) in
@@ -75,6 +93,13 @@ class TurnipReminderTableViewController: UITableViewController {
                 }
             }
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        customBuyCell.detailTextLabel?.text = buyLabel
+        customSellCell.detailTextLabel?.text = sellLabel
     }
     
     
@@ -112,7 +137,7 @@ class TurnipReminderTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
-        case 0: return 280
+        case 0: return 150
         case 2: return 44 * 1.5
         default: return .nan
         }
@@ -131,7 +156,7 @@ class TurnipReminderTableViewController: UITableViewController {
             
             
             label.numberOfLines = 0
-            label.text = "Buy reminder will be always on sunday morning (06:00 AM).\nwhile Sell reminder will be always on friday night. (06:00 PM).\n\nThis is because the app will make sure you buy it before turnip seller leave, and make sure that you sell your turnip before it's too late!"
+            label.text = "NookNook will remind you to buy turnip every \(buyLabel).\nAnd to sell turnip every \(sellLabel)."
             label.lineBreakMode = .byWordWrapping
             label.textColor = UIColor.dirt1.withAlphaComponent(0.5)
             label.font = .preferredFont(forTextStyle: .caption1)
@@ -149,9 +174,9 @@ class TurnipReminderTableViewController: UITableViewController {
                 imageView.heightAnchor.constraint(equalToConstant: 60),
                 imageView.widthAnchor.constraint(equalToConstant: 60),
                 
-                label.centerXAnchor.constraint(equalTo: headerView.centerXAnchor, constant: 0),
+                label.centerXAnchor.constraint(equalTo: headerView.centerXAnchor, constant: 10),
                 label.centerYAnchor.constraint(equalTo: headerView.centerYAnchor, constant: 40),
-                label.widthAnchor.constraint(equalTo: headerView.widthAnchor, multiplier: 0.9)
+                label.widthAnchor.constraint(equalTo: headerView.widthAnchor, multiplier: 0.95)
             ])
             return headerView
         case 2:
@@ -179,14 +204,41 @@ class TurnipReminderTableViewController: UITableViewController {
         }
     }
     
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.detailTextLabel?.textColor = UIColor.dirt1.withAlphaComponent(0.5)
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.tableView.deselectRow(at: indexPath, animated: true)
         switch indexPath.section {
         case 0, 1: break
         case 2:
             switch indexPath.row {
-            case 0: print("Attempt to present buy reminder picker view")
-            case 1: print("Attempt to present sell reminder picker view")
+            case 0:
+                mcPicker = dayTimeHelper.createMcPicker(selections: UserPersistEngine.loadReminder(reminderType: .buy), reminderType: .buy)
+                mcPicker.show(doneHandler: { [weak self] (selections: [Int : String]) -> Void in
+                    DispatchQueue.main.async {
+                        self!.buyLabel = self!.dayTimeHelper.renderTime(timeDict: selections)
+                        self!.customBuyCell.detailTextLabel?.text = self!.dayTimeHelper.renderTime(timeDict: selections)
+                        self?.tableView.reloadData()
+                        UserPersistEngine.saveReminder(timeDict: selections, reminderType: .buy)
+                        self!.buyCell.valueChanged(sender: self!.buyCell.switchView)
+                        Taptic.successTaptic()
+                    }
+                })
+                
+            case 1:
+                mcPicker = dayTimeHelper.createMcPicker(selections: UserPersistEngine.loadReminder(reminderType: .sell), reminderType: .sell)
+                mcPicker.show(doneHandler: { [weak self] (selections: [Int : String]) -> Void in
+                    DispatchQueue.main.async {
+                        self!.sellLabel = self!.dayTimeHelper.renderTime(timeDict: selections)
+                        self!.customSellCell.detailTextLabel?.text = self!.dayTimeHelper.renderTime(timeDict: selections)
+                        self?.tableView.reloadData()
+                        UserPersistEngine.saveReminder(timeDict: selections, reminderType: .sell)
+                        self!.sellCell.valueChanged(sender: self!.sellCell.switchView)
+                        Taptic.successTaptic()
+                    }
+                })
             default: break
             }
         default: break
@@ -227,7 +279,7 @@ class TurnipReminderTableViewController: UITableViewController {
         
         return cell
     }
-
+    
     // MARK: - Utilities functions
     private func disableViews(status: Bool) {
         DispatchQueue.main.async {

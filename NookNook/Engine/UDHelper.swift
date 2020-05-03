@@ -11,8 +11,10 @@ import Foundation
 struct UDHelper {
     
     private static let USER_KEY = "NookNook.userDefaults.key"
-    private static var userDict: [String: String]!
     private static let defaults = UserDefaults.standard
+    
+    private static var userDict: [String: String]!
+    
     
     static func saveUser(user: User) {
         let saveUser = ["id": user.id,
