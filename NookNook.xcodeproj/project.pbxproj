@@ -21,6 +21,7 @@
 		0A295B4C2444AAD0001CF828 /* Taptic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A295B4B2444AAD0001CF828 /* Taptic.swift */; };
 		0A2D908B245E690100974FD4 /* AlertHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2D908A245E690100974FD4 /* AlertHelper.swift */; };
 		0A2D908D245E6DF400974FD4 /* WhatsNewKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0A2D908C245E6DF400974FD4 /* WhatsNewKit */; };
+		0A34AB7C245EE51800BDCFF1 /* EditInfoVC+ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A34AB7B245EE51800BDCFF1 /* EditInfoVC+ImagePicker.swift */; };
 		0A36427E244695FE0081315A /* Critter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A36427D244695FE0081315A /* Critter.swift */; };
 		0A36428024469C600081315A /* bugsSecondary.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A36427F24469C600081315A /* bugsSecondary.json */; };
 		0A3642862446CC070081315A /* TimeMonthEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3642852446CC070081315A /* TimeMonthEngine.swift */; };
@@ -137,6 +138,7 @@
 		0A295B49244494F9001CF828 /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
 		0A295B4B2444AAD0001CF828 /* Taptic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Taptic.swift; sourceTree = "<group>"; };
 		0A2D908A245E690100974FD4 /* AlertHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertHelper.swift; sourceTree = "<group>"; };
+		0A34AB7B245EE51800BDCFF1 /* EditInfoVC+ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditInfoVC+ImagePicker.swift"; sourceTree = "<group>"; };
 		0A36427D244695FE0081315A /* Critter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Critter.swift; sourceTree = "<group>"; };
 		0A36427F24469C600081315A /* bugsSecondary.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bugsSecondary.json; sourceTree = "<group>"; };
 		0A3642852446CC070081315A /* TimeMonthEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeMonthEngine.swift; sourceTree = "<group>"; };
@@ -375,6 +377,7 @@
 			children = (
 				0A6862AB244D63A700E06C74 /* EditInfoViewController.swift */,
 				0A887F8C2450890C0044EAEA /* FruitsTableViewController.swift */,
+				0A34AB7B245EE51800BDCFF1 /* EditInfoVC+ImagePicker.swift */,
 			);
 			path = "Edit Info";
 			sourceTree = "<group>";
@@ -769,6 +772,7 @@
 				0A6862A6244D3DAB00E06C74 /* SCHeper.swift in Sources */,
 				0A2D908B245E690100974FD4 /* AlertHelper.swift in Sources */,
 				0A26E7B5244758C500D80594 /* Villager.swift in Sources */,
+				0A34AB7C245EE51800BDCFF1 /* EditInfoVC+ImagePicker.swift in Sources */,
 				0AEFF82B24470EAF0032156C /* WardrobesTableViewController.swift in Sources */,
 				0A72C3752445FD93009FA0D4 /* VariantCollectionViewCell.swift in Sources */,
 				0AEC5016245BA7B7004EC912 /* DynamicSizeTableView.swift in Sources */,
@@ -942,7 +946,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 30042020;
+				CURRENT_PROJECT_VERSION = 3052020;
 				DEVELOPMENT_TEAM = D87H8GPTK2;
 				INFOPLIST_FILE = NookNook/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -964,7 +968,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 30042020;
+				CURRENT_PROJECT_VERSION = 3052020;
 				DEVELOPMENT_TEAM = D87H8GPTK2;
 				INFOPLIST_FILE = NookNook/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;

@@ -9,7 +9,7 @@
 import UIKit
 import TweeTextField
 
-class EditInfoViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate {
+class EditInfoViewController: UIViewController, UINavigationControllerDelegate, UITextFieldDelegate {
     
     private var userDict: [String: String]!
     
@@ -55,6 +55,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
         imgWrapper.isUserInteractionEnabled = true
         imgWrapper.addGestureRecognizer(tapGestureRecognizer)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,26 +65,13 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         favouritesManager = DataPersistEngine()
     }
     
-    
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
-        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
             imagePicker.delegate = self
             imagePicker.sourceType = .photoLibrary
-            imagePicker.allowsEditing = false
+            imagePicker.allowsEditing = true
             present(imagePicker, animated: true, completion: nil)
         }
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        picker.dismiss(animated: true, completion: nil)
-        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            profileImageView.image = image
-        }
-
-    }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true, completion:nil)
     }
     
     // Modify the UI
