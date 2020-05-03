@@ -22,11 +22,15 @@
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-	</dict>
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <true/>
+        <key>NSAllowsArbitraryLoadsForMedia</key>
+        <true/>
+        <key>NSAllowsArbitraryLoadsInWebContent</key>
+        <true/>
+    </dict>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app needs to have access to your photo library to set profile picture.</string>
 	<key>UIApplicationSceneManifest</key>
@@ -69,5 +73,9 @@
 	</array>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-5887492549877876~7928146930</string>
+	<key>GADIsAdManagerApp</key>
+	<true/>
 </dict>
 </plist>
