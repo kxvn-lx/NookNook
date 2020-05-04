@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import GoogleMobileAds
 
 /// EXTENSIONS
 // MARK: - UIViewController
@@ -50,6 +51,27 @@ extension UIViewController {
         view.endEditing(true)
     }
 }
+
+
+extension UIViewController: GADBannerViewDelegate {
+    public func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+        print("Banner loaded successfully")
+        
+        self.view.addSubview(bannerView)
+        NSLayoutConstraint.activate([
+            bannerView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
+            bannerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+        ])
+    }
+    
+    public func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
+        print("Fail to receive ads")
+        print(error)
+    }
+}
+
+
+
 
 extension UITableViewController {
     func setCustomFooterView(text: String, height: CGFloat) {

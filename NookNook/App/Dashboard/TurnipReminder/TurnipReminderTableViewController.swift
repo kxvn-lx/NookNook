@@ -9,6 +9,7 @@
 import UIKit
 import UserNotifications
 import McPicker
+import GoogleMobileAds
 
 class TurnipReminderTableViewController: UITableViewController {
     
@@ -30,6 +31,17 @@ class TurnipReminderTableViewController: UITableViewController {
     private var buyLabel = "Sunday (06:00AM)"
     private var sellLabel = "Friday (06:00PM)"
     
+    // Google ads banner
+    lazy var adBannerView: GADBannerView = {
+        let adBannerView = GADBannerView(adSize: kGADAdSizeBanner)
+        adBannerView.translatesAutoresizingMaskIntoConstraints = false
+        adBannerView.adUnitID = GoogleAdsHelper.AD_UNIT_ID
+        adBannerView.delegate = self
+        adBannerView.rootViewController = self
+
+        return adBannerView
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +54,10 @@ class TurnipReminderTableViewController: UITableViewController {
         
         buyLabel = dayTimeHelper.renderTime(timeDict: UserPersistEngine.loadReminder(reminderType: .buy))
         sellLabel = dayTimeHelper.renderTime(timeDict: UserPersistEngine.loadReminder(reminderType: .sell))
+        
+        // Setup google ads
+        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ "2077ef9a63d2b398840261c8221a0c9b" ]
+        adBannerView.load(GADRequest())
     }
     
     override func loadView() {

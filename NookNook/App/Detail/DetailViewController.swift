@@ -8,6 +8,7 @@
 
 import UIKit
 import SDWebImage
+import GoogleMobileAds
 
 class DetailViewController: UIViewController {
     
@@ -64,6 +65,18 @@ class DetailViewController: UIViewController {
     private var variationTitleLabel: UILabel!
     let variationImageCollectionView:UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     let layout:UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
+    
+    // Google ads banner
+    lazy var adBannerView: GADBannerView = {
+        let adBannerView = GADBannerView(adSize: kGADAdSizeBanner)
+        adBannerView.translatesAutoresizingMaskIntoConstraints = false
+        adBannerView.adUnitID = GoogleAdsHelper.AD_UNIT_ID
+        adBannerView.delegate = self
+        adBannerView.rootViewController = self
+
+        return adBannerView
+    }()
+
 
 
     // MARK: - Tableview init
@@ -77,6 +90,10 @@ class DetailViewController: UIViewController {
         renderObj()
         
         self.variationImageCollectionView.register(VariantCollectionViewCell.self, forCellWithReuseIdentifier: VARIANT_CELL)
+        
+        // Setup google ads
+        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ "2077ef9a63d2b398840261c8221a0c9b" ]
+        adBannerView.load(GADRequest())
     }
     
     /**

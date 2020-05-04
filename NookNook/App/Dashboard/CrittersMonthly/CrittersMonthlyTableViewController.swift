@@ -8,6 +8,7 @@
 
 import UIKit
 import SDWebImage
+import GoogleMobileAds
 
 class CrittersMonthlyTableViewController: UITableViewController {
     
@@ -49,6 +50,18 @@ class CrittersMonthlyTableViewController: UITableViewController {
         case bugs, fishes
     }
     
+    // Google ads banner
+    lazy var adBannerView: GADBannerView = {
+        let adBannerView = GADBannerView(adSize: kGADAdSizeBanner)
+        adBannerView.translatesAutoresizingMaskIntoConstraints = false
+        adBannerView.adUnitID = GoogleAdsHelper.AD_UNIT_ID
+        adBannerView.delegate = self
+        adBannerView.rootViewController = self
+
+        return adBannerView
+    }()
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -74,6 +87,10 @@ class CrittersMonthlyTableViewController: UITableViewController {
         navigationItem.hidesSearchBarWhenScrolling = false
         
         self.isModalInPresentation = true
+        
+        // Setup google ads
+        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ "2077ef9a63d2b398840261c8221a0c9b" ]
+        adBannerView.load(GADRequest())
     }
     
     override func viewWillAppear(_ animated: Bool) {

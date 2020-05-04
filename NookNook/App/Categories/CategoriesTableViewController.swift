@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 protocol CatDelegate : NSObjectProtocol {
     func parseNewCategory(of category: Categories)
@@ -20,6 +21,18 @@ class CategoriesTableViewController: UITableViewController {
     
     weak var catDelegate: CatDelegate?
     
+    // Google ads banner
+    lazy var adBannerView: GADBannerView = {
+        let adBannerView = GADBannerView(adSize: kGADAdSizeBanner)
+        adBannerView.translatesAutoresizingMaskIntoConstraints = false
+        adBannerView.adUnitID = GoogleAdsHelper.AD_UNIT_ID
+        adBannerView.delegate = self
+        adBannerView.rootViewController = self
+
+        return adBannerView
+    }()
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,6 +42,11 @@ class CategoriesTableViewController: UITableViewController {
         tableView.tableFooterView = UIView()
         
         setBar()
+        
+        // Setup google ads
+        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ "2077ef9a63d2b398840261c8221a0c9b" ]
+        adBannerView.load(GADRequest())
+        
     }
     
     // MARK: - Table view data source

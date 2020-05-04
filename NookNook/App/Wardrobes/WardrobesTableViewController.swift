@@ -8,6 +8,7 @@
 
 import UIKit
 import SDWebImage
+import GoogleMobileAds
 
 class WardrobesTableViewController: UITableViewController {
     // Constants
@@ -31,6 +32,18 @@ class WardrobesTableViewController: UITableViewController {
         return searchController.isActive && !isSearchBarEmpty
     }
     
+    // Google ads banner
+    lazy var adBannerView: GADBannerView = {
+        let adBannerView = GADBannerView(adSize: kGADAdSizeBanner)
+        adBannerView.translatesAutoresizingMaskIntoConstraints = false
+        adBannerView.adUnitID = GoogleAdsHelper.AD_UNIT_ID
+        adBannerView.delegate = self
+        adBannerView.rootViewController = self
+
+        return adBannerView
+    }()
+
+    
     // MARK: - Table views init
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +62,10 @@ class WardrobesTableViewController: UITableViewController {
         navigationItem.hidesSearchBarWhenScrolling = false
         
         setBar()
+        
+        // Setup google ads
+        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ "2077ef9a63d2b398840261c8221a0c9b" ]
+        adBannerView.load(GADRequest())
     }
     
     override func viewWillAppear(_ animated: Bool) {

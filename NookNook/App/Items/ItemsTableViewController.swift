@@ -5,8 +5,6 @@
 //  Created by Kevin Laminto on 11/4/20.
 //  Copyright © 2020 Kevin Laminto. All rights reserved.
 //
-// app id: ca-app-pub-5887492549877876~7928146930
-// ad unit id: ca-app-pub-5887492549877876/4349463188
 
 import UIKit
 import SDWebImage
@@ -40,9 +38,8 @@ class ItemsTableViewController: UITableViewController {
     // Google ads banner
     lazy var adBannerView: GADBannerView = {
         let adBannerView = GADBannerView(adSize: kGADAdSizeBanner)
-        adBannerView.frame = CGRect(x: 0, y: self.view.frame.height, width: 320, height: 50)
         adBannerView.translatesAutoresizingMaskIntoConstraints = false
-        adBannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        adBannerView.adUnitID = GoogleAdsHelper.AD_UNIT_ID
         adBannerView.delegate = self
         adBannerView.rootViewController = self
 

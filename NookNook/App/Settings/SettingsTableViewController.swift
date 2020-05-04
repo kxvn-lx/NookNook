@@ -8,6 +8,7 @@
 
 import UIKit
 import MessageUI
+import GoogleMobileAds
 
 protocol ProfileDelegate: NSObjectProtocol {
     func updateprofile()
@@ -35,6 +36,17 @@ class SettingsTableViewController: UITableViewController {
     
     private let destColour = UIColor(red: 242/255, green: 67/255, blue: 51/255, alpha: 1)
     
+    // Google ads banner
+    lazy var adBannerView: GADBannerView = {
+        let adBannerView = GADBannerView(adSize: kGADAdSizeBanner)
+        adBannerView.translatesAutoresizingMaskIntoConstraints = false
+        adBannerView.adUnitID = GoogleAdsHelper.AD_UNIT_ID
+        adBannerView.delegate = self
+        adBannerView.rootViewController = self
+
+        return adBannerView
+    }()
+    
     // MARK: - Tableview Init
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +60,10 @@ class SettingsTableViewController: UITableViewController {
         self.isModalInPresentation = true
         
         self.setCustomFooterView(text: "Made with ❤️ by Kevin Laminto\n#NookNook", height: 50)
+        
+        // Setup google ads
+        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ "2077ef9a63d2b398840261c8221a0c9b" ]
+        adBannerView.load(GADRequest())
     }
     
     override func loadView() {

@@ -87,7 +87,7 @@
 		0AC89E402449418B009ADB18 /* VillagerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC89E3F2449418B009ADB18 /* VillagerTableViewCell.swift */; };
 		0AC89E422449419A009ADB18 /* VillagersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC89E412449419A009ADB18 /* VillagersTableViewController.swift */; };
 		0ACCF3AC2456830A00F9C62E /* WhatsNewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACCF3AB2456830A00F9C62E /* WhatsNewHelper.swift */; };
-		0ADC7B93245F22540033F67E /* ItemsTableView+Ads.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADC7B92245F22540033F67E /* ItemsTableView+Ads.swift */; };
+		0ADC7B97245F98A50033F67E /* GoogleAdsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADC7B96245F98A50033F67E /* GoogleAdsHelper.swift */; };
 		0AEC5016245BA7B7004EC912 /* DynamicSizeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEC5015245BA7B7004EC912 /* DynamicSizeTableView.swift */; };
 		0AEC501A245BAABD004EC912 /* NotificationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEC5019245BAABD004EC912 /* NotificationEngine.swift */; };
 		0AEC501C245BF56B004EC912 /* NookTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEC501B245BF56B004EC912 /* NookTabBarController.swift */; };
@@ -206,7 +206,7 @@
 		0AC89E3F2449418B009ADB18 /* VillagerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VillagerTableViewCell.swift; sourceTree = "<group>"; };
 		0AC89E412449419A009ADB18 /* VillagersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VillagersTableViewController.swift; sourceTree = "<group>"; };
 		0ACCF3AB2456830A00F9C62E /* WhatsNewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsNewHelper.swift; sourceTree = "<group>"; };
-		0ADC7B92245F22540033F67E /* ItemsTableView+Ads.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ItemsTableView+Ads.swift"; sourceTree = "<group>"; };
+		0ADC7B96245F98A50033F67E /* GoogleAdsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAdsHelper.swift; sourceTree = "<group>"; };
 		0AEC5015245BA7B7004EC912 /* DynamicSizeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicSizeTableView.swift; sourceTree = "<group>"; };
 		0AEC5019245BAABD004EC912 /* NotificationEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationEngine.swift; sourceTree = "<group>"; };
 		0AEC501B245BF56B004EC912 /* NookTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NookTabBarController.swift; sourceTree = "<group>"; };
@@ -288,7 +288,6 @@
 			children = (
 				0AFD706B2441BFEE00957BE6 /* ItemsTableViewController.swift */,
 				0AFD70722441D2B200957BE6 /* ItemTableViewCell.swift */,
-				0ADC7B92245F22540033F67E /* ItemsTableView+Ads.swift */,
 			);
 			path = Items;
 			sourceTree = "<group>";
@@ -530,6 +529,7 @@
 				0AA3616D244C520500D326AF /* SVHelper.swift */,
 				0AEC501B245BF56B004EC912 /* NookTabBarController.swift */,
 				0A2D908A245E690100974FD4 /* AlertHelper.swift */,
+				0ADC7B96245F98A50033F67E /* GoogleAdsHelper.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -755,6 +755,7 @@
 				0A370B5F2443223D00A72048 /* VC+.swift in Sources */,
 				0A23BBD0244AE1D5009B5178 /* Fruits.swift in Sources */,
 				0AEF52642452742E0056286B /* PatchLogViewController.swift in Sources */,
+				0ADC7B97245F98A50033F67E /* GoogleAdsHelper.swift in Sources */,
 				0A23BBCE244ADFE6009B5178 /* User.swift in Sources */,
 				0A6862AC244D63A700E06C74 /* EditInfoViewController.swift in Sources */,
 				0A739A41244B592300002B89 /* DashboardViewController.swift in Sources */,
@@ -804,7 +805,6 @@
 				0A370BAF2444796400A72048 /* CategoriesTableViewController.swift in Sources */,
 				0A14A002245155A10080941A /* ResidentHelper.swift in Sources */,
 				0AEC501A245BAABD004EC912 /* NotificationEngine.swift in Sources */,
-				0ADC7B93245F22540033F67E /* ItemsTableView+Ads.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

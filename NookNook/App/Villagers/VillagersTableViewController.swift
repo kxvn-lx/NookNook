@@ -8,6 +8,7 @@
 
 import UIKit
 import SDWebImage
+import GoogleMobileAds
 
 class VillagersTableViewController: UITableViewController {
     
@@ -33,6 +34,17 @@ class VillagersTableViewController: UITableViewController {
         return searchController.isActive && !isSearchBarEmpty
     }
     
+    // Google ads banner
+    lazy var adBannerView: GADBannerView = {
+        let adBannerView = GADBannerView(adSize: kGADAdSizeBanner)
+        adBannerView.translatesAutoresizingMaskIntoConstraints = false
+        adBannerView.adUnitID = GoogleAdsHelper.AD_UNIT_ID
+        adBannerView.delegate = self
+        adBannerView.rootViewController = self
+
+        return adBannerView
+    }()
+
     
     // MARK: - Tableview init
     override func viewDidLoad() {
@@ -53,6 +65,10 @@ class VillagersTableViewController: UITableViewController {
         navigationItem.hidesSearchBarWhenScrolling = false
         
         setBar()
+        
+        // Setup google ads
+        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ "2077ef9a63d2b398840261c8221a0c9b" ]
+        adBannerView.load(GADRequest())
     }
     
     override func viewWillAppear(_ animated: Bool) {
