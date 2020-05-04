@@ -12,12 +12,21 @@ import SwiftyStoreKit
 
 class InAppPurchaseViewController: UITableViewController {
     
+    enum IAPProduct: String, CaseIterable {
+        case NookNookP = "com.kevinlaminto.NookNook.BuyCoffee1"
+        case RemoveAds = "com.kevinlaminto.NookNook.RemoveAds1"
+        case BuyCoffeeNookNookP = "com.kevinlaminto.NookNook.RemoveAdsBuyCoffee1"
+    }
+    private let SHARED_SECRET = "240ac530fe894dc48bb26124d3368a65"
+    
     // Table view cell properties
     private var removeAdsCell = UITableViewCell()
     private var buyMeCoffeeCell = UITableViewCell()
     private var removeAdsAndCoffeeCell = UITableViewCell()
     
     private var restoreCell = UITableViewCell()
+    
+    private var isPurchasedLabel = PaddingLabel(withInsets: 10, 10, 20, 20)
     
     
     
@@ -27,14 +36,16 @@ class InAppPurchaseViewController: UITableViewController {
         
         setBar()
         
+        isPurchasedLabel.isHidden = true
+        
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 50
         tableView.allowsSelection = true
         tableView.separatorStyle = .singleLine
         
-        SwiftyStoreKit.retrieveProductsInfo(["com.kevinlaminto.NookNook.BuyCoffee1",
-                                             "com.kevinlaminto.NookNook.RemoveAds1",
-                                             "com.kevinlaminto.NookNook.RemoveAdsBuyCoffee1"])
+        SwiftyStoreKit.retrieveProductsInfo([IAPProduct.NookNookP.rawValue,
+                                             IAPProduct.RemoveAds.rawValue,
+                                             IAPProduct.BuyCoffeeNookNookP.rawValue])
         { result in
             for product in result.retrievedProducts {
                 print("Product: \(product.localizedTitle) - price: \(String(describing: product.localizedPrice))")
@@ -46,14 +57,26 @@ class InAppPurchaseViewController: UITableViewController {
                 print(error.localizedDescription)
             }
         }
+        
+        SwiftyStoreKit.shouldAddStorePaymentHandler = { payment, product in
+            return true
+        }
     }
     
     override func loadView() {
         super.loadView()
-        removeAdsCell = setupCell(text: "Remove ads 🙌")
+        removeAdsCell = setupCell(text: "NookNook+ 🙌")
         buyMeCoffeeCell = setupCell(text: "Buy me a coffee ☕️")
-        removeAdsAndCoffeeCell = setupCell(text: "Remove ads + buy me a coffee 🤩")
+        removeAdsAndCoffeeCell = setupCell(text: "NookNook+ and buy me a coffee 🤩")
         restoreCell = setupCell(text: "Restore purchase")
+        
+        isPurchasedLabel.text = "NookNook+"
+        isPurchasedLabel.font = .preferredFont(forTextStyle: .caption1)
+        isPurchasedLabel.textAlignment = .center
+        isPurchasedLabel.layer.borderColor = UIColor.dirt1.cgColor
+        isPurchasedLabel.textColor = .dirt1
+        isPurchasedLabel.layer.borderWidth = 1
+        isPurchasedLabel.layer.cornerRadius = 2.5
     }
     
     // MARK: - Table view data source
@@ -93,7 +116,7 @@ class InAppPurchaseViewController: UITableViewController {
         case 0:
             switch indexPath.row {
             case 0:
-                SwiftyStoreKit.purchaseProduct("com.kevinlaminto.NookNook.BuyCoffee1", quantity: 1, atomically: true) { result in
+                SwiftyStoreKit.purchaseProduct(IAPProduct.NookNookP.rawValue, quantity: 1, atomically: true) { result in
                     switch result {
                     case .success(let purchase):
                         Taptic.successTaptic()
@@ -113,9 +136,10 @@ class InAppPurchaseViewController: UITableViewController {
                 }
                 
             case 1:
-                SwiftyStoreKit.purchaseProduct("com.kevinlaminto.NookNook.RemoveAds1", quantity: 1, atomically: true) { result in
+                SwiftyStoreKit.purchaseProduct(IAPProduct.RemoveAds.rawValue, quantity: 1, atomically: true) { result in
                     switch result {
                     case .success(let purchase):
+                        self.isPurchasedLabel.isHidden = false
                         Taptic.successTaptic()
                         UDHelper.saveIsAdsPurchased()
                         let alert = AlertHelper.createDefaultAction(title: "Thank you ❤️", message: "\(String(describing: purchase.product.localizedTitle)) has been successfully purchased.")
@@ -134,9 +158,10 @@ class InAppPurchaseViewController: UITableViewController {
                 }
                 
             case 2:
-                SwiftyStoreKit.purchaseProduct("com.kevinlaminto.NookNook.RemoveAdsBuyCoffee1", quantity: 1, atomically: true) { result in
+                SwiftyStoreKit.purchaseProduct(IAPProduct.BuyCoffeeNookNookP.rawValue, quantity: 1, atomically: true) { result in
                     switch result {
                     case .success(let purchase):
+                        self.isPurchasedLabel.isHidden = false
                         Taptic.successTaptic()
                         UDHelper.saveIsAdsPurchased()
                         let alert = AlertHelper.createDefaultAction(title: "Thank you ❤️", message: "\(String(describing: purchase.product.localizedTitle)) has been successfully purchased.")
@@ -153,7 +178,7 @@ class InAppPurchaseViewController: UITableViewController {
                         }
                     }
                 }
-
+                
             default: break
             }
         case 1:
@@ -165,9 +190,11 @@ class InAppPurchaseViewController: UITableViewController {
                         self.present(alert, animated: true)
                     }
                     else if results.restoredPurchases.count > 0 {
-                        print("Restore successful!")
+                        self.isPurchasedLabel.isHidden = false
+                        let alert = AlertHelper.createDefaultAction(title: "Restore sucessful.", message: "")
+                        self.present(alert, animated: true)
                         results.restoredPurchases.forEach({
-                            if $0.productId == "com.kevinlaminto.NookNook.RemoveAds1" || $0.productId == "com.kevinlaminto.NookNook.RemoveAdsBuyCoffee1" {
+                            if $0.productId == IAPProduct.RemoveAds.rawValue || $0.productId == IAPProduct.BuyCoffeeNookNookP.rawValue {
                                 UDHelper.saveIsAdsPurchased()
                             }
                         })
@@ -189,7 +216,7 @@ class InAppPurchaseViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
-        case 0: return 300
+        case 0: return 350
         default: return .nan
         }
     }
@@ -226,9 +253,11 @@ class InAppPurchaseViewController: UITableViewController {
             
             headerView.addSubview(imageView)
             headerView.addSubview(label)
+            headerView.addSubview(isPurchasedLabel)
             
             imageView.translatesAutoresizingMaskIntoConstraints = false
             label.translatesAutoresizingMaskIntoConstraints = false
+            isPurchasedLabel.translatesAutoresizingMaskIntoConstraints = false
             
             NSLayoutConstraint.activate([
                 imageView.centerXAnchor.constraint(equalTo: headerView.centerXAnchor),
@@ -238,7 +267,10 @@ class InAppPurchaseViewController: UITableViewController {
                 
                 label.centerXAnchor.constraint(equalTo: headerView.centerXAnchor, constant: 10),
                 label.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20 * 2),
-                label.widthAnchor.constraint(equalTo: headerView.widthAnchor, multiplier: 0.95)
+                label.widthAnchor.constraint(equalTo: headerView.widthAnchor, multiplier: 0.95),
+                
+                isPurchasedLabel.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 10),
+                isPurchasedLabel.centerXAnchor.constraint(equalTo: headerView.centerXAnchor)
             ])
             return headerView
         default: return nil
