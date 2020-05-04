@@ -11,7 +11,7 @@ import StoreKit
 
 class IAPService: NSObject {
     
-    enum IAPProduct: String {
+    enum IAPProduct: String, CaseIterable {
         case RemoveAds = "com.kevinlaminto.NookNook.RemoveAds1"
         case BuyCoffee = "com.kevinlaminto.NookNook.BuyCoffee1"
         case RemoveAdsBuyCoffee = "com.kevinlaminto.NookNook.RemoveAdsBuyCoffee1"
@@ -25,7 +25,13 @@ class IAPService: NSObject {
     
     /// Get all the IN-App products
     func getProducts() {
-        let products: Set = [IAPProduct.RemoveAds.rawValue]
+        let products: Set = [IAPProduct.RemoveAds.rawValue,
+                             IAPProduct.BuyCoffee.rawValue,
+                             IAPProduct.RemoveAdsBuyCoffee.rawValue,
+        ]
+        guard products.count == IAPProduct.allCases.count else {
+            fatalError("Please ensure all products has been registered.")
+        }
         let request = SKProductsRequest(productIdentifiers: products)
         request.delegate = self
         request.start()
@@ -50,9 +56,6 @@ class IAPService: NSObject {
 extension IAPService: SKProductsRequestDelegate {
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
         self.products = response.products
-        for product in response.products {
-            print(product.productIdentifier)
-        }
     }
 }
 
