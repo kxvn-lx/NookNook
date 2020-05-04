@@ -8,7 +8,6 @@
 
 import UIKit
 import MessageUI
-import GoogleMobileAds
 
 protocol ProfileDelegate: NSObjectProtocol {
     func updateprofile()
@@ -38,17 +37,6 @@ class SettingsTableViewController: UITableViewController {
     private var deleteCacheCell = UITableViewCell()
     
     private let destColour = UIColor(red: 242/255, green: 67/255, blue: 51/255, alpha: 1)
-
-    // Google ads banner
-    lazy var adBannerView: GADBannerView = {
-        let adBannerView = GADBannerView(adSize: kGADAdSizeBanner)
-        adBannerView.translatesAutoresizingMaskIntoConstraints = false
-        adBannerView.adUnitID = GoogleAdsHelper.AD_UNIT_ID
-        adBannerView.delegate = self
-        adBannerView.rootViewController = self
-
-        return adBannerView
-    }()
     
     // MARK: - Tableview Init
     override func viewDidLoad() {
@@ -63,10 +51,6 @@ class SettingsTableViewController: UITableViewController {
         self.isModalInPresentation = true
         
         self.setCustomFooterView(text: "Made with ❤️ by Kevin Laminto\n#NookNook", height: 50, multiplier: 1.5)
-        
-        // Setup google ads
-        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ "2077ef9a63d2b398840261c8221a0c9b" ]
-        adBannerView.load(GADRequest())
     }
     
     override func loadView() {
@@ -258,7 +242,7 @@ class SettingsTableViewController: UITableViewController {
             switch indexPath.row {
                 // Remove ads
             case 0:
-                let vc = self.storyboard!.instantiateViewController(withIdentifier: ADS_VC) as! AdsTableViewController
+                let vc = self.storyboard!.instantiateViewController(withIdentifier: ADS_VC) as! InAppPurchaseViewController
                 let navController = UINavigationController(rootViewController: vc)
                 self.present(navController, animated:true, completion: nil)
             default: break

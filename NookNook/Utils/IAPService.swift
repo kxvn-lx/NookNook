@@ -50,6 +50,11 @@ class IAPService: NSObject {
         paymentQueue.add(payment)
     }
     
+    /// Restoring purchased product
+    func restore() {
+        paymentQueue.restoreCompletedTransactions()
+    }
+    
 }
 
 
@@ -63,10 +68,22 @@ extension IAPService: SKPaymentTransactionObserver {
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         for transaction in transactions {
             print("\(transaction.payment.productIdentifier) - \(transaction.transactionState.status())")
+            
             switch transaction.transactionState {
             case .purchasing: break
+            case .purchased:
+                if transaction.payment.productIdentifier == IAPProduct.RemoveAds.rawValue ||
+                    transaction.payment.productIdentifier == IAPProduct.RemoveAdsBuyCoffee.rawValue {
+                    UDHelper.saveIsAdsPurchased()
+                }
+                queue.finishTransaction(transaction)
+                
+            case .failed:
+                queue.finishTransaction(transaction)
+                
             default: queue.finishTransaction(transaction)
             }
+            
         }
     }
 }

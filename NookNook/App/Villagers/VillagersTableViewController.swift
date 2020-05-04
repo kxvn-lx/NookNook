@@ -36,7 +36,7 @@ class VillagersTableViewController: UITableViewController {
     
     // Google ads banner
     lazy var adBannerView: GADBannerView = {
-        let adBannerView = GADBannerView(adSize: kGADAdSizeBanner)
+        let adBannerView = GADBannerView(adSize: kGADAdSizeSmartBannerLandscape)
         adBannerView.translatesAutoresizingMaskIntoConstraints = false
         adBannerView.adUnitID = GoogleAdsHelper.AD_UNIT_ID
         adBannerView.delegate = self
@@ -68,7 +68,6 @@ class VillagersTableViewController: UITableViewController {
         
         // Setup google ads
         GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ "2077ef9a63d2b398840261c8221a0c9b" ]
-        adBannerView.load(GADRequest())
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,6 +75,12 @@ class VillagersTableViewController: UITableViewController {
         favouritesManager = DataPersistEngine()
         self.navigationController?.navigationBar.sizeToFit()
         self.tableView.reloadData()
+        if !UDHelper.getIsAdsPurchased() {
+            self.view.addSubview(adBannerView)
+            adBannerView.load(GADRequest())
+        } else {
+            adBannerView.removeFromSuperview()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -197,7 +202,9 @@ class VillagersTableViewController: UITableViewController {
             
             self.favouritesManager.saveFavouritedVillager(villager: villager)
             DispatchQueue.main.async {
+                let contentOffset = tableView.contentOffset
                 self.tableView.reloadRows(at: [indexPath], with: .left)
+                tableView.contentOffset = contentOffset
             }
             Taptic.lightTaptic()
             success(true)
@@ -217,7 +224,9 @@ class VillagersTableViewController: UITableViewController {
             if self.favouritesManager.residentVillagers.count <= 9 {
                 self.favouritesManager.saveResidentVillager(villager: villager)
                 DispatchQueue.main.async {
+                    let contentOffset = tableView.contentOffset
                     self.tableView.reloadRows(at: [indexPath], with: .left)
+                    tableView.contentOffset = contentOffset
                 }
                 Taptic.lightTaptic()
                 success(true)
@@ -225,7 +234,9 @@ class VillagersTableViewController: UITableViewController {
             else if self.favouritesManager.residentVillagers.count <= 10 && self.favouritesManager.residentVillagers.contains(villager) {
                 self.favouritesManager.saveResidentVillager(villager: villager)
                 DispatchQueue.main.async {
+                    let contentOffset = tableView.contentOffset
                     self.tableView.reloadRows(at: [indexPath], with: .left)
+                    tableView.contentOffset = contentOffset
                 }
                 Taptic.lightTaptic()
                 success(true)

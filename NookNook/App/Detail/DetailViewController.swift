@@ -68,7 +68,7 @@ class DetailViewController: UIViewController {
     
     // Google ads banner
     lazy var adBannerView: GADBannerView = {
-        let adBannerView = GADBannerView(adSize: kGADAdSizeBanner)
+        let adBannerView = GADBannerView(adSize: kGADAdSizeSmartBannerLandscape)
         adBannerView.translatesAutoresizingMaskIntoConstraints = false
         adBannerView.adUnitID = GoogleAdsHelper.AD_UNIT_ID
         adBannerView.delegate = self
@@ -93,7 +93,17 @@ class DetailViewController: UIViewController {
         
         // Setup google ads
         GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ "2077ef9a63d2b398840261c8221a0c9b" ]
-        adBannerView.load(GADRequest())
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if !UDHelper.getIsAdsPurchased() {
+            self.view.addSubview(adBannerView)
+            adBannerView.load(GADRequest())
+        } else {
+            adBannerView.removeFromSuperview()
+        }
     }
     
     /**

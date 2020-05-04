@@ -34,12 +34,12 @@ class CrittersTableViewController: UITableViewController {
     
     // Google ads banner
     lazy var adBannerView: GADBannerView = {
-        let adBannerView = GADBannerView(adSize: kGADAdSizeBanner)
+        let adBannerView = GADBannerView(adSize: kGADAdSizeSmartBannerLandscape)
         adBannerView.translatesAutoresizingMaskIntoConstraints = false
         adBannerView.adUnitID = GoogleAdsHelper.AD_UNIT_ID
         adBannerView.delegate = self
         adBannerView.rootViewController = self
-
+        
         return adBannerView
     }()
     
@@ -67,7 +67,6 @@ class CrittersTableViewController: UITableViewController {
         
         // Setup google ads
         GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ "2077ef9a63d2b398840261c8221a0c9b" ]
-        adBannerView.load(GADRequest())
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,6 +74,12 @@ class CrittersTableViewController: UITableViewController {
         favouritesManager = DataPersistEngine()
         self.navigationController?.navigationBar.sizeToFit()
         self.tableView.reloadData()
+        if !UDHelper.getIsAdsPurchased() {
+            self.view.addSubview(adBannerView)
+            adBannerView.load(GADRequest())
+        } else {
+            adBannerView.removeFromSuperview()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -207,7 +212,9 @@ class CrittersTableViewController: UITableViewController {
             
             self.favouritesManager.saveCaughtCritter(critter: critter)
             DispatchQueue.main.async {
+                let contentOffset = tableView.contentOffset
                 self.tableView.reloadRows(at: [indexPath], with: .left)
+                tableView.contentOffset = contentOffset
             }
             Taptic.lightTaptic()
             success(true)
@@ -229,7 +236,9 @@ class CrittersTableViewController: UITableViewController {
                 self.favouritesManager.saveDonatedCritter(critter: critter)
             }
             DispatchQueue.main.async {
+                let contentOffset = tableView.contentOffset
                 self.tableView.reloadRows(at: [indexPath], with: .left)
+                tableView.contentOffset = contentOffset
             }
             Taptic.lightTaptic()
             success(true)
@@ -285,7 +294,7 @@ extension CrittersTableViewController: CatDelegate {
             let indexPath = IndexPath(row: 0, section: 0)
             self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
         }
-
+        
         searchController.searchBar.placeholder = "Search \(critters.count) critters..."
     }
 }

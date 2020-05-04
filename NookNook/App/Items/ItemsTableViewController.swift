@@ -37,12 +37,12 @@ class ItemsTableViewController: UITableViewController {
     
     // Google ads banner
     lazy var adBannerView: GADBannerView = {
-        let adBannerView = GADBannerView(adSize: kGADAdSizeBanner)
+        let adBannerView = GADBannerView(adSize: kGADAdSizeSmartBannerLandscape)
         adBannerView.translatesAutoresizingMaskIntoConstraints = false
         adBannerView.adUnitID = GoogleAdsHelper.AD_UNIT_ID
         adBannerView.delegate = self
         adBannerView.rootViewController = self
-
+        
         return adBannerView
     }()
     
@@ -65,12 +65,10 @@ class ItemsTableViewController: UITableViewController {
         searchController.searchBar.placeholder = "Search \(items.count) items..."
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
-
+        
         
         // Setup google ads
         GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ "2077ef9a63d2b398840261c8221a0c9b" ]
-        adBannerView.load(GADRequest())
-
         // Whatsnew Properties
         guard let vc = whatsNewVC.view else {
             return
@@ -83,6 +81,12 @@ class ItemsTableViewController: UITableViewController {
         favouritesManager = DataPersistEngine()
         self.navigationController?.navigationBar.sizeToFit()
         self.tableView.reloadData()
+        if !UDHelper.getIsAdsPurchased() {
+            self.view.addSubview(adBannerView)
+            adBannerView.load(GADRequest())
+        } else {
+            adBannerView.removeFromSuperview()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -201,10 +205,12 @@ class ItemsTableViewController: UITableViewController {
         
         let favouriteAction = UIContextualAction(style: .normal, title:  "", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
 
-            
             self.favouritesManager.saveItem(item: item)
             DispatchQueue.main.async {
+                let contentOffset = tableView.contentOffset
                 self.tableView.reloadRows(at: [indexPath], with: .left)
+                tableView.contentOffset = contentOffset
+                
             }
             Taptic.lightTaptic()
             success(true)

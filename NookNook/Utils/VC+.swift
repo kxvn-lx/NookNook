@@ -54,8 +54,8 @@ extension UIViewController {
 
 
 extension UIViewController: GADBannerViewDelegate {
+    
     public func adViewDidReceiveAd(_ bannerView: GADBannerView) {
-        self.view.addSubview(bannerView)
         NSLayoutConstraint.activate([
             bannerView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
             bannerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),

@@ -88,7 +88,7 @@
 		0AC89E422449419A009ADB18 /* VillagersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC89E412449419A009ADB18 /* VillagersTableViewController.swift */; };
 		0ACCF3AC2456830A00F9C62E /* WhatsNewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACCF3AB2456830A00F9C62E /* WhatsNewHelper.swift */; };
 		0ADC7B97245F98A50033F67E /* GoogleAdsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADC7B96245F98A50033F67E /* GoogleAdsHelper.swift */; };
-		0ADC7BA0245FACA00033F67E /* AdsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADC7B9F245FACA00033F67E /* AdsTableViewController.swift */; };
+		0ADC7BA0245FACA00033F67E /* InAppPurchaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADC7B9F245FACA00033F67E /* InAppPurchaseViewController.swift */; };
 		0ADC7BA4245FC0B50033F67E /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ADC7BA3245FC0B50033F67E /* StoreKit.framework */; };
 		0ADC7BAA245FEF3B0033F67E /* IAPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADC7BA9245FEF3B0033F67E /* IAPService.swift */; };
 		0AEC5016245BA7B7004EC912 /* DynamicSizeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEC5015245BA7B7004EC912 /* DynamicSizeTableView.swift */; };
@@ -210,7 +210,7 @@
 		0AC89E412449419A009ADB18 /* VillagersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VillagersTableViewController.swift; sourceTree = "<group>"; };
 		0ACCF3AB2456830A00F9C62E /* WhatsNewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsNewHelper.swift; sourceTree = "<group>"; };
 		0ADC7B96245F98A50033F67E /* GoogleAdsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAdsHelper.swift; sourceTree = "<group>"; };
-		0ADC7B9F245FACA00033F67E /* AdsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsTableViewController.swift; sourceTree = "<group>"; };
+		0ADC7B9F245FACA00033F67E /* InAppPurchaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppPurchaseViewController.swift; sourceTree = "<group>"; };
 		0ADC7BA3245FC0B50033F67E /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		0ADC7BA9245FEF3B0033F67E /* IAPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPService.swift; sourceTree = "<group>"; };
 		0AEC5015245BA7B7004EC912 /* DynamicSizeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicSizeTableView.swift; sourceTree = "<group>"; };
@@ -374,7 +374,7 @@
 		0A6862A7244D498800E06C74 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				0ADC7B9E245FAC910033F67E /* Ads */,
+				0ADC7B9E245FAC910033F67E /* IAP */,
 				0AEF5262245273FF0056286B /* Patch Log */,
 				0A6862AA244D638E00E06C74 /* Edit Info */,
 				0A6862A8244D499C00E06C74 /* SettingsTableViewController.swift */,
@@ -462,12 +462,12 @@
 			path = WhatsNew;
 			sourceTree = "<group>";
 		};
-		0ADC7B9E245FAC910033F67E /* Ads */ = {
+		0ADC7B9E245FAC910033F67E /* IAP */ = {
 			isa = PBXGroup;
 			children = (
-				0ADC7B9F245FACA00033F67E /* AdsTableViewController.swift */,
+				0ADC7B9F245FACA00033F67E /* InAppPurchaseViewController.swift */,
 			);
-			path = Ads;
+			path = IAP;
 			sourceTree = "<group>";
 		};
 		0AEF5262245273FF0056286B /* Patch Log */ = {
@@ -789,7 +789,7 @@
 				0A370B6E24444BD800A72048 /* DataEngine.swift in Sources */,
 				0AFD705124419DD300957BE6 /* SceneDelegate.swift in Sources */,
 				0A370BAA24446D7B00A72048 /* IconUtil.swift in Sources */,
-				0ADC7BA0245FACA00033F67E /* AdsTableViewController.swift in Sources */,
+				0ADC7BA0245FACA00033F67E /* InAppPurchaseViewController.swift in Sources */,
 				0A97C2FB244C95290062B136 /* FavouritesTableViewController.swift in Sources */,
 				0AFD70752441D9BF00957BE6 /* Item.swift in Sources */,
 				0A887F8D2450890C0044EAEA /* FruitsTableViewController.swift in Sources */,

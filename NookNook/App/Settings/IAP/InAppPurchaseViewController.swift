@@ -1,5 +1,5 @@
 //
-//  AdsTableViewController.swift
+//  InAppPurchaseViewController.swift
 //  NookNook
 //
 //  Created by Kevin Laminto on 4/5/20.
@@ -8,21 +8,8 @@
 
 import UIKit
 import StoreKit
-import GoogleMobileAds
 
-class AdsTableViewController: UITableViewController {
-
-    
-    // Google ads banner
-    lazy var adBannerView: GADBannerView = {
-        let adBannerView = GADBannerView(adSize: kGADAdSizeBanner)
-        adBannerView.translatesAutoresizingMaskIntoConstraints = false
-        adBannerView.adUnitID = GoogleAdsHelper.AD_UNIT_ID
-        adBannerView.delegate = self
-        adBannerView.rootViewController = self
-
-        return adBannerView
-    }()
+class InAppPurchaseViewController: UITableViewController {
     
     // Table view cell properties
     private var removeAdsCell = UITableViewCell()
@@ -33,7 +20,7 @@ class AdsTableViewController: UITableViewController {
     
     
     
-    
+    // MARK: - View init
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,10 +31,6 @@ class AdsTableViewController: UITableViewController {
         tableView.allowsSelection = true
         tableView.separatorStyle = .singleLine
         
-        // Setup google ads
-        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ "2077ef9a63d2b398840261c8221a0c9b" ]
-        adBannerView.load(GADRequest())
-        
         IAPService.shared.getProducts()
     }
     
@@ -56,18 +39,18 @@ class AdsTableViewController: UITableViewController {
         removeAdsCell = setupCell(text: "Remove ads 🙌")
         buyMeCoffeeCell = setupCell(text: "Buy me a coffee ☕️")
         removeAdsAndCoffeeCell = setupCell(text: "Remove ads + buy me a coffee 🤩")
-        restoreCell = setupCell(text: "Restore 'Remove ads' purchase")
+        restoreCell = setupCell(text: "Restore purchase")
     }
 
     // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0: return 3
+        case 1: return 1
         default: return 0
         }
     }
@@ -81,6 +64,11 @@ class AdsTableViewController: UITableViewController {
             case 2: return removeAdsAndCoffeeCell
             default: return UITableViewCell()
             }
+            case 1:
+                switch indexPath.row {
+                case 0: return restoreCell
+                default: return UITableViewCell()
+                }
         default: return UITableViewCell()
         }
     }
@@ -93,6 +81,11 @@ class AdsTableViewController: UITableViewController {
             case 0: IAPService.shared.purchase(product: .BuyCoffee)
             case 1: IAPService.shared.purchase(product: .RemoveAds)
             case 2: IAPService.shared.purchase(product: .RemoveAdsBuyCoffee)
+            default: break
+            }
+        case 1:
+            switch indexPath.row {
+            case 0: IAPService.shared.restore()
             default: break
             }
         default: break
