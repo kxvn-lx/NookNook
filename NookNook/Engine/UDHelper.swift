@@ -35,7 +35,6 @@ struct UDHelper {
     /// Save user's bought preference
     static func saveIsAdsPurchased() {
         defaults.set(true, forKey: USER_AD_KEY)
-        Taptic.successTaptic()
     }
     
     /// Get user's ads bought preference

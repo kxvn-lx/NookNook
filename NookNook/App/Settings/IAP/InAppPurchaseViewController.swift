@@ -8,6 +8,7 @@
 
 import UIKit
 import StoreKit
+import SwiftyStoreKit
 
 class InAppPurchaseViewController: UITableViewController {
     
@@ -31,7 +32,20 @@ class InAppPurchaseViewController: UITableViewController {
         tableView.allowsSelection = true
         tableView.separatorStyle = .singleLine
         
-        IAPService.shared.getProducts()
+        SwiftyStoreKit.retrieveProductsInfo(["com.kevinlaminto.NookNook.BuyCoffee1",
+                                             "com.kevinlaminto.NookNook.RemoveAds1",
+                                             "com.kevinlaminto.NookNook.RemoveAdsBuyCoffee1"])
+        { result in
+            for product in result.retrievedProducts {
+                print("Product: \(product.localizedTitle) - price: \(String(describing: product.localizedPrice))")
+            }
+            for product in result.invalidProductIDs {
+                print("Invalid product ID: \(product)")
+            }
+            if let error = result.error {
+                print(error.localizedDescription)
+            }
+        }
     }
     
     override func loadView() {
@@ -41,12 +55,12 @@ class InAppPurchaseViewController: UITableViewController {
         removeAdsAndCoffeeCell = setupCell(text: "Remove ads + buy me a coffee 🤩")
         restoreCell = setupCell(text: "Restore purchase")
     }
-
+    
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0: return 3
@@ -54,7 +68,7 @@ class InAppPurchaseViewController: UITableViewController {
         default: return 0
         }
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
@@ -64,11 +78,11 @@ class InAppPurchaseViewController: UITableViewController {
             case 2: return removeAdsAndCoffeeCell
             default: return UITableViewCell()
             }
-            case 1:
-                switch indexPath.row {
-                case 0: return restoreCell
-                default: return UITableViewCell()
-                }
+        case 1:
+            switch indexPath.row {
+            case 0: return restoreCell
+            default: return UITableViewCell()
+            }
         default: return UITableViewCell()
         }
     }
@@ -78,14 +92,91 @@ class InAppPurchaseViewController: UITableViewController {
         switch indexPath.section {
         case 0:
             switch indexPath.row {
-            case 0: IAPService.shared.purchase(product: .BuyCoffee)
-            case 1: IAPService.shared.purchase(product: .RemoveAds)
-            case 2: IAPService.shared.purchase(product: .RemoveAdsBuyCoffee)
+            case 0:
+                SwiftyStoreKit.purchaseProduct("com.kevinlaminto.NookNook.BuyCoffee1", quantity: 1, atomically: true) { result in
+                    switch result {
+                    case .success(let purchase):
+                        Taptic.successTaptic()
+                        let alert = AlertHelper.createDefaultAction(title: "Thank you for you generosity 🤩", message: "\(String(describing: purchase.product.localizedTitle)) has been successfully purchased.")
+                        self.present(alert, animated: true)
+                        
+                    case .error(let error):
+                        switch error.code {
+                        case .unknown, .clientInvalid, .paymentInvalid, .paymentNotAllowed, .storeProductNotAvailable:
+                            Taptic.errorTaptic()
+                            let alert = AlertHelper.createDefaultAction(title: "Something went wrong.", message: "There was problem with the transaction. Please try again later or contact kevin.laminto@gmail.com")
+                            self.present(alert, animated: true)
+                            
+                        default: print((error as NSError).localizedDescription)
+                        }
+                    }
+                }
+                
+            case 1:
+                SwiftyStoreKit.purchaseProduct("com.kevinlaminto.NookNook.RemoveAds1", quantity: 1, atomically: true) { result in
+                    switch result {
+                    case .success(let purchase):
+                        Taptic.successTaptic()
+                        UDHelper.saveIsAdsPurchased()
+                        let alert = AlertHelper.createDefaultAction(title: "Thank you ❤️", message: "\(String(describing: purchase.product.localizedTitle)) has been successfully purchased.")
+                        self.present(alert, animated: true)
+                        
+                    case .error(let error):
+                        switch error.code {
+                        case .unknown, .clientInvalid, .paymentInvalid, .paymentNotAllowed, .storeProductNotAvailable:
+                            Taptic.errorTaptic()
+                            let alert = AlertHelper.createDefaultAction(title: "Something went wrong.", message: "There was problem with the transaction. Please try again later or contact kevin.laminto@gmail.com")
+                            self.present(alert, animated: true)
+                            
+                        default: print((error as NSError).localizedDescription)
+                        }
+                    }
+                }
+                
+            case 2:
+                SwiftyStoreKit.purchaseProduct("com.kevinlaminto.NookNook.RemoveAdsBuyCoffee1", quantity: 1, atomically: true) { result in
+                    switch result {
+                    case .success(let purchase):
+                        Taptic.successTaptic()
+                        UDHelper.saveIsAdsPurchased()
+                        let alert = AlertHelper.createDefaultAction(title: "Thank you ❤️", message: "\(String(describing: purchase.product.localizedTitle)) has been successfully purchased.")
+                        self.present(alert, animated: true)
+                        
+                    case .error(let error):
+                        switch error.code {
+                        case .unknown, .clientInvalid, .paymentInvalid, .paymentNotAllowed, .storeProductNotAvailable:
+                            Taptic.errorTaptic()
+                            let alert = AlertHelper.createDefaultAction(title: "Something went wrong.", message: "There was problem with the transaction. Please try again later or contact kevin.laminto@gmail.com")
+                            self.present(alert, animated: true)
+                            
+                        default: print((error as NSError).localizedDescription)
+                        }
+                    }
+                }
+
             default: break
             }
         case 1:
             switch indexPath.row {
-            case 0: IAPService.shared.restore()
+            case 0:
+                SwiftyStoreKit.restorePurchases(atomically: true) { results in
+                    if results.restoreFailedPurchases.count > 0 {
+                        let alert = AlertHelper.createDefaultAction(title: "Something went wrong.", message: "There was problem with the restoration. Please try again later or contact kevin.laminto@gmail.com")
+                        self.present(alert, animated: true)
+                    }
+                    else if results.restoredPurchases.count > 0 {
+                        print("Restore successful!")
+                        results.restoredPurchases.forEach({
+                            if $0.productId == "com.kevinlaminto.NookNook.RemoveAds1" || $0.productId == "com.kevinlaminto.NookNook.RemoveAdsBuyCoffee1" {
+                                UDHelper.saveIsAdsPurchased()
+                            }
+                        })
+                    }
+                    else {
+                        let alert = AlertHelper.createDefaultAction(title: "Nothing to restore.", message: "")
+                        self.present(alert, animated: true)
+                    }
+                }
             default: break
             }
         default: break
@@ -158,7 +249,7 @@ class InAppPurchaseViewController: UITableViewController {
         cell.detailTextLabel?.textColor = UIColor.dirt1.withAlphaComponent(0.5)
     }
     
-
+    
     // MARK: - Setup views
     private func setBar() {
         self.configureNavigationBar(title: "Support me", preferredLargeTitle: false)
@@ -172,7 +263,7 @@ class InAppPurchaseViewController: UITableViewController {
         navigationController?.popViewController(animated: true)
         dismiss(animated: true, completion: nil)
     }
-
+    
     private func setupCell(text: String) -> UITableViewCell {
         let cell = UITableViewCell(style: .value1, reuseIdentifier: "cell")
         
