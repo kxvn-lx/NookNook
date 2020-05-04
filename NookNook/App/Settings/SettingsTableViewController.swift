@@ -17,6 +17,7 @@ protocol ProfileDelegate: NSObjectProtocol {
 class SettingsTableViewController: UITableViewController {
     private let EDIT_INFO_VC = "EditInfoVC"
     private let PATCH_LOG_VC = "PatchLogVC"
+    private let ADS_VC = "AdsVC"
     private let BUILD_NUMBER = "305202010"
     
     weak var profileDelegate: ProfileDelegate!
@@ -31,11 +32,13 @@ class SettingsTableViewController: UITableViewController {
     private var reportBugCell = UITableViewCell()
     private var appVersionCell = UITableViewCell()
     
+    private var removeAdsCell = UITableViewCell()
+    
     private var deleteDatasCell = UITableViewCell()
     private var deleteCacheCell = UITableViewCell()
     
     private let destColour = UIColor(red: 242/255, green: 67/255, blue: 51/255, alpha: 1)
-    
+
     // Google ads banner
     lazy var adBannerView: GADBannerView = {
         let adBannerView = GADBannerView(adSize: kGADAdSizeBanner)
@@ -55,11 +58,11 @@ class SettingsTableViewController: UITableViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 50
         tableView.allowsSelection = true
-        tableView.separatorStyle = .none
+        tableView.separatorStyle = .singleLine
         
         self.isModalInPresentation = true
         
-        self.setCustomFooterView(text: "Made with ❤️ by Kevin Laminto\n#NookNook", height: 50)
+        self.setCustomFooterView(text: "Made with ❤️ by Kevin Laminto\n#NookNook", height: 50, multiplier: 1.5)
         
         // Setup google ads
         GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ "2077ef9a63d2b398840261c8221a0c9b" ]
@@ -92,26 +95,24 @@ class SettingsTableViewController: UITableViewController {
         requestFeatureCell = setupCell(text: "Request a feature", icon: IconUtil.systemIcon(of: .feature, weight: .regular), accesoryType: .disclosureIndicator)
         
         websiteCell = setupCell(text: "Website", icon: IconUtil.systemIcon(of: .website, weight: .regular), accesoryType: .disclosureIndicator)
+        
+        removeAdsCell = setupCell(text: "Support me", icon: IconUtil.systemIcon(of: .supportMe, weight: .regular), accesoryType: .disclosureIndicator)
     }
     
     
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return 5
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case 0:
-            return 1
-        case 1:
-            return 3
-        case 2:
-            return 3
-        case 3:
-            return 2
-        default:
-            return 0
+        case 0: return 1
+        case 1: return 3
+        case 2: return 3
+        case 3: return 1
+        case 4: return 2
+        default: return 0
         }
     }
     
@@ -140,9 +141,14 @@ class SettingsTableViewController: UITableViewController {
             }
         case 3:
             switch (indexPath.row) {
+            case 0: return self.removeAdsCell
+            default: fatalError("Unknown row in section 3")
+            }
+        case 4:
+            switch (indexPath.row) {
             case 0: return self.deleteCacheCell
             case 1: return self.deleteDatasCell
-            default: fatalError("Unknown row in section 3")
+            default: fatalError("Unknown row in section 4")
             }
             
         default: fatalError("Unknown section")
@@ -155,13 +161,17 @@ class SettingsTableViewController: UITableViewController {
         case 0: return "Share it if you love it."
         case 1: return ""
         case 2: return ""
-        case 3: return "Danger Zone"
+        case 3: return ""
+        case 4: return "Danger zone"
         default: return ""
         }
     }
     
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return ""
+        switch section {
+        case 3: return "Here you can buy in-app purchases to support me and the app."
+        default: return nil
+        }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -246,6 +256,15 @@ class SettingsTableViewController: UITableViewController {
             }
         case 3:
             switch indexPath.row {
+                // Remove ads
+            case 0:
+                let vc = self.storyboard!.instantiateViewController(withIdentifier: ADS_VC) as! AdsTableViewController
+                let navController = UINavigationController(rootViewController: vc)
+                self.present(navController, animated:true, completion: nil)
+            default: break
+            }
+        case 4:
+            switch indexPath.row {
             // Delete cached data
             case 0:
                 
@@ -281,7 +300,15 @@ class SettingsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 5
+        switch section {
+        case 3: return 44
+        default: return 5
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+        let footer = view as! UITableViewHeaderFooterView
+        footer.textLabel?.textColor = UIColor.dirt1.withAlphaComponent(0.5)
     }
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -291,7 +318,8 @@ class SettingsTableViewController: UITableViewController {
         case 0: header.textLabel?.text! = "Share it if you love it."
         case 1: header.textLabel?.text! = ""
         case 2: header.textLabel?.text! = ""
-        case 3: header.textLabel?.text! = "Danger Zone"
+        case 3: header.textLabel?.text! = ""
+        case 4: header.textLabel?.text! = "Danger zone"
         default: header.textLabel?.text! = ""
         }
     }

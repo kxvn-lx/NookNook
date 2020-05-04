@@ -34,6 +34,7 @@ struct IconUtil {
         case dashboard = "person.crop.circle"
         case reminder = "bell.fill"
         case website = "globe"
+        case supportMe = "hand.thumbsup"
     }
     
     /**

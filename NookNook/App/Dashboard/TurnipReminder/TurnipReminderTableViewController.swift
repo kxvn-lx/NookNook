@@ -50,7 +50,7 @@ class TurnipReminderTableViewController: UITableViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 50
         tableView.allowsSelection = true
-        tableView.separatorStyle = .none
+        tableView.separatorStyle = .singleLine
         
         buyLabel = dayTimeHelper.renderTime(timeDict: UserPersistEngine.loadReminder(reminderType: .buy))
         sellLabel = dayTimeHelper.renderTime(timeDict: UserPersistEngine.loadReminder(reminderType: .sell))
@@ -152,7 +152,7 @@ class TurnipReminderTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
-        case 0: return 150
+        case 0: return 180
         case 2: return 44 * 1.5
         default: return .nan
         }
@@ -190,7 +190,7 @@ class TurnipReminderTableViewController: UITableViewController {
                 imageView.widthAnchor.constraint(equalToConstant: 60),
                 
                 label.centerXAnchor.constraint(equalTo: headerView.centerXAnchor, constant: 10),
-                label.centerYAnchor.constraint(equalTo: headerView.centerYAnchor, constant: 40),
+                label.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20 * 2),
                 label.widthAnchor.constraint(equalTo: headerView.widthAnchor, multiplier: 0.95)
             ])
             return headerView

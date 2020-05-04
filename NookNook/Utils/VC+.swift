@@ -55,8 +55,6 @@ extension UIViewController {
 
 extension UIViewController: GADBannerViewDelegate {
     public func adViewDidReceiveAd(_ bannerView: GADBannerView) {
-        print("Banner loaded successfully")
-        
         self.view.addSubview(bannerView)
         NSLayoutConstraint.activate([
             bannerView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
@@ -65,17 +63,14 @@ extension UIViewController: GADBannerViewDelegate {
     }
     
     public func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
-        print("Fail to receive ads")
         print(error)
     }
 }
 
 
-
-
 extension UITableViewController {
-    func setCustomFooterView(text: String, height: CGFloat) {
-        let customView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: height))
+    func setCustomFooterView(text: String, height: CGFloat, multiplier: CGFloat = 0) {
+        let customView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: height + height * multiplier))
         customView.backgroundColor = .clear
         let titleLabel = UILabel(frame: CGRect(x: 30, y: 0, width: self.tableView.frame.width * 0.85, height: height))
         titleLabel.numberOfLines = 0
@@ -236,7 +231,7 @@ extension UIColor {
     /// Used for main app secondary background colour and buttons
     static let grass1 = UIColor(named: "Grass-1")!
     /// Used for secondary buttons
-    static let grassBtn = UIColor(named: "Grass-Btn")!
+    static let grassBtn = UIColor(named: "Grass-btn")!
     /// Used for main app background
     static let cream1 = UIColor(named: "Cream-1")!
     /// Used for secondary app background

@@ -11,6 +11,7 @@ import Foundation
 struct UDHelper {
     
     private static let USER_KEY = "NookNook.userDefaults.key"
+    private static let USER_AD_KEY = "NookNook.userDefaults.key.ad"
     private static let defaults = UserDefaults.standard
     
     private static var userDict: [String: String]!
@@ -28,6 +29,12 @@ struct UDHelper {
     static func getUser() -> [String: String] {
         userDict = defaults.dictionary(forKey: USER_KEY) as? [String: String] ?? [String: String]()
         return userDict
+    }
+    
+    
+    static func saveAdsPurchased() {
+        defaults.set(true, forKey: USER_AD_KEY)
+        print(defaults.bool(forKey: USER_AD_KEY))
     }
     
 }
