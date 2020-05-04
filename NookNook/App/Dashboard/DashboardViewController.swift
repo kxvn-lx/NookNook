@@ -169,6 +169,7 @@ class DashboardViewController: UIViewController {
     private func setUI() {
         
         scrollView = UIScrollView()
+        scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         
         self.view.addSubview(scrollView)

@@ -29,6 +29,8 @@ class AdsTableViewController: UITableViewController {
     private var buyMeCoffeeCell = UITableViewCell()
     private var removeAdsAndCoffeeCell = UITableViewCell()
     
+    private var restoreCell = UITableViewCell()
+    
     
     
     
@@ -54,23 +56,31 @@ class AdsTableViewController: UITableViewController {
         removeAdsCell = setupCell(text: "Remove ads 🙌")
         buyMeCoffeeCell = setupCell(text: "Buy me a coffee ☕️")
         removeAdsAndCoffeeCell = setupCell(text: "Remove ads + buy me a coffee 🤩")
+        restoreCell = setupCell(text: "Restore 'Remove ads' purchase")
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        switch section {
+        case 0: return 3
+        default: return 0
+        }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
-        case 0: return buyMeCoffeeCell
-        case 1: return removeAdsCell
-        case 2: return removeAdsAndCoffeeCell
+        case 0:
+            switch indexPath.row {
+            case 0: return buyMeCoffeeCell
+            case 1: return removeAdsCell
+            case 2: return removeAdsAndCoffeeCell
+            default: return UITableViewCell()
+            }
         default: return UITableViewCell()
         }
     }
@@ -78,9 +88,13 @@ class AdsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.tableView.deselectRow(at: indexPath, animated: true)
         switch indexPath.section {
-        case 0: IAPService.shared.purchase(product: .BuyCoffee)
-        case 1: IAPService.shared.purchase(product: .RemoveAds)
-        case 2: IAPService.shared.purchase(product: .RemoveAdsBuyCoffee)
+        case 0:
+            switch indexPath.row {
+            case 0: IAPService.shared.purchase(product: .BuyCoffee)
+            case 1: IAPService.shared.purchase(product: .RemoveAds)
+            case 2: IAPService.shared.purchase(product: .RemoveAdsBuyCoffee)
+            default: break
+            }
         default: break
         }
     }

@@ -60,6 +60,7 @@ class PatchLogViewController: UIViewController {
     
     private func setView() {
         scrollView = UIScrollView()
+        scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(scrollView)
         

@@ -140,7 +140,6 @@ class DetailViewController: UIViewController {
             renderCritter()
             variationStack.isHidden = true
             buyStack.isHidden = true
-            sourceNoteLabel.isHidden = true
             
         case .wardrobes:
             renderWardrobe()
@@ -175,6 +174,8 @@ class DetailViewController: UIViewController {
         
     }
     
+    
+    
     /// Method to render item object
     private func renderItem() {
         detailImageView.sd_setImage(with: ImageEngine.parseNPURL(with: itemObj.image!, category: itemObj.category), placeholderImage: UIImage(named: "placeholder"))
@@ -194,6 +195,12 @@ class DetailViewController: UIViewController {
 
     /// Method to render critter object
     private func renderCritter() {
+        var shadow = critterObj.shadow ?? ""
+        if !shadow.isEmpty {
+            shadow = shadow.components(separatedBy: " ")[0]
+            sourceNoteLabel.text = "Shadow size: \(shadow)"
+        }
+        
         detailImageView.sd_setImage(with: ImageEngine.parseAcnhURL(with: critterObj.image, of: critterObj.category, mediaType: .images), placeholderImage: UIImage(named: "placeholder"))
         titleLabel.text = critterObj.name
         subtitleLabel.text = critterObj.obtainedFrom
@@ -253,6 +260,7 @@ class DetailViewController: UIViewController {
     
     // MARK:- Modify UI
     private func setupView() {
+        
         buyStack = UIStackView()
         sellStack = UIStackView()
         weatherStack = UIStackView()
@@ -277,6 +285,7 @@ class DetailViewController: UIViewController {
         // create master scrollView
         scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
         
         // Create master stackView
         mStackView = SVHelper.createSV(axis: .vertical, spacing: MARGIN * 4, alignment: .center, distribution: .equalSpacing)
@@ -379,6 +388,8 @@ class DetailViewController: UIViewController {
         
         weatherStack = createInfoStackView(title: "Weather", with: weatherLabel)
         
+        
+        
         infoStackView.addArrangedSubview(sourceNoteLabel)
         infoStackView.addArrangedSubview(buyStack)
         infoStackView.addArrangedSubview(sellStack)
@@ -449,14 +460,14 @@ class DetailViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: self.view.topAnchor),
-            scrollView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 0),
-            scrollView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -0),
+            scrollView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
+            scrollView.rightAnchor.constraint(equalTo: self.view.rightAnchor),
             scrollView.bottomAnchor.constraint(equalTo: self.view.layoutMarginsGuide.bottomAnchor),
             
             mStackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             mStackView.leftAnchor.constraint(equalTo: scrollView.leftAnchor),
             mStackView.rightAnchor.constraint(equalTo: scrollView.rightAnchor),
-            mStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -MARGIN * 4),
+            mStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             mStackView.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor),
             
             detailImageView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: itemImageViewSize),
@@ -484,7 +495,7 @@ class DetailViewController: UIViewController {
     }
     
     private func setBar() {
-        self.configureNavigationBar(title: "Turnip reminder", preferredLargeTitle: false)
+        self.configureNavigationBar(title: "Detail", preferredLargeTitle: false)
         self.view.backgroundColor = .cream1
         
         let close = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(closeTapped))

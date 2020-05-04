@@ -28,4 +28,6 @@ struct Critter: Codable, Equatable, Identifiable {
     let category: String
     
     let sell: Int?
+    
+    let shadow: String?
 }

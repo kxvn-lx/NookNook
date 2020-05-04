@@ -106,16 +106,27 @@ struct DataEngine {
                     let key = jsonObj[k]!
                     let weather = weathers[key["name"]["name-en"].stringValue] != nil ? weathers[key["name"]["name-en"].stringValue]! : "Unknown"
                     
-                    let newCritter = Critter(name: key["name"]["name-en"].stringValue,
-                                             image: key["id"].stringValue,
+                    let name = key["name"]["name-en"].stringValue
+                    let image = key["id"].stringValue
+                    let obtainedFrom = key["availability"]["location"].stringValue
+                    let time = key["availability"]["time"].stringValue
+                    let activeMonthsN = key["availability"]["month-northern"].stringValue
+                    let activeMonthsS = key["availability"]["month-southern"].stringValue
+                    let rarity = key["availability"]["rarity"].stringValue
+                    let sell = key["price"].intValue
+                    let shadow = key["shadow"].stringValue
+                    
+                    let newCritter = Critter(name: name,
+                                             image: image,
                                              weather: weather,
-                                             obtainedFrom: key["availability"]["location"].stringValue,
-                                             time: key["availability"]["time"].stringValue,
-                                             activeMonthsN: key["availability"]["month-northern"].stringValue,
-                                             activeMonthsS: key["availability"]["month-southern"].stringValue,
-                                             rarity: key["availability"]["rarity"].stringValue,
+                                             obtainedFrom: obtainedFrom,
+                                             time: time,
+                                             activeMonthsN: activeMonthsN,
+                                             activeMonthsS: activeMonthsS,
+                                             rarity: rarity,
                                              category: cat,
-                                             sell: key["price"].intValue
+                                             sell: sell,
+                                             shadow: shadow
                     )
                     critters.append(newCritter)
                 }
