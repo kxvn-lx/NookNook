@@ -78,9 +78,9 @@ class AdsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.tableView.deselectRow(at: indexPath, animated: true)
         switch indexPath.section {
-        case 0: print("Buying coffee ...")
+        case 0: IAPService.shared.purchase(product: .BuyCoffee)
         case 1: IAPService.shared.purchase(product: .RemoveAds)
-        case 2: print("Removing ads and buying coffee ...")
+        case 2: IAPService.shared.purchase(product: .RemoveAdsBuyCoffee)
         default: break
         }
     }

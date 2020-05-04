@@ -13,6 +13,8 @@ class IAPService: NSObject {
     
     enum IAPProduct: String {
         case RemoveAds = "com.kevinlaminto.NookNook.RemoveAds1"
+        case BuyCoffee = "com.kevinlaminto.NookNook.BuyCoffee1"
+        case RemoveAdsBuyCoffee = "com.kevinlaminto.NookNook.RemoveAdsBuyCoffee1"
     }
     
     private override init() { }
@@ -57,15 +59,9 @@ extension IAPService: SKProductsRequestDelegate {
 extension IAPService: SKPaymentTransactionObserver {
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         for transaction in transactions {
-            print(transaction.transactionState.status(), transaction.payment.productIdentifier)
+            print("\(transaction.payment.productIdentifier) - \(transaction.transactionState.status())")
             switch transaction.transactionState {
             case .purchasing: break
-            case .failed:
-                queue.finishTransaction(transaction)
-                Taptic.errorTaptic()
-            case .purchased, .restored:
-                queue.finishTransaction(transaction)
-                Taptic.successTaptic()
             default: queue.finishTransaction(transaction)
             }
         }
