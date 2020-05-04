@@ -26,8 +26,6 @@ class InAppPurchaseViewController: UITableViewController {
     
     private var restoreCell = UITableViewCell()
     
-    private var isPurchasedLabel = PaddingLabel(withInsets: 10, 10, 20, 20)
-    
     
     
     // MARK: - View init
@@ -35,9 +33,6 @@ class InAppPurchaseViewController: UITableViewController {
         super.viewDidLoad()
         
         setBar()
-        
-        isPurchasedLabel.isHidden = true
-        
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 50
         tableView.allowsSelection = true
@@ -58,9 +53,7 @@ class InAppPurchaseViewController: UITableViewController {
             }
         }
         
-        SwiftyStoreKit.shouldAddStorePaymentHandler = { payment, product in
-            return true
-        }
+        SwiftyStoreKit.shouldAddStorePaymentHandler = { payment, product in return true }
     }
     
     override func loadView() {
@@ -69,14 +62,6 @@ class InAppPurchaseViewController: UITableViewController {
         buyMeCoffeeCell = setupCell(text: "Buy me a coffee ☕️")
         removeAdsAndCoffeeCell = setupCell(text: "NookNook+ and buy me a coffee 🤩")
         restoreCell = setupCell(text: "Restore purchase")
-        
-        isPurchasedLabel.text = "NookNook+"
-        isPurchasedLabel.font = .preferredFont(forTextStyle: .caption1)
-        isPurchasedLabel.textAlignment = .center
-        isPurchasedLabel.layer.borderColor = UIColor.dirt1.cgColor
-        isPurchasedLabel.textColor = .dirt1
-        isPurchasedLabel.layer.borderWidth = 1
-        isPurchasedLabel.layer.cornerRadius = 2.5
     }
     
     // MARK: - Table view data source
@@ -139,7 +124,6 @@ class InAppPurchaseViewController: UITableViewController {
                 SwiftyStoreKit.purchaseProduct(IAPProduct.RemoveAds.rawValue, quantity: 1, atomically: true) { result in
                     switch result {
                     case .success(let purchase):
-                        self.isPurchasedLabel.isHidden = false
                         Taptic.successTaptic()
                         UDHelper.saveIsAdsPurchased()
                         let alert = AlertHelper.createDefaultAction(title: "Thank you ❤️", message: "\(String(describing: purchase.product.localizedTitle)) has been successfully purchased.")
@@ -161,7 +145,6 @@ class InAppPurchaseViewController: UITableViewController {
                 SwiftyStoreKit.purchaseProduct(IAPProduct.BuyCoffeeNookNookP.rawValue, quantity: 1, atomically: true) { result in
                     switch result {
                     case .success(let purchase):
-                        self.isPurchasedLabel.isHidden = false
                         Taptic.successTaptic()
                         UDHelper.saveIsAdsPurchased()
                         let alert = AlertHelper.createDefaultAction(title: "Thank you ❤️", message: "\(String(describing: purchase.product.localizedTitle)) has been successfully purchased.")
@@ -190,7 +173,6 @@ class InAppPurchaseViewController: UITableViewController {
                         self.present(alert, animated: true)
                     }
                     else if results.restoredPurchases.count > 0 {
-                        self.isPurchasedLabel.isHidden = false
                         let alert = AlertHelper.createDefaultAction(title: "Restore sucessful.", message: "")
                         self.present(alert, animated: true)
                         results.restoredPurchases.forEach({
@@ -253,11 +235,9 @@ class InAppPurchaseViewController: UITableViewController {
             
             headerView.addSubview(imageView)
             headerView.addSubview(label)
-            headerView.addSubview(isPurchasedLabel)
             
             imageView.translatesAutoresizingMaskIntoConstraints = false
             label.translatesAutoresizingMaskIntoConstraints = false
-            isPurchasedLabel.translatesAutoresizingMaskIntoConstraints = false
             
             NSLayoutConstraint.activate([
                 imageView.centerXAnchor.constraint(equalTo: headerView.centerXAnchor),
@@ -268,9 +248,6 @@ class InAppPurchaseViewController: UITableViewController {
                 label.centerXAnchor.constraint(equalTo: headerView.centerXAnchor, constant: 10),
                 label.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20 * 2),
                 label.widthAnchor.constraint(equalTo: headerView.widthAnchor, multiplier: 0.95),
-                
-                isPurchasedLabel.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 10),
-                isPurchasedLabel.centerXAnchor.constraint(equalTo: headerView.centerXAnchor)
             ])
             return headerView
         default: return nil
