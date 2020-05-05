@@ -64,10 +64,10 @@ class DashboardViewController: UIViewController {
         adBannerView.adUnitID = GoogleAdsHelper.AD_UNIT_ID
         adBannerView.delegate = self
         adBannerView.rootViewController = self
-
+        
         return adBannerView
     }()
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -352,10 +352,11 @@ class DashboardViewController: UIViewController {
     }
     
     private func calculateMonthlyCritter() {
-        caughtBugsMonth = favouritesManager.caughtCritters.filter({ $0.category == Categories.bugs.rawValue })
-        caughtFishesMonth = favouritesManager.caughtCritters.filter({ $0.category == Categories.fishes.rawValue })
+        let caughtBugs = favouritesManager.caughtCritters.filter({ $0.category == Categories.bugs.rawValue })
+        let caughtFishes = favouritesManager.caughtCritters.filter({ $0.category == Categories.fishes.rawValue })
         
         ( monthlyBug, monthlyFish ) = CritterHelper.parseCritter(userHemisphere:userDict!["hemisphere"].map { DateHelper.Hemisphere(rawValue: $0)! } ?? DateHelper.Hemisphere.Southern)
+        ( caughtBugsMonth, caughtFishesMonth ) = CritterHelper.parseCaughtCritter(caughtBugs: caughtBugs, caughtFishes: caughtFishes, monthBugs: monthlyBug, monthFishes: monthlyFish)
     }
     
     private func renderPhraseLabel(withString string: String, boldString: String, font: UIFont) -> NSAttributedString {

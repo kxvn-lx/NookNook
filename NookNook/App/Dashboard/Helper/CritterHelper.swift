@@ -147,10 +147,10 @@ struct CritterHelper {
     /**
      Method to calculate caught critters ONLY on this month
      - Parameters:
-     - caughtBugs: The user's overall caught bugs/Users/kevinlaminto/Documents/Development/iOS Development/NookNook/NookNook/App/Items
-     - caughtFishes: The user's overall caught fishes
-     - monthFishes: The current month's available fishes
-     - monthBugs: The current month's available bugs
+         - caughtBugs: The user's overall caught bugs
+         - caughtFishes: The user's overall caught fishes
+         - monthFishes: The current month's available fishes
+         - monthBugs: The current month's available bugs
      */
     static func parseCaughtCritter(caughtBugs: [Critter], caughtFishes: [Critter], monthBugs: [Critter], monthFishes: [Critter]) -> ([Critter], [Critter]) {
         
