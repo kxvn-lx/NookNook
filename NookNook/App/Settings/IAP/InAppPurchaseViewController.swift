@@ -13,11 +13,10 @@ import SwiftyStoreKit
 class InAppPurchaseViewController: UITableViewController {
     
     enum IAPProduct: String, CaseIterable {
-        case NookNookP = "com.kevinlaminto.NookNook.BuyCoffee1"
+        case BuyCoffee = "com.kevinlaminto.NookNook.BuyCoffee1"
         case RemoveAds = "com.kevinlaminto.NookNook.RemoveAds1"
-        case BuyCoffeeNookNookP = "com.kevinlaminto.NookNook.RemoveAdsBuyCoffee1"
+        case RemoveAdsBuyCoffee = "com.kevinlaminto.NookNook.RemoveAdsBuyCoffee1"
     }
-    private let SHARED_SECRET = "240ac530fe894dc48bb26124d3368a65"
     
     // Table view cell properties
     private var removeAdsCell = UITableViewCell()
@@ -25,8 +24,6 @@ class InAppPurchaseViewController: UITableViewController {
     private var removeAdsAndCoffeeCell = UITableViewCell()
     
     private var restoreCell = UITableViewCell()
-    
-    
     
     // MARK: - View init
     override func viewDidLoad() {
@@ -38,12 +35,12 @@ class InAppPurchaseViewController: UITableViewController {
         tableView.allowsSelection = true
         tableView.separatorStyle = .singleLine
         
-        SwiftyStoreKit.retrieveProductsInfo([IAPProduct.NookNookP.rawValue,
+        SwiftyStoreKit.retrieveProductsInfo([IAPProduct.BuyCoffee.rawValue,
                                              IAPProduct.RemoveAds.rawValue,
-                                             IAPProduct.BuyCoffeeNookNookP.rawValue])
+                                             IAPProduct.RemoveAdsBuyCoffee.rawValue])
         { result in
             for product in result.retrievedProducts {
-                print("Product: \(product.localizedTitle) - price: \(String(describing: product.localizedPrice))")
+                print("Product: \(product.localizedTitle) - price: \(product.price)")
             }
             for product in result.invalidProductIDs {
                 print("Invalid product ID: \(product)")
@@ -58,10 +55,11 @@ class InAppPurchaseViewController: UITableViewController {
     
     override func loadView() {
         super.loadView()
-        removeAdsCell = setupCell(text: "NookNook+ 🙌")
+        removeAdsCell = setupCell(text: "Remove ads 🙌")
         buyMeCoffeeCell = setupCell(text: "Buy me a coffee ☕️")
-        removeAdsAndCoffeeCell = setupCell(text: "NookNook+ and buy me a coffee 🤩")
+        removeAdsAndCoffeeCell = setupCell(text: "Remove ads and buy me a coffee 🤩")
         restoreCell = setupCell(text: "Restore purchase")
+        
     }
     
     // MARK: - Table view data source
@@ -101,7 +99,7 @@ class InAppPurchaseViewController: UITableViewController {
         case 0:
             switch indexPath.row {
             case 0:
-                SwiftyStoreKit.purchaseProduct(IAPProduct.NookNookP.rawValue, quantity: 1, atomically: true) { result in
+                SwiftyStoreKit.purchaseProduct(IAPProduct.BuyCoffee.rawValue, quantity: 1, atomically: true) { result in
                     switch result {
                     case .success(let purchase):
                         Taptic.successTaptic()
@@ -142,7 +140,7 @@ class InAppPurchaseViewController: UITableViewController {
                 }
                 
             case 2:
-                SwiftyStoreKit.purchaseProduct(IAPProduct.BuyCoffeeNookNookP.rawValue, quantity: 1, atomically: true) { result in
+                SwiftyStoreKit.purchaseProduct(IAPProduct.RemoveAdsBuyCoffee.rawValue, quantity: 1, atomically: true) { result in
                     switch result {
                     case .success(let purchase):
                         Taptic.successTaptic()
@@ -176,7 +174,7 @@ class InAppPurchaseViewController: UITableViewController {
                         let alert = AlertHelper.createDefaultAction(title: "Restore sucessful.", message: "")
                         self.present(alert, animated: true)
                         results.restoredPurchases.forEach({
-                            if $0.productId == IAPProduct.RemoveAds.rawValue || $0.productId == IAPProduct.BuyCoffeeNookNookP.rawValue {
+                            if $0.productId == IAPProduct.RemoveAds.rawValue || $0.productId == IAPProduct.RemoveAdsBuyCoffee.rawValue {
                                 UDHelper.saveIsAdsPurchased()
                             }
                         })
@@ -198,7 +196,7 @@ class InAppPurchaseViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
-        case 0: return 350
+        case 0: return 300
         default: return .nan
         }
     }
@@ -213,7 +211,6 @@ class InAppPurchaseViewController: UITableViewController {
             imageView.contentMode = .scaleAspectFit
             imageView.tintColor = .dirt1
             imageView.image = IconUtil.systemIcon(of: .supportMe, weight: .regular).withRenderingMode(.alwaysTemplate)
-            
             
             label.numberOfLines = 0
             label.text =
@@ -248,6 +245,7 @@ class InAppPurchaseViewController: UITableViewController {
                 label.centerXAnchor.constraint(equalTo: headerView.centerXAnchor, constant: 10),
                 label.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20 * 2),
                 label.widthAnchor.constraint(equalTo: headerView.widthAnchor, multiplier: 0.95),
+                
             ])
             return headerView
         default: return nil

@@ -69,6 +69,8 @@ class ItemsTableViewController: UITableViewController {
         
         // Setup google ads
         GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ "2077ef9a63d2b398840261c8221a0c9b" ]
+        
+        
         // Whatsnew Properties
         guard let vc = whatsNewVC.view else {
             return
@@ -92,6 +94,8 @@ class ItemsTableViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.tabBarController?.delegate = self
+        
+
     }
     
     override func viewDidLayoutSubviews() {
@@ -253,6 +257,7 @@ class ItemsTableViewController: UITableViewController {
         let navController = UINavigationController(rootViewController: vc)
         self.present(navController, animated:true, completion: nil)
     }
+    
 }
 
 // MARK: - Category Delegate

@@ -33,12 +33,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 switch purchase.transaction.transactionState {
                 case .purchased, .restored:
                     if purchase.needsFinishTransaction {
-                        // Deliver content from server, then:
                         SwiftyStoreKit.finishTransaction(purchase.transaction)
                     }
                 // Unlock content
-                case .failed, .purchasing, .deferred:
-                break // do nothing
+                case .failed, .purchasing, .deferred: break
                 @unknown default:
                     fatalError("Unknown default")
                 }

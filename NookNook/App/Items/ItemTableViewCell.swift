@@ -150,7 +150,4 @@ class ItemTableViewCell: UITableViewCell {
             customisableImageView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: smallIconSize),
         ])
     }
-    
-    
-    
 }
