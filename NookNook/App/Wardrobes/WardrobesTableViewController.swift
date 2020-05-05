@@ -9,6 +9,7 @@
 import UIKit
 import SDWebImage
 import GoogleMobileAds
+import SwipeCellKit
 
 class WardrobesTableViewController: UITableViewController {
     // Constants
@@ -39,10 +40,10 @@ class WardrobesTableViewController: UITableViewController {
         adBannerView.adUnitID = GoogleAdsHelper.AD_UNIT_ID
         adBannerView.delegate = self
         adBannerView.rootViewController = self
-
+        
         return adBannerView
     }()
-
+    
     
     // MARK: - Table views init
     override func viewDidLoad() {
@@ -117,13 +118,9 @@ class WardrobesTableViewController: UITableViewController {
         if let wardrobeCell = cell as? WardrobetabTableViewCell {
             wardrobeCell.imgView.sd_imageTransition = .fade
             wardrobeCell.imgView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            wardrobeCell.delegate = self
+            let wardrobe = isFiltering ? filteredWardrobes[indexPath.row] : wardrobes[indexPath.row]
             
-            let wardrobe: Wardrobe
-            if isFiltering {
-                wardrobe = filteredWardrobes[indexPath.row]
-            } else {
-                wardrobe = wardrobes[indexPath.row]
-            }
             wardrobeCell.imgView.sd_setImage(with: ImageEngine.parseNPURL(with: wardrobe.image!, category: wardrobe.category), placeholderImage: UIImage(named: "placeholder"))
             wardrobeCell.nameLabel.text = wardrobe.name
             wardrobeCell.obtainedFromLabel.text = wardrobe.obtainedFrom
@@ -201,7 +198,7 @@ class WardrobesTableViewController: UITableViewController {
             Taptic.lightTaptic()
             success(true)
         })
-
+        
         favouriteAction.image = self.favouritesManager.wardrobes.contains(wardrobe) ? IconUtil.systemIcon(of: .starFill, weight: .thin) : IconUtil.systemIcon(of: .star, weight: .thin)
         favouriteAction.backgroundColor = .grass1
         
@@ -254,7 +251,7 @@ extension WardrobesTableViewController: CatDelegate {
             let indexPath = IndexPath(row: 0, section: 0)
             self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
         }
-
+        
         searchController.searchBar.placeholder = "Search \(wardrobes.count) wardrobes..."
     }
 }
@@ -284,5 +281,37 @@ extension WardrobesTableViewController: UITabBarControllerDelegate {
         if tabBarIndex == 2 {
             self.tableView.setContentOffset(CGPoint.zero, animated: true)
         }
+    }
+}
+
+
+extension WardrobesTableViewController: SwipeTableViewCellDelegate {
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        guard orientation == .left else { return nil }
+        
+        let wardrobe = isFiltering ? self.filteredWardrobes[indexPath.row] : self.wardrobes[indexPath.row]
+        
+        let favouriteAction = SwipeAction(style: .default, title: nil) { (action, indexPath) in
+            self.favouritesManager.saveWardrobe(wardrobe: wardrobe)
+            let contentOffset = tableView.contentOffset
+            DispatchQueue.main.async {
+                tableView.reloadRows(at: [indexPath], with: .left)
+                tableView.contentOffset = contentOffset
+            }
+            Taptic.lightTaptic()
+        }
+        
+        favouriteAction.image = self.favouritesManager.wardrobes.contains(wardrobe) ? IconUtil.systemIcon(of: .starFill, weight: .thin) : IconUtil.systemIcon(of: .star, weight: .thin)
+        favouriteAction.backgroundColor = .grass1
+        
+        return [favouriteAction]
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
+        var options = SwipeOptions()
+        options.expansionStyle = .selection
+        options.backgroundColor = .grass1
+        options.transitionStyle = .border
+        return options
     }
 }

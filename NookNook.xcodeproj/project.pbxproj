@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0A01F3102442DB8A001499D5 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 0A01F30F2442DB8A001499D5 /* SDWebImage */; };
 		0A01F31224431725001499D5 /* ImageEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A01F31124431724001499D5 /* ImageEngine.swift */; };
+		0A11A00E2461338400D1BFB2 /* SwipeCellKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0A11A00D2461338400D1BFB2 /* SwipeCellKit */; };
 		0A149FF224512E7B0080941A /* UserPersistEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A149FF124512E7B0080941A /* UserPersistEngine.swift */; };
 		0A14A002245155A10080941A /* ResidentHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A14A001245155A10080941A /* ResidentHelper.swift */; };
 		0A14A0072451986B0080941A /* CrittersMonthlyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A14A0062451986B0080941A /* CrittersMonthlyTableViewController.swift */; };
@@ -247,6 +248,7 @@
 				0A01F3102442DB8A001499D5 /* SDWebImage in Frameworks */,
 				0ADF34CB24605ED8006AE2DB /* SwiftyStoreKit in Frameworks */,
 				0A2D908D245E6DF400974FD4 /* WhatsNewKit in Frameworks */,
+				0A11A00E2461338400D1BFB2 /* SwipeCellKit in Frameworks */,
 				0ADC7BA4245FC0B50033F67E /* StoreKit.framework in Frameworks */,
 				0AFD70642441B80500957BE6 /* SwiftyJSON in Frameworks */,
 				D02015DDD8C8A4BAE7285CAB /* Pods_NookNook.framework in Frameworks */,
@@ -610,6 +612,7 @@
 				0A964997244E5FBE00C8E19D /* TweeTextField */,
 				0A2D908C245E6DF400974FD4 /* WhatsNewKit */,
 				0ADF34CA24605ED8006AE2DB /* SwiftyStoreKit */,
+				0A11A00D2461338400D1BFB2 /* SwipeCellKit */,
 			);
 			productName = NookNook;
 			productReference = 0AFD704B24419DD300957BE6 /* NookNook.app */;
@@ -645,6 +648,7 @@
 				0A964996244E5FBE00C8E19D /* XCRemoteSwiftPackageReference "TweeTextField" */,
 				0ACCF3A724567BB200F9C62E /* XCRemoteSwiftPackageReference "WhatsNewKit" */,
 				0ADF34C924605ED8006AE2DB /* XCRemoteSwiftPackageReference "SwiftyStoreKit" */,
+				0A11A00C2461338400D1BFB2 /* XCRemoteSwiftPackageReference "SwipeCellKit" */,
 			);
 			productRefGroup = 0AFD704C24419DD300957BE6 /* Products */;
 			projectDirPath = "";
@@ -1040,6 +1044,14 @@
 				minimumVersion = 5.7.2;
 			};
 		};
+		0A11A00C2461338400D1BFB2 /* XCRemoteSwiftPackageReference "SwipeCellKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwipeCellKit/SwipeCellKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.7.1;
+			};
+		};
 		0A964996244E5FBE00C8E19D /* XCRemoteSwiftPackageReference "TweeTextField" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/oleghnidets/TweeTextField.git";
@@ -1079,6 +1091,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0A01F30E2442DB8A001499D5 /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImage;
+		};
+		0A11A00D2461338400D1BFB2 /* SwipeCellKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0A11A00C2461338400D1BFB2 /* XCRemoteSwiftPackageReference "SwipeCellKit" */;
+			productName = SwipeCellKit;
 		};
 		0A2D908C245E6DF400974FD4 /* WhatsNewKit */ = {
 			isa = XCSwiftPackageProductDependency;

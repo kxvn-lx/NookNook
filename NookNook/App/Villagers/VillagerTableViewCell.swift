@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import SwipeCellKit
 
-class VillagerTableViewCell: UITableViewCell {
+class VillagerTableViewCell: SwipeTableViewCell {
     
     private let MARGIN: CGFloat = 10
     

@@ -9,6 +9,7 @@
 import UIKit
 import SDWebImage
 import GoogleMobileAds
+import SwipeCellKit
 
 class CrittersTableViewController: UITableViewController {
     // constants
@@ -119,15 +120,12 @@ class CrittersTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: CRITTER_CELL, for: indexPath)
         
         if let critterCell = cell as? CritterTableViewCell {
+            critterCell.delegate = self
             critterCell.imgView.sd_imageTransition = .fade
             critterCell.imgView.sd_imageIndicator = SDWebImageActivityIndicator.gray
             
-            let critter: Critter
-            if isFiltering {
-                critter = filteredCritters[indexPath.row]
-            } else {
-                critter = critters[indexPath.row]
-            }
+            let critter = isFiltering ? filteredCritters[indexPath.row] : critters[indexPath.row]
+
             critterCell.imgView.sd_setImage(with: ImageEngine.parseAcnhURL(with: critter.image, of: critter.category, mediaType: .images), placeholderImage: UIImage(named: "placeholder"))
             
             critterCell.nameLabel.text = critter.name
@@ -145,6 +143,7 @@ class CrittersTableViewController: UITableViewController {
             critterCell.isDonatedLabel.text = isDonated
             critterCell.isCaughtLabel.text = isCaught
             
+            
             critterCell.isDonatedLabel.isHidden =  self.favouritesManager.donatedCritters.contains(critter) ? false : true
             critterCell.isCaughtLabel.isHidden =  self.favouritesManager.caughtCritters.contains(critter) ? false : true
             
@@ -159,15 +158,9 @@ class CrittersTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let selectedCritter: Critter
-        if isFiltering {
-            selectedCritter = filteredCritters[indexPath.row]
-        } else {
-            selectedCritter = critters[indexPath.row]
-        }
+        let selectedCritter = isFiltering ? filteredCritters[indexPath.row] : critters[indexPath.row]
         
         let vc = self.storyboard!.instantiateViewController(withIdentifier: DETAIL_ID) as! DetailViewController
-        
         vc.parseOject(from: .critters, object: selectedCritter)
         
         let navController = UINavigationController(rootViewController: vc)
@@ -194,61 +187,6 @@ class CrittersTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         (view as! UITableViewHeaderFooterView).contentView.backgroundColor = .cream1
         (view as! UITableViewHeaderFooterView).textLabel?.textColor = .dirt1
-    }
-    
-    // swipe right function
-    override func tableView(_ tableView: UITableView,
-                            leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
-    {
-        
-        let critter: Critter
-        if self.isFiltering {
-            critter = self.filteredCritters[indexPath.row]
-        } else {
-            critter = self.critters[indexPath.row]
-        }
-        
-        let caughtAction = UIContextualAction(style: .normal, title:  "Caught", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-            
-            self.favouritesManager.saveCaughtCritter(critter: critter)
-            DispatchQueue.main.async {
-                let contentOffset = tableView.contentOffset
-                self.tableView.reloadRows(at: [indexPath], with: .left)
-                tableView.contentOffset = contentOffset
-            }
-            Taptic.lightTaptic()
-            success(true)
-        })
-        
-        let donatedAction = UIContextualAction(style: .normal, title:  "Donated", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-            var finished = false
-            
-            if !self.favouritesManager.caughtCritters.contains(critter) {
-                self.favouritesManager.saveCaughtCritter(critter: critter)
-                
-                if self.favouritesManager.caughtCritters.contains(critter) && self.favouritesManager.donatedCritters.contains(critter) {
-                    self.favouritesManager.saveDonatedCritter(critter: critter)
-                    self.favouritesManager.saveCaughtCritter(critter: critter)
-                    finished = true
-                }
-            }
-            if !finished {
-                self.favouritesManager.saveDonatedCritter(critter: critter)
-            }
-            DispatchQueue.main.async {
-                let contentOffset = tableView.contentOffset
-                self.tableView.reloadRows(at: [indexPath], with: .left)
-                tableView.contentOffset = contentOffset
-            }
-            Taptic.lightTaptic()
-            success(true)
-        })
-        
-        caughtAction.backgroundColor = .gold1
-        donatedAction.backgroundColor = .grass1
-        
-        return UISwipeActionsConfiguration(actions: [donatedAction, caughtAction])
-        
     }
     
     
@@ -326,3 +264,59 @@ extension CrittersTableViewController: UITabBarControllerDelegate {
         }
     }
 }
+
+extension CrittersTableViewController: SwipeTableViewCellDelegate {
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        guard orientation == .left else { return nil }
+        
+        let critter = self.isFiltering ? self.filteredCritters[indexPath.row] : self.critters[indexPath.row]
+        
+        let donatedAction = SwipeAction(style: .default, title: "Donated") { (action, indexPath) in
+            var finished = false
+            
+            if !self.favouritesManager.caughtCritters.contains(critter) {
+                self.favouritesManager.saveCaughtCritter(critter: critter)
+                
+                if self.favouritesManager.caughtCritters.contains(critter) && self.favouritesManager.donatedCritters.contains(critter) {
+                    self.favouritesManager.saveDonatedCritter(critter: critter)
+                    self.favouritesManager.saveCaughtCritter(critter: critter)
+                    finished = true
+                }
+            }
+            if !finished {
+                self.favouritesManager.saveDonatedCritter(critter: critter)
+            }
+            let contentOffset = tableView.contentOffset
+            DispatchQueue.main.async {
+                tableView.reloadRows(at: [indexPath], with: .left)
+                tableView.contentOffset = contentOffset
+            }
+            Taptic.lightTaptic()
+        }
+        
+        let caughtAction = SwipeAction(style: .default, title: "Caught") { (action, indexPath) in
+            self.favouritesManager.saveCaughtCritter(critter: critter)
+            let contentOffset = tableView.contentOffset
+            DispatchQueue.main.async {
+                tableView.reloadRows(at: [indexPath], with: .left)
+                tableView.contentOffset = contentOffset
+            }
+            Taptic.lightTaptic()
+        }
+        
+        donatedAction.backgroundColor = .grass1
+        caughtAction.backgroundColor = .gold1
+        
+        
+        return [donatedAction, caughtAction]
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
+        var options = SwipeOptions()
+        options.expansionStyle = .selection
+        options.backgroundColor = .gold1
+        options.transitionStyle = .border
+        return options
+    }
+}
+

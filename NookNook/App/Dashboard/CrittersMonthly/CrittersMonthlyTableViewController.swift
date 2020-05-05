@@ -9,6 +9,7 @@
 import UIKit
 import SDWebImage
 import GoogleMobileAds
+import SwipeCellKit
 
 class CrittersMonthlyTableViewController: UITableViewController {
     
@@ -90,7 +91,6 @@ class CrittersMonthlyTableViewController: UITableViewController {
         
         // Setup google ads
         GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ "2077ef9a63d2b398840261c8221a0c9b" ]
-        adBannerView.load(GADRequest())
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -98,6 +98,13 @@ class CrittersMonthlyTableViewController: UITableViewController {
         
         userHemisphere = UDHelper.getUser()["hemisphere"].map { (DateHelper.Hemisphere(rawValue: $0) ?? DateHelper.Hemisphere.Southern) }
         ( bugs, fishes ) = CritterHelper.parseCritter(userHemisphere: userHemisphere ?? DateHelper.Hemisphere.Southern)
+        
+        if !UDHelper.getIsAdsPurchased() {
+            self.view.addSubview(adBannerView)
+            adBannerView.load(GADRequest())
+        } else {
+            adBannerView.removeFromSuperview()
+        }
     }
     
     // MARK: - Table view data source
@@ -138,22 +145,14 @@ class CrittersMonthlyTableViewController: UITableViewController {
         if let critterCell = cell as? CritterTableViewCell {
             critterCell.imgView.sd_imageTransition = .fade
             critterCell.imgView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-            
+            critterCell.delegate = self
             let critter: Critter!
             
             switch currentGroup {
             case .bugs:
-                if isFiltering {
-                    critter = filteredBugs[indexPath.row]
-                } else {
-                    critter = bugs[indexPath.row]
-                }
+                critter = isFiltering ? filteredBugs[indexPath.row] : bugs[indexPath.row]
             case .fishes:
-                if isFiltering {
-                    critter = filteredFishes[indexPath.row]
-                } else {
-                    critter = fishes[indexPath.row]
-                }
+                critter = isFiltering ? filteredFishes[indexPath.row] : fishes[indexPath.row]
             }
             
             critterCell.imgView.sd_setImage(with: ImageEngine.parseAcnhURL(with: critter.image, of: critter.category, mediaType: .images), placeholderImage: UIImage(named: "placeholder"))
@@ -216,64 +215,7 @@ class CrittersMonthlyTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 100
     }
-    
-    // swipe right function
-    override func tableView(_ tableView: UITableView,
-                            leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
-    {
-        
-        let critter: Critter!
-        
-        switch currentGroup {
-        case .bugs:
-            if isFiltering {
-                critter = filteredBugs[indexPath.row]
-            } else {
-                critter = bugs[indexPath.row]
-            }
-        case .fishes:
-            if isFiltering {
-                critter = filteredFishes[indexPath.row]
-            } else {
-                critter = fishes[indexPath.row]
-            }
-        }
-        
-        let caughtAction = UIContextualAction(style: .normal, title:  "Caught", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-            
-            if self.favouritesManager.donatedCritters.contains(critter) {
-                self.favouritesManager.saveDonatedCritter(critter: critter)
-            }
-            
-            self.favouritesManager.saveCaughtCritter(critter: critter)
-            DispatchQueue.main.async {
-                self.tableView.reloadRows(at: [indexPath], with: .left)
-            }
-            Taptic.lightTaptic()
-            success(true)
-        })
-        
-        let donatedAction = UIContextualAction(style: .normal, title:  "Donated", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-            
-            if !self.favouritesManager.caughtCritters.contains(critter) {
-                self.favouritesManager.saveCaughtCritter(critter: critter)
-            }
-            self.favouritesManager.saveDonatedCritter(critter: critter)
-            DispatchQueue.main.async {
-                self.tableView.reloadRows(at: [indexPath], with: .left)
-            }
-            Taptic.lightTaptic()
-            success(true)
-        })
-        
-        
-        caughtAction.backgroundColor = .gold1
-        donatedAction.backgroundColor = .grass1
-        
-        return UISwipeActionsConfiguration(actions: [donatedAction, caughtAction])
-        
-    }
-    
+
     @objc func changeSource(sender: UISegmentedControl) {
         Taptic.lightTaptic()
         switch sender.selectedSegmentIndex {
@@ -326,5 +268,68 @@ extension CrittersMonthlyTableViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text else { return }
         filterContentForSearchText(text)
+    }
+}
+
+
+extension CrittersMonthlyTableViewController: SwipeTableViewCellDelegate {
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        guard orientation == .left else { return nil }
+        
+        let critter: Critter!
+        
+        switch currentGroup {
+        case .bugs:
+            critter = isFiltering ? filteredBugs[indexPath.row] : bugs[indexPath.row]
+        case .fishes:
+            critter = isFiltering ? filteredFishes[indexPath.row] : fishes[indexPath.row]
+        }
+        
+        let donatedAction = SwipeAction(style: .default, title: "Donated") { (action, indexPath) in
+            var finished = false
+            
+            if !self.favouritesManager.caughtCritters.contains(critter) {
+                self.favouritesManager.saveCaughtCritter(critter: critter)
+                
+                if self.favouritesManager.caughtCritters.contains(critter) && self.favouritesManager.donatedCritters.contains(critter) {
+                    self.favouritesManager.saveDonatedCritter(critter: critter)
+                    self.favouritesManager.saveCaughtCritter(critter: critter)
+                    finished = true
+                }
+            }
+            if !finished {
+                self.favouritesManager.saveDonatedCritter(critter: critter)
+            }
+            let contentOffset = tableView.contentOffset
+            DispatchQueue.main.async {
+                tableView.reloadRows(at: [indexPath], with: .left)
+                tableView.contentOffset = contentOffset
+            }
+            Taptic.lightTaptic()
+        }
+        
+        let caughtAction = SwipeAction(style: .default, title: "Caught") { (action, indexPath) in
+            self.favouritesManager.saveCaughtCritter(critter: critter)
+            let contentOffset = tableView.contentOffset
+            DispatchQueue.main.async {
+                tableView.reloadRows(at: [indexPath], with: .left)
+                tableView.contentOffset = contentOffset
+            }
+            Taptic.lightTaptic()
+        }
+        
+        donatedAction.backgroundColor = .grass1
+        caughtAction.backgroundColor = .gold1
+        
+        
+        return [donatedAction, caughtAction]
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
+        var options = SwipeOptions()
+        options.expansionStyle = .selection
+        options.backgroundColor = .gold1
+        options.transitionStyle = .border
+        return options
     }
 }

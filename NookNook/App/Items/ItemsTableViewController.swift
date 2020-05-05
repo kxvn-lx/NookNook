@@ -11,6 +11,7 @@ import SDWebImage
 import SwiftyJSON
 import WhatsNewKit
 import GoogleMobileAds
+import SwipeCellKit
 
 class ItemsTableViewController: UITableViewController {
     // constants
@@ -95,7 +96,12 @@ class ItemsTableViewController: UITableViewController {
         super.viewDidAppear(animated)
         self.tabBarController?.delegate = self
         
-
+        let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! ItemTableViewCell
+        cell.showSwipe(orientation: .left, animated: true) { (sucess) in
+            if sucess {
+                cell.hideSwipe(animated: true)
+            }
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -132,13 +138,9 @@ class ItemsTableViewController: UITableViewController {
         if let itemCell = cell as? ItemTableViewCell {
             itemCell.imgView.sd_imageTransition = .fade
             itemCell.imgView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            itemCell.delegate = self
             
-            let item: Item
-            if isFiltering {
-                item = filteredItems[indexPath.row]
-            } else {
-                item = items[indexPath.row]
-            }
+            let item = isFiltering ? filteredItems[indexPath.row] : items[indexPath.row]
             
             itemCell.buyLabel.font = UIFont.preferredFont(forTextStyle: .caption2)
             itemCell.sellLabel.font = UIFont.preferredFont(forTextStyle: .caption2)
@@ -164,17 +166,9 @@ class ItemsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let selectedItem: Item
-        if isFiltering {
-            selectedItem = filteredItems[indexPath.row]
-        } else {
-            selectedItem = items[indexPath.row]
-        }
-        
+        let selectedItem = isFiltering ? filteredItems[indexPath.row] : items[indexPath.row]
         
         let vc = self.storyboard!.instantiateViewController(withIdentifier: DETAIL_ID) as! DetailViewController
-        
         vc.parseOject(from: .items, object: selectedItem)
         
         let navController = UINavigationController(rootViewController: vc)
@@ -194,36 +188,6 @@ class ItemsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         (view as! UITableViewHeaderFooterView).contentView.backgroundColor = .cream1
         (view as! UITableViewHeaderFooterView).textLabel?.textColor = .dirt1
-    }
-    
-    // swipe right function
-    override func tableView(_ tableView: UITableView,
-                            leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
-    {
-        let item: Item
-        if self.isFiltering {
-            item = self.filteredItems[indexPath.row]
-        } else {
-            item = self.items[indexPath.row]
-        }
-        
-        let favouriteAction = UIContextualAction(style: .normal, title:  "", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-
-            self.favouritesManager.saveItem(item: item)
-            DispatchQueue.main.async {
-                let contentOffset = tableView.contentOffset
-                self.tableView.reloadRows(at: [indexPath], with: .left)
-                tableView.contentOffset = contentOffset
-                
-            }
-            Taptic.lightTaptic()
-            success(true)
-        })
-        favouriteAction.image = self.favouritesManager.items.contains(item) ? IconUtil.systemIcon(of: .starFill, weight: .thin) : IconUtil.systemIcon(of: .star, weight: .thin)
-        favouriteAction.backgroundColor = .grass1
-        
-        return UISwipeActionsConfiguration(actions: [favouriteAction])
-        
     }
     
     // MARK: - Modify UI
@@ -257,7 +221,6 @@ class ItemsTableViewController: UITableViewController {
         let navController = UINavigationController(rootViewController: vc)
         self.present(navController, animated:true, completion: nil)
     }
-    
 }
 
 // MARK: - Category Delegate
@@ -299,5 +262,36 @@ extension ItemsTableViewController: UITabBarControllerDelegate {
         if tabBarIndex == 0 {
             self.tableView.setContentOffset(CGPoint.zero, animated: true)
         }
+    }
+}
+
+extension ItemsTableViewController: SwipeTableViewCellDelegate {
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        guard orientation == .left else { return nil }
+        
+        let item = self.isFiltering ? self.filteredItems[indexPath.row] : self.items[indexPath.row]
+        
+        let favouriteAction = SwipeAction(style: .default, title: nil) { (action, indexPath) in
+            self.favouritesManager.saveItem(item: item)
+            let contentOffset = tableView.contentOffset
+            DispatchQueue.main.async {
+                tableView.reloadRows(at: [indexPath], with: .left)
+                tableView.contentOffset = contentOffset
+            }
+            Taptic.lightTaptic()
+        }
+        
+        favouriteAction.image = self.favouritesManager.items.contains(item) ? IconUtil.systemIcon(of: .starFill, weight: .thin) : IconUtil.systemIcon(of: .star, weight: .thin)
+        favouriteAction.backgroundColor = .grass1
+        
+        return [favouriteAction]
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
+        var options = SwipeOptions()
+        options.expansionStyle = .selection
+        options.backgroundColor = .grass1
+        options.transitionStyle = .border
+        return options
     }
 }

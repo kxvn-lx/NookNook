@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import SwipeCellKit
 
-class WardrobetabTableViewCell: UITableViewCell {
+class WardrobetabTableViewCell: SwipeTableViewCell {
 
     private let MARGIN: CGFloat = 10
     

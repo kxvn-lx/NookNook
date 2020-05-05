@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import SwipeCellKit
 
-class CritterTableViewCell: UITableViewCell {
+class CritterTableViewCell: SwipeTableViewCell {
     
     private let MARGIN: CGFloat = 10
     

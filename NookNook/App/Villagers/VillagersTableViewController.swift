@@ -9,6 +9,7 @@
 import UIKit
 import SDWebImage
 import GoogleMobileAds
+import SwipeCellKit
 
 class VillagersTableViewController: UITableViewController {
     
@@ -41,10 +42,10 @@ class VillagersTableViewController: UITableViewController {
         adBannerView.adUnitID = GoogleAdsHelper.AD_UNIT_ID
         adBannerView.delegate = self
         adBannerView.rootViewController = self
-
+        
         return adBannerView
     }()
-
+    
     
     // MARK: - Tableview init
     override func viewDidLoad() {
@@ -123,13 +124,8 @@ class VillagersTableViewController: UITableViewController {
         if let villagerCell = cell as? VillagerTableViewCell {
             villagerCell.imgView.sd_imageTransition = .fade
             villagerCell.imgView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-            
-            let villager: Villager
-            if isFiltering {
-                villager = filteredVillagers[indexPath.row]
-            } else {
-                villager = villagers[indexPath.row]
-            }
+            villagerCell.delegate = self
+            let villager = isFiltering ? filteredVillagers[indexPath.row] : villagers[indexPath.row]
             
             villagerCell.imgView.sd_setImage(with: ImageEngine.parseAcnhURL(with: villager.image, of: villager.category, mediaType: .icons), placeholderImage: UIImage(named: "placeholder"))
             villagerCell.nameLabel.text = villager.name
@@ -155,13 +151,7 @@ class VillagersTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedVillager: Villager
-        if isFiltering {
-            selectedVillager = filteredVillagers[indexPath.row]
-        } else {
-            selectedVillager = villagers[indexPath.row]
-        }
-        
+        let selectedVillager = isFiltering ? filteredVillagers[indexPath.row] : villagers[indexPath.row]
         
         let vc = self.storyboard!.instantiateViewController(withIdentifier: DETAIL_ID) as! DetailViewController
         
@@ -191,12 +181,7 @@ class VillagersTableViewController: UITableViewController {
                             leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
     {
         
-        let villager: Villager
-        if self.isFiltering {
-            villager = self.filteredVillagers[indexPath.row]
-        } else {
-            villager = self.villagers[indexPath.row]
-        }
+        let villager = isFiltering ? filteredVillagers[indexPath.row] : villagers[indexPath.row]
         
         let favouriteAction = UIContextualAction(style: .normal, title:  "", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             
@@ -248,7 +233,7 @@ class VillagersTableViewController: UITableViewController {
                 Taptic.errorTaptic()
                 success(false)
                 
-
+                
             }
         })
         favouriteAction.backgroundColor = .grass1
@@ -345,5 +330,68 @@ extension VillagersTableViewController: UITabBarControllerDelegate {
         if tabBarIndex == 3 {
             self.tableView.setContentOffset(CGPoint.zero, animated: true)
         }
+    }
+}
+
+
+extension VillagersTableViewController: SwipeTableViewCellDelegate {
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        guard orientation == .left else { return nil }
+        
+        let villager = isFiltering ? filteredVillagers[indexPath.row] : villagers[indexPath.row]
+        
+        let favouriteAction = SwipeAction(style: .default, title: nil) { (action, indexPath) in
+            self.favouritesManager.saveFavouritedVillager(villager: villager)
+            DispatchQueue.main.async {
+                let contentOffset = tableView.contentOffset
+                self.tableView.reloadRows(at: [indexPath], with: .left)
+                tableView.contentOffset = contentOffset
+            }
+            Taptic.lightTaptic()
+        }
+        
+        favouriteAction.image = self.favouritesManager.favouritedVillagers.contains(villager) ? IconUtil.systemIcon(of: .starFill, weight: .thin) : IconUtil.systemIcon(of: .star, weight: .thin)
+        
+        
+        let residentAction = SwipeAction(style: .default, title: "Resident") { (action, indexPath) in
+            if self.favouritesManager.residentVillagers.count <= 9 {
+                self.favouritesManager.saveResidentVillager(villager: villager)
+                DispatchQueue.main.async {
+                    let contentOffset = tableView.contentOffset
+                    self.tableView.reloadRows(at: [indexPath], with: .left)
+                    tableView.contentOffset = contentOffset
+                }
+                Taptic.lightTaptic()
+            }
+            else if self.favouritesManager.residentVillagers.count <= 10 && self.favouritesManager.residentVillagers.contains(villager) {
+                self.favouritesManager.saveResidentVillager(villager: villager)
+                DispatchQueue.main.async {
+                    let contentOffset = tableView.contentOffset
+                    self.tableView.reloadRows(at: [indexPath], with: .left)
+                    tableView.contentOffset = contentOffset
+                }
+                Taptic.lightTaptic()
+            }
+            else {
+                let alert = AlertHelper.createDefaultAction(title: "Woah there!", message: "It appears that you have the max number of residents. (10 max)")
+                self.present(alert, animated: true)
+                
+                Taptic.errorTaptic()
+            }
+        }
+        
+        favouriteAction.backgroundColor = .grass1
+        residentAction.backgroundColor = .gold1
+        
+        return [favouriteAction, residentAction]
+        
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
+        var options = SwipeOptions()
+        options.expansionStyle = .selection
+        options.backgroundColor = .gold1
+        options.transitionStyle = .border
+        return options
     }
 }
