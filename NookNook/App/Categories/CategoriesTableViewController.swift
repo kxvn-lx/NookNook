@@ -48,7 +48,7 @@ class CategoriesTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if !UDHelper.getIsAdsPurchased() {
+        if !UDEngine.shared.getIsAdsPurchased() {
             self.view.addSubview(adBannerView)
             adBannerView.load(GADRequest())
             NSLayoutConstraint.activate([

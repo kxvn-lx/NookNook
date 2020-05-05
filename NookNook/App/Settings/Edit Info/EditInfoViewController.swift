@@ -42,7 +42,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        userDict = UDHelper.getUser()
+        userDict = UDEngine.shared.getUser()
         setBar()
         setUI()
         setConstraint()
@@ -61,7 +61,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        userDict = UDHelper.getUser()
+        userDict = UDEngine.shared.getUser()
         favouritesManager = DataPersistEngine()
     }
     
@@ -95,7 +95,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
     
     
     private func setupProfile() {
-        userDict = UDHelper.getUser()
+        userDict = UDEngine.shared.getUser()
         
         nameTF.text = userDict["name"]
         islandNameTF.text = "\(userDict["islandName"] ?? "")"
@@ -130,7 +130,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         
         iconView = UIImageView()
         iconView.translatesAutoresizingMaskIntoConstraints = false
-        iconView.image =  IconUtil.systemIcon(of: .edit, weight: .regular).withRenderingMode(.alwaysTemplate)
+        iconView.image =  IconHelper.systemIcon(of: .edit, weight: .regular).withRenderingMode(.alwaysTemplate)
         iconView.tintColor = .dirt1
         
         imgWrapper = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
@@ -271,7 +271,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
     @objc private func saveTapped(sender: UIButton!) {
         if !nameTF.text!.trimmingCharacters(in: .whitespaces).isEmpty && !islandNameTF.text!.trimmingCharacters(in: .whitespaces).isEmpty && !selectedFruit.isEmpty {
             let user = User(name: nameTF.text!, islandName: islandNameTF.text!, nativeFruit: selectedFruit, hemisphere: selectedHemisphere)
-            UDHelper.saveUser(user: user)
+            UDEngine.shared.saveUser(user: user)
             
             // Save user image
             if let img = self.profileImageView.image {

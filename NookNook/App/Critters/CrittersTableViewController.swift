@@ -10,6 +10,7 @@ import UIKit
 import SDWebImage
 import GoogleMobileAds
 import SwipeCellKit
+import SwiftConfettiView
 
 class CrittersTableViewController: UITableViewController {
     // constants
@@ -74,7 +75,7 @@ class CrittersTableViewController: UITableViewController {
         favouritesManager = DataPersistEngine()
         self.navigationController?.navigationBar.sizeToFit()
         self.tableView.reloadData()
-        if !UDHelper.getIsAdsPurchased() {
+        if !UDEngine.shared.getIsAdsPurchased() {
             self.view.addSubview(adBannerView)
             adBannerView.load(GADRequest())
             NSLayoutConstraint.activate([
@@ -90,15 +91,30 @@ class CrittersTableViewController: UITableViewController {
         super.viewDidAppear(animated)
         self.tabBarController?.delegate = self
         
-        if !UDHelper.getIsFirstVisit(on: .Critters) {
+        if !UDEngine.shared.getIsFirstVisit(on: .Critters) {
             let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! SwipeTableViewCell
             cell.showSwipe(orientation: .left, animated: true) { (sucess) in
                 if sucess {
                     cell.hideSwipe(animated: true)
-                    UDHelper.saveIsFirstVisit(on: .Critters)
+                    UDEngine.shared.saveIsFirstVisit(on: .Critters)
                 }
             }
         }
+        
+        // Confetti
+        if UDEngine.shared.getHasCompletedCritters() {
+            let confettiView = ConfettiHelper.shared.renderConfetti(toView: self.view, withType: .confetti)
+            self.view.addSubview(confettiView)
+            confettiView.startConfetti()
+            Taptic.successTaptic()
+            let alert = AlertHelper.createDefaultAction(title: "Congratulations  🥳", message: "You have caught/donated all the critters! This deserve a celebration.")
+            self.present(alert, animated: true)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 15, execute: {
+                confettiView.stopConfetti()
+                confettiView.removeFromSuperview()
+            })
+        }
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -210,7 +226,7 @@ class CrittersTableViewController: UITableViewController {
         self.tableView.backgroundColor = .cream1
         
         let button: UIButton = UIButton(type: .custom)
-        button.setImage(IconUtil.systemIcon(of: .filter, weight: .regular), for: .normal)
+        button.setImage(IconHelper.systemIcon(of: .filter, weight: .regular), for: .normal)
         button.addTarget(self, action: #selector(filterButtonPressed), for: .touchUpInside)
         button.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
         button.imageView?.contentMode = .scaleAspectFit
@@ -281,12 +297,10 @@ extension CrittersTableViewController: UITabBarControllerDelegate {
 extension CrittersTableViewController: SwipeTableViewCellDelegate {
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
         guard orientation == .left else { return nil }
-        
         let critter = self.isFiltering ? self.filteredCritters[indexPath.row] : self.critters[indexPath.row]
         
         let donatedAction = SwipeAction(style: .default, title: "Donated") { (action, indexPath) in
             var finished = false
-            
             if !self.favouritesManager.caughtCritters.contains(critter) {
                 self.favouritesManager.saveCaughtCritter(critter: critter)
                 
@@ -299,6 +313,7 @@ extension CrittersTableViewController: SwipeTableViewCellDelegate {
             if !finished {
                 self.favouritesManager.saveDonatedCritter(critter: critter)
             }
+            UDEngine.shared.saveHasCompletedCritters(isCompleted: self.favouritesManager.caughtCritters.count == self.critters.count)
             let contentOffset = tableView.contentOffset
             DispatchQueue.main.async {
                 tableView.reloadRows(at: [indexPath], with: .left)
@@ -309,6 +324,7 @@ extension CrittersTableViewController: SwipeTableViewCellDelegate {
         
         let caughtAction = SwipeAction(style: .default, title: "Caught") { (action, indexPath) in
             self.favouritesManager.saveCaughtCritter(critter: critter)
+            UDEngine.shared.saveHasCompletedCritters(isCompleted: self.favouritesManager.caughtCritters.count == self.critters.count)
             let contentOffset = tableView.contentOffset
             DispatchQueue.main.async {
                 tableView.reloadRows(at: [indexPath], with: .left)

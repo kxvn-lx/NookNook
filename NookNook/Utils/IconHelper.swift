@@ -1,5 +1,5 @@
 //
-//  IconUtil.swift
+//  IconHelper.swift
 //  NookNook
 //
 //  Created by Kevin Laminto on 13/4/20.
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-struct IconUtil {
+struct IconHelper {
     
     enum IconName: String {
         case star

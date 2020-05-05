@@ -19,7 +19,7 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
                 // favourite cell
                 let cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: FAVOURITE_CELL)
                 cell.textLabel!.text = "Favourites"
-                cell.imageView?.image = IconUtil.systemIcon(of: .starFill, weight: .regular).withRenderingMode(.alwaysTemplate)
+                cell.imageView?.image = IconHelper.systemIcon(of: .starFill, weight: .regular).withRenderingMode(.alwaysTemplate)
                 cell.accessoryType = .disclosureIndicator
                 return cell
                 
@@ -27,7 +27,7 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
                 // turnip cell
                 let cell = UITableViewCell(style: .default, reuseIdentifier: FAVOURITE_CELL)
                 cell.textLabel!.text = "Turnip reminder"
-                cell.imageView?.image = IconUtil.systemIcon(of: .reminder, weight: .regular).withRenderingMode(.alwaysTemplate)
+                cell.imageView?.image = IconHelper.systemIcon(of: .reminder, weight: .regular).withRenderingMode(.alwaysTemplate)
                 cell.accessoryType = .disclosureIndicator
                 return cell
             default: break

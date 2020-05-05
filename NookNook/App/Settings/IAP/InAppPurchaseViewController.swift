@@ -123,7 +123,7 @@ class InAppPurchaseViewController: UITableViewController {
                     switch result {
                     case .success(let purchase):
                         Taptic.successTaptic()
-                        UDHelper.saveIsAdsPurchased()
+                        UDEngine.shared.saveIsAdsPurchased()
                         let alert = AlertHelper.createDefaultAction(title: "Thank you ❤️", message: "\(String(describing: purchase.product.localizedTitle)) has been successfully purchased.")
                         self.present(alert, animated: true)
                         
@@ -144,7 +144,7 @@ class InAppPurchaseViewController: UITableViewController {
                     switch result {
                     case .success(let purchase):
                         Taptic.successTaptic()
-                        UDHelper.saveIsAdsPurchased()
+                        UDEngine.shared.saveIsAdsPurchased()
                         let alert = AlertHelper.createDefaultAction(title: "Thank you ❤️", message: "\(String(describing: purchase.product.localizedTitle)) has been successfully purchased.")
                         self.present(alert, animated: true)
                         
@@ -175,7 +175,7 @@ class InAppPurchaseViewController: UITableViewController {
                         self.present(alert, animated: true)
                         results.restoredPurchases.forEach({
                             if $0.productId == IAPProduct.RemoveAds.rawValue || $0.productId == IAPProduct.RemoveAdsBuyCoffee.rawValue {
-                                UDHelper.saveIsAdsPurchased()
+                                UDEngine.shared.saveIsAdsPurchased()
                             }
                         })
                     }
@@ -210,7 +210,7 @@ class InAppPurchaseViewController: UITableViewController {
             
             imageView.contentMode = .scaleAspectFit
             imageView.tintColor = .dirt1
-            imageView.image = IconUtil.systemIcon(of: .supportMe, weight: .regular).withRenderingMode(.alwaysTemplate)
+            imageView.image = IconHelper.systemIcon(of: .supportMe, weight: .regular).withRenderingMode(.alwaysTemplate)
             
             label.numberOfLines = 0
             label.text =
@@ -219,7 +219,7 @@ class InAppPurchaseViewController: UITableViewController {
             I'd really appreciate it if you'd take the time to support me with this app.
             I made NookNook to improve my ACNH experience and I hope you'll feel the same!
             
-            This app would never be possible with your support. So to keep it like this in the future,
+            This app would never be possible without your support. So to keep it like this in the future,
             any means of support is greatly appreaciated! 😁
             
             Thanks,

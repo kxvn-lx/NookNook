@@ -69,8 +69,7 @@ class CrittersMonthlyTableViewController: UITableViewController {
         
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 100
-        
-        userHemisphere = UDHelper.getUser()["hemisphere"].map { (DateHelper.Hemisphere(rawValue: $0) ?? DateHelper.Hemisphere.Southern) }
+        userHemisphere = UDEngine.shared.getUser()["hemisphere"].map { (DateHelper.Hemisphere(rawValue: $0) ?? DateHelper.Hemisphere.Southern) }
         (bugs, fishes) = CritterHelper.parseCritter(userHemisphere: userHemisphere ?? DateHelper.Hemisphere.Southern)
         
         setBar()
@@ -95,10 +94,10 @@ class CrittersMonthlyTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        userHemisphere = UDHelper.getUser()["hemisphere"].map { (DateHelper.Hemisphere(rawValue: $0) ?? DateHelper.Hemisphere.Southern) }
+        userHemisphere = UDEngine.shared.getUser()["hemisphere"].map { (DateHelper.Hemisphere(rawValue: $0) ?? DateHelper.Hemisphere.Southern) }
         ( bugs, fishes ) = CritterHelper.parseCritter(userHemisphere: userHemisphere ?? DateHelper.Hemisphere.Southern)
         
-        if !UDHelper.getIsAdsPurchased() {
+        if !UDEngine.shared.getIsAdsPurchased() {
             self.view.addSubview(adBannerView)
             adBannerView.load(GADRequest())
             NSLayoutConstraint.activate([
@@ -113,12 +112,12 @@ class CrittersMonthlyTableViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if !UDHelper.getIsFirstVisit(on: .CrittersThisMonth) {
+        if !UDEngine.shared.getIsFirstVisit(on: .CrittersThisMonth) {
             let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! SwipeTableViewCell
             cell.showSwipe(orientation: .left, animated: true) { (sucess) in
                 if sucess {
                     cell.hideSwipe(animated: true)
-                    UDHelper.saveIsFirstVisit(on: .CrittersThisMonth)
+                    UDEngine.shared.saveIsFirstVisit(on: .CrittersThisMonth)
                 }
             }
         }

@@ -56,31 +56,31 @@ class SettingsTableViewController: UITableViewController {
     override func loadView() {
         super.loadView()
         
-        editInfoCell = setupCell(text: "Edit info", icon:  IconUtil.systemIcon(of: .edit, weight: .regular), accesoryType: .disclosureIndicator)
+        editInfoCell = setupCell(text: "Edit info", icon:  IconHelper.systemIcon(of: .edit, weight: .regular), accesoryType: .disclosureIndicator)
         
-        shareCell = setupCell(text: "Share", icon:  IconUtil.systemIcon(of: .share, weight: .regular), accesoryType: .disclosureIndicator)
+        shareCell = setupCell(text: "Share", icon:  IconHelper.systemIcon(of: .share, weight: .regular), accesoryType: .disclosureIndicator)
         
-        reportBugCell = setupCell(text: "Report a bug", icon:  IconUtil.systemIcon(of: .bug, weight: .regular), accesoryType: .disclosureIndicator)
+        reportBugCell = setupCell(text: "Report a bug", icon:  IconHelper.systemIcon(of: .bug, weight: .regular), accesoryType: .disclosureIndicator)
         
-        deleteDatasCell  = setupCell(text: "Delete app data", icon:  IconUtil.systemIcon(of: .deleteData, weight: .regular), accesoryType: .none)
+        deleteDatasCell  = setupCell(text: "Delete app data", icon:  IconHelper.systemIcon(of: .deleteData, weight: .regular), accesoryType: .none)
         deleteDatasCell.textLabel?.textColor = destColour
         deleteDatasCell.imageView?.tintColor = destColour
         
-        deleteCacheCell  = setupCell(text: "Delete cached data", icon:  IconUtil.systemIcon(of: .deleteCache, weight: .regular), accesoryType: .none)
+        deleteCacheCell  = setupCell(text: "Delete cached data", icon:  IconHelper.systemIcon(of: .deleteCache, weight: .regular), accesoryType: .none)
         deleteCacheCell.textLabel?.textColor = destColour
         deleteCacheCell.imageView?.tintColor = destColour
         
-        creatorCell = setupCell(text: "Creator", icon: IconUtil.systemIcon(of: .socialMedia, weight: .regular), accesoryType: .disclosureIndicator)
+        creatorCell = setupCell(text: "Creator", icon: IconHelper.systemIcon(of: .socialMedia, weight: .regular), accesoryType: .disclosureIndicator)
         
-        appVersionCell = setupCell(text: "App version", icon: IconUtil.systemIcon(of: .info, weight: .regular), accesoryType: .disclosureIndicator)
+        appVersionCell = setupCell(text: "App version", icon: IconHelper.systemIcon(of: .info, weight: .regular), accesoryType: .disclosureIndicator)
         appVersionCell.detailTextLabel?.text = "v1.0.0 (\(BUILD_NUMBER))"
         appVersionCell.detailTextLabel?.font = .preferredFont(forTextStyle: .caption1)
         
-        requestFeatureCell = setupCell(text: "Request a feature", icon: IconUtil.systemIcon(of: .feature, weight: .regular), accesoryType: .disclosureIndicator)
+        requestFeatureCell = setupCell(text: "Request a feature", icon: IconHelper.systemIcon(of: .feature, weight: .regular), accesoryType: .disclosureIndicator)
         
-        websiteCell = setupCell(text: "Website", icon: IconUtil.systemIcon(of: .website, weight: .regular), accesoryType: .disclosureIndicator)
+        websiteCell = setupCell(text: "Website", icon: IconHelper.systemIcon(of: .website, weight: .regular), accesoryType: .disclosureIndicator)
         
-        removeAdsCell = setupCell(text: "Support me", icon: IconUtil.systemIcon(of: .supportMe, weight: .regular), accesoryType: .disclosureIndicator)
+        removeAdsCell = setupCell(text: "Support me", icon: IconHelper.systemIcon(of: .supportMe, weight: .regular), accesoryType: .disclosureIndicator)
     }
     
     

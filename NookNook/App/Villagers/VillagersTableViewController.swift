@@ -75,7 +75,7 @@ class VillagersTableViewController: UITableViewController {
         favouritesManager = DataPersistEngine()
         self.navigationController?.navigationBar.sizeToFit()
         self.tableView.reloadData()
-        if !UDHelper.getIsAdsPurchased() {
+        if !UDEngine.shared.getIsAdsPurchased() {
             self.view.addSubview(adBannerView)
             adBannerView.load(GADRequest())
             NSLayoutConstraint.activate([
@@ -91,12 +91,12 @@ class VillagersTableViewController: UITableViewController {
         super.viewDidAppear(animated)
         self.tabBarController?.delegate = self
         
-        if !UDHelper.getIsFirstVisit(on: .Villagers) {
+        if !UDEngine.shared.getIsFirstVisit(on: .Villagers) {
             let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! SwipeTableViewCell
             cell.showSwipe(orientation: .left, animated: true) { (sucess) in
                 if sucess {
                     cell.hideSwipe(animated: true)
-                    UDHelper.saveIsFirstVisit(on: .Villagers)
+                    UDEngine.shared.saveIsFirstVisit(on: .Villagers)
                 }
             }
         }
@@ -148,7 +148,7 @@ class VillagersTableViewController: UITableViewController {
             villagerCell.bdayLabel.text = villager.bdayString
             villagerCell.genderLabel.text = villager.gender
             
-            villagerCell.isFavImageView.image = self.favouritesManager.favouritedVillagers.contains(villager) ?  IconUtil.systemIcon(of: IconUtil.IconName.starFill, weight: .thin) : nil
+            villagerCell.isFavImageView.image = self.favouritesManager.favouritedVillagers.contains(villager) ?  IconHelper.systemIcon(of: IconHelper.IconName.starFill, weight: .thin) : nil
             
             let isResident = self.favouritesManager.residentVillagers.contains(villager) ? "R" : ""
             villagerCell.isResidentLabel.text = isResident
@@ -199,7 +199,7 @@ class VillagersTableViewController: UITableViewController {
         
         // add Left bar button item
         let button: UIButton = UIButton(type: .custom)
-        button.setImage(IconUtil.systemIcon(of: .sort, weight: .regular), for: .normal)
+        button.setImage(IconHelper.systemIcon(of: .sort, weight: .regular), for: .normal)
         button.addTarget(self, action: #selector(sortButtonPressed), for: .touchUpInside)
         button.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
         button.imageView?.contentMode = .scaleAspectFit
@@ -295,7 +295,7 @@ extension VillagersTableViewController: SwipeTableViewCellDelegate {
             Taptic.lightTaptic()
         }
         
-        favouriteAction.image = self.favouritesManager.favouritedVillagers.contains(villager) ? IconUtil.systemIcon(of: .starFill, weight: .thin) : IconUtil.systemIcon(of: .star, weight: .thin)
+        favouriteAction.image = self.favouritesManager.favouritedVillagers.contains(villager) ? IconHelper.systemIcon(of: .starFill, weight: .thin) : IconHelper.systemIcon(of: .star, weight: .thin)
         
         
         let residentAction = SwipeAction(style: .default, title: "Resident") { (action, indexPath) in

@@ -114,7 +114,7 @@ class TurnipReminderTableViewController: UITableViewController {
         customBuyCell.detailTextLabel?.text = buyLabel
         customSellCell.detailTextLabel?.text = sellLabel
         
-        if !UDHelper.getIsAdsPurchased() {
+        if !UDEngine.shared.getIsAdsPurchased() {
             self.view.addSubview(adBannerView)
             adBannerView.load(GADRequest())
             NSLayoutConstraint.activate([
@@ -176,7 +176,7 @@ class TurnipReminderTableViewController: UITableViewController {
             
             imageView.contentMode = .scaleAspectFit
             imageView.tintColor = .dirt1
-            imageView.image = IconUtil.systemIcon(of: .reminder, weight: .regular).withRenderingMode(.alwaysTemplate)
+            imageView.image = IconHelper.systemIcon(of: .reminder, weight: .regular).withRenderingMode(.alwaysTemplate)
             
             
             label.numberOfLines = 0

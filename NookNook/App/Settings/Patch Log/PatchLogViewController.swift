@@ -27,6 +27,7 @@ class PatchLogViewController: UIViewController {
         - Added shadow size for fishes
         - Fixed minor bugs
         - Fixed critter this month displaying all caught critters instead of only on a particular month
+        - Added some surprise when you caught/donated all critters 😉
 
         v1.0.0 (305202010)
         - Improved app performance

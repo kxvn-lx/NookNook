@@ -72,7 +72,7 @@ class WardrobesTableViewController: UITableViewController {
         favouritesManager = DataPersistEngine()
         self.navigationController?.navigationBar.sizeToFit()
         self.tableView.reloadData()
-        if !UDHelper.getIsAdsPurchased() {
+        if !UDEngine.shared.getIsAdsPurchased() {
             self.view.addSubview(adBannerView)
             adBannerView.load(GADRequest())
             NSLayoutConstraint.activate([
@@ -88,12 +88,12 @@ class WardrobesTableViewController: UITableViewController {
         super.viewDidAppear(animated)
         self.tabBarController?.delegate = self
         
-        if !UDHelper.getIsFirstVisit(on: .Wardrobes) {
+        if !UDEngine.shared.getIsFirstVisit(on: .Wardrobes) {
             let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! SwipeTableViewCell
             cell.showSwipe(orientation: .left, animated: true) { (sucess) in
                 if sucess {
                     cell.hideSwipe(animated: true)
-                    UDHelper.saveIsFirstVisit(on: .Wardrobes)
+                    UDEngine.shared.saveIsFirstVisit(on: .Wardrobes)
                 }
             }
         }
@@ -140,9 +140,9 @@ class WardrobesTableViewController: UITableViewController {
             wardrobeCell.buyLabel.attributedText = PriceEngine.renderPrice(amount: wardrobe.buy, with: .buy, of: 12)
             wardrobeCell.sellLabel.attributedText = PriceEngine.renderPrice(amount: wardrobe.sell, with: .sell, of: 12)
             
-            wardrobeCell.isFavImageView.image = self.favouritesManager.wardrobes.contains(wardrobe) ?  IconUtil.systemIcon(of: IconUtil.IconName.starFill, weight: .thin) : nil
+            wardrobeCell.isFavImageView.image = self.favouritesManager.wardrobes.contains(wardrobe) ?  IconHelper.systemIcon(of: IconHelper.IconName.starFill, weight: .thin) : nil
             if wardrobe.variants != nil {
-                wardrobeCell.customisableImageView.image = IconUtil.systemIcon(of: IconUtil.IconName.paintbrush, weight: .thin)
+                wardrobeCell.customisableImageView.image = IconHelper.systemIcon(of: IconHelper.IconName.paintbrush, weight: .thin)
             } else {
                 wardrobeCell.customisableImageView.image = nil
             }
@@ -212,7 +212,7 @@ class WardrobesTableViewController: UITableViewController {
             success(true)
         })
         
-        favouriteAction.image = self.favouritesManager.wardrobes.contains(wardrobe) ? IconUtil.systemIcon(of: .starFill, weight: .thin) : IconUtil.systemIcon(of: .star, weight: .thin)
+        favouriteAction.image = self.favouritesManager.wardrobes.contains(wardrobe) ? IconHelper.systemIcon(of: .starFill, weight: .thin) : IconHelper.systemIcon(of: .star, weight: .thin)
         favouriteAction.backgroundColor = .grass1
         
         return UISwipeActionsConfiguration(actions: [favouriteAction])
@@ -229,7 +229,7 @@ class WardrobesTableViewController: UITableViewController {
         tabBarController?.tabBar.tintColor = .white
         
         let button: UIButton = UIButton(type: .custom)
-        button.setImage(IconUtil.systemIcon(of: .filter, weight: .regular), for: .normal)
+        button.setImage(IconHelper.systemIcon(of: .filter, weight: .regular), for: .normal)
         button.addTarget(self, action: #selector(filterButtonPressed), for: .touchUpInside)
         button.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
         button.imageView?.contentMode = .scaleAspectFit
@@ -314,7 +314,7 @@ extension WardrobesTableViewController: SwipeTableViewCellDelegate {
             Taptic.lightTaptic()
         }
         
-        favouriteAction.image = self.favouritesManager.wardrobes.contains(wardrobe) ? IconUtil.systemIcon(of: .starFill, weight: .thin) : IconUtil.systemIcon(of: .star, weight: .thin)
+        favouriteAction.image = self.favouritesManager.wardrobes.contains(wardrobe) ? IconHelper.systemIcon(of: .starFill, weight: .thin) : IconHelper.systemIcon(of: .star, weight: .thin)
         favouriteAction.backgroundColor = .grass1
         
         return [favouriteAction]

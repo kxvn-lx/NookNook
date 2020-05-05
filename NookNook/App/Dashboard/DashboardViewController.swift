@@ -67,11 +67,21 @@ class DashboardViewController: UIViewController {
         return adBannerView
     }()
     
+    // Google ads banner
+    lazy var adBannerViewMiddle: GADBannerView = {
+        let adBannerView = GADBannerView(adSize: kGADAdSizeSmartBannerLandscape)
+        adBannerView.translatesAutoresizingMaskIntoConstraints = false
+        adBannerView.adUnitID = GoogleAdsHelper.AD_UNIT_ID
+        adBannerView.rootViewController = self
+        
+        return adBannerView
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         favouritesManager = DataPersistEngine()
-        userDict = UDHelper.getUser()
+        userDict = UDEngine.shared.getUser()
         
         setBar()
         setUI()
@@ -106,7 +116,7 @@ class DashboardViewController: UIViewController {
             self.variationImageCollectionView.reloadData()
         }
         favouritesManager = DataPersistEngine()
-        userDict = UDHelper.getUser()
+        userDict = UDEngine.shared.getUser()
         
         setupProfile()
         residentLabel.text = "Your Resident: \(self.favouritesManager.residentVillagers.count)/10"
@@ -115,12 +125,11 @@ class DashboardViewController: UIViewController {
         
         // Calculate monthly bug and fish count
         calculateMonthlyCritter()
-        
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
         
-        if !UDHelper.getIsAdsPurchased() {
+        if !UDEngine.shared.getIsAdsPurchased() {
             self.view.addSubview(adBannerView)
             adBannerView.load(GADRequest())
             NSLayoutConstraint.activate([
@@ -140,7 +149,7 @@ class DashboardViewController: UIViewController {
         self.view.tintColor = .white
         
         let button: UIButton = UIButton(type: .custom)
-        button.setImage(IconUtil.systemIcon(of: .gear, weight: .regular), for: .normal)
+        button.setImage(IconHelper.systemIcon(of: .gear, weight: .regular), for: .normal)
         button.addTarget(self, action: #selector(settingsButtonPressed), for: .touchUpInside)
         button.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
         button.imageView?.contentMode = .scaleAspectFit
@@ -186,6 +195,7 @@ class DashboardViewController: UIViewController {
         
         // Name stack view
         nameStackView = SVHelper.createSV(axis: .vertical, spacing: MARGIN, alignment: .center, distribution: .fill)
+        scrollView.addSubview(mStackView)
         
         profileImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 130, height: 130))
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -261,12 +271,20 @@ class DashboardViewController: UIViewController {
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: CRITTER_CELL)
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: FAVOURITE_CELL)
         
+        
         mStackView.addArrangedSubview(profileNameStackView, withMargin: UIEdgeInsets(top: MARGIN*4, left: 0, bottom: 0, right: 0))
         mStackView.addArrangedSubview(phraseStack)
+        if !UDEngine.shared.getIsAdsPurchased() {
+            mStackView.addArrangedSubview(adBannerViewMiddle)
+            adBannerViewMiddle.load(GADRequest())
+            NSLayoutConstraint.activate([
+                adBannerViewMiddle.widthAnchor.constraint(equalTo: self.view.widthAnchor),
+                adBannerViewMiddle.heightAnchor.constraint(equalToConstant: 50),
+            ])
+        } 
         mStackView.addArrangedSubview(passportStackView)
         mStackView.addArrangedSubview(residentStack)
         mStackView.addArrangedSubview(tableView)
-        scrollView.addSubview(mStackView)
     }
     
     private func setConstraint() {
@@ -375,7 +393,7 @@ class DashboardViewController: UIViewController {
     }
     
     private func reloadProfile() {
-        userDict = UDHelper.getUser()
+        userDict = UDEngine.shared.getUser()
         favouritesManager = DataPersistEngine()
         setupProfile()
         
@@ -391,7 +409,7 @@ class DashboardViewController: UIViewController {
 extension DashboardViewController: UIAdaptivePresentationControllerDelegate {
     func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
         self.reloadProfile()
-        if !UDHelper.getIsAdsPurchased() {
+        if !UDEngine.shared.getIsAdsPurchased() {
             self.view.addSubview(adBannerView)
             adBannerView.load(GADRequest())
         } else {
@@ -404,7 +422,7 @@ extension DashboardViewController: UIAdaptivePresentationControllerDelegate {
 extension DashboardViewController: ProfileDelegate {
     func updateprofile() {
         self.reloadProfile()
-        if !UDHelper.getIsAdsPurchased() {
+        if !UDEngine.shared.getIsAdsPurchased() {
             self.view.addSubview(adBannerView)
             adBannerView.load(GADRequest())
         } else {

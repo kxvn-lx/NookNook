@@ -22,11 +22,11 @@ class WhatsNewHelper {
     var view: WhatsNewViewController?
     @objc weak var delegate: WhatsNewhelperDelegate?
     
-    private var swipeRightIcon = IconUtil.systemIcon(of: .swipeRight, weight: .light)
-    private var favouriteIcon = IconUtil.systemIcon(of: .star, weight: .light)
-    private var birthdayIcon = IconUtil.systemIcon(of: .birthday, weight: .light)
-    private var critterIcon = IconUtil.systemIcon(of: .critter, weight: .light)
-    private var profileIcon = IconUtil.systemIcon(of: .dashboard, weight: .light)
+    private var swipeRightIcon = IconHelper.systemIcon(of: .swipeRight, weight: .light)
+    private var favouriteIcon = IconHelper.systemIcon(of: .star, weight: .light)
+    private var birthdayIcon = IconHelper.systemIcon(of: .birthday, weight: .light)
+    private var critterIcon = IconHelper.systemIcon(of: .critter, weight: .light)
+    private var profileIcon = IconHelper.systemIcon(of: .dashboard, weight: .light)
     
     // MARK: Initialiser
     init() {

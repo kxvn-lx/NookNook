@@ -106,7 +106,7 @@ class DetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if !UDHelper.getIsAdsPurchased() {
+        if !UDEngine.shared.getIsAdsPurchased() {
             self.view.addSubview(adBannerView)
             adBannerView.load(GADRequest())
             NSLayoutConstraint.activate([
@@ -472,7 +472,7 @@ class DetailViewController: UIViewController {
         mStackView.addArrangedSubview(tsStackView)
         mStackView.addArrangedSubview(iconStackView)
         
-        if !UDHelper.getIsAdsPurchased() {
+        if !UDEngine.shared.getIsAdsPurchased() {
             mStackView.addArrangedSubview(adBannerViewMiddle)
             adBannerViewMiddle.load(GADRequest())
             NSLayoutConstraint.activate([

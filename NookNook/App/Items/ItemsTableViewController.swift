@@ -85,7 +85,7 @@ class ItemsTableViewController: UITableViewController {
         self.navigationController?.navigationBar.sizeToFit()
         self.tableView.reloadData()
         
-        if !UDHelper.getIsAdsPurchased() {
+        if !UDEngine.shared.getIsAdsPurchased() {
             self.view.addSubview(adBannerView)
             adBannerView.load(GADRequest())
             NSLayoutConstraint.activate([
@@ -100,6 +100,16 @@ class ItemsTableViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.tabBarController?.delegate = self
+        
+        if !UDEngine.shared.getIsFirstVisit(on: .Item) {
+            let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! SwipeTableViewCell
+            cell.showSwipe(orientation: .left, animated: true) { (sucess) in
+                if sucess {
+                    cell.hideSwipe(animated: true)
+                    UDEngine.shared.saveIsFirstVisit(on: .Item)
+                }
+            }
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -149,9 +159,9 @@ class ItemsTableViewController: UITableViewController {
             itemCell.buyLabel.attributedText = PriceEngine.renderPrice(amount: item.buy, with: .buy, of: itemCell.buyLabel.font.pointSize)
             itemCell.sellLabel.attributedText = PriceEngine.renderPrice(amount: item.sell, with: .sell, of: itemCell.sellLabel.font.pointSize)
             
-            itemCell.isFavImageView.image = self.favouritesManager.items.contains(item) ?  IconUtil.systemIcon(of: IconUtil.IconName.starFill, weight: .thin) : nil
+            itemCell.isFavImageView.image = self.favouritesManager.items.contains(item) ?  IconHelper.systemIcon(of: IconHelper.IconName.starFill, weight: .thin) : nil
             if item.variants != nil {
-                itemCell.customisableImageView.image = IconUtil.systemIcon(of: IconUtil.IconName.paintbrush, weight: .thin)
+                itemCell.customisableImageView.image = IconHelper.systemIcon(of: IconHelper.IconName.paintbrush, weight: .thin)
             } else {
                 itemCell.customisableImageView.image = nil
             }
@@ -197,7 +207,7 @@ class ItemsTableViewController: UITableViewController {
         tabBarController?.tabBar.tintColor = .white
         
         let button: UIButton = UIButton(type: .custom)
-        button.setImage(IconUtil.systemIcon(of: .filter, weight: .regular), for: .normal)
+        button.setImage(IconHelper.systemIcon(of: .filter, weight: .regular), for: .normal)
         button.addTarget(self, action: #selector(filterButtonPressed), for: .touchUpInside)
         button.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
         button.imageView?.contentMode = .scaleAspectFit
@@ -279,7 +289,7 @@ extension ItemsTableViewController: SwipeTableViewCellDelegate {
             Taptic.lightTaptic()
         }
         
-        favouriteAction.image = self.favouritesManager.items.contains(item) ? IconUtil.systemIcon(of: .starFill, weight: .thin) : IconUtil.systemIcon(of: .star, weight: .thin)
+        favouriteAction.image = self.favouritesManager.items.contains(item) ? IconHelper.systemIcon(of: .starFill, weight: .thin) : IconHelper.systemIcon(of: .star, weight: .thin)
         favouriteAction.backgroundColor = .grass1
         
         return [favouriteAction]
@@ -299,12 +309,12 @@ extension ItemsTableViewController: WhatsNewhelperDelegate {
         controller.dismiss(animated: true, completion: nil)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-            if !UDHelper.getIsFirstVisit(on: .Item) {
+            if !UDEngine.shared.getIsFirstVisit(on: .Item) {
                 let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! SwipeTableViewCell
                 cell.showSwipe(orientation: .left, animated: true) { (sucess) in
                     if sucess {
                         cell.hideSwipe(animated: true)
-                        UDHelper.saveIsFirstVisit(on: .Item)
+                        UDEngine.shared.saveIsFirstVisit(on: .Item)
                     }
                 }
             }
