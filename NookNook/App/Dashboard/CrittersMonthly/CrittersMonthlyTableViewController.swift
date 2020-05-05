@@ -56,7 +56,6 @@ class CrittersMonthlyTableViewController: UITableViewController {
         let adBannerView = GADBannerView(adSize: kGADAdSizeBanner)
         adBannerView.translatesAutoresizingMaskIntoConstraints = false
         adBannerView.adUnitID = GoogleAdsHelper.AD_UNIT_ID
-        adBannerView.delegate = self
         adBannerView.rootViewController = self
 
         return adBannerView
@@ -102,6 +101,10 @@ class CrittersMonthlyTableViewController: UITableViewController {
         if !UDHelper.getIsAdsPurchased() {
             self.view.addSubview(adBannerView)
             adBannerView.load(GADRequest())
+            NSLayoutConstraint.activate([
+                adBannerView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
+                adBannerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+            ])
         } else {
             adBannerView.removeFromSuperview()
         }

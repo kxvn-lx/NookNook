@@ -12,6 +12,12 @@ struct UDHelper {
     
     private static let USER_KEY = "NookNook.userDefaults.key"
     private static let USER_AD_KEY = "NookNook.userDefaults.key.ad"
+    private static let USER_FIRST_VISIT_KEY = "NookNook.userDefaults.key.firstVisit"
+    
+    enum TableViewCaller: String {
+        case Item, Critters, Wardrobes, Villagers
+    }
+    
     private static let defaults = UserDefaults.standard
     
     private static var userDict: [String: String]!
@@ -40,6 +46,15 @@ struct UDHelper {
     /// Get user's ads bought preference
     static func getIsAdsPurchased() -> Bool {
         return defaults.bool(forKey: USER_AD_KEY)
+    }
+    
+    
+    static func saveIsFirstVisit(on vc: TableViewCaller) {
+        defaults.set(true, forKey: USER_FIRST_VISIT_KEY + vc.rawValue)
+    }
+    
+    static func getIsFirstVisit(on vc: TableViewCaller) -> Bool {
+        return defaults.bool(forKey: USER_FIRST_VISIT_KEY + vc.rawValue)
     }
     
 }

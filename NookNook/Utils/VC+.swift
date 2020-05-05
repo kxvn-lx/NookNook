@@ -53,21 +53,6 @@ extension UIViewController {
 }
 
 
-extension UIViewController: GADBannerViewDelegate {
-    
-    public func adViewDidReceiveAd(_ bannerView: GADBannerView) {
-        NSLayoutConstraint.activate([
-            bannerView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-            bannerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
-        ])
-    }
-    
-    public func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
-        print(error)
-    }
-}
-
-
 extension UITableViewController {
     func setCustomFooterView(text: String, height: CGFloat, multiplier: CGFloat = 0) {
         let customView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: height + height * multiplier))
@@ -148,13 +133,6 @@ extension String {
     
     mutating func capitalizeFirstLetter() {
         self = self.capitalizingFirstLetter()
-    }
-}
-
-// MARK: - Float
-extension Float {
-    var clean: String {
-        return self.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", self) : String(self)
     }
 }
 

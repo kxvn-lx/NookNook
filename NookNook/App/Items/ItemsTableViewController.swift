@@ -41,7 +41,6 @@ class ItemsTableViewController: UITableViewController {
         let adBannerView = GADBannerView(adSize: kGADAdSizeSmartBannerLandscape)
         adBannerView.translatesAutoresizingMaskIntoConstraints = false
         adBannerView.adUnitID = GoogleAdsHelper.AD_UNIT_ID
-        adBannerView.delegate = self
         adBannerView.rootViewController = self
         
         return adBannerView
@@ -73,6 +72,7 @@ class ItemsTableViewController: UITableViewController {
         
         
         // Whatsnew Properties
+        whatsNewVC.delegate = self
         guard let vc = whatsNewVC.view else {
             return
         }
@@ -84,9 +84,14 @@ class ItemsTableViewController: UITableViewController {
         favouritesManager = DataPersistEngine()
         self.navigationController?.navigationBar.sizeToFit()
         self.tableView.reloadData()
+        
         if !UDHelper.getIsAdsPurchased() {
             self.view.addSubview(adBannerView)
             adBannerView.load(GADRequest())
+            NSLayoutConstraint.activate([
+                adBannerView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
+                adBannerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+            ])
         } else {
             adBannerView.removeFromSuperview()
         }
@@ -95,13 +100,6 @@ class ItemsTableViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.tabBarController?.delegate = self
-        
-        let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! ItemTableViewCell
-        cell.showSwipe(orientation: .left, animated: true) { (sucess) in
-            if sucess {
-                cell.hideSwipe(animated: true)
-            }
-        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -293,5 +291,23 @@ extension ItemsTableViewController: SwipeTableViewCellDelegate {
         options.backgroundColor = .grass1
         options.transitionStyle = .border
         return options
+    }
+}
+
+extension ItemsTableViewController: WhatsNewhelperDelegate {
+    func whatsNewDidFinish(controller: UIViewController) {
+        controller.dismiss(animated: true, completion: nil)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+            if !UDHelper.getIsFirstVisit(on: .Item) {
+                let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! SwipeTableViewCell
+                cell.showSwipe(orientation: .left, animated: true) { (sucess) in
+                    if sucess {
+                        cell.hideSwipe(animated: true)
+                        UDHelper.saveIsFirstVisit(on: .Item)
+                    }
+                }
+            }
+        })
     }
 }

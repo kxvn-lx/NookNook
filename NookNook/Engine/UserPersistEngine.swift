@@ -70,7 +70,6 @@ struct UserPersistEngine {
         }
     }
     
-    
     /// Save a user's reminder into the device.
     /// - Parameter reminderType: The type of reminder. Either buy or sell
     /// - Returns: A return of a random order of [2: "00", 1: "6", 0: "Friday", 3: "PM"] (best sort first)
@@ -87,5 +86,4 @@ struct UserPersistEngine {
         }
         return reminderType.rawValue == ReminderType.buy.rawValue ? [2: "00", 0: "Sunday", 3: "AM", 1: "6"] : [2: "00", 0: "Friday", 3: "PM", 1: "6"]
     }
-    
 }

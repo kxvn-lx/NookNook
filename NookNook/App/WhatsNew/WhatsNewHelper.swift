@@ -10,10 +10,17 @@ import Foundation
 import UIKit
 import WhatsNewKit
 
-struct WhatsNewHelper {
+
+@objc protocol WhatsNewhelperDelegate: class {
+    func whatsNewDidFinish(controller: UIViewController)
+}
+
+
+class WhatsNewHelper {
     
     // MARK: Properties
     var view: WhatsNewViewController?
+    @objc weak var delegate: WhatsNewhelperDelegate?
     
     private var swipeRightIcon = IconUtil.systemIcon(of: .swipeRight, weight: .light)
     private var favouriteIcon = IconUtil.systemIcon(of: .star, weight: .light)
@@ -54,7 +61,24 @@ struct WhatsNewHelper {
             ]
         )
         
+        let configuration = getConfiguration()
+        let versionStore: WhatsNewVersionStore = KeyValueWhatsNewVersionStore()
         
+        // MARK:  Initialize
+        view = WhatsNewViewController(
+            whatsNew: whatsNew,
+            configuration: configuration,
+            versionStore: versionStore
+        )
+        
+//        view = WhatsNewViewController(
+//            whatsNew: whatsNew,
+//            configuration: configuration
+//        )
+    }
+    
+    
+    private func getConfiguration() -> WhatsNewViewController.Configuration {
         // MARK: Configurations
         var configuration = WhatsNewViewController.Configuration()
         
@@ -83,19 +107,12 @@ struct WhatsNewHelper {
         configuration.itemsView.layout = .left
         configuration.itemsView.contentMode = .top
         
-        // MARK: New updates
-        //        let detailButton = WhatsNewViewController.DetailButton(
-        //            title: "See what's new",
-        //            action: .website(url: "https://github.com/SvenTiigi/WhatsNewKit"),
-        //            titleColor: UIColor(named: ColourUtil.grass1.rawValue)!,
-        //            animation: .slideRight
-        //        )
-        //        configuration.detailButton = detailButton
-        
         // MARK: Buttons
         let completionButton = WhatsNewViewController.CompletionButton(
             title: "Get started",
-            action: .dismiss,
+            action: .custom(action: { [weak self] whatsNewViewController in
+                self?.delegate?.whatsNewDidFinish(controller: whatsNewViewController)
+            }),
             hapticFeedback: .notification(.success),
             backgroundColor: .grass1,
             titleColor: .white,
@@ -104,21 +121,7 @@ struct WhatsNewHelper {
         )
         configuration.completionButton = completionButton
         
-        
-        
-        
-        let versionStore: WhatsNewVersionStore = KeyValueWhatsNewVersionStore()
-        
-        // MARK:  Initialize
-        view = WhatsNewViewController(
-            whatsNew: whatsNew,
-            configuration: configuration,
-            versionStore: versionStore
-        )
-        
-        //        view = WhatsNewViewController(
-        //            whatsNew: whatsNew,
-        //            configuration: configuration
-        //        )
+        return configuration
     }
+    
 }

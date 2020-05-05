@@ -40,7 +40,6 @@ class VillagersTableViewController: UITableViewController {
         let adBannerView = GADBannerView(adSize: kGADAdSizeSmartBannerLandscape)
         adBannerView.translatesAutoresizingMaskIntoConstraints = false
         adBannerView.adUnitID = GoogleAdsHelper.AD_UNIT_ID
-        adBannerView.delegate = self
         adBannerView.rootViewController = self
         
         return adBannerView
@@ -79,6 +78,10 @@ class VillagersTableViewController: UITableViewController {
         if !UDHelper.getIsAdsPurchased() {
             self.view.addSubview(adBannerView)
             adBannerView.load(GADRequest())
+            NSLayoutConstraint.activate([
+                adBannerView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
+                adBannerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+            ])
         } else {
             adBannerView.removeFromSuperview()
         }
@@ -87,6 +90,16 @@ class VillagersTableViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.tabBarController?.delegate = self
+        
+        if !UDHelper.getIsFirstVisit(on: .Villagers) {
+            let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! SwipeTableViewCell
+            cell.showSwipe(orientation: .left, animated: true) { (sucess) in
+                if sucess {
+                    cell.hideSwipe(animated: true)
+                    UDHelper.saveIsFirstVisit(on: .Villagers)
+                }
+            }
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -154,7 +167,6 @@ class VillagersTableViewController: UITableViewController {
         let selectedVillager = isFiltering ? filteredVillagers[indexPath.row] : villagers[indexPath.row]
         
         let vc = self.storyboard!.instantiateViewController(withIdentifier: DETAIL_ID) as! DetailViewController
-        
         vc.parseOject(from: .villagers, object: selectedVillager)
         
         let navController = UINavigationController(rootViewController: vc)
@@ -174,73 +186,6 @@ class VillagersTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         (view as! UITableViewHeaderFooterView).contentView.backgroundColor = .cream1
         (view as! UITableViewHeaderFooterView).textLabel?.textColor = .dirt1
-    }
-    
-    // swipe right function
-    override func tableView(_ tableView: UITableView,
-                            leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
-    {
-        
-        let villager = isFiltering ? filteredVillagers[indexPath.row] : villagers[indexPath.row]
-        
-        let favouriteAction = UIContextualAction(style: .normal, title:  "", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-            
-            self.favouritesManager.saveFavouritedVillager(villager: villager)
-            DispatchQueue.main.async {
-                let contentOffset = tableView.contentOffset
-                self.tableView.reloadRows(at: [indexPath], with: .left)
-                tableView.contentOffset = contentOffset
-            }
-            Taptic.lightTaptic()
-            success(true)
-        })
-        
-        favouriteAction.image = self.favouritesManager.favouritedVillagers.contains(villager) ? IconUtil.systemIcon(of: .starFill, weight: .thin) : IconUtil.systemIcon(of: .star, weight: .thin)
-        
-        let residentAction = UIContextualAction(style: .normal, title:  "Resident", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-            
-            let villager: Villager
-            if self.isFiltering {
-                villager = self.filteredVillagers[indexPath.row]
-            } else {
-                villager = self.villagers[indexPath.row]
-            }
-            
-            if self.favouritesManager.residentVillagers.count <= 9 {
-                self.favouritesManager.saveResidentVillager(villager: villager)
-                DispatchQueue.main.async {
-                    let contentOffset = tableView.contentOffset
-                    self.tableView.reloadRows(at: [indexPath], with: .left)
-                    tableView.contentOffset = contentOffset
-                }
-                Taptic.lightTaptic()
-                success(true)
-            }
-            else if self.favouritesManager.residentVillagers.count <= 10 && self.favouritesManager.residentVillagers.contains(villager) {
-                self.favouritesManager.saveResidentVillager(villager: villager)
-                DispatchQueue.main.async {
-                    let contentOffset = tableView.contentOffset
-                    self.tableView.reloadRows(at: [indexPath], with: .left)
-                    tableView.contentOffset = contentOffset
-                }
-                Taptic.lightTaptic()
-                success(true)
-            }
-            else {
-                let alert = AlertHelper.createDefaultAction(title: "Woah there!", message: "It appears that you have the max number of residents. (10 max)")
-                self.present(alert, animated: true)
-                
-                Taptic.errorTaptic()
-                success(false)
-                
-                
-            }
-        })
-        favouriteAction.backgroundColor = .grass1
-        residentAction.backgroundColor = .gold1
-        
-        return UISwipeActionsConfiguration(actions: [favouriteAction, residentAction])
-        
     }
     
     

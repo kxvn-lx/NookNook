@@ -71,7 +71,15 @@ class DetailViewController: UIViewController {
         let adBannerView = GADBannerView(adSize: kGADAdSizeSmartBannerLandscape)
         adBannerView.translatesAutoresizingMaskIntoConstraints = false
         adBannerView.adUnitID = GoogleAdsHelper.AD_UNIT_ID
-        adBannerView.delegate = self
+        adBannerView.rootViewController = self
+
+        return adBannerView
+    }()
+    
+    lazy var adBannerViewMiddle: GADBannerView = {
+        let adBannerView = GADBannerView(adSize: kGADAdSizeSmartBannerLandscape)
+        adBannerView.translatesAutoresizingMaskIntoConstraints = false
+        adBannerView.adUnitID = GoogleAdsHelper.AD_UNIT_ID
         adBannerView.rootViewController = self
 
         return adBannerView
@@ -101,6 +109,10 @@ class DetailViewController: UIViewController {
         if !UDHelper.getIsAdsPurchased() {
             self.view.addSubview(adBannerView)
             adBannerView.load(GADRequest())
+            NSLayoutConstraint.activate([
+                adBannerView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
+                adBannerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+            ])
         } else {
             adBannerView.removeFromSuperview()
         }
@@ -459,6 +471,16 @@ class DetailViewController: UIViewController {
         mStackView.addArrangedSubview(detailImageView, withMargin: UIEdgeInsets(top: MARGIN * 4, left: 0, bottom: 0, right: 0))
         mStackView.addArrangedSubview(tsStackView)
         mStackView.addArrangedSubview(iconStackView)
+        
+        if !UDHelper.getIsAdsPurchased() {
+            mStackView.addArrangedSubview(adBannerViewMiddle)
+            adBannerViewMiddle.load(GADRequest())
+            NSLayoutConstraint.activate([
+                adBannerViewMiddle.widthAnchor.constraint(equalTo: self.view.widthAnchor),
+                adBannerViewMiddle.heightAnchor.constraint(equalToConstant: 50),
+            ])
+        }
+        
         mStackView.addArrangedSubview(infoStackView)
         mStackView.addArrangedSubview(activeTimeStack)
         mStackView.addArrangedSubview(variationStack)

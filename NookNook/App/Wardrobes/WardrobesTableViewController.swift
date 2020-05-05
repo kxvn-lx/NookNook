@@ -38,7 +38,6 @@ class WardrobesTableViewController: UITableViewController {
         let adBannerView = GADBannerView(adSize: kGADAdSizeSmartBannerLandscape)
         adBannerView.translatesAutoresizingMaskIntoConstraints = false
         adBannerView.adUnitID = GoogleAdsHelper.AD_UNIT_ID
-        adBannerView.delegate = self
         adBannerView.rootViewController = self
         
         return adBannerView
@@ -76,6 +75,10 @@ class WardrobesTableViewController: UITableViewController {
         if !UDHelper.getIsAdsPurchased() {
             self.view.addSubview(adBannerView)
             adBannerView.load(GADRequest())
+            NSLayoutConstraint.activate([
+                adBannerView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
+                adBannerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+            ])
         } else {
             adBannerView.removeFromSuperview()
         }
@@ -84,6 +87,16 @@ class WardrobesTableViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.tabBarController?.delegate = self
+        
+        if !UDHelper.getIsFirstVisit(on: .Wardrobes) {
+            let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! SwipeTableViewCell
+            cell.showSwipe(orientation: .left, animated: true) { (sucess) in
+                if sucess {
+                    cell.hideSwipe(animated: true)
+                    UDHelper.saveIsFirstVisit(on: .Wardrobes)
+                }
+            }
+        }
     }
     
     override func viewDidLayoutSubviews() {
