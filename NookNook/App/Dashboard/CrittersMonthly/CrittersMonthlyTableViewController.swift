@@ -110,6 +110,20 @@ class CrittersMonthlyTableViewController: UITableViewController {
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if !UDHelper.getIsFirstVisit(on: .CrittersThisMonth) {
+            let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! SwipeTableViewCell
+            cell.showSwipe(orientation: .left, animated: true) { (sucess) in
+                if sucess {
+                    cell.hideSwipe(animated: true)
+                    UDHelper.saveIsFirstVisit(on: .CrittersThisMonth)
+                }
+            }
+        }
+    }
+    
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {

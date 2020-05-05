@@ -11,4 +11,5 @@ target 'NookNook' do
 	pod 'GoogleTagManager'
 	pod 'McPicker', '~> 2.0.0'
 	pod 'Google-Mobile-Ads-SDK'
+	pod 'SwiftConfettiView'
 end

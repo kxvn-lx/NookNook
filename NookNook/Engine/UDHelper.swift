@@ -15,7 +15,7 @@ struct UDHelper {
     private static let USER_FIRST_VISIT_KEY = "NookNook.userDefaults.key.firstVisit"
     
     enum TableViewCaller: String {
-        case Item, Critters, Wardrobes, Villagers
+        case Item, Critters, Wardrobes, Villagers, CrittersThisMonth
     }
     
     private static let defaults = UserDefaults.standard

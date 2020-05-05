@@ -78,6 +78,7 @@ PODS:
   - nanopb/decode (0.3.9011)
   - nanopb/encode (0.3.9011)
   - PromisesObjC (1.2.8)
+  - SwiftConfettiView (0.1.0)
   - UXCam (3.2.1)
 
 DEPENDENCIES:
@@ -85,6 +86,7 @@ DEPENDENCIES:
   - Google-Mobile-Ads-SDK
   - GoogleTagManager
   - McPicker (~> 2.0.0)
+  - SwiftConfettiView
   - UXCam
 
 SPEC REPOS:
@@ -107,6 +109,7 @@ SPEC REPOS:
     - McPicker
     - nanopb
     - PromisesObjC
+    - SwiftConfettiView
     - UXCam
 
 SPEC CHECKSUMS:
@@ -128,8 +131,9 @@ SPEC CHECKSUMS:
   McPicker: a0a6b8ece8f1642e05401a29867463aba501188b
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
+  SwiftConfettiView: 1bdbc2e6913b6b1c76d8070802b212508ad5c352
   UXCam: 457f52deaee1cb2807393c134bc232e0d42b8e87
 
-PODFILE CHECKSUM: c9272809f862308a56c4e9b6bf402497e71b4765
+PODFILE CHECKSUM: 7977d59311632318d2cd69448e23d67ec00380f5
 
 COCOAPODS: 1.9.1
