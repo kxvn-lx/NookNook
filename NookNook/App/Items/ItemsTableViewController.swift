@@ -67,10 +67,6 @@ class ItemsTableViewController: UITableViewController {
         navigationItem.hidesSearchBarWhenScrolling = false
         
         
-        // Setup google ads
-        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ "2077ef9a63d2b398840261c8221a0c9b" ]
-        
-        
         // Whatsnew Properties
         whatsNewVC.delegate = self
         guard let vc = whatsNewVC.view else {

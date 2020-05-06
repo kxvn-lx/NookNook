@@ -62,9 +62,6 @@ class WardrobesTableViewController: UITableViewController {
         navigationItem.hidesSearchBarWhenScrolling = false
         
         setBar()
-        
-        // Setup google ads
-        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ "2077ef9a63d2b398840261c8221a0c9b" ]
     }
     
     override func viewWillAppear(_ animated: Bool) {
