@@ -19,7 +19,7 @@
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>GADApplicationIdentifier</key>
-	<string>ca-app-pub-5887492549877876~7928146930</string>
+	<string>ca-app-pub-9765417433047370~4251731586</string>
 	<key>GADIsAdManagerApp</key>
 	<true/>
 	<key>LSRequiresIPhoneOS</key>
@@ -27,6 +27,10 @@
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+		<key>NSAllowsArbitraryLoadsForMedia</key>
+		<true/>
+		<key>NSAllowsArbitraryLoadsInWebContent</key>
 		<true/>
 	</dict>
 	<key>NSPhotoLibraryUsageDescription</key>

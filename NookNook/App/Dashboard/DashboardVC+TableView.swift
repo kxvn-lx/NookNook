@@ -61,7 +61,7 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 let cell = UITableViewCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: CRITTER_CELL)
                 cell.selectionStyle = .none
-                cell.textLabel!.text = "Total bugs caught (\(formatted)%)"
+                cell.textLabel!.text = "Total fishes caught (\(formatted)%)"
                 cell.detailTextLabel?.text = "\(caughtFishesCount)/\(totalFishesCount)"
                 return cell
             default: break

@@ -25,3 +25,9 @@ struct Wardrobe: Codable, Equatable, Identifiable {
     
     let sourceNote: String?
 }
+
+extension Wardrobe {
+    static func == (lhs: Wardrobe , rhs: Wardrobe) -> Bool {
+        return lhs.id == rhs.id
+    }
+}

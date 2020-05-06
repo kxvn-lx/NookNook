@@ -31,3 +31,9 @@ struct Critter: Codable, Equatable, Identifiable {
     
     let shadow: String?
 }
+
+extension Critter {
+    static func == (lhs: Critter , rhs: Critter) -> Bool {
+        return lhs.id == rhs.id
+    }
+}

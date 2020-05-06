@@ -26,3 +26,9 @@ struct Villager: Codable, Equatable, Identifiable {
     let category: String
     
 }
+
+extension Villager {
+    static func == (lhs: Villager , rhs: Villager) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
