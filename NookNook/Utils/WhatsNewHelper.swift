@@ -27,6 +27,7 @@ class WhatsNewHelper {
     private var birthdayIcon = IconHelper.systemIcon(of: .birthday, weight: .light)
     private var critterIcon = IconHelper.systemIcon(of: .critter, weight: .light)
     private var profileIcon = IconHelper.systemIcon(of: .dashboard, weight: .light)
+    private var reminderIcon = IconHelper.systemIcon(of: .reminder, weight: .light)
     
     // MARK: Initialiser
     init() {
@@ -54,10 +55,15 @@ class WhatsNewHelper {
                     image: critterIcon
                 ),
                 WhatsNew.Item(
+                    title: "Turnip reminder",
+                    subtitle: "Use the default reminder, or set your own custom time!",
+                    image: reminderIcon
+                ),
+                WhatsNew.Item(
                     title: "Personalised dashboard",
                     subtitle: "Make NookNook your very own ACNH companion app.",
                     image: profileIcon
-                )
+                ),
             ]
         )
         

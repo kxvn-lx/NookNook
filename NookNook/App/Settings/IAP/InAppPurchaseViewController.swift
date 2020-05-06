@@ -41,15 +41,15 @@ class InAppPurchaseViewController: UITableViewController {
         SwiftyStoreKit.retrieveProductsInfo([IAPProduct.BuyCoffee.rawValue,
                                              IAPProduct.RemoveAds.rawValue,
                                              IAPProduct.RemoveAdsBuyCoffee.rawValue]) { result in
-            for product in result.retrievedProducts {
-                print("Product: \(product.localizedTitle) - price: \(product.price)")
-            }
-            for product in result.invalidProductIDs {
-                print("Invalid product ID: \(product)")
-            }
-            if let error = result.error {
-                print(error.localizedDescription)
-            }
+                                                for product in result.retrievedProducts {
+                                                    print("Product: \(product.localizedTitle) - price: \(product.price)")
+                                                }
+                                                for product in result.invalidProductIDs {
+                                                    print("Invalid product ID: \(product)")
+                                                }
+                                                if let error = result.error {
+                                                    print(error.localizedDescription)
+                                                }
         }
         SwiftyStoreKit.shouldAddStorePaymentHandler = { payment, product in return true }
     }
@@ -112,25 +112,33 @@ class InAppPurchaseViewController: UITableViewController {
         switch indexPath.section {
         case 0:
             switch indexPath.row {
+            // Buy coffee
             case 0:
+                SpinnerHelper.shared.present()
                 SwiftyStoreKit.purchaseProduct(IAPProduct.BuyCoffee.rawValue, quantity: 1, atomically: true) { result in
                     switch result {
                     case .success(let purchase):
                         Taptic.successTaptic()
-                        let alert = AlertHelper.createDefaultAction(title: "Thank you for you generosity 🤩", message: "\(String(describing: purchase.product.localizedTitle)) has been successfully purchased.")
+                        let alert = AlertHelper.createDefaultAction(title: "Thank you ❤️", message: "\(String(describing: purchase.product.localizedTitle)) has been successfully purchased!")
                         self.present(alert, animated: true)
+                        SpinnerHelper.shared.absent()
                         
                     case .error(let error):
                         switch error.code {
+                        case .paymentCancelled:
+                            SpinnerHelper.shared.absent()
+                            
                         case .unknown, .storeProductNotAvailable:
                             Taptic.errorTaptic()
                             let alert = AlertHelper.createDefaultAction(title: "Something went wrong.", message: "There was problem with the transaction. Please try again later or contact kevin.laminto@gmail.com")
                             self.present(alert, animated: true)
+                            SpinnerHelper.shared.absent()
                             
                         case .paymentInvalid, .paymentNotAllowed, .clientInvalid:
                             Taptic.errorTaptic()
                             let alert = AlertHelper.createDefaultAction(title: "Something went wrong.", message: "Your payment option seems to be invalid/not allowed. Please try again later or contact kevin.laminto@gmail.com")
                             self.present(alert, animated: true)
+                            SpinnerHelper.shared.absent()
                             
                             
                         default: print((error as NSError).localizedDescription)
@@ -138,52 +146,67 @@ class InAppPurchaseViewController: UITableViewController {
                     }
                 }
                 
+            // Remove ads
             case 1:
+                SpinnerHelper.shared.present()
                 SwiftyStoreKit.purchaseProduct(IAPProduct.RemoveAds.rawValue, quantity: 1, atomically: true) { result in
                     switch result {
                     case .success(let purchase):
                         Taptic.successTaptic()
                         UDEngine.shared.saveIsAdsPurchased()
-                        let alert = AlertHelper.createDefaultAction(title: "Thank you ❤️", message: "\(String(describing: purchase.product.localizedTitle)) has been successfully purchased.")
+                        let alert = AlertHelper.createDefaultAction(title: "Thank you ❤️", message: "\(String(describing: purchase.product.localizedTitle)) has been successfully purchased!")
                         self.present(alert, animated: true)
+                        SpinnerHelper.shared.absent()
                         
                     case .error(let error):
                         switch error.code {
+                        case .paymentCancelled:
+                            SpinnerHelper.shared.absent()
+                            
                         case .unknown, .storeProductNotAvailable:
                             Taptic.errorTaptic()
                             let alert = AlertHelper.createDefaultAction(title: "Something went wrong.", message: "There was problem with the transaction. Please try again later or contact kevin.laminto@gmail.com")
                             self.present(alert, animated: true)
+                            SpinnerHelper.shared.absent()
                             
                         case .paymentInvalid, .paymentNotAllowed, .clientInvalid:
                             Taptic.errorTaptic()
                             let alert = AlertHelper.createDefaultAction(title: "Something went wrong.", message: "Your payment option seems to be invalid/not allowed. Please try again later or contact kevin.laminto@gmail.com")
                             self.present(alert, animated: true)
+                            SpinnerHelper.shared.absent()
                             
                         default: print((error as NSError).localizedDescription)
                         }
                     }
                 }
                 
+            // Remove ads + buy cofeee
             case 2:
+                SpinnerHelper.shared.present()
                 SwiftyStoreKit.purchaseProduct(IAPProduct.RemoveAdsBuyCoffee.rawValue, quantity: 1, atomically: true) { result in
                     switch result {
                     case .success(let purchase):
                         Taptic.successTaptic()
                         UDEngine.shared.saveIsAdsPurchased()
-                        let alert = AlertHelper.createDefaultAction(title: "Thank you ❤️", message: "\(String(describing: purchase.product.localizedTitle)) has been successfully purchased.")
+                        let alert = AlertHelper.createDefaultAction(title: "Thank you ❤️", message: "\(String(describing: purchase.product.localizedTitle)) has been successfully purchased!")
                         self.present(alert, animated: true)
+                        SpinnerHelper.shared.absent()
                         
                     case .error(let error):
                         switch error.code {
+                        case .paymentCancelled:
+                            SpinnerHelper.shared.absent()
                         case .unknown, .storeProductNotAvailable:
                             Taptic.errorTaptic()
                             let alert = AlertHelper.createDefaultAction(title: "Something went wrong.", message: "There was problem with the transaction. Please try again later or contact kevin.laminto@gmail.com")
                             self.present(alert, animated: true)
+                            SpinnerHelper.shared.absent()
                             
                         case .paymentInvalid, .paymentNotAllowed, .clientInvalid:
                             Taptic.errorTaptic()
                             let alert = AlertHelper.createDefaultAction(title: "Something went wrong.", message: "Your payment option seems to be invalid/not allowed. Please try again later or contact kevin.laminto@gmail.com")
                             self.present(alert, animated: true)
+                            SpinnerHelper.shared.absent()
                             
                         default: print((error as NSError).localizedDescription)
                         }
@@ -194,24 +217,29 @@ class InAppPurchaseViewController: UITableViewController {
             }
         case 1:
             switch indexPath.row {
+            // Restore
             case 0:
+                SpinnerHelper.shared.present()
                 SwiftyStoreKit.restorePurchases(atomically: true) { results in
                     if results.restoreFailedPurchases.count > 0 {
                         let alert = AlertHelper.createDefaultAction(title: "Something went wrong.", message: "There was problem restoring your purchase(s). Please try again later or contact kevin.laminto@gmail.com")
                         self.present(alert, animated: true)
+                        SpinnerHelper.shared.absent()
                     }
                     else if results.restoredPurchases.count > 0 {
-                        let alert = AlertHelper.createDefaultAction(title: "Restore sucessful.", message: "")
+                        let alert = AlertHelper.createDefaultAction(title: "Restore sucessful!", message: "")
                         self.present(alert, animated: true)
                         results.restoredPurchases.forEach({
                             if $0.productId == IAPProduct.RemoveAds.rawValue || $0.productId == IAPProduct.RemoveAdsBuyCoffee.rawValue {
                                 UDEngine.shared.saveIsAdsPurchased()
                             }
                         })
+                        SpinnerHelper.shared.absent()
                     }
                     else {
                         let alert = AlertHelper.createDefaultAction(title: "Nothing to restore.", message: "")
                         self.present(alert, animated: true)
+                        SpinnerHelper.shared.absent()
                     }
                 }
             default: break
@@ -234,9 +262,9 @@ class InAppPurchaseViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
-         let footer = view as! UITableViewHeaderFooterView
-         footer.textLabel?.textColor = UIColor.dirt1.withAlphaComponent(0.5)
-     }
+        let footer = view as! UITableViewHeaderFooterView
+        footer.textLabel?.textColor = UIColor.dirt1.withAlphaComponent(0.5)
+    }
     
     
     // MARK: - Setup views

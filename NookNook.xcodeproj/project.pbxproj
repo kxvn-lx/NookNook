@@ -45,6 +45,7 @@
 		0A370BAD2444795700A72048 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A370BAC2444795700A72048 /* CategoryTableViewCell.swift */; };
 		0A370BAF2444796400A72048 /* CategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A370BAE2444796400A72048 /* CategoriesTableViewController.swift */; };
 		0A4DEC23245B0FF50017A553 /* TurnipTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4DEC22245B0FF50017A553 /* TurnipTableViewCell.swift */; };
+		0A53327F246265350033FCF7 /* SpinnerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A53327E246265350033FCF7 /* SpinnerHelper.swift */; };
 		0A55912F244DF0110018CF99 /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0A595B912453252D00F37E15 /* housewares.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A595B902453252D00F37E15 /* housewares.json */; };
 		0A595B932453334C00F37E15 /* wallpapers.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A595B922453334C00F37E15 /* wallpapers.json */; };
@@ -167,6 +168,7 @@
 		0A370BAC2444795700A72048 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		0A370BAE2444796400A72048 /* CategoriesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesTableViewController.swift; sourceTree = "<group>"; };
 		0A4DEC22245B0FF50017A553 /* TurnipTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnipTableViewCell.swift; sourceTree = "<group>"; };
+		0A53327E246265350033FCF7 /* SpinnerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerHelper.swift; sourceTree = "<group>"; };
 		0A559121244DCDAD0018CF99 /* RAGTextField.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RAGTextField.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A559128244DCE170018CF99 /* RAGTextField.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RAGTextField.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A55912B244DF0000018CF99 /* RAGTextField.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RAGTextField.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -543,6 +545,7 @@
 				0A2D908A245E690100974FD4 /* AlertHelper.swift */,
 				0ADC7B96245F98A50033F67E /* GoogleAdsHelper.swift */,
 				0AE2795E24617B4300BF7EDB /* ConfettiHelper.swift */,
+				0A53327E246265350033FCF7 /* SpinnerHelper.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -767,6 +770,7 @@
 				0A97C2FD244C95360062B136 /* FavouriteTableViewCell.swift in Sources */,
 				0AC89E402449418B009ADB18 /* VillagerTableViewCell.swift in Sources */,
 				0A23BBCC244ACE94009B5178 /* SortEngine.swift in Sources */,
+				0A53327F246265350033FCF7 /* SpinnerHelper.swift in Sources */,
 				0A295B4A244494F9001CF828 /* Categories.swift in Sources */,
 				0A14A0072451986B0080941A /* CrittersMonthlyTableViewController.swift in Sources */,
 				0AEC501C245BF56B004EC912 /* NookTabBarController.swift in Sources */,
@@ -970,7 +974,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 305202010;
+				CURRENT_PROJECT_VERSION = 2020050610;
 				DEVELOPMENT_TEAM = D87H8GPTK2;
 				INFOPLIST_FILE = NookNook/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -992,7 +996,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 305202010;
+				CURRENT_PROJECT_VERSION = 2020050610;
 				DEVELOPMENT_TEAM = D87H8GPTK2;
 				INFOPLIST_FILE = NookNook/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;

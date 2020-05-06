@@ -138,6 +138,8 @@ class DashboardViewController: UIViewController {
             ])
         } else {
             adBannerView.removeFromSuperview()
+            mStackView.removeArrangedSubview(adBannerViewMiddle)
+            adBannerViewMiddle.removeFromSuperview()
         }
     }
     
@@ -414,6 +416,8 @@ extension DashboardViewController: UIAdaptivePresentationControllerDelegate {
             adBannerView.load(GADRequest())
         } else {
             adBannerView.removeFromSuperview()
+            mStackView.removeArrangedSubview(adBannerViewMiddle)
+            adBannerViewMiddle.removeFromSuperview()
         }
         self.dismiss(animated: true, completion: nil)
     }
@@ -427,7 +431,11 @@ extension DashboardViewController: ProfileDelegate {
             adBannerView.load(GADRequest())
         } else {
             adBannerView.removeFromSuperview()
+            mStackView.removeArrangedSubview(adBannerViewMiddle)
+            adBannerViewMiddle.removeFromSuperview()
         }
+        
+        
         self.dismiss(animated: true, completion: nil)
     }
 }

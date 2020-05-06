@@ -20,7 +20,7 @@ class PatchLogViewController: UIViewController {
     
     var logArray = [
         """
-        v1.0.0 ()
+        v1.0.0 (2020050610)
         - Added ads so your boy can pay rent lol (can be removed via in app purchases under settings)
         - Added swipe tableview cells hint for new user to let them know SWIPE RIGHT is an option (only first time)
         - Improved app architecture
@@ -28,6 +28,7 @@ class PatchLogViewController: UIViewController {
         - Fixed minor bugs
         - Fixed critter this month displaying all caught critters instead of only on a particular month
         - Added some surprise when you caught/donated all critters 😉
+        - Minor UI tweaks for Turnip reminder (for consistency)
 
         v1.0.0 (305202010)
         - Improved app performance

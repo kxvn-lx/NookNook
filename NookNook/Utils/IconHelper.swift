@@ -32,7 +32,8 @@ struct IconHelper {
         case birthday = "gift"
         case critter = "ant"
         case dashboard = "person.crop.circle"
-        case reminder = "bell.fill"
+        case reminder = "bell"
+        case reminderFill = "bell.fill"
         case website = "globe"
         case supportMe = "hand.thumbsup"
     }

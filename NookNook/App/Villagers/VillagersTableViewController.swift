@@ -92,15 +92,13 @@ class VillagersTableViewController: UITableViewController {
         self.tabBarController?.delegate = self
         
         if !UDEngine.shared.getIsFirstVisit(on: .Villagers) {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-                let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! SwipeTableViewCell
-                cell.showSwipe(orientation: .left, animated: true) { (sucess) in
-                    if sucess {
-                        cell.hideSwipe(animated: true)
-                        UDEngine.shared.saveIsFirstVisit(on: .Villagers)
-                    }
+            let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! SwipeTableViewCell
+            cell.showSwipe(orientation: .left, animated: true) { (sucess) in
+                if sucess {
+                    cell.hideSwipe(animated: true)
+                    UDEngine.shared.saveIsFirstVisit(on: .Villagers)
                 }
-            })
+            }
         }
     }
     

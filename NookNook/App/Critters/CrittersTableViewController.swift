@@ -92,7 +92,7 @@ class CrittersTableViewController: UITableViewController {
         self.tabBarController?.delegate = self
         
         if !UDEngine.shared.getIsFirstVisit(on: .Critters) {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
                 let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! SwipeTableViewCell
                 cell.showSwipe(orientation: .left, animated: true) { (sucess) in
                     if sucess {
@@ -105,8 +105,14 @@ class CrittersTableViewController: UITableViewController {
         
         // Confetti
         if UDEngine.shared.getHasCompletedCritters() {
+            guard let window = UIApplication.shared.connectedScenes
+                .filter({$0.activationState == .foregroundActive})
+                .map({$0 as? UIWindowScene})
+                .compactMap({$0})
+                .first?.windows
+                .filter({$0.isKeyWindow}).first else { return }
             let confettiView = ConfettiHelper.shared.renderConfetti(toView: self.view, withType: .confetti)
-            self.view.addSubview(confettiView)
+            window.addSubview(confettiView)
             confettiView.startConfetti()
             Taptic.successTaptic()
             let alert = AlertHelper.createDefaultAction(title: "Congratulations  🥳", message: "You have caught/donated all the critters! This deserve a celebration.")
