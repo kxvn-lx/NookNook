@@ -30,15 +30,17 @@ class InAppPurchaseViewController: UITableViewController {
         super.viewDidLoad()
         
         setBar()
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 50
+        // Tableview properties
         tableView.allowsSelection = true
         tableView.separatorStyle = .singleLine
         
+        tableView.sectionHeaderHeight = UITableView.automaticDimension
+        tableView.estimatedSectionHeaderHeight = 50
+        
+        // SwiftyStoreKit properties
         SwiftyStoreKit.retrieveProductsInfo([IAPProduct.BuyCoffee.rawValue,
                                              IAPProduct.RemoveAds.rawValue,
-                                             IAPProduct.RemoveAdsBuyCoffee.rawValue])
-        { result in
+                                             IAPProduct.RemoveAdsBuyCoffee.rawValue]) { result in
             for product in result.retrievedProducts {
                 print("Product: \(product.localizedTitle) - price: \(product.price)")
             }
@@ -49,8 +51,19 @@ class InAppPurchaseViewController: UITableViewController {
                 print(error.localizedDescription)
             }
         }
-        
         SwiftyStoreKit.shouldAddStorePaymentHandler = { payment, product in return true }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let headerImageView = UIImageView(frame: CGRect(x: 0, y: 20, width: self.view.frame.size.width, height: 60))
+        headerImageView.contentMode = .scaleAspectFit
+        let icon = IconHelper.systemIcon(of: .supportMe, weight: .regular)
+        let image = icon.withRenderingMode(.alwaysTemplate)
+        headerImageView.tintColor = .dirt1
+        headerImageView.image = image
+        tableView.tableHeaderView = headerImageView
     }
     
     override func loadView() {
@@ -208,66 +221,22 @@ class InAppPurchaseViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 5
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        switch section {
-        case 0: return 280
-        default: return .nan
-        }
-    }
-    
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        switch section {
-        case 0:
-            let headerView = UIView()
-            let imageView = UIImageView()
-            let label = UILabel()
-            
-            imageView.contentMode = .scaleAspectFit
-            imageView.tintColor = .dirt1
-            imageView.image = IconHelper.systemIcon(of: .supportMe, weight: .regular).withRenderingMode(.alwaysTemplate)
-            
-            label.numberOfLines = 0
-            label.text =
-            """
-            Hey there! I'm Kevin, the creator of NookNook.
-            I'd really appreciate it if you'd take the time to support me with this app. I made NookNook to improve my ACNH experience and I hope you'll feel the same!
-            
-            This app would never be possible without your support. So to keep it like this in the future,
-            any means of support is greatly appreaciated! 😁
-            """
-            label.lineBreakMode = .byWordWrapping
-            label.textColor = UIColor.dirt1.withAlphaComponent(0.5)
-            label.font = .preferredFont(forTextStyle: .caption1)
-            
-            
-            headerView.addSubview(imageView)
-            headerView.addSubview(label)
-            
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            label.translatesAutoresizingMaskIntoConstraints = false
-            
-            NSLayoutConstraint.activate([
-                imageView.centerXAnchor.constraint(equalTo: headerView.centerXAnchor),
-                imageView.topAnchor.constraint(equalTo: headerView.topAnchor, constant: 20),
-                imageView.heightAnchor.constraint(equalToConstant: 60),
-                imageView.widthAnchor.constraint(equalToConstant: 60),
-                
-                label.centerXAnchor.constraint(equalTo: headerView.centerXAnchor, constant: 10),
-                label.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20 * 2),
-                label.widthAnchor.constraint(equalTo: headerView.widthAnchor, multiplier: 0.95),
-                
-            ])
-            return headerView
-        default: return nil
-        }
+        return section == 1 ? 44 * 1.5 : 5
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.detailTextLabel?.textColor = UIColor.dirt1.withAlphaComponent(0.5)
     }
+    
+    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        let text = "By supporting me, you are supporting the app. Every supports matter in improving the app to make it better for each and every one of you ❤️"
+        return section == 1 ? text : nil
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+         let footer = view as! UITableViewHeaderFooterView
+         footer.textLabel?.textColor = UIColor.dirt1.withAlphaComponent(0.5)
+     }
     
     
     // MARK: - Setup views

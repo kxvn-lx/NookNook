@@ -51,6 +51,17 @@ class TurnipReminderTableViewController: UITableViewController {
         tableView.allowsSelection = true
         tableView.separatorStyle = .singleLine
         
+        let headerImageView = UIImageView(frame: CGRect(x: 0, y: 20, width: self.view.frame.size.width, height: 60))
+        headerImageView.contentMode = .scaleAspectFit
+        let icon = IconHelper.systemIcon(of: .reminder, weight: .regular)
+        let image = icon.withRenderingMode(.alwaysTemplate)
+        headerImageView.tintColor = .dirt1
+        headerImageView.image = image
+        tableView.tableHeaderView = headerImageView
+        
+        tableView.sectionHeaderHeight = UITableView.automaticDimension
+        tableView.estimatedSectionHeaderHeight = 50
+        
         buyLabel = dayTimeHelper.renderTime(timeDict: UserPersistEngine.loadReminder(reminderType: .buy))
         sellLabel = dayTimeHelper.renderTime(timeDict: UserPersistEngine.loadReminder(reminderType: .sell))
         
@@ -129,103 +140,37 @@ class TurnipReminderTableViewController: UITableViewController {
     
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 2
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case 0,1 : return 1
-        case 2: return 2
+        case 0: return 2
+        case 1: return 2
         default: return 0
         }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
-        case 0: return buyCell
-        case 1: return sellCell
-        case 2:
+        case 0:
+            switch indexPath.row {
+            case 0 : return buyCell
+            case 1: return sellCell
+            default: fatalError("Invalid rows")
+            }
+        case 1:
             switch indexPath.row {
             case 0: return customBuyCell
             case 1: return customSellCell
             default: fatalError("Invalid rows")
             }
-            
         default: fatalError("Unknown section")
         }
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 5
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        switch section {
-        case 0: return 180
-        case 2: return 44 * 1.5
-        default: return .nan
-        }
-    }
-    
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        switch section {
-        case 0:
-            let headerView = UIView()
-            let imageView = UIImageView()
-            let label = UILabel()
-            
-            imageView.contentMode = .scaleAspectFit
-            imageView.tintColor = .dirt1
-            imageView.image = IconHelper.systemIcon(of: .reminder, weight: .regular).withRenderingMode(.alwaysTemplate)
-            
-            
-            label.numberOfLines = 0
-            label.text = "NookNook will remind you to buy turnip every \(buyLabel).\nAnd to sell turnip every \(sellLabel)."
-            label.lineBreakMode = .byWordWrapping
-            label.textColor = UIColor.dirt1.withAlphaComponent(0.5)
-            label.font = .preferredFont(forTextStyle: .caption1)
-            
-            
-            headerView.addSubview(imageView)
-            headerView.addSubview(label)
-            
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            label.translatesAutoresizingMaskIntoConstraints = false
-            
-            NSLayoutConstraint.activate([
-                imageView.centerXAnchor.constraint(equalTo: headerView.centerXAnchor),
-                imageView.topAnchor.constraint(equalTo: headerView.topAnchor, constant: 20),
-                imageView.heightAnchor.constraint(equalToConstant: 60),
-                imageView.widthAnchor.constraint(equalToConstant: 60),
-                
-                label.centerXAnchor.constraint(equalTo: headerView.centerXAnchor, constant: 10),
-                label.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20 * 2),
-                label.widthAnchor.constraint(equalTo: headerView.widthAnchor, multiplier: 0.95)
-            ])
-            return headerView
-        case 2:
-            let headerView = UIView()
-            let label = UILabel()
-            
-            label.numberOfLines = 0
-            label.text = "Custom time"
-            label.lineBreakMode = .byWordWrapping
-            label.textColor = UIColor.dirt1.withAlphaComponent(0.5)
-            label.font = .preferredFont(forTextStyle: .title3)
-            
-            
-            headerView.addSubview(label)
-            
-            label.translatesAutoresizingMaskIntoConstraints = false
-            
-            NSLayoutConstraint.activate([
-                label.centerXAnchor.constraint(equalTo: headerView.centerXAnchor, constant: 0),
-                label.bottomAnchor.constraint(equalTo: headerView.bottomAnchor, constant: -10),
-                label.widthAnchor.constraint(equalTo: headerView.widthAnchor, multiplier: 0.9)
-            ])
-            return headerView
-        default: return nil
-        }
+        return .leastNormalMagnitude
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -235,8 +180,8 @@ class TurnipReminderTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.tableView.deselectRow(at: indexPath, animated: true)
         switch indexPath.section {
-        case 0, 1: break
-        case 2:
+        case 0: break
+        case 1:
             switch indexPath.row {
             case 0:
                 mcPicker = dayTimeHelper.createMcPicker(selections: UserPersistEngine.loadReminder(reminderType: .buy), reminderType: .buy)
@@ -269,7 +214,26 @@ class TurnipReminderTableViewController: UITableViewController {
         }
     }
     
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 0: return "NookNook will remind you to buy turnip every \(buyLabel). And to sell turnip every \(sellLabel)"
+        case 1: return "Custom time"
+        default: return nil
+        }
+    }
     
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        let headerView = view as! UITableViewHeaderFooterView
+        headerView.textLabel?.textColor = UIColor.dirt1.withAlphaComponent(0.5)
+        switch section {
+        case 0: headerView.textLabel!.text = "NookNook will remind you to buy turnip every \(buyLabel). And to sell turnip every \(sellLabel)"
+        case 1:
+            headerView.textLabel!.font = .preferredFont(forTextStyle: .title3)
+            headerView.textLabel!.text = "Custom time"
+        default: headerView.textLabel!.text = ""
+        }
+    }
+
     // MARK: - Setup views
     private func setBar() {
         self.configureNavigationBar(title: "Turnip reminder", preferredLargeTitle: false)
