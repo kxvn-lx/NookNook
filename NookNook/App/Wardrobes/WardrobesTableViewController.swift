@@ -89,13 +89,15 @@ class WardrobesTableViewController: UITableViewController {
         self.tabBarController?.delegate = self
         
         if !UDEngine.shared.getIsFirstVisit(on: .Wardrobes) {
-            let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! SwipeTableViewCell
-            cell.showSwipe(orientation: .left, animated: true) { (sucess) in
-                if sucess {
-                    cell.hideSwipe(animated: true)
-                    UDEngine.shared.saveIsFirstVisit(on: .Wardrobes)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! SwipeTableViewCell
+                cell.showSwipe(orientation: .left, animated: true) { (sucess) in
+                    if sucess {
+                        cell.hideSwipe(animated: true)
+                        UDEngine.shared.saveIsFirstVisit(on: .Wardrobes)
+                    }
                 }
-            }
+            })
         }
     }
     

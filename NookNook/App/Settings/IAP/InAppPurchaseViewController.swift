@@ -62,6 +62,7 @@ class InAppPurchaseViewController: UITableViewController {
         
     }
     
+    
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -108,10 +109,16 @@ class InAppPurchaseViewController: UITableViewController {
                         
                     case .error(let error):
                         switch error.code {
-                        case .unknown, .clientInvalid, .paymentInvalid, .paymentNotAllowed, .storeProductNotAvailable:
+                        case .unknown, .storeProductNotAvailable:
                             Taptic.errorTaptic()
                             let alert = AlertHelper.createDefaultAction(title: "Something went wrong.", message: "There was problem with the transaction. Please try again later or contact kevin.laminto@gmail.com")
                             self.present(alert, animated: true)
+                            
+                        case .paymentInvalid, .paymentNotAllowed, .clientInvalid:
+                            Taptic.errorTaptic()
+                            let alert = AlertHelper.createDefaultAction(title: "Something went wrong.", message: "Your payment option seems to be invalid/not allowed. Please try again later or contact kevin.laminto@gmail.com")
+                            self.present(alert, animated: true)
+                            
                             
                         default: print((error as NSError).localizedDescription)
                         }
@@ -129,9 +136,14 @@ class InAppPurchaseViewController: UITableViewController {
                         
                     case .error(let error):
                         switch error.code {
-                        case .unknown, .clientInvalid, .paymentInvalid, .paymentNotAllowed, .storeProductNotAvailable:
+                        case .unknown, .storeProductNotAvailable:
                             Taptic.errorTaptic()
                             let alert = AlertHelper.createDefaultAction(title: "Something went wrong.", message: "There was problem with the transaction. Please try again later or contact kevin.laminto@gmail.com")
+                            self.present(alert, animated: true)
+                            
+                        case .paymentInvalid, .paymentNotAllowed, .clientInvalid:
+                            Taptic.errorTaptic()
+                            let alert = AlertHelper.createDefaultAction(title: "Something went wrong.", message: "Your payment option seems to be invalid/not allowed. Please try again later or contact kevin.laminto@gmail.com")
                             self.present(alert, animated: true)
                             
                         default: print((error as NSError).localizedDescription)
@@ -150,9 +162,14 @@ class InAppPurchaseViewController: UITableViewController {
                         
                     case .error(let error):
                         switch error.code {
-                        case .unknown, .clientInvalid, .paymentInvalid, .paymentNotAllowed, .storeProductNotAvailable:
+                        case .unknown, .storeProductNotAvailable:
                             Taptic.errorTaptic()
                             let alert = AlertHelper.createDefaultAction(title: "Something went wrong.", message: "There was problem with the transaction. Please try again later or contact kevin.laminto@gmail.com")
+                            self.present(alert, animated: true)
+                            
+                        case .paymentInvalid, .paymentNotAllowed, .clientInvalid:
+                            Taptic.errorTaptic()
+                            let alert = AlertHelper.createDefaultAction(title: "Something went wrong.", message: "Your payment option seems to be invalid/not allowed. Please try again later or contact kevin.laminto@gmail.com")
                             self.present(alert, animated: true)
                             
                         default: print((error as NSError).localizedDescription)
@@ -167,7 +184,7 @@ class InAppPurchaseViewController: UITableViewController {
             case 0:
                 SwiftyStoreKit.restorePurchases(atomically: true) { results in
                     if results.restoreFailedPurchases.count > 0 {
-                        let alert = AlertHelper.createDefaultAction(title: "Something went wrong.", message: "There was problem with the restoration. Please try again later or contact kevin.laminto@gmail.com")
+                        let alert = AlertHelper.createDefaultAction(title: "Something went wrong.", message: "There was problem restoring your purchase(s). Please try again later or contact kevin.laminto@gmail.com")
                         self.present(alert, animated: true)
                     }
                     else if results.restoredPurchases.count > 0 {
@@ -196,7 +213,7 @@ class InAppPurchaseViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
-        case 0: return 300
+        case 0: return 280
         default: return .nan
         }
     }
@@ -216,14 +233,10 @@ class InAppPurchaseViewController: UITableViewController {
             label.text =
             """
             Hey there! I'm Kevin, the creator of NookNook.
-            I'd really appreciate it if you'd take the time to support me with this app.
-            I made NookNook to improve my ACNH experience and I hope you'll feel the same!
+            I'd really appreciate it if you'd take the time to support me with this app. I made NookNook to improve my ACNH experience and I hope you'll feel the same!
             
             This app would never be possible without your support. So to keep it like this in the future,
             any means of support is greatly appreaciated! 😁
-            
-            Thanks,
-            Kevin.
             """
             label.lineBreakMode = .byWordWrapping
             label.textColor = UIColor.dirt1.withAlphaComponent(0.5)

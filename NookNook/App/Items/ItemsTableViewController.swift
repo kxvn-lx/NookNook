@@ -102,13 +102,15 @@ class ItemsTableViewController: UITableViewController {
         self.tabBarController?.delegate = self
         
         if !UDEngine.shared.getIsFirstVisit(on: .Item) {
-            let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! SwipeTableViewCell
-            cell.showSwipe(orientation: .left, animated: true) { (sucess) in
-                if sucess {
-                    cell.hideSwipe(animated: true)
-                    UDEngine.shared.saveIsFirstVisit(on: .Item)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! SwipeTableViewCell
+                cell.showSwipe(orientation: .left, animated: true) { (sucess) in
+                    if sucess {
+                        cell.hideSwipe(animated: true)
+                        UDEngine.shared.saveIsFirstVisit(on: .Item)
+                    }
                 }
-            }
+            })
         }
     }
     
@@ -309,13 +311,11 @@ extension ItemsTableViewController: WhatsNewhelperDelegate {
         controller.dismiss(animated: true, completion: nil)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-            if !UDEngine.shared.getIsFirstVisit(on: .Item) {
-                let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! SwipeTableViewCell
-                cell.showSwipe(orientation: .left, animated: true) { (sucess) in
-                    if sucess {
-                        cell.hideSwipe(animated: true)
-                        UDEngine.shared.saveIsFirstVisit(on: .Item)
-                    }
+            let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! SwipeTableViewCell
+            cell.showSwipe(orientation: .left, animated: true) { (sucess) in
+                if sucess {
+                    cell.hideSwipe(animated: true)
+                    UDEngine.shared.saveIsFirstVisit(on: .Item)
                 }
             }
         })
