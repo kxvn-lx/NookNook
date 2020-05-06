@@ -51,16 +51,9 @@ class TurnipReminderTableViewController: UITableViewController {
         tableView.allowsSelection = true
         tableView.separatorStyle = .singleLine
         
-        let headerImageView = UIImageView(frame: CGRect(x: 0, y: 20, width: self.view.frame.size.width, height: 60))
-        headerImageView.contentMode = .scaleAspectFit
-        let icon = IconHelper.systemIcon(of: .reminder, weight: .regular)
-        let image = icon.withRenderingMode(.alwaysTemplate)
-        headerImageView.tintColor = .dirt1
-        headerImageView.image = image
-        tableView.tableHeaderView = headerImageView
-        
         tableView.sectionHeaderHeight = UITableView.automaticDimension
         tableView.estimatedSectionHeaderHeight = 50
+        self.addHeaderImage(withIcon: IconHelper.systemIcon(of: .reminder, weight: .regular), height: 100)
         
         buyLabel = dayTimeHelper.renderTime(timeDict: UserPersistEngine.loadReminder(reminderType: .buy))
         sellLabel = dayTimeHelper.renderTime(timeDict: UserPersistEngine.loadReminder(reminderType: .sell))

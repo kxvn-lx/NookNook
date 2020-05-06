@@ -76,12 +76,10 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
     
     // Modify the UI
     private func setBar() {
-        self.configureNavigationBar(title: "Edit Info", preferredLargeTitle: false)
+        self.configureNavigationBar(title: "Edit info", preferredLargeTitle: false)
         
         self.view.backgroundColor = .cream1
-        
-        self.view.tintColor = .white
-        
+        self.view.tintColor = .dirt1
         let close = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(closeTapped))
         navigationItem.leftBarButtonItem = close
         

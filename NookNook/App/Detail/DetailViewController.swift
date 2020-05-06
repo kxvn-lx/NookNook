@@ -527,7 +527,7 @@ class DetailViewController: UIViewController {
     }
     
     private func setBar() {
-        self.configureNavigationBar(title: "Detail", preferredLargeTitle: false)
+        self.configureNavigationBar(title: nil, preferredLargeTitle: false)
         self.view.backgroundColor = .cream1
         
         let close = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(closeTapped))

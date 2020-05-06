@@ -13,7 +13,7 @@ import GoogleMobileAds
 /// EXTENSIONS
 // MARK: - UIViewController
 extension UIViewController {
-    func configureNavigationBar(largeTitleColor: UIColor? = nil, backgoundColor: UIColor? = nil, tintColor: UIColor? = nil, title: String, preferredLargeTitle: Bool? = nil) {
+    func configureNavigationBar(largeTitleColor: UIColor? = nil, backgoundColor: UIColor? = nil, tintColor: UIColor? = nil, title: String? = "", preferredLargeTitle: Bool? = nil) {
         
         // Colours
         let cream1 = UIColor.cream1
@@ -65,6 +65,18 @@ extension UITableViewController {
         titleLabel.text  = text
         customView.addSubview(titleLabel)
         self.tableView.tableFooterView = customView
+    }
+    
+    func addHeaderImage(withIcon icon: UIImage, height: CGFloat? = 150) {
+        let v = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: height!))
+        let headerImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 60))
+        
+        headerImageView.contentMode = .scaleAspectFit
+        headerImageView.tintColor = .dirt1
+        headerImageView.image = icon.withRenderingMode(.alwaysTemplate)
+        v.addSubview(headerImageView)
+        headerImageView.center = CGPoint(x: v.frame.size.width  / 2, y: v.frame.size.height / 2)
+        self.tableView.tableHeaderView = v
     }
 }
 

@@ -31,11 +31,14 @@ class InAppPurchaseViewController: UITableViewController {
         
         setBar()
         // Tableview properties
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 50
         tableView.allowsSelection = true
         tableView.separatorStyle = .singleLine
         
         tableView.sectionHeaderHeight = UITableView.automaticDimension
         tableView.estimatedSectionHeaderHeight = 50
+        self.addHeaderImage(withIcon: IconHelper.systemIcon(of: .supportMe, weight: .regular))
         
         // SwiftyStoreKit properties
         SwiftyStoreKit.retrieveProductsInfo([IAPProduct.BuyCoffee.rawValue,
@@ -52,18 +55,6 @@ class InAppPurchaseViewController: UITableViewController {
                                                 }
         }
         SwiftyStoreKit.shouldAddStorePaymentHandler = { payment, product in return true }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        let headerImageView = UIImageView(frame: CGRect(x: 0, y: 20, width: self.view.frame.size.width, height: 60))
-        headerImageView.contentMode = .scaleAspectFit
-        let icon = IconHelper.systemIcon(of: .supportMe, weight: .regular)
-        let image = icon.withRenderingMode(.alwaysTemplate)
-        headerImageView.tintColor = .dirt1
-        headerImageView.image = image
-        tableView.tableHeaderView = headerImageView
     }
     
     override func loadView() {
