@@ -56,6 +56,7 @@ class SettingsTableViewController: UITableViewController {
     override func loadView() {
         super.loadView()
         
+        // 1st Section
         editInfoCell = setupCell(text: "Edit info", icon:  IconHelper.systemIcon(of: .edit, weight: .regular), accesoryType: .disclosureIndicator)
         
         shareCell = setupCell(text: "Share", icon:  IconHelper.systemIcon(of: .share, weight: .regular), accesoryType: .disclosureIndicator)
@@ -70,7 +71,8 @@ class SettingsTableViewController: UITableViewController {
         deleteCacheCell.textLabel?.textColor = destColour
         deleteCacheCell.imageView?.tintColor = destColour
         
-        creatorCell = setupCell(text: "Creator", icon: IconHelper.systemIcon(of: .socialMedia, weight: .regular), accesoryType: .disclosureIndicator)
+        creatorCell = setupCell(text: "Creator", icon: IconHelper.systemIcon(of: .socialMedia, weight: .regular), accesoryType: .none)
+        creatorCell.accessoryView = self.outsourceImageView()
         
         appVersionCell = setupCell(text: "App version", icon: IconHelper.systemIcon(of: .info, weight: .regular), accesoryType: .disclosureIndicator)
         appVersionCell.detailTextLabel?.text = "v1.0.0 (\(BUILD_NUMBER))"
@@ -78,7 +80,8 @@ class SettingsTableViewController: UITableViewController {
         
         requestFeatureCell = setupCell(text: "Request a feature", icon: IconHelper.systemIcon(of: .feature, weight: .regular), accesoryType: .disclosureIndicator)
         
-        websiteCell = setupCell(text: "Website", icon: IconHelper.systemIcon(of: .website, weight: .regular), accesoryType: .disclosureIndicator)
+        websiteCell = setupCell(text: "Website", icon: IconHelper.systemIcon(of: .website, weight: .regular), accesoryType: .none)
+        websiteCell.accessoryView = self.outsourceImageView()
         
         removeAdsCell = setupCell(text: "Support me", icon: IconHelper.systemIcon(of: .supportMe, weight: .regular), accesoryType: .disclosureIndicator)
     }
@@ -153,6 +156,7 @@ class SettingsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
+        case 1: return "You can check the app's Privacy policy and Terms and Condition on the website."
         case 3: return "Here you can buy in-app purchases to support me and the app."
         default: return nil
         }
@@ -284,7 +288,10 @@ class SettingsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return section == 3 ? 44 : 5
+        switch section {
+        case 1, 3: return 44
+        default: return 5
+        }
     }
     
     override func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
@@ -358,6 +365,13 @@ class SettingsTableViewController: UITableViewController {
             activityVC.popoverPresentationController?.sourceView = sender
             self.present(activityVC, animated: true, completion: nil)
         }
+    }
+    
+    private func outsourceImageView() -> UIImageView {
+        let image = UIImage(systemName: "arrow.up.right")!.withRenderingMode(.alwaysTemplate)
+        let v = UIImageView(image: image, highlightedImage: image)
+        v.tintColor = .lightGray
+         return v
     }
     
 }

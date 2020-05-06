@@ -29,6 +29,7 @@ class PatchLogViewController: UIViewController {
         - Fixed critter this month displaying all caught critters instead of only on a particular month
         - Added some surprise when you caught/donated all critters 😉
         - Minor UI tweaks for Turnip reminder (for consistency)
+        - Minor icon changed for consistency and readability
 
         v1.0.0 (305202010)
         - Improved app performance
