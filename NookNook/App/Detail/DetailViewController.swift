@@ -72,21 +72,22 @@ class DetailViewController: UIViewController {
         adBannerView.translatesAutoresizingMaskIntoConstraints = false
         adBannerView.adUnitID = GoogleAdsHelper.AD_UNIT_ID
         adBannerView.rootViewController = self
-
+        
         return adBannerView
     }()
     
     lazy var adBannerViewMiddle: GADBannerView = {
         let adBannerView = GADBannerView(adSize: kGADAdSizeSmartBannerLandscape)
         adBannerView.translatesAutoresizingMaskIntoConstraints = false
-        adBannerView.adUnitID = GoogleAdsHelper.AD_UNIT_ID
+        adBannerView.adUnitID = GoogleAdsHelper.DETAIL_PROFILE_AD_UNIT_ID
+        adBannerView.delegate = self
         adBannerView.rootViewController = self
-
+        
         return adBannerView
     }()
-
-
-
+    
+    
+    
     // MARK: - Tableview init
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -118,8 +119,8 @@ class DetailViewController: UIViewController {
     /**
      Method to parse an object provided from a VC, and treat them as to their own unique type.
      - Parameters:
-        - group: The group that the method is being called. ie: Items, Critters, Wardrobes, etc
-        - object: An object of Any type, which the method will then typecast it to the selected type.
+     - group: The group that the method is being called. ie: Items, Critters, Wardrobes, etc
+     - object: An object of Any type, which the method will then typecast it to the selected type.
      */
     func parseOject(from group: DataEngine.Group, object: Any) {
         
@@ -203,7 +204,7 @@ class DetailViewController: UIViewController {
         buyLabel.attributedText = PriceEngine.renderPrice(amount: itemObj.buy!, with: .none, of: buyLabel.font.pointSize)
         sellLabel.attributedText = PriceEngine.renderPrice(amount: itemObj.sell!, with: .none, of: buyLabel.font.pointSize)
         sourceNoteLabel.text = itemObj.sourceNote
-
+        
         
         if itemObj.variants == nil {
             variationImageCollectionView.isHidden = true
@@ -211,7 +212,7 @@ class DetailViewController: UIViewController {
             variationTitleLabel.font = UIFont.preferredFont(forTextStyle: .body)
         }
     }
-
+    
     /// Method to render critter object
     private func renderCritter() {
         var shadow = critterObj.shadow ?? ""
@@ -245,7 +246,7 @@ class DetailViewController: UIViewController {
             iconStackView.isHidden = false
         }
     }
-
+    
     /// Method to render wardrobe  object
     private func renderWardrobe() {
         detailImageView.sd_setImage(with: ImageEngine.parseNPURL(with: wardrobeObj.image!, category: wardrobeObj.category), placeholderImage: UIImage(named: "placeholder"))
@@ -259,7 +260,7 @@ class DetailViewController: UIViewController {
             variationTitleLabel.font = UIFont.preferredFont(forTextStyle: .body)
         }
     }
-
+    
     /// Method to render villager object
     private func renderVillager() {
         detailImageView.sd_setImage(with: ImageEngine.parseAcnhURL(with: villagerObj.image, of: villagerObj.category, mediaType: .images), placeholderImage: UIImage(named: "placeholder"))
@@ -273,9 +274,9 @@ class DetailViewController: UIViewController {
         secondIconLabel.text = self.favouriteManager.residentVillagers.contains(villagerObj) ? "In Resident" : ""
         
         iconStackView.isHidden = self.favouriteManager.residentVillagers.contains(villagerObj) ? false : true
-
+        
     }
-
+    
     
     // MARK:- Modify UI
     private func setupView() {
@@ -320,10 +321,10 @@ class DetailViewController: UIViewController {
         detailImageView.sd_imageTransition = .fade
         detailImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
         
-
+        
         // Object Title and Subtitle stackView
         tsStackView = SVHelper.createSV(axis: .vertical, spacing: MARGIN, alignment: .leading, distribution: .equalSpacing)
-
+        
         titleRarityStack = SVHelper.createSV(axis: .horizontal, spacing: MARGIN, alignment: .lastBaseline, distribution: .equalSpacing)
         
         
@@ -394,12 +395,12 @@ class DetailViewController: UIViewController {
         specialSellLabel.textColor = .gold1
         weatherLabel.textColor = .gold1
         timeLabel.textColor = .gold1
-
+        
         buyStack = createInfoStackView(title: "Buy", with: buyLabel)
         sellStack = createInfoStackView(title: "Sell", with: sellLabel)
         specialSellStack = createInfoStackView(title: "Special sell price", with: specialSellLabel)
         timeStack = createInfoStackView(title: "Active time", with: timeLabel)
-
+        
         if let critterObj = critterObj {
             let t = critterObj.category == Categories.fishes.rawValue ? "CJ sell price" : "Flick sell price"
             specialSellStack = createInfoStackView(title: t, with: specialSellLabel)
@@ -442,7 +443,7 @@ class DetailViewController: UIViewController {
         activeTimeStack.addArrangedSubview(activeTimeLabel)
         activeTimeStack.addArrangedSubview(activeTimeNStack)
         activeTimeStack.addArrangedSubview(activeTimeSStack)
-
+        
         
         // Variation Section
         variationStack = SVHelper.createSV(axis: .vertical, spacing: MARGIN, alignment: .leading, distribution: .fill)
@@ -470,12 +471,7 @@ class DetailViewController: UIViewController {
         mStackView.addArrangedSubview(iconStackView)
         
         if !UDEngine.shared.getIsAdsPurchased() {
-            mStackView.addArrangedSubview(adBannerViewMiddle)
             adBannerViewMiddle.load(GADRequest())
-            NSLayoutConstraint.activate([
-                adBannerViewMiddle.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-                adBannerViewMiddle.heightAnchor.constraint(equalToConstant: 50),
-            ])
         }
         
         mStackView.addArrangedSubview(infoStackView)
@@ -515,7 +511,7 @@ class DetailViewController: UIViewController {
             
             variationImageCollectionView.widthAnchor.constraint(equalTo: self.variationStack.widthAnchor),
             variationImageCollectionView.heightAnchor.constraint(equalToConstant: 135)
-
+            
         ])
         
         if critterObj != nil {
@@ -572,7 +568,7 @@ class DetailViewController: UIViewController {
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.35),
                                                heightDimension: .fractionalHeight(1))
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize,
-                                                         subitem: item, count: 1)
+                                                     subitem: item, count: 1)
         
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
@@ -584,4 +580,18 @@ class DetailViewController: UIViewController {
         return layout
     }
     
+}
+
+extension DetailViewController: GADBannerViewDelegate {
+    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+        if !UDEngine.shared.getIsAdsPurchased() {
+            mStackView.insertArrangedSubview(adBannerViewMiddle, at: 3)
+            NSLayoutConstraint.activate([
+                adBannerViewMiddle.widthAnchor.constraint(equalTo: self.view.widthAnchor),
+                adBannerViewMiddle.heightAnchor.constraint(equalToConstant: 50),
+            ])
+        } else {
+            mStackView.removeArrangedSubview(adBannerViewMiddle)
+        }
+    }
 }

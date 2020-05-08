@@ -71,9 +71,10 @@ class DashboardViewController: UIViewController {
     lazy var adBannerViewMiddle: GADBannerView = {
         let adBannerView = GADBannerView(adSize: kGADAdSizeSmartBannerLandscape)
         adBannerView.translatesAutoresizingMaskIntoConstraints = false
-        adBannerView.adUnitID = GoogleAdsHelper.AD_UNIT_ID
+        adBannerView.adUnitID = GoogleAdsHelper.DETAIL_PROFILE_AD_UNIT_ID
         adBannerView.rootViewController = self
-        
+        adBannerView.delegate = self
+
         return adBannerView
     }()
     
@@ -274,13 +275,8 @@ class DashboardViewController: UIViewController {
         mStackView.addArrangedSubview(profileNameStackView, withMargin: UIEdgeInsets(top: MARGIN*4, left: 0, bottom: 0, right: 0))
         mStackView.addArrangedSubview(phraseStack)
         if !UDEngine.shared.getIsAdsPurchased() {
-            mStackView.addArrangedSubview(adBannerViewMiddle)
             adBannerViewMiddle.load(GADRequest())
-            NSLayoutConstraint.activate([
-                adBannerViewMiddle.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-                adBannerViewMiddle.heightAnchor.constraint(equalToConstant: 50),
-            ])
-        } 
+        }
         mStackView.addArrangedSubview(passportStackView)
         mStackView.addArrangedSubview(residentStack)
         mStackView.addArrangedSubview(tableView)
@@ -447,3 +443,19 @@ extension DashboardViewController: UITabBarControllerDelegate {
     }
 }
 
+extension DashboardViewController: GADBannerViewDelegate {
+    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+        print("DELEGATE CALLED")
+        if !UDEngine.shared.getIsAdsPurchased() {
+            DispatchQueue.main.async {
+                self.mStackView.insertArrangedSubview(bannerView, at: 2)
+                NSLayoutConstraint.activate([
+                    bannerView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
+                    bannerView.heightAnchor.constraint(equalToConstant: 50),
+                ])
+            }
+        } else {
+            mStackView.removeArrangedSubview(bannerView)
+        }
+    }
+}
