@@ -52,6 +52,14 @@ extension UIViewController {
     }
 }
 
+extension UIViewController: GADBannerViewDelegate {
+    /// Tells the delegate an ad request failed.
+    public func adView(_ bannerView: GADBannerView,
+        didFailToReceiveAdWithError error: GADRequestError) {
+      print("adView:didFailToReceiveAdWithError: \(error.localizedDescription)")
+    }
+}
+
 
 extension UITableViewController {
     func setCustomFooterView(text: String, height: CGFloat, multiplier: CGFloat = 0) {
