@@ -46,7 +46,6 @@ class ItemsTableViewController: UITableViewController {
         return adBannerView
     }()
     
-    
     // MARK: - Table view init
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,7 +64,6 @@ class ItemsTableViewController: UITableViewController {
         searchController.searchBar.placeholder = "Search \(items.count) items..."
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
-        
         
         // Whatsnew Properties
         whatsNewVC.delegate = self
@@ -86,7 +84,7 @@ class ItemsTableViewController: UITableViewController {
             adBannerView.load(GADRequest())
             NSLayoutConstraint.activate([
                 adBannerView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-                adBannerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+                adBannerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
             ])
         } else {
             adBannerView.removeFromSuperview()
@@ -112,11 +110,10 @@ class ItemsTableViewController: UITableViewController {
         setupSearchBar(searchBar: searchController.searchBar)
     }
     
-    private func setupSearchBar(searchBar : UISearchBar) {
+    private func setupSearchBar(searchBar: UISearchBar) {
         searchBar.setPlaceholderTextColorTo(color: UIColor.lightGray)
         
     }
-    
     
     // MARK: - Table view data source
     
@@ -126,7 +123,7 @@ class ItemsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isFiltering {
-            if filteredItems.count == 0 {
+            if filteredItems.isEmpty {
                 self.tableView.setEmptyMessage("No item(s) found 😢.\nPerhaps you made a mistake?")
             } else {
                 self.tableView.restore()
@@ -176,7 +173,7 @@ class ItemsTableViewController: UITableViewController {
         vc.parseOject(from: .items, object: selectedItem)
         
         let navController = UINavigationController(rootViewController: vc)
-        self.present(navController, animated:true, completion: nil)
+        self.present(navController, animated: true, completion: nil)
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -223,7 +220,7 @@ class ItemsTableViewController: UITableViewController {
         vc.currentCategory = currentCategory
         
         let navController = UINavigationController(rootViewController: vc)
-        self.present(navController, animated:true, completion: nil)
+        self.present(navController, animated: true, completion: nil)
     }
 }
 
@@ -275,7 +272,7 @@ extension ItemsTableViewController: SwipeTableViewCellDelegate {
         
         let item = self.isFiltering ? self.filteredItems[indexPath.row] : self.items[indexPath.row]
         
-        let favouriteAction = SwipeAction(style: .default, title: nil) { (action, indexPath) in
+        let favouriteAction = SwipeAction(style: .default, title: nil) { (_, indexPath) in
             self.favouritesManager.saveItem(item: item)
             let contentOffset = tableView.contentOffset
             DispatchQueue.main.async {

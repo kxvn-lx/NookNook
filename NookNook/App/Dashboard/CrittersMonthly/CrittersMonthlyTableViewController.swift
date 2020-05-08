@@ -28,7 +28,7 @@ class CrittersMonthlyTableViewController: UITableViewController {
     private var scView: UIView!
     
     private let items: [String] = [GroupType.bugs.rawValue.capitalizingFirstLetter(),
-                                   GroupType.fishes.rawValue.capitalizingFirstLetter(),
+                                   GroupType.fishes.rawValue.capitalizingFirstLetter()
     ]
     
     let search = UISearchController(searchResultsController: nil)
@@ -60,7 +60,6 @@ class CrittersMonthlyTableViewController: UITableViewController {
 
         return adBannerView
     }()
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,7 +76,7 @@ class CrittersMonthlyTableViewController: UITableViewController {
         scView = SCHelper.createSCWithTitle(title: userHemisphere?.rawValue ?? DateHelper.Hemisphere.Southern.rawValue, items: items)
         sc = scView.viewWithTag(1) as? UISegmentedControl
         sc.selectedSegmentIndex = 0
-        sc.addTarget(self, action:  #selector(changeSource), for: .valueChanged)
+        sc.addTarget(self, action: #selector(changeSource), for: .valueChanged)
         
         search.searchResultsUpdater = self
         search.obscuresBackgroundDuringPresentation = false
@@ -99,7 +98,7 @@ class CrittersMonthlyTableViewController: UITableViewController {
             adBannerView.load(GADRequest())
             NSLayoutConstraint.activate([
                 adBannerView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-                adBannerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+                adBannerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
             ])
         } else {
             adBannerView.removeFromSuperview()
@@ -130,7 +129,7 @@ class CrittersMonthlyTableViewController: UITableViewController {
         switch currentGroup {
         case .bugs:
             if isFiltering {
-                if filteredBugs.count == 0 {
+                if filteredBugs.isEmpty {
                     self.tableView.setEmptyMessage("No bugs(s) found 😢.\nPerhaps you made a mistake?")
                 } else {
                     self.tableView.restore()
@@ -141,7 +140,7 @@ class CrittersMonthlyTableViewController: UITableViewController {
             }
         case .fishes:
             if isFiltering {
-                if filteredBugs.count == 0 {
+                if filteredBugs.isEmpty {
                     self.tableView.setEmptyMessage("No fish(s) found 😢.\nPerhaps you made a mistake?")
                 } else {
                     self.tableView.restore()
@@ -216,7 +215,7 @@ class CrittersMonthlyTableViewController: UITableViewController {
         }
         
         let navController = UINavigationController(rootViewController: vc)
-        self.present(navController, animated:true, completion: nil)
+        self.present(navController, animated: true, completion: nil)
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -284,7 +283,6 @@ extension CrittersMonthlyTableViewController: UISearchResultsUpdating {
     }
 }
 
-
 extension CrittersMonthlyTableViewController: SwipeTableViewCellDelegate {
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
         guard orientation == .left else { return nil }
@@ -298,7 +296,7 @@ extension CrittersMonthlyTableViewController: SwipeTableViewCellDelegate {
             critter = isFiltering ? filteredFishes[indexPath.row] : fishes[indexPath.row]
         }
         
-        let donatedAction = SwipeAction(style: .default, title: "Donated") { (action, indexPath) in
+        let donatedAction = SwipeAction(style: .default, title: "Donated") { (_, indexPath) in
             var finished = false
             
             if !self.favouritesManager.caughtCritters.contains(critter) {
@@ -321,7 +319,7 @@ extension CrittersMonthlyTableViewController: SwipeTableViewCellDelegate {
             Taptic.lightTaptic()
         }
         
-        let caughtAction = SwipeAction(style: .default, title: "Caught") { (action, indexPath) in
+        let caughtAction = SwipeAction(style: .default, title: "Caught") { (_, indexPath) in
             self.favouritesManager.saveCaughtCritter(critter: critter)
             let contentOffset = tableView.contentOffset
             DispatchQueue.main.async {
@@ -333,7 +331,6 @@ extension CrittersMonthlyTableViewController: SwipeTableViewCellDelegate {
         
         donatedAction.backgroundColor = .grass1
         caughtAction.backgroundColor = .gold1
-        
         
         return [donatedAction, caughtAction]
     }

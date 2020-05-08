@@ -16,7 +16,7 @@ class CritterTableViewCell: SwipeTableViewCell {
     var imgView: UIImageView!
     var rarityLabel: UIButton!
     var nameLabel: UILabel!
-    var obtainedFromLabel : UILabel!
+    var obtainedFromLabel: UILabel!
     var weatherLabel: UILabel!
     var timeLabel: UILabel!
     var sellLabel: UILabel!
@@ -26,7 +26,6 @@ class CritterTableViewCell: SwipeTableViewCell {
     
     private var infoStackView: UIStackView!
     private var mStackView: UIStackView!
-
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -48,11 +47,9 @@ class CritterTableViewCell: SwipeTableViewCell {
         rarityLabel.isUserInteractionEnabled = false
         rarityLabel.addBlurEffect(style: .light, cornerRadius: 5, padding: .zero)
         
-        
         imgView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         imgView.translatesAutoresizingMaskIntoConstraints = false
         imgView.contentMode = .scaleAspectFit
-        
         
         isCaughtLabel = PaddingLabel(withInsets: 2.5, 2.5, 5, 5)
         isCaughtLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -79,19 +76,16 @@ class CritterTableViewCell: SwipeTableViewCell {
         isDonatedLabel.layer.cornerRadius = 2.5
         isDonatedLabel.clipsToBounds = true
         isDonatedLabel.textAlignment = .center
-
         
         imgView.addSubview(rarityLabel)
         imgView.addSubview(isCaughtLabel)
         imgView.addSubview(isDonatedLabel)
-        
         
         nameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.numberOfLines = 0
         nameLabel.font = UIFont.systemFont(ofSize: nameLabel.font!.pointSize, weight: .semibold)
         nameLabel.textColor = .dirt1
-        
         
         obtainedFromLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         obtainedFromLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -147,12 +141,9 @@ class CritterTableViewCell: SwipeTableViewCell {
         mStackView.axis = .horizontal
         mStackView.distribution = .fill
         mStackView.spacing = MARGIN
-        
 
         mStackView.addArrangedSubview(imgView)
         mStackView.addArrangedSubview(infoStackView)
-        
-
         
         self.addSubview(mStackView)
     }

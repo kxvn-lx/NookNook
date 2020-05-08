@@ -17,8 +17,7 @@ extension SettingsTableViewController: SKPaymentTransactionObserver {
         transactions.forEach({
             if $0.transactionState == .purchased {
                 print("Transaction successful.")
-            }
-            else if $0.transactionState == .failed {
+            } else if $0.transactionState == .failed {
                 print("Transaction failed.")
             }
         })

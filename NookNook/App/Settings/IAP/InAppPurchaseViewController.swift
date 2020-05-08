@@ -66,7 +66,6 @@ class InAppPurchaseViewController: UITableViewController {
         
     }
     
-    
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -130,7 +129,6 @@ class InAppPurchaseViewController: UITableViewController {
                             let alert = AlertHelper.createDefaultAction(title: "Something went wrong.", message: "Your payment option seems to be invalid/not allowed. Please try again later or contact kevin.laminto@gmail.com")
                             self.present(alert, animated: true)
                             SpinnerHelper.shared.absent()
-                            
                             
                         default: print((error as NSError).localizedDescription)
                         }
@@ -212,12 +210,11 @@ class InAppPurchaseViewController: UITableViewController {
             case 0:
                 SpinnerHelper.shared.present()
                 SwiftyStoreKit.restorePurchases(atomically: true) { results in
-                    if results.restoreFailedPurchases.count > 0 {
+                    if results.restoreFailedPurchases.isEmpty {
                         let alert = AlertHelper.createDefaultAction(title: "Something went wrong.", message: "There was problem restoring your purchase(s). Please try again later or contact kevin.laminto@gmail.com")
                         self.present(alert, animated: true)
                         SpinnerHelper.shared.absent()
-                    }
-                    else if results.restoredPurchases.count > 0 {
+                    } else if results.restoredPurchases.isEmpty {
                         let alert = AlertHelper.createDefaultAction(title: "Restore sucessful!", message: "")
                         self.present(alert, animated: true)
                         results.restoredPurchases.forEach({
@@ -226,8 +223,7 @@ class InAppPurchaseViewController: UITableViewController {
                             }
                         })
                         SpinnerHelper.shared.absent()
-                    }
-                    else {
+                    } else {
                         let alert = AlertHelper.createDefaultAction(title: "Nothing to restore.", message: "")
                         self.present(alert, animated: true)
                         SpinnerHelper.shared.absent()
@@ -256,7 +252,6 @@ class InAppPurchaseViewController: UITableViewController {
         let footer = view as! UITableViewHeaderFooterView
         footer.textLabel?.textColor = UIColor.dirt1.withAlphaComponent(0.5)
     }
-    
     
     // MARK: - Setup views
     private func setBar() {

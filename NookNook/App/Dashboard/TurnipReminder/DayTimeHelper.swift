@@ -12,10 +12,10 @@ import McPicker
 
 struct ReminderHelper {
     
-    private var days: [String] = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
+    private var days: [String] = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     private var hours: [String] = []
     private var minutes: [String] = []
-    private var period: [String] = ["AM","PM"]
+    private var period: [String] = ["AM", "PM"]
     
     private var mcPicker: McPicker!
     
@@ -28,11 +28,10 @@ struct ReminderHelper {
         }
     }
     
-    
     /// Get all the Day and Time in one single ararys of arrays
     /// - Returns: An array of String arrays
     private func getDateTimeArray() -> [[String]] {
-        var array:[[String]] = []
+        var array: [[String]] = []
         
         array.append(days)
         array.append(hours)
@@ -42,7 +41,6 @@ struct ReminderHelper {
         return array
     }
     
-    
     /// Create a custom McPicker and populates it with the data
     /// - Returns: The customised McPicker complete with its data
     mutating func createMcPicker(selections: [Int: String]? = nil) -> McPicker {
@@ -50,8 +48,6 @@ struct ReminderHelper {
         if let selections = selections {
             convertToRawSelection(selections: selections)
         }
-        
-        
         
         var data: [[String]] = []
         data = getDateTimeArray()
@@ -77,14 +73,11 @@ struct ReminderHelper {
             0: [3: true],
             1: [2: true],
             2: [0: true],
-            3: [0: true],
+            3: [0: true]
         ]
-        
-        
         
         return mcPicker
     }
-    
     
     /// Render a time in [Int: String] into a readable String
     /// - Parameter timeDict: The raw timeDict format from McPicker
@@ -102,11 +95,9 @@ struct ReminderHelper {
         return time
     }
     
-    
-    
     /// Convert the function into a raw selection to be parsed for McPicker selections
     // -> [[Int: [Int: Bool]]]
-    private func convertToRawSelection(selections: [Int: String])  {
+    private func convertToRawSelection(selections: [Int: String]) {
         
         let timeDict = selections.sorted(by: { $0 < $1 }) // 0: Day, 1: Hour, 2: Min, 3: Meridian
         
@@ -118,6 +109,5 @@ struct ReminderHelper {
         print("\(dayInt) - \(hourInt) - \(minInt) - \(merInt)")
         
     }
-    
     
 }

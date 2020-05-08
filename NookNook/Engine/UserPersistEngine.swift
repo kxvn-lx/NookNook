@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-
 /// For user related settings (apart from UserDefaults)
 struct UserPersistEngine {
     private static let IMAGE_NAME = "userImage"
@@ -53,8 +52,6 @@ struct UserPersistEngine {
         }
         return nil
     }
-    
-    
     
     static func saveReminder(timeDict: [Int: String], reminderType: ReminderType) {
         guard let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { fatalError() }

@@ -24,7 +24,7 @@ class VariantCollectionViewCell: UICollectionViewCell {
             variantImage.topAnchor.constraint(equalTo: self.topAnchor),
             variantImage.leftAnchor.constraint(equalTo: self.leftAnchor),
             variantImage.rightAnchor.constraint(equalTo: self.rightAnchor),
-            variantImage.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            variantImage.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
     }
 

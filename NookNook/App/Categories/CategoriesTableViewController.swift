@@ -9,7 +9,7 @@
 import UIKit
 import GoogleMobileAds
 
-protocol CatDelegate : NSObjectProtocol {
+protocol CatDelegate: NSObjectProtocol {
     func parseNewCategory(of category: Categories)
 }
 
@@ -30,7 +30,6 @@ class CategoriesTableViewController: UITableViewController {
 
         return adBannerView
     }()
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +49,7 @@ class CategoriesTableViewController: UITableViewController {
             adBannerView.load(GADRequest())
             NSLayoutConstraint.activate([
                 adBannerView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-                adBannerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+                adBannerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
             ])
         } else {
             adBannerView.removeFromSuperview()
@@ -74,8 +73,7 @@ class CategoriesTableViewController: UITableViewController {
         
         if cat == Categories.bugsMain.rawValue {
             cat = "Bugs"
-        }
-        else if cat == Categories.fishesMain.rawValue {
+        } else if cat == Categories.fishesMain.rawValue {
             cat = "Fishes"
         }
         if let categoryCell = cell as? CategoryTableViewCell {

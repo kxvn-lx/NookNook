@@ -71,4 +71,3 @@ extension DetailViewController: UICollectionViewDelegateFlowLayout, UICollection
         Taptic.lightTaptic()
     }
 }
-

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-// MARK:- UITableView data source
+// MARK: - UITableView data source
 extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
@@ -44,7 +44,7 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
             // Total bugs count
             case 1:
                 let totalBugsCount = DataEngine.loadCritterJSON(from: .bugsMain).count
-                let caughtBugsCount = self.favouritesManager.caughtCritters.filter( {$0.category == Categories.bugs.rawValue} ).count
+                let caughtBugsCount = self.favouritesManager.caughtCritters.filter({$0.category == Categories.bugs.rawValue}).count
                 let formatted = String(format: "%.1f", (Float(caughtBugsCount) / Float(totalBugsCount)) * 100)
                 
                 let cell = UITableViewCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: CRITTER_CELL)
@@ -56,7 +56,7 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
             // Total fishes count
             case 2:
                 let totalFishesCount = DataEngine.loadCritterJSON(from: .fishesMain).count
-                let caughtFishesCount = self.favouritesManager.caughtCritters.filter( {$0.category == Categories.fishes.rawValue} ).count
+                let caughtFishesCount = self.favouritesManager.caughtCritters.filter({$0.category == Categories.fishes.rawValue}).count
                 let formatted = String(format: "%.1f", (Float(caughtFishesCount) / Float(totalFishesCount)) * 100)
                 
                 let cell = UITableViewCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: CRITTER_CELL)
@@ -109,12 +109,12 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
             case 0:
                 let vc = self.storyboard!.instantiateViewController(withIdentifier: "FavouritesVC") as! FavouritesTableViewController
                 let navController = UINavigationController(rootViewController: vc)
-                self.present(navController, animated:true, completion: nil)
+                self.present(navController, animated: true, completion: nil)
                 // Turnip Reminder
             case 1:
                 let vc = self.storyboard!.instantiateViewController(withIdentifier: TURNIP_ID) as! TurnipReminderTableViewController
                 let navController = UINavigationController(rootViewController: vc)
-                self.present(navController, animated:true, completion: nil)
+                self.present(navController, animated: true, completion: nil)
             default: break
             }
             
@@ -127,7 +127,7 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 let navController = UINavigationController(rootViewController: vc)
                 navController.presentationController?.delegate = self
-                self.present(navController, animated:true, completion: nil)
+                self.present(navController, animated: true, completion: nil)
             case 1: break
             case 2: break
             default: break
@@ -136,7 +136,7 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.textColor = UIColor.dirt1.withAlphaComponent(0.5)
         header.textLabel?.font = UIFont.preferredFont(forTextStyle: .title3)

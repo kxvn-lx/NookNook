@@ -10,11 +10,9 @@ import Foundation
 import UIKit
 import WhatsNewKit
 
-
 @objc protocol WhatsNewhelperDelegate: class {
     func whatsNewDidFinish(controller: UIViewController)
 }
-
 
 class WhatsNewHelper {
     
@@ -63,14 +61,14 @@ class WhatsNewHelper {
                     title: "Personalised dashboard",
                     subtitle: "Make NookNook your very own ACNH companion app.",
                     image: profileIcon
-                ),
+                )
             ]
         )
         
         let configuration = getConfiguration()
         let versionStore: WhatsNewVersionStore = KeyValueWhatsNewVersionStore()
         
-        // MARK:  Initialize
+        // MARK: Initialize
         view = WhatsNewViewController(
             whatsNew: whatsNew,
             configuration: configuration,
@@ -83,14 +81,12 @@ class WhatsNewHelper {
 //        )
     }
     
-    
     private func getConfiguration() -> WhatsNewViewController.Configuration {
         // MARK: Configurations
         var configuration = WhatsNewViewController.Configuration()
         
         configuration.backgroundColor = .cream1
         configuration.apply(animation: .slideRight)
-        
         
         // MARK: Title
         configuration.titleView.secondaryColor = .init(
@@ -102,7 +98,6 @@ class WhatsNewHelper {
         configuration.titleView.titleFont = UIFont.preferredFont(forTextStyle: .title1)
         configuration.titleView.titleFont = .systemFont(ofSize: configuration.titleView.titleFont.pointSize, weight: .bold)
         configuration.titleView.titleAlignment = .left
-        
         
         // MARK: Items
         configuration.itemsView.titleFont = .preferredFont(forTextStyle: .callout)

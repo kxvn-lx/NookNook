@@ -50,7 +50,7 @@ class PatchLogViewController: UIViewController {
         
         V1.0.0 (28042020)
         Beta testing released! 🤩
-        """,
+        """
     ]
 
     override func viewDidLoad() {
@@ -107,7 +107,7 @@ class PatchLogViewController: UIViewController {
             mStackView.leftAnchor.constraint(equalTo: scrollView.leftAnchor),
             mStackView.rightAnchor.constraint(equalTo: scrollView.rightAnchor),
             mStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            mStackView.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor),
+            mStackView.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor)
         ])
     }
     

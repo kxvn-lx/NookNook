@@ -34,7 +34,7 @@ let static_item = Item(name: "Acoustic guitar", image: "3FX566U", obtainedFrom: 
 let static_item2 = Item(name: "XXX", image: "XXX", obtainedFrom: "XXX", isDIY: true, isCustomisable: true, variants: ["XXX", "doXXXb8IS9"], category: "XXX", buy: 200, sell: 300, set: "", sourceNote: nil)
 
 extension Item {
-    static func == (lhs: Item , rhs: Item) -> Bool {
+    static func == (lhs: Item, rhs: Item) -> Bool {
         return lhs.id == rhs.id
     }
 }

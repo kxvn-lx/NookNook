@@ -15,7 +15,6 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
     
     private let MARGIN: CGFloat = 10
     
-    
     private var scrollView: UIScrollView!
     private var mStackView: UIStackView!
     
@@ -23,7 +22,6 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
     
     var iconView: UIImageView!
     var imgWrapper: UIView!
-
     
     var profileImageView: UIImageView!
     var nameTF: TweeAttributedTextField!
@@ -37,7 +35,6 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
     var saveButton: UIButton!
     
     var imagePicker = UIImagePickerController()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,7 +88,6 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         dismiss(animated: true, completion: nil)
     }
     
-    
     private func setupProfile() {
         userDict = UDEngine.shared.getUser()
         
@@ -125,7 +121,6 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         profileImageView.backgroundColor = .cream2
         profileImageView.image = UIImage(named: "appIcon-Ori")
         
-        
         iconView = UIImageView()
         iconView.translatesAutoresizingMaskIntoConstraints = false
         iconView.image =  IconHelper.systemIcon(of: .edit, weight: .regular).withRenderingMode(.alwaysTemplate)
@@ -135,7 +130,6 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         imgWrapper.translatesAutoresizingMaskIntoConstraints = false
         imgWrapper.addSubview(profileImageView)
         imgWrapper.addSubview(iconView)
-        
         
         nameTF = TweeAttributedTextField()
         nameTF.translatesAutoresizingMaskIntoConstraints = false
@@ -156,7 +150,6 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         nameTF.placeholderDuration = 0.2
         nameTF.placeholderColor = UIColor.dirt1.withAlphaComponent(0.5)
         nameTF.tweePlaceholder = "Name"
-
         
         islandNameTF = TweeAttributedTextField()
         islandNameTF.translatesAutoresizingMaskIntoConstraints = false
@@ -192,13 +185,11 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         nativeFruitButton.addTarget(self, action: #selector(fruitPicker), for: .touchUpInside)
         nativeFruitButton.setTitle("Change fruit", for: .normal)
         
-        
         hemispherePicker = UISegmentedControl(items: [DateHelper.Hemisphere.Northern.rawValue, DateHelper.Hemisphere.Southern.rawValue])
         hemispherePicker.backgroundColor = .cream2
         hemispherePicker.tintColor = .cream1
         hemispherePicker.translatesAutoresizingMaskIntoConstraints = false
-        hemispherePicker.addTarget(self, action:  #selector(hemispherePickerChanged), for: .valueChanged)
-        
+        hemispherePicker.addTarget(self, action: #selector(hemispherePickerChanged), for: .valueChanged)
         
         saveButton = UIButton()
         saveButton.translatesAutoresizingMaskIntoConstraints = false
@@ -269,11 +260,9 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
                 UserPersistEngine.saveImage(image: img)
             }
             
-            
             Taptic.successTaptic()
             self.closeTapped()
-        }
-        else {            
+        } else {            
             let alert = AlertHelper.createDefaultAction(title: "Oh bummer!", message: "Please make sure you did not leave any textfields empty!")
             self.present(alert, animated: true)
             Taptic.errorTaptic()
@@ -288,7 +277,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         vc.fruitsDelegate = self
         vc.userFruit = selectedFruit
         let navController = UINavigationController(rootViewController: vc)
-        self.present(navController, animated:true, completion: nil)
+        self.present(navController, animated: true, completion: nil)
     }
     
     private func setConstraint() {
@@ -319,8 +308,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
             iconView.heightAnchor.constraint(equalTo: self.profileImageView.widthAnchor, multiplier: itemImageViewSize - 0.12),
             
             iconView.rightAnchor.constraint(equalTo: imgWrapper.rightAnchor),
-            iconView.bottomAnchor.constraint(equalTo: imgWrapper.bottomAnchor),
-            
+            iconView.bottomAnchor.constraint(equalTo: imgWrapper.bottomAnchor)
             
         ])
     }
@@ -348,15 +336,13 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: MARGIN * 1.5, left: MARGIN * 1.5, bottom: MARGIN * 1.5, right: MARGIN * 1.5)
         
-        
-        
         return stackView
     }
     
     private func renderFruitLabel(text: String) -> NSMutableAttributedString {
         let boldText = "Native fruit: "
-        let attrs = [NSAttributedString.Key.font : UIFont.systemFont(ofSize: self.fruitLabel.font.pointSize, weight: .semibold)]
-        let attributedString = NSMutableAttributedString(string:boldText, attributes:attrs)
+        let attrs = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: self.fruitLabel.font.pointSize, weight: .semibold)]
+        let attributedString = NSMutableAttributedString(string: boldText, attributes: attrs)
 
         let normalString = NSMutableAttributedString(string: text)
 

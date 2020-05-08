@@ -71,7 +71,7 @@ class FavouritesTableViewController: UITableViewController {
         scView = SCHelper.createSCWithTitle(title: "You can only perform swipe right action\non the main list.", items: items)
         sc = scView.viewWithTag(1) as? UISegmentedControl
         sc.selectedSegmentIndex = 0
-        sc.addTarget(self, action:  #selector(changeSource), for: .valueChanged)
+        sc.addTarget(self, action: #selector(changeSource), for: .valueChanged)
         
         favItems = favouritesManager.items
         favVillagers = favouritesManager.favouritedVillagers
@@ -91,13 +91,12 @@ class FavouritesTableViewController: UITableViewController {
             adBannerView.load(GADRequest())
             NSLayoutConstraint.activate([
                 adBannerView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-                adBannerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+                adBannerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
             ])
         } else {
             adBannerView.removeFromSuperview()
         }
     }
-    
     
     // MARK: - Table view data source
     
@@ -111,7 +110,7 @@ class FavouritesTableViewController: UITableViewController {
             if isFiltering {
                 return filteredItems.count
             } else {
-                if favItems.count == 0 {
+                if favItems.isEmpty {
                     self.tableView.setEmptyMessage("Swipe right and press ⭑ to\nadd an item to your collection!")
                 } else {
                     self.tableView.restore()
@@ -122,7 +121,7 @@ class FavouritesTableViewController: UITableViewController {
             if isFiltering {
                 return filteredWardrobes.count
             } else {
-                if favWardrobes.count == 0 {
+                if favWardrobes.isEmpty {
                     self.tableView.setEmptyMessage("Swipe right and press ⭑ to\nadd a clothings to your collection!")
                 } else {
                     self.tableView.restore()
@@ -133,7 +132,7 @@ class FavouritesTableViewController: UITableViewController {
             if isFiltering {
                 return filteredVillagers.count
             } else {
-                if favVillagers.count == 0 {
+                if favVillagers.isEmpty {
                     self.tableView.setEmptyMessage("Swipe right and press ⭑ to\nadd a villager to your collection!")
                 } else {
                     self.tableView.restore()
@@ -142,7 +141,6 @@ class FavouritesTableViewController: UITableViewController {
             return favouritesManager.favouritedVillagers.count
         }
     }
-    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FAVOURITE_CELL, for: indexPath)
@@ -166,7 +164,6 @@ class FavouritesTableViewController: UITableViewController {
                 cell.label1.text = item.obtainedFrom
                 cell.label3.attributedText = PriceEngine.renderPrice(amount: item.buy, with: .buy, of: 12)
                 cell.label4.attributedText = PriceEngine.renderPrice(amount: item.sell, with: .sell, of: 12)
-                
                 
                 cell.iconLabel1.isHidden = true
                 cell.iconLabel2.isHidden = true
@@ -219,7 +216,6 @@ class FavouritesTableViewController: UITableViewController {
                 cell.label3.attributedText = PriceEngine.renderPrice(amount: wardrobe.buy, with: .buy, of: 12)
                 cell.label4.attributedText = PriceEngine.renderPrice(amount: wardrobe.sell, with: .sell, of: 12)
                 
-                
                 cell.iconLabel1.isHidden = true
                 cell.iconLabel2.isHidden = true
                 cell.tagLabel.isHidden = true
@@ -246,7 +242,7 @@ class FavouritesTableViewController: UITableViewController {
         }
         
         let navController = UINavigationController(rootViewController: vc)
-        self.present(navController, animated:true, completion: nil)
+        self.present(navController, animated: true, completion: nil)
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -276,7 +272,6 @@ class FavouritesTableViewController: UITableViewController {
             tableView.deleteRows(at: [indexPath], with: .left)
         }
     }
-    
     
     @objc func changeSource(sender: UISegmentedControl) {
         Taptic.lightTaptic()

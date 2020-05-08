@@ -30,7 +30,7 @@ struct PriceEngine {
         // Format the price for better readability.
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
-        let formattedNumber = numberFormatter.string(from: NSNumber(value:amount!))!
+        let formattedNumber = numberFormatter.string(from: NSNumber(value: amount!))!
         
         var body: String = ""
         switch price {
@@ -40,11 +40,10 @@ struct PriceEngine {
             body = amount != 0 ? String(formattedNumber) : "Not for sale"
         }
         
-        let priceAttr = [NSAttributedString.Key.font :  UIFont.systemFont(ofSize: size, weight: .semibold), NSAttributedString.Key.foregroundColor : UIColor.gold1]
-        let finalString = NSMutableAttributedString(string: body, attributes: priceAttr as [NSAttributedString.Key : Any])
+        let priceAttr = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: size, weight: .semibold), NSAttributedString.Key.foregroundColor: UIColor.gold1]
+        let finalString = NSMutableAttributedString(string: body, attributes: priceAttr as [NSAttributedString.Key: Any])
         
         let bodyString = NSMutableAttributedString(string: price.rawValue)
-        
         
         bodyString.append(finalString)
         

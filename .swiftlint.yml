@@ -1,0 +1,28 @@
+disabled_rules:
+- trailing_whitespace
+- line_length
+- cyclomatic_complexity
+- identifier_name
+- force_cast
+- function_body_length
+- for_where
+- type_body_length
+- unused_optional_binding
+opt_in_rules:
+- empty_count
+- empty_string
+excluded:
+- Carthage
+- Pods
+- SwiftLint/Common/3rdPartyLib
+function_parameter_count:
+    warning: 6
+    error: 8
+file_length:
+    warning: 1000
+    error: 1500
+    ignore_comment_only_lines: true
+cyclomatic_complexity:
+    warning: 15
+    error: 25
+reporter: "xcode"

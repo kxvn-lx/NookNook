@@ -28,7 +28,7 @@ struct Villager: Codable, Equatable, Identifiable {
 }
 
 extension Villager {
-    static func == (lhs: Villager , rhs: Villager) -> Bool {
+    static func == (lhs: Villager, rhs: Villager) -> Bool {
         return lhs.id == rhs.id
     }
 }

@@ -16,23 +16,20 @@ import SwiftyStoreKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    
-    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         UNUserNotificationCenter.current().delegate = self
         
-        /// Analytics and ads configurations.
+        // Analytics and ads configurations.
         UXCam.optIntoSchematicRecordings()
-        UXCam.start(withKey:"pm7prng53jwfhag")
+        UXCam.start(withKey: "pm7prng53jwfhag")
         
         FirebaseApp.configure()
         
         GADMobileAds.sharedInstance().start(completionHandler: nil)
 //        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = kGADSimulatorID as? [String]
         
-        
-        /// Uncomment this to disable ads (Development purposes).
+        // Uncomment this to disable ads (Development purposes).
 //        UDEngine.shared.saveIsAdsPurchased()
         
         SwiftyStoreKit.completeTransactions(atomically: true) { purchases in
@@ -66,7 +63,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
     
-    
 }
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
@@ -74,4 +70,3 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         completionHandler([.alert, .sound])
     }
 }
-

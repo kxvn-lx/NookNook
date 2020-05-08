@@ -63,8 +63,8 @@ class DetailViewController: UIViewController {
     private var timeStack: UIStackView!
     private var variationStack: UIStackView!
     private var variationTitleLabel: UILabel!
-    let variationImageCollectionView:UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
-    let layout:UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
+    let variationImageCollectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
+    let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
     
     // Google ads banner
     lazy var adBannerView: GADBannerView = {
@@ -85,8 +85,6 @@ class DetailViewController: UIViewController {
         
         return adBannerView
     }()
-    
-    
     
     // MARK: - Tableview init
     override func viewDidLoad() {
@@ -109,7 +107,7 @@ class DetailViewController: UIViewController {
             adBannerView.load(GADRequest())
             NSLayoutConstraint.activate([
                 adBannerView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-                adBannerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+                adBannerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
             ])
         } else {
             adBannerView.removeFromSuperview()
@@ -187,14 +185,10 @@ class DetailViewController: UIViewController {
             let gender = weatherStack.viewWithTag(1) as! UILabel
             gender.text = "Gender"
             
-            
-            
         default: fatalError("Attempt to render an invalid object group or groupOrigin is still nil!")
         }
         
     }
-    
-    
     
     /// Method to render item object
     private func renderItem() {
@@ -204,7 +198,6 @@ class DetailViewController: UIViewController {
         buyLabel.attributedText = PriceEngine.renderPrice(amount: itemObj.buy!, with: .none, of: buyLabel.font.pointSize)
         sellLabel.attributedText = PriceEngine.renderPrice(amount: itemObj.sell!, with: .none, of: buyLabel.font.pointSize)
         sourceNoteLabel.text = itemObj.sourceNote
-        
         
         if itemObj.variants == nil {
             variationImageCollectionView.isHidden = true
@@ -277,8 +270,7 @@ class DetailViewController: UIViewController {
         
     }
     
-    
-    // MARK:- Modify UI
+    // MARK: - Modify UI
     private func setupView() {
         
         buyStack = UIStackView()
@@ -313,7 +305,6 @@ class DetailViewController: UIViewController {
         self.view.addSubview(scrollView)
         scrollView.addSubview(mStackView)
         
-        
         // detailImageView
         detailImageView = UIImageView()
         detailImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -321,12 +312,10 @@ class DetailViewController: UIViewController {
         detailImageView.sd_imageTransition = .fade
         detailImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
         
-        
         // Object Title and Subtitle stackView
         tsStackView = SVHelper.createSV(axis: .vertical, spacing: MARGIN, alignment: .leading, distribution: .equalSpacing)
         
         titleRarityStack = SVHelper.createSV(axis: .horizontal, spacing: MARGIN, alignment: .lastBaseline, distribution: .equalSpacing)
-        
         
         // Title, subtitle, and sourcenote section
         titleLabel.numberOfLines = 0
@@ -339,7 +328,6 @@ class DetailViewController: UIViewController {
         sourceNoteLabel.numberOfLines = 0
         sourceNoteLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         sourceNoteLabel.textColor = UIColor.dirt1.withAlphaComponent(0.5)
-        
         
         // Rarity section
         rarityLabel.setTitleColor(.darkGray, for: .normal)
@@ -376,7 +364,6 @@ class DetailViewController: UIViewController {
         secondIconLabel.clipsToBounds = true
         secondIconLabel.layer.cornerRadius = 2.5
         
-        
         iconStackView = SVHelper.createSV(axis: .horizontal, spacing: MARGIN, alignment: .center, distribution: .fillEqually)
         iconStackView.isLayoutMarginsRelativeArrangement = true
         iconStackView.layoutMargins = UIEdgeInsets(top: 0, left: MARGIN*2, bottom: 0, right: MARGIN*2)
@@ -388,7 +375,6 @@ class DetailViewController: UIViewController {
         infoStackView = SVHelper.createSV(axis: .vertical, spacing: MARGIN, alignment: .fill, distribution: .equalSpacing)
         infoStackView.isLayoutMarginsRelativeArrangement = true
         infoStackView.layoutMargins = UIEdgeInsets(top: 0, left: MARGIN*2, bottom: 0, right: MARGIN*2)
-        
         
         buyLabel.textColor = .gold1
         sellLabel.textColor = .gold1
@@ -408,8 +394,6 @@ class DetailViewController: UIViewController {
         
         weatherStack = createInfoStackView(title: "Weather", with: weatherLabel)
         
-        
-        
         infoStackView.addArrangedSubview(sourceNoteLabel)
         infoStackView.addArrangedSubview(buyStack)
         infoStackView.addArrangedSubview(sellStack)
@@ -417,12 +401,10 @@ class DetailViewController: UIViewController {
         infoStackView.addArrangedSubview(weatherStack)
         infoStackView.addArrangedSubview(timeStack)
         
-        
         // Active time period section
         activeTimeStack = SVHelper.createSV(axis: .vertical, spacing: MARGIN, alignment: .fill, distribution: .equalSpacing)
         activeTimeStack.isLayoutMarginsRelativeArrangement = true
         activeTimeStack.layoutMargins = UIEdgeInsets(top: 0, left: MARGIN*2, bottom: 0, right: MARGIN*2)
-        
         
         activeTimeN.textColor = .gold1
         activeTimeS.textColor = .gold1
@@ -444,7 +426,6 @@ class DetailViewController: UIViewController {
         activeTimeStack.addArrangedSubview(activeTimeNStack)
         activeTimeStack.addArrangedSubview(activeTimeSStack)
         
-        
         // Variation Section
         variationStack = SVHelper.createSV(axis: .vertical, spacing: MARGIN, alignment: .leading, distribution: .fill)
         
@@ -460,7 +441,6 @@ class DetailViewController: UIViewController {
         variationImageCollectionView.delegate = self
         variationImageCollectionView.dataSource = self
         variationImageCollectionView.backgroundColor = .cream2
-        
         
         variationStack.addArrangedSubview(variationTitleLabel, withMargin: UIEdgeInsets(top: 0, left: MARGIN * 2, bottom: 0, right: 0))
         variationStack.addArrangedSubview(variationImageCollectionView)
@@ -501,11 +481,9 @@ class DetailViewController: UIViewController {
             tsStackView.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
             titleRarityStack.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
             
-            
             infoStackView.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
             
             activeTimeStack.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
-            
             
             variationStack.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
             
@@ -555,8 +533,6 @@ class DetailViewController: UIViewController {
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: MARGIN * 1.5, left: MARGIN * 1.5, bottom: MARGIN * 1.5, right: MARGIN * 1.5)
         
-        
-        
         return stackView
     }
     
@@ -575,7 +551,7 @@ class DetailViewController: UIViewController {
         
         let config = UICollectionViewCompositionalLayoutConfiguration()
         config.scrollDirection = .vertical
-        let layout = UICollectionViewCompositionalLayout(section: section, configuration:config)
+        let layout = UICollectionViewCompositionalLayout(section: section, configuration: config)
         
         return layout
     }
@@ -588,7 +564,7 @@ extension DetailViewController: GADBannerViewDelegate {
             mStackView.insertArrangedSubview(adBannerViewMiddle, at: 3)
             NSLayoutConstraint.activate([
                 adBannerViewMiddle.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-                adBannerViewMiddle.heightAnchor.constraint(equalToConstant: 50),
+                adBannerViewMiddle.heightAnchor.constraint(equalToConstant: 50)
             ])
         } else {
             mStackView.removeArrangedSubview(adBannerViewMiddle)

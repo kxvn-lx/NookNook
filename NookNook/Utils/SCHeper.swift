@@ -17,10 +17,10 @@ struct SCHelper {
         let sc = UISegmentedControl(items: items)
         sc.translatesAutoresizingMaskIntoConstraints = false
         
-        let xPostion:CGFloat = 0
-        let yPostion:CGFloat = 0
-        let elementWidth:CGFloat = 300
-        let elementHeight:CGFloat = 30
+        let xPostion: CGFloat = 0
+        let yPostion: CGFloat = 0
+        let elementWidth: CGFloat = 300
+        let elementHeight: CGFloat = 30
         
         sc.frame = CGRect(x: xPostion, y: yPostion, width: elementWidth, height: elementHeight)
         
@@ -29,7 +29,6 @@ struct SCHelper {
         sc.tintColor = .cream1
         
         sc.tag = 1
-        
         
         vw.addSubview(sc)
         
@@ -54,10 +53,10 @@ struct SCHelper {
         let sc = UISegmentedControl(items: items)
         sc.translatesAutoresizingMaskIntoConstraints = false
         
-        let xPostion:CGFloat = 0
-        let yPostion:CGFloat = 0
-        let elementWidth:CGFloat = 300
-        let elementHeight:CGFloat = 30
+        let xPostion: CGFloat = 0
+        let yPostion: CGFloat = 0
+        let elementWidth: CGFloat = 300
+        let elementHeight: CGFloat = 30
         
         sc.frame = CGRect(x: xPostion, y: yPostion, width: elementWidth, height: elementHeight)
         titleLabel.frame = CGRect(x: xPostion, y: yPostion, width: elementWidth, height: elementHeight)
@@ -77,7 +76,7 @@ struct SCHelper {
             sc.centerYAnchor.constraint(equalTo: vw.centerYAnchor, constant: -20),
             
             titleLabel.centerXAnchor.constraint(equalTo: vw.centerXAnchor),
-            titleLabel.centerYAnchor.constraint(equalTo: vw.centerYAnchor, constant: 20),
+            titleLabel.centerYAnchor.constraint(equalTo: vw.centerYAnchor, constant: 20)
         ])
         
         return vw

@@ -10,7 +10,6 @@ import UIKit
 
 class CategoryTableViewCell: UITableViewCell {
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
     }

@@ -46,8 +46,7 @@ struct CritterHelper {
                     if currMonthInt >= initRange1 && currMonthInt <= finalRange1 || currMonthInt >= initRange2 && currMonthInt <= finalRange2 {
                         northernBugs.append($0)
                     }
-                }
-                else {
+                } else {
                     let initRange = monthsArr != [-1] ? monthsArr[0] : -1
                     let finalRange = monthsArr != [1] ? monthsArr.last! : -1
                     
@@ -70,8 +69,7 @@ struct CritterHelper {
                     if currMonthInt >= initRange1 && currMonthInt <= finalRange1 || currMonthInt >= initRange2 && currMonthInt <= finalRange2 {
                         northernFishes.append($0)
                     }
-                }
-                else {
+                } else {
                     let initRange = monthsArr != [-1] ? monthsArr[0] : -1
                     let finalRange = monthsArr != [1] ? monthsArr.last! : -1
                     
@@ -95,8 +93,7 @@ struct CritterHelper {
                     if currMonthInt >= initRange1 && currMonthInt <= finalRange1 || currMonthInt >= initRange2 && currMonthInt <= finalRange2 {
                         southernBugs.append($0)
                     }
-                }
-                else {
+                } else {
                     let initRange = monthsArr != [-1] ? monthsArr[0] : -1
                     let finalRange = monthsArr != [1] ? monthsArr.last! : -1
                     
@@ -105,7 +102,6 @@ struct CritterHelper {
                         southernBugs.append($0)
                     }
                 }
-                
                 
             })
             allFishes.forEach({
@@ -121,8 +117,7 @@ struct CritterHelper {
                     if currMonthInt >= initRange1 && currMonthInt <= finalRange1 || currMonthInt >= initRange2 && currMonthInt <= finalRange2 {
                         southernFishes.append($0)
                     }
-                }
-                else {
+                } else {
                     let initRange = monthsArr != [-1] ? monthsArr[0] : -1
                     let finalRange = monthsArr != [1] ? monthsArr.last! : -1
                     
@@ -134,7 +129,6 @@ struct CritterHelper {
             })
         }
         
-        
         switch userHemisphere {
         case .Northern:
             return (northernBugs, northernFishes)
@@ -142,7 +136,6 @@ struct CritterHelper {
             return (southernBugs, southernFishes)
         }
     }
-    
     
     /**
      Method to calculate caught critters ONLY on this month

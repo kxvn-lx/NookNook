@@ -17,7 +17,7 @@ class VillagerTableViewCell: SwipeTableViewCell {
     var personalityLabel: UIButton!
     var isFavImageView: UIImageView!
     var nameLabel: UILabel!
-    var speciesLabel : UILabel!
+    var speciesLabel: UILabel!
     var bdayLabel: UILabel!
     var genderLabel: UILabel!
     
@@ -68,11 +68,9 @@ class VillagerTableViewCell: SwipeTableViewCell {
         isFavImageView.contentMode = .scaleAspectFit
         isFavImageView.tintColor = .darkGray
         
-        
         imgView.addSubview(personalityLabel)
         imgView.addSubview(isFavImageView)
         imgView.addSubview(isResidentLabel)
-        
         
         nameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -120,11 +118,8 @@ class VillagerTableViewCell: SwipeTableViewCell {
         mStackView = SVHelper.createSV(axis: .horizontal, spacing: MARGIN, alignment: .center, distribution: .fill)
         mStackView.translatesAutoresizingMaskIntoConstraints = false
         
-        
         mStackView.addArrangedSubview(imgView)
         mStackView.addArrangedSubview(infoStackView)
-        
-        
         
         self.addSubview(mStackView)
     }

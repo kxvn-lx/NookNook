@@ -43,11 +43,9 @@ class WardrobesTableViewController: UITableViewController {
         return adBannerView
     }()
     
-    
     // MARK: - Table views init
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 100
@@ -74,7 +72,7 @@ class WardrobesTableViewController: UITableViewController {
             adBannerView.load(GADRequest())
             NSLayoutConstraint.activate([
                 adBannerView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-                adBannerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+                adBannerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
             ])
         } else {
             adBannerView.removeFromSuperview()
@@ -100,10 +98,9 @@ class WardrobesTableViewController: UITableViewController {
         setupSearchBar(searchBar: searchController.searchBar)
     }
     
-    private func setupSearchBar(searchBar : UISearchBar) {
+    private func setupSearchBar(searchBar: UISearchBar) {
         searchBar.setPlaceholderTextColorTo(color: UIColor.lightGray)
     }
-    
     
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -112,7 +109,7 @@ class WardrobesTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isFiltering {
-            if filteredWardrobes.count == 0 {
+            if filteredWardrobes.isEmpty {
                 self.tableView.setEmptyMessage("No wardrobe(s) found 😢.\nPerhaps you made a mistake?")
             } else {
                 self.tableView.restore()
@@ -161,13 +158,12 @@ class WardrobesTableViewController: UITableViewController {
             selectedItem = wardrobes[indexPath.row]
         }
         
-        
         let vc = self.storyboard!.instantiateViewController(withIdentifier: DETAIL_ID) as! DetailViewController
         
         vc.parseOject(from: .wardrobes, object: selectedItem)
         
         let navController = UINavigationController(rootViewController: vc)
-        self.present(navController, animated:true, completion: nil)
+        self.present(navController, animated: true, completion: nil)
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -187,8 +183,7 @@ class WardrobesTableViewController: UITableViewController {
     
     // swipe right function
     override func tableView(_ tableView: UITableView,
-                            leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
-    {
+                            leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let wardrobe: Wardrobe
         if self.isFiltering {
@@ -197,7 +192,7 @@ class WardrobesTableViewController: UITableViewController {
             wardrobe = self.wardrobes[indexPath.row]
         }
         
-        let favouriteAction = UIContextualAction(style: .normal, title:  "", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+        let favouriteAction = UIContextualAction(style: .normal, title: "", handler: { (_: UIContextualAction, _: UIView, success: (Bool) -> Void) in
             self.favouritesManager.saveWardrobe(wardrobe: wardrobe)
             DispatchQueue.main.async {
                 let contentOffset = tableView.contentOffset
@@ -215,7 +210,6 @@ class WardrobesTableViewController: UITableViewController {
         return UISwipeActionsConfiguration(actions: [favouriteAction])
         
     }
-    
     
     // MARK: - Modify UI
     private func setBar() {
@@ -246,7 +240,7 @@ class WardrobesTableViewController: UITableViewController {
         vc.currentCategory = currentCategory
         
         let navController = UINavigationController(rootViewController: vc)
-        self.present(navController, animated:true, completion: nil)
+        self.present(navController, animated: true, completion: nil)
     }
     
 }
@@ -294,14 +288,13 @@ extension WardrobesTableViewController: UITabBarControllerDelegate {
     }
 }
 
-
 extension WardrobesTableViewController: SwipeTableViewCellDelegate {
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
         guard orientation == .left else { return nil }
         
         let wardrobe = isFiltering ? self.filteredWardrobes[indexPath.row] : self.wardrobes[indexPath.row]
         
-        let favouriteAction = SwipeAction(style: .default, title: nil) { (action, indexPath) in
+        let favouriteAction = SwipeAction(style: .default, title: nil) { (_, indexPath) in
             self.favouritesManager.saveWardrobe(wardrobe: wardrobe)
             let contentOffset = tableView.contentOffset
             DispatchQueue.main.async {

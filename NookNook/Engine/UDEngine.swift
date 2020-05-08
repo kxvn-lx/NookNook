@@ -26,7 +26,6 @@ struct UDEngine {
     
     private let defaults = UserDefaults.standard
     
-    
     // MARK: - Get user's data
     func saveUser(user: User) {
         let saveUser = ["id": user.id,
@@ -38,9 +37,8 @@ struct UDEngine {
     }
     
     func getUser() -> [String: String] {
-        return defaults.dictionary(forKey:  Key.UserData.rawValue) as? [String: String] ?? [String: String]()
+        return defaults.dictionary(forKey: Key.UserData.rawValue) as? [String: String] ?? [String: String]()
     }
-    
     
     // MARK: - Has purchased ads
     /// Save user's bought preference
@@ -53,7 +51,6 @@ struct UDEngine {
         return defaults.bool(forKey: Key.Ad.rawValue)
     }
     
-    
     // MARK: - Is first Visit
     func saveIsFirstVisit(on vc: TableViewCaller) {
         defaults.set(true, forKey: Key.FirstVisit.rawValue + vc.rawValue)
@@ -62,7 +59,6 @@ struct UDEngine {
     func getIsFirstVisit(on vc: TableViewCaller) -> Bool {
         return defaults.bool(forKey: Key.FirstVisit.rawValue + vc.rawValue)
     }
-    
     
     // MARK: - Has completed Critters
     func saveHasCompletedCritters(isCompleted bool: Bool) {

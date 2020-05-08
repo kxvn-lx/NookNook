@@ -45,7 +45,6 @@ class VillagersTableViewController: UITableViewController {
         return adBannerView
     }()
     
-    
     // MARK: - Tableview init
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +55,7 @@ class VillagersTableViewController: UITableViewController {
         tableView.estimatedRowHeight = 100
         
         // Default categories to be presented
-        villagers = DataEngine.loadVillagersJSON(from: currentCategory).sorted(by: { $0.name < $1.name } )
+        villagers = DataEngine.loadVillagersJSON(from: currentCategory).sorted(by: { $0.name < $1.name })
         
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
@@ -77,7 +76,7 @@ class VillagersTableViewController: UITableViewController {
             adBannerView.load(GADRequest())
             NSLayoutConstraint.activate([
                 adBannerView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-                adBannerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+                adBannerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
             ])
         } else {
             adBannerView.removeFromSuperview()
@@ -103,11 +102,10 @@ class VillagersTableViewController: UITableViewController {
         setupSearchBar(searchBar: searchController.searchBar)
     }
     
-    private func setupSearchBar(searchBar : UISearchBar) {
+    private func setupSearchBar(searchBar: UISearchBar) {
         searchBar.setPlaceholderTextColorTo(color: UIColor.lightGray)
         
     }
-    
     
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -116,17 +114,15 @@ class VillagersTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isFiltering {
-            if filteredVillagers.count == 0 {
+            if filteredVillagers.isEmpty {
                 self.tableView.setEmptyMessage("No villager(s) found 😢.\nPerhaps you made a mistake?")
-            }
-            else {
+            } else {
                 self.tableView.restore()
             }
             return filteredVillagers.count
         }
         return villagers.count
     }
-    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: VILLAGER_CELL, for: indexPath)
@@ -167,7 +163,7 @@ class VillagersTableViewController: UITableViewController {
         vc.parseOject(from: .villagers, object: selectedVillager)
         
         let navController = UINavigationController(rootViewController: vc)
-        self.present(navController, animated:true, completion: nil)
+        self.present(navController, animated: true, completion: nil)
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -184,7 +180,6 @@ class VillagersTableViewController: UITableViewController {
         (view as! UITableViewHeaderFooterView).contentView.backgroundColor = .cream1
         (view as! UITableViewHeaderFooterView).textLabel?.textColor = .dirt1
     }
-    
     
     // MARK: - Modify UI
     private func setBar() {
@@ -210,7 +205,7 @@ class VillagersTableViewController: UITableViewController {
     @objc private func sortButtonPressed() {
         let alert = UIAlertController(title: "Sort villagers", message: nil, preferredStyle: .actionSheet)
         
-        alert.addAction(UIAlertAction(title: "Name", style: .default , handler:{ (UIAlertAction) in
+        alert.addAction(UIAlertAction(title: "Name", style: .default, handler: { (_) in
             self.villagers = SortEngine.sortVillagers(villagers: self.villagers, with: .name)
             self.sortType = .name
             DispatchQueue.main.async {
@@ -221,7 +216,7 @@ class VillagersTableViewController: UITableViewController {
             Taptic.lightTaptic()
             
         }))
-        alert.addAction(UIAlertAction(title: "Species", style: .default , handler:{ (UIAlertAction) in
+        alert.addAction(UIAlertAction(title: "Species", style: .default, handler: { (_) in
             self.villagers = SortEngine.sortVillagers(villagers: self.villagers, with: .species)
             self.sortType = .species
             DispatchQueue.main.async {
@@ -231,7 +226,7 @@ class VillagersTableViewController: UITableViewController {
             self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
             Taptic.lightTaptic()
         }))
-        alert.addAction(UIAlertAction(title: "Personality", style: .default , handler:{ (UIAlertAction) in
+        alert.addAction(UIAlertAction(title: "Personality", style: .default, handler: { (_) in
             self.villagers = SortEngine.sortVillagers(villagers: self.villagers, with: .personality)
             self.sortType = .personality
             DispatchQueue.main.async {
@@ -275,14 +270,13 @@ extension VillagersTableViewController: UITabBarControllerDelegate {
     }
 }
 
-
 extension VillagersTableViewController: SwipeTableViewCellDelegate {
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
         guard orientation == .left else { return nil }
         
         let villager = isFiltering ? filteredVillagers[indexPath.row] : villagers[indexPath.row]
         
-        let favouriteAction = SwipeAction(style: .default, title: nil) { (action, indexPath) in
+        let favouriteAction = SwipeAction(style: .default, title: nil) { (_, indexPath) in
             self.favouritesManager.saveFavouritedVillager(villager: villager)
             DispatchQueue.main.async {
                 let contentOffset = tableView.contentOffset
@@ -294,8 +288,7 @@ extension VillagersTableViewController: SwipeTableViewCellDelegate {
         
         favouriteAction.image = self.favouritesManager.favouritedVillagers.contains(villager) ? IconHelper.systemIcon(of: .starFill, weight: .thin) : IconHelper.systemIcon(of: .star, weight: .thin)
         
-        
-        let residentAction = SwipeAction(style: .default, title: "Resident") { (action, indexPath) in
+        let residentAction = SwipeAction(style: .default, title: "Resident") { (_, indexPath) in
             if self.favouritesManager.residentVillagers.count <= 9 {
                 self.favouritesManager.saveResidentVillager(villager: villager)
                 DispatchQueue.main.async {
@@ -304,8 +297,7 @@ extension VillagersTableViewController: SwipeTableViewCellDelegate {
                     tableView.contentOffset = contentOffset
                 }
                 Taptic.lightTaptic()
-            }
-            else if self.favouritesManager.residentVillagers.count <= 10 && self.favouritesManager.residentVillagers.contains(villager) {
+            } else if self.favouritesManager.residentVillagers.count <= 10 && self.favouritesManager.residentVillagers.contains(villager) {
                 self.favouritesManager.saveResidentVillager(villager: villager)
                 DispatchQueue.main.async {
                     let contentOffset = tableView.contentOffset
@@ -313,8 +305,7 @@ extension VillagersTableViewController: SwipeTableViewCellDelegate {
                     tableView.contentOffset = contentOffset
                 }
                 Taptic.lightTaptic()
-            }
-            else {
+            } else {
                 let alert = AlertHelper.createDefaultAction(title: "Woah there!", message: "It appears that you have the max number of residents. (10 max)")
                 self.present(alert, animated: true)
                 

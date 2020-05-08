@@ -54,8 +54,6 @@ struct DataEngine {
                     items.append(newItem)
                 }
                 
-                
-                
             } catch let error {
                 fatalError("parse error: \(error.localizedDescription)")
             }
@@ -65,7 +63,6 @@ struct DataEngine {
         
         return items
     }
-    
     
     /**
      Load Critters datas from the datasrouce - and return them for view.
@@ -131,18 +128,12 @@ struct DataEngine {
                     critters.append(newCritter)
                 }
                 
-
-                
-                
-                
             } catch let error {
                 print("parse error: \(error.localizedDescription)")
             }
         } else {
             print("Invalid filename/path on critters")
         }
-        
-        
         
         return critters
     }
@@ -172,7 +163,6 @@ struct DataEngine {
         return (weathers)
     }
     
-    
     /**
      Load Wardrobes datas from the datasrouce - and return them for view.
      - Parameters:
@@ -187,7 +177,6 @@ struct DataEngine {
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped)
                 let jsonObj = try JSON(data: data)["results"].array!
-                
                 
                 for wardrobe in jsonObj {
                     var imagesArr: [String] = []
@@ -210,8 +199,6 @@ struct DataEngine {
                     wardrobes.append(newWardrobe)
                 }
                 
-                
-                
             } catch let error {
                 fatalError("parse error: \(error.localizedDescription)")
             }
@@ -221,7 +208,6 @@ struct DataEngine {
         
         return wardrobes
     }
-    
     
     /**
      Load Villagers datas from the datasrouce - and return them for view.
@@ -264,7 +250,6 @@ struct DataEngine {
         return villagers
     }
     
-    
     /**
      Load any JSON for experimenting.
      - Parameters:
@@ -275,11 +260,7 @@ struct DataEngine {
         if let path = Bundle.main.path(forResource: fileName, ofType: "json") {
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped)
-                let _ = try JSON(data: data)["results"].array!
-
-                
-                
-
+                _ = try JSON(data: data)["results"].array!
 
             } catch let error {
                 fatalError("parse error: \(error.localizedDescription)")

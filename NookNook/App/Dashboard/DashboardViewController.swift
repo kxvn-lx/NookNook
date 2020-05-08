@@ -41,8 +41,8 @@ class DashboardViewController: UIViewController {
     var islandNameLabel: UILabel!
     var nativeFruitLabel: UILabel!
     var residentLabel: UILabel!
-    let variationImageCollectionView:UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
-    let layout:UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
+    let variationImageCollectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
+    let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
     
     internal var birthdayResidents: [Villager] = []
     
@@ -77,7 +77,6 @@ class DashboardViewController: UIViewController {
 
         return adBannerView
     }()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -132,7 +131,7 @@ class DashboardViewController: UIViewController {
             adBannerView.load(GADRequest())
             NSLayoutConstraint.activate([
                 adBannerView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-                adBannerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+                adBannerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
             ])
         } else {
             adBannerView.removeFromSuperview()
@@ -140,7 +139,6 @@ class DashboardViewController: UIViewController {
             adBannerViewMiddle.removeFromSuperview()
         }
     }
-    
     
     // MARK: - Modify UI
     private func setBar() {
@@ -158,13 +156,12 @@ class DashboardViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = barButton
     }
     
-    
     @objc private func settingsButtonPressed() {
         let vc = self.storyboard!.instantiateViewController(withIdentifier: SETTING_ID) as! SettingsTableViewController
         vc.profileDelegate = self
         let navController = UINavigationController(rootViewController: vc)
         navController.presentationController?.delegate = self
-        self.present(navController, animated:true, completion: nil)
+        self.present(navController, animated: true, completion: nil)
     }
     
     func setupProfile() {
@@ -217,7 +214,6 @@ class DashboardViewController: UIViewController {
         profileNameStackView.addArrangedSubview(profileImageView)
         profileNameStackView.addArrangedSubview(nameStackView)
         
-        
         // phrase
         phraseLabel = UILabel()
         phraseLabel.numberOfLines = 0
@@ -227,7 +223,6 @@ class DashboardViewController: UIViewController {
         
         phraseStack = SVHelper.createSV(axis: .vertical, spacing: MARGIN, alignment: .leading, distribution: .fillEqually)
         phraseStack.addArrangedSubview(phraseLabel, withMargin: UIEdgeInsets(top: 0, left: MARGIN * 2, bottom: 0, right: 0))
-        
         
         // Passport
         passportStackView = SVHelper.createSV(axis: .vertical, spacing: MARGIN, alignment: .fill, distribution: .equalSpacing)
@@ -242,7 +237,6 @@ class DashboardViewController: UIViewController {
         
         passportStackView.addArrangedSubview(createSV(title: "Island Name", with: islandNameLabel))
         passportStackView.addArrangedSubview(createSV(title: "Native Fruit", with: nativeFruitLabel))
-        
         
         residentStack = SVHelper.createSV(axis: .vertical, spacing: MARGIN, alignment: .leading, distribution: .fill)
         
@@ -259,7 +253,6 @@ class DashboardViewController: UIViewController {
         variationImageCollectionView.dataSource = self
         variationImageCollectionView.backgroundColor = .cream2
         
-        
         residentStack.addArrangedSubview(residentLabel, withMargin: UIEdgeInsets(top: 0, left: MARGIN * 2, bottom: 0, right: 0))
         residentStack.addArrangedSubview(variationImageCollectionView)
         
@@ -270,7 +263,6 @@ class DashboardViewController: UIViewController {
         tableView.delegate = self
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: CRITTER_CELL)
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: FAVOURITE_CELL)
-        
         
         mStackView.addArrangedSubview(profileNameStackView, withMargin: UIEdgeInsets(top: MARGIN*4, left: 0, bottom: 0, right: 0))
         mStackView.addArrangedSubview(phraseStack)
@@ -307,7 +299,7 @@ class DashboardViewController: UIViewController {
             residentStack.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
             
             variationImageCollectionView.widthAnchor.constraint(equalTo: self.residentStack.widthAnchor),
-            variationImageCollectionView.heightAnchor.constraint(equalToConstant: 140),
+            variationImageCollectionView.heightAnchor.constraint(equalToConstant: 140)
             
         ])
     }
@@ -335,8 +327,6 @@ class DashboardViewController: UIViewController {
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: MARGIN * 1.5, left: MARGIN * 1.5, bottom: MARGIN * 1.5, right: MARGIN * 1.5)
         
-        
-        
         return stackView
     }
     
@@ -345,7 +335,7 @@ class DashboardViewController: UIViewController {
                                               heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8)
-        let groupSize = NSCollectionLayoutSize(widthDimension:.fractionalWidth(0.3),
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.3),
                                                heightDimension: .fractionalHeight(0.8))
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize,
                                                      subitem: item, count: 1)
@@ -355,7 +345,7 @@ class DashboardViewController: UIViewController {
         
         let config = UICollectionViewCompositionalLayoutConfiguration()
         config.scrollDirection = .vertical
-        let layout = UICollectionViewCompositionalLayout(section: section, configuration:config)
+        let layout = UICollectionViewCompositionalLayout(section: section, configuration: config)
         
         return layout
     }
@@ -371,17 +361,17 @@ class DashboardViewController: UIViewController {
         let caughtBugs = favouritesManager.caughtCritters.filter({ $0.category == Categories.bugs.rawValue })
         let caughtFishes = favouritesManager.caughtCritters.filter({ $0.category == Categories.fishes.rawValue })
         
-        ( monthlyBug, monthlyFish ) = CritterHelper.parseCritter(userHemisphere:userDict!["hemisphere"].map { DateHelper.Hemisphere(rawValue: $0)! } ?? DateHelper.Hemisphere.Southern)
+        ( monthlyBug, monthlyFish ) = CritterHelper.parseCritter(userHemisphere: userDict!["hemisphere"].map { DateHelper.Hemisphere(rawValue: $0)! } ?? DateHelper.Hemisphere.Southern)
         ( caughtBugsMonth, caughtFishesMonth ) = CritterHelper.parseCaughtCritter(caughtBugs: caughtBugs, caughtFishes: caughtFishes, monthBugs: monthlyBug, monthFishes: monthlyFish)
     }
     
     private func renderPhraseLabel(withString string: String, boldString: String, font: UIFont) -> NSAttributedString {
         let boldText = boldString
-        let attrs = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: font.pointSize)]
-        let attributedString = NSMutableAttributedString(string:boldText, attributes:attrs)
+        let attrs = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: font.pointSize)]
+        let attributedString = NSMutableAttributedString(string: boldText, attributes: attrs)
         
         let normalText = string
-        let normalString = NSMutableAttributedString(string:normalText)
+        let normalString = NSMutableAttributedString(string: normalText)
         
         attributedString.append(normalString)
         return attributedString
@@ -428,7 +418,6 @@ extension DashboardViewController: ProfileDelegate {
             adBannerViewMiddle.removeFromSuperview()
         }
         
-        
         self.dismiss(animated: true, completion: nil)
     }
 }
@@ -451,7 +440,7 @@ extension DashboardViewController: GADBannerViewDelegate {
                 self.mStackView.insertArrangedSubview(bannerView, at: 2)
                 NSLayoutConstraint.activate([
                     bannerView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-                    bannerView.heightAnchor.constraint(equalToConstant: 50),
+                    bannerView.heightAnchor.constraint(equalToConstant: 50)
                 ])
             }
         } else {

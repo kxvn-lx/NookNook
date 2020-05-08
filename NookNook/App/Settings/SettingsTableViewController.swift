@@ -57,17 +57,17 @@ class SettingsTableViewController: UITableViewController {
         super.loadView()
         
         // 1st Section
-        editInfoCell = setupCell(text: "Edit info", icon:  IconHelper.systemIcon(of: .edit, weight: .regular), accesoryType: .disclosureIndicator)
+        editInfoCell = setupCell(text: "Edit info", icon: IconHelper.systemIcon(of: .edit, weight: .regular), accesoryType: .disclosureIndicator)
         
-        shareCell = setupCell(text: "Share", icon:  IconHelper.systemIcon(of: .share, weight: .regular), accesoryType: .disclosureIndicator)
+        shareCell = setupCell(text: "Share", icon: IconHelper.systemIcon(of: .share, weight: .regular), accesoryType: .disclosureIndicator)
         
-        reportBugCell = setupCell(text: "Report a bug", icon:  IconHelper.systemIcon(of: .bug, weight: .regular), accesoryType: .disclosureIndicator)
+        reportBugCell = setupCell(text: "Report a bug", icon: IconHelper.systemIcon(of: .bug, weight: .regular), accesoryType: .disclosureIndicator)
         
-        deleteDatasCell  = setupCell(text: "Delete app data", icon:  IconHelper.systemIcon(of: .deleteData, weight: .regular), accesoryType: .none)
+        deleteDatasCell  = setupCell(text: "Delete app data", icon: IconHelper.systemIcon(of: .deleteData, weight: .regular), accesoryType: .none)
         deleteDatasCell.textLabel?.textColor = destColour
         deleteDatasCell.imageView?.tintColor = destColour
         
-        deleteCacheCell  = setupCell(text: "Delete cached data", icon:  IconHelper.systemIcon(of: .deleteCache, weight: .regular), accesoryType: .none)
+        deleteCacheCell  = setupCell(text: "Delete cached data", icon: IconHelper.systemIcon(of: .deleteCache, weight: .regular), accesoryType: .none)
         deleteCacheCell.textLabel?.textColor = destColour
         deleteCacheCell.imageView?.tintColor = destColour
         
@@ -85,7 +85,6 @@ class SettingsTableViewController: UITableViewController {
         
         removeAdsCell = setupCell(text: "Support me", icon: IconHelper.systemIcon(of: .supportMe, weight: .regular), accesoryType: .disclosureIndicator)
     }
-    
     
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -105,34 +104,34 @@ class SettingsTableViewController: UITableViewController {
     
     // Return the row for the corresponding section and row
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch(indexPath.section) {
+        switch indexPath.section {
         case 0:
-            switch(indexPath.row) {
+            switch indexPath.row {
             case 0: return self.editInfoCell
             default: fatalError("Unknown row in section 0")
             }
             
         case 1:
-            switch (indexPath.row) {
+            switch indexPath.row {
             case 0: return self.shareCell
             case 1: return self.creatorCell
             case 2: return self.websiteCell
             default: fatalError("Unknown row in section 1")
             }
         case 2:
-            switch (indexPath.row) {
+            switch indexPath.row {
             case 0: return self.requestFeatureCell
             case 1: return self.reportBugCell
             case 2: return self.appVersionCell
             default: fatalError("Unkown row in section 2")
             }
         case 3:
-            switch (indexPath.row) {
+            switch indexPath.row {
             case 0: return self.removeAdsCell
             default: fatalError("Unknown row in section 3")
             }
         case 4:
-            switch (indexPath.row) {
+            switch indexPath.row {
             case 0: return self.deleteCacheCell
             case 1: return self.deleteDatasCell
             default: fatalError("Unknown row in section 4")
@@ -144,7 +143,7 @@ class SettingsTableViewController: UITableViewController {
     
     // Customize the section headings for each section
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch(section) {
+        switch section {
         case 0: return "Share it if you love it."
         case 1: return ""
         case 2: return ""
@@ -171,7 +170,7 @@ class SettingsTableViewController: UITableViewController {
             case 0:
                 let vc = self.storyboard!.instantiateViewController(withIdentifier: EDIT_INFO_VC) as! EditInfoViewController
                 let navController = UINavigationController(rootViewController: vc)
-                self.present(navController, animated:true, completion: nil)
+                self.present(navController, animated: true, completion: nil)
             default: break
             }
         case 1:
@@ -204,7 +203,7 @@ class SettingsTableViewController: UITableViewController {
             switch indexPath.row {
             // Request a feature
             case 0:
-                if (MFMailComposeViewController.canSendMail()) {
+                if MFMailComposeViewController.canSendMail() {
                     let mailVC = MFMailComposeViewController()
                     mailVC.mailComposeDelegate = self
                     mailVC.setToRecipients(["kevin.laminto@gmail.com"])
@@ -212,16 +211,14 @@ class SettingsTableViewController: UITableViewController {
                     mailVC.setMessageBody("Hi! I have a cool feature idea that could improve the app.", isHTML: false)
                     
                     present(mailVC, animated: true, completion: nil)
-                }
-                else {
+                } else {
                     let alert = AlertHelper.createDefaultAction(title: "No mail accounts", message: "Please configure a mail account in order to send email. Or, manually email it to kevin.laminto@gmail.com")
                     self.present(alert, animated: true)
                 }
                 
-                
             // Report a bug
             case 1:
-                if (MFMailComposeViewController.canSendMail()) {
+                if MFMailComposeViewController.canSendMail() {
                     let mailVC = MFMailComposeViewController()
                     mailVC.mailComposeDelegate = self
                     mailVC.setToRecipients(["kevin.laminto@gmail.com"])
@@ -229,8 +226,7 @@ class SettingsTableViewController: UITableViewController {
                     mailVC.setMessageBody("Hi! I found a bug.", isHTML: false)
                     
                     present(mailVC, animated: true, completion: nil)
-                }
-                else {
+                } else {
                     let alert = AlertHelper.createDefaultAction(title: "No mail accounts", message: "Please configure a mail account in order to send email. Or, manually email it to kevin.laminto@gmail.com")
                     self.present(alert, animated: true)
                 }
@@ -239,7 +235,7 @@ class SettingsTableViewController: UITableViewController {
             case 2:
                 let vc = self.storyboard!.instantiateViewController(withIdentifier: PATCH_LOG_VC) as! PatchLogViewController
                 let navController = UINavigationController(rootViewController: vc)
-                self.present(navController, animated:true, completion: nil)
+                self.present(navController, animated: true, completion: nil)
             default: break
             }
         case 3:
@@ -248,7 +244,7 @@ class SettingsTableViewController: UITableViewController {
             case 0:
                 let vc = self.storyboard!.instantiateViewController(withIdentifier: ADS_VC) as! InAppPurchaseViewController
                 let navController = UINavigationController(rootViewController: vc)
-                self.present(navController, animated:true, completion: nil)
+                self.present(navController, animated: true, completion: nil)
             default: break
             }
         case 4:
@@ -278,7 +274,6 @@ class SettingsTableViewController: UITableViewController {
                 let alert = AlertHelper.createCustomAction(title: "Delete app datas?", message: "Your favourites, caught/donated, and in residents data will be deleted.", action: deleteAction)
                 self.present(alert, animated: true)
                 
-                
             default: break
             }
         default:
@@ -302,7 +297,7 @@ class SettingsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.textColor = UIColor.dirt1.withAlphaComponent(0.5)
-        switch(section) {
+        switch section {
         case 0: header.textLabel?.text! = "Share it if you love it."
         case 1: header.textLabel?.text! = ""
         case 2: header.textLabel?.text! = ""
@@ -345,7 +340,7 @@ class SettingsTableViewController: UITableViewController {
         return cell
     }
     
-    @objc func share(sender:UIView){
+    @objc func share(sender: UIView) {
         UIGraphicsBeginImageContext(view.frame.size)
         view.layer.render(in: UIGraphicsGetCurrentContext()!)
         let image = UIGraphicsGetImageFromCurrentImageContext()
@@ -361,7 +356,6 @@ class SettingsTableViewController: UITableViewController {
             //Excluded Activities
             activityVC.excludedActivityTypes = [UIActivity.ActivityType.airDrop, UIActivity.ActivityType.addToReadingList, UIActivity.ActivityType.saveToCameraRoll]
             
-            
             activityVC.popoverPresentationController?.sourceView = sender
             self.present(activityVC, animated: true, completion: nil)
         }
@@ -376,7 +370,7 @@ class SettingsTableViewController: UITableViewController {
     
 }
 
-//MARK: - MFMail compose method
+// MARK: - MFMail compose method
 extension SettingsTableViewController: MFMailComposeViewControllerDelegate {
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true, completion: nil)

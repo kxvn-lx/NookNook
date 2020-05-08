@@ -43,12 +43,11 @@ struct NotificationEngine {
         }
     }
     
-    
     /// Check wether the user has enabled a notifications (any pending notifications)
     /// - Parameters:
     ///   - identifer: The unique identifier. This case, either buy or sell
     ///   - completed: Async completion of true or false.
-    func hasNotification(identifer: Identifier, completed: @escaping (Bool)-> Void = {_ in }) {
+    func hasNotification(identifer: Identifier, completed: @escaping (Bool) -> Void = {_ in }) {
         notificationCenter.getPendingNotificationRequests(completionHandler: { requests in
             var selectedNotifications: [UNNotificationRequest] = []
             requests.forEach({
@@ -56,10 +55,9 @@ struct NotificationEngine {
                     selectedNotifications.append($0)
                 }
             })
-            completed(selectedNotifications.count > 0)
+            completed(!selectedNotifications.isEmpty)
         })
     }
-    
     
     /// Quick check if the app has access for notifications
     /// - Parameter status: the status completion

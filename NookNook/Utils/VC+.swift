@@ -52,7 +52,6 @@ extension UIViewController {
     }
 }
 
-
 extension UITableViewController {
     func setCustomFooterView(text: String, height: CGFloat, multiplier: CGFloat = 0) {
         let customView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: height + height * multiplier))
@@ -80,7 +79,6 @@ extension UITableViewController {
     }
 }
 
-
 // MARK: - UIStackView
 extension UIStackView {
     func addBackground(color: UIColor, cornerRadius: CGFloat? = 0) {
@@ -91,13 +89,12 @@ extension UIStackView {
         insertSubview(subView, at: 0)
     }
     
-    func addArrangedSubview(_ v:UIView, withMargin m:UIEdgeInsets )
-    {
+    func addArrangedSubview(_ v: UIView, withMargin m: UIEdgeInsets ) {
         let containerForMargin = UIView()
         containerForMargin.addSubview(v)
         v.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            v.topAnchor.constraint(equalTo: containerForMargin.topAnchor, constant:m.top ),
+            v.topAnchor.constraint(equalTo: containerForMargin.topAnchor, constant: m.top ),
             v.bottomAnchor.constraint(equalTo: containerForMargin.bottomAnchor, constant: m.bottom ),
             v.leftAnchor.constraint(equalTo: containerForMargin.leftAnchor, constant: m.left),
             v.rightAnchor.constraint(equalTo: containerForMargin.rightAnchor, constant: m.right)
@@ -189,7 +186,7 @@ extension UICollectionView {
         messageLabel.font = UIFont.preferredFont(forTextStyle: .body)
         messageLabel.sizeToFit()
         
-        self.backgroundView = messageLabel;
+        self.backgroundView = messageLabel
     }
     
     func restore() {
@@ -231,7 +228,6 @@ extension UIColor {
     
 }
 
-
 /// CLASS
 // MARK: - UILabel
 class PaddingLabel: UILabel {
@@ -240,7 +236,7 @@ class PaddingLabel: UILabel {
     var leftInset: CGFloat
     var rightInset: CGFloat
     
-    required init(withInsets top: CGFloat, _ bottom: CGFloat,_ left: CGFloat,_ right: CGFloat) {
+    required init(withInsets top: CGFloat, _ bottom: CGFloat, _ left: CGFloat, _ right: CGFloat) {
         self.topInset = top
         self.bottomInset = bottom
         self.leftInset = left
@@ -258,11 +254,9 @@ class PaddingLabel: UILabel {
     }
     
     override var intrinsicContentSize: CGSize {
-        get {
-            var contentSize = super.intrinsicContentSize
-            contentSize.height += topInset + bottomInset
-            contentSize.width += leftInset + rightInset
-            return contentSize
-        }
+        var contentSize = super.intrinsicContentSize
+        contentSize.height += topInset + bottomInset
+        contentSize.width += leftInset + rightInset
+        return contentSize
     }
 }

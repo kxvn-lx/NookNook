@@ -21,7 +21,6 @@ struct DataPersistEngine {
     var favouritedVillagers: [Villager] = []
     var residentVillagers: [Villager] = []
     
-    
     struct SavedData: Codable {
         let items: [Item]
         
@@ -73,7 +72,7 @@ struct DataPersistEngine {
     
     mutating func saveDonatedCritter(critter: Critter) {
         if donatedCritters.contains(critter) {
-            donatedCritters.removeAll(where: {$0 == critter} )
+            donatedCritters.removeAll(where: {$0 == critter})
         } else {
             donatedCritters.append(critter)
         }
@@ -82,7 +81,7 @@ struct DataPersistEngine {
     
     mutating func saveCaughtCritter(critter: Critter) {
         if caughtCritters.contains(critter) {
-            caughtCritters.removeAll(where: {$0 == critter} )
+            caughtCritters.removeAll(where: {$0 == critter})
         } else {
             caughtCritters.append(critter)
         }
@@ -109,13 +108,12 @@ struct DataPersistEngine {
     
     mutating func saveFavouritedVillager(villager: Villager) {
         if favouritedVillagers.contains(villager) {
-            favouritedVillagers.removeAll(where: {$0 == villager} )
+            favouritedVillagers.removeAll(where: {$0 == villager})
         } else {
             favouritedVillagers.append(villager)
         }
         save()
     }
-
     
     private func save() {
         do {
@@ -137,8 +135,7 @@ struct DataPersistEngine {
         let documentsPath = documentsUrl.path
 
         do {
-            if let documentPath = documentsPath
-            {
+            if let documentPath = documentsPath {
                 let fileNames = try fileManager.contentsOfDirectory(atPath: "\(documentPath)")
                 for fileName in fileNames {
                     if fileName == "com.hackemist.SDImageCache" {
@@ -162,8 +159,7 @@ struct DataPersistEngine {
         let documentsPath = documentsUrl.path
 
         do {
-            if let documentPath = documentsPath
-            {
+            if let documentPath = documentsPath {
                 let fileNames = try fileManager.contentsOfDirectory(atPath: "\(documentPath)")
                 for fileName in fileNames {
                     if fileName == "SavedDatas" {

@@ -24,7 +24,6 @@ struct DateHelper {
     
     private static let days = ["Sunday", "Monday", "Tuesday", "Wedneday", "Thursday", "Friday", "Saturday"]
     
-    
     /**
      This method will return the current season the user have.
     - Parameters:
@@ -42,9 +41,9 @@ struct DateHelper {
         
         let currentMonth = calendar.component(.month, from: date)
         switch currentMonth {
-        case 12,1,2 :
+        case 12, 1, 2 :
             return isNorthern ? .Winter : .Summer
-        case 3,4,5 :
+        case 3, 4, 5 :
             return isNorthern ? .Spring : .Autumn
         case 6, 7, 8:
             return isNorthern ? .Summer : .Winter
@@ -54,7 +53,6 @@ struct DateHelper {
             fatalError("Season index out of range")
         }
     }
-    
      
     static func renderGreet() -> String {
         let hour = Calendar.current.component(.hour, from: Date())
@@ -63,11 +61,10 @@ struct DateHelper {
         case 6..<12 : return "Morning"
         case 12..<17 : return "Afternoon"
         case 17..<22 : return "Evening"
-        case 23,24,0..<6 : return "Evening"
+        case 23, 24, 0..<6 : return "Evening"
         default: return "Day"
         }
     }
-    
     
     static func renderDate() -> String {
         var dateString = ""
@@ -81,7 +78,6 @@ struct DateHelper {
         formatter.numberStyle = .ordinal
         
         dateString = "\(days[calendar.component(.weekday, from: date) - 1]), \(formatter.string(from: NSNumber(value: calendar.component(.day, from: date)))!) of \(months[calendar.component(.month, from: date) - 1])"
-        
         
         return dateString
     }

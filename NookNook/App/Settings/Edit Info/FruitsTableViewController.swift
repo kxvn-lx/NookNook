@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol FruitsDelegate : NSObjectProtocol {
+protocol FruitsDelegate: NSObjectProtocol {
     func changeFruit(fruit: Fruits)
 }
 

@@ -28,7 +28,7 @@ class SpinnerHelper: NSObject {
         guard let window = window else { return }
         
         v = UIView(frame: window.bounds)
-        window.addSubview(v);
+        window.addSubview(v)
         v.backgroundColor = UIColor.black.withAlphaComponent(0.3)
         let spinner = UIActivityIndicatorView(style: .medium)
         spinner.translatesAutoresizingMaskIntoConstraints = false

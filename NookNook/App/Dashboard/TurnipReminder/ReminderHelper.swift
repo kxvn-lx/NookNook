@@ -12,10 +12,10 @@ import McPicker
 
 struct ReminderHelper {
     
-    static var days: [String] = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
+    static var days: [String] = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     private var hours: [String] = []
     private var minutes: [String] = []
-    private var period: [String] = ["AM","PM"]
+    private var period: [String] = ["AM", "PM"]
     
     private var mcPicker: McPicker!
     
@@ -28,11 +28,10 @@ struct ReminderHelper {
         }
     }
     
-    
     /// Get all the Day and Time in one single ararys of arrays
     /// - Returns: An array of String arrays
     private func getDateTimeArray() -> [[String]] {
-        var array:[[String]] = []
+        var array: [[String]] = []
         
         array.append(ReminderHelper.days)
         array.append(hours)
@@ -42,7 +41,6 @@ struct ReminderHelper {
         return array
     }
     
-    
     /// Create a custom McPicker and populates it with the data
     /// - Returns: The customised McPicker complete with its data
     mutating func createMcPicker(selections: [Int: String]? = nil, reminderType: UserPersistEngine.ReminderType) -> McPicker {
@@ -51,22 +49,20 @@ struct ReminderHelper {
             0: [5: true],
             1: [5: true],
             2: [0: true],
-            3: [0: true],
+            3: [0: true]
         ]
         
         let sellSelected = [
             0: [0: true],
             1: [5: true],
             2: [0: true],
-            3: [1: true],
+            3: [1: true]
         ]
         
-        
-        var selected: [Int: [Int:Bool]] = reminderType == UserPersistEngine.ReminderType.buy ? buySelected : sellSelected
+        var selected: [Int: [Int: Bool]] = reminderType == UserPersistEngine.ReminderType.buy ? buySelected : sellSelected
         if let selections = selections {
             selected = convertToRawSelection(selections: selections)
         }
-        
 
         var data: [[String]] = []
         data = getDateTimeArray()
@@ -91,11 +87,8 @@ struct ReminderHelper {
         mcPicker.pickerBackgroundColor = .cream1
         mcPicker.pickerSelectRowsForComponents = selected
         
-        
-        
         return mcPicker
     }
-    
     
     /// Render a time in [Int: String] into a readable String
     /// - Parameter timeDict: The raw timeDict format from McPicker
@@ -113,8 +106,6 @@ struct ReminderHelper {
         return time
     }
     
-    
-    
     /// Convert the function into a raw selection to be parsed for McPicker selections
     private func convertToRawSelection(selections: [Int: String]) -> [Int: [Int: Bool]] {
         
@@ -125,15 +116,14 @@ struct ReminderHelper {
         let minInt = timeDict[2].value.prefix(1) == "0" ? Int(timeDict[2].value.suffix(1))! : Int(timeDict[2].value)!
         let merInt = timeDict[3].value == "AM" ? 0 : 1
         
-        let selectComponents: [Int: [Int:Bool]] = [
+        let selectComponents: [Int: [Int: Bool]] = [
             0: [dayInt!: true],
             1: [hourInt: true],
             2: [minInt: true],
-            3: [merInt: true],
+            3: [merInt: true]
         ]
         
         return selectComponents
     }
-    
     
 }

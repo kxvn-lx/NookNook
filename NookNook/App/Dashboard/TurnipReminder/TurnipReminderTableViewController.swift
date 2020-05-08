@@ -19,14 +19,12 @@ class TurnipReminderTableViewController: UITableViewController {
     lazy private var customBuyCell = UITableViewCell()
     lazy private var customSellCell = UITableViewCell()
     
-    
     lazy private var notificationsManager = NotificationEngine()
     private let notificationCenter = UNUserNotificationCenter.current()
     private let options: UNAuthorizationOptions = [.alert, .sound]
     
     lazy private var dayTimeHelper = ReminderHelper()
     private var mcPicker: McPicker!
-    
     
     private var buyLabel = "Sunday (06:00AM)"
     private var sellLabel = "Friday (06:00PM)"
@@ -40,7 +38,6 @@ class TurnipReminderTableViewController: UITableViewController {
 
         return adBannerView
     }()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,7 +81,6 @@ class TurnipReminderTableViewController: UITableViewController {
         customBuyCell.textLabel?.textColor = .grass1
         customBuyCell.detailTextLabel?.font = .preferredFont(forTextStyle: .caption1)
         
-        
         customSellCell = setupCell(text: "Set sell reminder")
         customSellCell.detailTextLabel?.font = .preferredFont(forTextStyle: .caption1)
         customSellCell.textLabel?.textColor = .grass1
@@ -95,8 +91,7 @@ class TurnipReminderTableViewController: UITableViewController {
         super.viewDidAppear(animated)
         
         // check for permission
-        notificationCenter.requestAuthorization(options: options) {
-            (didAllow, error) in
+        notificationCenter.requestAuthorization(options: options) { (didAllow, _) in
             if !didAllow {
                 DispatchQueue.main.async {
                     let alert = AlertHelper.createDefaultAction(title: "Oh no ):", message: "NookNook can't send you reminders if you don't enable notifications. Please go to settings and enable it!")
@@ -120,13 +115,12 @@ class TurnipReminderTableViewController: UITableViewController {
             adBannerView.load(GADRequest())
             NSLayoutConstraint.activate([
                 adBannerView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-                adBannerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+                adBannerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
             ])
         } else {
             adBannerView.removeFromSuperview()
         }
     }
-    
     
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -175,7 +169,7 @@ class TurnipReminderTableViewController: UITableViewController {
             switch indexPath.row {
             case 0:
                 mcPicker = dayTimeHelper.createMcPicker(selections: UserPersistEngine.loadReminder(reminderType: .buy), reminderType: .buy)
-                mcPicker.show(doneHandler: { [weak self] (selections: [Int : String]) -> Void in
+                mcPicker.show(doneHandler: { [weak self] (selections: [Int: String]) -> Void in
                     DispatchQueue.main.async {
                         self!.buyLabel = self!.dayTimeHelper.renderTime(timeDict: selections)
                         self!.customBuyCell.detailTextLabel?.text = self!.dayTimeHelper.renderTime(timeDict: selections)
@@ -188,7 +182,7 @@ class TurnipReminderTableViewController: UITableViewController {
                 
             case 1:
                 mcPicker = dayTimeHelper.createMcPicker(selections: UserPersistEngine.loadReminder(reminderType: .sell), reminderType: .sell)
-                mcPicker.show(doneHandler: { [weak self] (selections: [Int : String]) -> Void in
+                mcPicker.show(doneHandler: { [weak self] (selections: [Int: String]) -> Void in
                     DispatchQueue.main.async {
                         self!.sellLabel = self!.dayTimeHelper.renderTime(timeDict: selections)
                         self!.customSellCell.detailTextLabel?.text = self!.dayTimeHelper.renderTime(timeDict: selections)

@@ -24,7 +24,6 @@ struct AlertHelper {
         return alert
     }
     
-    
     /// Create a custom action with the GO action as a custom
     /// - Parameters:
     ///   - title: The title of the action

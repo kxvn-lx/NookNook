@@ -64,7 +64,6 @@ class WardrobetabTableViewCell: SwipeTableViewCell {
         
         imgView.addSubview(iconStackView)
         
-        
         nameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.numberOfLines = 0
@@ -118,12 +117,9 @@ class WardrobetabTableViewCell: SwipeTableViewCell {
         mStackView.axis = .horizontal
         mStackView.distribution = .fill
         mStackView.spacing = MARGIN
-        
 
         mStackView.addArrangedSubview(imgView)
         mStackView.addArrangedSubview(infoStackView)
-        
-
         
         self.addSubview(mStackView)
     }
@@ -149,7 +145,7 @@ class WardrobetabTableViewCell: SwipeTableViewCell {
             isFavImageView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: smallIconSize),
             
             customisableImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: smallIconSize),
-            customisableImageView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: smallIconSize),
+            customisableImageView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: smallIconSize)
         ])
     }
 

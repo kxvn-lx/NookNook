@@ -1,4 +1,4 @@
- //
+//
  //  TurnipTableViewCell.swift
  //  NookNook
  //
@@ -51,8 +51,7 @@
                 dateComponents.minute = min
                 
                 notificationsManager.createNotification(title: "Buy turnip reminder", body: "Don't forget to buy your turnip today! Turnip seller will leave your island around noon.", dateComponents: dateComponents, identifier: identifier)
-            }
-            else {
+            } else {
                 UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [identifier.rawValue])
             }
             
@@ -68,13 +67,11 @@
                     hour = timeDict[3].value == "AM" ? 0 : 12
                 }
                 
-                
                 dateComponents.weekday = weekday
                 dateComponents.hour = hour
                 dateComponents.minute = min
                 notificationsManager.createNotification(title: "Sell turnip reminder", body: "Make sure you have sold your turnip this week! turnip will reset by sunday!", dateComponents: dateComponents, identifier: identifier)
-            }
-            else {
+            } else {
                 UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [identifier.rawValue])
             }
             

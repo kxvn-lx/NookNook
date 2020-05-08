@@ -11,14 +11,13 @@ import UIKit
 
 extension EditInfoViewController: UIImagePickerControllerDelegate {
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         let image: UIImage!
         if let img = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
             image = img
             self.profileImageView.image = image
 
-        }
-        else if let img = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+        } else if let img = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             image = img
             self.profileImageView.image = image
         }
@@ -26,8 +25,7 @@ extension EditInfoViewController: UIImagePickerControllerDelegate {
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true, completion:nil)
+        dismiss(animated: true, completion: nil)
     }
-    
 
 }

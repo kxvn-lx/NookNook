@@ -12,7 +12,6 @@ import GoogleMobileAds
 
 class InAppPurchaseViewController: UITableViewController {
 
-    
     // Google ads banner
     lazy var adBannerView: GADBannerView = {
         let adBannerView = GADBannerView(adSize: kGADAdSizeBanner)
@@ -30,9 +29,6 @@ class InAppPurchaseViewController: UITableViewController {
     private var removeAdsAndCoffeeCell = UITableViewCell()
     
     private var restoreCell = UITableViewCell()
-    
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -121,7 +117,6 @@ class InAppPurchaseViewController: UITableViewController {
             imageView.tintColor = .dirt1
             imageView.image = IconUtil.systemIcon(of: .supportMe, weight: .regular).withRenderingMode(.alwaysTemplate)
             
-            
             label.numberOfLines = 0
             label.text =
             """
@@ -138,7 +133,6 @@ class InAppPurchaseViewController: UITableViewController {
             label.lineBreakMode = .byWordWrapping
             label.textColor = UIColor.dirt1.withAlphaComponent(0.5)
             label.font = .preferredFont(forTextStyle: .caption1)
-            
             
             headerView.addSubview(imageView)
             headerView.addSubview(label)
@@ -165,7 +159,6 @@ class InAppPurchaseViewController: UITableViewController {
         cell.detailTextLabel?.textColor = UIColor.dirt1.withAlphaComponent(0.5)
     }
     
-
     // MARK: - Setup views
     private func setBar() {
         self.configureNavigationBar(title: "Support me", preferredLargeTitle: false)

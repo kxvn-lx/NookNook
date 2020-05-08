@@ -9,10 +9,10 @@
 import Foundation
 import UIKit
 
-// MARK:- UICollectionView data source
+// MARK: - UICollectionView data source
 extension DashboardViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if (favouritesManager.residentVillagers.count == 0) {
+        if favouritesManager.residentVillagers.isEmpty {
             collectionView.setEmptyMessage("Swipe right and press Resident to\nadd a villager to your resident collection!")
         } else {
             collectionView.restore()
@@ -41,7 +41,7 @@ extension DashboardViewController: UICollectionViewDelegateFlowLayout, UICollect
         vc.parseOject(from: .villagers, object: selectedVillager)
         
         let navController = UINavigationController(rootViewController: vc)
-        self.present(navController, animated:true, completion: nil)
+        self.present(navController, animated: true, completion: nil)
     }
     
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {

@@ -44,7 +44,6 @@ class CrittersTableViewController: UITableViewController {
         return adBannerView
     }()
     
-    
     // MARK: - Table view init
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +52,6 @@ class CrittersTableViewController: UITableViewController {
         
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 100
-        
         
         // Default categories to be presented
         critters = DataEngine.loadCritterJSON(from: currentCategory)
@@ -77,7 +75,7 @@ class CrittersTableViewController: UITableViewController {
             adBannerView.load(GADRequest())
             NSLayoutConstraint.activate([
                 adBannerView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-                adBannerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+                adBannerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
             ])
         } else {
             adBannerView.removeFromSuperview()
@@ -126,11 +124,10 @@ class CrittersTableViewController: UITableViewController {
         setupSearchBar(searchBar: searchController.searchBar)
     }
     
-    private func setupSearchBar(searchBar : UISearchBar) {
+    private func setupSearchBar(searchBar: UISearchBar) {
         searchBar.setPlaceholderTextColorTo(color: UIColor.lightGray)
         
     }
-    
     
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -139,10 +136,9 @@ class CrittersTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isFiltering {
-            if filteredCritters.count == 0 {
+            if filteredCritters.isEmpty {
                 self.tableView.setEmptyMessage("No critter(s) found 😢.\nPerhaps you made a mistake?")
-            }
-            else {
+            } else {
                 self.tableView.restore()
             }
             return filteredCritters.count
@@ -177,7 +173,6 @@ class CrittersTableViewController: UITableViewController {
             critterCell.isDonatedLabel.text = isDonated
             critterCell.isCaughtLabel.text = isCaught
             
-            
             critterCell.isDonatedLabel.isHidden =  self.favouritesManager.donatedCritters.contains(critter) ? false : true
             critterCell.isCaughtLabel.isHidden =  self.favouritesManager.caughtCritters.contains(critter) ? false : true
             
@@ -198,7 +193,7 @@ class CrittersTableViewController: UITableViewController {
         vc.parseOject(from: .critters, object: selectedCritter)
         
         let navController = UINavigationController(rootViewController: vc)
-        self.present(navController, animated:true, completion: nil)
+        self.present(navController, animated: true, completion: nil)
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -222,7 +217,6 @@ class CrittersTableViewController: UITableViewController {
         (view as! UITableViewHeaderFooterView).contentView.backgroundColor = .cream1
         (view as! UITableViewHeaderFooterView).textLabel?.textColor = .dirt1
     }
-    
     
     // MARK: - Modify UI
     private func setBar() {
@@ -251,7 +245,7 @@ class CrittersTableViewController: UITableViewController {
         vc.currentCategory = currentCategory
         
         let navController = UINavigationController(rootViewController: vc)
-        self.present(navController, animated:true, completion: nil)
+        self.present(navController, animated: true, completion: nil)
     }
     
 }
@@ -304,7 +298,7 @@ extension CrittersTableViewController: SwipeTableViewCellDelegate {
         guard orientation == .left else { return nil }
         let critter = self.isFiltering ? self.filteredCritters[indexPath.row] : self.critters[indexPath.row]
         
-        let donatedAction = SwipeAction(style: .default, title: "Donated") { (action, indexPath) in
+        let donatedAction = SwipeAction(style: .default, title: "Donated") { (_, indexPath) in
             var finished = false
             if !self.favouritesManager.caughtCritters.contains(critter) {
                 self.favouritesManager.saveCaughtCritter(critter: critter)
@@ -327,7 +321,7 @@ extension CrittersTableViewController: SwipeTableViewCellDelegate {
             Taptic.lightTaptic()
         }
         
-        let caughtAction = SwipeAction(style: .default, title: "Caught") { (action, indexPath) in
+        let caughtAction = SwipeAction(style: .default, title: "Caught") { (_, indexPath) in
             self.favouritesManager.saveCaughtCritter(critter: critter)
             UDEngine.shared.saveHasCompletedCritters(isCompleted: self.favouritesManager.caughtCritters.count == self.critters.count)
             let contentOffset = tableView.contentOffset
@@ -341,7 +335,6 @@ extension CrittersTableViewController: SwipeTableViewCellDelegate {
         donatedAction.backgroundColor = .grass1
         caughtAction.backgroundColor = .gold1
         
-        
         return [donatedAction, caughtAction]
     }
     
@@ -353,4 +346,3 @@ extension CrittersTableViewController: SwipeTableViewCellDelegate {
         return options
     }
 }
-

@@ -15,7 +15,7 @@ class FavouriteTableViewCell: UITableViewCell {
     var imgView: UIImageView!
     var tagLabel: UIButton!
     var nameLabel: UILabel!
-    var label1 : UILabel!
+    var label1: UILabel!
     var label2: UILabel!
     var label3: UILabel!
     var label4: UILabel!
@@ -25,7 +25,6 @@ class FavouriteTableViewCell: UITableViewCell {
     
     private var infoStackView: UIStackView!
     private var mStackView: UIStackView!
-
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -47,11 +46,9 @@ class FavouriteTableViewCell: UITableViewCell {
         tagLabel.isUserInteractionEnabled = false
         tagLabel.addBlurEffect(style: .light, cornerRadius: 5, padding: .zero)
         
-        
         imgView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         imgView.translatesAutoresizingMaskIntoConstraints = false
         imgView.contentMode = .scaleAspectFit
-        
         
         iconLabel1 = PaddingLabel(withInsets: 2.5, 2.5, 5, 5)
         iconLabel1.translatesAutoresizingMaskIntoConstraints = false
@@ -78,7 +75,6 @@ class FavouriteTableViewCell: UITableViewCell {
         iconLabel2.layer.cornerRadius = 5
         iconLabel2.clipsToBounds = true
         iconLabel2.textAlignment = .center
-
         
         imgView.addSubview(tagLabel)
         imgView.addSubview(iconLabel1)
@@ -89,7 +85,6 @@ class FavouriteTableViewCell: UITableViewCell {
         nameLabel.numberOfLines = 0
         nameLabel.font = UIFont.systemFont(ofSize: nameLabel.font!.pointSize, weight: .semibold)
         nameLabel.textColor = .dirt1
-        
         
         label1 = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         label1.translatesAutoresizingMaskIntoConstraints = false
@@ -146,12 +141,9 @@ class FavouriteTableViewCell: UITableViewCell {
         mStackView.axis = .horizontal
         mStackView.distribution = .fill
         mStackView.spacing = MARGIN
-        
 
         mStackView.addArrangedSubview(imgView)
         mStackView.addArrangedSubview(infoStackView)
-        
-
         
         self.addSubview(mStackView)
     }
@@ -179,6 +171,5 @@ class FavouriteTableViewCell: UITableViewCell {
             
         ])
     }
-
 
 }

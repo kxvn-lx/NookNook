@@ -28,22 +28,18 @@ struct TimeMonthEngine {
         if time.contains("-") {
             let timeArr = time.components(separatedBy: " - ")
             renderedTime = "\(timeArr[0].uppercased()) - \(timeArr[1].uppercased())"
-        }
-        else if time.contains("to") {
+        } else if time.contains("to") {
             let timeArr = time.components(separatedBy: " to ")
             renderedTime = "\(timeArr[0].uppercased()) - \(timeArr[1].uppercased())"
-        }
-        else if time.isEmpty {
+        } else if time.isEmpty {
             renderedTime = "All day and night"
-        }
-        else {
+        } else {
             print(time)
             fatalError("Unable to format time!")
         }
 
         return renderedTime
     }
-    
 
     /**
      Render a month format in an array of Int. Since we only assume that Critters are the one dependent with time, this method is explicit for Critter object.
@@ -80,22 +76,19 @@ struct TimeMonthEngine {
                 let arr1Arr = formatHypenMonths(month: arr1)
                 return [arr1Arr[0], arr1Arr[1], Int(arr0)!]
             }
-        }
-        else {
+        } else {
             return formatHypenMonths(month: month)
         }
         
         return [-2]
     }
     
-    
     private static func formatHypenMonths(month: String) -> [Int] {
         let month = month.trimmingCharacters(in: .whitespacesAndNewlines)
         if month.contains("-") {
             let monthArr = month.components(separatedBy: "-")
             return [Int(monthArr[0])!, Int(monthArr[1])!]
-        }
-        else {
+        } else {
             return [-2]
         }
     }
@@ -122,14 +115,11 @@ struct TimeMonthEngine {
         
         if month.count == 1 {
             renderedMonth = "\(months[month[0] - 1])"
-        }
-        else if month.count == 2 {
+        } else if month.count == 2 {
             renderedMonth = "\(months[month[0] - 1]) to \(months[month[1] - 1])"
-        }
-        else if month.count == 3 {
+        } else if month.count == 3 {
             renderedMonth = "\(months[month[0] - 1]) to \(months[month[1] - 1]), and \(months[month[2] - 1])"
-        }
-        else if month.count == 4 {
+        } else if month.count == 4 {
             renderedMonth = "\(months[month[0] - 1]) to \(months[month[1] - 1]), and \(months[month[2] - 1]) to \(months[month[3] - 1])"
         }
         

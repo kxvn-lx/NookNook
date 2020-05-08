@@ -33,7 +33,7 @@ struct Critter: Codable, Equatable, Identifiable {
 }
 
 extension Critter {
-    static func == (lhs: Critter , rhs: Critter) -> Bool {
+    static func == (lhs: Critter, rhs: Critter) -> Bool {
         return lhs.id == rhs.id
     }
 }
