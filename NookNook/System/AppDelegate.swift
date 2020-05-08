@@ -19,15 +19,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        UNUserNotificationCenter.current().delegate = self
+        
+        /// Analytics and ads configurations.
         UXCam.optIntoSchematicRecordings()
         UXCam.start(withKey:"pm7prng53jwfhag")
         
         FirebaseApp.configure()
-        UNUserNotificationCenter.current().delegate = self
         
         GADMobileAds.sharedInstance().start(completionHandler: nil)
-        //        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = kGADSimulatorID as? [String]
+//        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = kGADSimulatorID as? [String]
+        
+        
+        /// Uncomment this to disable ads (Development purposes).
+//        UDEngine.shared.saveIsAdsPurchased()
         
         SwiftyStoreKit.completeTransactions(atomically: true) { purchases in
             for purchase in purchases {

@@ -185,17 +185,10 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         
         nativeFruitButton = UIButton()
         nativeFruitButton.translatesAutoresizingMaskIntoConstraints = false
-        nativeFruitButton.contentEdgeInsets = UIEdgeInsets(top: 15, left: 20, bottom: 15, right: 20)
-        nativeFruitButton.backgroundColor = .grassBtn
-        nativeFruitButton.layer.borderWidth = 1
-        nativeFruitButton.titleLabel?.numberOfLines = 2
-        nativeFruitButton.layer.borderColor = UIColor.grassBtn.cgColor
-        nativeFruitButton.layer.cornerRadius = 2.5
         nativeFruitButton.titleLabel?.textAlignment = .center
         nativeFruitButton.setTitleColor(.grass1, for: .normal)
         nativeFruitButton.setTitleColor(UIColor.grass1.withAlphaComponent(0.5), for: .highlighted)
         nativeFruitButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
-        nativeFruitButton.titleLabel?.font = UIFont.systemFont(ofSize: (nativeFruitButton.titleLabel?.font.pointSize)!, weight: .semibold)
         nativeFruitButton.addTarget(self, action: #selector(fruitPicker), for: .touchUpInside)
         nativeFruitButton.setTitle("Change fruit", for: .normal)
         
