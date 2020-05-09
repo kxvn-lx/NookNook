@@ -74,7 +74,7 @@ class CategoriesTableViewController: UITableViewController {
         if cat == Categories.bugsMain.rawValue {
             cat = "Bugs"
         } else if cat == Categories.fishesMain.rawValue {
-            cat = "Fishes"
+            cat = "Fish"
         }
         if let categoryCell = cell as? CategoryTableViewCell {
             categoryCell.textLabel!.text = cat.capitalizingFirstLetter()

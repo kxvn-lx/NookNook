@@ -28,7 +28,7 @@ class CrittersMonthlyTableViewController: UITableViewController {
     private var scView: UIView!
     
     private let items: [String] = [GroupType.bugs.rawValue.capitalizingFirstLetter(),
-                                   GroupType.fishes.rawValue.capitalizingFirstLetter()
+                                   GroupType.fish.rawValue.capitalizingFirstLetter()
     ]
     
     let search = UISearchController(searchResultsController: nil)
@@ -48,7 +48,7 @@ class CrittersMonthlyTableViewController: UITableViewController {
     }
     
     enum GroupType: String {
-        case bugs, fishes
+        case bugs, fish
     }
     
     // Google ads banner
@@ -138,7 +138,7 @@ class CrittersMonthlyTableViewController: UITableViewController {
             } else {
                 return bugs.count
             }
-        case .fishes:
+        case .fish:
             if isFiltering {
                 if filteredBugs.isEmpty {
                     self.tableView.setEmptyMessage("No fish(s) found 😢.\nPerhaps you made a mistake?")
@@ -163,7 +163,7 @@ class CrittersMonthlyTableViewController: UITableViewController {
             switch currentGroup {
             case .bugs:
                 critter = isFiltering ? filteredBugs[indexPath.row] : bugs[indexPath.row]
-            case .fishes:
+            case .fish:
                 critter = isFiltering ? filteredFishes[indexPath.row] : fishes[indexPath.row]
             }
             
@@ -206,7 +206,7 @@ class CrittersMonthlyTableViewController: UITableViewController {
             } else {
                 vc.parseOject(from: .critters, object: bugs[indexPath.row])
             }
-        case .fishes:
+        case .fish:
             if isFiltering {
                 vc.parseOject(from: .critters, object: filteredFishes[indexPath.row])
             } else {
@@ -234,7 +234,7 @@ class CrittersMonthlyTableViewController: UITableViewController {
         case 0:
             self.currentGroup = .bugs
         case 1:
-            self.currentGroup = .fishes
+            self.currentGroup = .fish
         default:
             fatalError("Invalid Segmented Control index.")
         }
@@ -266,7 +266,7 @@ class CrittersMonthlyTableViewController: UITableViewController {
                 return bug.name.lowercased().contains(searchText.lowercased())
             }
             
-        case .fishes:
+        case .fish:
             filteredFishes = fishes.filter { (fish: Critter) -> Bool in
                 return fish.name.lowercased().contains(searchText.lowercased())
             }
@@ -292,7 +292,7 @@ extension CrittersMonthlyTableViewController: SwipeTableViewCellDelegate {
         switch currentGroup {
         case .bugs:
             critter = isFiltering ? filteredBugs[indexPath.row] : bugs[indexPath.row]
-        case .fishes:
+        case .fish:
             critter = isFiltering ? filteredFishes[indexPath.row] : fishes[indexPath.row]
         }
         

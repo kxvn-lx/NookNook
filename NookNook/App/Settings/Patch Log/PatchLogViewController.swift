@@ -20,6 +20,11 @@ class PatchLogViewController: UIViewController {
     
     var logArray = [
         """
+        v1.0.1 (20200509)
+        - NookNook released for public! 🎉
+        - Improved app performance
+        - Fixed minor bugs and typos
+
         v1.0.0 (2020050616)
         - Added ads so your boy can pay rent lol (can be removed via in app purchases under settings. Ads MAY NOT appear as this is a new app. It takes time for the server to register my app to receive ads.)
         - Added swipe tableview cells hint for new user to let them know SWIPE RIGHT is an option (only first time)

@@ -12,26 +12,30 @@ import Firebase
 import UserNotifications
 import GoogleMobileAds
 import SwiftyStoreKit
+import SwiftyBeaver
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    let log = SwiftyBeaver.self
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         UNUserNotificationCenter.current().delegate = self
         
-        // Analytics and ads configurations.
+        // MARK: - Analytics and ads configurations.
         UXCam.optIntoSchematicRecordings()
         UXCam.start(withKey: "pm7prng53jwfhag")
         
         FirebaseApp.configure()
         
         GADMobileAds.sharedInstance().start(completionHandler: nil)
-//        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = kGADSimulatorID as? [String]
+        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = kGADSimulatorID as? [String]
         
         // Uncomment this to disable ads (Development purposes).
 //        UDEngine.shared.saveIsAdsPurchased()
         
+        // MARK: - SwiftyStoreKit
         SwiftyStoreKit.completeTransactions(atomically: true) { purchases in
             for purchase in purchases {
                 switch purchase.transaction.transactionState {
@@ -46,6 +50,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
         }
+        
+        // MARK: - Logger
+        let console = ConsoleDestination()
+        console.levelString.debug = "💚 DEBUG"
+        console.levelString.info = "💙 INFO"
+        console.levelString.warning = "💛 WARNING"
+        console.levelString.error = "❤️ ERROR"
+        
+        let file = FileDestination()
+        let cloud = SBPlatformDestination(appID: "XWx8zP", appSecret: "dvvJt6lrf9vw5rayifmh7b7kobnk8nYz", encryptionKey: "jxdzzroLusazn0pMxSsimUzj6Uvoe9h2")
+
+        // use custom format and set console output to short time, log level & message
+        console.format = "$DHH:mm:ss$d $L $M"
+        
+        log.addDestination(console)
+        log.addDestination(file)
+        log.addDestination(cloud)
+
         return true
     }
     

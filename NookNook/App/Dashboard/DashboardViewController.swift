@@ -9,6 +9,7 @@
 import UIKit
 import SDWebImage
 import GoogleMobileAds
+import StoreKit
 
 class DashboardViewController: UIViewController {
     
@@ -24,6 +25,8 @@ class DashboardViewController: UIViewController {
     internal let TURNIP_ID = "TurnipVC"
     private let MARGIN: CGFloat = 10
     private var isFirstLoad = true
+    
+    private let reviewHelper = ReviewHelper()
     
     // Views variables
     private var scrollView: UIScrollView!
@@ -105,6 +108,14 @@ class DashboardViewController: UIViewController {
             isFirstLoad = false
         }
         self.tabBarController?.delegate = self
+        
+        // Trigger to review the app
+        if reviewHelper.canReview() {
+            let twoSecondsFromNow = DispatchTime.now() + 2.0
+            DispatchQueue.main.asyncAfter(deadline: twoSecondsFromNow) {
+                SKStoreReviewController.requestReview()
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -434,7 +445,6 @@ extension DashboardViewController: UITabBarControllerDelegate {
 
 extension DashboardViewController: GADBannerViewDelegate {
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
-        print("DELEGATE CALLED")
         if !UDEngine.shared.getIsAdsPurchased() {
             DispatchQueue.main.async {
                 self.mStackView.insertArrangedSubview(bannerView, at: 2)

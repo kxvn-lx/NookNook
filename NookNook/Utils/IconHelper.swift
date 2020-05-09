@@ -36,6 +36,7 @@ struct IconHelper {
         case reminderFill = "bell.fill"
         case website = "globe"
         case supportMe = "hand.thumbsup"
+        case writeReview = "pencil.and.outline"
     }
     
     /**

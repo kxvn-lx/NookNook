@@ -102,7 +102,7 @@ class InAppPurchaseViewController: UITableViewController {
         switch indexPath.section {
         case 0:
             switch indexPath.row {
-            // Buy coffee
+            // MARK: - Buy coffee
             case 0:
                 SpinnerHelper.shared.present()
                 SwiftyStoreKit.purchaseProduct(IAPProduct.BuyCoffee.rawValue, quantity: 1, atomically: true) { result in
@@ -135,7 +135,7 @@ class InAppPurchaseViewController: UITableViewController {
                     }
                 }
                 
-            // Remove ads
+            // MARK: - Remove ads
             case 1:
                 SpinnerHelper.shared.present()
                 SwiftyStoreKit.purchaseProduct(IAPProduct.RemoveAds.rawValue, quantity: 1, atomically: true) { result in
@@ -169,7 +169,7 @@ class InAppPurchaseViewController: UITableViewController {
                     }
                 }
                 
-            // Remove ads + buy cofeee
+            // MARK: - Remove ads + buy cofeee
             case 2:
                 SpinnerHelper.shared.present()
                 SwiftyStoreKit.purchaseProduct(IAPProduct.RemoveAdsBuyCoffee.rawValue, quantity: 1, atomically: true) { result in
@@ -206,15 +206,15 @@ class InAppPurchaseViewController: UITableViewController {
             }
         case 1:
             switch indexPath.row {
-            // Restore
+            // MARK: - Restore
             case 0:
                 SpinnerHelper.shared.present()
                 SwiftyStoreKit.restorePurchases(atomically: true) { results in
-                    if results.restoreFailedPurchases.isEmpty {
+                    if !results.restoreFailedPurchases.isEmpty {
                         let alert = AlertHelper.createDefaultAction(title: "Something went wrong.", message: "There was problem restoring your purchase(s). Please try again later or contact kevin.laminto@gmail.com")
                         self.present(alert, animated: true)
                         SpinnerHelper.shared.absent()
-                    } else if results.restoredPurchases.isEmpty {
+                    } else if !results.restoredPurchases.isEmpty {
                         let alert = AlertHelper.createDefaultAction(title: "Restore sucessful!", message: "")
                         self.present(alert, animated: true)
                         results.restoredPurchases.forEach({

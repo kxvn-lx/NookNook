@@ -8,6 +8,7 @@
 
 import UIKit
 import MessageUI
+import StoreKit
 
 protocol ProfileDelegate: NSObjectProtocol {
     func updateprofile()
@@ -17,13 +18,14 @@ class SettingsTableViewController: UITableViewController {
     private let EDIT_INFO_VC = "EditInfoVC"
     private let PATCH_LOG_VC = "PatchLogVC"
     private let ADS_VC = "AdsVC"
-    private let BUILD_NUMBER = "2020050616"
+    private let BUILD_NUMBER = "20200509"
     
     weak var profileDelegate: ProfileDelegate!
     
     private var editInfoCell = UITableViewCell()
     
     private var shareCell = UITableViewCell()
+    private var writeReviewCell = UITableViewCell()
     private var creatorCell = UITableViewCell()
     private var websiteCell = UITableViewCell()
     
@@ -56,33 +58,28 @@ class SettingsTableViewController: UITableViewController {
     override func loadView() {
         super.loadView()
         
-        // 1st Section
         editInfoCell = setupCell(text: "Edit info", icon: IconHelper.systemIcon(of: .edit, weight: .regular), accesoryType: .disclosureIndicator)
         
         shareCell = setupCell(text: "Share", icon: IconHelper.systemIcon(of: .share, weight: .regular), accesoryType: .disclosureIndicator)
+        writeReviewCell = setupCell(text: "Write a review", icon: IconHelper.systemIcon(of: .writeReview, weight: .regular), accesoryType: .disclosureIndicator)
+        creatorCell = setupCell(text: "Creator", icon: IconHelper.systemIcon(of: .socialMedia, weight: .regular), accesoryType: .none)
+        creatorCell.accessoryView = self.outsourceImageView()
+        websiteCell = setupCell(text: "Website", icon: IconHelper.systemIcon(of: .website, weight: .regular), accesoryType: .none)
+        websiteCell.accessoryView = self.outsourceImageView()
         
+        requestFeatureCell = setupCell(text: "Request a feature", icon: IconHelper.systemIcon(of: .feature, weight: .regular), accesoryType: .disclosureIndicator)
         reportBugCell = setupCell(text: "Report a bug", icon: IconHelper.systemIcon(of: .bug, weight: .regular), accesoryType: .disclosureIndicator)
+        appVersionCell = setupCell(text: "App version", icon: IconHelper.systemIcon(of: .info, weight: .regular), accesoryType: .disclosureIndicator)
+        appVersionCell.detailTextLabel?.text = "\(UIApplication.appVersion!) (\(BUILD_NUMBER))"
+        appVersionCell.detailTextLabel?.font = .preferredFont(forTextStyle: .caption1)
         
         deleteDatasCell  = setupCell(text: "Delete app data", icon: IconHelper.systemIcon(of: .deleteData, weight: .regular), accesoryType: .none)
         deleteDatasCell.textLabel?.textColor = destColour
         deleteDatasCell.imageView?.tintColor = destColour
-        
         deleteCacheCell  = setupCell(text: "Delete cached data", icon: IconHelper.systemIcon(of: .deleteCache, weight: .regular), accesoryType: .none)
         deleteCacheCell.textLabel?.textColor = destColour
         deleteCacheCell.imageView?.tintColor = destColour
-        
-        creatorCell = setupCell(text: "Creator", icon: IconHelper.systemIcon(of: .socialMedia, weight: .regular), accesoryType: .none)
-        creatorCell.accessoryView = self.outsourceImageView()
-        
-        appVersionCell = setupCell(text: "App version", icon: IconHelper.systemIcon(of: .info, weight: .regular), accesoryType: .disclosureIndicator)
-        appVersionCell.detailTextLabel?.text = "v1.0.0 (\(BUILD_NUMBER))"
-        appVersionCell.detailTextLabel?.font = .preferredFont(forTextStyle: .caption1)
-        
-        requestFeatureCell = setupCell(text: "Request a feature", icon: IconHelper.systemIcon(of: .feature, weight: .regular), accesoryType: .disclosureIndicator)
-        
-        websiteCell = setupCell(text: "Website", icon: IconHelper.systemIcon(of: .website, weight: .regular), accesoryType: .none)
-        websiteCell.accessoryView = self.outsourceImageView()
-        
+
         removeAdsCell = setupCell(text: "Support me", icon: IconHelper.systemIcon(of: .supportMe, weight: .regular), accesoryType: .disclosureIndicator)
     }
     
@@ -94,7 +91,7 @@ class SettingsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0: return 1
-        case 1: return 3
+        case 1: return 4
         case 2: return 3
         case 3: return 1
         case 4: return 2
@@ -114,8 +111,9 @@ class SettingsTableViewController: UITableViewController {
         case 1:
             switch indexPath.row {
             case 0: return self.shareCell
-            case 1: return self.creatorCell
-            case 2: return self.websiteCell
+            case 1: return self.writeReviewCell
+            case 2: return self.creatorCell
+            case 3: return self.websiteCell
             default: fatalError("Unknown row in section 1")
             }
         case 2:
@@ -177,8 +175,10 @@ class SettingsTableViewController: UITableViewController {
             switch indexPath.row {
             // Share
             case 0: share(sender: self.view)
+            // Write a review
+            case 1: SKStoreReviewController.requestReview()
             // Creator
-            case 1:
+            case 2:
                 guard let url = URL(string: "https://twitter.com/kevinlx_")  else { return }
                 if UIApplication.shared.canOpenURL(url) {
                     if #available(iOS 10.0, *) {
@@ -187,8 +187,8 @@ class SettingsTableViewController: UITableViewController {
                         UIApplication.shared.openURL(url)
                     }
                 }
-                // Website
-            case 2:
+            // Website
+            case 3:
                 guard let url = URL(string: "https://www.notion.so/NookNook-5983d18455354aea846999708a6045b1")  else { return }
                 if UIApplication.shared.canOpenURL(url) {
                     if #available(iOS 10.0, *) {
@@ -240,7 +240,7 @@ class SettingsTableViewController: UITableViewController {
             }
         case 3:
             switch indexPath.row {
-                // Remove ads
+            // Remove ads
             case 0:
                 let vc = self.storyboard!.instantiateViewController(withIdentifier: ADS_VC) as! InAppPurchaseViewController
                 let navController = UINavigationController(rootViewController: vc)
@@ -261,7 +261,7 @@ class SettingsTableViewController: UITableViewController {
                 }
                 let alert = AlertHelper.createCustomAction(title: "Delete cached datas?", message: "Cached images will be deleted. This could free up some space in your device", action: deleteAction)
                 self.present(alert, animated: true)
-
+                
             // Delete app data
             case 1:
                 let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (_) in
@@ -365,7 +365,7 @@ class SettingsTableViewController: UITableViewController {
         let image = UIImage(systemName: "arrow.up.right")!.withRenderingMode(.alwaysTemplate)
         let v = UIImageView(image: image, highlightedImage: image)
         v.tintColor = .lightGray
-         return v
+        return v
     }
     
 }

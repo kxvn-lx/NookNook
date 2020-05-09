@@ -50,7 +50,7 @@
                 dateComponents.hour = hour
                 dateComponents.minute = min
                 
-                notificationsManager.createNotification(title: "Buy turnip reminder", body: "Don't forget to buy your turnip today! Turnip seller will leave your island around noon.", dateComponents: dateComponents, identifier: identifier)
+                notificationsManager.createNotification(title: "Buy turnips reminder", body: "Don't forget to buy your turnips today! Turnips seller will leave your island around noon.", dateComponents: dateComponents, identifier: identifier)
             } else {
                 UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [identifier.rawValue])
             }
@@ -70,7 +70,7 @@
                 dateComponents.weekday = weekday
                 dateComponents.hour = hour
                 dateComponents.minute = min
-                notificationsManager.createNotification(title: "Sell turnip reminder", body: "Make sure you have sold your turnip this week! turnip will reset by sunday!", dateComponents: dateComponents, identifier: identifier)
+                notificationsManager.createNotification(title: "Sell turnips reminder", body: "Make sure you have sold your turnips this week! turnips will reset by sunday!", dateComponents: dateComponents, identifier: identifier)
             } else {
                 UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [identifier.rawValue])
             }

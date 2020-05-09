@@ -11,6 +11,13 @@ import UIKit
 import GoogleMobileAds
 
 /// EXTENSIONS
+// MARK: - UIApplication
+extension UIApplication {
+    static var appVersion: String? {
+        return Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
+    }
+}
+
 // MARK: - UIViewController
 extension UIViewController {
     func configureNavigationBar(largeTitleColor: UIColor? = nil, backgoundColor: UIColor? = nil, tintColor: UIColor? = nil, title: String? = "", preferredLargeTitle: Bool? = nil) {
