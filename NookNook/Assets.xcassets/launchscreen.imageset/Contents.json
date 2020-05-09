@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "launchscreen.png",
+      "filename" : "launchScreen.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "launchScreen@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "launchScreen@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

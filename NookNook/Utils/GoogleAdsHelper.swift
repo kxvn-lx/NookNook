@@ -14,6 +14,6 @@ import Foundation
 
 struct GoogleAdsHelper {
     
-    static let AD_UNIT_ID = "ca-app-pub-3589208077424978/7126087181"
-    static let DETAIL_PROFILE_AD_UNIT_ID = "ca-app-pub-3589208077424978/7957729228"
+    static let AD_UNIT_ID = "ca-app-pub-3940256099942544/2934735716"
+    static let DETAIL_PROFILE_AD_UNIT_ID = "ca-app-pub-3940256099942544/2934735716"
 }
