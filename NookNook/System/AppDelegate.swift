@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = kGADSimulatorID as? [String]
         
         // Uncomment this to disable ads (Development purposes).
-//        UDEngine.shared.saveIsAdsPurchased()
+        UDEngine.shared.saveIsAdsPurchased()
         
         // MARK: - SwiftyStoreKit
         SwiftyStoreKit.completeTransactions(atomically: true) { purchases in

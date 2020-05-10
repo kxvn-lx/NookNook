@@ -89,15 +89,13 @@ class CrittersTableViewController: UITableViewController {
         self.tabBarController?.delegate = self
         
         if !UDEngine.shared.getIsFirstVisit(on: .Critters) {
-            DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
-                let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! SwipeTableViewCell
-                cell.showSwipe(orientation: .left, animated: true) { (sucess) in
-                    if sucess {
-                        cell.hideSwipe(animated: true)
-                        UDEngine.shared.saveIsFirstVisit(on: .Critters)
-                    }
+            let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! SwipeTableViewCell
+            cell.showSwipe(orientation: .left, animated: true) { (sucess) in
+                if sucess {
+                    cell.hideSwipe(animated: true)
+                    UDEngine.shared.saveIsFirstVisit(on: .Critters)
                 }
-            })
+            }
         }
         
         // Confetti
@@ -119,7 +117,14 @@ class CrittersTableViewController: UITableViewController {
                 UDEngine.shared.saveHasCompletedCritters(isCompleted: true)
             })
         }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         
+        if UDEngine.shared.getHasCompletedCritters() {
+            UDEngine.shared.saveHasCompletedCritters(isCompleted: true)
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -157,7 +162,7 @@ class CrittersTableViewController: UITableViewController {
             critterCell.imgView.sd_imageIndicator = SDWebImageActivityIndicator.gray
             
             let critter = isFiltering ? filteredCritters[indexPath.row] : critters[indexPath.row]
-
+            
             critterCell.imgView.sd_setImage(with: ImageEngine.parseAcnhURL(with: critter.image, of: critter.category, mediaType: .images), placeholderImage: UIImage(named: "placeholder"))
             
             critterCell.nameLabel.text = critter.name
