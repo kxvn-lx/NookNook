@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import SwiftyBeaver
 
 struct ImageEngine {
     
@@ -30,8 +29,6 @@ struct ImageEngine {
         if category.lowercased() == Categories.art.rawValue {
             return URL(string: "\(ImageEngine.SERVICE_ART_URL)\(filename).png")!
         }
-        let urlString = "\(ImageEngine.SERVICE_URL)\(category.lowercased())/\(filename).png"
-        SwiftyBeaver.info("ImageEngine: Nook Plaza Image URL: \(urlString)")
         return URL(string: "\(ImageEngine.SERVICE_URL)\(category.lowercased())/\(filename).png")!
     }
     
@@ -46,8 +43,6 @@ struct ImageEngine {
      */
     static func parseAcnhURL(with imageID: String, of catType: String, mediaType: MediaType) -> URL {
         let catType = catType == Categories.fishes.rawValue ? "fish" : catType
-        let urlString = "\(ImageEngine.ACNH_API_URL)\(mediaType)/\(catType)/\(imageID)"
-        SwiftyBeaver.info("ImageEngine: ACNH Image URL: \(urlString)")
         return URL(string: "\(ImageEngine.ACNH_API_URL)\(mediaType)/\(catType)/\(imageID)")!
     }
     
