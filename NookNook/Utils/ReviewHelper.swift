@@ -33,7 +33,7 @@ class ReviewHelper {
         guard let currentVersion = Bundle.main.object(forInfoDictionaryKey: infoDictionaryKey) as? String
             else { fatalError("Expected to find a bundle version in the info dictionary") }
         let lastVersionPromptedForReview = defaults.string(forKey: VERSION_KEY)
-        SwiftyBeaver.info("App opened \(count ?? 0) time(s)")
+        SwiftyBeaver.info("ReviewHelper: App opened \(count ?? 0) time(s)")
         SwiftyBeaver.info("ReviewHelper: current bundle version: \(currentVersion)")
         
         if count == 20 && currentVersion != lastVersionPromptedForReview {
