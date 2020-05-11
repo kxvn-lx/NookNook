@@ -18,7 +18,7 @@ class SettingsTableViewController: UITableViewController {
     private let EDIT_INFO_VC = "EditInfoVC"
     private let PATCH_LOG_VC = "PatchLogVC"
     private let ADS_VC = "AdsVC"
-    private let BUILD_NUMBER = "202005010"
+    private let BUILD_NUMBER = "202005011"
     
     weak var profileDelegate: ProfileDelegate!
     
@@ -330,16 +330,13 @@ class SettingsTableViewController: UITableViewController {
     }
     
     @objc func share(sender: UIView) {
-        UIGraphicsBeginImageContext(view.frame.size)
-        view.layer.render(in: UIGraphicsGetCurrentContext()!)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        let textToShare = "Animal Crossing: New Horizons is so much better with this companion app! 😍 #NookNook"
+
+        let image = UIImage(named: "appIcon-Ori")
+        let textToShare = "Check this AC companion app out! 😍 #NookNook"
         
         // http://itunes.apple.com/app/idXXXXXXXXX
         if let myWebsite = URL(string: "https://cutt.ly/nooknook") {//Enter link to your app here
-            let objectsToShare = [textToShare, myWebsite, image ?? #imageLiteral(resourceName: "appIcon-Ori")] as [Any]
+            let objectsToShare = [textToShare, myWebsite, image as Any]
             let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
             
             //Excluded Activities
