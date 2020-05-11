@@ -177,8 +177,8 @@ class DashboardViewController: UIViewController {
     
     func setupProfile() {
         profileNameLabel.text = userDict["name"] ?? "NookNook"
-        islandNameLabel.text = "\(userDict["islandName"] ?? "Nook Island") 🏝"
-        nativeFruitLabel.text = userDict["nativeFruit"] ?? "Nook Fruit 🧃"
+        islandNameLabel.text = "\(userDict["islandName"] ?? "My Island") 🏝"
+        nativeFruitLabel.text = userDict["nativeFruit"] ?? "My Fruit 🧃"
         
         if let img = UserPersistEngine.loadImage() {
             profileImageView.image = img
