@@ -59,7 +59,7 @@ class WhatsNewHelper {
                 ),
                 WhatsNew.Item(
                     title: "Personalised dashboard",
-                    subtitle: "Make NookNook your very own ACNH companion app.",
+                    subtitle: "Make NookNook your own personal app.",
                     image: profileIcon
                 )
             ]

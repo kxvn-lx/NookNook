@@ -18,7 +18,7 @@ class SettingsTableViewController: UITableViewController {
     private let EDIT_INFO_VC = "EditInfoVC"
     private let PATCH_LOG_VC = "PatchLogVC"
     private let ADS_VC = "AdsVC"
-    private let BUILD_NUMBER = "202005012"
+    private let BUILD_NUMBER = "202005130"
     
     weak var profileDelegate: ProfileDelegate!
     
@@ -332,7 +332,7 @@ class SettingsTableViewController: UITableViewController {
     @objc func share(sender: UIView) {
 
         let image = UIImage(named: "appIcon-Ori")
-        let textToShare = "Check this AC companion app out! 😍 #NookNook"
+        let textToShare = "Check this app out! 😍 #NookNook"
         
         // http://itunes.apple.com/app/idXXXXXXXXX
         if let myWebsite = URL(string: "https://cutt.ly/nooknook") {//Enter link to your app here
