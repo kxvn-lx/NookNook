@@ -18,5 +18,3 @@ struct User: Codable, Equatable, Identifiable {
     
     var hemisphere: DateHelper.Hemisphere
 }
-
-let static_user = User(name: "Kevin", islandName: "Tonkotsu", nativeFruit: Fruits.cherries.rawValue, hemisphere: DateHelper.Hemisphere.Southern)

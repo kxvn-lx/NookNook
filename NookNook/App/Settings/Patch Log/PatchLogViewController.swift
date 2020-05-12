@@ -20,7 +20,7 @@ class PatchLogViewController: UIViewController {
     
     var logArray = [
         """
-        v1.0.1 (202005011)
+        v1.0.1 (202005012)
         - NookNook released for public! 🎉
         - Improved app performance
         - Fixed minor bugs and typos
