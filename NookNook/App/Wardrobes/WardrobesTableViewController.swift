@@ -318,3 +318,34 @@ extension WardrobesTableViewController: SwipeTableViewCellDelegate {
         return options
     }
 }
+
+extension WardrobesTableViewController {
+    
+    override func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        return UIContextMenuConfiguration(
+            identifier: indexPath as NSIndexPath,
+            previewProvider: {
+                let selectedWardrobe = self.isFiltering ? self.filteredWardrobes[indexPath.row] : self.wardrobes[indexPath.row]
+                return DetailViewController(obj: selectedWardrobe, group: .wardrobes)
+            },
+            actionProvider: { _ in
+                let selectedWardrobe = self.isFiltering ? self.filteredWardrobes[indexPath.row] : self.wardrobes[indexPath.row]
+                return ShareHelper.shared.presentContextShare(obj: selectedWardrobe, group: .wardrobes, toVC: self)
+            })
+    }
+    
+    override func tableView(_ tableView: UITableView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
+        
+        guard let indexPath = configuration.identifier as? IndexPath else { return }
+        let selectedWardrobe = self.isFiltering ? self.filteredWardrobes[indexPath.row] : self.wardrobes[indexPath.row]
+        
+        animator.addAnimations {
+            let vc = self.storyboard!.instantiateViewController(withIdentifier: self.DETAIL_ID) as! DetailViewController
+            vc.parseOject(from: .wardrobes, object: selectedWardrobe)
+            
+            let navController = UINavigationController(rootViewController: vc)
+            self.present(navController, animated: true, completion: nil)
+        }
+    }
+
+}

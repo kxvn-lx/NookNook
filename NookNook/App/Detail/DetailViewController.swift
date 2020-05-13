@@ -86,6 +86,15 @@ class DetailViewController: UIViewController {
         return adBannerView
     }()
     
+    init(obj: Any, group: DataEngine.Group) {
+        super.init(nibName: nil, bundle: nil)
+        self.parseOject(from: group, object: obj)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
     // MARK: - Tableview init
     override func viewDidLoad() {
         super.viewDidLoad()

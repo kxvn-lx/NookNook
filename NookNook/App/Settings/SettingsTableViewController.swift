@@ -18,7 +18,7 @@ class SettingsTableViewController: UITableViewController {
     private let EDIT_INFO_VC = "EditInfoVC"
     private let PATCH_LOG_VC = "PatchLogVC"
     private let ADS_VC = "AdsVC"
-    private let BUILD_NUMBER = "202005130"
+    private let BUILD_NUMBER = "202005131"
     
     weak var profileDelegate: ProfileDelegate!
     
@@ -166,7 +166,7 @@ class SettingsTableViewController: UITableViewController {
         case 1:
             switch indexPath.row {
             // Share
-            case 0: share(sender: self.view)
+            case 0: ShareHelper.shared.presentShare(toView: self)
             // Write a review
             case 1: SKStoreReviewController.requestReview()
             // Creator
@@ -327,24 +327,6 @@ class SettingsTableViewController: UITableViewController {
         cell.accessoryType = accesoryType
         
         return cell
-    }
-    
-    @objc func share(sender: UIView) {
-
-        let image = UIImage(named: "appIcon-Ori")
-        let textToShare = "Check this app out! 😍 #NookNook"
-        
-        // http://itunes.apple.com/app/idXXXXXXXXX
-        if let myWebsite = URL(string: "https://cutt.ly/nooknook") {//Enter link to your app here
-            let objectsToShare = [textToShare, myWebsite, image as Any]
-            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-            
-            //Excluded Activities
-            activityVC.excludedActivityTypes = [UIActivity.ActivityType.airDrop, UIActivity.ActivityType.addToReadingList, UIActivity.ActivityType.saveToCameraRoll]
-            
-            activityVC.popoverPresentationController?.sourceView = sender
-            self.present(activityVC, animated: true, completion: nil)
-        }
     }
     
     private func outsourceImageView() -> UIImageView {

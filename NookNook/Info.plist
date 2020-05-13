@@ -39,6 +39,8 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>This app needs to have permission to save photos so that we can store the images to your library.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app needs to have access to your photo library to set profile picture.</string>
 	<key>UIApplicationSceneManifest</key>

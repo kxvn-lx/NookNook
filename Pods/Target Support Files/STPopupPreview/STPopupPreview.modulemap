@@ -1,0 +1,6 @@
+framework module STPopupPreview {
+  umbrella header "STPopupPreview-umbrella.h"
+
+  export *
+  module * { export * }
+}

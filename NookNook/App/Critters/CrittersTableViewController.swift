@@ -353,3 +353,34 @@ extension CrittersTableViewController: SwipeTableViewCellDelegate {
         return options
     }
 }
+
+extension CrittersTableViewController {
+    
+    override func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        return UIContextMenuConfiguration(
+            identifier: indexPath as NSIndexPath,
+            previewProvider: {
+                let selectedCritter = self.isFiltering ? self.filteredCritters[indexPath.row] : self.critters[indexPath.row]
+                return DetailViewController(obj: selectedCritter, group: .critters)
+            },
+            actionProvider: { _ in
+                let selectedCritter = self.isFiltering ? self.filteredCritters[indexPath.row] : self.critters[indexPath.row]
+                return ShareHelper.shared.presentContextShare(obj: selectedCritter, group: .critters, toVC: self)
+            })
+    }
+    
+    override func tableView(_ tableView: UITableView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
+        
+        guard let indexPath = configuration.identifier as? IndexPath else { return }
+        let selectedCritter = self.isFiltering ? self.filteredCritters[indexPath.row] : self.critters[indexPath.row]
+        
+        animator.addAnimations {
+            let vc = self.storyboard!.instantiateViewController(withIdentifier: self.DETAIL_ID) as! DetailViewController
+            vc.parseOject(from: .critters, object: selectedCritter)
+            
+            let navController = UINavigationController(rootViewController: vc)
+            self.present(navController, animated: true, completion: nil)
+        }
+    }
+
+}

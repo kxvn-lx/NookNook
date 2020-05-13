@@ -328,3 +328,34 @@ extension VillagersTableViewController: SwipeTableViewCellDelegate {
         return options
     }
 }
+
+extension VillagersTableViewController {
+    
+    override func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        return UIContextMenuConfiguration(
+            identifier: indexPath as NSIndexPath,
+            previewProvider: {
+                let selectedVillager = self.isFiltering ? self.filteredVillagers[indexPath.row] : self.villagers[indexPath.row]
+                return DetailViewController(obj: selectedVillager, group: .villagers)
+            },
+            actionProvider: { _ in
+                let selectedVillager = self.isFiltering ? self.filteredVillagers[indexPath.row] : self.villagers[indexPath.row]
+                return ShareHelper.shared.presentContextShare(obj: selectedVillager, group: .villagers, toVC: self)
+            })
+    }
+    
+    override func tableView(_ tableView: UITableView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
+        
+        guard let indexPath = configuration.identifier as? IndexPath else { return }
+        let selectedVillager = self.isFiltering ? self.filteredVillagers[indexPath.row] : self.villagers[indexPath.row]
+        
+        animator.addAnimations {
+            let vc = self.storyboard!.instantiateViewController(withIdentifier: self.DETAIL_ID) as! DetailViewController
+            vc.parseOject(from: .villagers, object: selectedVillager)
+            
+            let navController = UINavigationController(rootViewController: vc)
+            self.present(navController, animated: true, completion: nil)
+        }
+    }
+
+}
