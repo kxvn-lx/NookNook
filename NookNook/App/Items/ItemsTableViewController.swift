@@ -310,3 +310,34 @@ extension ItemsTableViewController: WhatsNewhelperDelegate {
         }
     }
 }
+
+extension ItemsTableViewController {
+    
+    override func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        return UIContextMenuConfiguration(
+            identifier: indexPath as NSIndexPath,
+            previewProvider: {
+                let selectedItem = self.isFiltering ? self.filteredItems[indexPath.row] : self.items[indexPath.row]
+                return DetailViewController(obj: selectedItem, group: .items)
+            },
+            actionProvider: { _ in
+                let selectedItem = self.isFiltering ? self.filteredItems[indexPath.row] : self.items[indexPath.row]
+                return ShareHelper.shared.presentContextShare(obj: selectedItem, group: .items, toVC: self)
+            })
+    }
+    
+    override func tableView(_ tableView: UITableView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
+        
+        guard let indexPath = configuration.identifier as? IndexPath else { return }
+        let selectedItem = self.isFiltering ? self.filteredItems[indexPath.row] : self.items[indexPath.row]
+        
+        animator.addAnimations {
+            let vc = self.storyboard!.instantiateViewController(withIdentifier: self.DETAIL_ID) as! DetailViewController
+            vc.parseOject(from: .items, object: selectedItem)
+            
+            let navController = UINavigationController(rootViewController: vc)
+            self.present(navController, animated: true, completion: nil)
+        }
+    }
+
+}

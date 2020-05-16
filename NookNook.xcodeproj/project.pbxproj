@@ -21,7 +21,6 @@
 		0A295B4A244494F9001CF828 /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A295B49244494F9001CF828 /* Categories.swift */; };
 		0A295B4C2444AAD0001CF828 /* Taptic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A295B4B2444AAD0001CF828 /* Taptic.swift */; };
 		0A2A8D862466D1E900B47BE4 /* ReviewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2A8D852466D1E900B47BE4 /* ReviewHelper.swift */; };
-		0A2A8D892466D43300B47BE4 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = 0A2A8D882466D43300B47BE4 /* SwiftyBeaver */; };
 		0A2D908B245E690100974FD4 /* AlertHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2D908A245E690100974FD4 /* AlertHelper.swift */; };
 		0A2D908D245E6DF400974FD4 /* WhatsNewKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0A2D908C245E6DF400974FD4 /* WhatsNewKit */; };
 		0A34AB7C245EE51800BDCFF1 /* EditInfoVC+ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A34AB7B245EE51800BDCFF1 /* EditInfoVC+ImagePicker.swift */; };
@@ -63,6 +62,8 @@
 		0A595BA824533B3F00F37E15 /* other.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A595BA624533B3F00F37E15 /* other.json */; };
 		0A595BA924533B3F00F37E15 /* fossils.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A595BA724533B3F00F37E15 /* fossils.json */; };
 		0A595BAB24533C8C00F37E15 /* tops.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A595BAA24533C8C00F37E15 /* tops.json */; };
+		0A5D2A32246B71830037D2A0 /* ReminderHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5D2A31246B71830037D2A0 /* ReminderHelper.swift */; };
+		0A5D2A36246B816C0037D2A0 /* ShareHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5D2A35246B816C0037D2A0 /* ShareHelper.swift */; };
 		0A65203124499B6400692E74 /* DataPersistEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A65203024499B6400692E74 /* DataPersistEngine.swift */; };
 		0A6862A6244D3DAB00E06C74 /* SCHeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6862A5244D3DAB00E06C74 /* SCHeper.swift */; };
 		0A6862A9244D499C00E06C74 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6862A8244D499C00E06C74 /* SettingsTableViewController.swift */; };
@@ -84,7 +85,6 @@
 		0AADD410244870D9004FDA33 /* fishesSecondary.json in Resources */ = {isa = PBXBuildFile; fileRef = 0AADD40F244870D9004FDA33 /* fishesSecondary.json */; };
 		0AADD4192448ADB4004FDA33 /* bugsMain.json in Resources */ = {isa = PBXBuildFile; fileRef = 0AADD4172448ADB4004FDA33 /* bugsMain.json */; };
 		0AADD41A2448ADB4004FDA33 /* fishesMain.json in Resources */ = {isa = PBXBuildFile; fileRef = 0AADD4182448ADB4004FDA33 /* fishesMain.json */; };
-		0AAE49BA245D17F8009DCF1B /* ReminderHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAE49B9245D17F8009DCF1B /* ReminderHelper.swift */; };
 		0AB4DCD3245AD44A00AB16E6 /* TurnipReminderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB4DCD2245AD44A00AB16E6 /* TurnipReminderTableViewController.swift */; };
 		0AC54AF2244DF17600AD1188 /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0AC703B42451C749008D7C77 /* CritterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC703B32451C749008D7C77 /* CritterHelper.swift */; };
@@ -189,6 +189,8 @@
 		0A595BA624533B3F00F37E15 /* other.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = other.json; sourceTree = "<group>"; };
 		0A595BA724533B3F00F37E15 /* fossils.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fossils.json; sourceTree = "<group>"; };
 		0A595BAA24533C8C00F37E15 /* tops.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tops.json; sourceTree = "<group>"; };
+		0A5D2A31246B71830037D2A0 /* ReminderHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderHelper.swift; sourceTree = "<group>"; };
+		0A5D2A35246B816C0037D2A0 /* ShareHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareHelper.swift; sourceTree = "<group>"; };
 		0A65203024499B6400692E74 /* DataPersistEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPersistEngine.swift; sourceTree = "<group>"; };
 		0A6862A5244D3DAB00E06C74 /* SCHeper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCHeper.swift; sourceTree = "<group>"; };
 		0A6862A8244D499C00E06C74 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
@@ -209,7 +211,6 @@
 		0AADD40F244870D9004FDA33 /* fishesSecondary.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fishesSecondary.json; sourceTree = "<group>"; };
 		0AADD4172448ADB4004FDA33 /* bugsMain.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bugsMain.json; sourceTree = "<group>"; };
 		0AADD4182448ADB4004FDA33 /* fishesMain.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fishesMain.json; sourceTree = "<group>"; };
-		0AAE49B9245D17F8009DCF1B /* ReminderHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReminderHelper.swift; path = "/Users/kevinlaminto/Documents/Development/iOS Development/NookNook/NookNook/App/Dashboard/TurnipReminder/ReminderHelper.swift"; sourceTree = "<absolute>"; };
 		0AB4DCD2245AD44A00AB16E6 /* TurnipReminderTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnipReminderTableViewController.swift; sourceTree = "<group>"; };
 		0AC54AF3244DF17B00AD1188 /* RAGTextField.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RAGTextField.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AC703B32451C749008D7C77 /* CritterHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CritterHelper.swift; sourceTree = "<group>"; };
@@ -259,7 +260,6 @@
 				0ADC7BA4245FC0B50033F67E /* StoreKit.framework in Frameworks */,
 				0AFD70642441B80500957BE6 /* SwiftyJSON in Frameworks */,
 				D02015DDD8C8A4BAE7285CAB /* Pods_NookNook.framework in Frameworks */,
-				0A2A8D892466D43300B47BE4 /* SwiftyBeaver in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -447,9 +447,9 @@
 		0AB4DCD1245AD42F00AB16E6 /* TurnipReminder */ = {
 			isa = PBXGroup;
 			children = (
+				0A5D2A31246B71830037D2A0 /* ReminderHelper.swift */,
 				0AB4DCD2245AD44A00AB16E6 /* TurnipReminderTableViewController.swift */,
 				0A4DEC22245B0FF50017A553 /* TurnipTableViewCell.swift */,
-				0AAE49B9245D17F8009DCF1B /* ReminderHelper.swift */,
 			);
 			path = TurnipReminder;
 			sourceTree = "<group>";
@@ -551,6 +551,7 @@
 				0AE2795E24617B4300BF7EDB /* ConfettiHelper.swift */,
 				0A53327E246265350033FCF7 /* SpinnerHelper.swift */,
 				0A2A8D852466D1E900B47BE4 /* ReviewHelper.swift */,
+				0A5D2A35246B816C0037D2A0 /* ShareHelper.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -617,7 +618,6 @@
 				0A2D908C245E6DF400974FD4 /* WhatsNewKit */,
 				0ADF34CA24605ED8006AE2DB /* SwiftyStoreKit */,
 				0A11A00D2461338400D1BFB2 /* SwipeCellKit */,
-				0A2A8D882466D43300B47BE4 /* SwiftyBeaver */,
 			);
 			productName = NookNook;
 			productReference = 0AFD704B24419DD300957BE6 /* NookNook.app */;
@@ -829,16 +829,17 @@
 				0AEFF82B24470EAF0032156C /* WardrobesTableViewController.swift in Sources */,
 				0A72C3752445FD93009FA0D4 /* VariantCollectionViewCell.swift in Sources */,
 				0AEC5016245BA7B7004EC912 /* DynamicSizeTableView.swift in Sources */,
+				0A5D2A36246B816C0037D2A0 /* ShareHelper.swift in Sources */,
 				0A65203124499B6400692E74 /* DataPersistEngine.swift in Sources */,
 				0A3642862446CC070081315A /* TimeMonthEngine.swift in Sources */,
 				0A72C3712445AD8F009FA0D4 /* DetailViewController.swift in Sources */,
 				0AC89E422449419A009ADB18 /* VillagersTableViewController.swift in Sources */,
 				0AFD706C2441BFEE00957BE6 /* ItemsTableViewController.swift in Sources */,
 				0A01F31224431725001499D5 /* ImageEngine.swift in Sources */,
-				0AAE49BA245D17F8009DCF1B /* ReminderHelper.swift in Sources */,
 				0A149FF224512E7B0080941A /* UserPersistEngine.swift in Sources */,
 				0AFD70732441D2B200957BE6 /* ItemTableViewCell.swift in Sources */,
 				0AEFF82D24470EC30032156C /* WardrobetabTableViewCell.swift in Sources */,
+				0A5D2A32246B71830037D2A0 /* ReminderHelper.swift in Sources */,
 				0AF37FB6245960A7004A8944 /* DetailVC+CollectionView.swift in Sources */,
 				0AFD706A2441BA7500957BE6 /* HomeViewController.swift in Sources */,
 				0AB4DCD3245AD44A00AB16E6 /* TurnipReminderTableViewController.swift in Sources */,
@@ -1000,7 +1001,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 202005130;
+				CURRENT_PROJECT_VERSION = 202005150;
 				DEVELOPMENT_TEAM = D87H8GPTK2;
 				INFOPLIST_FILE = NookNook/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1008,7 +1009,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kevinlaminto.NookNook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1022,7 +1023,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 202005130;
+				CURRENT_PROJECT_VERSION = 202005150;
 				DEVELOPMENT_TEAM = D87H8GPTK2;
 				INFOPLIST_FILE = NookNook/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1030,7 +1031,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kevinlaminto.NookNook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1130,11 +1131,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0A11A00C2461338400D1BFB2 /* XCRemoteSwiftPackageReference "SwipeCellKit" */;
 			productName = SwipeCellKit;
-		};
-		0A2A8D882466D43300B47BE4 /* SwiftyBeaver */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0A2A8D872466D43300B47BE4 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */;
-			productName = SwiftyBeaver;
 		};
 		0A2D908C245E6DF400974FD4 /* WhatsNewKit */ = {
 			isa = XCSwiftPackageProductDependency;

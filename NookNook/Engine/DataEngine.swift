@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 import SwiftyJSON
-import SwiftyBeaver
 
 struct DataEngine {
     
@@ -54,7 +53,6 @@ struct DataEngine {
                     let newItem = Item(name: name, image: image, obtainedFrom: obtainedFrom, isDIY: isDIY, isCustomisable: isCustomisable, variants: variants, category: category, buy: buy, sell: sell, set: set, sourceNote: sourceNote)
                     items.append(newItem)
                 }
-                SwiftyBeaver.info("DataEngine: Successfully loaded \(items.count) items")
             } catch let error {
                 fatalError("parse error: \(error.localizedDescription)")
             }
@@ -128,7 +126,6 @@ struct DataEngine {
                     )
                     critters.append(newCritter)
                 }
-                SwiftyBeaver.info("DataEngine: Successfully loaded \(critters.count) critters")
             } catch let error {
                 print("parse error: \(error.localizedDescription)")
             }
@@ -199,7 +196,6 @@ struct DataEngine {
                     let newWardrobe = Wardrobe(name: name, image: image, obtainedFrom: obtainedFrom, isDIY: isDIY, variants: variants, category: category, buy: buy, sell: sell, sourceNote: sourceNote)
                     wardrobes.append(newWardrobe)
                 }
-                SwiftyBeaver.info("DataEngine:  Successfully loaded \(wardrobes.count) wardrobes")
             } catch let error {
                 fatalError("parse error: \(error.localizedDescription)")
             }
@@ -240,7 +236,6 @@ struct DataEngine {
                     )
                     villagers.append(newVillager)
                 }
-                SwiftyBeaver.info("DataEngine: Successfully loaded \(villagers.count) villagers")
             } catch let error {
                 fatalError("parse error: \(error.localizedDescription)")
             }
