@@ -25,7 +25,6 @@ class SettingsTableViewController: UITableViewController {
     private var editInfoCell = UITableViewCell()
     
     private var shareCell = UITableViewCell()
-    private var writeReviewCell = UITableViewCell()
     private var creatorCell = UITableViewCell()
     private var websiteCell = UITableViewCell()
     
@@ -61,7 +60,6 @@ class SettingsTableViewController: UITableViewController {
         editInfoCell = setupCell(text: "Edit info", icon: IconHelper.systemIcon(of: .edit, weight: .regular), accesoryType: .disclosureIndicator)
         
         shareCell = setupCell(text: "Share", icon: IconHelper.systemIcon(of: .share, weight: .regular), accesoryType: .disclosureIndicator)
-        writeReviewCell = setupCell(text: "Write a review", icon: IconHelper.systemIcon(of: .writeReview, weight: .regular), accesoryType: .disclosureIndicator)
         creatorCell = setupCell(text: "Creator", icon: IconHelper.systemIcon(of: .socialMedia, weight: .regular), accesoryType: .none)
         creatorCell.accessoryView = self.outsourceImageView()
         websiteCell = setupCell(text: "Website", icon: IconHelper.systemIcon(of: .website, weight: .regular), accesoryType: .none)
@@ -91,7 +89,7 @@ class SettingsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0: return 1
-        case 1: return 4
+        case 1: return 3
         case 2: return 3
         case 3: return 1
         case 4: return 2
@@ -111,9 +109,8 @@ class SettingsTableViewController: UITableViewController {
         case 1:
             switch indexPath.row {
             case 0: return self.shareCell
-            case 1: return self.writeReviewCell
-            case 2: return self.creatorCell
-            case 3: return self.websiteCell
+            case 1: return self.creatorCell
+            case 2: return self.websiteCell
             default: fatalError("Unknown row in section 1")
             }
         case 2:
@@ -167,10 +164,8 @@ class SettingsTableViewController: UITableViewController {
             switch indexPath.row {
             // Share
             case 0: ShareHelper.shared.presentShare(toView: self)
-            // Write a review
-            case 1: SKStoreReviewController.requestReview()
             // Creator
-            case 2:
+            case 1:
                 guard let url = URL(string: "https://twitter.com/kevinlx_")  else { return }
                 if UIApplication.shared.canOpenURL(url) {
                     if #available(iOS 10.0, *) {
@@ -180,7 +175,7 @@ class SettingsTableViewController: UITableViewController {
                     }
                 }
             // Website
-            case 3:
+            case 2:
                 guard let url = URL(string: "https://www.notion.so/NookNook-5983d18455354aea846999708a6045b1")  else { return }
                 if UIApplication.shared.canOpenURL(url) {
                     if #available(iOS 10.0, *) {
