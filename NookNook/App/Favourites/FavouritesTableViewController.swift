@@ -341,3 +341,74 @@ extension FavouritesTableViewController: UISearchResultsUpdating {
         filterContentForSearchText(text)
     }
 }
+
+extension FavouritesTableViewController {
+    
+    override func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        return UIContextMenuConfiguration(
+            identifier: indexPath as NSIndexPath,
+            previewProvider: {
+                switch self.currentGroup {
+                case .items:
+                    let selectedItem = self.isFiltering ? self.filteredItems[indexPath.row] : self.favItems[indexPath.row]
+                    return DetailViewController(obj: selectedItem, group: .items)
+                case .wardrobes:
+                    let selectedWardrobe = self.isFiltering ? self.filteredWardrobes[indexPath.row] : self.favWardrobes[indexPath.row]
+                    return DetailViewController(obj: selectedWardrobe, group: .wardrobes)
+                case .villagers:
+                    let selectedVillager = self.isFiltering ? self.filteredVillagers[indexPath.row] : self.favVillagers[indexPath.row]
+                    return DetailViewController(obj: selectedVillager, group: .villagers)
+                }
+                
+        },
+            actionProvider: { _ in
+                switch self.currentGroup {
+                case .items:
+                    let selectedItem = self.isFiltering ? self.filteredItems[indexPath.row] : self.favItems[indexPath.row]
+                    return ShareHelper.shared.presentContextShare(obj: selectedItem, group: .items, toVC: self)
+                case .wardrobes:
+                    let selectedWardrobe = self.isFiltering ? self.filteredWardrobes[indexPath.row] : self.favWardrobes[indexPath.row]
+                    return ShareHelper.shared.presentContextShare(obj: selectedWardrobe, group: .wardrobes, toVC: self)
+                case .villagers:
+                    let selectedVillager = self.isFiltering ? self.filteredVillagers[indexPath.row] : self.favVillagers[indexPath.row]
+                    return ShareHelper.shared.presentContextShare(obj: selectedVillager, group: .villagers, toVC: self)
+                }
+        })
+    }
+    
+    override func tableView(_ tableView: UITableView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
+        
+        guard let indexPath = configuration.identifier as? IndexPath else { return }
+        
+        switch self.currentGroup {
+        case .items:
+            let selectedItem = self.isFiltering ? self.filteredItems[indexPath.row] : self.favItems[indexPath.row]
+            animator.addAnimations {
+                let vc = self.storyboard!.instantiateViewController(withIdentifier: self.DETAIL_ID) as! DetailViewController
+                vc.parseOject(from: .items, object: selectedItem)
+                
+                let navController = UINavigationController(rootViewController: vc)
+                self.present(navController, animated: true, completion: nil)
+            }
+        case .wardrobes:
+            let selectedWardrobe = self.isFiltering ? self.filteredWardrobes[indexPath.row] : self.favWardrobes[indexPath.row]
+            animator.addAnimations {
+                let vc = self.storyboard!.instantiateViewController(withIdentifier: self.DETAIL_ID) as! DetailViewController
+                vc.parseOject(from: .wardrobes, object: selectedWardrobe)
+                
+                let navController = UINavigationController(rootViewController: vc)
+                self.present(navController, animated: true, completion: nil)
+            }
+        case .villagers:
+            let selectedVillager = self.isFiltering ? self.filteredVillagers[indexPath.row] : self.favVillagers[indexPath.row]
+            animator.addAnimations {
+                let vc = self.storyboard!.instantiateViewController(withIdentifier: self.DETAIL_ID) as! DetailViewController
+                vc.parseOject(from: .villagers, object: selectedVillager)
+                
+                let navController = UINavigationController(rootViewController: vc)
+                self.present(navController, animated: true, completion: nil)
+            }
+        }
+    }
+    
+}

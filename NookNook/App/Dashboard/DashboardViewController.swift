@@ -44,7 +44,7 @@ class DashboardViewController: UIViewController {
     var islandNameLabel: UILabel!
     var nativeFruitLabel: UILabel!
     var residentLabel: UILabel!
-    let variationImageCollectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
+    let residentVillagerCollectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
     
     internal var birthdayResidents: [Villager] = []
@@ -90,7 +90,7 @@ class DashboardViewController: UIViewController {
         setUI()
         setConstraint()
         
-        self.variationImageCollectionView.register(ResidentCollectionViewCell.self, forCellWithReuseIdentifier: VARIANT_CELL)
+        self.residentVillagerCollectionView.register(ResidentCollectionViewCell.self, forCellWithReuseIdentifier: VARIANT_CELL)
         
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 50
@@ -121,7 +121,7 @@ class DashboardViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         DispatchQueue.main.async {
-            self.variationImageCollectionView.reloadData()
+            self.residentVillagerCollectionView.reloadData()
         }
         favouritesManager = DataPersistEngine()
         userDict = UDEngine.shared.getUser()
@@ -259,13 +259,13 @@ class DashboardViewController: UIViewController {
         
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 10
-        variationImageCollectionView.setCollectionViewLayout(calculateCVLayout(), animated: true)
-        variationImageCollectionView.delegate = self
-        variationImageCollectionView.dataSource = self
-        variationImageCollectionView.backgroundColor = .cream2
+        residentVillagerCollectionView.setCollectionViewLayout(calculateCVLayout(), animated: true)
+        residentVillagerCollectionView.delegate = self
+        residentVillagerCollectionView.dataSource = self
+        residentVillagerCollectionView.backgroundColor = .cream2
         
         residentStack.addArrangedSubview(residentLabel, withMargin: UIEdgeInsets(top: 0, left: MARGIN * 2, bottom: 0, right: 0))
-        residentStack.addArrangedSubview(variationImageCollectionView)
+        residentStack.addArrangedSubview(residentVillagerCollectionView)
         
         // Table view
         tableView = DynamicSizeTableView(frame: .zero, style: .grouped)
@@ -309,8 +309,8 @@ class DashboardViewController: UIViewController {
             
             residentStack.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
             
-            variationImageCollectionView.widthAnchor.constraint(equalTo: self.residentStack.widthAnchor),
-            variationImageCollectionView.heightAnchor.constraint(equalToConstant: 140)
+            residentVillagerCollectionView.widthAnchor.constraint(equalTo: self.residentStack.widthAnchor),
+            residentVillagerCollectionView.heightAnchor.constraint(equalToConstant: 140)
             
         ])
     }
@@ -396,7 +396,7 @@ class DashboardViewController: UIViewController {
         residentLabel.text = "Your Resident: \(self.favouritesManager.residentVillagers.count)/10"
         calculateMonthlyCritter()
         DispatchQueue.main.async {
-            self.variationImageCollectionView.reloadData()
+            self.residentVillagerCollectionView.reloadData()
             self.tableView.reloadData()
         }
     }

@@ -57,7 +57,7 @@ class CrittersMonthlyTableViewController: UITableViewController {
         adBannerView.translatesAutoresizingMaskIntoConstraints = false
         adBannerView.adUnitID = GoogleAdsHelper.AD_UNIT_ID
         adBannerView.rootViewController = self
-
+        
         return adBannerView
     }()
     
@@ -227,7 +227,7 @@ class CrittersMonthlyTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 100
     }
-
+    
     @objc func changeSource(sender: UISegmentedControl) {
         Taptic.lightTaptic()
         switch sender.selectedSegmentIndex {
@@ -342,4 +342,60 @@ extension CrittersMonthlyTableViewController: SwipeTableViewCellDelegate {
         options.transitionStyle = .border
         return options
     }
+}
+
+extension CrittersMonthlyTableViewController {
+    
+    override func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        return UIContextMenuConfiguration(
+            identifier: indexPath as NSIndexPath,
+            previewProvider: {
+                switch self.currentGroup {
+                case .bugs:
+                    let selectedBugs = self.isFiltering ? self.filteredBugs[indexPath.row] : self.bugs[indexPath.row]
+                    return DetailViewController(obj: selectedBugs, group: .critters)
+                case .fish:
+                    let selectedFish = self.isFiltering ? self.filteredFishes[indexPath.row] : self.fishes[indexPath.row]
+                    return DetailViewController(obj: selectedFish, group: .critters)
+                }
+                
+        },
+            actionProvider: { _ in
+                switch self.currentGroup {
+                case .bugs:
+                    let selectedBugs = self.isFiltering ? self.filteredBugs[indexPath.row] : self.bugs[indexPath.row]
+                    return ShareHelper.shared.presentContextShare(obj: selectedBugs, group: .critters, toVC: self)
+                case .fish:
+                    let selectedFish = self.isFiltering ? self.filteredFishes[indexPath.row] : self.fishes[indexPath.row]
+                    return ShareHelper.shared.presentContextShare(obj: selectedFish, group: .critters, toVC: self)
+                }
+        })
+    }
+    
+    override func tableView(_ tableView: UITableView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
+        
+        guard let indexPath = configuration.identifier as? IndexPath else { return }
+        
+        switch self.currentGroup {
+        case .bugs:
+            let selectedBugs = self.isFiltering ? self.filteredBugs[indexPath.row] : self.bugs[indexPath.row]
+            animator.addAnimations {
+                let vc = self.storyboard!.instantiateViewController(withIdentifier: self.DETAIL_ID) as! DetailViewController
+                vc.parseOject(from: .critters, object: selectedBugs)
+                
+                let navController = UINavigationController(rootViewController: vc)
+                self.present(navController, animated: true, completion: nil)
+            }
+        case .fish:
+            let selectedFish = self.isFiltering ? self.filteredFishes[indexPath.row] : self.fishes[indexPath.row]
+            animator.addAnimations {
+                let vc = self.storyboard!.instantiateViewController(withIdentifier: self.DETAIL_ID) as! DetailViewController
+                vc.parseOject(from: .critters, object: selectedFish)
+                
+                let navController = UINavigationController(rootViewController: vc)
+                self.present(navController, animated: true, completion: nil)
+            }
+        }
+    }
+    
 }

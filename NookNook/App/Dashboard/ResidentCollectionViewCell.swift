@@ -11,32 +11,32 @@ import SDWebImage
 
 class ResidentCollectionViewCell: UICollectionViewCell {
     
-    var variantImage: UIImageView = UIImageView()
-    var variantName: UILabel = UILabel()
+    var villagerImage: UIImageView = UIImageView()
+    var villagerName: UILabel = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.addSubview(variantImage)
-        self.addSubview(variantName)
+        self.addSubview(villagerImage)
+        self.addSubview(villagerName)
         
-        variantName.translatesAutoresizingMaskIntoConstraints = false
-        variantName.textAlignment = .center
-        variantName.numberOfLines = 0
-        variantName.textColor = .dirt1
+        villagerName.translatesAutoresizingMaskIntoConstraints = false
+        villagerName.textAlignment = .center
+        villagerName.numberOfLines = 0
+        villagerName.textColor = .dirt1
         
-        variantImage.translatesAutoresizingMaskIntoConstraints = false
-        variantImage.sd_imageTransition = .fade
-        variantImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
+        villagerImage.translatesAutoresizingMaskIntoConstraints = false
+        villagerImage.sd_imageTransition = .fade
+        villagerImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
         
         NSLayoutConstraint.activate([
-            variantImage.topAnchor.constraint(equalTo: self.topAnchor),
-            variantImage.leftAnchor.constraint(equalTo: self.leftAnchor),
-            variantImage.rightAnchor.constraint(equalTo: self.rightAnchor),
-            variantImage.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            villagerImage.topAnchor.constraint(equalTo: self.topAnchor),
+            villagerImage.leftAnchor.constraint(equalTo: self.leftAnchor),
+            villagerImage.rightAnchor.constraint(equalTo: self.rightAnchor),
+            villagerImage.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             
-            variantName.topAnchor.constraint(equalTo: variantImage.bottomAnchor, constant: 5),
-            variantName.leftAnchor.constraint(equalTo: self.leftAnchor),
-            variantName.rightAnchor.constraint(equalTo: self.rightAnchor)
+            villagerName.topAnchor.constraint(equalTo: villagerImage.bottomAnchor, constant: 5),
+            villagerName.leftAnchor.constraint(equalTo: self.leftAnchor),
+            villagerName.rightAnchor.constraint(equalTo: self.rightAnchor)
         ])
     }
 

@@ -20,8 +20,8 @@ class PatchLogViewController: UIViewController {
     
     var logArray = [
         """
-        v1.1.0 (202005150)
-        - Long press on any main cells to preview and share! (Items, Critters, Wardrobes, and Villagers)
+        v1.1.0 (202005170)
+        - Long press on any main cells to preview and share! (Items, Critters, Wardrobes, Villagers, critters this month, favourites, and resident list.)
         - Improved app performance
         - Fixed minor bugs and typos
 
