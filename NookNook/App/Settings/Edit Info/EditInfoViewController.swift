@@ -17,6 +17,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
     
     private var scrollView: UIScrollView!
     private var mStackView: UIStackView!
+    private var fruitStack: UIStackView!
     
     private var favouritesManager: DataPersistEngine!
     
@@ -178,12 +179,18 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         
         nativeFruitButton = UIButton()
         nativeFruitButton.translatesAutoresizingMaskIntoConstraints = false
-        nativeFruitButton.titleLabel?.textAlignment = .center
+        nativeFruitButton.titleLabel?.textAlignment = .right
+        nativeFruitButton.titleLabel?.numberOfLines = 2
         nativeFruitButton.setTitleColor(.grass1, for: .normal)
         nativeFruitButton.setTitleColor(UIColor.grass1.withAlphaComponent(0.5), for: .highlighted)
         nativeFruitButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
         nativeFruitButton.addTarget(self, action: #selector(fruitPicker), for: .touchUpInside)
         nativeFruitButton.setTitle("Change fruit", for: .normal)
+        
+        fruitStack = SVHelper.createSV(axis: .horizontal, spacing: 10, alignment: .center, distribution: .fillProportionally)
+        fruitStack.translatesAutoresizingMaskIntoConstraints = false
+        fruitStack.addArrangedSubview(fruitLabel)
+        fruitStack.addArrangedSubview(nativeFruitButton)
         
         hemispherePicker = UISegmentedControl(items: [DateHelper.Hemisphere.Northern.rawValue, DateHelper.Hemisphere.Southern.rawValue])
         hemispherePicker.backgroundColor = .cream2
@@ -211,8 +218,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         mStackView.addArrangedSubview(nameTF)
         mStackView.addArrangedSubview(islandNameTF)
         mStackView.addArrangedSubview(hemispherePicker)
-        mStackView.addArrangedSubview(fruitLabel)
-        mStackView.addArrangedSubview(nativeFruitButton)
+        mStackView.addArrangedSubview(fruitStack)
         mStackView.addArrangedSubview(saveButton)
         
         scrollView.addSubview(mStackView)
@@ -294,9 +300,9 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
             mStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -MARGIN * 4),
             mStackView.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor),
             
-            nameTF.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor, multiplier: 0.8),
-            islandNameTF.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor, multiplier: 0.8),
-            nativeFruitButton.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor, multiplier: 0.7),
+            nameTF.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor, multiplier: 0.7),
+            islandNameTF.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor, multiplier: 0.7),
+            fruitStack.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor, multiplier: 0.7),
             saveButton.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor, multiplier: 0.7),
             
             profileImageView.widthAnchor.constraint(equalToConstant: 130),

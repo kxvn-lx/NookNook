@@ -94,7 +94,7 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.backgroundColor = .cream1
+        cell.backgroundColor = .cream2
         cell.tintColor =  .dirt1
         cell.textLabel?.textColor = .dirt1
         cell.detailTextLabel?.textColor = UIColor.dirt1.withAlphaComponent(0.5)
