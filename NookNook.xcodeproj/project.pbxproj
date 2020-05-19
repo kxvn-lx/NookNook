@@ -78,6 +78,7 @@
 		0A887F8D2450890C0044EAEA /* FruitsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A887F8C2450890C0044EAEA /* FruitsTableViewController.swift */; };
 		0A887F9124508F280044EAEA /* UDEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A887F9024508F280044EAEA /* UDEngine.swift */; };
 		0A902FDB245A53A600E7298A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A902FDA245A53A600E7298A /* GoogleService-Info.plist */; };
+		0A95BDED247373B500AA8FA0 /* NookNookTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A95BDEC247373B500AA8FA0 /* NookNookTests.swift */; };
 		0A964998244E5FBE00C8E19D /* TweeTextField in Frameworks */ = {isa = PBXBuildFile; productRef = 0A964997244E5FBE00C8E19D /* TweeTextField */; };
 		0A97C2FB244C95290062B136 /* FavouritesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A97C2FA244C95290062B136 /* FavouritesTableViewController.swift */; };
 		0A97C2FD244C95360062B136 /* FavouriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A97C2FC244C95360062B136 /* FavouriteTableViewCell.swift */; };
@@ -116,8 +117,19 @@
 		0AFD706C2441BFEE00957BE6 /* ItemsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFD706B2441BFEE00957BE6 /* ItemsTableViewController.swift */; };
 		0AFD70732441D2B200957BE6 /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFD70722441D2B200957BE6 /* ItemTableViewCell.swift */; };
 		0AFD70752441D9BF00957BE6 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFD70742441D9BF00957BE6 /* Item.swift */; };
+		7FED8C2AE2B972E9F4296543 /* Pods_NookNookTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4ED982529BF524F49A0E568 /* Pods_NookNookTests.framework */; };
 		D02015DDD8C8A4BAE7285CAB /* Pods_NookNook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A4557804DEA2E2611BA88D4 /* Pods_NookNook.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0A95BDEF247373B500AA8FA0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0AFD704324419DD300957BE6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0AFD704A24419DD300957BE6;
+			remoteInfo = NookNook;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		0A559127244DCE120018CF99 /* Embed Frameworks */ = {
@@ -205,6 +217,9 @@
 		0A887F8C2450890C0044EAEA /* FruitsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitsTableViewController.swift; sourceTree = "<group>"; };
 		0A887F9024508F280044EAEA /* UDEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UDEngine.swift; sourceTree = "<group>"; };
 		0A902FDA245A53A600E7298A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0A95BDEA247373B400AA8FA0 /* NookNookTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NookNookTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A95BDEC247373B500AA8FA0 /* NookNookTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NookNookTests.swift; sourceTree = "<group>"; };
+		0A95BDEE247373B500AA8FA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A97C2FA244C95290062B136 /* FavouritesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesTableViewController.swift; sourceTree = "<group>"; };
 		0A97C2FC244C95360062B136 /* FavouriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteTableViewCell.swift; sourceTree = "<group>"; };
 		0AA3616D244C520500D326AF /* SVHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVHelper.swift; sourceTree = "<group>"; };
@@ -245,9 +260,20 @@
 		0FC0B9212811082E98C0131C /* Pods-NookNook.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NookNook.release.xcconfig"; path = "Target Support Files/Pods-NookNook/Pods-NookNook.release.xcconfig"; sourceTree = "<group>"; };
 		3A4557804DEA2E2611BA88D4 /* Pods_NookNook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NookNook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F2D55C25D11CEC5AE82E7DC /* Pods-NookNook.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NookNook.debug.xcconfig"; path = "Target Support Files/Pods-NookNook/Pods-NookNook.debug.xcconfig"; sourceTree = "<group>"; };
+		895D890932D70BE299AFB0FC /* Pods-NookNookTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NookNookTests.release.xcconfig"; path = "Target Support Files/Pods-NookNookTests/Pods-NookNookTests.release.xcconfig"; sourceTree = "<group>"; };
+		8B7D8AF0745B3B4D783E8E00 /* Pods-NookNookTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NookNookTests.debug.xcconfig"; path = "Target Support Files/Pods-NookNookTests/Pods-NookNookTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E4ED982529BF524F49A0E568 /* Pods_NookNookTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NookNookTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		0A95BDE7247373B400AA8FA0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7FED8C2AE2B972E9F4296543 /* Pods_NookNookTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0AFD704824419DD300957BE6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -435,6 +461,15 @@
 			path = Critters;
 			sourceTree = "<group>";
 		};
+		0A95BDEB247373B500AA8FA0 /* NookNookTests */ = {
+			isa = PBXGroup;
+			children = (
+				0A95BDEC247373B500AA8FA0 /* NookNookTests.swift */,
+				0A95BDEE247373B500AA8FA0 /* Info.plist */,
+			);
+			path = NookNookTests;
+			sourceTree = "<group>";
+		};
 		0A97C2F9244C94EE0062B136 /* Favourites */ = {
 			isa = PBXGroup;
 			children = (
@@ -501,6 +536,7 @@
 			isa = PBXGroup;
 			children = (
 				0AFD704D24419DD300957BE6 /* NookNook */,
+				0A95BDEB247373B500AA8FA0 /* NookNookTests */,
 				0AFD704C24419DD300957BE6 /* Products */,
 				26589D3C1D6EDD4DE75F7739 /* Frameworks */,
 				B9CACF7B7CE535B37D8DD9A4 /* Pods */,
@@ -511,6 +547,7 @@
 			isa = PBXGroup;
 			children = (
 				0AFD704B24419DD300957BE6 /* NookNook.app */,
+				0A95BDEA247373B400AA8FA0 /* NookNookTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -577,6 +614,7 @@
 				0A559128244DCE170018CF99 /* RAGTextField.framework */,
 				0A559121244DCDAD0018CF99 /* RAGTextField.framework */,
 				3A4557804DEA2E2611BA88D4 /* Pods_NookNook.framework */,
+				E4ED982529BF524F49A0E568 /* Pods_NookNookTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -586,6 +624,8 @@
 			children = (
 				5F2D55C25D11CEC5AE82E7DC /* Pods-NookNook.debug.xcconfig */,
 				0FC0B9212811082E98C0131C /* Pods-NookNook.release.xcconfig */,
+				8B7D8AF0745B3B4D783E8E00 /* Pods-NookNookTests.debug.xcconfig */,
+				895D890932D70BE299AFB0FC /* Pods-NookNookTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -593,6 +633,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		0A95BDE9247373B400AA8FA0 /* NookNookTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0A95BDF3247373B500AA8FA0 /* Build configuration list for PBXNativeTarget "NookNookTests" */;
+			buildPhases = (
+				A4A1FDC8E702BBB4917F9329 /* [CP] Check Pods Manifest.lock */,
+				0A95BDE6247373B400AA8FA0 /* Sources */,
+				0A95BDE7247373B400AA8FA0 /* Frameworks */,
+				0A95BDE8247373B400AA8FA0 /* Resources */,
+				78C8F2F696B51C0545FF4131 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0A95BDF0247373B500AA8FA0 /* PBXTargetDependency */,
+			);
+			name = NookNookTests;
+			productName = NookNookTests;
+			productReference = 0A95BDEA247373B400AA8FA0 /* NookNookTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		0AFD704A24419DD300957BE6 /* NookNook */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0AFD705F24419DD500957BE6 /* Build configuration list for PBXNativeTarget "NookNook" */;
@@ -629,10 +689,14 @@
 		0AFD704324419DD300957BE6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1130;
+				LastSwiftUpdateCheck = 1140;
 				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = "Kevin Laminto";
 				TargetAttributes = {
+					0A95BDE9247373B400AA8FA0 = {
+						CreatedOnToolsVersion = 11.4.1;
+						TestTargetID = 0AFD704A24419DD300957BE6;
+					};
 					0AFD704A24419DD300957BE6 = {
 						CreatedOnToolsVersion = 11.3.1;
 					};
@@ -661,11 +725,19 @@
 			projectRoot = "";
 			targets = (
 				0AFD704A24419DD300957BE6 /* NookNook */,
+				0A95BDE9247373B400AA8FA0 /* NookNookTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		0A95BDE8247373B400AA8FA0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0AFD704924419DD300957BE6 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -745,6 +817,23 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NookNook/Pods-NookNook-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		78C8F2F696B51C0545FF4131 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NookNookTests/Pods-NookNookTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NookNookTests/Pods-NookNookTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NookNookTests/Pods-NookNookTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		955A889AC9392D4A3F3FE72E /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -784,9 +873,39 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		A4A1FDC8E702BBB4917F9329 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NookNookTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0A95BDE6247373B400AA8FA0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A95BDED247373B500AA8FA0 /* NookNookTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0AFD704724419DD300957BE6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -861,6 +980,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		0A95BDF0247373B500AA8FA0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0AFD704A24419DD300957BE6 /* NookNook */;
+			targetProxy = 0A95BDEF247373B500AA8FA0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		0AFD705424419DD300957BE6 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -881,6 +1008,50 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		0A95BDF1247373B500AA8FA0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8B7D8AF0745B3B4D783E8E00 /* Pods-NookNookTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = D87H8GPTK2;
+				INFOPLIST_FILE = NookNookTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kevinlaminto.NookNookTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NookNook.app/NookNook";
+			};
+			name = Debug;
+		};
+		0A95BDF2247373B500AA8FA0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 895D890932D70BE299AFB0FC /* Pods-NookNookTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = D87H8GPTK2;
+				INFOPLIST_FILE = NookNookTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kevinlaminto.NookNookTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NookNook.app/NookNook";
+			};
+			name = Release;
+		};
 		0AFD705D24419DD500957BE6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1042,6 +1213,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0A95BDF3247373B500AA8FA0 /* Build configuration list for PBXNativeTarget "NookNookTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0A95BDF1247373B500AA8FA0 /* Debug */,
+				0A95BDF2247373B500AA8FA0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		0AFD704624419DD300957BE6 /* Build configuration list for PBXProject "NookNook" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

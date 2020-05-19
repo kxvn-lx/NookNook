@@ -15,4 +15,11 @@ target 'NookNook' do
 	pod 'McPicker', '~> 2.0.0'
 	pod 'Google-Mobile-Ads-SDK'
 	pod 'SwiftConfettiView'
+
+target 'NookNookTests' do
+  inherit! :search_paths
+  # Pods for testing
+	pod 'Firebase/Analytics'
+	pod 'Google-Mobile-Ads-SDK'
+	end
 end
