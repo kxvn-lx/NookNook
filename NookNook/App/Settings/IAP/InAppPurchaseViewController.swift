@@ -10,13 +10,13 @@ import UIKit
 import StoreKit
 import SwiftyStoreKit
 
+enum IAPProduct: String, CaseIterable {
+    case BuyCoffee = "com.kevinlaminto.NookNook.BuyCoffee1"
+    case RemoveAds = "com.kevinlaminto.NookNook.RemoveAds1"
+    case RemoveAdsBuyCoffee = "com.kevinlaminto.NookNook.RemoveAdsBuyCoffee1"
+}
+
 class InAppPurchaseViewController: UITableViewController {
-    
-    enum IAPProduct: String, CaseIterable {
-        case BuyCoffee = "com.kevinlaminto.NookNook.BuyCoffee1"
-        case RemoveAds = "com.kevinlaminto.NookNook.RemoveAds1"
-        case RemoveAdsBuyCoffee = "com.kevinlaminto.NookNook.RemoveAdsBuyCoffee1"
-    }
     
     // Table view cell properties
     private var removeAdsCell = UITableViewCell()
@@ -45,13 +45,13 @@ class InAppPurchaseViewController: UITableViewController {
                                              IAPProduct.RemoveAds.rawValue,
                                              IAPProduct.RemoveAdsBuyCoffee.rawValue]) { result in
                                                 for product in result.retrievedProducts {
-                                                    print("Product: \(product.localizedTitle) - price: \(product.price)")
+                                                    print("✅ Product: \(product.localizedTitle) - price: $\(product.price)")
                                                 }
                                                 for product in result.invalidProductIDs {
-                                                    print("Invalid product ID: \(product)")
+                                                    print("❗️Invalid product ID: \(product)")
                                                 }
                                                 if let error = result.error {
-                                                    print(error.localizedDescription)
+                                                    print("ERROR RETRIEVING PRODUCTS: \(error.localizedDescription)")
                                                 }
         }
         SwiftyStoreKit.shouldAddStorePaymentHandler = { payment, product in return true }
