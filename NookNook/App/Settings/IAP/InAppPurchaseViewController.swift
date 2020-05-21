@@ -235,16 +235,17 @@ class InAppPurchaseViewController: UITableViewController {
         }
     }
     
-    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return section == 1 ? 44 * 1.5 : 5
-    }
-    
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.detailTextLabel?.textColor = UIColor.dirt1.withAlphaComponent(0.5)
     }
     
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        let text = "By supporting me, you are supporting the app. Every supports matter in improving the app to make it better for each and every one of you ❤️"
+        let text =
+            """
+            By supporting me, you are supporting the app. Every supports matter in improving the app to make it better for each and every one of you ❤️
+
+            Terms And Condition + Privacy Policy is available via the website.
+            """
         return section == 1 ? text : nil
     }
     

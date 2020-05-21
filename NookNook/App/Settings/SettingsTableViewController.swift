@@ -18,7 +18,7 @@ class SettingsTableViewController: UITableViewController {
     private let EDIT_INFO_VC = "EditInfoVC"
     private let PATCH_LOG_VC = "PatchLogVC"
     private let ADS_VC = "AdsVC"
-    private let BUILD_NUMBER = "202005170"
+    private let BUILD_NUMBER = "202005210"
     
     weak var profileDelegate: ProfileDelegate!
     
@@ -78,12 +78,12 @@ class SettingsTableViewController: UITableViewController {
         deleteCacheCell.textLabel?.textColor = destColour
         deleteCacheCell.imageView?.tintColor = destColour
 
-        removeAdsCell = setupCell(text: "Support me", icon: IconHelper.systemIcon(of: .supportMe, weight: .regular), accesoryType: .disclosureIndicator)
+//        removeAdsCell = setupCell(text: "Support me", icon: IconHelper.systemIcon(of: .supportMe, weight: .regular), accesoryType: .disclosureIndicator)
     }
     
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
+        return 4
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -91,8 +91,8 @@ class SettingsTableViewController: UITableViewController {
         case 0: return 1
         case 1: return 3
         case 2: return 3
-        case 3: return 1
-        case 4: return 2
+//        case 3: return 1
+        case 3: return 2
         default: return 0
         }
     }
@@ -120,12 +120,12 @@ class SettingsTableViewController: UITableViewController {
             case 2: return self.appVersionCell
             default: fatalError("Unkown row in section 2")
             }
+//        case 3:
+//            switch indexPath.row {
+//            case 0: return self.removeAdsCell
+//            default: fatalError("Unknown row in section 3")
+//            }
         case 3:
-            switch indexPath.row {
-            case 0: return self.removeAdsCell
-            default: fatalError("Unknown row in section 3")
-            }
-        case 4:
             switch indexPath.row {
             case 0: return self.deleteCacheCell
             case 1: return self.deleteDatasCell
@@ -225,16 +225,16 @@ class SettingsTableViewController: UITableViewController {
                 self.present(navController, animated: true, completion: nil)
             default: break
             }
+//        case 3:
+//            switch indexPath.row {
+//            // Remove ads
+//            case 0:
+//                let vc = self.storyboard!.instantiateViewController(withIdentifier: ADS_VC) as! InAppPurchaseViewController
+//                let navController = UINavigationController(rootViewController: vc)
+//                self.present(navController, animated: true, completion: nil)
+//            default: break
+//            }
         case 3:
-            switch indexPath.row {
-            // Remove ads
-            case 0:
-                let vc = self.storyboard!.instantiateViewController(withIdentifier: ADS_VC) as! InAppPurchaseViewController
-                let navController = UINavigationController(rootViewController: vc)
-                self.present(navController, animated: true, completion: nil)
-            default: break
-            }
-        case 4:
             switch indexPath.row {
             // Delete cached data
             case 0:
@@ -267,10 +267,6 @@ class SettingsTableViewController: UITableViewController {
             fatalError("Invalid sections")
         }
         tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 5
     }
     
     override func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {

@@ -153,10 +153,6 @@ class TurnipReminderTableViewController: UITableViewController {
         }
     }
     
-    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return .leastNormalMagnitude
-    }
-    
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.detailTextLabel?.textColor = UIColor.dirt1.withAlphaComponent(0.5)
     }
@@ -258,20 +254,30 @@ class TurnipReminderTableViewController: UITableViewController {
     
     // MARK: - Utilities functions
     private func disableViews(status: Bool) {
+        
         DispatchQueue.main.async {
-            self.buyCell.switchView.isEnabled = status ? true : false
-            self.sellCell.switchView.isEnabled = status ? true : false
+            self.buyCell.switchView.isEnabled = status
+            self.sellCell.switchView.isEnabled = status
+            
             self.buyCell.selectionStyle = .none
             self.sellCell.selectionStyle = .none
+            
             self.buyCell.textLabel?.textColor = .lightGray
             self.sellCell.textLabel?.textColor = .lightGray
+
             self.customBuyCell.textLabel?.textColor = .lightGray
             self.customSellCell.textLabel?.textColor = .lightGray
+            
             self.customBuyCell.selectionStyle = .none
             self.customSellCell.selectionStyle = .none
+            
             self.customBuyCell.detailTextLabel?.textColor = .lightGray
             self.customSellCell.detailTextLabel?.textColor = .lightGray
+            
+            self.customBuyCell.isUserInteractionEnabled = status
+            self.customSellCell.isUserInteractionEnabled = status
         }
+
     }
     
 }

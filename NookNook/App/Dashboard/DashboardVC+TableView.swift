@@ -143,8 +143,4 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
         header.textLabel?.text? = header.textLabel?.text?.capitalized ?? ""
     }
     
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return .leastNormalMagnitude
-    }
-    
 }
