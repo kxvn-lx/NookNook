@@ -20,14 +20,14 @@ class PatchLogViewController: UIViewController {
     
     var logArray = [
         """
-        v1.1.0 (202005210)
+        v1.1.0 (202005211)
         - Long press on any main cells to preview and share! (Items, Critters, Wardrobes, Villagers, critters this month, favourites, and resident list.)
         - Improved app performance
         - Fixed minor bugs and typos
         - Improved edit info layout
 
         v1.0.0 (2020050616)
-        - Added ads (can be removed via in app purchases under settings. Ads MAY NOT appear as this is a new app. It takes time for the server to register my app to receive ads.)
+        - Added ads (can be removed via in app purchases under settings (future). Ads MAY NOT appear as this is a new app. It takes time for the server to register my app to receive ads.)
         - Added swipe tableview cells hint for new user to let them know SWIPE RIGHT is an option (only first time)
         - Improved app architecture
         - Added shadow size for fishes

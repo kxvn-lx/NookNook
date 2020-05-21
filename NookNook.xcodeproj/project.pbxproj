@@ -718,7 +718,6 @@
 				0ACCF3A724567BB200F9C62E /* XCRemoteSwiftPackageReference "WhatsNewKit" */,
 				0ADF34C924605ED8006AE2DB /* XCRemoteSwiftPackageReference "SwiftyStoreKit" */,
 				0A11A00C2461338400D1BFB2 /* XCRemoteSwiftPackageReference "SwipeCellKit" */,
-				0A2A8D872466D43300B47BE4 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */,
 			);
 			productRefGroup = 0AFD704C24419DD300957BE6 /* Products */;
 			projectDirPath = "";
@@ -1172,7 +1171,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 202005210;
+				CURRENT_PROJECT_VERSION = 202005211;
 				DEVELOPMENT_TEAM = D87H8GPTK2;
 				INFOPLIST_FILE = NookNook/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1194,7 +1193,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 202005210;
+				CURRENT_PROJECT_VERSION = 202005211;
 				DEVELOPMENT_TEAM = D87H8GPTK2;
 				INFOPLIST_FILE = NookNook/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1257,14 +1256,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 2.7.1;
-			};
-		};
-		0A2A8D872466D43300B47BE4 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SwiftyBeaver/SwiftyBeaver.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.9.1;
 			};
 		};
 		0A964996244E5FBE00C8E19D /* XCRemoteSwiftPackageReference "TweeTextField" */ = {

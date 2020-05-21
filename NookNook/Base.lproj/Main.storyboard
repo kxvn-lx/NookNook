@@ -136,20 +136,31 @@
         <scene sceneID="TkJ-ew-juG">
             <objects>
                 <tableViewController storyboardIdentifier="AdsVC" title="Support me" id="Qdb-Af-8gI" customClass="InAppPurchaseViewController" customModule="NookNook" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="O3o-h3-Rxc">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="O3o-h3-Rxc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="mlA-Md-t83">
+                                <rect key="frame" x="20" y="55.5" width="374" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mlA-Md-t83" id="d0z-34-kle">
+                                    <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
                         <sections/>
                         <connections>
                             <outlet property="dataSource" destination="Qdb-Af-8gI" id="HeH-zU-Nh1"/>
                             <outlet property="delegate" destination="Qdb-Af-8gI" id="ILi-W6-8Re"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="BHr-o0-St9"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ch9-dm-auY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5650" y="-321"/>
+            <point key="canvasLocation" x="7046.376811594203" y="-297.32142857142856"/>
         </scene>
         <!--Critters-->
         <scene sceneID="omT-t6-fSa">

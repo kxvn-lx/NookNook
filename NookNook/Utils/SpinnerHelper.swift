@@ -24,6 +24,7 @@ class SpinnerHelper: NSObject {
 
     static let shared = SpinnerHelper()
     
+    /// Start animating the spinner
     func present() {
         guard let window = window else { return }
         
@@ -40,6 +41,7 @@ class SpinnerHelper: NSObject {
         spinner.centerYAnchor.constraint(equalTo: v.centerYAnchor).isActive = true
     }
     
+    /// Stop animating the spinner
     func absent() {
         v.removeFromSuperview()
     }
