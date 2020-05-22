@@ -320,6 +320,8 @@ class DetailViewController: UIViewController {
         detailImageView.contentMode = .scaleAspectFit
         detailImageView.sd_imageTransition = .fade
         detailImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+        detailImageView.layer.cornerRadius = 10
+        detailImageView.clipsToBounds = true
         
         // Object Title and Subtitle stackView
         tsStackView = SVHelper.createSV(axis: .vertical, spacing: MARGIN, alignment: .leading, distribution: .equalSpacing)
