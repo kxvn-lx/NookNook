@@ -140,7 +140,7 @@ class CrittersMonthlyTableViewController: UITableViewController {
             }
         case .fish:
             if isFiltering {
-                if filteredBugs.isEmpty {
+                if filteredFishes.isEmpty {
                     self.tableView.setEmptyMessage("No fish(s) found 😢.\nPerhaps you made a mistake?")
                 } else {
                     self.tableView.restore()
