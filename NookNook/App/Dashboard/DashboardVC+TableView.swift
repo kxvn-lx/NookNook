@@ -38,7 +38,7 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
             case 0:
                 let cell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: CRITTER_CELL)
                 cell.textLabel!.text = "Critters this month"
-                cell.detailTextLabel?.text = "Bugs: \(caughtBugsMonth.count)/\(monthlyBug.count) | Fishes: \(caughtFishesMonth.count)/\(monthlyFish.count)"
+                cell.detailTextLabel?.text = "Bugs: \(caughtBugsMonth.count)/\(monthlyBug.count) | Fish: \(caughtFishesMonth.count)/\(monthlyFish.count)"
                 cell.accessoryType = .disclosureIndicator
                 return cell
             // Total bugs count
