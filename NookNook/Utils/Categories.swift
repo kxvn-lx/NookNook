@@ -21,7 +21,6 @@ enum Categories: String {
     
     case bugsMain
     case bugsSecondary
-    case fossilsTest
     
     case fishesMain
     case fishesSecondary
@@ -31,7 +30,7 @@ enum Categories: String {
     // Static functions to returns the filtered categories
     static func items() -> [Categories] {
         return [.housewares, .miscellaneous, .wallMounted, .art,
-                .wallpapers, .floors, .rugs, .photos, .fencing, .tools, .music]
+                .wallpapers, .floors, .rugs, .photos, .fencing, .tools, .music, .fossils]
     }
     
     static func wardrobes() -> [Categories] {
@@ -40,7 +39,7 @@ enum Categories: String {
     }
     
     static func critters() -> [Categories] {
-        return [.bugsMain, .fishesMain, .fossils]
+        return [.bugsMain, .fishesMain]
     }
     
 }

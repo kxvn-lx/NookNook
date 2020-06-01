@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		0A01F3102442DB8A001499D5 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 0A01F30F2442DB8A001499D5 /* SDWebImage */; };
 		0A01F31224431725001499D5 /* ImageEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A01F31124431724001499D5 /* ImageEngine.swift */; };
-		0A0C06A6248538ED0015A07F /* Museum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0C06A5248538ED0015A07F /* Museum.swift */; };
-		0A0C06A824853ACA0015A07F /* fossilsTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A0C06A724853ACA0015A07F /* fossilsTest.json */; };
 		0A0C06AA24853DB80015A07F /* bugsMain.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A0C06A924853DB80015A07F /* bugsMain.json */; };
 		0A0C06AC24853DBD0015A07F /* fishesMain.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A0C06AB24853DBD0015A07F /* fishesMain.json */; };
 		0A11A00E2461338400D1BFB2 /* SwipeCellKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0A11A00D2461338400D1BFB2 /* SwipeCellKit */; };
@@ -150,8 +148,6 @@
 
 /* Begin PBXFileReference section */
 		0A01F31124431724001499D5 /* ImageEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEngine.swift; sourceTree = "<group>"; };
-		0A0C06A5248538ED0015A07F /* Museum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Museum.swift; sourceTree = "<group>"; };
-		0A0C06A724853ACA0015A07F /* fossilsTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fossilsTest.json; sourceTree = "<group>"; };
 		0A0C06A924853DB80015A07F /* bugsMain.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bugsMain.json; sourceTree = "<group>"; };
 		0A0C06AB24853DBD0015A07F /* fishesMain.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fishesMain.json; sourceTree = "<group>"; };
 		0A149FF124512E7B0080941A /* UserPersistEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPersistEngine.swift; sourceTree = "<group>"; };
@@ -367,7 +363,6 @@
 			isa = PBXGroup;
 			children = (
 				0ADA6116248542E900A501BF /* villagers.json */,
-				0A0C06A724853ACA0015A07F /* fossilsTest.json */,
 				0A595B902453252D00F37E15 /* housewares.json */,
 				0A595B962453349B00F37E15 /* art.json */,
 				0A0C06A924853DB80015A07F /* bugsMain.json */,
@@ -606,7 +601,6 @@
 				0AEFF82E24471CD90032156C /* Wardrobe.swift */,
 				0A26E7B4244758C500D80594 /* Villager.swift */,
 				0A23BBCD244ADFE6009B5178 /* User.swift */,
-				0A0C06A5248538ED0015A07F /* Museum.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -753,7 +747,6 @@
 				0A370B982444543200A72048 /* dresses.json in Resources */,
 				0A595B972453349B00F37E15 /* art.json in Resources */,
 				0A595BA324533A6600F37E15 /* tools.json in Resources */,
-				0A0C06A824853ACA0015A07F /* fossilsTest.json in Resources */,
 				0A370B8E2444543200A72048 /* umbrellas.json in Resources */,
 				0A595B9B245339B000F37E15 /* floors.json in Resources */,
 				0AADD410244870D9004FDA33 /* fishesSecondary.json in Resources */,
@@ -957,7 +950,6 @@
 				0A5D2A36246B816C0037D2A0 /* ShareHelper.swift in Sources */,
 				0A65203124499B6400692E74 /* DataPersistEngine.swift in Sources */,
 				0A3642862446CC070081315A /* TimeMonthEngine.swift in Sources */,
-				0A0C06A6248538ED0015A07F /* Museum.swift in Sources */,
 				0A72C3712445AD8F009FA0D4 /* DetailViewController.swift in Sources */,
 				0AC89E422449419A009ADB18 /* VillagersTableViewController.swift in Sources */,
 				0AFD706C2441BFEE00957BE6 /* ItemsTableViewController.swift in Sources */,
