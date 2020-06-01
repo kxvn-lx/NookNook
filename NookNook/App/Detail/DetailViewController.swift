@@ -223,7 +223,7 @@ class DetailViewController: UIViewController {
             sourceNoteLabel.text = "Shadow size: \(shadow)"
         }
         
-        detailImageView.sd_setImage(with: ImageEngine.parseAcnhURL(with: critterObj.image, of: critterObj.category, mediaType: .images), placeholderImage: UIImage(named: "placeholder"))
+        detailImageView.sd_setImage(with: ImageEngine.parseAcnhURL(with: critterObj.image), placeholderImage: UIImage(named: "placeholder"))
         titleLabel.text = critterObj.name
         subtitleLabel.text = critterObj.obtainedFrom
         sellLabel.attributedText = PriceEngine.renderPrice(amount: critterObj.sell!, with: .none, of: sellLabel.font.pointSize)
@@ -265,7 +265,7 @@ class DetailViewController: UIViewController {
     
     /// Method to render villager object
     private func renderVillager() {
-        detailImageView.sd_setImage(with: ImageEngine.parseAcnhURL(with: villagerObj.image, of: villagerObj.category, mediaType: .images), placeholderImage: UIImage(named: "placeholder"))
+        detailImageView.sd_setImage(with: ImageEngine.parseAcnhURL(with: villagerObj.image), placeholderImage: UIImage(named: "placeholder"))
         titleLabel.text = villagerObj.name
         buyLabel.text = villagerObj.bdayString
         subtitleLabel.text = "Catch-phrase: \(villagerObj.catchphrase)"

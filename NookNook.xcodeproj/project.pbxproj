@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		0A01F3102442DB8A001499D5 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 0A01F30F2442DB8A001499D5 /* SDWebImage */; };
 		0A01F31224431725001499D5 /* ImageEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A01F31124431724001499D5 /* ImageEngine.swift */; };
+		0A0C06A6248538ED0015A07F /* Museum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0C06A5248538ED0015A07F /* Museum.swift */; };
+		0A0C06A824853ACA0015A07F /* fossilsTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A0C06A724853ACA0015A07F /* fossilsTest.json */; };
+		0A0C06AA24853DB80015A07F /* bugsMain.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A0C06A924853DB80015A07F /* bugsMain.json */; };
+		0A0C06AC24853DBD0015A07F /* fishesMain.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A0C06AB24853DBD0015A07F /* fishesMain.json */; };
 		0A11A00E2461338400D1BFB2 /* SwipeCellKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0A11A00D2461338400D1BFB2 /* SwipeCellKit */; };
 		0A149FF224512E7B0080941A /* UserPersistEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A149FF124512E7B0080941A /* UserPersistEngine.swift */; };
 		0A14A002245155A10080941A /* ResidentHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A14A001245155A10080941A /* ResidentHelper.swift */; };
@@ -17,7 +21,6 @@
 		0A23BBCE244ADFE6009B5178 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A23BBCD244ADFE6009B5178 /* User.swift */; };
 		0A23BBD0244AE1D5009B5178 /* Fruits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A23BBCF244AE1D5009B5178 /* Fruits.swift */; };
 		0A26E7B5244758C500D80594 /* Villager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A26E7B4244758C500D80594 /* Villager.swift */; };
-		0A26E7B724475B6300D80594 /* villagers.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A26E7B624475B6300D80594 /* villagers.json */; };
 		0A295B4A244494F9001CF828 /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A295B49244494F9001CF828 /* Categories.swift */; };
 		0A295B4C2444AAD0001CF828 /* Taptic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A295B4B2444AAD0001CF828 /* Taptic.swift */; };
 		0A2A8D862466D1E900B47BE4 /* ReviewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2A8D852466D1E900B47BE4 /* ReviewHelper.swift */; };
@@ -84,14 +87,13 @@
 		0A97C2FD244C95360062B136 /* FavouriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A97C2FC244C95360062B136 /* FavouriteTableViewCell.swift */; };
 		0AA3616E244C520500D326AF /* SVHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA3616D244C520500D326AF /* SVHelper.swift */; };
 		0AADD410244870D9004FDA33 /* fishesSecondary.json in Resources */ = {isa = PBXBuildFile; fileRef = 0AADD40F244870D9004FDA33 /* fishesSecondary.json */; };
-		0AADD4192448ADB4004FDA33 /* bugsMain.json in Resources */ = {isa = PBXBuildFile; fileRef = 0AADD4172448ADB4004FDA33 /* bugsMain.json */; };
-		0AADD41A2448ADB4004FDA33 /* fishesMain.json in Resources */ = {isa = PBXBuildFile; fileRef = 0AADD4182448ADB4004FDA33 /* fishesMain.json */; };
 		0AB4DCD3245AD44A00AB16E6 /* TurnipReminderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB4DCD2245AD44A00AB16E6 /* TurnipReminderTableViewController.swift */; };
 		0AC54AF2244DF17600AD1188 /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0AC703B42451C749008D7C77 /* CritterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC703B32451C749008D7C77 /* CritterHelper.swift */; };
 		0AC89E402449418B009ADB18 /* VillagerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC89E3F2449418B009ADB18 /* VillagerTableViewCell.swift */; };
 		0AC89E422449419A009ADB18 /* VillagersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC89E412449419A009ADB18 /* VillagersTableViewController.swift */; };
 		0ACCF3AC2456830A00F9C62E /* WhatsNewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACCF3AB2456830A00F9C62E /* WhatsNewHelper.swift */; };
+		0ADA6117248542E900A501BF /* villagers.json in Resources */ = {isa = PBXBuildFile; fileRef = 0ADA6116248542E900A501BF /* villagers.json */; };
 		0ADC7B97245F98A50033F67E /* GoogleAdsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADC7B96245F98A50033F67E /* GoogleAdsHelper.swift */; };
 		0ADC7BA0245FACA00033F67E /* InAppPurchaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADC7B9F245FACA00033F67E /* InAppPurchaseViewController.swift */; };
 		0ADC7BA4245FC0B50033F67E /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ADC7BA3245FC0B50033F67E /* StoreKit.framework */; };
@@ -148,6 +150,10 @@
 
 /* Begin PBXFileReference section */
 		0A01F31124431724001499D5 /* ImageEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEngine.swift; sourceTree = "<group>"; };
+		0A0C06A5248538ED0015A07F /* Museum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Museum.swift; sourceTree = "<group>"; };
+		0A0C06A724853ACA0015A07F /* fossilsTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fossilsTest.json; sourceTree = "<group>"; };
+		0A0C06A924853DB80015A07F /* bugsMain.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bugsMain.json; sourceTree = "<group>"; };
+		0A0C06AB24853DBD0015A07F /* fishesMain.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fishesMain.json; sourceTree = "<group>"; };
 		0A149FF124512E7B0080941A /* UserPersistEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPersistEngine.swift; sourceTree = "<group>"; };
 		0A14A001245155A10080941A /* ResidentHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResidentHelper.swift; sourceTree = "<group>"; };
 		0A14A0062451986B0080941A /* CrittersMonthlyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrittersMonthlyTableViewController.swift; sourceTree = "<group>"; };
@@ -155,7 +161,6 @@
 		0A23BBCD244ADFE6009B5178 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0A23BBCF244AE1D5009B5178 /* Fruits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fruits.swift; sourceTree = "<group>"; };
 		0A26E7B4244758C500D80594 /* Villager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Villager.swift; sourceTree = "<group>"; };
-		0A26E7B624475B6300D80594 /* villagers.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = villagers.json; sourceTree = "<group>"; };
 		0A295B49244494F9001CF828 /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
 		0A295B4B2444AAD0001CF828 /* Taptic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Taptic.swift; sourceTree = "<group>"; };
 		0A2A8D852466D1E900B47BE4 /* ReviewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewHelper.swift; sourceTree = "<group>"; };
@@ -224,14 +229,13 @@
 		0A97C2FC244C95360062B136 /* FavouriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteTableViewCell.swift; sourceTree = "<group>"; };
 		0AA3616D244C520500D326AF /* SVHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVHelper.swift; sourceTree = "<group>"; };
 		0AADD40F244870D9004FDA33 /* fishesSecondary.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fishesSecondary.json; sourceTree = "<group>"; };
-		0AADD4172448ADB4004FDA33 /* bugsMain.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bugsMain.json; sourceTree = "<group>"; };
-		0AADD4182448ADB4004FDA33 /* fishesMain.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fishesMain.json; sourceTree = "<group>"; };
 		0AB4DCD2245AD44A00AB16E6 /* TurnipReminderTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnipReminderTableViewController.swift; sourceTree = "<group>"; };
 		0AC54AF3244DF17B00AD1188 /* RAGTextField.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RAGTextField.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AC703B32451C749008D7C77 /* CritterHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CritterHelper.swift; sourceTree = "<group>"; };
 		0AC89E3F2449418B009ADB18 /* VillagerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VillagerTableViewCell.swift; sourceTree = "<group>"; };
 		0AC89E412449419A009ADB18 /* VillagersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VillagersTableViewController.swift; sourceTree = "<group>"; };
 		0ACCF3AB2456830A00F9C62E /* WhatsNewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsNewHelper.swift; sourceTree = "<group>"; };
+		0ADA6116248542E900A501BF /* villagers.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = villagers.json; sourceTree = "<group>"; };
 		0ADC7B96245F98A50033F67E /* GoogleAdsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAdsHelper.swift; sourceTree = "<group>"; };
 		0ADC7B9F245FACA00033F67E /* InAppPurchaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppPurchaseViewController.swift; sourceTree = "<group>"; };
 		0ADC7BA3245FC0B50033F67E /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -362,13 +366,14 @@
 		0A370B682444417800A72048 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				0ADA6116248542E900A501BF /* villagers.json */,
+				0A0C06A724853ACA0015A07F /* fossilsTest.json */,
 				0A595B902453252D00F37E15 /* housewares.json */,
 				0A595B962453349B00F37E15 /* art.json */,
-				0AADD4172448ADB4004FDA33 /* bugsMain.json */,
-				0AADD4182448ADB4004FDA33 /* fishesMain.json */,
+				0A0C06A924853DB80015A07F /* bugsMain.json */,
+				0A0C06AB24853DBD0015A07F /* fishesMain.json */,
 				0A36427F24469C600081315A /* bugsSecondary.json */,
 				0AADD40F244870D9004FDA33 /* fishesSecondary.json */,
-				0A26E7B624475B6300D80594 /* villagers.json */,
 				0A595BA724533B3F00F37E15 /* fossils.json */,
 				0A595BA624533B3F00F37E15 /* other.json */,
 				0A370B702444543000A72048 /* accessories.json */,
@@ -555,10 +560,10 @@
 		0AFD704D24419DD300957BE6 /* NookNook */ = {
 			isa = PBXGroup;
 			children = (
+				0AFD70672441B91700957BE6 /* Model */,
 				0A370B682444417800A72048 /* Data */,
 				0A01F31324431BB2001499D5 /* App */,
 				0A01F30B2442D9E9001499D5 /* Engine */,
-				0AFD70672441B91700957BE6 /* Model */,
 				0A370B5D2443221100A72048 /* System */,
 				0AFD70652441B85F00957BE6 /* Utils */,
 				0AFD705424419DD300957BE6 /* Main.storyboard */,
@@ -601,6 +606,7 @@
 				0AEFF82E24471CD90032156C /* Wardrobe.swift */,
 				0A26E7B4244758C500D80594 /* Villager.swift */,
 				0A23BBCD244ADFE6009B5178 /* User.swift */,
+				0A0C06A5248538ED0015A07F /* Museum.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -744,14 +750,13 @@
 				0A595B932453334C00F37E15 /* wallpapers.json in Resources */,
 				0A370B9E2444543200A72048 /* socks.json in Resources */,
 				0A595BA124533A4E00F37E15 /* fencing.json in Resources */,
-				0A26E7B724475B6300D80594 /* villagers.json in Resources */,
 				0A370B982444543200A72048 /* dresses.json in Resources */,
 				0A595B972453349B00F37E15 /* art.json in Resources */,
 				0A595BA324533A6600F37E15 /* tools.json in Resources */,
+				0A0C06A824853ACA0015A07F /* fossilsTest.json in Resources */,
 				0A370B8E2444543200A72048 /* umbrellas.json in Resources */,
 				0A595B9B245339B000F37E15 /* floors.json in Resources */,
 				0AADD410244870D9004FDA33 /* fishesSecondary.json in Resources */,
-				0AADD4192448ADB4004FDA33 /* bugsMain.json in Resources */,
 				0A370B8D2444543200A72048 /* accessories.json in Resources */,
 				0A595B992453393400F37E15 /* wall-mounted.json in Resources */,
 				0A595B9D245339DD00F37E15 /* rugs.json in Resources */,
@@ -759,10 +764,11 @@
 				0AFD705B24419DD500957BE6 /* LaunchScreen.storyboard in Resources */,
 				0AFD705824419DD500957BE6 /* Assets.xcassets in Resources */,
 				0A595B952453344A00F37E15 /* miscellaneous.json in Resources */,
-				0AADD41A2448ADB4004FDA33 /* fishesMain.json in Resources */,
 				0A370B912444543200A72048 /* bottoms.json in Resources */,
+				0A0C06AA24853DB80015A07F /* bugsMain.json in Resources */,
 				0A370B9B2444543200A72048 /* posters.json in Resources */,
 				0A595BA524533AB200F37E15 /* music.json in Resources */,
+				0A0C06AC24853DBD0015A07F /* fishesMain.json in Resources */,
 				0A370BA02444543200A72048 /* headwear.json in Resources */,
 				0A36428024469C600081315A /* bugsSecondary.json in Resources */,
 				0A370BA82444543200A72048 /* construction.json in Resources */,
@@ -776,6 +782,7 @@
 				0A595B9F24533A1D00F37E15 /* photos.json in Resources */,
 				0A370B902444543200A72048 /* shoes.json in Resources */,
 				0A595BAB24533C8C00F37E15 /* tops.json in Resources */,
+				0ADA6117248542E900A501BF /* villagers.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -950,6 +957,7 @@
 				0A5D2A36246B816C0037D2A0 /* ShareHelper.swift in Sources */,
 				0A65203124499B6400692E74 /* DataPersistEngine.swift in Sources */,
 				0A3642862446CC070081315A /* TimeMonthEngine.swift in Sources */,
+				0A0C06A6248538ED0015A07F /* Museum.swift in Sources */,
 				0A72C3712445AD8F009FA0D4 /* DetailViewController.swift in Sources */,
 				0AC89E422449419A009ADB18 /* VillagersTableViewController.swift in Sources */,
 				0AFD706C2441BFEE00957BE6 /* ItemsTableViewController.swift in Sources */,

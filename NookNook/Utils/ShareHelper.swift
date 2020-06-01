@@ -54,7 +54,7 @@ struct ShareHelper {
         case .critters:
             let crit = obj as! Critter
             name = crit.name
-            imageView.sd_setImage(with: ImageEngine.parseAcnhURL(with: crit.image, of: crit.category, mediaType: .images), completed: nil)
+            imageView.sd_setImage(with: ImageEngine.parseAcnhURL(with: crit.image), completed: nil)
         case .wardrobes:
             let war = obj as! Wardrobe
             name = war.name
@@ -62,7 +62,7 @@ struct ShareHelper {
         case .villagers:
             let vill = obj as! Villager
             name = vill.name
-            imageView.sd_setImage(with: ImageEngine.parseAcnhURL(with: vill.image, of: vill.category, mediaType: .images), completed: nil)
+            imageView.sd_setImage(with: ImageEngine.parseAcnhURL(with: vill.image), completed: nil)
         }
         
         let share = UIAction(title: "Share", image: UIImage(systemName: "square.and.arrow.up")) { _ in

@@ -184,7 +184,7 @@ class FavouritesTableViewController: UITableViewController {
                 cell.imgView.sd_imageTransition = .fade
                 cell.imgView.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 
-                cell.imgView.sd_setImage(with: ImageEngine.parseAcnhURL(with: villager.image, of: villager.category, mediaType: .icons), placeholderImage: nil)
+                cell.imgView.sd_setImage(with: ImageEngine.parseAcnhURL(with: villager.icon), placeholderImage: nil)
                 cell.nameLabel.text = villager.name
                 cell.label1.text = villager.species
                 cell.tagLabel.setTitle(villager.personality, for: .normal)

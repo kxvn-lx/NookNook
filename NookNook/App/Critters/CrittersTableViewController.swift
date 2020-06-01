@@ -163,7 +163,7 @@ class CrittersTableViewController: UITableViewController {
             
             let critter = isFiltering ? filteredCritters[indexPath.row] : critters[indexPath.row]
             
-            critterCell.imgView.sd_setImage(with: ImageEngine.parseAcnhURL(with: critter.image, of: critter.category, mediaType: .images), placeholderImage: UIImage(named: "placeholder"))
+            critterCell.imgView.sd_setImage(with: ImageEngine.parseAcnhURL(with: critter.image), placeholderImage: UIImage(named: "placeholder"))
             
             critterCell.nameLabel.text = critter.name
             critterCell.obtainedFromLabel.text = critter.obtainedFrom.isEmpty ? "Location unknown" : critter.obtainedFrom

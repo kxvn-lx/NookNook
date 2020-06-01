@@ -133,7 +133,7 @@ class VillagersTableViewController: UITableViewController {
             villagerCell.delegate = self
             let villager = isFiltering ? filteredVillagers[indexPath.row] : villagers[indexPath.row]
             
-            villagerCell.imgView.sd_setImage(with: ImageEngine.parseAcnhURL(with: villager.image, of: villager.category, mediaType: .icons), placeholderImage: UIImage(named: "placeholder"))
+            villagerCell.imgView.sd_setImage(with: ImageEngine.parseAcnhURL(with: villager.icon), placeholderImage: UIImage(named: "placeholder"))
             villagerCell.nameLabel.text = villager.name
             villagerCell.speciesLabel.text = villager.species
             villagerCell.personalityLabel.setTitle(villager.personality, for: .normal)

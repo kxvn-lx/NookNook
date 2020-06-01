@@ -14,10 +14,6 @@ struct ImageEngine {
     private static let SERVICE_ART_URL = "https://acnhcdn.com/latest/FtrIcon/"
     private static let ACNH_API_URL = "http://acnhapi.com/"
     
-    enum MediaType {
-        case icons, images
-    }
-    
     /**
      Parse the given NookPlaza URL and returns a URL format
      - Parameters:
@@ -41,9 +37,8 @@ struct ImageEngine {
      - Returns:
         - The url of the image
      */
-    static func parseAcnhURL(with imageID: String, of catType: String, mediaType: MediaType) -> URL {
-        let catType = catType == Categories.fishes.rawValue ? "fish" : catType
-        return URL(string: "\(ImageEngine.ACNH_API_URL)\(mediaType)/\(catType)/\(imageID)")!
+    static func parseAcnhURL(with imageID: String) -> URL {
+        return URL(string: "\(imageID)")!
     }
     
 }

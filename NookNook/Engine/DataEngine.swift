@@ -100,10 +100,10 @@ struct DataEngine {
                 
                 for k in obj {
                     let key = jsonObj[k]!
-                    let weather = weathers[key["name"]["name-en"].stringValue] != nil ? weathers[key["name"]["name-en"].stringValue]! : "Unknown"
+                    let weather = weathers[key["name"]["name-USen"].stringValue] != nil ? weathers[key["name"]["name-USen"].stringValue]! : "Unknown"
                     
-                    let name = key["name"]["name-en"].stringValue
-                    let image = key["id"].stringValue
+                    let name = key["name"]["name-USen"].stringValue
+                    let image = key["image_uri"].stringValue
                     let obtainedFrom = key["availability"]["location"].stringValue
                     let time = key["availability"]["time"].stringValue
                     let activeMonthsN = key["availability"]["month-northern"].stringValue
@@ -130,7 +130,7 @@ struct DataEngine {
                 print("parse error: \(error.localizedDescription)")
             }
         } else {
-            print("Invalid filename/path on critters")
+            fatalError("Invalid filename/path on critters")
         }
         
         return critters
@@ -159,6 +159,75 @@ struct DataEngine {
         }
         
         return (weathers)
+    }
+    
+    static func loadMuseumJSON(from category: Categories) -> [Museum] {
+        var museums: [Museum] = []
+        
+        var weathers: [String: String]?
+        
+        var cat: String!
+        
+        // Load datas from secondary JSON files (bugsSecondary.JSON)
+        switch category {
+        case .bugsMain:
+            weathers = loadSecondCritterJSON(with: .bugsSecondary)
+            cat = "bugs"
+        case .fishesMain:
+            weathers = loadSecondCritterJSON(with: .fishesSecondary)
+            cat = "fishes"
+        default: cat = category.rawValue
+        }
+        
+        if let path = Bundle.main.path(forResource: category.rawValue, ofType: "json") {
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped)
+                let jsonObj = try JSON(data: data).dictionary!
+                
+                let obj = jsonObj.keys.sorted()
+                 
+                 for k in obj {
+                    let key = jsonObj[k]!
+                    
+                    let name = key["name"]["name-USen"].stringValue
+                    let image = key["image_uri"].stringValue
+                    var weather: String? = ""
+                    
+                    if category == .bugsMain && category == .fishesMain {
+                        weather = weathers![key["name"]["name-en"].stringValue] != nil ? weathers![key["name"]["name-en"].stringValue]! : "Unknown"
+                    }
+                    
+                    let obtainedFrom = key["availability"]["location"].stringValue
+                    let time = key["availability"]["time"].stringValue
+                    let activeMonthsN = key["availability"]["month-northern"].stringValue
+                    let activeMonthsS = key["availability"]["month-southern"].stringValue
+                    let rarity = key["availability"]["rarity"].stringValue
+                    let sell = key["price"].intValue
+                    let shadow = key["shadow"].stringValue
+                    
+                    let newMuseum = Museum(name: name,
+                                           image: image,
+                                           weather: weather,
+                                           obtainedFrom: obtainedFrom,
+                                           time: time,
+                                           activeMonthsN: activeMonthsN,
+                                           activeMonthsS: activeMonthsS,
+                                           rarity: rarity,
+                                           category: cat,
+                                           sell: sell,
+                                           shadow: shadow)
+                    museums.append(newMuseum)
+                 }
+                print(museums[0])
+
+            } catch let error {
+                fatalError("parse error: \(error.localizedDescription)")
+            }
+        } else {
+            fatalError("Invalid filename/path on items")
+        }
+        
+        return museums
     }
     
     /**
@@ -225,8 +294,9 @@ struct DataEngine {
                 
                 for k in obj {
                     let key = jsonObj[k]!
-                    let newVillager = Villager(name: key["name"]["name-en"].stringValue,
-                                               image: key["id"].stringValue,
+                    let newVillager = Villager(name: key["name"]["name-USen"].stringValue,
+                                               icon: key["icon_uri"].stringValue,
+                                               image: key["image_uri"].stringValue,
                                                personality: key["personality"].stringValue,
                                                bdayString: key["birthday-string"].stringValue,
                                                species: key["species"].stringValue,

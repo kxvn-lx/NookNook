@@ -12,6 +12,9 @@ class HomeViewController: NookTabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        DataEngine.loadMuseumJSON(from: .fossilsTest)
+        
         if let tbManager = tabBar.items {
             tbManager[0].title = "Items"
             tbManager[0].image = UIImage(systemName: "house")
