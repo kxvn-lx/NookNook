@@ -105,6 +105,12 @@ class InAppPurchaseViewController: UITableViewController {
                 case .success:
                     SpinnerHelper.shared.absent()
                     
+                    // Remove the ads for these two cells.
+                    switch indexPath.row {
+                    case 1, 2: UDEngine.shared.saveIsAdsPurchased()
+                    default: break
+                    }
+                    
                 case .error(let error):
                     switch error.code {
                     case .paymentCancelled: SpinnerHelper.shared.absent()

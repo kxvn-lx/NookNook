@@ -20,6 +20,9 @@ class PatchLogViewController: UIViewController {
     
     var logArray = [
         """
+        v1.1.1
+        - Fixed IAP issue not removing ads on purchase.
+
         v1.1.0 (202005280)
         - Long press on any main cells to preview and share! (Items, Critters, Wardrobes, Villagers, critters this month, favourites, and resident list.)
         - Improved app performance

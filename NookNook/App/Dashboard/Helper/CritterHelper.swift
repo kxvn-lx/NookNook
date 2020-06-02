@@ -105,6 +105,7 @@ struct CritterHelper {
                 
             })
             allFishes.forEach({
+                
                 let monthsArr = TimeMonthEngine.formatMonths(month: $0.activeMonthsS)
                 
                 if monthsArr.count == 4 {
@@ -128,7 +129,6 @@ struct CritterHelper {
                 }
             })
         }
-        
         switch userHemisphere {
         case .Northern:
             return (northernBugs, northernFishes)
