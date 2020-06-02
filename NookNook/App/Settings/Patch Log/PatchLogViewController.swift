@@ -20,7 +20,7 @@ class PatchLogViewController: UIViewController {
     
     var logArray = [
         """
-        v1.1.1
+        v1.1.1 (202006020)
         - Fixed IAP issue not removing ads on purchase.
         - Minor adjustments on the app engine.
 
