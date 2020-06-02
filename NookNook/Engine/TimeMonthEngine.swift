@@ -55,6 +55,11 @@ struct TimeMonthEngine {
             return [-1]
         }
         
+        if month.count == 1 {
+            guard let m = Int(month) else { fatalError("Attempt to make something of Int") }
+            return [m]
+        }
+        
         if month.contains("&") {
             let monthArr = month.components(separatedBy: "&")
             let arr0 = monthArr[0].trimmingCharacters(in: .whitespacesAndNewlines)
