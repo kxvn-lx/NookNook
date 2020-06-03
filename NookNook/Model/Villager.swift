@@ -13,7 +13,7 @@ struct Villager: Codable, Equatable, Identifiable {
     var id: String { name }
     
     let name: String
-    let icon: String
+    let icon: String?
     let image: String
     
     let personality: String
