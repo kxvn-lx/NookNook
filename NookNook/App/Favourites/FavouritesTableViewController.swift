@@ -184,7 +184,15 @@ class FavouritesTableViewController: UITableViewController {
                 cell.imgView.sd_imageTransition = .fade
                 cell.imgView.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 
-                cell.imgView.sd_setImage(with: ImageEngine.parseAcnhURL(with: villager.icon!), placeholderImage: nil)
+                // Fallback on older version
+                var iconString = self.favouritesManager.favouritedVillagers[indexPath.row].image
+                if !iconString.contains("https://acnhapi.com/v1/images/") {
+                    iconString = "https://acnhapi.com/v1/icons/villagers/\(iconString)"
+                } else {
+                    iconString = self.favouritesManager.favouritedVillagers[indexPath.row].icon!
+                }
+                
+                cell.imgView.sd_setImage(with: ImageEngine.parseAcnhURL(with: iconString), placeholderImage: nil)
                 cell.nameLabel.text = villager.name
                 cell.label1.text = villager.species
                 cell.tagLabel.setTitle(villager.personality, for: .normal)
