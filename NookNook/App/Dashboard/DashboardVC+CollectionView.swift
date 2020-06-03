@@ -24,7 +24,15 @@ extension DashboardViewController: UICollectionViewDelegateFlowLayout, UICollect
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VARIANT_CELL, for: indexPath) as! ResidentCollectionViewCell
         
-        cell.villagerImage.sd_setImage(with: ImageEngine.parseAcnhURL(with: self.favouritesManager.residentVillagers[indexPath.row].icon), placeholderImage: UIImage(named: "placeholder"))
+        // Fallback on older version
+        var iconString = self.favouritesManager.residentVillagers[indexPath.row].image
+        if !iconString.contains("https://acnhapi.com/v1/images/") {
+            iconString = "https://acnhapi.com/v1/icons/villagers/\(iconString)"
+        } else {
+            iconString = self.favouritesManager.residentVillagers[indexPath.row].icon!
+        }
+
+        cell.villagerImage.sd_setImage(with: ImageEngine.parseAcnhURL(with: iconString), placeholderImage: UIImage(named: "placeholder"))
         
         let villagerName = self.birthdayResidents.contains(self.favouritesManager.residentVillagers[indexPath.row]) ? "\(self.favouritesManager.residentVillagers[indexPath.row].name) 🎂" : self.favouritesManager.residentVillagers[indexPath.row].name
         cell.villagerName.text = villagerName

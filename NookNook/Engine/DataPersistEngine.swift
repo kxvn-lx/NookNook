@@ -42,6 +42,7 @@ struct DataPersistEngine {
             filePath = try FileManager.default.url(for: .documentDirectory,
                                                    in: .userDomainMask,
                                                    appropriateFor: nil,
+                              
                                                    create: false).appendingPathComponent("SavedDatas")
             if let data = try? Data(contentsOf: filePath) {
                 decoder.dataDecodingStrategy = .base64
@@ -57,7 +58,8 @@ struct DataPersistEngine {
                 self.residentVillagers = savedData.residentVillagers
             }
         } catch let error {
-            fatalError(error.localizedDescription)
+            print(error)
+            fatalError()
         }
     }
     

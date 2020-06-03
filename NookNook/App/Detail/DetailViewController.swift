@@ -265,7 +265,13 @@ class DetailViewController: UIViewController {
     
     /// Method to render villager object
     private func renderVillager() {
-        detailImageView.sd_setImage(with: ImageEngine.parseAcnhURL(with: villagerObj.image), placeholderImage: UIImage(named: "placeholder"))
+        // fallback on older version
+        var imageString = villagerObj.image
+        if !imageString.contains("https://acnhapi.com/v1/images/") {
+            imageString = "https://acnhapi.com/v1/images/villagers/\(imageString)"
+        }
+        
+        detailImageView.sd_setImage(with: ImageEngine.parseAcnhURL(with: imageString), placeholderImage: UIImage(named: "placeholder"))
         titleLabel.text = villagerObj.name
         buyLabel.text = villagerObj.bdayString
         subtitleLabel.text = "Catch-phrase: \(villagerObj.catchphrase)"

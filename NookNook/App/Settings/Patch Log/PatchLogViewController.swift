@@ -20,6 +20,9 @@ class PatchLogViewController: UIViewController {
     
     var logArray = [
         """
+        v1.1.2 (202006030)
+        - Fixed chrash on some devices when opening the app
+
         v1.1.1 (202006020)
         - Fixed IAP issue not removing ads on purchase.
         - Minor adjustments on the app engine.
