@@ -13,13 +13,59 @@ class WardrobetabTableViewCell: SwipeTableViewCell {
 
     private let MARGIN: CGFloat = 10
     
-    var imgView: UIImageView!
-    var customisableImageView: UIImageView!
-    var isFavImageView: UIImageView!
-    var nameLabel: UILabel!
-    var obtainedFromLabel: UILabel!
-    var buyLabel: UILabel!
-    var sellLabel: UILabel!
+    var imgView: UIImageView = {
+        let v = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        v.translatesAutoresizingMaskIntoConstraints = false
+        v.contentMode = .scaleAspectFit
+       return v
+    }()
+    var customisableImageView: UIImageView = {
+        let v = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        v.translatesAutoresizingMaskIntoConstraints = false
+        v.contentMode = .scaleAspectFit
+        v.tintColor = .darkGray
+       return v
+    }()
+    var isFavImageView: UIImageView = {
+        let v = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        v.translatesAutoresizingMaskIntoConstraints = false
+        v.contentMode = .scaleAspectFit
+        v.tintColor = .darkGray
+        
+       return v
+    }()
+    var nameLabel: UILabel = {
+        let v = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
+        v.translatesAutoresizingMaskIntoConstraints = false
+        v.numberOfLines = 0
+        v.font = UIFont.systemFont(ofSize: v.font!.pointSize, weight: .semibold)
+        v.textColor = UIColor.dirt1
+       return v
+    }()
+    var obtainedFromLabel: UILabel = {
+        let v = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
+        v.translatesAutoresizingMaskIntoConstraints = false
+        v.numberOfLines = 0
+        v.font = UIFont.preferredFont(forTextStyle: .caption1)
+        v.textColor = UIColor.dirt1.withAlphaComponent(0.5)
+       return v
+    }()
+    var buyLabel: UILabel = {
+        let v = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
+        v.translatesAutoresizingMaskIntoConstraints = false
+        v.numberOfLines = 0
+        v.font = UIFont.preferredFont(forTextStyle: .caption1)
+        v.textColor = UIColor.dirt1.withAlphaComponent(0.5)
+       return v
+    }()
+    var sellLabel: UILabel = {
+        let v = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
+        v.translatesAutoresizingMaskIntoConstraints = false
+        v.numberOfLines = 0
+        v.font = UIFont.preferredFont(forTextStyle: .caption1)
+        v.textColor = UIColor.dirt1.withAlphaComponent(0.5)
+       return v
+    }()
     
     private var infoStackView: UIStackView!
     private var mStackView: UIStackView!
@@ -38,69 +84,16 @@ class WardrobetabTableViewCell: SwipeTableViewCell {
     }
     
     private func setupView() {
-        iconStackView = UIStackView()
-        iconStackView.translatesAutoresizingMaskIntoConstraints = false
-        iconStackView.alignment = .leading
-        iconStackView.axis = .vertical
-        iconStackView.distribution = .equalCentering
-        iconStackView.spacing = MARGIN
-        
-        customisableImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-        customisableImageView.translatesAutoresizingMaskIntoConstraints = false
-        customisableImageView.contentMode = .scaleAspectFit
-        customisableImageView.tintColor = .darkGray
-        
-        isFavImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-        isFavImageView.translatesAutoresizingMaskIntoConstraints = false
-        isFavImageView.contentMode = .scaleAspectFit
-        isFavImageView.tintColor = .darkGray
-        
+        iconStackView = SVHelper.createSV(axis: .vertical, spacing: MARGIN, alignment: .leading, distribution: .equalCentering)
+
         iconStackView.addArrangedSubview(customisableImageView)
         iconStackView.addArrangedSubview(isFavImageView)
         
-        imgView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-        imgView.translatesAutoresizingMaskIntoConstraints = false
-        imgView.contentMode = .scaleAspectFit
-        
         imgView.addSubview(iconStackView)
+
+        infoStackView = SVHelper.createSV(axis: .vertical, spacing: MARGIN, alignment: .leading, distribution: .fill)
         
-        nameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        nameLabel.numberOfLines = 0
-        nameLabel.font = UIFont.systemFont(ofSize: nameLabel.font!.pointSize, weight: .semibold)
-        nameLabel.textColor = UIColor.dirt1
-        
-        obtainedFromLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
-        obtainedFromLabel.translatesAutoresizingMaskIntoConstraints = false
-        obtainedFromLabel.numberOfLines = 0
-        obtainedFromLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
-        obtainedFromLabel.textColor = UIColor.dirt1.withAlphaComponent(0.5)
-        
-        buyLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
-        buyLabel.translatesAutoresizingMaskIntoConstraints = false
-        buyLabel.numberOfLines = 0
-        buyLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
-        buyLabel.textColor = UIColor.dirt1.withAlphaComponent(0.5)
-        
-        sellLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
-        sellLabel.translatesAutoresizingMaskIntoConstraints = false
-        sellLabel.numberOfLines = 0
-        sellLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
-        sellLabel.textColor = UIColor.dirt1.withAlphaComponent(0.5)
-        
-        infoStackView = UIStackView()
-        infoStackView.alignment = .leading
-        infoStackView.translatesAutoresizingMaskIntoConstraints = false
-        infoStackView.axis = .vertical
-        infoStackView.distribution = .fill
-        infoStackView.spacing = MARGIN
-        
-        let bsStackView = UIStackView()
-        bsStackView.alignment = .leading
-        bsStackView.translatesAutoresizingMaskIntoConstraints = false
-        bsStackView.axis = .horizontal
-        bsStackView.distribution = .fillEqually
-        bsStackView.spacing = MARGIN
+        let bsStackView = SVHelper.createSV(axis: .horizontal, spacing: MARGIN, alignment: .leading, distribution: .fillEqually)
         
         bsStackView.addArrangedSubview(buyLabel)
         bsStackView.addArrangedSubview(sellLabel)
@@ -111,12 +104,7 @@ class WardrobetabTableViewCell: SwipeTableViewCell {
         infoStackView.addArrangedSubview(obtainedFromLabel)
         infoStackView.addArrangedSubview(bsStackView)
 
-        mStackView = UIStackView()
-        mStackView.translatesAutoresizingMaskIntoConstraints = false
-        mStackView.alignment = .center
-        mStackView.axis = .horizontal
-        mStackView.distribution = .fill
-        mStackView.spacing = MARGIN
+        mStackView = SVHelper.createSV(axis: .horizontal, spacing: MARGIN, alignment: .center, distribution: .fill)
 
         mStackView.addArrangedSubview(imgView)
         mStackView.addArrangedSubview(infoStackView)
@@ -128,25 +116,26 @@ class WardrobetabTableViewCell: SwipeTableViewCell {
         let wardrobeImageViewSize: CGFloat = 0.20
         let smallIconSize: CGFloat = wardrobeImageViewSize / 6
         
-        NSLayoutConstraint.activate([
-            imgView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: wardrobeImageViewSize),
-            imgView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: wardrobeImageViewSize),
-            
-            mStackView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: MARGIN),
-            mStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: MARGIN),
-            mStackView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -MARGIN),
-            mStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -MARGIN),
-            
-            iconStackView.leftAnchor.constraint(equalTo: imgView.leftAnchor),
-            iconStackView.topAnchor.constraint(equalTo: imgView.topAnchor),
-            iconStackView.bottomAnchor.constraint(equalTo: imgView.bottomAnchor, constant: -MARGIN),
-            
-            isFavImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: smallIconSize),
-            isFavImageView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: smallIconSize),
-            
-            customisableImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: smallIconSize),
-            customisableImageView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: smallIconSize)
-        ])
+        imgView.snp.makeConstraints { (make) in
+            make.width.height.equalTo(self.frame.width * wardrobeImageViewSize)
+        }
+        
+        mStackView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview().inset(UIEdgeInsets(top: MARGIN, left: MARGIN, bottom: MARGIN, right: MARGIN))
+        }
+        
+        iconStackView.snp.makeConstraints { (make) in
+            make.left.top.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-MARGIN)
+        }
+        
+        isFavImageView.snp.makeConstraints { (make) in
+            make.width.height.equalTo(self.frame.width * smallIconSize)
+        }
+        
+        customisableImageView.snp.makeConstraints { (make) in
+            make.width.height.equalTo(self.frame.width * smallIconSize)
+        }
     }
 
 }

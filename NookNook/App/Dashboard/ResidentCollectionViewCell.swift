@@ -11,33 +11,35 @@ import SDWebImage
 
 class ResidentCollectionViewCell: UICollectionViewCell {
     
-    var villagerImage: UIImageView = UIImageView()
-    var villagerName: UILabel = UILabel()
+    var villagerImage: UIImageView = {
+        let v = UIImageView()
+        v.translatesAutoresizingMaskIntoConstraints = false
+        v.sd_imageTransition = .fade
+        v.sd_imageIndicator = SDWebImageActivityIndicator.gray
+       return v
+    }()
+    var villagerName: UILabel = {
+        let v = UILabel()
+        v.translatesAutoresizingMaskIntoConstraints = false
+        v.textAlignment = .center
+        v.numberOfLines = 0
+        v.textColor = .dirt1
+       return v
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.addSubview(villagerImage)
         self.addSubview(villagerName)
+
+        villagerImage.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
         
-        villagerName.translatesAutoresizingMaskIntoConstraints = false
-        villagerName.textAlignment = .center
-        villagerName.numberOfLines = 0
-        villagerName.textColor = .dirt1
-        
-        villagerImage.translatesAutoresizingMaskIntoConstraints = false
-        villagerImage.sd_imageTransition = .fade
-        villagerImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
-        
-        NSLayoutConstraint.activate([
-            villagerImage.topAnchor.constraint(equalTo: self.topAnchor),
-            villagerImage.leftAnchor.constraint(equalTo: self.leftAnchor),
-            villagerImage.rightAnchor.constraint(equalTo: self.rightAnchor),
-            villagerImage.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            
-            villagerName.topAnchor.constraint(equalTo: villagerImage.bottomAnchor, constant: 5),
-            villagerName.leftAnchor.constraint(equalTo: self.leftAnchor),
-            villagerName.rightAnchor.constraint(equalTo: self.rightAnchor)
-        ])
+        villagerName.snp.makeConstraints { (make) in
+            make.left.right.equalToSuperview()
+            make.top.equalTo(villagerImage.snp.bottom).offset(5)
+        }
     }
 
     convenience init() {

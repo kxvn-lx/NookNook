@@ -29,7 +29,12 @@ class DashboardViewController: UIViewController {
     private let reviewHelper = ReviewHelper()
     
     // Views variables
-    private var scrollView: UIScrollView!
+    private var scrollView: UIScrollView = {
+        let v = UIScrollView()
+        v.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
+        v.translatesAutoresizingMaskIntoConstraints = false
+       return v
+    }()
     private var mStackView: UIStackView!
     
     private var profileNameStackView: UIStackView!
@@ -38,12 +43,50 @@ class DashboardViewController: UIViewController {
     private var residentStack: UIStackView!
     private var phraseStack: UIStackView!
     
-    var phraseLabel: UILabel!
-    var profileImageView: UIImageView!
-    var profileNameLabel: UILabel!
-    var islandNameLabel: UILabel!
-    var nativeFruitLabel: UILabel!
-    var residentLabel: UILabel!
+    var phraseLabel: UILabel = {
+        let v = UILabel()
+        v.numberOfLines = 0
+        v.translatesAutoresizingMaskIntoConstraints = false
+        v.textColor = .dirt1
+        v.font = UIFont.preferredFont(forTextStyle: .title3)
+       return v
+    }()
+    var profileImageView: UIImageView = {
+        let v = UIImageView(frame: CGRect(x: 0, y: 0, width: 130, height: 130))
+        v.translatesAutoresizingMaskIntoConstraints = false
+        v.contentMode = .scaleAspectFill
+        v.clipsToBounds = true
+        v.backgroundColor = .cream2
+        v.image = UIImage(named: "appIcon-Ori")
+        v.layer.cornerRadius = v.frame.size.width / 2
+       return v
+    }()
+    var profileNameLabel: UILabel = {
+        let v = UILabel()
+        v.translatesAutoresizingMaskIntoConstraints = false
+        v.textColor = .dirt1
+        v.font = UIFont.preferredFont(forTextStyle: .title1)
+        v.font = UIFont.systemFont(ofSize: v.font.pointSize, weight: .semibold)
+       return v
+    }()
+    var islandNameLabel: UILabel = {
+        let v = UILabel()
+        v.textColor = .gold1
+       return v
+    }()
+    var nativeFruitLabel: UILabel = {
+        let v = UILabel()
+        v.textColor = .gold1
+        return v
+    }()
+    var residentLabel: UILabel = {
+        let v = UILabel()
+        v.text = "Your Resident"
+        v.numberOfLines = 0
+        v.font = UIFont.preferredFont(forTextStyle: .title3)
+        v.textColor = UIColor.dirt1.withAlphaComponent(0.5)
+       return v
+    }()
     let residentVillagerCollectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
     
@@ -69,8 +112,6 @@ class DashboardViewController: UIViewController {
         
         return adBannerView
     }()
-    
-    // Google ads banner
     lazy var adBannerViewMiddle: GADBannerView = {
         let adBannerView = GADBannerView(adSize: kGADAdSizeSmartBannerLandscape)
         adBannerView.translatesAutoresizingMaskIntoConstraints = false
@@ -191,34 +232,15 @@ class DashboardViewController: UIViewController {
     }
     
     private func setUI() {
-        
-        scrollView = UIScrollView()
-        scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        
         self.view.addSubview(scrollView)
         
         // Create master stackView
         mStackView = SVHelper.createSV(axis: .vertical, spacing: MARGIN * 4, alignment: .center, distribution: .equalSpacing)
         
-        // Name stack view
-        nameStackView = SVHelper.createSV(axis: .vertical, spacing: MARGIN, alignment: .center, distribution: .fill)
         scrollView.addSubview(mStackView)
         
-        profileImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 130, height: 130))
-        profileImageView.translatesAutoresizingMaskIntoConstraints = false
-        profileImageView.contentMode = .scaleAspectFill
-        profileImageView.clipsToBounds = true
-        profileImageView.backgroundColor = .cream2
-        profileImageView.image = UIImage(named: "appIcon-Ori")
-        profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2
-        
-        profileNameLabel = UILabel()
-        profileNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        profileNameLabel.textColor = .dirt1
-        profileNameLabel.font = UIFont.preferredFont(forTextStyle: .title1)
-        profileNameLabel.font = UIFont.systemFont(ofSize: profileNameLabel.font.pointSize, weight: .semibold)
-        
+        // Name stack view
+        nameStackView = SVHelper.createSV(axis: .vertical, spacing: MARGIN, alignment: .center, distribution: .fill)
         nameStackView.addArrangedSubview(profileNameLabel)
         
         profileNameStackView = SVHelper.createSV(axis: .vertical, spacing: MARGIN * 2, alignment: .center, distribution: .fill)
@@ -226,12 +248,6 @@ class DashboardViewController: UIViewController {
         profileNameStackView.addArrangedSubview(nameStackView)
         
         // phrase
-        phraseLabel = UILabel()
-        phraseLabel.numberOfLines = 0
-        phraseLabel.translatesAutoresizingMaskIntoConstraints = false
-        phraseLabel.textColor = .dirt1
-        phraseLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-        
         phraseStack = SVHelper.createSV(axis: .vertical, spacing: MARGIN, alignment: .leading, distribution: .fillEqually)
         phraseStack.addArrangedSubview(phraseLabel, withMargin: UIEdgeInsets(top: 0, left: MARGIN * 2, bottom: 0, right: 0))
         
@@ -239,24 +255,11 @@ class DashboardViewController: UIViewController {
         passportStackView = SVHelper.createSV(axis: .vertical, spacing: MARGIN, alignment: .fill, distribution: .equalSpacing)
         passportStackView.isLayoutMarginsRelativeArrangement = true
         passportStackView.layoutMargins = UIEdgeInsets(top: 0, left: MARGIN*2, bottom: 0, right: MARGIN*2)
-        
-        islandNameLabel = UILabel()
-        islandNameLabel.textColor = .gold1
-        
-        nativeFruitLabel = UILabel()
-        nativeFruitLabel.textColor = .gold1
-        
         passportStackView.addArrangedSubview(createSV(title: "Island Name", with: islandNameLabel))
         passportStackView.addArrangedSubview(createSV(title: "Native Fruit", with: nativeFruitLabel))
         
         residentStack = SVHelper.createSV(axis: .vertical, spacing: MARGIN, alignment: .leading, distribution: .fill)
-        
-        residentLabel = UILabel()
-        residentLabel.text = "Your Resident"
-        residentLabel.numberOfLines = 0
-        residentLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-        residentLabel.textColor = UIColor.dirt1.withAlphaComponent(0.5)
-        
+
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 10
         residentVillagerCollectionView.setCollectionViewLayout(calculateCVLayout(), animated: true)
@@ -286,43 +289,47 @@ class DashboardViewController: UIViewController {
     }
     
     private func setConstraint() {
-        NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: self.view.topAnchor),
-            scrollView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
-            scrollView.rightAnchor.constraint(equalTo: self.view.rightAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: self.view.layoutMarginsGuide.bottomAnchor),
-            
-            mStackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            mStackView.leftAnchor.constraint(equalTo: scrollView.leftAnchor),
-            mStackView.rightAnchor.constraint(equalTo: scrollView.rightAnchor),
-            mStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -MARGIN * 2),
-            mStackView.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor),
-            
-            profileNameStackView.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
-            phraseStack.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
-            passportStackView.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
-            
-            profileImageView.widthAnchor.constraint(equalToConstant: 130),
-            profileImageView.heightAnchor.constraint(equalToConstant: 130),
-            
-            tableView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-            
-            residentStack.widthAnchor.constraint(equalTo: self.mStackView.widthAnchor),
-            
-            residentVillagerCollectionView.widthAnchor.constraint(equalTo: self.residentStack.widthAnchor),
-            residentVillagerCollectionView.heightAnchor.constraint(equalToConstant: 140)
-            
-        ])
+        scrollView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+        
+        mStackView.snp.makeConstraints { (make) in
+            make.top.left.width.right.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-MARGIN * 2)
+        }
+        
+        profileNameStackView.snp.makeConstraints { (make) in
+            make.width.equalToSuperview()
+        }
+        
+        phraseStack.snp.makeConstraints { (make) in
+            make.width.equalToSuperview()
+        }
+        
+        passportStackView.snp.makeConstraints { (make) in
+            make.width.equalToSuperview()
+        }
+        
+        profileImageView.snp.makeConstraints { (make) in
+            make.width.height.equalTo(130)
+        }
+        
+        tableView.snp.makeConstraints { (make) in
+            make.width.equalToSuperview()
+        }
+        
+        residentStack.snp.makeConstraints { (make) in
+            make.width.equalToSuperview()
+        }
+        
+        residentVillagerCollectionView.snp.makeConstraints { (make) in
+            make.width.equalToSuperview()
+            make.height.equalTo(140)
+        }
     }
     
     private func createSV(title: String, with body: UILabel) -> UIStackView {
-        let stackView = UIStackView()
-        
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
-        stackView.spacing = self.MARGIN
-        stackView.alignment = .center
-        stackView.distribution = .equalCentering
+        let stackView = SVHelper.createSV(axis: .horizontal, spacing: MARGIN, alignment: .center, distribution: .equalCentering)
         
         let label1 = UILabel()
         label1.numberOfLines = 0
