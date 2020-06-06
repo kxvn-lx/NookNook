@@ -30,6 +30,13 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.imageView?.image = IconHelper.systemIcon(of: .reminder, weight: .regular).withRenderingMode(.alwaysTemplate)
                 cell.accessoryType = .disclosureIndicator
                 return cell
+            case 2:
+                // Outfit Generator Cell
+                let cell = UITableViewCell(style: .default, reuseIdentifier: FAVOURITE_CELL)
+                cell.textLabel!.text = "Outfit picker"
+                cell.imageView?.image = IconHelper.systemIcon(of: .outfit, weight: .regular).withRenderingMode(.alwaysTemplate)
+                cell.accessoryType = .disclosureIndicator
+                return cell
             default: break
             }
             
@@ -78,7 +85,7 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return 2
+            return 3
         case 1:
             return 3
         default: fatalError("Invalid rows detected.")
@@ -105,14 +112,18 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.section {
         case 0:
             switch indexPath.row {
-                // Favourites
+            // Favourites
             case 0:
                 let vc = self.storyboard!.instantiateViewController(withIdentifier: "FavouritesVC") as! FavouritesTableViewController
                 let navController = UINavigationController(rootViewController: vc)
                 self.present(navController, animated: true, completion: nil)
-                // Turnip Reminder
+            // Turnip Reminder
             case 1:
                 let vc = self.storyboard!.instantiateViewController(withIdentifier: TURNIP_ID) as! TurnipReminderTableViewController
+                let navController = UINavigationController(rootViewController: vc)
+                self.present(navController, animated: true, completion: nil)
+            case 2:
+                let vc = OutfitPickerViewController()
                 let navController = UINavigationController(rootViewController: vc)
                 self.present(navController, animated: true, completion: nil)
             default: break
@@ -120,7 +131,7 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
             
         case 1:
             switch indexPath.row {
-                // Critters Monthly
+            // Critters Monthly
             case 0:
                 let vc = self.storyboard!.instantiateViewController(withIdentifier: "CrittersMonthlyVC") as! CrittersMonthlyTableViewController
                 vc.profileDelegate = self

@@ -37,6 +37,7 @@ struct IconHelper {
         case website = "globe"
         case supportMe = "hand.thumbsup"
         case writeReview = "pencil.and.outline"
+        case outfit = "bag"
     }
     
     /**

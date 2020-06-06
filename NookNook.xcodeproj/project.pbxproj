@@ -16,6 +16,7 @@
 		0A14A002245155A10080941A /* ResidentHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A14A001245155A10080941A /* ResidentHelper.swift */; };
 		0A14A0072451986B0080941A /* CrittersMonthlyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A14A0062451986B0080941A /* CrittersMonthlyTableViewController.swift */; };
 		0A1DE43D248BDF98004A6449 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0A1DE43C248BDF98004A6449 /* SnapKit */; };
+		0A1DE440248BFB2E004A6449 /* OutfitPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1DE43F248BFB2E004A6449 /* OutfitPickerViewController.swift */; };
 		0A23BBCC244ACE94009B5178 /* SortEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A23BBCB244ACE94009B5178 /* SortEngine.swift */; };
 		0A23BBCE244ADFE6009B5178 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A23BBCD244ADFE6009B5178 /* User.swift */; };
 		0A23BBD0244AE1D5009B5178 /* Fruits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A23BBCF244AE1D5009B5178 /* Fruits.swift */; };
@@ -154,6 +155,7 @@
 		0A149FF124512E7B0080941A /* UserPersistEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPersistEngine.swift; sourceTree = "<group>"; };
 		0A14A001245155A10080941A /* ResidentHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResidentHelper.swift; sourceTree = "<group>"; };
 		0A14A0062451986B0080941A /* CrittersMonthlyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrittersMonthlyTableViewController.swift; sourceTree = "<group>"; };
+		0A1DE43F248BFB2E004A6449 /* OutfitPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitPickerViewController.swift; sourceTree = "<group>"; };
 		0A23BBCB244ACE94009B5178 /* SortEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortEngine.swift; sourceTree = "<group>"; };
 		0A23BBCD244ADFE6009B5178 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0A23BBCF244AE1D5009B5178 /* Fruits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fruits.swift; sourceTree = "<group>"; };
@@ -352,6 +354,14 @@
 			path = CrittersMonthly;
 			sourceTree = "<group>";
 		};
+		0A1DE43E248BFB0E004A6449 /* OutfitPicker */ = {
+			isa = PBXGroup;
+			children = (
+				0A1DE43F248BFB2E004A6449 /* OutfitPickerViewController.swift */,
+			);
+			path = OutfitPicker;
+			sourceTree = "<group>";
+		};
 		0A370B5D2443221100A72048 /* System */ = {
 			isa = PBXGroup;
 			children = (
@@ -442,6 +452,7 @@
 		0A739A3F244B58C500002B89 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
+				0A1DE43E248BFB0E004A6449 /* OutfitPicker */,
 				0AB4DCD1245AD42F00AB16E6 /* TurnipReminder */,
 				0AF37FB42459607B004A8944 /* Helper */,
 				0A14A0052451984B0080941A /* CrittersMonthly */,
@@ -915,6 +926,7 @@
 			files = (
 				0A739A43244BE55600002B89 /* ResidentCollectionViewCell.swift in Sources */,
 				0A97C2FD244C95360062B136 /* FavouriteTableViewCell.swift in Sources */,
+				0A1DE440248BFB2E004A6449 /* OutfitPickerViewController.swift in Sources */,
 				0AC89E402449418B009ADB18 /* VillagerTableViewCell.swift in Sources */,
 				0A23BBCC244ACE94009B5178 /* SortEngine.swift in Sources */,
 				0A53327F246265350033FCF7 /* SpinnerHelper.swift in Sources */,
