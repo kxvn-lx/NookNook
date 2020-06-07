@@ -9,19 +9,37 @@
 import UIKit
 
 private let reuseIdentifier = "outfitCell"
-private let headerIdentifier = "filtersHeader"
+private let headerFooterIdentifier = "outfitHeaderFooter"
 
 class OutfitPickerViewController: UIViewController {
     
     private let categories: [Categories] = [.headwear, .accessories, .tops, .bottoms, .socks, .shoes]
     
     private var collectionView: UICollectionView!
-    private var datasource: [[Wardrobe]] = [[]]
+    private var randomizeButton: UIButton = {
+        let v = UIButton()
+        v.setTitle("Randomize!", for: .normal)
+        v.translatesAutoresizingMaskIntoConstraints = false
+        v.contentEdgeInsets = UIEdgeInsets(top: 15, left: 20, bottom: 15, right: 20)
+        v.backgroundColor = .grass1
+        v.layer.borderWidth = 1
+        v.layer.cornerRadius = 2.5
+        v.titleLabel?.numberOfLines = 2
+        v.layer.borderColor = UIColor.grass1.cgColor
+        v.titleLabel?.textAlignment = .center
+        v.setTitleColor(UIColor.white, for: .normal)
+        v.setTitleColor(UIColor.white.withAlphaComponent(0.5), for: .highlighted)
+        v.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
+        v.titleLabel?.font = UIFont.systemFont(ofSize: UIFont.preferredFont(forTextStyle: .body).pointSize, weight: .semibold)
+        return v
+    }()
+    
+    private var datasource: [[Wardrobe]] = []
     
     // MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         fetchDatasource()
         
         setBar()
@@ -35,26 +53,36 @@ class OutfitPickerViewController: UIViewController {
     // MARK: - Class functions
     private func fetchDatasource() {
         categories.forEach({
-            datasource.append(DataEngine.loadWardrobesJSON(from: $0))
+            let data = DataEngine.loadWardrobesJSON(from: $0)
+            datasource.append(data)
         })
     }
     
     private func setupView() {
+        randomizeButton.addTarget(self, action: #selector(randomizeButtonTapped), for: .touchUpInside)
+        
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: makeLayout())
         collectionView.backgroundColor = .clear
         collectionView.register(OutfitPickerCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        collectionView.register(OutfitPickerCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: headerFooterIdentifier)
         
         self.view.addSubview(collectionView)
+        self.view.addSubview(randomizeButton)
     }
     
     private func setupConstraint() {
         collectionView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
+        
+        randomizeButton.snp.makeConstraints { (make) in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(collectionView.snp.bottom)
+        }
     }
     
     private func createSection() -> NSCollectionLayoutSection {
-        let contentInsets = NSDirectionalEdgeInsets(top: 2.5, leading: 2.5, bottom: 2.5, trailing: 2.5)
+        let contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 2.5, bottom: 0, trailing: 2.5)
         
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -67,17 +95,54 @@ class OutfitPickerViewController: UIViewController {
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
         
         let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .continuous
+        section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
+        
+        return section
+    }
+    
+    private func createLastSection() -> NSCollectionLayoutSection {
+        let contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 2.5, bottom: 0, trailing: 2.5)
+        
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        item.contentInsets = contentInsets
+        
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(0.21),
+            heightDimension: .fractionalWidth(0.25))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.boundarySupplementaryItems = [makeSectionFooter()]
+        section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
         
         return section
     }
     
     private func makeLayout() -> UICollectionViewLayout {
-        let layout = UICollectionViewCompositionalLayout { (_, _) -> NSCollectionLayoutSection? in
-            return self.createSection()
+        let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int, _) -> NSCollectionLayoutSection? in
+            if sectionIndex == self.datasource.count - 1 {
+                return self.createLastSection()
+            } else {
+                return self.createSection()
+            }
         }
         
         return layout
+    }
+    
+    private func makeSectionFooter() -> NSCollectionLayoutBoundarySupplementaryItem {
+        let layoutSectionHeaderSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .estimated(100))
+        
+        let layoutSectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: layoutSectionHeaderSize,
+            elementKind: UICollectionView.elementKindSectionFooter,
+            alignment: .bottom
+        )
+        return layoutSectionHeader
     }
     
     private func setBar() {
@@ -87,6 +152,11 @@ class OutfitPickerViewController: UIViewController {
         
         let close = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(closeTapped))
         navigationItem.leftBarButtonItem = close
+    }
+    
+    @objc private func randomizeButtonTapped() {
+        Taptic.successTaptic()
+        print("Randomize!")
     }
     
     @objc private func closeTapped() {
@@ -120,5 +190,14 @@ extension OutfitPickerViewController: UICollectionViewDelegate {
         Taptic.lightTaptic()
         
         print(indexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        guard let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerFooterIdentifier, for: indexPath) as? OutfitPickerCollectionReusableView else {
+            fatalError("Could not dequeue SectionHeader")
+        }
+        
+        view.backgroundColor = .red
+        return view
     }
 }
