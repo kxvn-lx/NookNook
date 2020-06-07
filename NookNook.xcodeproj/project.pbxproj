@@ -99,6 +99,7 @@
 		0ADC7BA4245FC0B50033F67E /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ADC7BA3245FC0B50033F67E /* StoreKit.framework */; };
 		0ADF34CB24605ED8006AE2DB /* SwiftyStoreKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0ADF34CA24605ED8006AE2DB /* SwiftyStoreKit */; };
 		0AE2795F24617B4300BF7EDB /* ConfettiHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE2795E24617B4300BF7EDB /* ConfettiHelper.swift */; };
+		0AE58041248C6E1A00656B2F /* OutfitPickerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE58040248C6E1A00656B2F /* OutfitPickerCollectionViewCell.swift */; };
 		0AEC5016245BA7B7004EC912 /* DynamicSizeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEC5015245BA7B7004EC912 /* DynamicSizeTableView.swift */; };
 		0AEC501A245BAABD004EC912 /* NotificationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEC5019245BAABD004EC912 /* NotificationEngine.swift */; };
 		0AEC501C245BF56B004EC912 /* NookTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEC501B245BF56B004EC912 /* NookTabBarController.swift */; };
@@ -239,6 +240,7 @@
 		0ADC7B9F245FACA00033F67E /* InAppPurchaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppPurchaseViewController.swift; sourceTree = "<group>"; };
 		0ADC7BA3245FC0B50033F67E /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		0AE2795E24617B4300BF7EDB /* ConfettiHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiHelper.swift; sourceTree = "<group>"; };
+		0AE58040248C6E1A00656B2F /* OutfitPickerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitPickerCollectionViewCell.swift; sourceTree = "<group>"; };
 		0AEC5015245BA7B7004EC912 /* DynamicSizeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicSizeTableView.swift; sourceTree = "<group>"; };
 		0AEC5019245BAABD004EC912 /* NotificationEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationEngine.swift; sourceTree = "<group>"; };
 		0AEC501B245BF56B004EC912 /* NookTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NookTabBarController.swift; sourceTree = "<group>"; };
@@ -358,6 +360,7 @@
 			isa = PBXGroup;
 			children = (
 				0A1DE43F248BFB2E004A6449 /* OutfitPickerViewController.swift */,
+				0AE58040248C6E1A00656B2F /* OutfitPickerCollectionViewCell.swift */,
 			);
 			path = OutfitPicker;
 			sourceTree = "<group>";
@@ -985,6 +988,7 @@
 				0AF37FB124595EE9004A8944 /* DashboardVC+CollectionView.swift in Sources */,
 				0AC703B42451C749008D7C77 /* CritterHelper.swift in Sources */,
 				0A4DEC23245B0FF50017A553 /* TurnipTableViewCell.swift in Sources */,
+				0AE58041248C6E1A00656B2F /* OutfitPickerCollectionViewCell.swift in Sources */,
 				0ACCF3AC2456830A00F9C62E /* WhatsNewHelper.swift in Sources */,
 				0A370BAF2444796400A72048 /* CategoriesTableViewController.swift in Sources */,
 				0A14A002245155A10080941A /* ResidentHelper.swift in Sources */,

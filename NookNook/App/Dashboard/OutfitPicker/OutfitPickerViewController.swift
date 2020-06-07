@@ -12,20 +12,18 @@ private let reuseIdentifier = "outfitCell"
 private let headerIdentifier = "filtersHeader"
 
 class OutfitPickerViewController: UIViewController {
-
+    
+    private let categories: [Categories] = [.headwear, .accessories, .tops, .bottoms, .socks, .shoes]
+    
     private var collectionView: UICollectionView!
-    private var datasource: [[UIColor]] = [
-        [.systemRed, .systemRed],
-        [.systemOrange, .systemOrange],
-        [.systemYellow, .systemYellow],
-        [.systemGreen, .systemGreen],
-        [.systemBlue, .systemBlue]
-    ]
+    private var datasource: [[Wardrobe]] = [[]]
     
     // MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        fetchDatasource()
+        
         setBar()
         setupView()
         setupConstraint()
@@ -35,10 +33,16 @@ class OutfitPickerViewController: UIViewController {
     }
     
     // MARK: - Class functions
+    private func fetchDatasource() {
+        categories.forEach({
+            datasource.append(DataEngine.loadWardrobesJSON(from: $0))
+        })
+    }
+    
     private func setupView() {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: makeLayout())
         collectionView.backgroundColor = .clear
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        collectionView.register(OutfitPickerCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
         self.view.addSubview(collectionView)
     }
@@ -58,12 +62,12 @@ class OutfitPickerViewController: UIViewController {
         item.contentInsets = contentInsets
         
         let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(0.3),
-            heightDimension: .fractionalWidth(0.3))
+            widthDimension: .fractionalWidth(0.21),
+            heightDimension: .fractionalWidth(0.25))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
         
         let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .groupPaging
+        section.orthogonalScrollingBehavior = .continuous
         
         return section
     }
@@ -89,7 +93,7 @@ class OutfitPickerViewController: UIViewController {
         navigationController?.popViewController(animated: true)
         dismiss(animated: true, completion: nil)
     }
-
+    
 }
 
 extension OutfitPickerViewController: UICollectionViewDataSource {
@@ -102,9 +106,11 @@ extension OutfitPickerViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as!  OutfitPickerCollectionViewCell
         let data = self.datasource[indexPath.section][indexPath.row]
-        cell.contentView.backgroundColor = data
+        
+        cell.imgView.sd_setImage(with: ImageEngine.parseNPURL(with: data.image!, category: data.category), placeholderImage: UIImage(named: "placeholder"))
+        
         return cell
     }
 }
@@ -112,7 +118,7 @@ extension OutfitPickerViewController: UICollectionViewDataSource {
 extension OutfitPickerViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         Taptic.lightTaptic()
-
+        
         print(indexPath)
     }
 }
