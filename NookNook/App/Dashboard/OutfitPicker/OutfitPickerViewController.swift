@@ -50,6 +50,27 @@ class OutfitPickerViewController: UIViewController {
         self.collectionView.delegate = self
     }
     
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        collectionView.layoutIfNeeded()
+//        for i in 0 ..< datasource.count {
+//            DispatchQueue.main.asyncAfter(deadline: .now() + Double(i) * 0.125) {
+//                self.collectionView.scrollToItem(at: IndexPath(row: 2, section: i), at: .centeredHorizontally, animated: true)
+//            }
+//        }
+//    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        collectionView.layoutIfNeeded()
+        for i in 0 ..< datasource.count {
+            DispatchQueue.main.asyncAfter(deadline: .now() + Double(i) * 0.125) {
+                self.collectionView.scrollToItem(at: IndexPath(row: 2, section: i), at: .centeredHorizontally, animated: true)
+            }
+        }
+    }
+    
     // MARK: - Class functions
     private func fetchDatasource() {
         categories.forEach({
@@ -90,32 +111,12 @@ class OutfitPickerViewController: UIViewController {
         item.contentInsets = contentInsets
         
         let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(0.21),
+            widthDimension: .fractionalWidth(0.20),
             heightDimension: .fractionalWidth(0.25))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
         
         let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
-        
-        return section
-    }
-    
-    private func createLastSection() -> NSCollectionLayoutSection {
-        let contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 2.5, bottom: 0, trailing: 2.5)
-        
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        
-        item.contentInsets = contentInsets
-        
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(0.21),
-            heightDimension: .fractionalWidth(0.25))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
-        
-        let section = NSCollectionLayoutSection(group: group)
-        section.boundarySupplementaryItems = [makeSectionFooter()]
-        section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
+        section.orthogonalScrollingBehavior = .groupPagingCentered
         
         return section
     }
@@ -123,7 +124,9 @@ class OutfitPickerViewController: UIViewController {
     private func makeLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int, _) -> NSCollectionLayoutSection? in
             if sectionIndex == self.datasource.count - 1 {
-                return self.createLastSection()
+                let section = self.createSection()
+                section.boundarySupplementaryItems = [self.makeSectionFooter()]
+                return section
             } else {
                 return self.createSection()
             }
@@ -189,7 +192,7 @@ extension OutfitPickerViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         Taptic.lightTaptic()
         
-        print(indexPath)
+        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
