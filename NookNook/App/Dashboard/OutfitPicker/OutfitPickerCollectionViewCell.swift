@@ -23,6 +23,10 @@ class OutfitPickerCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
+        self.layer.cornerRadius = 5
+        self.layer.borderWidth = 1
+        self.layer.borderColor = UIColor.clear.cgColor
+        
         addSubview(imgView)
         
         imgView.snp.makeConstraints { (make) in
