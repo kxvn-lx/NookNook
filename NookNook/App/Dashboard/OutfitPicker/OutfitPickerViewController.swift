@@ -19,7 +19,7 @@ class OutfitPickerViewController: UIViewController {
     private var randomizeButton: UIButton = {
         let v = UIButton()
         v.setTitle("Randomize!", for: .normal)
-
+        
         v.translatesAutoresizingMaskIntoConstraints = false
         v.titleLabel?.textAlignment = .center
         v.titleLabel?.numberOfLines = 2
@@ -63,16 +63,11 @@ class OutfitPickerViewController: UIViewController {
         
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
         collectionView.layoutIfNeeded()
         for i in 0 ..< datasource.count {
             DispatchQueue.main.asyncAfter(deadline: .now() + Double(i) * 0.125) {
                 self.collectionView.scrollToItem(at: IndexPath(row: 2, section: i), at: .centeredHorizontally, animated: true)
-//                self.renderSelection(at: IndexPath(row: 2, section: i))
             }
         }
     }
@@ -80,8 +75,7 @@ class OutfitPickerViewController: UIViewController {
     // MARK: - Class functions
     private func fetchDatasource() {
         categories.forEach({
-            let data = DataEngine.loadWardrobesJSON(from: $0)
-            datasource.append(data)
+            datasource.append(DataEngine.loadWardrobesJSON(from: $0))
         })
     }
     
@@ -96,6 +90,20 @@ class OutfitPickerViewController: UIViewController {
         
         self.view.addSubview(collectionView)
         self.view.addSubview(randomizeButton)
+        
+        let v = UIView()
+        v.layer.cornerRadius = 10
+        v.layer.borderWidth = 1
+        v.layer.borderColor = UIColor.gold1.withAlphaComponent(0.5).cgColor
+        v.backgroundColor = .cream2
+        
+        self.collectionView.addSubview(v)
+        
+        v.snp.makeConstraints { (make) in
+            make.centerX.equalToSuperview()
+            make.height.equalTo(self.view.frame.width * 0.20 * 6)
+            make.width.equalTo(self.view.frame.width * 0.20)
+        }
     }
     
     private func setupConstraint() {
@@ -164,24 +172,19 @@ class OutfitPickerViewController: UIViewController {
         navigationItem.leftBarButtonItem = close
     }
     
-    private func renderSelection(at indexPath: IndexPath) {
-        if selectedOutfitIndexPaths[indexPath.section] != indexPath.row && selectedOutfitIndexPaths[indexPath.section] != nil {
-            let oldIndexPath = IndexPath(item: selectedOutfitIndexPaths[indexPath.section]!, section: indexPath.section)
-            
-            if let cell = collectionView.cellForItem(at: oldIndexPath) as? OutfitPickerCollectionViewCell {
-             cell.layer.borderColor = UIColor.clear.cgColor
-            }
-        }
-        
-        selectedOutfitIndexPaths[indexPath.section] = indexPath.row
-        if let cell = collectionView.cellForItem(at: indexPath) as? OutfitPickerCollectionViewCell {
-            cell.layer.borderColor = UIColor.gold1.cgColor
-        }
-    }
-    
     @objc private func randomizeButtonTapped() {
         Taptic.successTaptic()
-        print("Randomize!")
+        
+        for i in 0 ..< datasource.count {
+            let randomInt = Int.random(in: 0 ..< datasource[i].count)
+            
+            collectionView.layoutIfNeeded()
+            self.collectionView.scrollToItem(at: IndexPath(row: randomInt, section: i), at: .centeredHorizontally, animated: true)
+            selectedOutfitIndexPaths[i] = randomInt
+        }
+        
+        print(selectedOutfitIndexPaths)
+        
     }
     
     @objc private func previewButtonTapped() {
@@ -220,7 +223,7 @@ extension OutfitPickerViewController: UICollectionViewDelegate {
         Taptic.lightTaptic()
         
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-        renderSelection(at: indexPath)
+        selectedOutfitIndexPaths[indexPath.section] = indexPath.row
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -233,7 +236,7 @@ extension OutfitPickerViewController: UICollectionViewDelegate {
         sv.addArrangedSubview(previewButton)
         
         view.addSubview(sv)
-
+        
         sv.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
             make.bottom.equalToSuperview()
@@ -242,3 +245,4 @@ extension OutfitPickerViewController: UICollectionViewDelegate {
         return view
     }
 }
+

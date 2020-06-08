@@ -23,7 +23,7 @@ class OutfitPickerCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        self.layer.cornerRadius = 5
+        self.layer.cornerRadius = 10
         self.layer.borderWidth = 1
         self.layer.borderColor = UIColor.clear.cgColor
         
