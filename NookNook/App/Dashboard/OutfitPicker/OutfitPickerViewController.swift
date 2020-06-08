@@ -11,11 +11,10 @@ import UIKit
 private let reuseIdentifier = "outfitCell"
 private let headerFooterIdentifier = "outfitHeaderFooter"
 
-class OutfitPickerViewController: UIViewController {
+class OutfitPickerViewController: UICollectionViewController {
     
     private let categories: [Categories] = [.headwear, .accessories, .tops, .bottoms, .socks, .shoes]
-    
-    private var collectionView: UICollectionView!
+    private let cellSize: CGFloat = 0.25
     private var randomizeButton: UIButton = {
         let v = UIButton()
         v.setTitle("Randomize!", for: .normal)
@@ -59,16 +58,10 @@ class OutfitPickerViewController: UIViewController {
         
         setBar()
         setupView()
-        setupConstraint()
-        
-        self.collectionView.dataSource = self
-        self.collectionView.delegate = self
         
         collectionView.layoutIfNeeded()
         for i in 0 ..< datasource.count {
-            DispatchQueue.main.asyncAfter(deadline: .now() + Double(i) * 0.125) {
-                self.collectionView.scrollToItem(at: IndexPath(row: 2, section: i), at: .centeredHorizontally, animated: true)
-            }
+            self.collectionView.scrollToItem(at: IndexPath(row: 0, section: i), at: .centeredHorizontally, animated: true)
         }
     }
     
@@ -83,13 +76,8 @@ class OutfitPickerViewController: UIViewController {
         randomizeButton.addTarget(self, action: #selector(randomizeButtonTapped), for: .touchUpInside)
         previewButton.addTarget(self, action: #selector(previewButtonTapped), for: .touchUpInside)
         
-        collectionView = UICollectionView(frame: .zero, collectionViewLayout: makeLayout())
+        collectionView.collectionViewLayout = makeLayout()
         collectionView.backgroundColor = .clear
-        collectionView.register(OutfitPickerCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        collectionView.register(OutfitPickerCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: headerFooterIdentifier)
-        
-        self.view.addSubview(collectionView)
-        self.view.addSubview(randomizeButton)
         
         let v = UIView()
         v.layer.cornerRadius = 10
@@ -101,8 +89,8 @@ class OutfitPickerViewController: UIViewController {
         
         v.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
-            make.height.equalTo(self.view.frame.width * 0.20 * 6)
-            make.width.equalTo(self.view.frame.width * 0.20)
+            make.height.equalTo(self.view.frame.height * (cellSize - 0.11) * 5.33)
+            make.width.equalTo(self.view.frame.width * (cellSize + 0.005))
         }
     }
     
@@ -126,8 +114,8 @@ class OutfitPickerViewController: UIViewController {
         item.contentInsets = contentInsets
         
         let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(0.20),
-            heightDimension: .fractionalWidth(0.20))
+            widthDimension: .fractionalWidth(cellSize),
+            heightDimension: .fractionalHeight(cellSize - 0.11))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
         
         let section = NSCollectionLayoutSection(group: group)
@@ -189,7 +177,14 @@ class OutfitPickerViewController: UIViewController {
     
     @objc private func previewButtonTapped() {
         Taptic.lightTaptic()
-        print("preview!")
+        
+        var visibleRect = CGRect()
+        visibleRect.origin = collectionView.contentOffset
+        visibleRect.size = collectionView.bounds.size
+        let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
+        
+        guard let visibleIndexPath: IndexPath = collectionView.indexPathForItem(at: visiblePoint) else { return }
+        print(visibleIndexPath)
     }
     
     @objc private func closeTapped() {
@@ -199,37 +194,36 @@ class OutfitPickerViewController: UIViewController {
     
 }
 
-extension OutfitPickerViewController: UICollectionViewDataSource {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
+extension OutfitPickerViewController {
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return datasource.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return datasource[section].count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as!  OutfitPickerCollectionViewCell
         let data = self.datasource[indexPath.section][indexPath.row]
         
         cell.imgView.sd_setImage(with: ImageEngine.parseNPURL(with: data.image!, category: data.category), placeholderImage: UIImage(named: "placeholder"))
+        cell.label.text = "\(indexPath)"
         
         return cell
     }
 }
 
-extension OutfitPickerViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+extension OutfitPickerViewController {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         Taptic.lightTaptic()
         
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         selectedOutfitIndexPaths[indexPath.section] = indexPath.row
     }
     
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerFooterIdentifier, for: indexPath) as? OutfitPickerCollectionReusableView else {
-            fatalError("Could not dequeue SectionHeader")
-        }
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerFooterIdentifier, for: indexPath)
         
         let sv = SVHelper.createSV(axis: .horizontal, spacing: 50, alignment: .center, distribution: .fillProportionally)
         sv.addArrangedSubview(randomizeButton)
@@ -244,5 +238,5 @@ extension OutfitPickerViewController: UICollectionViewDelegate {
         
         return view
     }
+    
 }
-

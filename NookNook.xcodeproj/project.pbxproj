@@ -101,7 +101,6 @@
 		0ADF34CB24605ED8006AE2DB /* SwiftyStoreKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0ADF34CA24605ED8006AE2DB /* SwiftyStoreKit */; };
 		0AE2795F24617B4300BF7EDB /* ConfettiHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE2795E24617B4300BF7EDB /* ConfettiHelper.swift */; };
 		0AE58041248C6E1A00656B2F /* OutfitPickerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE58040248C6E1A00656B2F /* OutfitPickerCollectionViewCell.swift */; };
-		0AE58043248C828B00656B2F /* OutfitPickerCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE58042248C828B00656B2F /* OutfitPickerCollectionReusableView.swift */; };
 		0AEC5016245BA7B7004EC912 /* DynamicSizeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEC5015245BA7B7004EC912 /* DynamicSizeTableView.swift */; };
 		0AEC501A245BAABD004EC912 /* NotificationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEC5019245BAABD004EC912 /* NotificationEngine.swift */; };
 		0AEC501C245BF56B004EC912 /* NookTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEC501B245BF56B004EC912 /* NookTabBarController.swift */; };
@@ -244,7 +243,6 @@
 		0ADC7BA3245FC0B50033F67E /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		0AE2795E24617B4300BF7EDB /* ConfettiHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiHelper.swift; sourceTree = "<group>"; };
 		0AE58040248C6E1A00656B2F /* OutfitPickerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitPickerCollectionViewCell.swift; sourceTree = "<group>"; };
-		0AE58042248C828B00656B2F /* OutfitPickerCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitPickerCollectionReusableView.swift; sourceTree = "<group>"; };
 		0AEC5015245BA7B7004EC912 /* DynamicSizeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicSizeTableView.swift; sourceTree = "<group>"; };
 		0AEC5019245BAABD004EC912 /* NotificationEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationEngine.swift; sourceTree = "<group>"; };
 		0AEC501B245BF56B004EC912 /* NookTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NookTabBarController.swift; sourceTree = "<group>"; };
@@ -365,7 +363,6 @@
 			children = (
 				0A1DE43F248BFB2E004A6449 /* OutfitPickerViewController.swift */,
 				0AE58040248C6E1A00656B2F /* OutfitPickerCollectionViewCell.swift */,
-				0AE58042248C828B00656B2F /* OutfitPickerCollectionReusableView.swift */,
 				0A5F504C248D0C1400F0DFF0 /* OutfitPickerPreviewViewController.swift */,
 			);
 			path = OutfitPicker;
@@ -984,7 +981,6 @@
 				0AFD70732441D2B200957BE6 /* ItemTableViewCell.swift in Sources */,
 				0AEFF82D24470EC30032156C /* WardrobetabTableViewCell.swift in Sources */,
 				0A5D2A32246B71830037D2A0 /* ReminderHelper.swift in Sources */,
-				0AE58043248C828B00656B2F /* OutfitPickerCollectionReusableView.swift in Sources */,
 				0AF37FB6245960A7004A8944 /* DetailVC+CollectionView.swift in Sources */,
 				0AFD706A2441BA7500957BE6 /* HomeViewController.swift in Sources */,
 				0AB4DCD3245AD44A00AB16E6 /* TurnipReminderTableViewController.swift in Sources */,

@@ -20,25 +20,26 @@ class OutfitPickerCollectionViewCell: UICollectionViewCell {
         return v
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-
-        self.layer.cornerRadius = 10
-        self.layer.borderWidth = 1
-        self.layer.borderColor = UIColor.clear.cgColor
+    var label: UILabel = {
+       let v = UILabel()
+        v.backgroundColor = .cyan
+        v.font = .preferredFont(forTextStyle: .caption1)
+        v.translatesAutoresizingMaskIntoConstraints = false
+        return v
+    }()
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
         
         addSubview(imgView)
+        addSubview(label)
         
         imgView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
-    }
-
-    convenience init() {
-        self.init(frame: CGRect())
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        
+        label.snp.makeConstraints { (make) in
+            make.left.bottom.equalToSuperview()
+        }
     }
 }

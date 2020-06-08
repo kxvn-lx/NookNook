@@ -123,7 +123,7 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
                 let navController = UINavigationController(rootViewController: vc)
                 self.present(navController, animated: true, completion: nil)
             case 2:
-                let vc = OutfitPickerViewController()
+                let vc = self.storyboard!.instantiateViewController(identifier: "outfitPickerVC") as! OutfitPickerViewController
                 let navController = UINavigationController(rootViewController: vc)
                 self.present(navController, animated: true, completion: nil)
             default: break
