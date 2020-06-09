@@ -67,7 +67,6 @@
 		0A595BAB24533C8C00F37E15 /* tops.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A595BAA24533C8C00F37E15 /* tops.json */; };
 		0A5D2A32246B71830037D2A0 /* ReminderHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5D2A31246B71830037D2A0 /* ReminderHelper.swift */; };
 		0A5D2A36246B816C0037D2A0 /* ShareHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5D2A35246B816C0037D2A0 /* ShareHelper.swift */; };
-		0A5F504D248D0C1400F0DFF0 /* OutfitPickerPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5F504C248D0C1400F0DFF0 /* OutfitPickerPreviewViewController.swift */; };
 		0A65203124499B6400692E74 /* DataPersistEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A65203024499B6400692E74 /* DataPersistEngine.swift */; };
 		0A6862A6244D3DAB00E06C74 /* SCHeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6862A5244D3DAB00E06C74 /* SCHeper.swift */; };
 		0A6862A9244D499C00E06C74 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6862A8244D499C00E06C74 /* SettingsTableViewController.swift */; };
@@ -121,6 +120,7 @@
 		0AFD706C2441BFEE00957BE6 /* ItemsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFD706B2441BFEE00957BE6 /* ItemsTableViewController.swift */; };
 		0AFD70732441D2B200957BE6 /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFD70722441D2B200957BE6 /* ItemTableViewCell.swift */; };
 		0AFD70752441D9BF00957BE6 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFD70742441D9BF00957BE6 /* Item.swift */; };
+		0AFF368B248F604600388C11 /* OutfitPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFF368A248F604600388C11 /* OutfitPreviewViewController.swift */; };
 		7FED8C2AE2B972E9F4296543 /* Pods_NookNookTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4ED982529BF524F49A0E568 /* Pods_NookNookTests.framework */; };
 		D02015DDD8C8A4BAE7285CAB /* Pods_NookNook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A4557804DEA2E2611BA88D4 /* Pods_NookNook.framework */; };
 /* End PBXBuildFile section */
@@ -209,7 +209,6 @@
 		0A595BAA24533C8C00F37E15 /* tops.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tops.json; sourceTree = "<group>"; };
 		0A5D2A31246B71830037D2A0 /* ReminderHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderHelper.swift; sourceTree = "<group>"; };
 		0A5D2A35246B816C0037D2A0 /* ShareHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareHelper.swift; sourceTree = "<group>"; };
-		0A5F504C248D0C1400F0DFF0 /* OutfitPickerPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitPickerPreviewViewController.swift; sourceTree = "<group>"; };
 		0A65203024499B6400692E74 /* DataPersistEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPersistEngine.swift; sourceTree = "<group>"; };
 		0A6862A5244D3DAB00E06C74 /* SCHeper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCHeper.swift; sourceTree = "<group>"; };
 		0A6862A8244D499C00E06C74 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
@@ -264,6 +263,7 @@
 		0AFD706B2441BFEE00957BE6 /* ItemsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsTableViewController.swift; sourceTree = "<group>"; };
 		0AFD70722441D2B200957BE6 /* ItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableViewCell.swift; sourceTree = "<group>"; };
 		0AFD70742441D9BF00957BE6 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		0AFF368A248F604600388C11 /* OutfitPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitPreviewViewController.swift; sourceTree = "<group>"; };
 		0FC0B9212811082E98C0131C /* Pods-NookNook.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NookNook.release.xcconfig"; path = "Target Support Files/Pods-NookNook/Pods-NookNook.release.xcconfig"; sourceTree = "<group>"; };
 		3A4557804DEA2E2611BA88D4 /* Pods_NookNook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NookNook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F2D55C25D11CEC5AE82E7DC /* Pods-NookNook.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NookNook.debug.xcconfig"; path = "Target Support Files/Pods-NookNook/Pods-NookNook.debug.xcconfig"; sourceTree = "<group>"; };
@@ -363,7 +363,7 @@
 			children = (
 				0A1DE43F248BFB2E004A6449 /* OutfitPickerViewController.swift */,
 				0AE58040248C6E1A00656B2F /* OutfitPickerCollectionViewCell.swift */,
-				0A5F504C248D0C1400F0DFF0 /* OutfitPickerPreviewViewController.swift */,
+				0AFF368A248F604600388C11 /* OutfitPreviewViewController.swift */,
 			);
 			path = OutfitPicker;
 			sourceTree = "<group>";
@@ -956,6 +956,7 @@
 				0AFD704F24419DD300957BE6 /* AppDelegate.swift in Sources */,
 				0A6862A9244D499C00E06C74 /* SettingsTableViewController.swift in Sources */,
 				0A370B6E24444BD800A72048 /* DataEngine.swift in Sources */,
+				0AFF368B248F604600388C11 /* OutfitPreviewViewController.swift in Sources */,
 				0AFD705124419DD300957BE6 /* SceneDelegate.swift in Sources */,
 				0A370BAA24446D7B00A72048 /* IconHelper.swift in Sources */,
 				0ADC7BA0245FACA00033F67E /* InAppPurchaseViewController.swift in Sources */,
@@ -967,7 +968,6 @@
 				0A26E7B5244758C500D80594 /* Villager.swift in Sources */,
 				0A34AB7C245EE51800BDCFF1 /* EditInfoVC+ImagePicker.swift in Sources */,
 				0AEFF82B24470EAF0032156C /* WardrobesTableViewController.swift in Sources */,
-				0A5F504D248D0C1400F0DFF0 /* OutfitPickerPreviewViewController.swift in Sources */,
 				0A72C3752445FD93009FA0D4 /* VariantCollectionViewCell.swift in Sources */,
 				0AEC5016245BA7B7004EC912 /* DynamicSizeTableView.swift in Sources */,
 				0A5D2A36246B816C0037D2A0 /* ShareHelper.swift in Sources */,

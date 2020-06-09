@@ -49,6 +49,7 @@ class OutfitPickerViewController: UICollectionViewController {
     
     private var datasource: [[Wardrobe]] = []
     private var selectedOutfitIndexPaths: [Int: Int] = [:]
+    private var isFirstLoad = true
     
     // MARK: - View lifecycle
     override func viewDidLoad() {
@@ -157,7 +158,7 @@ class OutfitPickerViewController: UICollectionViewController {
         let close = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(closeTapped))
         navigationItem.leftBarButtonItem = close
     }
-    
+
     @objc private func randomizeButtonTapped() {
         Taptic.successTaptic()
         
@@ -165,8 +166,10 @@ class OutfitPickerViewController: UICollectionViewController {
             let randomInt = Int.random(in: 0 ..< datasource[i].count)
             
             collectionView.layoutIfNeeded()
-            DispatchQueue.main.asyncAfter(deadline: .now() + Double(i) * 0.0625) {
-                self.collectionView.scrollToItem(at: IndexPath(row: randomInt, section: i), at: .centeredHorizontally, animated: true)
+            DispatchQueue.main.asyncAfter(deadline: .now() + Double(i) * 0.125) {
+                UIView.animate(withDuration: 1, delay: 0, options: .curveEaseInOut, animations: {
+                    self.collectionView.scrollToItem(at: IndexPath(row: randomInt, section: i), at: .centeredHorizontally, animated: false)
+                }, completion: nil)
             }
 
             selectedOutfitIndexPaths[i] = randomInt
@@ -186,8 +189,20 @@ class OutfitPickerViewController: UICollectionViewController {
 
             guard let indexPath = collectionView.indexPathForItem(at: visiblePoint) else { fatalError("Item not found") }
             selectedOutfitIndexPaths[indexPath.section] = indexPath.row
-            
         }
+        
+        var selectedOutfit: [Wardrobe] = []
+        
+        let sortedDict = selectedOutfitIndexPaths.sorted( by: { $0.0 < $1.0 })
+        
+        for (key, value) in sortedDict {
+            selectedOutfit.append(datasource[key][value])
+        }
+        
+        let vc = OutfitPreviewViewController()
+        vc.selectedOutfit = selectedOutfit
+        let navController = UINavigationController(rootViewController: vc)
+        self.present(navController, animated: true, completion: nil)
     }
     
     @objc private func closeTapped() {
