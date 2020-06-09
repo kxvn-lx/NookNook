@@ -54,8 +54,23 @@ class OutfitPreviewViewController: UIViewController {
         setupConstraint()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
+        navigationController?.navigationBar.shadowImage = nil
+    }
+    
     private func setBar() {
-        self.configureNavigationBar(title: "", preferredLargeTitle: false)
+//        self.configureNavigationBar(title: "", preferredLargeTitle: false)
         self.view.backgroundColor = .cream1
         self.view.tintColor = .white
         
@@ -64,7 +79,7 @@ class OutfitPreviewViewController: UIViewController {
     }
     
     private func setupView() {
-        logoImageView.alpha = 0.25
+        logoImageView.alpha = 0.125
         self.view.addSubview(logoImageView)
         self.view.addSubview(mScrollView)
         mScrollView.addSubview(mSV)
@@ -75,7 +90,7 @@ class OutfitPreviewViewController: UIViewController {
             outfitImageView.sd_setImage(with: ImageEngine.parseNPURL(with: outfit.image!, category: outfit.category), placeholderImage: UIImage(named: "placeholder"))
             
             outfitImageView.snp.makeConstraints { (make) in
-                make.height.width.equalTo(self.view.frame.width * 0.25)
+                make.height.width.equalTo(self.view.frame.height * 0.20)
             }
             
             mSV.addArrangedSubview(outfitImageView)
@@ -118,7 +133,8 @@ class OutfitPreviewViewController: UIViewController {
         if let error = error {
             print(error)
         }
-        self.present(AlertHelper.createDefaultAction(title: "Saved!", message: ""), animated: true)
+        Taptic.successTaptic()
+        self.present(AlertHelper.createDefaultAction(title: "Saved! 🎉", message: "Your outfit has been saved to the camera roll."), animated: true)
     }
     
     @objc private func closeTapped() {
