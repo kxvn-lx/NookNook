@@ -79,19 +79,17 @@ class OutfitPickerViewController: UICollectionViewController {
         collectionView.collectionViewLayout = makeLayout()
         collectionView.backgroundColor = .clear
         
-        let v = UIView()
+        let vWidth = self.view.frame.width * (cellSize + 0.005)
+        let vHeight = self.view.frame.height * (cellSize - 0.11) * 5.25
+        let vCenterX = self.view.frame.midX - vWidth / 2
+        
+        let v = UIView(frame: CGRect(x: vCenterX, y: 0, width: vWidth, height: vHeight))
         v.layer.cornerRadius = 10
         v.layer.borderWidth = 1
         v.layer.borderColor = UIColor.gold1.withAlphaComponent(0.5).cgColor
         v.backgroundColor = .cream2
-        
+
         self.collectionView.addSubview(v)
-        
-        v.snp.makeConstraints { (make) in
-            make.centerX.equalToSuperview()
-            make.height.equalTo(self.view.frame.height * (cellSize - 0.11) * 5.33)
-            make.width.equalTo(self.view.frame.width * (cellSize + 0.005))
-        }
     }
     
     private func setupConstraint() {
@@ -181,10 +179,15 @@ class OutfitPickerViewController: UICollectionViewController {
         var visibleRect = CGRect()
         visibleRect.origin = collectionView.contentOffset
         visibleRect.size = collectionView.bounds.size
-        let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
         
-        guard let visibleIndexPath: IndexPath = collectionView.indexPathForItem(at: visiblePoint) else { return }
-        print(visibleIndexPath)
+        for i in 0 ..< datasource.count {
+            let constant = self.view.frame.height / 1.65 * cellSize * CGFloat(i)
+            let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.minY + 5 + constant)
+
+            guard let indexPath = collectionView.indexPathForItem(at: visiblePoint) else { fatalError("Item not found") }
+            selectedOutfitIndexPaths[indexPath.section] = indexPath.row
+            
+        }
     }
     
     @objc private func closeTapped() {
@@ -208,7 +211,6 @@ extension OutfitPickerViewController {
         let data = self.datasource[indexPath.section][indexPath.row]
         
         cell.imgView.sd_setImage(with: ImageEngine.parseNPURL(with: data.image!, category: data.category), placeholderImage: UIImage(named: "placeholder"))
-        cell.label.text = "\(indexPath)"
         
         return cell
     }

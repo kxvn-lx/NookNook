@@ -28,18 +28,23 @@ class OutfitPickerCollectionViewCell: UICollectionViewCell {
         return v
     }()
     
+    private let isDebugMode = false
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
         addSubview(imgView)
-        addSubview(label)
-        
         imgView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
         
-        label.snp.makeConstraints { (make) in
-            make.left.bottom.equalToSuperview()
+        if isDebugMode {
+            addSubview(label)
+            
+            label.snp.makeConstraints { (make) in
+                make.left.bottom.equalToSuperview()
+            }
         }
+
     }
 }
