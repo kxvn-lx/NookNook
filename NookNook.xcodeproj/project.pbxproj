@@ -76,6 +76,7 @@
 		0A72C3752445FD93009FA0D4 /* VariantCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A72C3742445FD93009FA0D4 /* VariantCollectionViewCell.swift */; };
 		0A739A41244B592300002B89 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A739A40244B592200002B89 /* DashboardViewController.swift */; };
 		0A739A43244BE55600002B89 /* ResidentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A739A42244BE55600002B89 /* ResidentCollectionViewCell.swift */; };
+		0A7737CD248F9DEB00EF9FAE /* OutfitImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7737CC248F9DEB00EF9FAE /* OutfitImageView.swift */; };
 		0A7FA6A32445971900921079 /* CrittersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7FA6A22445971900921079 /* CrittersTableViewController.swift */; };
 		0A7FA6A52445972A00921079 /* CritterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7FA6A42445972A00921079 /* CritterTableViewCell.swift */; };
 		0A887F8D2450890C0044EAEA /* FruitsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A887F8C2450890C0044EAEA /* FruitsTableViewController.swift */; };
@@ -218,6 +219,7 @@
 		0A72C3742445FD93009FA0D4 /* VariantCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariantCollectionViewCell.swift; sourceTree = "<group>"; };
 		0A739A40244B592200002B89 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		0A739A42244BE55600002B89 /* ResidentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResidentCollectionViewCell.swift; sourceTree = "<group>"; };
+		0A7737CC248F9DEB00EF9FAE /* OutfitImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitImageView.swift; sourceTree = "<group>"; };
 		0A7FA6A22445971900921079 /* CrittersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrittersTableViewController.swift; sourceTree = "<group>"; };
 		0A7FA6A42445972A00921079 /* CritterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CritterTableViewCell.swift; sourceTree = "<group>"; };
 		0A887F8C2450890C0044EAEA /* FruitsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitsTableViewController.swift; sourceTree = "<group>"; };
@@ -364,6 +366,7 @@
 				0A1DE43F248BFB2E004A6449 /* OutfitPickerViewController.swift */,
 				0AE58040248C6E1A00656B2F /* OutfitPickerCollectionViewCell.swift */,
 				0AFF368A248F604600388C11 /* OutfitPreviewViewController.swift */,
+				0A7737CC248F9DEB00EF9FAE /* OutfitImageView.swift */,
 			);
 			path = OutfitPicker;
 			sourceTree = "<group>";
@@ -943,6 +946,7 @@
 				0A23BBD0244AE1D5009B5178 /* Fruits.swift in Sources */,
 				0AE2795F24617B4300BF7EDB /* ConfettiHelper.swift in Sources */,
 				0AEF52642452742E0056286B /* PatchLogViewController.swift in Sources */,
+				0A7737CD248F9DEB00EF9FAE /* OutfitImageView.swift in Sources */,
 				0ADC7B97245F98A50033F67E /* GoogleAdsHelper.swift in Sources */,
 				0A23BBCE244ADFE6009B5178 /* User.swift in Sources */,
 				0A6862AC244D63A700E06C74 /* EditInfoViewController.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  OutfitPreviewViewController.swift
+//  OutfitImageView.swift
 //  NookNook
 //
 //  Created by Kevin Laminto on 9/6/20.
@@ -8,14 +8,8 @@
 
 import UIKit
 
-class OutfitPreviewViewController: UIViewController {
+class OutfitImageView: UIView {
 
-    private let mScrollView: UIScrollView = {
-        let v = UIScrollView()
-        v.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
-        v.translatesAutoresizingMaskIntoConstraints = false
-        return v
-    }()
     private let logoImageView: UIImageView = {
         let v = UIImageView()
         v.contentMode = .scaleAspectFill
@@ -44,30 +38,27 @@ class OutfitPreviewViewController: UIViewController {
         return v
     }()
     
-    var selectedOutfit: [Wardrobe] = []
+    private var selectedOutfit: [Wardrobe] = []
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        setBar()
+    init(frame: CGRect, selectedOutfit: [Wardrobe]) {
+        
+        self.selectedOutfit = selectedOutfit
+        
+        super.init(frame: frame)
+        
         setupView()
+        setBar()
         setupConstraint()
     }
     
-    private func setBar() {
-        self.configureNavigationBar(title: "", preferredLargeTitle: false)
-        self.view.backgroundColor = .cream1
-        self.view.tintColor = .white
-        
-        let close = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(closeTapped))
-        navigationItem.leftBarButtonItem = close
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     private func setupView() {
         logoImageView.alpha = 0.25
-        self.view.addSubview(logoImageView)
-        self.view.addSubview(mScrollView)
-        mScrollView.addSubview(mSV)
+        addSubview(logoImageView)
+        addSubview(mSV)
         
         for outfit in selectedOutfit {
             let outfitImageView = UIImageView()
@@ -75,15 +66,11 @@ class OutfitPreviewViewController: UIViewController {
             outfitImageView.sd_setImage(with: ImageEngine.parseNPURL(with: outfit.image!, category: outfit.category), placeholderImage: UIImage(named: "placeholder"))
             
             outfitImageView.snp.makeConstraints { (make) in
-                make.height.width.equalTo(self.view.frame.width * 0.25)
+                make.height.width.equalTo(self.frame.width * 0.25)
             }
             
             mSV.addArrangedSubview(outfitImageView)
         }
-        
-        mSV.addArrangedSubview(saveButton, withMargin: UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0))
-        
-        saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
     }
     
     private func setupConstraint() {
@@ -91,38 +78,13 @@ class OutfitPreviewViewController: UIViewController {
             make.edges.equalToSuperview()
         }
         
-        mScrollView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
-        }
-        
         mSV.snp.makeConstraints { (make) in
-            make.top.left.width.right.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-10 * 2)
+            make.center.equalToSuperview()
         }
         
     }
     
-    @objc private func saveButtonTapped() {
-
-        let view = OutfitImageView(frame: self.view.frame, selectedOutfit: selectedOutfit)
-        
-        let renderer = UIGraphicsImageRenderer(size: view.bounds.size)
-        let image = renderer.image { _ in
-            view.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
-        }
-        
-        UIImageWriteToSavedPhotosAlbum(image, self, #selector(saveError), nil)
-    }
-    
-    @objc func saveError(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
-        if let error = error {
-            print(error)
-        }
-        self.present(AlertHelper.createDefaultAction(title: "Saved!", message: ""), animated: true)
-    }
-    
-    @objc private func closeTapped() {
-        navigationController?.popViewController(animated: true)
-        dismiss(animated: true, completion: nil)
+    private func setBar() {
+        backgroundColor = .cream1
     }
 }

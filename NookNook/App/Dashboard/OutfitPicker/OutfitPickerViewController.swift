@@ -49,7 +49,6 @@ class OutfitPickerViewController: UICollectionViewController {
     
     private var datasource: [[Wardrobe]] = []
     private var selectedOutfitIndexPaths: [Int: Int] = [:]
-    private var isFirstLoad = true
     
     // MARK: - View lifecycle
     override func viewDidLoad() {
