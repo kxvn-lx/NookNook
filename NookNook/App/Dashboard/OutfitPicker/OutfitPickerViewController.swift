@@ -165,12 +165,12 @@ class OutfitPickerViewController: UICollectionViewController {
             let randomInt = Int.random(in: 0 ..< datasource[i].count)
             
             collectionView.layoutIfNeeded()
-            self.collectionView.scrollToItem(at: IndexPath(row: randomInt, section: i), at: .centeredHorizontally, animated: true)
+            DispatchQueue.main.asyncAfter(deadline: .now() + Double(i) * 0.0625) {
+                self.collectionView.scrollToItem(at: IndexPath(row: randomInt, section: i), at: .centeredHorizontally, animated: true)
+            }
+
             selectedOutfitIndexPaths[i] = randomInt
         }
-        
-        print(selectedOutfitIndexPaths)
-        
     }
     
     @objc private func previewButtonTapped() {
