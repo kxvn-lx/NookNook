@@ -13,7 +13,7 @@ private let headerFooterIdentifier = "outfitHeaderFooter"
 
 class OutfitPickerViewController: UICollectionViewController {
     
-    private let categories: [Categories] = [.headwear, .accessories, .tops, .bottoms, .socks, .shoes]
+    private var categories: [Categories] = [.headwear, .accessories, .tops, .bottoms, .socks, .shoes]
     private let cellSize: CGFloat = 0.25
     private var randomizeButton: UIButton = {
         let v = UIButton()
@@ -49,6 +49,7 @@ class OutfitPickerViewController: UICollectionViewController {
     
     private var datasource: [[Wardrobe]] = []
     private var selectedOutfitIndexPaths: [Int: Int] = [:]
+    private var isDressToggled = false
     
     // MARK: - View lifecycle
     override func viewDidLoad() {
@@ -70,37 +71,31 @@ class OutfitPickerViewController: UICollectionViewController {
         categories.forEach({
             datasource.append(DataEngine.loadWardrobesJSON(from: $0))
         })
+        
+        if isDressToggled {
+            datasource.append([])
+        }
     }
     
     private func setupView() {
+        self.view.addSubview(createTriangleSelector(frame: CGRect(x: self.view.frame.midX - 25 / 2, y: 0, width: 25, height: 25)))
         randomizeButton.addTarget(self, action: #selector(randomizeButtonTapped), for: .touchUpInside)
         previewButton.addTarget(self, action: #selector(previewButtonTapped), for: .touchUpInside)
         
+        let sv = SVHelper.createSV(axis: .horizontal, spacing: 50, alignment: .center, distribution: .fillProportionally)
+        sv.addArrangedSubview(randomizeButton)
+        sv.addArrangedSubview(previewButton)
+        
+        self.view.addSubview(sv)
+        
+        sv.snp.makeConstraints { (make) in
+            make.bottom.equalToSuperview().inset(self.view.getSafeAreaInsets().bottom + 10)
+            make.width.equalTo(self.view.frame.width * 0.8)
+            make.centerX.equalToSuperview()
+        }
+        
         collectionView.collectionViewLayout = makeLayout()
         collectionView.backgroundColor = .clear
-        
-        let vWidth = self.view.frame.width * (cellSize + 0.005)
-        let vHeight = self.view.frame.height * (cellSize - 0.11) * 5.25
-        let vCenterX = self.view.frame.midX - vWidth / 2
-        
-        let v = UIView(frame: CGRect(x: vCenterX, y: 0, width: vWidth, height: vHeight))
-        v.layer.cornerRadius = 10
-        v.layer.borderWidth = 1
-        v.layer.borderColor = UIColor.gold1.withAlphaComponent(0.5).cgColor
-        v.backgroundColor = .cream2
-
-        self.collectionView.addSubview(v)
-    }
-    
-    private func setupConstraint() {
-        collectionView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
-        }
-        
-        randomizeButton.snp.makeConstraints { (make) in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(collectionView.snp.bottom)
-        }
     }
     
     private func createSection() -> NSCollectionLayoutSection {
@@ -123,30 +118,11 @@ class OutfitPickerViewController: UICollectionViewController {
     }
     
     private func makeLayout() -> UICollectionViewLayout {
-        let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int, _) -> NSCollectionLayoutSection? in
-            if sectionIndex == self.datasource.count - 1 {
-                let section = self.createSection()
-                section.boundarySupplementaryItems = [self.makeSectionFooter()]
-                return section
-            } else {
-                return self.createSection()
-            }
+        let layout = UICollectionViewCompositionalLayout { (_, _) -> NSCollectionLayoutSection? in
+            return self.createSection()
         }
         
         return layout
-    }
-    
-    private func makeSectionFooter() -> NSCollectionLayoutBoundarySupplementaryItem {
-        let layoutSectionHeaderSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1),
-            heightDimension: .estimated(75))
-        
-        let layoutSectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: layoutSectionHeaderSize,
-            elementKind: UICollectionView.elementKindSectionFooter,
-            alignment: .bottom
-        )
-        return layoutSectionHeader
     }
     
     private func setBar() {
@@ -156,13 +132,38 @@ class OutfitPickerViewController: UICollectionViewController {
         
         let close = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(closeTapped))
         navigationItem.leftBarButtonItem = close
+        
+        let btn = UIButton(type: .detailDisclosure)
+        btn.addTarget(self, action: #selector(filterTapped), for: .touchUpInside)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: btn)
+    }
+    
+    private func createTriangleSelector(frame: CGRect) -> UIView {
+        let v = UIView(frame: frame)
+        let heightWidth = frame.size.width
+        let path = CGMutablePath()
+        
+        path.move(to: CGPoint(x: 0, y: 0))
+        path.addLine(to: CGPoint(x: heightWidth / 2, y: heightWidth / 2))
+        path.addLine(to: CGPoint(x: heightWidth, y: 0))
+        path.addLine(to: CGPoint(x: 0, y: 0))
+        
+        let shape = CAShapeLayer()
+        shape.path = path
+        shape.fillColor = UIColor.gold1.cgColor
+        
+        v.layer.insertSublayer(shape, at: 0)
+        
+        return v
     }
 
     @objc private func randomizeButtonTapped() {
         Taptic.successTaptic()
+
+        let d = isDressToggled ? datasource.filter { !$0.isEmpty } : datasource
         
-        for i in 0 ..< datasource.count {
-            let randomInt = Int.random(in: 0 ..< datasource[i].count)
+        for i in 0 ..< d.count {
+            let randomInt = Int.random(in: 0 ..< d[i].count)
             
             collectionView.layoutIfNeeded()
             DispatchQueue.main.asyncAfter(deadline: .now() + Double(i) * 0.125) {
@@ -182,7 +183,9 @@ class OutfitPickerViewController: UICollectionViewController {
         visibleRect.origin = collectionView.contentOffset
         visibleRect.size = collectionView.bounds.size
         
-        for i in 0 ..< datasource.count {
+        let d = isDressToggled ? datasource.filter { !$0.isEmpty } : datasource
+        
+        for i in 0 ..< d.count {
             let constant = self.view.frame.height / 1.65 * cellSize * CGFloat(i)
             let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.minY + 5 + constant)
 
@@ -209,6 +212,14 @@ class OutfitPickerViewController: UICollectionViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    @objc private func filterTapped() {
+        let vc = OutfitFilterTableViewController(style: .insetGrouped)
+        vc.delegate = self
+        vc.isDressTogled = isDressToggled
+        let root = UINavigationController(rootViewController: vc)
+        self.present(root, animated: true, completion: nil)
+    }
+    
 }
 
 extension OutfitPickerViewController {
@@ -222,7 +233,7 @@ extension OutfitPickerViewController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as!  OutfitPickerCollectionViewCell
-        let data = self.datasource[indexPath.section][indexPath.row]
+        let data = datasource[indexPath.section][indexPath.row]
         
         cell.imgView.sd_setImage(with: ImageEngine.parseNPURL(with: data.image!, category: data.category), placeholderImage: UIImage(named: "placeholder"))
         
@@ -238,21 +249,26 @@ extension OutfitPickerViewController {
         selectedOutfitIndexPaths[indexPath.section] = indexPath.row
     }
     
-    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerFooterIdentifier, for: indexPath)
+}
+
+extension OutfitPickerViewController: OutfitFilterDelegate {
+    func filterDidToggleDress(withToggleResult isDress: Bool) {
+        self.isDressToggled = isDress
         
-        let sv = SVHelper.createSV(axis: .horizontal, spacing: 50, alignment: .center, distribution: .fillProportionally)
-        sv.addArrangedSubview(randomizeButton)
-        sv.addArrangedSubview(previewButton)
-        
-        view.addSubview(sv)
-        
-        sv.snp.makeConstraints { (make) in
-            make.centerX.equalToSuperview()
-            make.bottom.equalToSuperview()
+        if isDress {
+            self.categories = [.headwear, .accessories, .dresses, .socks, .shoes]
+        } else {
+            self.categories = [.headwear, .accessories, .tops, .bottoms, .socks, .shoes]
         }
-        
-        return view
+        datasource.removeAll()
+        fetchDatasource()
+
+        self.collectionView.reloadData()
+        self.selectedOutfitIndexPaths = [:]
+
+        collectionView.layoutIfNeeded()
+        for i in 0 ..< datasource.count {
+            self.collectionView.scrollToItem(at: IndexPath(row: 0, section: i), at: .centeredHorizontally, animated: true)
+        }
     }
-    
 }

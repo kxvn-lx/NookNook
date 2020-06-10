@@ -11,6 +11,7 @@
 		0A01F31224431725001499D5 /* ImageEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A01F31124431724001499D5 /* ImageEngine.swift */; };
 		0A0C06AA24853DB80015A07F /* bugsMain.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A0C06A924853DB80015A07F /* bugsMain.json */; };
 		0A0C06AC24853DBD0015A07F /* fishesMain.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A0C06AB24853DBD0015A07F /* fishesMain.json */; };
+		0A0EC83324905CE000F6DF96 /* OutfitFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0EC83224905CE000F6DF96 /* OutfitFilterTableViewController.swift */; };
 		0A11A00E2461338400D1BFB2 /* SwipeCellKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0A11A00D2461338400D1BFB2 /* SwipeCellKit */; };
 		0A149FF224512E7B0080941A /* UserPersistEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A149FF124512E7B0080941A /* UserPersistEngine.swift */; };
 		0A14A002245155A10080941A /* ResidentHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A14A001245155A10080941A /* ResidentHelper.swift */; };
@@ -155,6 +156,7 @@
 		0A01F31124431724001499D5 /* ImageEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEngine.swift; sourceTree = "<group>"; };
 		0A0C06A924853DB80015A07F /* bugsMain.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bugsMain.json; sourceTree = "<group>"; };
 		0A0C06AB24853DBD0015A07F /* fishesMain.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fishesMain.json; sourceTree = "<group>"; };
+		0A0EC83224905CE000F6DF96 /* OutfitFilterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitFilterTableViewController.swift; sourceTree = "<group>"; };
 		0A149FF124512E7B0080941A /* UserPersistEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPersistEngine.swift; sourceTree = "<group>"; };
 		0A14A001245155A10080941A /* ResidentHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResidentHelper.swift; sourceTree = "<group>"; };
 		0A14A0062451986B0080941A /* CrittersMonthlyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrittersMonthlyTableViewController.swift; sourceTree = "<group>"; };
@@ -367,6 +369,7 @@
 				0AE58040248C6E1A00656B2F /* OutfitPickerCollectionViewCell.swift */,
 				0AFF368A248F604600388C11 /* OutfitPreviewViewController.swift */,
 				0A7737CC248F9DEB00EF9FAE /* OutfitImageView.swift */,
+				0A0EC83224905CE000F6DF96 /* OutfitFilterTableViewController.swift */,
 			);
 			path = OutfitPicker;
 			sourceTree = "<group>";
@@ -953,6 +956,7 @@
 				0A739A41244B592300002B89 /* DashboardViewController.swift in Sources */,
 				0AA3616E244C520500D326AF /* SVHelper.swift in Sources */,
 				0A7FA6A32445971900921079 /* CrittersTableViewController.swift in Sources */,
+				0A0EC83324905CE000F6DF96 /* OutfitFilterTableViewController.swift in Sources */,
 				0A887F9124508F280044EAEA /* UDEngine.swift in Sources */,
 				0A7FA6A52445972A00921079 /* CritterTableViewCell.swift in Sources */,
 				0AF37FB324596040004A8944 /* DashboardVC+TableView.swift in Sources */,
