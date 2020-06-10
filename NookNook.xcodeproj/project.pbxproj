@@ -11,6 +11,7 @@
 		0A01F31224431725001499D5 /* ImageEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A01F31124431724001499D5 /* ImageEngine.swift */; };
 		0A0C06AA24853DB80015A07F /* bugsMain.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A0C06A924853DB80015A07F /* bugsMain.json */; };
 		0A0C06AC24853DBD0015A07F /* fishesMain.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A0C06AB24853DBD0015A07F /* fishesMain.json */; };
+		0A0EC83324905CE000F6DF96 /* OutfitFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0EC83224905CE000F6DF96 /* OutfitFilterTableViewController.swift */; };
 		0A11A00E2461338400D1BFB2 /* SwipeCellKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0A11A00D2461338400D1BFB2 /* SwipeCellKit */; };
 		0A149FF224512E7B0080941A /* UserPersistEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A149FF124512E7B0080941A /* UserPersistEngine.swift */; };
 		0A14A002245155A10080941A /* ResidentHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A14A001245155A10080941A /* ResidentHelper.swift */; };
@@ -76,6 +77,7 @@
 		0A72C3752445FD93009FA0D4 /* VariantCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A72C3742445FD93009FA0D4 /* VariantCollectionViewCell.swift */; };
 		0A739A41244B592300002B89 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A739A40244B592200002B89 /* DashboardViewController.swift */; };
 		0A739A43244BE55600002B89 /* ResidentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A739A42244BE55600002B89 /* ResidentCollectionViewCell.swift */; };
+		0A7737CD248F9DEB00EF9FAE /* OutfitImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7737CC248F9DEB00EF9FAE /* OutfitImageView.swift */; };
 		0A7FA6A32445971900921079 /* CrittersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7FA6A22445971900921079 /* CrittersTableViewController.swift */; };
 		0A7FA6A52445972A00921079 /* CritterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7FA6A42445972A00921079 /* CritterTableViewCell.swift */; };
 		0A887F8D2450890C0044EAEA /* FruitsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A887F8C2450890C0044EAEA /* FruitsTableViewController.swift */; };
@@ -99,6 +101,7 @@
 		0ADC7BA4245FC0B50033F67E /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ADC7BA3245FC0B50033F67E /* StoreKit.framework */; };
 		0ADF34CB24605ED8006AE2DB /* SwiftyStoreKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0ADF34CA24605ED8006AE2DB /* SwiftyStoreKit */; };
 		0AE2795F24617B4300BF7EDB /* ConfettiHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE2795E24617B4300BF7EDB /* ConfettiHelper.swift */; };
+		0AE58041248C6E1A00656B2F /* OutfitPickerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE58040248C6E1A00656B2F /* OutfitPickerCollectionViewCell.swift */; };
 		0AEC5016245BA7B7004EC912 /* DynamicSizeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEC5015245BA7B7004EC912 /* DynamicSizeTableView.swift */; };
 		0AEC501A245BAABD004EC912 /* NotificationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEC5019245BAABD004EC912 /* NotificationEngine.swift */; };
 		0AEC501C245BF56B004EC912 /* NookTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEC501B245BF56B004EC912 /* NookTabBarController.swift */; };
@@ -119,6 +122,7 @@
 		0AFD706C2441BFEE00957BE6 /* ItemsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFD706B2441BFEE00957BE6 /* ItemsTableViewController.swift */; };
 		0AFD70732441D2B200957BE6 /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFD70722441D2B200957BE6 /* ItemTableViewCell.swift */; };
 		0AFD70752441D9BF00957BE6 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFD70742441D9BF00957BE6 /* Item.swift */; };
+		0AFF368B248F604600388C11 /* OutfitPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFF368A248F604600388C11 /* OutfitPreviewViewController.swift */; };
 		7FED8C2AE2B972E9F4296543 /* Pods_NookNookTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4ED982529BF524F49A0E568 /* Pods_NookNookTests.framework */; };
 		D02015DDD8C8A4BAE7285CAB /* Pods_NookNook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A4557804DEA2E2611BA88D4 /* Pods_NookNook.framework */; };
 /* End PBXBuildFile section */
@@ -152,6 +156,7 @@
 		0A01F31124431724001499D5 /* ImageEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEngine.swift; sourceTree = "<group>"; };
 		0A0C06A924853DB80015A07F /* bugsMain.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bugsMain.json; sourceTree = "<group>"; };
 		0A0C06AB24853DBD0015A07F /* fishesMain.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fishesMain.json; sourceTree = "<group>"; };
+		0A0EC83224905CE000F6DF96 /* OutfitFilterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitFilterTableViewController.swift; sourceTree = "<group>"; };
 		0A149FF124512E7B0080941A /* UserPersistEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPersistEngine.swift; sourceTree = "<group>"; };
 		0A14A001245155A10080941A /* ResidentHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResidentHelper.swift; sourceTree = "<group>"; };
 		0A14A0062451986B0080941A /* CrittersMonthlyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrittersMonthlyTableViewController.swift; sourceTree = "<group>"; };
@@ -216,6 +221,7 @@
 		0A72C3742445FD93009FA0D4 /* VariantCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariantCollectionViewCell.swift; sourceTree = "<group>"; };
 		0A739A40244B592200002B89 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		0A739A42244BE55600002B89 /* ResidentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResidentCollectionViewCell.swift; sourceTree = "<group>"; };
+		0A7737CC248F9DEB00EF9FAE /* OutfitImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitImageView.swift; sourceTree = "<group>"; };
 		0A7FA6A22445971900921079 /* CrittersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrittersTableViewController.swift; sourceTree = "<group>"; };
 		0A7FA6A42445972A00921079 /* CritterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CritterTableViewCell.swift; sourceTree = "<group>"; };
 		0A887F8C2450890C0044EAEA /* FruitsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitsTableViewController.swift; sourceTree = "<group>"; };
@@ -239,6 +245,7 @@
 		0ADC7B9F245FACA00033F67E /* InAppPurchaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppPurchaseViewController.swift; sourceTree = "<group>"; };
 		0ADC7BA3245FC0B50033F67E /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		0AE2795E24617B4300BF7EDB /* ConfettiHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiHelper.swift; sourceTree = "<group>"; };
+		0AE58040248C6E1A00656B2F /* OutfitPickerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitPickerCollectionViewCell.swift; sourceTree = "<group>"; };
 		0AEC5015245BA7B7004EC912 /* DynamicSizeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicSizeTableView.swift; sourceTree = "<group>"; };
 		0AEC5019245BAABD004EC912 /* NotificationEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationEngine.swift; sourceTree = "<group>"; };
 		0AEC501B245BF56B004EC912 /* NookTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NookTabBarController.swift; sourceTree = "<group>"; };
@@ -260,6 +267,7 @@
 		0AFD706B2441BFEE00957BE6 /* ItemsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsTableViewController.swift; sourceTree = "<group>"; };
 		0AFD70722441D2B200957BE6 /* ItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableViewCell.swift; sourceTree = "<group>"; };
 		0AFD70742441D9BF00957BE6 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		0AFF368A248F604600388C11 /* OutfitPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitPreviewViewController.swift; sourceTree = "<group>"; };
 		0FC0B9212811082E98C0131C /* Pods-NookNook.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NookNook.release.xcconfig"; path = "Target Support Files/Pods-NookNook/Pods-NookNook.release.xcconfig"; sourceTree = "<group>"; };
 		3A4557804DEA2E2611BA88D4 /* Pods_NookNook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NookNook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F2D55C25D11CEC5AE82E7DC /* Pods-NookNook.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NookNook.debug.xcconfig"; path = "Target Support Files/Pods-NookNook/Pods-NookNook.debug.xcconfig"; sourceTree = "<group>"; };
@@ -358,6 +366,10 @@
 			isa = PBXGroup;
 			children = (
 				0A1DE43F248BFB2E004A6449 /* OutfitPickerViewController.swift */,
+				0AE58040248C6E1A00656B2F /* OutfitPickerCollectionViewCell.swift */,
+				0AFF368A248F604600388C11 /* OutfitPreviewViewController.swift */,
+				0A7737CC248F9DEB00EF9FAE /* OutfitImageView.swift */,
+				0A0EC83224905CE000F6DF96 /* OutfitFilterTableViewController.swift */,
 			);
 			path = OutfitPicker;
 			sourceTree = "<group>";
@@ -937,12 +949,14 @@
 				0A23BBD0244AE1D5009B5178 /* Fruits.swift in Sources */,
 				0AE2795F24617B4300BF7EDB /* ConfettiHelper.swift in Sources */,
 				0AEF52642452742E0056286B /* PatchLogViewController.swift in Sources */,
+				0A7737CD248F9DEB00EF9FAE /* OutfitImageView.swift in Sources */,
 				0ADC7B97245F98A50033F67E /* GoogleAdsHelper.swift in Sources */,
 				0A23BBCE244ADFE6009B5178 /* User.swift in Sources */,
 				0A6862AC244D63A700E06C74 /* EditInfoViewController.swift in Sources */,
 				0A739A41244B592300002B89 /* DashboardViewController.swift in Sources */,
 				0AA3616E244C520500D326AF /* SVHelper.swift in Sources */,
 				0A7FA6A32445971900921079 /* CrittersTableViewController.swift in Sources */,
+				0A0EC83324905CE000F6DF96 /* OutfitFilterTableViewController.swift in Sources */,
 				0A887F9124508F280044EAEA /* UDEngine.swift in Sources */,
 				0A7FA6A52445972A00921079 /* CritterTableViewCell.swift in Sources */,
 				0AF37FB324596040004A8944 /* DashboardVC+TableView.swift in Sources */,
@@ -950,6 +964,7 @@
 				0AFD704F24419DD300957BE6 /* AppDelegate.swift in Sources */,
 				0A6862A9244D499C00E06C74 /* SettingsTableViewController.swift in Sources */,
 				0A370B6E24444BD800A72048 /* DataEngine.swift in Sources */,
+				0AFF368B248F604600388C11 /* OutfitPreviewViewController.swift in Sources */,
 				0AFD705124419DD300957BE6 /* SceneDelegate.swift in Sources */,
 				0A370BAA24446D7B00A72048 /* IconHelper.swift in Sources */,
 				0ADC7BA0245FACA00033F67E /* InAppPurchaseViewController.swift in Sources */,
@@ -985,6 +1000,7 @@
 				0AF37FB124595EE9004A8944 /* DashboardVC+CollectionView.swift in Sources */,
 				0AC703B42451C749008D7C77 /* CritterHelper.swift in Sources */,
 				0A4DEC23245B0FF50017A553 /* TurnipTableViewCell.swift in Sources */,
+				0AE58041248C6E1A00656B2F /* OutfitPickerCollectionViewCell.swift in Sources */,
 				0ACCF3AC2456830A00F9C62E /* WhatsNewHelper.swift in Sources */,
 				0A370BAF2444796400A72048 /* CategoriesTableViewController.swift in Sources */,
 				0A14A002245155A10080941A /* ResidentHelper.swift in Sources */,
@@ -1187,7 +1203,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 202006030;
+				CURRENT_PROJECT_VERSION = 202006100;
 				DEVELOPMENT_TEAM = D87H8GPTK2;
 				INFOPLIST_FILE = NookNook/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1195,7 +1211,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.2;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kevinlaminto.NookNook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1209,7 +1225,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 202006030;
+				CURRENT_PROJECT_VERSION = 202006100;
 				DEVELOPMENT_TEAM = D87H8GPTK2;
 				INFOPLIST_FILE = NookNook/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1217,7 +1233,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.2;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kevinlaminto.NookNook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

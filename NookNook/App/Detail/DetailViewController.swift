@@ -217,6 +217,10 @@ class DetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
+        
         if !UDEngine.shared.getIsAdsPurchased() {
             self.view.addSubview(adBannerView)
             adBannerView.load(GADRequest())
@@ -227,6 +231,13 @@ class DetailViewController: UIViewController {
         } else {
             adBannerView.removeFromSuperview()
         }
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
+        navigationController?.navigationBar.shadowImage = nil
     }
     
     /**
@@ -529,7 +540,6 @@ class DetailViewController: UIViewController {
     }
     
     private func setBar() {
-        self.configureNavigationBar(title: nil, preferredLargeTitle: false)
         self.view.backgroundColor = .cream1
         
         let close = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(closeTapped))

@@ -152,6 +152,17 @@ extension String {
     }
 }
 
+extension UIView {
+    /// Get the safe area layout of the device
+    /// - Returns: The safe area layout
+    func getSafeAreaInsets() -> UIEdgeInsets {
+        guard #available(iOS 11.0, *), let window = UIApplication.shared.windows.filter({$0.isKeyWindow}).first else {
+            return .zero
+        }
+        return window.safeAreaInsets
+    }
+}
+
 // MARK: - UISearchBar
 extension UISearchBar {
     func setPlaceholderTextColorTo(color: UIColor) {
