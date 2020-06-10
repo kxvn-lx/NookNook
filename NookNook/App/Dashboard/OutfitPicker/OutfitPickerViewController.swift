@@ -78,7 +78,7 @@ class OutfitPickerViewController: UICollectionViewController {
     }
     
     private func setupView() {
-        self.view.addSubview(createTriangleSelector(frame: CGRect(x: self.view.frame.midX - 25 / 2, y: 0, width: 25, height: 25)))
+        self.view.addSubview(createTriangleSelector(frame: CGRect(x: self.view.frame.midX - 20 / 2, y: 0, width: 20, height: 20)))
         randomizeButton.addTarget(self, action: #selector(randomizeButtonTapped), for: .touchUpInside)
         previewButton.addTarget(self, action: #selector(previewButtonTapped), for: .touchUpInside)
         
@@ -167,7 +167,7 @@ class OutfitPickerViewController: UICollectionViewController {
             
             collectionView.layoutIfNeeded()
             DispatchQueue.main.asyncAfter(deadline: .now() + Double(i) * 0.125) {
-                UIView.animate(withDuration: 1, delay: 0, options: .curveEaseInOut, animations: {
+                UIView.animate(withDuration: 1, delay: 0, options: [.curveEaseInOut, .preferredFramesPerSecond60], animations: {
                     self.collectionView.scrollToItem(at: IndexPath(row: randomInt, section: i), at: .centeredHorizontally, animated: false)
                 }, completion: nil)
             }

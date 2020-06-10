@@ -26,20 +26,10 @@ class OutfitPreviewViewController: UIViewController {
     private let buttonSV = SVHelper.createSV(axis: .horizontal, spacing: 10, alignment: .center, distribution: .equalSpacing)
     private var saveButton: UIButton = {
         let v = UIButton()
-        v.setTitle("Save to photo library", for: .normal)
-        
-        v.translatesAutoresizingMaskIntoConstraints = false
-        v.contentEdgeInsets = UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15)
-        v.backgroundColor = .grass1
-        v.layer.borderWidth = 1
-        v.layer.cornerRadius = 2.5
-        v.titleLabel?.numberOfLines = 2
-        v.layer.borderColor = UIColor.grass1.cgColor
+        v.setTitle("Save", for: .normal)
         v.titleLabel?.textAlignment = .center
-        v.setTitleColor(UIColor.white, for: .normal)
-        v.setTitleColor(UIColor.white.withAlphaComponent(0.5), for: .highlighted)
-        v.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
-        v.titleLabel?.font = UIFont.systemFont(ofSize: UIFont.preferredFont(forTextStyle: .body).pointSize, weight: .semibold)
+        v.setTitleColor(UIColor.grass1, for: .normal)
+        v.setTitleColor(UIColor.grass1.withAlphaComponent(0.5), for: .highlighted)
         
         return v
     }()
@@ -70,12 +60,13 @@ class OutfitPreviewViewController: UIViewController {
     }
     
     private func setBar() {
-//        self.configureNavigationBar(title: "", preferredLargeTitle: false)
         self.view.backgroundColor = .cream1
         self.view.tintColor = .white
         
         let close = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(closeTapped))
         navigationItem.leftBarButtonItem = close
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: saveButton)
     }
     
     private func setupView() {
@@ -95,8 +86,6 @@ class OutfitPreviewViewController: UIViewController {
             
             mSV.addArrangedSubview(outfitImageView)
         }
-        
-        mSV.addArrangedSubview(saveButton, withMargin: UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0))
         
         saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
     }
