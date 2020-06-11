@@ -20,8 +20,9 @@ class PatchLogViewController: UIViewController {
     
     var logArray = [
         """
-        v1.2.0 (202006100)
+        v1.2.0 (202006110)
         - Added outfit picker! Mix and match all the clothings to find your next outfit! You can also save an outfit that you liked to your camera roll for future reference.
+        - Minor bug fixes to improve the app.
 
         v1.1.2 (202006030)
         - Fixed chrash on some devices when opening the app

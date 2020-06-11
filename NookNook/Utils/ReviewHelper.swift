@@ -35,7 +35,7 @@ class ReviewHelper {
         print("ReviewHelper: App opened \(count ?? 0) time(s)")
         print("ReviewHelper: current bundle version: \(currentVersion)")
         
-        if count == 20 && currentVersion != lastVersionPromptedForReview {
+        if count == 15 && currentVersion != lastVersionPromptedForReview {
             defaults.set(currentVersion, forKey: VERSION_KEY)
             return true
         } else {

@@ -284,7 +284,7 @@ extension OutfitPickerViewController: OutfitFilterDelegate {
 
         collectionView.layoutIfNeeded()
         for i in 0 ..< datasource.count {
-            self.collectionView.scrollToItem(at: IndexPath(row: 0, section: i), at: .centeredHorizontally, animated: true)
+            self.collectionView.scrollToItem(at: IndexPath(row: 1, section: i), at: .centeredHorizontally, animated: true)
         }
     }
 }

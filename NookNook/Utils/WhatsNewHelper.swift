@@ -24,7 +24,7 @@ class WhatsNewHelper {
     private var favouriteIcon = IconHelper.systemIcon(of: .star, weight: .light)
     private var birthdayIcon = IconHelper.systemIcon(of: .birthday, weight: .light)
     private var critterIcon = IconHelper.systemIcon(of: .critter, weight: .light)
-    private var profileIcon = IconHelper.systemIcon(of: .dashboard, weight: .light)
+    private var outfitIcon = IconHelper.systemIcon(of: .outfit, weight: .light)
     private var reminderIcon = IconHelper.systemIcon(of: .reminder, weight: .light)
     
     // MARK: Initialiser
@@ -32,6 +32,11 @@ class WhatsNewHelper {
         let whatsNew = WhatsNew(
             title: "Welcome\nto NookNook!",
             items: [
+                WhatsNew.Item(
+                    title: "Oufit picker",
+                    subtitle: "Mix and match any clothings to find your own outfit!",
+                    image: outfitIcon
+                ),
                 WhatsNew.Item(
                     title: "Swipe right action",
                     subtitle: "All actions, one swipe away.",
@@ -56,11 +61,6 @@ class WhatsNewHelper {
                     title: "Turnip reminder",
                     subtitle: "Use the default reminder, or set your own custom time!",
                     image: reminderIcon
-                ),
-                WhatsNew.Item(
-                    title: "Personalised dashboard",
-                    subtitle: "Make NookNook your own personal app.",
-                    image: profileIcon
                 )
             ]
         )

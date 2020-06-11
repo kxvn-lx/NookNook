@@ -20,6 +20,7 @@ class OutfitFilterTableViewController: UITableViewController {
     weak var delegate: OutfitFilterDelegate?
     
     var isDressTogled = false
+    private let headerTitle = "Mix and match any outfit as you like! Once you are ready, tap the preview button to see it in a bigger picture. Once you are happy, you can save your outfit selection to your camera roll to show off your cool new outfit! 😎"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,14 +78,14 @@ class OutfitFilterTableViewController: UITableViewController {
         let headerView = view as! UITableViewHeaderFooterView
         headerView.textLabel?.textColor = UIColor.dirt1.withAlphaComponent(0.5)
         switch section {
-        case 0: headerView.textLabel!.text = "Plan your next outfit with NookNook's outfit picker! just mix-and-match any clothing that you liked, and once you are happy with the selection, go ahead and preview it!\nYou can also save the selected outfit to your camera roll to show off your new style! 😎"
+        case 0: headerView.textLabel!.text = headerTitle
         default: headerView.textLabel!.text = ""
         }
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
-        case 0: return "Plan your next outfit with NookNook's outfit picker! just mix-and-match any clothing that you liked, and once you are happy with the selection, go ahead and preview it!\nYou can also save the selected outfit to your camera roll to show off your new style! 😎"
+        case 0: return headerTitle
         default: return nil
         }
     }
