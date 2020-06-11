@@ -62,14 +62,16 @@ class OutfitPickerViewController: UICollectionViewController {
         
         collectionView.layoutIfNeeded()
         for i in 0 ..< datasource.count {
-            self.collectionView.scrollToItem(at: IndexPath(row: 0, section: i), at: .centeredHorizontally, animated: true)
+            self.collectionView.scrollToItem(at: IndexPath(row: 1, section: i), at: .centeredHorizontally, animated: true)
         }
     }
     
     // MARK: - Class functions
     private func fetchDatasource() {
         categories.forEach({
-            datasource.append(DataEngine.loadWardrobesJSON(from: $0))
+            var clothes = DataEngine.loadWardrobesJSON(from: $0)
+            clothes.insert(Wardrobe.empty_wardrobe, at: 0)
+            datasource.append(clothes)
         })
         
         if isDressToggled {
@@ -167,7 +169,7 @@ class OutfitPickerViewController: UICollectionViewController {
             
             collectionView.layoutIfNeeded()
             DispatchQueue.main.asyncAfter(deadline: .now() + Double(i) * 0.125) {
-                UIView.animate(withDuration: 1, delay: 0, options: [.curveEaseInOut, .preferredFramesPerSecond60], animations: {
+                UIView.animate(withDuration: 1, delay: 0, options: .curveEaseInOut, animations: {
                     self.collectionView.scrollToItem(at: IndexPath(row: randomInt, section: i), at: .centeredHorizontally, animated: false)
                 }, completion: nil)
             }
@@ -201,8 +203,15 @@ class OutfitPickerViewController: UICollectionViewController {
             selectedOutfit.append(datasource[key][value])
         }
         
+        let selected = selectedOutfit.filter({ $0.image != nil })
+        guard !selected.isEmpty else {
+            let alert = AlertHelper.createDefaultAction(title: "Nope!", message: "You can't just go around your island without any clothes do you? so please pick at least one")
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
+        
         let vc = OutfitPreviewViewController()
-        vc.selectedOutfit = selectedOutfit
+        vc.selectedOutfit = selected
         let navController = UINavigationController(rootViewController: vc)
         self.present(navController, animated: true, completion: nil)
     }
@@ -235,8 +244,15 @@ extension OutfitPickerViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as!  OutfitPickerCollectionViewCell
         let data = datasource[indexPath.section][indexPath.row]
         
-        cell.imgView.sd_setImage(with: ImageEngine.parseNPURL(with: data.image!, category: data.category), placeholderImage: UIImage(named: "placeholder"))
-        
+        if indexPath.row == 0 {
+            cell.imgView.image = UIImage(named: "none")
+            cell.imgView.alpha = 0.25
+            cell.imgView.sd_imageIndicator = nil
+        } else {
+            cell.imgView.sd_setImage(with: ImageEngine.parseNPURL(with: data.image!, category: data.category), placeholderImage: UIImage(named: "placeholder"))
+            cell.imgView.alpha = 1
+        }
+
         return cell
     }
 }

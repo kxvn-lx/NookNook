@@ -24,6 +24,8 @@ struct Wardrobe: Codable, Equatable, Identifiable {
     let sell: Int?
     
     let sourceNote: String?
+    
+    static let empty_wardrobe = Wardrobe(name: "EMPTY_WARDROBE", image: nil, obtainedFrom: nil, isDIY: nil, variants: nil, category: "EMPTY_WARDROBE", buy: nil, sell: nil, sourceNote: nil)
 }
 
 extension Wardrobe {
