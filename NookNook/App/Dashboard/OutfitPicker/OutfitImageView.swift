@@ -18,6 +18,15 @@ class OutfitImageView: UIView {
     }()
     private let mSV = SVHelper.createSV(axis: .vertical, spacing: 5, alignment: .center, distribution: .equalSpacing)
     private let buttonSV = SVHelper.createSV(axis: .horizontal, spacing: 10, alignment: .center, distribution: .equalSpacing)
+    private let watermark: UILabel = {
+        let v = UILabel()
+        v.numberOfLines = 0
+        v.textAlignment = .center
+        v.textColor = .grass1
+        v.text = "Generated with ❤️ via #NookNook.\nDownload on the app store now!"
+        v.font = .preferredFont(forTextStyle: .caption1)
+        return v
+    }()
     
     private var selectedOutfit: [Wardrobe] = []
     
@@ -40,6 +49,7 @@ class OutfitImageView: UIView {
         logoImageView.alpha = 0.125
         addSubview(logoImageView)
         addSubview(mSV)
+        addSubview(watermark)
         
         for outfit in selectedOutfit {
             let outfitImageView = UIImageView()
@@ -61,6 +71,11 @@ class OutfitImageView: UIView {
         
         mSV.snp.makeConstraints { (make) in
             make.center.equalToSuperview()
+        }
+        
+        watermark.snp.makeConstraints { (make) in
+            make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview().inset(UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0))
         }
         
     }

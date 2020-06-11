@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 class OutfitPreviewViewController: UIViewController {
 
@@ -35,6 +36,15 @@ class OutfitPreviewViewController: UIViewController {
     }()
     
     var selectedOutfit: [Wardrobe] = []
+    // Google ads banner
+    private lazy var adBannerView: GADBannerView = {
+        let adBannerView = GADBannerView(adSize: kGADAdSizeSmartBannerLandscape)
+        adBannerView.translatesAutoresizingMaskIntoConstraints = false
+        adBannerView.adUnitID = GoogleAdsHelper.AD_UNIT_ID
+        adBannerView.rootViewController = self
+        
+        return adBannerView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +60,17 @@ class OutfitPreviewViewController: UIViewController {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
+        
+        if !UDEngine.shared.getIsAdsPurchased() {
+            self.view.addSubview(adBannerView)
+            adBannerView.load(GADRequest())
+            NSLayoutConstraint.activate([
+                adBannerView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
+                adBannerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
+            ])
+        } else {
+            adBannerView.removeFromSuperview()
+        }
     }
 
     override func viewDidDisappear(_ animated: Bool) {

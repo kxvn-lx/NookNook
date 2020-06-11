@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 private let reuseIdentifier = "outfitCell"
 private let headerFooterIdentifier = "outfitHeaderFooter"
@@ -51,6 +52,18 @@ class OutfitPickerViewController: UICollectionViewController {
     private var selectedOutfitIndexPaths: [Int: Int] = [:]
     private var isDressToggled = false
     
+    private var bottomSV = SVHelper.createSV(axis: .vertical, spacing: 10, alignment: .center, distribution: .fillProportionally)
+    
+    // Google ads banner
+    private lazy var adBannerView: GADBannerView = {
+        let adBannerView = GADBannerView(adSize: kGADAdSizeSmartBannerLandscape)
+        adBannerView.translatesAutoresizingMaskIntoConstraints = false
+        adBannerView.adUnitID = GoogleAdsHelper.AD_UNIT_ID
+        adBannerView.rootViewController = self
+        
+        return adBannerView
+    }()
+    
     // MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,12 +101,25 @@ class OutfitPickerViewController: UICollectionViewController {
         sv.addArrangedSubview(randomizeButton)
         sv.addArrangedSubview(previewButton)
         
-        self.view.addSubview(sv)
+        self.view.addSubview(bottomSV)
         
         sv.snp.makeConstraints { (make) in
-            make.bottom.equalToSuperview().inset(self.view.getSafeAreaInsets().bottom + 10)
             make.width.equalTo(self.view.frame.width * 0.8)
+        }
+        
+        bottomSV.addArrangedSubview(sv)
+        
+        if !UDEngine.shared.getIsAdsPurchased() {
+            bottomSV.addArrangedSubview(adBannerView)
+            adBannerView.load(GADRequest())
+        } else {
+            bottomSV.removeArrangedSubview(adBannerView)
+        }
+
+        bottomSV.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
+            make.width.equalToSuperview()
+            make.bottom.equalToSuperview().inset(UDEngine.shared.getIsAdsPurchased() ? self.view.getSafeAreaInsets().bottom + 10 : self.view.getSafeAreaInsets().bottom)
         }
         
         collectionView.collectionViewLayout = makeLayout()
