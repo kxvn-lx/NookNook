@@ -135,7 +135,6 @@ class DashboardViewController: UIViewController {
         
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 50
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -324,7 +323,7 @@ class DashboardViewController: UIViewController {
         
         residentVillagerCollectionView.snp.makeConstraints { (make) in
             make.width.equalToSuperview()
-            make.height.equalTo(140)
+            make.height.equalTo(self.view.frame.width * 0.325)
         }
     }
     
@@ -349,14 +348,12 @@ class DashboardViewController: UIViewController {
     }
     
     private func calculateCVLayout() -> UICollectionViewCompositionalLayout {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                              heightDimension: .fractionalHeight(1))
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.3),
-                                               heightDimension: .fractionalHeight(0.8))
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize,
-                                                     subitem: item, count: 1)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.25), heightDimension: .fractionalWidth(0.25))
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitem: item, count: 1)
         
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous

@@ -21,19 +21,77 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
     
     private var favouritesManager: DataPersistEngine!
     
-    var iconView: UIImageView!
-    var imgWrapper: UIView!
+    var iconView: UIImageView = {
+        let v = UIImageView()
+        v.translatesAutoresizingMaskIntoConstraints = false
+        v.image =  IconHelper.systemIcon(of: .edit, weight: .regular).withRenderingMode(.alwaysTemplate)
+        v.tintColor = .dirt1
+        return v
+    }()
+    var imgWrapper: UIView = {
+        let v = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        v.translatesAutoresizingMaskIntoConstraints = false
+        return v
+    }()
     
-    var profileImageView: UIImageView!
+    var profileImageView: UIImageView = {
+        let v = UIImageView(frame: CGRect(x: 0, y: 0, width: 130, height: 130))
+        v.translatesAutoresizingMaskIntoConstraints = false
+        v.contentMode = .scaleAspectFill
+        v.layer.cornerRadius = 130 / 2
+        v.clipsToBounds = true
+        v.backgroundColor = .cream2
+        v.image = UIImage(named: "appIcon-Ori")
+        return v
+    }()
     var nameTF: TweeAttributedTextField!
     var islandNameTF: TweeAttributedTextField!
-    var nativeFruitButton: UIButton!
-    var fruitLabel: UILabel!
+    var nativeFruitButton: UIButton = {
+        let v = UIButton()
+        v.translatesAutoresizingMaskIntoConstraints = false
+        v.titleLabel?.textAlignment = .right
+        v.titleLabel?.numberOfLines = 2
+        v.setTitleColor(.grass1, for: .normal)
+        v.setTitleColor(UIColor.grass1.withAlphaComponent(0.5), for: .highlighted)
+        v.titleLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
+        v.addTarget(self, action: #selector(fruitPicker), for: .touchUpInside)
+        v.setTitle("Change fruit", for: .normal)
+        return v
+    }()
+    var fruitLabel: UILabel = {
+        let v = UILabel()
+        v.translatesAutoresizingMaskIntoConstraints = false
+        v.textColor = .dirt1
+        v.numberOfLines = 2
+        return v
+    }()
     var selectedFruit: String!
     var selectedHemisphere: DateHelper.Hemisphere!
-    var hemispherePicker: UISegmentedControl!
+    var hemispherePicker: UISegmentedControl = {
+        let v = UISegmentedControl(items: [DateHelper.Hemisphere.Northern.rawValue, DateHelper.Hemisphere.Southern.rawValue])
+        v.backgroundColor = .cream2
+        v.tintColor = .cream1
+        v.translatesAutoresizingMaskIntoConstraints = false
+        return v
+    }()
     
-    var saveButton: UIButton!
+    var saveButton: UIButton = {
+        let v = UIButton()
+        v.translatesAutoresizingMaskIntoConstraints = false
+        v.contentEdgeInsets = UIEdgeInsets(top: 15, left: 20, bottom: 15, right: 20)
+        v.backgroundColor = .grass1
+        v.layer.borderWidth = 1
+        v.layer.cornerRadius = 2.5
+        v.titleLabel?.numberOfLines = 2
+        v.layer.borderColor = UIColor.grass1.cgColor
+        v.titleLabel?.textAlignment = .center
+        v.setTitleColor(UIColor.white, for: .normal)
+        v.setTitleColor(UIColor.white.withAlphaComponent(0.5), for: .highlighted)
+        v.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
+        v.titleLabel?.font = UIFont.systemFont(ofSize: UIFont.preferredFont(forTextStyle: .callout).pointSize, weight: .semibold)
+        v.setTitle("Save", for: .normal)
+        return v
+    }()
     
     var imagePicker = UIImagePickerController()
     
@@ -113,22 +171,7 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         // Create master stackView
         mStackView = SVHelper.createSV(axis: .vertical, spacing: MARGIN * 4, alignment: .center, distribution: .equalSpacing)
         mStackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        profileImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 130, height: 130))
-        profileImageView.translatesAutoresizingMaskIntoConstraints = false
-        profileImageView.contentMode = .scaleAspectFill
-        profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2
-        profileImageView.clipsToBounds = true
-        profileImageView.backgroundColor = .cream2
-        profileImageView.image = UIImage(named: "appIcon-Ori")
-        
-        iconView = UIImageView()
-        iconView.translatesAutoresizingMaskIntoConstraints = false
-        iconView.image =  IconHelper.systemIcon(of: .edit, weight: .regular).withRenderingMode(.alwaysTemplate)
-        iconView.tintColor = .dirt1
-        
-        imgWrapper = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-        imgWrapper.translatesAutoresizingMaskIntoConstraints = false
+
         imgWrapper.addSubview(profileImageView)
         imgWrapper.addSubview(iconView)
         
@@ -172,47 +215,15 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         islandNameTF.placeholderColor = UIColor.dirt1.withAlphaComponent(0.5)
         islandNameTF.tweePlaceholder = "Island Name 🏝"
 
-        fruitLabel = UILabel()
-        fruitLabel.translatesAutoresizingMaskIntoConstraints = false
-        fruitLabel.textColor = .dirt1
-        fruitLabel.numberOfLines = 2
-        
-        nativeFruitButton = UIButton()
-        nativeFruitButton.translatesAutoresizingMaskIntoConstraints = false
-        nativeFruitButton.titleLabel?.textAlignment = .right
-        nativeFruitButton.titleLabel?.numberOfLines = 2
-        nativeFruitButton.setTitleColor(.grass1, for: .normal)
-        nativeFruitButton.setTitleColor(UIColor.grass1.withAlphaComponent(0.5), for: .highlighted)
-        nativeFruitButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
-        nativeFruitButton.addTarget(self, action: #selector(fruitPicker), for: .touchUpInside)
-        nativeFruitButton.setTitle("Change fruit", for: .normal)
-        
         fruitStack = SVHelper.createSV(axis: .horizontal, spacing: 10, alignment: .center, distribution: .fillProportionally)
         fruitStack.translatesAutoresizingMaskIntoConstraints = false
         fruitStack.addArrangedSubview(fruitLabel)
         fruitStack.addArrangedSubview(nativeFruitButton)
         
-        hemispherePicker = UISegmentedControl(items: [DateHelper.Hemisphere.Northern.rawValue, DateHelper.Hemisphere.Southern.rawValue])
-        hemispherePicker.backgroundColor = .cream2
-        hemispherePicker.tintColor = .cream1
-        hemispherePicker.translatesAutoresizingMaskIntoConstraints = false
+
         hemispherePicker.addTarget(self, action: #selector(hemispherePickerChanged), for: .valueChanged)
         
-        saveButton = UIButton()
-        saveButton.translatesAutoresizingMaskIntoConstraints = false
-        saveButton.contentEdgeInsets = UIEdgeInsets(top: 15, left: 20, bottom: 15, right: 20)
-        saveButton.backgroundColor = .grass1
-        saveButton.layer.borderWidth = 1
-        saveButton.layer.cornerRadius = 2.5
-        saveButton.titleLabel?.numberOfLines = 2
-        saveButton.layer.borderColor = UIColor.grass1.cgColor
-        saveButton.titleLabel?.textAlignment = .center
-        saveButton.setTitleColor(UIColor.white, for: .normal)
-        saveButton.setTitleColor(UIColor.white.withAlphaComponent(0.5), for: .highlighted)
-        saveButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
-        saveButton.titleLabel?.font = UIFont.systemFont(ofSize: (nativeFruitButton.titleLabel?.font.pointSize)!, weight: .semibold)
         saveButton.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)
-        saveButton.setTitle("Save", for: .normal)
         
         mStackView.addArrangedSubview(imgWrapper, withMargin: UIEdgeInsets(top: MARGIN*4, left: 0, bottom: 0, right: 0))
         mStackView.addArrangedSubview(nameTF)

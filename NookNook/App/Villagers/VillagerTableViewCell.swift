@@ -80,6 +80,7 @@ class VillagerTableViewCell: SwipeTableViewCell {
         v.backgroundColor = .gold1
         v.layer.borderWidth = 1
         v.layer.cornerRadius = 2.5
+        v.layer.cornerCurve = .continuous
         v.clipsToBounds = true
         v.textAlignment = .center
         return v

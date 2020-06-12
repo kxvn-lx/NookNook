@@ -92,6 +92,7 @@ extension UIStackView {
         let subView = UIView(frame: bounds)
         subView.backgroundColor = color
         subView.layer.cornerRadius = cornerRadius!
+        subView.layer.cornerCurve = .continuous
         subView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         insertSubview(subView, at: 0)
     }
@@ -120,6 +121,7 @@ extension UIButton {
         blurView.backgroundColor = .clear
         if cornerRadius > 0 {
             blurView.layer.cornerRadius = cornerRadius
+            blurView.layer.cornerCurve = .continuous
             blurView.layer.masksToBounds = true
         }
         self.insertSubview(blurView, at: 0)

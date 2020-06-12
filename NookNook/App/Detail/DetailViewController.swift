@@ -46,7 +46,8 @@ class DetailViewController: UIViewController {
         v.contentMode = .scaleAspectFit
         v.sd_imageTransition = .fade
         v.sd_imageIndicator = SDWebImageActivityIndicator.gray
-        v.layer.cornerRadius = 10
+        v.layer.cornerRadius = 20
+        v.layer.cornerCurve = .continuous
         v.clipsToBounds = true
         return v
     }()
@@ -132,6 +133,7 @@ class DetailViewController: UIViewController {
         v.backgroundColor = .grass1
         v.layer.borderWidth = 1
         v.layer.cornerRadius = 2.5
+        v.layer.cornerCurve = .continuous
         v.clipsToBounds = true
         v.textAlignment = .center
         return v
@@ -147,6 +149,7 @@ class DetailViewController: UIViewController {
         v.layer.borderWidth = 1
         v.clipsToBounds = true
         v.layer.cornerRadius = 2.5
+        v.layer.cornerCurve = .continuous
         return v
     }()
     
