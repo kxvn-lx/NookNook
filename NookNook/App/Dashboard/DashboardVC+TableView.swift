@@ -9,6 +9,10 @@
 import Foundation
 import UIKit
 
+private struct CellPath {
+    static let favouritesCell = IndexPath(item: 0, section: 0)
+}
+
 // MARK: - UITableView data source
 extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -109,6 +113,7 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+
         switch indexPath.section {
         case 0:
             switch indexPath.row {

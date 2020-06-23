@@ -15,7 +15,11 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
     
     private let MARGIN: CGFloat = 10
     
-    private var scrollView: UIScrollView!
+    private var scrollView: UIScrollView = {
+       let v = UIScrollView()
+       v.translatesAutoresizingMaskIntoConstraints = false
+        return v
+    }()
     private var mStackView: UIStackView!
     private var fruitStack: UIStackView!
     
@@ -163,9 +167,6 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
     
     // MARK: - Set the views
     private func setUI() {
-        scrollView = UIScrollView()
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        
         self.view.addSubview(scrollView)
         
         // Create master stackView
@@ -219,7 +220,6 @@ class EditInfoViewController: UIViewController, UINavigationControllerDelegate, 
         fruitStack.translatesAutoresizingMaskIntoConstraints = false
         fruitStack.addArrangedSubview(fruitLabel)
         fruitStack.addArrangedSubview(nativeFruitButton)
-        
 
         hemispherePicker.addTarget(self, action: #selector(hemispherePickerChanged), for: .valueChanged)
         
