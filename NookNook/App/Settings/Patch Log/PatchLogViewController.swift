@@ -20,7 +20,7 @@ class PatchLogViewController: UIViewController {
     
     var logArray = [
         """
-        v1.2.1 (202006250)
+        v1.2.1 (202006251)
         - Improved app performance
         - Minor bug fixes
 

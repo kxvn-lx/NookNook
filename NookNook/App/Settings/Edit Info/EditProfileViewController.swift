@@ -24,7 +24,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
     private let userProfileImageView: UIImageView = {
         let v = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: 100, height: 100)))
         v.image = UIImage(named: "appIcon-Ori")
-        v.contentMode = .scaleAspectFit
+        v.contentMode = .scaleAspectFill
         v.layer.cornerRadius = 100 / 2
         v.clipsToBounds = true
         return v
