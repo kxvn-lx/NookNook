@@ -38,7 +38,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
     }()
     private let nameTextfield: UITextField = {
         let v = UITextField()
-        v.placeholder = "Name"
+        v.placeholder = "NookNook"
         v.layer.borderWidth = 1
         v.layer.cornerRadius = 5
         v.layer.cornerCurve = .continuous
@@ -51,7 +51,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
     }()
     private let islandTextfield: UITextField = {
         let v = UITextField()
-        v.placeholder = "Island name 🏝"
+        v.placeholder = "My island"
         v.layer.borderWidth = 1
         v.font = .preferredFont(forTextStyle: .callout)
         v.layer.cornerRadius = 5
@@ -107,6 +107,16 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
         super.viewWillAppear(true)
         
         userDict = UDEngine.shared.getUser()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     // MARK: - Setup the View
@@ -283,6 +293,20 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
         }
         
         return sv
+    }
+    
+    @objc func keyboardWillShow(sender: NSNotification) {
+        mStackView.snp.updateConstraints { (make) in
+            make.bottom.equalToSuperview().offset(-10 * 30)
+        }
+        mScrollView.setContentOffset(CGPoint(x: 0, y: 150), animated: true)
+    }
+    
+    @objc func keyboardWillHide(sender: NSNotification) {
+        mScrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+        mStackView.snp.updateConstraints { (make) in
+            make.bottom.equalToSuperview().offset(-10 * 2)
+        }
     }
 }
 
