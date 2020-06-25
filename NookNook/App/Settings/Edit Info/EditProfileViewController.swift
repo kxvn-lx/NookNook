@@ -44,6 +44,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
         v.layer.cornerCurve = .continuous
         v.layer.borderColor = UIColor.dirt1.withAlphaComponent(0.3).cgColor
         v.backgroundColor = .clear
+        v.font = .preferredFont(forTextStyle: .callout)
         v.font = .preferredFont(forTextStyle: .body)
         v.borderStyle = .roundedRect
         return v
@@ -52,6 +53,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
         let v = UITextField()
         v.placeholder = "Island name 🏝"
         v.layer.borderWidth = 1
+        v.font = .preferredFont(forTextStyle: .callout)
         v.layer.cornerRadius = 5
         v.layer.cornerCurve = .continuous
         v.layer.borderColor = UIColor.dirt1.withAlphaComponent(0.3).cgColor
@@ -117,10 +119,9 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
         mStackView.addArrangedSubview(editProfileImageButton)
         
         mStackView.setCustomSpacing(40, after: editProfileImageButton)
-        
         mStackView.addArrangedSubview(hemisphereSelector)
-        mStackView.addArrangedSubview(nameTextfield)
-        mStackView.addArrangedSubview(islandTextfield)
+        mStackView.addArrangedSubview(createSVWithLabel(textfield: nameTextfield, title: "Name"))
+        mStackView.addArrangedSubview(createSVWithLabel(textfield: islandTextfield, title: "Island name 🏝"))
         mStackView.addArrangedSubview(nativeFruitLabel)
         
         mStackView.setCustomSpacing(40, after: nativeFruitLabel)
@@ -265,6 +266,23 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
         
         attributedString.append(normalString)
         return attributedString
+    }
+    
+    private func createSVWithLabel(textfield: UITextField, title: String) -> UIStackView {
+        let sv = SVHelper.createSV(axis: .vertical, spacing: 10, alignment: .leading, distribution: .fillProportionally)
+        
+        let label = UILabel()
+        label.text = title
+        label.font = .boldSystemFont(ofSize: UIFont.preferredFont(forTextStyle: .caption1).pointSize)
+        
+        sv.addArrangedSubview(label)
+        sv.addArrangedSubview(textfield)
+        
+        sv.snp.makeConstraints { (make) in
+            make.width.equalTo(self.view.frame.width * 0.8)
+        }
+        
+        return sv
     }
 }
 
