@@ -155,7 +155,7 @@ class SettingsTableViewController: UITableViewController {
             switch indexPath.row {
             // Edit info
             case 0:
-                let vc = self.storyboard!.instantiateViewController(withIdentifier: EDIT_INFO_VC) as! EditInfoViewController
+                let vc = EditProfileViewController()
                 let navController = UINavigationController(rootViewController: vc)
                 self.present(navController, animated: true, completion: nil)
             default: break
