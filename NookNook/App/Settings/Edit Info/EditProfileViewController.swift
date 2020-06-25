@@ -8,9 +8,12 @@
 
 import UIKit
 
-class EditProfileViewController: UIViewController {
+class EditProfileViewController: UIViewController, UINavigationControllerDelegate {
     
     private var userDict = UDEngine.shared.getUser()
+    private var selectedFruit: String!
+    private var selectedHemisphere: DateHelper.Hemisphere!
+    private var imagePicker = UIImagePickerController()
     
     private let mScrollView: UIScrollView = {
         let v = UIScrollView()
@@ -23,11 +26,12 @@ class EditProfileViewController: UIViewController {
         v.image = UIImage(named: "appIcon-Ori")
         v.contentMode = .scaleAspectFit
         v.layer.cornerRadius = 100 / 2
+        v.clipsToBounds = true
         return v
     }()
     private let editProfileImageButton: UIButton = {
         let v = UIButton()
-        v.setTitle("Upload a photo", for: .normal)
+        v.setTitle("Edit profile photo", for: .normal)
         v.titleLabel?.font = .preferredFont(forTextStyle: .callout)
         v.setTitleColor(.grass1, for: .normal)
         return v
@@ -46,7 +50,7 @@ class EditProfileViewController: UIViewController {
     }()
     private let islandTextfield: UITextField = {
         let v = UITextField()
-        v.placeholder = "Island name"
+        v.placeholder = "Island name 🏝"
         v.layer.borderWidth = 1
         v.layer.cornerRadius = 5
         v.layer.cornerCurve = .continuous
@@ -57,19 +61,19 @@ class EditProfileViewController: UIViewController {
         return v
     }()
     private let hemisphereSelector: UISegmentedControl = {
-       let v = UISegmentedControl(items: [DateHelper.Hemisphere.Northern.rawValue, DateHelper.Hemisphere.Southern.rawValue])
-       v.backgroundColor = .cream2
-       v.tintColor = .cream1
+        let v = UISegmentedControl(items: [DateHelper.Hemisphere.Northern.rawValue, DateHelper.Hemisphere.Southern.rawValue])
+        v.backgroundColor = .cream2
+        v.tintColor = .cream1
         return v
     }()
     private let nativeFruitLabel: UILabel = {
-       let v = UILabel()
+        let v = UILabel()
         v.textColor = .dirt1
         v.text = "Native fruit: none"
         return v
     }()
     private let changeFruitButton: UIButton = {
-       let v = UIButton()
+        let v = UIButton()
         v.setTitle("Change fruit", for: .normal)
         v.titleLabel?.font = .preferredFont(forTextStyle: .callout)
         v.setTitleColor(.grass1, for: .normal)
@@ -97,6 +101,12 @@ class EditProfileViewController: UIViewController {
         setupProfile()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        userDict = UDEngine.shared.getUser()
+    }
+    
     // MARK: - Setup the View
     private func setupView() {
         view.addSubview(mScrollView)
@@ -108,9 +118,9 @@ class EditProfileViewController: UIViewController {
         
         mStackView.setCustomSpacing(40, after: editProfileImageButton)
         
+        mStackView.addArrangedSubview(hemisphereSelector)
         mStackView.addArrangedSubview(nameTextfield)
         mStackView.addArrangedSubview(islandTextfield)
-        mStackView.addArrangedSubview(hemisphereSelector)
         mStackView.addArrangedSubview(nativeFruitLabel)
         
         mStackView.setCustomSpacing(40, after: nativeFruitLabel)
@@ -119,9 +129,11 @@ class EditProfileViewController: UIViewController {
         mStackView.setCustomSpacing(10, after: changeFruitButton)
         mStackView.addArrangedSubview(saveButton)
         
+        // Targets adding to buttons and selector
         editProfileImageButton.addTarget(self, action: #selector(editProfileButtonTapped), for: .touchUpInside)
         changeFruitButton.addTarget(self, action: #selector(changeFruitButtonTapped), for: .touchUpInside)
         saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
+        hemisphereSelector.addTarget(self, action: #selector(hemispherePickerChanged), for: .valueChanged)
         
         nameTextfield.delegate = self
         islandTextfield.delegate = self
@@ -133,7 +145,7 @@ class EditProfileViewController: UIViewController {
         }
         
         mStackView.snp.makeConstraints { (make) in
-            make.top.equalTo(userProfileImageView.snp.bottom).inset(UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0))
+            make.top.equalTo(userProfileImageView.snp.bottom).inset(UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0))
             make.left.width.right.equalToSuperview()
             make.bottom.equalToSuperview().offset(-10 * 2)
         }
@@ -147,7 +159,7 @@ class EditProfileViewController: UIViewController {
         nameTextfield.snp.makeConstraints { (make) in
             make.width.equalTo(self.view.frame.width * 0.8)
         }
-
+        
         islandTextfield.snp.makeConstraints { (make) in
             make.width.equalTo(self.view.frame.width * 0.8)
         }
@@ -180,19 +192,79 @@ class EditProfileViewController: UIViewController {
     
     private func setupProfile() {
         userDict = UDEngine.shared.getUser()
+        nameTextfield.text = userDict["name"]
+        islandTextfield.text = "\(userDict["islandName"] ?? "")"
+        selectedFruit = userDict["nativeFruit"] ?? ""
+        nativeFruitLabel.attributedText = renderFruitLabel(text: userDict["nativeFruit"] ?? "Not selected")
+        hemisphereSelector.selectedSegmentIndex = userDict["hemisphere"] == DateHelper.Hemisphere.Northern.rawValue ? 0 : 1
+        selectedHemisphere = userDict["hemisphere"].map { DateHelper.Hemisphere(rawValue: $0) ?? DateHelper.Hemisphere.Southern } == nil ? DateHelper.Hemisphere.Southern : userDict["hemisphere"].map { DateHelper.Hemisphere(rawValue: $0)! }
         
+        if let img = UserPersistEngine.loadImage() {
+            userProfileImageView.image = img
+        }
     }
     
     @objc private func editProfileButtonTapped() {
-        print("Edit profile...")
+        let uploadAction = UIAlertAction(title: "Upload a photo", style: .default) { [weak self] (_) in
+            if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+                self?.imagePicker.delegate = self
+                self?.imagePicker.sourceType = .photoLibrary
+                self?.imagePicker.allowsEditing = true
+                self?.present(self!.imagePicker, animated: true, completion: nil)
+            }
+        }
+        
+        let removeAction = UIAlertAction(title: "Remove photo", style: .destructive) { [weak self] (_) in
+            self?.userProfileImageView.image = UIImage(named: "appIcon-Ori")
+        }
+        
+        let alert = AlertHelper.createCustomAction(actions: [uploadAction, removeAction])
+        self.present(alert, animated: true, completion: nil)
     }
     
     @objc private func changeFruitButtonTapped() {
-        print("Changing fruit...")
+        let vc = FruitsTableViewController(style: .insetGrouped)
+        vc.fruitsDelegate = self
+        vc.userFruit = selectedFruit
+        let navController = UINavigationController(rootViewController: vc)
+        self.present(navController, animated: true, completion: nil)
     }
     
     @objc private func saveButtonTapped() {
-        print("saveButtonTapped")
+        if !nameTextfield.text!.trimmingCharacters(in: .whitespaces).isEmpty &&
+            !islandTextfield.text!.trimmingCharacters(in: .whitespaces).isEmpty &&
+            !selectedFruit.isEmpty {
+            let user = User(name: nameTextfield.text!, islandName: islandTextfield.text!, nativeFruit: selectedFruit, hemisphere: selectedHemisphere)
+            UDEngine.shared.saveUser(user: user)
+            
+            // Save the image
+            if let img = self.userProfileImageView.image {
+                UserPersistEngine.saveImage(image: img)
+            }
+            
+            Taptic.successTaptic()
+            self.closeTapped()
+        } else {
+            let alert = AlertHelper.createDefaultAction(title: "Oh bummer!", message: "Please make sure you did not leave any textfields and selections empty!")
+            self.present(alert, animated: true, completion: nil)
+            Taptic.errorTaptic()
+        }
+    }
+    
+    @objc private func hemispherePickerChanged(_ sender: UISegmentedControl) {
+        Taptic.lightTaptic()
+        selectedHemisphere = sender.selectedSegmentIndex == 0 ? .Northern : .Southern
+    }
+    
+    private func renderFruitLabel(text: String) -> NSMutableAttributedString {
+        let boldText = "Native fruit: "
+        let attrs = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: self.nativeFruitLabel.font.pointSize, weight: .semibold)]
+        let attributedString = NSMutableAttributedString(string: boldText, attributes: attrs)
+        
+        let normalString = NSMutableAttributedString(string: text)
+        
+        attributedString.append(normalString)
+        return attributedString
     }
 }
 
@@ -203,5 +275,32 @@ extension EditProfileViewController: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         textField.layer.borderColor = UIColor.dirt1.withAlphaComponent(0.3).cgColor
+    }
+}
+
+extension EditProfileViewController: UIImagePickerControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        let image: UIImage!
+        if let img = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+            image = img
+            self.userProfileImageView.image = image
+            
+        } else if let img = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            image = img
+            self.userProfileImageView.image = image
+        }
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+}
+
+extension EditProfileViewController: FruitsDelegate {
+    func changeFruit(fruit: Fruits) {
+        selectedFruit = fruit.rawValue
+        self.nativeFruitLabel.attributedText = renderFruitLabel(text: selectedFruit)
+        
     }
 }

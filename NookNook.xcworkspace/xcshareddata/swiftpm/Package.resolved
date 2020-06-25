@@ -47,15 +47,6 @@
         }
       },
       {
-        "package": "TweeTextField",
-        "repositoryURL": "https://github.com/oleghnidets/TweeTextField.git",
-        "state": {
-          "branch": null,
-          "revision": "b712e44c1fe4020ee20f9d494572a9762ea5a59c",
-          "version": "1.6.3"
-        }
-      },
-      {
         "package": "WhatsNewKit",
         "repositoryURL": "https://github.com/SvenTiigi/WhatsNewKit.git",
         "state": {

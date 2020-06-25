@@ -24,6 +24,8 @@ class FruitsTableViewController: UITableViewController {
      override func viewDidLoad() {
         super.viewDidLoad()
 
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: FRUIT_CELL)
+        
         tableView.rowHeight = 50
 
         tableView.tableFooterView = UIView()

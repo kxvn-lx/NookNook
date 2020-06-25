@@ -38,4 +38,15 @@ struct AlertHelper {
         alert.addAction(cancelAction)
         return alert
     }
+    
+    static func createCustomAction(title: String? = nil, message: String? = nil, actions: [UIAlertAction]) -> UIAlertController {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+        
+        for action in actions {
+            alert.addAction(action)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(cancelAction)
+        return alert
+    }
 }
