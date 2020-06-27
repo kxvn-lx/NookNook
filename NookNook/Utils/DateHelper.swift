@@ -22,7 +22,7 @@ struct DateHelper {
         case Southern = "Southern Hemisphere"
     }
     
-    private static let days = ["Sunday", "Monday", "Tuesday", "Wedneday", "Thursday", "Friday", "Saturday"]
+    private static let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     
     /**
      This method will return the current season the user have.

@@ -62,15 +62,4 @@ struct UDEngine {
         return defaults.bool(forKey: Key.FirstVisit.rawValue + vc.rawValue)
     }
     
-    // MARK: - Has completed Critters
-    /// Save user's has completed caught all critter check
-    func saveHasCompletedCritters(isCompleted bool: Bool) {
-        defaults.set(bool, forKey: Key.CrittersCompleted.rawValue)
-    }
-    
-    /// Get user's has completed caught all critter check
-    func getHasCompletedCritters() -> Bool {
-        return defaults.bool(forKey: Key.CrittersCompleted.rawValue)
-    }
-    
 }

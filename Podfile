@@ -12,9 +12,8 @@ target 'NookNook' do
 	pod 'UXCam'
 	pod 'Firebase/Analytics'
 	pod 'GoogleTagManager'
-	pod 'McPicker', '~> 2.0.0'
+	pod 'McPicker'
 	pod 'Google-Mobile-Ads-SDK'
-	pod 'SwiftConfettiView'
 
 target 'NookNookTests' do
   inherit! :search_paths

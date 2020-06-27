@@ -10,7 +10,6 @@ import UIKit
 import SDWebImage
 import GoogleMobileAds
 import SwipeCellKit
-import SwiftConfettiView
 
 class CrittersTableViewController: UITableViewController {
     // constants
@@ -43,9 +42,7 @@ class CrittersTableViewController: UITableViewController {
         
         return adBannerView
     }()
-    
-    lazy var confettiView = ConfettiHelper.shared.renderConfetti(toView: self.view, withType: .confetti)
-    
+        
     // MARK: - Table view init
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,34 +93,6 @@ class CrittersTableViewController: UITableViewController {
                     UDEngine.shared.saveIsFirstVisit(on: .Critters)
                 }
             }
-        }
-        
-        // Confetti
-        if UDEngine.shared.getHasCompletedCritters() {
-            guard let window = UIApplication.shared.connectedScenes
-                .filter({$0.activationState == .foregroundActive})
-                .map({$0 as? UIWindowScene})
-                .compactMap({$0})
-                .first?.windows
-                .filter({$0.isKeyWindow}).first else { return }
-            window.addSubview(confettiView)
-            confettiView.startConfetti()
-            Taptic.successTaptic()
-            let alert = AlertHelper.createDefaultAction(title: "Congratulations  🥳", message: "You have caught/donated all the critters! This deserve a celebration.")
-            self.present(alert, animated: true)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 15, execute: {
-                self.confettiView.stopConfetti()
-                self.confettiView.removeFromSuperview()
-                UDEngine.shared.saveHasCompletedCritters(isCompleted: true)
-            })
-        }
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        
-        if UDEngine.shared.getHasCompletedCritters() {
-            UDEngine.shared.saveHasCompletedCritters(isCompleted: true)
         }
     }
     
@@ -319,7 +288,6 @@ extension CrittersTableViewController: SwipeTableViewCellDelegate {
             if !finished {
                 self.favouritesManager.saveDonatedCritter(critter: critter)
             }
-            UDEngine.shared.saveHasCompletedCritters(isCompleted: self.favouritesManager.caughtCritters.count == self.critters.count * 2)
             let contentOffset = tableView.contentOffset
             DispatchQueue.main.async {
                 tableView.reloadRows(at: [indexPath], with: .left)
@@ -330,7 +298,6 @@ extension CrittersTableViewController: SwipeTableViewCellDelegate {
         
         let caughtAction = SwipeAction(style: .default, title: "Caught") { (_, indexPath) in
             self.favouritesManager.saveCaughtCritter(critter: critter)
-            UDEngine.shared.saveHasCompletedCritters(isCompleted: self.favouritesManager.caughtCritters.count == self.critters.count * 2)
             let contentOffset = tableView.contentOffset
             DispatchQueue.main.async {
                 tableView.reloadRows(at: [indexPath], with: .left)
