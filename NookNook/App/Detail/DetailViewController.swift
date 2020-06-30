@@ -46,7 +46,7 @@ class DetailViewController: UIViewController {
         v.contentMode = .scaleAspectFit
         v.sd_imageTransition = .fade
         v.sd_imageIndicator = SDWebImageActivityIndicator.gray
-        v.layer.cornerRadius = 20
+        v.layer.cornerRadius = 30
         v.layer.cornerCurve = .continuous
         v.clipsToBounds = true
         return v
@@ -180,16 +180,7 @@ class DetailViewController: UIViewController {
     lazy var adBannerView: GADBannerView = {
         let adBannerView = GADBannerView(adSize: kGADAdSizeSmartBannerLandscape)
         adBannerView.translatesAutoresizingMaskIntoConstraints = false
-        adBannerView.adUnitID = GoogleAdsHelper.AD_UNIT_ID
-        adBannerView.rootViewController = self
-        
-        return adBannerView
-    }()
-    lazy var adBannerViewMiddle: GADBannerView = {
-        let adBannerView = GADBannerView(adSize: kGADAdSizeSmartBannerLandscape)
-        adBannerView.translatesAutoresizingMaskIntoConstraints = false
-        adBannerView.adUnitID = GoogleAdsHelper.DETAIL_PROFILE_AD_UNIT_ID
-        adBannerView.delegate = self
+        adBannerView.adUnitID = GoogleAdsHelper.shared.getAds(forVC: .detail)
         adBannerView.rootViewController = self
         
         return adBannerView
@@ -488,10 +479,6 @@ class DetailViewController: UIViewController {
         mStackView.addArrangedSubview(tsStackView)
         mStackView.addArrangedSubview(iconStackView)
         
-        if !UDEngine.shared.getIsAdsPurchased() {
-            adBannerViewMiddle.load(GADRequest())
-        }
-        
         mStackView.addArrangedSubview(infoStackView)
         mStackView.addArrangedSubview(activeTimeStack)
         mStackView.addArrangedSubview(variationStack)
@@ -600,18 +587,4 @@ class DetailViewController: UIViewController {
         return layout
     }
     
-}
-
-extension DetailViewController: GADBannerViewDelegate {
-    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
-        if !UDEngine.shared.getIsAdsPurchased() {
-            mStackView.insertArrangedSubview(adBannerViewMiddle, at: 3)
-            NSLayoutConstraint.activate([
-                adBannerViewMiddle.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-                adBannerViewMiddle.heightAnchor.constraint(equalToConstant: 50)
-            ])
-        } else {
-            mStackView.removeArrangedSubview(adBannerViewMiddle)
-        }
-    }
 }

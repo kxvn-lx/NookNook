@@ -40,7 +40,7 @@ class ItemsTableViewController: UITableViewController {
     lazy var adBannerView: GADBannerView = {
         let adBannerView = GADBannerView(adSize: kGADAdSizeSmartBannerLandscape)
         adBannerView.translatesAutoresizingMaskIntoConstraints = false
-        adBannerView.adUnitID = GoogleAdsHelper.AD_UNIT_ID
+        adBannerView.adUnitID = GoogleAdsHelper.shared.getAds(forVC: .items)
         adBannerView.rootViewController = self
         
         return adBannerView
@@ -82,6 +82,7 @@ class ItemsTableViewController: UITableViewController {
         if !UDEngine.shared.getIsAdsPurchased() {
             self.view.addSubview(adBannerView)
             adBannerView.load(GADRequest())
+            adBannerView.delegate = self
             NSLayoutConstraint.activate([
                 adBannerView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
                 adBannerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
@@ -312,7 +313,6 @@ extension ItemsTableViewController: WhatsNewhelperDelegate {
 }
 
 extension ItemsTableViewController {
-    
     override func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         return UIContextMenuConfiguration(
             identifier: indexPath as NSIndexPath,
@@ -339,5 +339,14 @@ extension ItemsTableViewController {
             self.present(navController, animated: true, completion: nil)
         }
     }
+}
 
+extension ItemsTableViewController: GADBannerViewDelegate {
+    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+        print("received")
+    }
+    
+    func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
+        print(error)
+    }
 }

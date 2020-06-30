@@ -54,16 +54,6 @@ class OutfitPickerViewController: UICollectionViewController {
     
     private var bottomSV = SVHelper.createSV(axis: .vertical, spacing: 10, alignment: .center, distribution: .fillProportionally)
     
-    // Google ads banner
-    private lazy var adBannerView: GADBannerView = {
-        let adBannerView = GADBannerView(adSize: kGADAdSizeSmartBannerLandscape)
-        adBannerView.translatesAutoresizingMaskIntoConstraints = false
-        adBannerView.adUnitID = GoogleAdsHelper.AD_UNIT_ID
-        adBannerView.rootViewController = self
-        
-        return adBannerView
-    }()
-    
     // MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -108,18 +98,11 @@ class OutfitPickerViewController: UICollectionViewController {
         }
         
         bottomSV.addArrangedSubview(sv)
-        
-        if !UDEngine.shared.getIsAdsPurchased() {
-            bottomSV.addArrangedSubview(adBannerView)
-            adBannerView.load(GADRequest())
-        } else {
-            bottomSV.removeArrangedSubview(adBannerView)
-        }
 
         bottomSV.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
             make.width.equalToSuperview()
-            make.bottom.equalToSuperview().inset(UDEngine.shared.getIsAdsPurchased() ? self.view.getSafeAreaInsets().bottom + 10 : self.view.getSafeAreaInsets().bottom)
+            make.bottom.equalToSuperview().inset(self.view.getSafeAreaInsets().bottom + 10)
         }
         
         collectionView.collectionViewLayout = makeLayout()

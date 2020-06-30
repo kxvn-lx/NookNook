@@ -39,7 +39,7 @@ class VillagersTableViewController: UITableViewController {
     lazy var adBannerView: GADBannerView = {
         let adBannerView = GADBannerView(adSize: kGADAdSizeSmartBannerLandscape)
         adBannerView.translatesAutoresizingMaskIntoConstraints = false
-        adBannerView.adUnitID = GoogleAdsHelper.AD_UNIT_ID
+        adBannerView.adUnitID = GoogleAdsHelper.shared.getAds(forVC: .villager)
         adBannerView.rootViewController = self
         
         return adBannerView

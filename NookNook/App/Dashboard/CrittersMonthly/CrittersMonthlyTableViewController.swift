@@ -55,7 +55,7 @@ class CrittersMonthlyTableViewController: UITableViewController {
     lazy var adBannerView: GADBannerView = {
         let adBannerView = GADBannerView(adSize: kGADAdSizeBanner)
         adBannerView.translatesAutoresizingMaskIntoConstraints = false
-        adBannerView.adUnitID = GoogleAdsHelper.AD_UNIT_ID
+        adBannerView.adUnitID = GoogleAdsHelper.shared.getAds(forVC: .crittersMonthly)
         adBannerView.rootViewController = self
         
         return adBannerView

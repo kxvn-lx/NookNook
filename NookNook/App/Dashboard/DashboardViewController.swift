@@ -107,18 +107,9 @@ class DashboardViewController: UIViewController {
     lazy var adBannerView: GADBannerView = {
         let adBannerView = GADBannerView(adSize: kGADAdSizeSmartBannerLandscape)
         adBannerView.translatesAutoresizingMaskIntoConstraints = false
-        adBannerView.adUnitID = GoogleAdsHelper.AD_UNIT_ID
+        adBannerView.adUnitID = GoogleAdsHelper.shared.getAds(forVC: .dashboard)
         adBannerView.rootViewController = self
         
-        return adBannerView
-    }()
-    lazy var adBannerViewMiddle: GADBannerView = {
-        let adBannerView = GADBannerView(adSize: kGADAdSizeSmartBannerLandscape)
-        adBannerView.translatesAutoresizingMaskIntoConstraints = false
-        adBannerView.adUnitID = GoogleAdsHelper.DETAIL_PROFILE_AD_UNIT_ID
-        adBannerView.rootViewController = self
-        adBannerView.delegate = self
-
         return adBannerView
     }()
     
@@ -186,8 +177,6 @@ class DashboardViewController: UIViewController {
             ])
         } else {
             adBannerView.removeFromSuperview()
-            mStackView.removeArrangedSubview(adBannerViewMiddle)
-            adBannerViewMiddle.removeFromSuperview()
         }
     }
     
@@ -279,9 +268,6 @@ class DashboardViewController: UIViewController {
         
         mStackView.addArrangedSubview(profileNameStackView, withMargin: UIEdgeInsets(top: MARGIN*4, left: 0, bottom: 0, right: 0))
         mStackView.addArrangedSubview(phraseStack)
-        if !UDEngine.shared.getIsAdsPurchased() {
-            adBannerViewMiddle.load(GADRequest())
-        }
         mStackView.addArrangedSubview(passportStackView)
         mStackView.addArrangedSubview(residentStack)
         mStackView.addArrangedSubview(tableView)
@@ -414,8 +400,6 @@ extension DashboardViewController: UIAdaptivePresentationControllerDelegate {
             adBannerView.load(GADRequest())
         } else {
             adBannerView.removeFromSuperview()
-            mStackView.removeArrangedSubview(adBannerViewMiddle)
-            adBannerViewMiddle.removeFromSuperview()
         }
         self.dismiss(animated: true, completion: nil)
     }
@@ -429,8 +413,6 @@ extension DashboardViewController: ProfileDelegate {
             adBannerView.load(GADRequest())
         } else {
             adBannerView.removeFromSuperview()
-            mStackView.removeArrangedSubview(adBannerViewMiddle)
-            adBannerViewMiddle.removeFromSuperview()
         }
         
         self.dismiss(animated: true, completion: nil)
@@ -443,22 +425,6 @@ extension DashboardViewController: UITabBarControllerDelegate {
         let tabBarIndex = tabBarController.selectedIndex
         if tabBarIndex == 4 {
             self.scrollView.setContentOffset(CGPoint.zero, animated: true)
-        }
-    }
-}
-
-extension DashboardViewController: GADBannerViewDelegate {
-    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
-        if !UDEngine.shared.getIsAdsPurchased() {
-            DispatchQueue.main.async {
-                self.mStackView.insertArrangedSubview(bannerView, at: 2)
-                NSLayoutConstraint.activate([
-                    bannerView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-                    bannerView.heightAnchor.constraint(equalToConstant: 50)
-                ])
-            }
-        } else {
-            mStackView.removeArrangedSubview(bannerView)
         }
     }
 }
