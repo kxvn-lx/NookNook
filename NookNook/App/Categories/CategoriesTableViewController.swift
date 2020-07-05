@@ -75,7 +75,10 @@ class CategoriesTableViewController: UITableViewController {
             cat = "Bugs"
         } else if cat == Categories.fishesMain.rawValue {
             cat = "Fish"
+        } else if cat == Categories.seaCreaturesMain.rawValue {
+            cat = "Sea creatures"
         }
+        
         if let categoryCell = cell as? CategoryTableViewCell {
             categoryCell.textLabel!.text = cat.capitalizingFirstLetter()
             if filteredCategories[indexPath.row] == currentCategory {

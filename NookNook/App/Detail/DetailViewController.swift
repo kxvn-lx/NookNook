@@ -343,7 +343,7 @@ class DetailViewController: UIViewController {
         rarityLabel.setTitle(critterObj.rarity, for: .normal)
         activeTimeN.text = TimeMonthEngine.renderMonth(monthInString: critterObj.activeMonthsN)
         activeTimeS.text = TimeMonthEngine.renderMonth(monthInString: critterObj.activeMonthsS)
-        weatherStack.isHidden = critterObj.weather.isEmpty ? true : false
+        weatherStack.isHidden = critterObj.weather == nil ? true : false
         timeLabel.text = TimeMonthEngine.formatTime(of: critterObj.time)
         
         firstIconLabel.text = self.favouriteManager.donatedCritters.contains(critterObj) ? "Donated" : ""

@@ -18,12 +18,15 @@ enum Categories: String {
     case umbrellas, music, recipes, fossils, construction, nookmiles, other
     
     case bugs, fishes
+    case seaCreatures = "Sea creatures"
     
     case bugsMain
     case bugsSecondary
     
     case fishesMain
     case fishesSecondary
+    
+    case seaCreaturesMain
 
     case villagers
     
@@ -39,7 +42,7 @@ enum Categories: String {
     }
     
     static func critters() -> [Categories] {
-        return [.bugsMain, .fishesMain]
+        return [.bugsMain, .fishesMain, .seaCreaturesMain]
     }
     
 }

@@ -42,7 +42,7 @@ class CrittersTableViewController: UITableViewController {
         
         return adBannerView
     }()
-        
+    
     // MARK: - Table view init
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -135,10 +135,21 @@ class CrittersTableViewController: UITableViewController {
             critterCell.imgView.sd_setImage(with: ImageEngine.parseAcnhURL(with: critter.image), placeholderImage: UIImage(named: "placeholder"))
             
             critterCell.nameLabel.text = critter.name
-            critterCell.obtainedFromLabel.text = critter.obtainedFrom.isEmpty ? "Location unknown" : critter.obtainedFrom
+            if critter.obtainedFrom.isEmpty {
+                critterCell.obtainedFromLabel.isHidden = true
+            } else {
+                critterCell.obtainedFromLabel.isHidden = false
+                critterCell.obtainedFromLabel.text = critter.obtainedFrom
+            }
             critterCell.timeLabel.text = TimeMonthEngine.formatTime(of: critter.time)
             critterCell.sellLabel.attributedText = PriceEngine.renderPrice(amount: critter.sell, with: .sell, of: 12)
-            critterCell.weatherLabel.text = critter.weather
+            
+            if critter.weather == nil || critter.weather == "" {
+                critterCell.weatherLabel.isHidden = true
+            } else {
+                critterCell.weatherLabel.isHidden = false
+                critterCell.weatherLabel.text = critter.weather
+            }
             
             critterCell.rarityLabel.setTitle(critter.rarity, for: .normal)
             critterCell.rarityLabel.sizeToFit()
@@ -180,10 +191,9 @@ class CrittersTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch currentCategory {
-        case .bugsMain:
-            return "Bugs"
-        case .fishesMain:
-            return "Fishes"
+        case .bugsMain: return "Bugs"
+        case .fishesMain: return "Fishes"
+        case .seaCreaturesMain: return "Sea creatures"
         default:
             return "No Category found!"
         }
@@ -329,11 +339,11 @@ extension CrittersTableViewController {
             previewProvider: {
                 let selectedCritter = self.isFiltering ? self.filteredCritters[indexPath.row] : self.critters[indexPath.row]
                 return DetailViewController(obj: selectedCritter, group: .critters)
-            },
+        },
             actionProvider: { _ in
                 let selectedCritter = self.isFiltering ? self.filteredCritters[indexPath.row] : self.critters[indexPath.row]
                 return ShareHelper.shared.presentContextShare(obj: selectedCritter, group: .critters, toVC: self)
-            })
+        })
     }
     
     override func tableView(_ tableView: UITableView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
@@ -349,5 +359,5 @@ extension CrittersTableViewController {
             self.present(navController, animated: true, completion: nil)
         }
     }
-
+    
 }

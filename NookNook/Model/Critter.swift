@@ -14,7 +14,7 @@ struct Critter: Codable, Equatable, Identifiable {
     
     let name: String
     let image: String
-    let weather: String
+    let weather: String?
     let obtainedFrom: String
     
     let time: String

@@ -35,7 +35,7 @@ struct GoogleAdsHelper {
         }
     }
     
-    private let IS_TEST = true
+    private let IS_TEST = false
     static let shared = GoogleAdsHelper()
     private init() { }
     

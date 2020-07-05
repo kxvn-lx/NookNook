@@ -70,7 +70,7 @@ struct DataEngine {
      - Returns:
         - An array of critters, ready to be rendered.
      */
-    // THIS FUNCTION WILL ONLY LOAD DATA FROM ALEXIS
+    // THIS FUNCTION WILL ONLY LOAD DATA FROM ACNHAPI.com
     static func loadCritterJSON(from category: Categories) -> [Critter] {
         var critters: [Critter] = []
         
@@ -86,6 +86,8 @@ struct DataEngine {
         case .fishesMain:
             (weathers) = loadSecondCritterJSON(with: .fishesSecondary)
             cat = Categories.fishes.rawValue
+        case .seaCreaturesMain:
+            cat = Categories.seaCreatures.rawValue
         default:
             fatalError("Passing an invalid categories to loadCritterJSON method. Check the category to make sure you have passed the right categories!")
         }
@@ -102,7 +104,7 @@ struct DataEngine {
                     let key = jsonObj[k]!
                     
                     let name = key["name"]["name-USen"].stringValue.capitalizingFirstLetter()
-                    let weather = weathers[name] != nil ? weathers[name]! : "Unknown"
+                    let weather = weathers[name]
                     let image = key["image_uri"].stringValue
                     let obtainedFrom = key["availability"]["location"].stringValue
                     let time = key["availability"]["time"].stringValue
