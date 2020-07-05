@@ -49,7 +49,7 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
             case 0:
                 let cell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: CRITTER_CELL)
                 cell.textLabel!.text = "Critters this month"
-                cell.detailTextLabel?.text = "Bugs: \(caughtBugsMonth.count)/\(monthlyBug.count) | Fish: \(caughtFishesMonth.count)/\(monthlyFish.count)"
+                cell.detailTextLabel?.text = "Bugs: \(caughtBugsMonth.count)/\(monthlyBug.count) | Fish: \(caughtFishesMonth.count)/\(monthlyFish.count) | Sea creatures: \(caughtSeaCreaturesMonth.count)/\(monthlySeaCreatures.count)"
                 cell.accessoryType = .disclosureIndicator
                 return cell
             // Total bugs count
@@ -75,6 +75,18 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.textLabel!.text = "Total fishes caught (\(formatted)%)"
                 cell.detailTextLabel?.text = "\(caughtFishesCount)/\(totalFishesCount)"
                 return cell
+                
+            // Total sea creatures count
+            case 3:
+                let totalSeaCreaturesCount = DataEngine.loadCritterJSON(from: .seaCreaturesMain).count
+                let caughtSeaCreaturesCount = self.favouritesManager.caughtCritters.filter({$0.category == Categories.seaCreatures.rawValue}).count
+                let formatted = String(format: "%.1f", (Float(caughtSeaCreaturesCount) / Float(totalSeaCreaturesCount)) * 100)
+                
+                let cell = UITableViewCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: CRITTER_CELL)
+                cell.selectionStyle = .none
+                cell.textLabel!.text = "Total sea creatures caught (\(formatted)%)"
+                cell.detailTextLabel?.text = "\(caughtSeaCreaturesCount)/\(totalSeaCreaturesCount)"
+                return cell
             default: break
             }
         default: fatalError("Indexpath out of range.")
@@ -91,7 +103,7 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
         case 0:
             return 3
         case 1:
-            return 3
+            return 4
         default: fatalError("Invalid rows detected.")
         }
     }
@@ -144,8 +156,6 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
                 let navController = UINavigationController(rootViewController: vc)
                 navController.presentationController?.delegate = self
                 self.present(navController, animated: true, completion: nil)
-            case 1: break
-            case 2: break
             default: break
             }
         default: fatalError("Invalid section detected")

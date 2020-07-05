@@ -17,19 +17,22 @@ struct CritterHelper {
      - Returns:
      Array Bugs and Fishes in the current hemisphere on this month.
      */
-    static func parseCritter(userHemisphere: DateHelper.Hemisphere) -> ([Critter], [Critter]) {
+    static func parseCritter(userHemisphere: DateHelper.Hemisphere) -> ([Critter], [Critter], [Critter]) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "M"
         let currMonthInt = Int(dateFormatter.string(from: Date()))!
         
         var northernBugs: [Critter] = []
         var northernFishes: [Critter] = []
+        var northernSeaCreatures: [Critter] = []
         
         var southernBugs: [Critter] = []
         var southernFishes: [Critter] = []
+        var southernSeaCreatures: [Critter] = []
         
         let allBugs = DataEngine.loadCritterJSON(from: .bugsMain)
         let allFishes = DataEngine.loadCritterJSON(from: .fishesMain)
+        let allSeaCreatures = DataEngine.loadCritterJSON(from: .seaCreaturesMain)
         
         switch userHemisphere {
         case .Northern:
@@ -79,6 +82,30 @@ struct CritterHelper {
                     }
                 }
             })
+            allSeaCreatures.forEach({
+                let monthsArr = TimeMonthEngine.formatMonths(month: $0.activeMonthsN)
+                
+                if monthsArr.count == 4 {
+                    let initRange1 = monthsArr[0]
+                    let finalRange1 = monthsArr[1] < initRange1 ? monthsArr[1] + 12 : monthsArr[1]
+                    
+                    let initRange2 = monthsArr[2]
+                    let finalRange2 = monthsArr[3] < initRange2 ? monthsArr[3] + 12 : monthsArr[3]
+                    
+                    if currMonthInt >= initRange1 && currMonthInt <= finalRange1 || currMonthInt >= initRange2 && currMonthInt <= finalRange2 {
+                        northernSeaCreatures.append($0)
+                    }
+                } else {
+                    let initRange = monthsArr != [-1] ? monthsArr[0] : -1
+                    let finalRange = monthsArr != [1] ? (monthsArr.last! < initRange ? monthsArr.last! + 12 : monthsArr.last!) : -1
+                    
+                    if currMonthInt >= initRange && currMonthInt <= finalRange || monthsArr == [-1] {
+                        // sea creatures is in season for northern region.
+                        northernSeaCreatures.append($0)
+                    }
+                }
+            })
+            
         case .Southern:
             allBugs.forEach({
                 let monthsArr = TimeMonthEngine.formatMonths(month: $0.activeMonthsS)
@@ -126,12 +153,35 @@ struct CritterHelper {
                     }
                 }
             })
+            
+            allSeaCreatures.forEach({
+                let monthsArr = TimeMonthEngine.formatMonths(month: $0.activeMonthsS)
+                if monthsArr.count == 4 {
+                    let initRange1 = monthsArr[0]
+                    let finalRange1 = monthsArr[1] < initRange1 ? monthsArr[1] + 12 : monthsArr[1]
+                    
+                    let initRange2 = monthsArr[2]
+                    let finalRange2 = monthsArr[3] < initRange2 ? monthsArr[3] + 12 : monthsArr[3]
+                    
+                    if currMonthInt >= initRange1 && currMonthInt <= finalRange1 || currMonthInt >= initRange2 && currMonthInt <= finalRange2 {
+                        southernSeaCreatures.append($0)
+                    }
+                } else {
+                    let initRange = monthsArr != [-1] ? monthsArr[0] : -1
+                    let finalRange = monthsArr != [1] ? (monthsArr.last! < initRange ? monthsArr.last! + 12 : monthsArr.last!) : -1
+                    
+                    if currMonthInt >= initRange && currMonthInt <= finalRange || monthsArr == [-1] {
+                        // sea creatures is in season for southern region.
+                        southernSeaCreatures.append($0)
+                    }
+                }
+            })
         }
         switch userHemisphere {
         case .Northern:
-            return (northernBugs, northernFishes)
+            return (northernBugs, northernFishes, northernSeaCreatures)
         case .Southern:
-            return (southernBugs, southernFishes)
+            return (southernBugs, southernFishes, southernSeaCreatures)
         }
     }
     
@@ -143,10 +193,11 @@ struct CritterHelper {
          - monthFishes: The current month's available fishes
          - monthBugs: The current month's available bugs
      */
-    static func parseCaughtCritter(caughtBugs: [Critter], caughtFishes: [Critter], monthBugs: [Critter], monthFishes: [Critter]) -> ([Critter], [Critter]) {
+    static func parseCaughtCritter(caughtBugs: [Critter], caughtFishes: [Critter], caughtSeaCreatures: [Critter], monthBugs: [Critter], monthFishes: [Critter], monthSeaCreatures: [Critter]) -> ([Critter], [Critter], [Critter]) {
         
         var caughtBugsMonth: [Critter] = []
         var caughtFishesMonth: [Critter] = []
+        var caughtSeaCreaturesMonth: [Critter] = []
         
         caughtBugs.forEach({
             if monthBugs.contains($0) {
@@ -160,6 +211,12 @@ struct CritterHelper {
             }
         })
         
-        return ( caughtBugsMonth, caughtFishesMonth )
+        caughtSeaCreatures.forEach({
+            if monthSeaCreatures.contains($0) {
+                caughtSeaCreaturesMonth.append($0)
+            }
+        })
+        
+        return ( caughtBugsMonth, caughtFishesMonth, caughtSeaCreaturesMonth )
     }
 }

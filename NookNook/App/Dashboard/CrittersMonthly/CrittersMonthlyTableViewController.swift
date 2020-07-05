@@ -28,16 +28,19 @@ class CrittersMonthlyTableViewController: UITableViewController {
     private var scView: UIView!
     
     private let items: [String] = [GroupType.bugs.rawValue.capitalizingFirstLetter(),
-                                   GroupType.fish.rawValue.capitalizingFirstLetter()
+                                   GroupType.fish.rawValue.capitalizingFirstLetter(),
+                                   GroupType.seaCreatures.rawValue.capitalizingFirstLetter()
     ]
     
     let search = UISearchController(searchResultsController: nil)
     
     private var bugs: [Critter] = []
     private var fishes: [Critter] = []
+    private var seaCreatures: [Critter] = []
     
     private var filteredBugs: [Critter] = []
     private var filteredFishes: [Critter] = []
+    private var filteredSeaCreatures: [Critter] = []
     
     var isSearchBarEmpty: Bool {
         return search.searchBar.text?.isEmpty ?? true
@@ -49,6 +52,7 @@ class CrittersMonthlyTableViewController: UITableViewController {
     
     enum GroupType: String {
         case bugs, fish
+        case seaCreatures = "Sea creatures"
     }
     
     // Google ads banner
@@ -69,7 +73,7 @@ class CrittersMonthlyTableViewController: UITableViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 100
         userHemisphere = UDEngine.shared.getUser()["hemisphere"].map { (DateHelper.Hemisphere(rawValue: $0) ?? DateHelper.Hemisphere.Southern) }
-        (bugs, fishes) = CritterHelper.parseCritter(userHemisphere: userHemisphere ?? DateHelper.Hemisphere.Southern)
+        (bugs, fishes, seaCreatures) = CritterHelper.parseCritter(userHemisphere: userHemisphere ?? DateHelper.Hemisphere.Southern)
         
         setBar()
         
@@ -91,7 +95,7 @@ class CrittersMonthlyTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         userHemisphere = UDEngine.shared.getUser()["hemisphere"].map { (DateHelper.Hemisphere(rawValue: $0) ?? DateHelper.Hemisphere.Southern) }
-        ( bugs, fishes ) = CritterHelper.parseCritter(userHemisphere: userHemisphere ?? DateHelper.Hemisphere.Southern)
+        ( bugs, fishes, seaCreatures ) = CritterHelper.parseCritter(userHemisphere: userHemisphere ?? DateHelper.Hemisphere.Southern)
         
         if !UDEngine.shared.getIsAdsPurchased() {
             self.view.addSubview(adBannerView)
@@ -149,6 +153,17 @@ class CrittersMonthlyTableViewController: UITableViewController {
             } else {
                 return fishes.count
             }
+        case .seaCreatures:
+            if isFiltering {
+                if filteredSeaCreatures.isEmpty {
+                    self.tableView.setEmptyMessage("No sea creatures found 😢.\nPerhaps you made a mistake?")
+                } else {
+                    self.tableView.restore()
+                }
+                return filteredSeaCreatures.count
+            } else {
+                return seaCreatures.count
+            }
         }
     }
     
@@ -165,15 +180,27 @@ class CrittersMonthlyTableViewController: UITableViewController {
                 critter = isFiltering ? filteredBugs[indexPath.row] : bugs[indexPath.row]
             case .fish:
                 critter = isFiltering ? filteredFishes[indexPath.row] : fishes[indexPath.row]
+            case .seaCreatures:
+                critter = isFiltering ? filteredSeaCreatures[indexPath.row] : seaCreatures[indexPath.row]
             }
             
             critterCell.imgView.sd_setImage(with: ImageEngine.parseAcnhURL(with: critter.image), placeholderImage: UIImage(named: "placeholder"))
             
             critterCell.nameLabel.text = critter.name
-            critterCell.obtainedFromLabel.text = critter.obtainedFrom.isEmpty ? "Location unknown" : critter.obtainedFrom
+            if critter.obtainedFrom.isEmpty {
+                critterCell.obtainedFromLabel.isHidden = true
+            } else {
+                critterCell.obtainedFromLabel.isHidden = false
+                critterCell.obtainedFromLabel.text = critter.obtainedFrom
+            }
             critterCell.timeLabel.text = TimeMonthEngine.formatTime(of: critter.time)
             critterCell.sellLabel.attributedText = PriceEngine.renderPrice(amount: critter.sell, with: .sell, of: 12)
-            critterCell.weatherLabel.text = critter.weather
+            if critter.weather == nil || critter.weather == "" {
+                critterCell.weatherLabel.isHidden = true
+            } else {
+                critterCell.weatherLabel.isHidden = false
+                critterCell.weatherLabel.text = critter.weather
+            }
             
             critterCell.rarityLabel.setTitle(critter.rarity, for: .normal)
             critterCell.rarityLabel.sizeToFit()
@@ -212,6 +239,12 @@ class CrittersMonthlyTableViewController: UITableViewController {
             } else {
                 vc.parseOject(from: .critters, object: fishes[indexPath.row])
             }
+        case .seaCreatures:
+            if isFiltering {
+                vc.parseOject(from: .critters, object: filteredSeaCreatures[indexPath.row])
+            } else {
+                vc.parseOject(from: .critters, object: seaCreatures[indexPath.row])
+            }
         }
         
         let navController = UINavigationController(rootViewController: vc)
@@ -235,6 +268,8 @@ class CrittersMonthlyTableViewController: UITableViewController {
             self.currentGroup = .bugs
         case 1:
             self.currentGroup = .fish
+        case 2:
+            self.currentGroup = .seaCreatures
         default:
             fatalError("Invalid Segmented Control index.")
         }
@@ -270,6 +305,11 @@ class CrittersMonthlyTableViewController: UITableViewController {
             filteredFishes = fishes.filter { (fish: Critter) -> Bool in
                 return fish.name.lowercased().contains(searchText.lowercased())
             }
+            
+        case .seaCreatures:
+            filteredSeaCreatures = seaCreatures.filter { (seaCreatures: Critter) -> Bool in
+                return seaCreatures.name.lowercased().contains(searchText.lowercased())
+            }
         }
         
         tableView.reloadData()
@@ -294,6 +334,8 @@ extension CrittersMonthlyTableViewController: SwipeTableViewCellDelegate {
             critter = isFiltering ? filteredBugs[indexPath.row] : bugs[indexPath.row]
         case .fish:
             critter = isFiltering ? filteredFishes[indexPath.row] : fishes[indexPath.row]
+        case .seaCreatures:
+            critter = isFiltering ? filteredSeaCreatures[indexPath.row] : seaCreatures[indexPath.row]
         }
         
         let donatedAction = SwipeAction(style: .default, title: "Donated") { (_, indexPath) in
@@ -357,6 +399,9 @@ extension CrittersMonthlyTableViewController {
                 case .fish:
                     let selectedFish = self.isFiltering ? self.filteredFishes[indexPath.row] : self.fishes[indexPath.row]
                     return DetailViewController(obj: selectedFish, group: .critters)
+                case .seaCreatures:
+                    let selectedSeaCreature = self.isFiltering ? self.filteredSeaCreatures[indexPath.row] : self.seaCreatures[indexPath.row]
+                    return DetailViewController(obj: selectedSeaCreature, group: .critters)
                 }
                 
         },
@@ -368,6 +413,9 @@ extension CrittersMonthlyTableViewController {
                 case .fish:
                     let selectedFish = self.isFiltering ? self.filteredFishes[indexPath.row] : self.fishes[indexPath.row]
                     return ShareHelper.shared.presentContextShare(obj: selectedFish, group: .critters, toVC: self)
+                case .seaCreatures:
+                    let selectedSeaCreature = self.isFiltering ? self.filteredSeaCreatures[indexPath.row] : self.seaCreatures[indexPath.row]
+                    return ShareHelper.shared.presentContextShare(obj: selectedSeaCreature, group: .critters, toVC: self)
                 }
         })
     }
@@ -391,6 +439,15 @@ extension CrittersMonthlyTableViewController {
             animator.addAnimations {
                 let vc = self.storyboard!.instantiateViewController(withIdentifier: self.DETAIL_ID) as! DetailViewController
                 vc.parseOject(from: .critters, object: selectedFish)
+                
+                let navController = UINavigationController(rootViewController: vc)
+                self.present(navController, animated: true, completion: nil)
+            }
+        case .seaCreatures:
+            let selectedSeaCreature = self.isFiltering ? self.filteredSeaCreatures[indexPath.row] : self.seaCreatures[indexPath.row]
+            animator.addAnimations {
+                let vc = self.storyboard!.instantiateViewController(withIdentifier: self.DETAIL_ID) as! DetailViewController
+                vc.parseOject(from: .critters, object: selectedSeaCreature)
                 
                 let navController = UINavigationController(rootViewController: vc)
                 self.present(navController, animated: true, completion: nil)

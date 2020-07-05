@@ -93,15 +93,18 @@ class DashboardViewController: UIViewController {
     internal var birthdayResidents: [Villager] = []
     
     // Critter Monthly properties
-    internal var monthlyBug: [Critter]!
-    internal var monthlyFish: [Critter]!
-    internal var caughtBugsMonth: [Critter] = []
-    internal var caughtFishesMonth: [Critter] = []
+    var monthlyBug: [Critter]!
+    var monthlyFish: [Critter]!
+    var monthlySeaCreatures: [Critter]!
     
+    var caughtBugsMonth: [Critter] = []
+    var caughtFishesMonth: [Critter] = []
+    var caughtSeaCreaturesMonth: [Critter] = []
+
     // MARK: - Table view properties
-    internal let CRITTER_CELL = "CritterCell"
-    internal let FAVOURITE_CELL = "FavouriteCell"
-    internal var tableView: DynamicSizeTableView!
+    let CRITTER_CELL = "CritterCell"
+    let FAVOURITE_CELL = "FavouriteCell"
+    var tableView: DynamicSizeTableView!
     
     // Google ads banner
     lazy var adBannerView: GADBannerView = {
@@ -361,9 +364,10 @@ class DashboardViewController: UIViewController {
     private func calculateMonthlyCritter() {
         let caughtBugs = favouritesManager.caughtCritters.filter({ $0.category == Categories.bugs.rawValue })
         let caughtFishes = favouritesManager.caughtCritters.filter({ $0.category == Categories.fishes.rawValue })
+        let caughtSeaCreatures = favouritesManager.caughtCritters.filter({ $0.category == Categories.seaCreatures.rawValue })
         
-        ( monthlyBug, monthlyFish ) = CritterHelper.parseCritter(userHemisphere: userDict!["hemisphere"].map { DateHelper.Hemisphere(rawValue: $0)! } ?? DateHelper.Hemisphere.Southern)
-        ( caughtBugsMonth, caughtFishesMonth ) = CritterHelper.parseCaughtCritter(caughtBugs: caughtBugs, caughtFishes: caughtFishes, monthBugs: monthlyBug, monthFishes: monthlyFish)
+        ( monthlyBug, monthlyFish, monthlySeaCreatures ) = CritterHelper.parseCritter(userHemisphere: userDict!["hemisphere"].map { DateHelper.Hemisphere(rawValue: $0)! } ?? DateHelper.Hemisphere.Southern)
+        ( caughtBugsMonth, caughtFishesMonth, caughtSeaCreaturesMonth ) = CritterHelper.parseCaughtCritter(caughtBugs: caughtBugs, caughtFishes: caughtFishes, caughtSeaCreatures: caughtSeaCreatures, monthBugs: monthlyBug, monthFishes: monthlyFish, monthSeaCreatures: monthlySeaCreatures)
     }
     
     private func renderPhraseLabel(withString string: String, boldString: String, font: UIFont) -> NSAttributedString {
