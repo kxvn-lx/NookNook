@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import GoogleMobileAds
 
 private let reuseIdentifier = "outfitCell"
 private let headerFooterIdentifier = "outfitHeaderFooter"

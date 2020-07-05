@@ -40,7 +40,6 @@ class InAppPurchaseViewController: UITableViewController {
         self.addHeaderImage(withIcon: IconHelper.systemIcon(of: .supportMe, weight: .regular))
         
         // SwiftyStoreKit properties
-        
         SwiftyStoreKit.retrieveProductsInfo([IAPProduct.BuyCoffee.rawValue,
                                              IAPProduct.BuyCoffee.rawValue]) { result in
                                                 for product in result.retrievedProducts {

@@ -10,7 +10,6 @@ import UIKit
 import SDWebImage
 import SwiftyJSON
 import WhatsNewKit
-import GoogleMobileAds
 import SwipeCellKit
 
 class ItemsTableViewController: UITableViewController {
@@ -315,15 +314,5 @@ extension ItemsTableViewController {
             let navController = UINavigationController(rootViewController: vc)
             self.present(navController, animated: true, completion: nil)
         }
-    }
-}
-
-extension ItemsTableViewController: GADBannerViewDelegate {
-    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
-        print("received")
-    }
-    
-    func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
-        print(error)
     }
 }

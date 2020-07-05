@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import GoogleMobileAds
 
-protocol CatDelegate: NSObjectProtocol {
+protocol CatDelegate: class {
     func parseNewCategory(of category: Categories)
 }
 

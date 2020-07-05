@@ -11,14 +11,11 @@ target 'NookNook' do
   # Pods for NookNook
 	pod 'UXCam'
 	pod 'Firebase/Analytics'
-	pod 'GoogleTagManager'
 	pod 'McPicker'
-	pod 'Google-Mobile-Ads-SDK'
 
 target 'NookNookTests' do
   inherit! :search_paths
   # Pods for testing
 	pod 'Firebase/Analytics'
-	pod 'Google-Mobile-Ads-SDK'
 	end
 end

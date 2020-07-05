@@ -1035,14 +1035,6 @@ Copyright 2020 Google
    limitations under the License.
 
 
-## Google-Mobile-Ads-SDK
-
-Copyright 2020 Google
-
-## GoogleAnalytics
-
-Copyright 2016 Google
-
 ## GoogleAppMeasurement
 
 Copyright 2020 Google
@@ -1459,14 +1451,6 @@ Copyright 2020 Google
    limitations under the License.
 
 
-## GoogleSymbolUtilities
-
-Copyright 2016 Google
-
-## GoogleTagManager
-
-Copyright 2020 Google
-
 ## GoogleUtilities
 
 
@@ -1717,10 +1701,6 @@ similar to disable codesignature checks.
 More information at <a href="http://landonf.org/2009/02/index.html">Landon
 Fuller's blog</a>
 
-
-## GoogleUtilitiesLegacy
-
-Copyright 2018 Google
 
 ## McPicker
 

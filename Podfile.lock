@@ -32,9 +32,6 @@ PODS:
     - GoogleUtilities/Environment (~> 6.6)
     - GoogleUtilities/UserDefaults (~> 6.6)
     - PromisesObjC (~> 1.2)
-  - Google-Mobile-Ads-SDK (7.58.0):
-    - GoogleAppMeasurement (~> 6.0)
-  - GoogleAnalytics (3.17.0)
   - GoogleAppMeasurement (6.4.2):
     - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
     - GoogleUtilities/MethodSwizzler (~> 6.0)
@@ -45,11 +42,6 @@ PODS:
   - GoogleDataTransportCCTSupport (3.0.0):
     - GoogleDataTransport (~> 6.0)
     - nanopb (~> 0.3.901)
-  - GoogleSymbolUtilities (1.1.2)
-  - GoogleTagManager (7.1.3):
-    - FirebaseAnalytics (~> 6.3)
-    - GoogleAnalytics (~> 3.17)
-    - GoogleUtilitiesLegacy (~> 1.3)
   - GoogleUtilities/AppDelegateSwizzler (6.6.0):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -69,8 +61,6 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (6.6.0):
     - GoogleUtilities/Logger
-  - GoogleUtilitiesLegacy (1.3.2):
-    - GoogleSymbolUtilities (~> 1.1)
   - McPicker (2.0.1)
   - nanopb (0.3.9011):
     - nanopb/decode (= 0.3.9011)
@@ -82,8 +72,6 @@ PODS:
 
 DEPENDENCIES:
   - Firebase/Analytics
-  - Google-Mobile-Ads-SDK
-  - GoogleTagManager
   - McPicker
   - UXCam
 
@@ -95,15 +83,10 @@ SPEC REPOS:
     - FirebaseCoreDiagnostics
     - FirebaseCoreDiagnosticsInterop
     - FirebaseInstallations
-    - Google-Mobile-Ads-SDK
-    - GoogleAnalytics
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleDataTransportCCTSupport
-    - GoogleSymbolUtilities
-    - GoogleTagManager
     - GoogleUtilities
-    - GoogleUtilitiesLegacy
     - McPicker
     - nanopb
     - PromisesObjC
@@ -116,20 +99,15 @@ SPEC CHECKSUMS:
   FirebaseCoreDiagnostics: b59c024493a409f8aecba02c99928d0d8431d159
   FirebaseCoreDiagnosticsInterop: 296e2c5f5314500a850ad0b83e9e7c10b011a850
   FirebaseInstallations: 2119fb3e46b0a88bfdbf12562f855ee3252462fa
-  Google-Mobile-Ads-SDK: 7052557293c75c676db55feb707ace9b790f32c1
-  GoogleAnalytics: f42cc53a87a51fe94334821868d9c8481ff47a7b
   GoogleAppMeasurement: 2253e99c1f22638cf234c059144660c338ad76c3
   GoogleDataTransport: 061fe7d9b476710e3cd8ea51e8e07d8b67c2b420
   GoogleDataTransportCCTSupport: 0f39025e8cf51f168711bd3fb773938d7e62ddb5
-  GoogleSymbolUtilities: 631ee17048aa5e9ab133470d768ea997a5ef9b96
-  GoogleTagManager: a5b872a9aae225c83587cc526d816b0323961845
   GoogleUtilities: 39530bc0ad980530298e9c4af8549e991fd033b1
-  GoogleUtilitiesLegacy: 5501bedec1646bd284286eb5fc9453f7e23a12f4
   McPicker: a0a6b8ece8f1642e05401a29867463aba501188b
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   UXCam: 457f52deaee1cb2807393c134bc232e0d42b8e87
 
-PODFILE CHECKSUM: a6678a410514963bf5be59b43274c20cfe5aae06
+PODFILE CHECKSUM: bab107937c47d5c9338c9e65423f7765c40523fa
 
 COCOAPODS: 1.9.3

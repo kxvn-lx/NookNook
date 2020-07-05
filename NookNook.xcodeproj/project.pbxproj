@@ -7,16 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0A01F3102442DB8A001499D5 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 0A01F30F2442DB8A001499D5 /* SDWebImage */; };
+		0A01F3102442DB8A001499D5 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 0A01F30F2442DB8A001499D5 /* SwiftPackageProductDependency */; };
 		0A01F31224431725001499D5 /* ImageEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A01F31124431724001499D5 /* ImageEngine.swift */; };
 		0A0C06AA24853DB80015A07F /* bugsMain.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A0C06A924853DB80015A07F /* bugsMain.json */; };
 		0A0C06AC24853DBD0015A07F /* fishesMain.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A0C06AB24853DBD0015A07F /* fishesMain.json */; };
 		0A0EC83324905CE000F6DF96 /* OutfitFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0EC83224905CE000F6DF96 /* OutfitFilterTableViewController.swift */; };
-		0A11A00E2461338400D1BFB2 /* SwipeCellKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0A11A00D2461338400D1BFB2 /* SwipeCellKit */; };
+		0A11A00E2461338400D1BFB2 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 0A11A00D2461338400D1BFB2 /* SwiftPackageProductDependency */; };
 		0A149FF224512E7B0080941A /* UserPersistEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A149FF124512E7B0080941A /* UserPersistEngine.swift */; };
 		0A14A002245155A10080941A /* ResidentHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A14A001245155A10080941A /* ResidentHelper.swift */; };
 		0A14A0072451986B0080941A /* CrittersMonthlyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A14A0062451986B0080941A /* CrittersMonthlyTableViewController.swift */; };
-		0A1DE43D248BDF98004A6449 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0A1DE43C248BDF98004A6449 /* SnapKit */; };
+		0A1DE43D248BDF98004A6449 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 0A1DE43C248BDF98004A6449 /* SwiftPackageProductDependency */; };
 		0A1DE440248BFB2E004A6449 /* OutfitPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1DE43F248BFB2E004A6449 /* OutfitPickerViewController.swift */; };
 		0A205D2B24A44C9300EBFF72 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A205D2A24A44C9300EBFF72 /* EditProfileViewController.swift */; };
 		0A23BBCC244ACE94009B5178 /* SortEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A23BBCB244ACE94009B5178 /* SortEngine.swift */; };
@@ -27,7 +27,7 @@
 		0A295B4C2444AAD0001CF828 /* Taptic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A295B4B2444AAD0001CF828 /* Taptic.swift */; };
 		0A2A8D862466D1E900B47BE4 /* ReviewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2A8D852466D1E900B47BE4 /* ReviewHelper.swift */; };
 		0A2D908B245E690100974FD4 /* AlertHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2D908A245E690100974FD4 /* AlertHelper.swift */; };
-		0A2D908D245E6DF400974FD4 /* WhatsNewKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0A2D908C245E6DF400974FD4 /* WhatsNewKit */; };
+		0A2D908D245E6DF400974FD4 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 0A2D908C245E6DF400974FD4 /* SwiftPackageProductDependency */; };
 		0A36427E244695FE0081315A /* Critter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A36427D244695FE0081315A /* Critter.swift */; };
 		0A36428024469C600081315A /* bugsSecondary.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A36427F24469C600081315A /* bugsSecondary.json */; };
 		0A3642862446CC070081315A /* TimeMonthEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3642852446CC070081315A /* TimeMonthEngine.swift */; };
@@ -51,7 +51,7 @@
 		0A370BAF2444796400A72048 /* CategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A370BAE2444796400A72048 /* CategoriesTableViewController.swift */; };
 		0A4DEC23245B0FF50017A553 /* TurnipTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4DEC22245B0FF50017A553 /* TurnipTableViewCell.swift */; };
 		0A53327F246265350033FCF7 /* SpinnerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A53327E246265350033FCF7 /* SpinnerHelper.swift */; };
-		0A55912F244DF0110018CF99 /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0A55912F244DF0110018CF99 /* BuildFile in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0A595B912453252D00F37E15 /* housewares.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A595B902453252D00F37E15 /* housewares.json */; };
 		0A595B932453334C00F37E15 /* wallpapers.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A595B922453334C00F37E15 /* wallpapers.json */; };
 		0A595B952453344A00F37E15 /* miscellaneous.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A595B942453344A00F37E15 /* miscellaneous.json */; };
@@ -90,7 +90,7 @@
 		0AA3793D24B1FBBF00AF193B /* Swimming suits.json in Resources */ = {isa = PBXBuildFile; fileRef = 0AA3793C24B1FBBF00AF193B /* Swimming suits.json */; };
 		0AADD410244870D9004FDA33 /* fishesSecondary.json in Resources */ = {isa = PBXBuildFile; fileRef = 0AADD40F244870D9004FDA33 /* fishesSecondary.json */; };
 		0AB4DCD3245AD44A00AB16E6 /* TurnipReminderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB4DCD2245AD44A00AB16E6 /* TurnipReminderTableViewController.swift */; };
-		0AC54AF2244DF17600AD1188 /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0AC54AF2244DF17600AD1188 /* BuildFile in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0AC703B42451C749008D7C77 /* CritterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC703B32451C749008D7C77 /* CritterHelper.swift */; };
 		0AC89E402449418B009ADB18 /* VillagerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC89E3F2449418B009ADB18 /* VillagerTableViewCell.swift */; };
 		0AC89E422449419A009ADB18 /* VillagersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC89E412449419A009ADB18 /* VillagersTableViewController.swift */; };
@@ -98,7 +98,7 @@
 		0ADA6117248542E900A501BF /* villagers.json in Resources */ = {isa = PBXBuildFile; fileRef = 0ADA6116248542E900A501BF /* villagers.json */; };
 		0ADC7BA0245FACA00033F67E /* InAppPurchaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADC7B9F245FACA00033F67E /* InAppPurchaseViewController.swift */; };
 		0ADC7BA4245FC0B50033F67E /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ADC7BA3245FC0B50033F67E /* StoreKit.framework */; };
-		0ADF34CB24605ED8006AE2DB /* SwiftyStoreKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0ADF34CA24605ED8006AE2DB /* SwiftyStoreKit */; };
+		0ADF34CB24605ED8006AE2DB /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 0ADF34CA24605ED8006AE2DB /* SwiftPackageProductDependency */; };
 		0AE58041248C6E1A00656B2F /* OutfitPickerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE58040248C6E1A00656B2F /* OutfitPickerCollectionViewCell.swift */; };
 		0AEC5016245BA7B7004EC912 /* DynamicSizeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEC5015245BA7B7004EC912 /* DynamicSizeTableView.swift */; };
 		0AEC501A245BAABD004EC912 /* NotificationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEC5019245BAABD004EC912 /* NotificationEngine.swift */; };
@@ -115,7 +115,7 @@
 		0AFD705624419DD300957BE6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AFD705424419DD300957BE6 /* Main.storyboard */; };
 		0AFD705824419DD500957BE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AFD705724419DD500957BE6 /* Assets.xcassets */; };
 		0AFD705B24419DD500957BE6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AFD705924419DD500957BE6 /* LaunchScreen.storyboard */; };
-		0AFD70642441B80500957BE6 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 0AFD70632441B80500957BE6 /* SwiftyJSON */; };
+		0AFD70642441B80500957BE6 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 0AFD70632441B80500957BE6 /* SwiftPackageProductDependency */; };
 		0AFD706A2441BA7500957BE6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFD70692441BA7500957BE6 /* HomeViewController.swift */; };
 		0AFD706C2441BFEE00957BE6 /* ItemsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFD706B2441BFEE00957BE6 /* ItemsTableViewController.swift */; };
 		0AFD70732441D2B200957BE6 /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFD70722441D2B200957BE6 /* ItemTableViewCell.swift */; };
@@ -142,8 +142,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				0AC54AF2244DF17600AD1188 /* (null) in Embed Frameworks */,
-				0A55912F244DF0110018CF99 /* (null) in Embed Frameworks */,
+				0AC54AF2244DF17600AD1188 /* BuildFile in Embed Frameworks */,
+				0A55912F244DF0110018CF99 /* BuildFile in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -286,13 +286,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A01F3102442DB8A001499D5 /* SDWebImage in Frameworks */,
-				0ADF34CB24605ED8006AE2DB /* SwiftyStoreKit in Frameworks */,
-				0A2D908D245E6DF400974FD4 /* WhatsNewKit in Frameworks */,
-				0A11A00E2461338400D1BFB2 /* SwipeCellKit in Frameworks */,
+				0A01F3102442DB8A001499D5 /* BuildFile in Frameworks */,
+				0ADF34CB24605ED8006AE2DB /* BuildFile in Frameworks */,
+				0A2D908D245E6DF400974FD4 /* BuildFile in Frameworks */,
+				0A11A00E2461338400D1BFB2 /* BuildFile in Frameworks */,
 				0ADC7BA4245FC0B50033F67E /* StoreKit.framework in Frameworks */,
-				0A1DE43D248BDF98004A6449 /* SnapKit in Frameworks */,
-				0AFD70642441B80500957BE6 /* SwiftyJSON in Frameworks */,
+				0A1DE43D248BDF98004A6449 /* BuildFile in Frameworks */,
+				0AFD70642441B80500957BE6 /* BuildFile in Frameworks */,
 				60C9A20898DE7A1B7EFAF9D4 /* Pods_NookNook.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -684,7 +684,6 @@
 				0A559127244DCE120018CF99 /* Embed Frameworks */,
 				0ABA205E24652D60005DF2D5 /* ShellScript */,
 				D58A049AF675C5E239A33211 /* [CP] Embed Pods Frameworks */,
-				32FF3E4042D7E565B7EFBD4A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -692,12 +691,12 @@
 			);
 			name = NookNook;
 			packageProductDependencies = (
-				0AFD70632441B80500957BE6 /* SwiftyJSON */,
-				0A01F30F2442DB8A001499D5 /* SDWebImage */,
-				0A2D908C245E6DF400974FD4 /* WhatsNewKit */,
-				0ADF34CA24605ED8006AE2DB /* SwiftyStoreKit */,
-				0A11A00D2461338400D1BFB2 /* SwipeCellKit */,
-				0A1DE43C248BDF98004A6449 /* SnapKit */,
+				0AFD70632441B80500957BE6 /* SwiftPackageProductDependency */,
+				0A01F30F2442DB8A001499D5 /* SwiftPackageProductDependency */,
+				0A2D908C245E6DF400974FD4 /* SwiftPackageProductDependency */,
+				0ADF34CA24605ED8006AE2DB /* SwiftPackageProductDependency */,
+				0A11A00D2461338400D1BFB2 /* SwiftPackageProductDependency */,
+				0A1DE43C248BDF98004A6449 /* SwiftPackageProductDependency */,
 			);
 			productName = NookNook;
 			productReference = 0AFD704B24419DD300957BE6 /* NookNook.app */;
@@ -732,12 +731,12 @@
 			);
 			mainGroup = 0AFD704224419DD300957BE6;
 			packageReferences = (
-				0AFD70622441B80500957BE6 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
-				0A01F30E2442DB8A001499D5 /* XCRemoteSwiftPackageReference "SDWebImage" */,
-				0ACCF3A724567BB200F9C62E /* XCRemoteSwiftPackageReference "WhatsNewKit" */,
-				0ADF34C924605ED8006AE2DB /* XCRemoteSwiftPackageReference "SwiftyStoreKit" */,
-				0A11A00C2461338400D1BFB2 /* XCRemoteSwiftPackageReference "SwipeCellKit" */,
-				0A1DE43B248BDF97004A6449 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				0AFD70622441B80500957BE6 /* RemoteSwiftPackageReference */,
+				0A01F30E2442DB8A001499D5 /* RemoteSwiftPackageReference */,
+				0ACCF3A724567BB200F9C62E /* RemoteSwiftPackageReference */,
+				0ADF34C924605ED8006AE2DB /* RemoteSwiftPackageReference */,
+				0A11A00C2461338400D1BFB2 /* RemoteSwiftPackageReference */,
+				0A1DE43B248BDF97004A6449 /* RemoteSwiftPackageReference */,
 			);
 			productRefGroup = 0AFD704C24419DD300957BE6 /* Products */;
 			projectDirPath = "";
@@ -842,23 +841,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
-		};
-		32FF3E4042D7E565B7EFBD4A /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-NookNook/Pods-NookNook-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-NookNook/Pods-NookNook-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NookNook/Pods-NookNook-resources.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 		584334193737E40F57E4BB23 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1266,7 +1248,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		0A01F30E2442DB8A001499D5 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+		0A01F30E2442DB8A001499D5 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
 			requirement = {
@@ -1274,7 +1256,7 @@
 				minimumVersion = 5.7.2;
 			};
 		};
-		0A11A00C2461338400D1BFB2 /* XCRemoteSwiftPackageReference "SwipeCellKit" */ = {
+		0A11A00C2461338400D1BFB2 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwipeCellKit/SwipeCellKit";
 			requirement = {
@@ -1282,7 +1264,7 @@
 				minimumVersion = 2.7.1;
 			};
 		};
-		0A1DE43B248BDF97004A6449 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+		0A1DE43B248BDF97004A6449 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
 			requirement = {
@@ -1290,7 +1272,7 @@
 				minimumVersion = 5.0.1;
 			};
 		};
-		0ACCF3A724567BB200F9C62E /* XCRemoteSwiftPackageReference "WhatsNewKit" */ = {
+		0ACCF3A724567BB200F9C62E /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SvenTiigi/WhatsNewKit.git";
 			requirement = {
@@ -1298,7 +1280,7 @@
 				minimumVersion = 1.3.2;
 			};
 		};
-		0ADF34C924605ED8006AE2DB /* XCRemoteSwiftPackageReference "SwiftyStoreKit" */ = {
+		0ADF34C924605ED8006AE2DB /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/bizz84/SwiftyStoreKit.git";
 			requirement = {
@@ -1306,7 +1288,7 @@
 				minimumVersion = 0.15.1;
 			};
 		};
-		0AFD70622441B80500957BE6 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+		0AFD70622441B80500957BE6 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON";
 			requirement = {
@@ -1317,34 +1299,34 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		0A01F30F2442DB8A001499D5 /* SDWebImage */ = {
+		0A01F30F2442DB8A001499D5 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0A01F30E2442DB8A001499D5 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			package = 0A01F30E2442DB8A001499D5 /* RemoteSwiftPackageReference */;
 			productName = SDWebImage;
 		};
-		0A11A00D2461338400D1BFB2 /* SwipeCellKit */ = {
+		0A11A00D2461338400D1BFB2 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0A11A00C2461338400D1BFB2 /* XCRemoteSwiftPackageReference "SwipeCellKit" */;
+			package = 0A11A00C2461338400D1BFB2 /* RemoteSwiftPackageReference */;
 			productName = SwipeCellKit;
 		};
-		0A1DE43C248BDF98004A6449 /* SnapKit */ = {
+		0A1DE43C248BDF98004A6449 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0A1DE43B248BDF97004A6449 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			package = 0A1DE43B248BDF97004A6449 /* RemoteSwiftPackageReference */;
 			productName = SnapKit;
 		};
-		0A2D908C245E6DF400974FD4 /* WhatsNewKit */ = {
+		0A2D908C245E6DF400974FD4 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0ACCF3A724567BB200F9C62E /* XCRemoteSwiftPackageReference "WhatsNewKit" */;
+			package = 0ACCF3A724567BB200F9C62E /* RemoteSwiftPackageReference */;
 			productName = WhatsNewKit;
 		};
-		0ADF34CA24605ED8006AE2DB /* SwiftyStoreKit */ = {
+		0ADF34CA24605ED8006AE2DB /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0ADF34C924605ED8006AE2DB /* XCRemoteSwiftPackageReference "SwiftyStoreKit" */;
+			package = 0ADF34C924605ED8006AE2DB /* RemoteSwiftPackageReference */;
 			productName = SwiftyStoreKit;
 		};
-		0AFD70632441B80500957BE6 /* SwiftyJSON */ = {
+		0AFD70632441B80500957BE6 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0AFD70622441B80500957BE6 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			package = 0AFD70622441B80500957BE6 /* RemoteSwiftPackageReference */;
 			productName = SwiftyJSON;
 		};
 /* End XCSwiftPackageProductDependency section */

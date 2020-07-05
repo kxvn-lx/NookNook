@@ -9,7 +9,6 @@
 import UIKit
 import UserNotifications
 import McPicker
-import GoogleMobileAds
 
 class TurnipReminderTableViewController: UITableViewController {
     

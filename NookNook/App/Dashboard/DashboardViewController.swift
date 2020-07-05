@@ -8,7 +8,6 @@
 
 import UIKit
 import SDWebImage
-import GoogleMobileAds
 import StoreKit
 
 class DashboardViewController: UIViewController {
