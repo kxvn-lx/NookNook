@@ -29,16 +29,6 @@ class TurnipReminderTableViewController: UITableViewController {
     private var buyLabel = "Sunday (06:00AM)"
     private var sellLabel = "Friday (06:00PM)"
     
-    // Google ads banner
-    lazy var adBannerView: GADBannerView = {
-        let adBannerView = GADBannerView(adSize: kGADAdSizeSmartBannerLandscape)
-        adBannerView.translatesAutoresizingMaskIntoConstraints = false
-        adBannerView.adUnitID = GoogleAdsHelper.shared.getAds(forVC: .turnipReminder)
-        adBannerView.rootViewController = self
-
-        return adBannerView
-    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -109,17 +99,6 @@ class TurnipReminderTableViewController: UITableViewController {
         
         customBuyCell.detailTextLabel?.text = buyLabel
         customSellCell.detailTextLabel?.text = sellLabel
-        
-        if !UDEngine.shared.getIsAdsPurchased() {
-            self.view.addSubview(adBannerView)
-            adBannerView.load(GADRequest())
-            NSLayoutConstraint.activate([
-                adBannerView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-                adBannerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
-            ])
-        } else {
-            adBannerView.removeFromSuperview()
-        }
     }
     
     // MARK: - Table view data source

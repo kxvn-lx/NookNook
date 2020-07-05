@@ -21,16 +21,6 @@ class CategoriesTableViewController: UITableViewController {
     
     weak var catDelegate: CatDelegate?
     
-    // Google ads banner
-    lazy var adBannerView: GADBannerView = {
-        let adBannerView = GADBannerView(adSize: kGADAdSizeSmartBannerLandscape)
-        adBannerView.translatesAutoresizingMaskIntoConstraints = false
-        adBannerView.adUnitID = GoogleAdsHelper.shared.getAds(forVC: .category)
-        adBannerView.rootViewController = self
-
-        return adBannerView
-    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -39,25 +29,9 @@ class CategoriesTableViewController: UITableViewController {
         tableView.contentInset.bottom = 50
         
         setBar()
-        
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        if !UDEngine.shared.getIsAdsPurchased() {
-            self.view.addSubview(adBannerView)
-            adBannerView.load(GADRequest())
-            NSLayoutConstraint.activate([
-                adBannerView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-                adBannerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
-            ])
-        } else {
-            adBannerView.removeFromSuperview()
-        }
     }
     
     // MARK: - Table view data source
-    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }

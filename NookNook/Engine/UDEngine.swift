@@ -39,18 +39,6 @@ struct UDEngine {
     func getUser() -> [String: String] {
         return defaults.dictionary(forKey: Key.UserData.rawValue) as? [String: String] ?? [String: String]()
     }
-    
-    // MARK: - Has purchased ads
-    /// Save user's bought preference
-    func saveIsAdsPurchased() {
-        defaults.set(true, forKey: Key.Ad.rawValue)
-    }
-    
-    /// Get user's ads bought preference
-    func getIsAdsPurchased() -> Bool {
-        return defaults.bool(forKey: Key.Ad.rawValue)
-    }
-    
     // MARK: - Is first Visit
     /// Save user's first visit
     func saveIsFirstVisit(on vc: TableViewCaller) {

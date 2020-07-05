@@ -106,16 +106,6 @@ class DashboardViewController: UIViewController {
     let FAVOURITE_CELL = "FavouriteCell"
     var tableView: DynamicSizeTableView!
     
-    // Google ads banner
-    lazy var adBannerView: GADBannerView = {
-        let adBannerView = GADBannerView(adSize: kGADAdSizeSmartBannerLandscape)
-        adBannerView.translatesAutoresizingMaskIntoConstraints = false
-        adBannerView.adUnitID = GoogleAdsHelper.shared.getAds(forVC: .dashboard)
-        adBannerView.rootViewController = self
-        
-        return adBannerView
-    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         favouritesManager = DataPersistEngine()
@@ -169,17 +159,6 @@ class DashboardViewController: UIViewController {
         calculateMonthlyCritter()
         DispatchQueue.main.async {
             self.tableView.reloadData()
-        }
-        
-        if !UDEngine.shared.getIsAdsPurchased() {
-            self.view.addSubview(adBannerView)
-            adBannerView.load(GADRequest())
-            NSLayoutConstraint.activate([
-                adBannerView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-                adBannerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
-            ])
-        } else {
-            adBannerView.removeFromSuperview()
         }
     }
     
@@ -399,25 +378,12 @@ class DashboardViewController: UIViewController {
 extension DashboardViewController: UIAdaptivePresentationControllerDelegate {
     func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
         self.reloadProfile()
-        if !UDEngine.shared.getIsAdsPurchased() {
-            self.view.addSubview(adBannerView)
-            adBannerView.load(GADRequest())
-        } else {
-            adBannerView.removeFromSuperview()
-        }
-        self.dismiss(animated: true, completion: nil)
     }
 }
 
 extension DashboardViewController: ProfileDelegate {
     func updateprofile() {
         self.reloadProfile()
-        if !UDEngine.shared.getIsAdsPurchased() {
-            self.view.addSubview(adBannerView)
-            adBannerView.load(GADRequest())
-        } else {
-            adBannerView.removeFromSuperview()
-        }
         
         self.dismiss(animated: true, completion: nil)
     }

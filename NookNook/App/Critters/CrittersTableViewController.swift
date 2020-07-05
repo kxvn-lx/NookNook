@@ -33,16 +33,6 @@ class CrittersTableViewController: UITableViewController {
         return searchController.isActive && !isSearchBarEmpty
     }
     
-    // Google ads banner
-    lazy var adBannerView: GADBannerView = {
-        let adBannerView = GADBannerView(adSize: kGADAdSizeSmartBannerLandscape)
-        adBannerView.translatesAutoresizingMaskIntoConstraints = false
-        adBannerView.adUnitID = GoogleAdsHelper.shared.getAds(forVC: .critter)
-        adBannerView.rootViewController = self
-        
-        return adBannerView
-    }()
-    
     // MARK: - Table view init
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,31 +59,11 @@ class CrittersTableViewController: UITableViewController {
         favouritesManager = DataPersistEngine()
         self.navigationController?.navigationBar.sizeToFit()
         self.tableView.reloadData()
-        if !UDEngine.shared.getIsAdsPurchased() {
-            self.view.addSubview(adBannerView)
-            adBannerView.load(GADRequest())
-            NSLayoutConstraint.activate([
-                adBannerView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-                adBannerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
-            ])
-        } else {
-            adBannerView.removeFromSuperview()
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.tabBarController?.delegate = self
-        
-        if !UDEngine.shared.getIsFirstVisit(on: .Critters) {
-            let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! SwipeTableViewCell
-            cell.showSwipe(orientation: .left, animated: true) { (sucess) in
-                if sucess {
-                    cell.hideSwipe(animated: true)
-                    UDEngine.shared.saveIsFirstVisit(on: .Critters)
-                }
-            }
-        }
     }
     
     override func viewDidLayoutSubviews() {

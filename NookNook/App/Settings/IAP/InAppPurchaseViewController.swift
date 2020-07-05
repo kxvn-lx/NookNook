@@ -12,15 +12,14 @@ import SwiftyStoreKit
 
 enum IAPProduct: String, CaseIterable {
     case BuyCoffee = "com.kevinlaminto.NookNook.BuyCoffee1"
-    case RemoveAds = "com.kevinlaminto.NookNook.RemoveAds1"
-    case RemoveAdsBuyCoffee = "com.kevinlaminto.NookNook.RemoveAdsBuyCoffee1"
+    case BuyMeal = "com.kevinlaminto.NookNook.BuyMeal1"
 }
 
 class InAppPurchaseViewController: UITableViewController {
     
     // Table view cell properties
     private var products: [SKProduct] = []
-    private let emojis = ["☕️", "😁", "🤩"]
+    private let emojis = ["☕️", "🍱"]
     
     // MARK: - View init
     override func viewDidLoad() {
@@ -43,8 +42,7 @@ class InAppPurchaseViewController: UITableViewController {
         // SwiftyStoreKit properties
         
         SwiftyStoreKit.retrieveProductsInfo([IAPProduct.BuyCoffee.rawValue,
-                                             IAPProduct.RemoveAds.rawValue,
-                                             IAPProduct.RemoveAdsBuyCoffee.rawValue]) { result in
+                                             IAPProduct.BuyCoffee.rawValue]) { result in
                                                 for product in result.retrievedProducts {
                                                     print("✅ Product: \(product.localizedTitle) - price: $\(product.price)")
                                                     self.products.append(product)
@@ -64,31 +62,21 @@ class InAppPurchaseViewController: UITableViewController {
     
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0: return products.count
-        case 1: return 1
-        default: return 0
-        }
+        return products.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .value1, reuseIdentifier: "productCell")
         
-        switch indexPath.section {
-        case 0:
-            if !products.isEmpty {
-                cell.textLabel?.text = "\(products[indexPath.row].localizedTitle) \(emojis[indexPath.row])"
-                cell.detailTextLabel?.text = "\(products[indexPath.row].price)"
-            }
-            return cell
-        case 1:
-            cell.textLabel?.text = "Restore purchase"
-        default: return cell
+        if !products.isEmpty {
+            cell.textLabel?.text = "\(products[indexPath.row].localizedTitle) \(emojis[indexPath.row])"
+            cell.detailTextLabel?.text = "\(products[indexPath.row].price)"
         }
+
         return cell
     }
     
@@ -104,13 +92,7 @@ class InAppPurchaseViewController: UITableViewController {
                 switch result {
                 case .success:
                     SpinnerHelper.shared.absent()
-                    
-                    // Remove the ads for these two cells.
-                    switch indexPath.row {
-                    case 1, 2: UDEngine.shared.saveIsAdsPurchased()
-                    default: break
-                    }
-                    
+
                 case .error(let error):
                     switch error.code {
                     case .paymentCancelled: SpinnerHelper.shared.absent()
@@ -137,33 +119,6 @@ class InAppPurchaseViewController: UITableViewController {
                     }
                 }
             }
-            
-        // Restore purchase
-        case 1:
-            SpinnerHelper.shared.present()
-            
-            SwiftyStoreKit.restorePurchases { (results) in
-                if !results.restoreFailedPurchases.isEmpty {
-                    let alert = AlertHelper.createDefaultAction(title: "Something went wrong.", message: "There was a problem restoring your purchase(s). Please contact kevin.laminto@gmail.com if problem persist.")
-                    self.present(alert, animated: true)
-                    SpinnerHelper.shared.absent()
-                } else if !results.restoredPurchases.isEmpty {
-                    let alert = AlertHelper.createDefaultAction(title: "Restore successful!", message: "")
-                    self.present(alert, animated: true)
-                    
-                    results.restoredPurchases.forEach({
-                        if $0.productId == IAPProduct.RemoveAds.rawValue || $0.productId == IAPProduct.RemoveAdsBuyCoffee.rawValue {
-                            UDEngine.shared.saveIsAdsPurchased()
-                        }
-                    })
-                    SpinnerHelper.shared.absent()
-                } else {
-                    let alert = AlertHelper.createDefaultAction(title: "Nothing to restore.", message: "")
-                    self.present(alert, animated: true)
-                    SpinnerHelper.shared.absent()
-                }
-            }
-            
         default: break
         }
     }
@@ -182,7 +137,7 @@ class InAppPurchaseViewController: UITableViewController {
 
             Terms And Condition + Privacy Policy are available via the website.
             """
-        return section == 1 ? text : nil
+        return text
     }
     
     override func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {

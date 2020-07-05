@@ -35,16 +35,6 @@ class VillagersTableViewController: UITableViewController {
         return searchController.isActive && !isSearchBarEmpty
     }
     
-    // Google ads banner
-    lazy var adBannerView: GADBannerView = {
-        let adBannerView = GADBannerView(adSize: kGADAdSizeSmartBannerLandscape)
-        adBannerView.translatesAutoresizingMaskIntoConstraints = false
-        adBannerView.adUnitID = GoogleAdsHelper.shared.getAds(forVC: .villager)
-        adBannerView.rootViewController = self
-        
-        return adBannerView
-    }()
-    
     // MARK: - Tableview init
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,16 +61,6 @@ class VillagersTableViewController: UITableViewController {
         favouritesManager = DataPersistEngine()
         self.navigationController?.navigationBar.sizeToFit()
         self.tableView.reloadData()
-        if !UDEngine.shared.getIsAdsPurchased() {
-            self.view.addSubview(adBannerView)
-            adBannerView.load(GADRequest())
-            NSLayoutConstraint.activate([
-                adBannerView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-                adBannerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
-            ])
-        } else {
-            adBannerView.removeFromSuperview()
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {

@@ -176,16 +176,6 @@ class DetailViewController: UIViewController {
     let variationImageCollectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
     
-    // Google ads banner
-    lazy var adBannerView: GADBannerView = {
-        let adBannerView = GADBannerView(adSize: kGADAdSizeSmartBannerLandscape)
-        adBannerView.translatesAutoresizingMaskIntoConstraints = false
-        adBannerView.adUnitID = GoogleAdsHelper.shared.getAds(forVC: .detail)
-        adBannerView.rootViewController = self
-        
-        return adBannerView
-    }()
-    
     init(obj: Any, group: DataEngine.Group) {
         super.init(nibName: nil, bundle: nil)
         self.parseOject(from: group, object: obj)
@@ -214,17 +204,6 @@ class DetailViewController: UIViewController {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
-        
-        if !UDEngine.shared.getIsAdsPurchased() {
-            self.view.addSubview(adBannerView)
-            adBannerView.load(GADRequest())
-            NSLayoutConstraint.activate([
-                adBannerView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-                adBannerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
-            ])
-        } else {
-            adBannerView.removeFromSuperview()
-        }
     }
 
     override func viewDidDisappear(_ animated: Bool) {

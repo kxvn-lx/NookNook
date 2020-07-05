@@ -55,16 +55,6 @@ class CrittersMonthlyTableViewController: UITableViewController {
         case seaCreatures = "Sea creatures"
     }
     
-    // Google ads banner
-    lazy var adBannerView: GADBannerView = {
-        let adBannerView = GADBannerView(adSize: kGADAdSizeBanner)
-        adBannerView.translatesAutoresizingMaskIntoConstraints = false
-        adBannerView.adUnitID = GoogleAdsHelper.shared.getAds(forVC: .crittersMonthly)
-        adBannerView.rootViewController = self
-        
-        return adBannerView
-    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -96,17 +86,6 @@ class CrittersMonthlyTableViewController: UITableViewController {
         
         userHemisphere = UDEngine.shared.getUser()["hemisphere"].map { (DateHelper.Hemisphere(rawValue: $0) ?? DateHelper.Hemisphere.Southern) }
         ( bugs, fishes, seaCreatures ) = CritterHelper.parseCritter(userHemisphere: userHemisphere ?? DateHelper.Hemisphere.Southern)
-        
-        if !UDEngine.shared.getIsAdsPurchased() {
-            self.view.addSubview(adBannerView)
-            adBannerView.load(GADRequest())
-            NSLayoutConstraint.activate([
-                adBannerView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-                adBannerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
-            ])
-        } else {
-            adBannerView.removeFromSuperview()
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -124,7 +103,6 @@ class CrittersMonthlyTableViewController: UITableViewController {
     }
     
     // MARK: - Table view data source
-    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }

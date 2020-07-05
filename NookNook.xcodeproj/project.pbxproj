@@ -87,7 +87,7 @@
 		0A97C2FB244C95290062B136 /* FavouritesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A97C2FA244C95290062B136 /* FavouritesTableViewController.swift */; };
 		0A97C2FD244C95360062B136 /* FavouriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A97C2FC244C95360062B136 /* FavouriteTableViewCell.swift */; };
 		0AA3616E244C520500D326AF /* SVHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA3616D244C520500D326AF /* SVHelper.swift */; };
-		0AA3793B24B1F9CE00AF193B /* Swimming suits.json in Resources */ = {isa = PBXBuildFile; fileRef = 0AA3793A24B1F9CE00AF193B /* Swimming suits.json */; };
+		0AA3793D24B1FBBF00AF193B /* Swimming suits.json in Resources */ = {isa = PBXBuildFile; fileRef = 0AA3793C24B1FBBF00AF193B /* Swimming suits.json */; };
 		0AADD410244870D9004FDA33 /* fishesSecondary.json in Resources */ = {isa = PBXBuildFile; fileRef = 0AADD40F244870D9004FDA33 /* fishesSecondary.json */; };
 		0AB4DCD3245AD44A00AB16E6 /* TurnipReminderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB4DCD2245AD44A00AB16E6 /* TurnipReminderTableViewController.swift */; };
 		0AC54AF2244DF17600AD1188 /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -96,7 +96,6 @@
 		0AC89E422449419A009ADB18 /* VillagersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC89E412449419A009ADB18 /* VillagersTableViewController.swift */; };
 		0ACCF3AC2456830A00F9C62E /* WhatsNewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACCF3AB2456830A00F9C62E /* WhatsNewHelper.swift */; };
 		0ADA6117248542E900A501BF /* villagers.json in Resources */ = {isa = PBXBuildFile; fileRef = 0ADA6116248542E900A501BF /* villagers.json */; };
-		0ADC7B97245F98A50033F67E /* GoogleAdsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADC7B96245F98A50033F67E /* GoogleAdsHelper.swift */; };
 		0ADC7BA0245FACA00033F67E /* InAppPurchaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADC7B9F245FACA00033F67E /* InAppPurchaseViewController.swift */; };
 		0ADC7BA4245FC0B50033F67E /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ADC7BA3245FC0B50033F67E /* StoreKit.framework */; };
 		0ADF34CB24605ED8006AE2DB /* SwiftyStoreKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0ADF34CA24605ED8006AE2DB /* SwiftyStoreKit */; };
@@ -233,7 +232,7 @@
 		0A97C2FA244C95290062B136 /* FavouritesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesTableViewController.swift; sourceTree = "<group>"; };
 		0A97C2FC244C95360062B136 /* FavouriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteTableViewCell.swift; sourceTree = "<group>"; };
 		0AA3616D244C520500D326AF /* SVHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVHelper.swift; sourceTree = "<group>"; };
-		0AA3793A24B1F9CE00AF193B /* Swimming suits.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "Swimming suits.json"; path = "../../../../../../../Desktop/Swimming suits.json"; sourceTree = "<group>"; };
+		0AA3793C24B1FBBF00AF193B /* Swimming suits.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Swimming suits.json"; sourceTree = "<group>"; };
 		0AADD40F244870D9004FDA33 /* fishesSecondary.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fishesSecondary.json; sourceTree = "<group>"; };
 		0AB4DCD2245AD44A00AB16E6 /* TurnipReminderTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnipReminderTableViewController.swift; sourceTree = "<group>"; };
 		0AC54AF3244DF17B00AD1188 /* RAGTextField.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RAGTextField.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -242,7 +241,6 @@
 		0AC89E412449419A009ADB18 /* VillagersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VillagersTableViewController.swift; sourceTree = "<group>"; };
 		0ACCF3AB2456830A00F9C62E /* WhatsNewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsNewHelper.swift; sourceTree = "<group>"; };
 		0ADA6116248542E900A501BF /* villagers.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = villagers.json; sourceTree = "<group>"; };
-		0ADC7B96245F98A50033F67E /* GoogleAdsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAdsHelper.swift; sourceTree = "<group>"; };
 		0ADC7B9F245FACA00033F67E /* InAppPurchaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppPurchaseViewController.swift; sourceTree = "<group>"; };
 		0ADC7BA3245FC0B50033F67E /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		0AE58040248C6E1A00656B2F /* OutfitPickerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitPickerCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -384,7 +382,7 @@
 		0A370B682444417800A72048 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				0AA3793A24B1F9CE00AF193B /* Swimming suits.json */,
+				0AA3793C24B1FBBF00AF193B /* Swimming suits.json */,
 				0A82E7A024B1768300D3114B /* seaCreaturesMain.json */,
 				0ADA6116248542E900A501BF /* villagers.json */,
 				0A595B902453252D00F37E15 /* housewares.json */,
@@ -608,7 +606,6 @@
 				0AA3616D244C520500D326AF /* SVHelper.swift */,
 				0AEC501B245BF56B004EC912 /* NookTabBarController.swift */,
 				0A2D908A245E690100974FD4 /* AlertHelper.swift */,
-				0ADC7B96245F98A50033F67E /* GoogleAdsHelper.swift */,
 				0A53327E246265350033FCF7 /* SpinnerHelper.swift */,
 				0A2A8D852466D1E900B47BE4 /* ReviewHelper.swift */,
 				0A5D2A35246B816C0037D2A0 /* ShareHelper.swift */,
@@ -778,7 +775,6 @@
 				0A595B9D245339DD00F37E15 /* rugs.json in Resources */,
 				0A595BA924533B3F00F37E15 /* fossils.json in Resources */,
 				0AFD705B24419DD500957BE6 /* LaunchScreen.storyboard in Resources */,
-				0AA3793B24B1F9CE00AF193B /* Swimming suits.json in Resources */,
 				0AFD705824419DD500957BE6 /* Assets.xcassets in Resources */,
 				0A595B952453344A00F37E15 /* miscellaneous.json in Resources */,
 				0A370B912444543200A72048 /* bottoms.json in Resources */,
@@ -789,6 +785,7 @@
 				0A0C06AC24853DBD0015A07F /* fishesMain.json in Resources */,
 				0A370BA02444543200A72048 /* headwear.json in Resources */,
 				0A36428024469C600081315A /* bugsSecondary.json in Resources */,
+				0AA3793D24B1FBBF00AF193B /* Swimming suits.json in Resources */,
 				0A370BA82444543200A72048 /* construction.json in Resources */,
 				0AFD705624419DD300957BE6 /* Main.storyboard in Resources */,
 				0A595B912453252D00F37E15 /* housewares.json in Resources */,
@@ -948,7 +945,6 @@
 				0A23BBD0244AE1D5009B5178 /* Fruits.swift in Sources */,
 				0AEF52642452742E0056286B /* PatchLogViewController.swift in Sources */,
 				0A7737CD248F9DEB00EF9FAE /* OutfitImageView.swift in Sources */,
-				0ADC7B97245F98A50033F67E /* GoogleAdsHelper.swift in Sources */,
 				0A23BBCE244ADFE6009B5178 /* User.swift in Sources */,
 				0A739A41244B592300002B89 /* DashboardViewController.swift in Sources */,
 				0AA3616E244C520500D326AF /* SVHelper.swift in Sources */,
