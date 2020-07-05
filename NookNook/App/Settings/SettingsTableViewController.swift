@@ -18,7 +18,7 @@ class SettingsTableViewController: UITableViewController {
     private let EDIT_INFO_VC = "EditInfoVC"
     private let PATCH_LOG_VC = "PatchLogVC"
     private let ADS_VC = "AdsVC"
-    private let BUILD_NUMBER = "202006110"
+    private let BUILD_NUMBER = "202007050"
     
     weak var profileDelegate: ProfileDelegate!
     

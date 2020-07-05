@@ -41,7 +41,7 @@ class InAppPurchaseViewController: UITableViewController {
         
         // SwiftyStoreKit properties
         SwiftyStoreKit.retrieveProductsInfo([IAPProduct.BuyCoffee.rawValue,
-                                             IAPProduct.BuyCoffee.rawValue]) { result in
+                                             IAPProduct.BuyMeal.rawValue]) { result in
                                                 for product in result.retrievedProducts {
                                                     print("✅ Product: \(product.localizedTitle) - price: $\(product.price)")
                                                     self.products.append(product)

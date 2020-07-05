@@ -377,13 +377,13 @@ class DashboardViewController: UIViewController {
 extension DashboardViewController: UIAdaptivePresentationControllerDelegate {
     func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
         self.reloadProfile()
+        self.dismiss(animated: true, completion: nil)
     }
 }
 
 extension DashboardViewController: ProfileDelegate {
     func updateprofile() {
         self.reloadProfile()
-        
         self.dismiss(animated: true, completion: nil)
     }
 }
