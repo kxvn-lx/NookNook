@@ -22,10 +22,7 @@ struct ImageEngine {
         - The url of the image
      */
     static func parseNPURL(with filename: String, category: String) -> URL {
-        if category.lowercased() == Categories.art.rawValue {
-            return URL(string: "\(ImageEngine.SERVICE_ART_URL)\(filename).png")!
-        }
-        return URL(string: "\(ImageEngine.SERVICE_URL)\(category.lowercased())/\(filename).png")!
+        return URL(string: "\(ImageEngine.SERVICE_ART_URL)\(filename).png")!
     }
     
     /**

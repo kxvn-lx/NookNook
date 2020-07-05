@@ -117,7 +117,6 @@ class ItemsTableViewController: UITableViewController {
     }
     
     // MARK: - Table view data source
-    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -147,6 +146,7 @@ class ItemsTableViewController: UITableViewController {
             itemCell.buyLabel.font = UIFont.preferredFont(forTextStyle: .caption2)
             itemCell.sellLabel.font = UIFont.preferredFont(forTextStyle: .caption2)
             
+            print(item.image)
             itemCell.imgView.sd_setImage(with: ImageEngine.parseNPURL(with: item.image!, category: item.category), placeholderImage: UIImage(named: "placeholder"))
             itemCell.nameLabel.text = item.name
             itemCell.obtainedFromLabel.text = item.obtainedFrom

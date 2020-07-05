@@ -16,6 +16,7 @@ enum Categories: String {
     case wallpapers, floors, rugs, photos, posters, fencing, tools
     case tops, bottoms, dresses, headwear, accessories, socks, shoes, bags
     case umbrellas, music, recipes, fossils, construction, nookmiles, other
+    case swimmingSuit = "Swimming suits"
     
     case bugs, fishes
     case seaCreatures = "Sea creatures"
@@ -38,7 +39,7 @@ enum Categories: String {
     
     static func wardrobes() -> [Categories] {
         return [.tops, .bottoms, .dresses, .headwear,
-                .accessories, .socks, .shoes, .bags, .umbrellas]
+                .accessories, .socks, .shoes, .bags, .umbrellas, .swimmingSuit]
     }
     
     static func critters() -> [Categories] {
