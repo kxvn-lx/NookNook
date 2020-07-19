@@ -2016,18 +2016,6 @@ THE SOFTWARE.
 		</dict>
 		<dict>
 			<key>FooterText</key>
-			<string>Copyright (c) 2013-2020, UXCam Inc.
-All rights reserved.
-</string>
-			<key>License</key>
-			<string>Commercial</string>
-			<key>Title</key>
-			<string>UXCam</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>FooterText</key>
 			<string>Copyright (c) 2011 Petteri Aimonen &lt;jpa at nanopb.mail.kapsi.fi&gt;
 
 This software is provided 'as-is', without any express or 

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import UXCam
 import Firebase
 import UserNotifications
 import SwiftyStoreKit
@@ -20,9 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UNUserNotificationCenter.current().delegate = self
         
         // MARK: - Analytics and ads configurations.
-        UXCam.optIntoSchematicRecordings()
-        UXCam.start(withKey: "pm7prng53jwfhag")
-        
         FirebaseApp.configure()
         
         // MARK: - SwiftyStoreKit

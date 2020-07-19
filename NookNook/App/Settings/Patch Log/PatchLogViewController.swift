@@ -35,7 +35,6 @@ class PatchLogViewController: UIViewController {
         - Fixed chrash on some devices when opening the app
 
         v1.1.1 (202006020)
-        - Fixed IAP issue not removing ads on purchase.
         - Minor adjustments on the app engine.
 
         v1.1.0 (202005280)
@@ -45,7 +44,6 @@ class PatchLogViewController: UIViewController {
         - Improved edit info layout
 
         v1.0.0 (2020050616)
-        - Added ads (can be removed via in app purchases under settings (future). Ads MAY NOT appear as this is a new app. It takes time for the server to register my app to receive ads.)
         - Added swipe tableview cells hint for new user to let them know SWIPE RIGHT is an option (only first time)
         - Improved app architecture
         - Added shadow size for fishes

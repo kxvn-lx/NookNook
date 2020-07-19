@@ -1931,12 +1931,6 @@ THE SOFTWARE.
    limitations under the License.
 
 
-## UXCam
-
-Copyright (c) 2013-2020, UXCam Inc.
-All rights reserved.
-
-
 ## nanopb
 
 Copyright (c) 2011 Petteri Aimonen <jpa at nanopb.mail.kapsi.fi>

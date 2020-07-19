@@ -236,7 +236,6 @@ class OutfitPickerViewController: UICollectionViewController {
         let root = UINavigationController(rootViewController: vc)
         self.present(root, animated: true, completion: nil)
     }
-    
 }
 
 extension OutfitPickerViewController {

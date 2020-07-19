@@ -68,12 +68,10 @@ PODS:
   - nanopb/decode (0.3.9011)
   - nanopb/encode (0.3.9011)
   - PromisesObjC (1.2.8)
-  - UXCam (3.2.1)
 
 DEPENDENCIES:
   - Firebase/Analytics
   - McPicker
-  - UXCam
 
 SPEC REPOS:
   trunk:
@@ -90,7 +88,6 @@ SPEC REPOS:
     - McPicker
     - nanopb
     - PromisesObjC
-    - UXCam
 
 SPEC CHECKSUMS:
   Firebase: 585ae467b3edda6a5444e788fda6888f024d8d6f
@@ -106,8 +103,7 @@ SPEC CHECKSUMS:
   McPicker: a0a6b8ece8f1642e05401a29867463aba501188b
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
-  UXCam: 457f52deaee1cb2807393c134bc232e0d42b8e87
 
-PODFILE CHECKSUM: bab107937c47d5c9338c9e65423f7765c40523fa
+PODFILE CHECKSUM: f962ba1c53058a537f8b2eaeff8724c01699fac5
 
 COCOAPODS: 1.9.3

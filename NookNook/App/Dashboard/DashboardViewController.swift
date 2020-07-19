@@ -89,7 +89,7 @@ class DashboardViewController: UIViewController {
     let residentVillagerCollectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
     
-    internal var birthdayResidents: [Villager] = []
+    var birthdayResidents: [Villager] = []
     
     // Critter Monthly properties
     var monthlyBug: [Critter]!
