@@ -9,6 +9,7 @@
 import UIKit
 import MessageUI
 import StoreKit
+import SafariServices
 
 protocol ProfileDelegate: NSObjectProtocol {
     func updateprofile()
@@ -18,7 +19,7 @@ class SettingsTableViewController: UITableViewController {
     private let EDIT_INFO_VC = "EditInfoVC"
     private let PATCH_LOG_VC = "PatchLogVC"
     private let ADS_VC = "AdsVC"
-    private let BUILD_NUMBER = "202007050"
+    private let BUILD_NUMBER = "202008040"
     
     weak var profileDelegate: ProfileDelegate!
     
@@ -166,23 +167,19 @@ class SettingsTableViewController: UITableViewController {
             case 0: ShareHelper.shared.presentShare(toView: self)
             // Creator
             case 1:
-                guard let url = URL(string: "https://twitter.com/kevinlx_")  else { return }
-                if UIApplication.shared.canOpenURL(url) {
-                    if #available(iOS 10.0, *) {
-                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                    } else {
-                        UIApplication.shared.openURL(url)
-                    }
+                if let url = URL(string: "https://twitter.com/kevinlx_") {
+                    let config = SFSafariViewController.Configuration()
+
+                    let vc = SFSafariViewController(url: url, configuration: config)
+                    present(vc, animated: true)
                 }
             // Website
             case 2:
-                guard let url = URL(string: "https://www.notion.so/NookNook-5983d18455354aea846999708a6045b1")  else { return }
-                if UIApplication.shared.canOpenURL(url) {
-                    if #available(iOS 10.0, *) {
-                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                    } else {
-                        UIApplication.shared.openURL(url)
-                    }
+                if let url = URL(string: "https://www.notion.so/NookNook-5983d18455354aea846999708a6045b1") {
+                    let config = SFSafariViewController.Configuration()
+
+                    let vc = SFSafariViewController(url: url, configuration: config)
+                    present(vc, animated: true)
                 }
             default: break
             }

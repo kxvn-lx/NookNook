@@ -20,6 +20,10 @@ class PatchLogViewController: UIViewController {
     
     var logArray = [
         """
+        v1.3.3 (202008040)
+        - Improved app performance
+        - Improved security and privacy
+
         v1.2.2 (202007050)
         - Datasource updated to match the game v1.3.0 (Summer update)
 
