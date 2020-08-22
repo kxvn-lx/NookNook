@@ -168,15 +168,8 @@ class VillagersTableViewController: UITableViewController {
         
         tabBarController?.tabBar.tintColor = .white
         
-        // add Left bar button item
-        let button: UIButton = UIButton(type: .custom)
-        button.setImage(IconHelper.systemIcon(of: .sort, weight: .regular), for: .normal)
-        button.addTarget(self, action: #selector(sortButtonPressed), for: .touchUpInside)
-        button.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-        button.imageView?.contentMode = .scaleAspectFit
-        
-        let barButton = UIBarButtonItem(customView: button)
-        self.navigationItem.leftBarButtonItem = barButton
+        let filterButton = UIBarButtonItem(image: IconHelper.systemIcon(of: .sort, weight: .regular), style: .plain, target: self, action: #selector(sortButtonPressed))
+        self.navigationItem.leftBarButtonItem = filterButton
         
         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.dirt1]
     }

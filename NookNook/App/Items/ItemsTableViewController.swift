@@ -176,14 +176,8 @@ class ItemsTableViewController: UITableViewController {
         
         tabBarController?.tabBar.tintColor = .white
         
-        let button: UIButton = UIButton(type: .custom)
-        button.setImage(IconHelper.systemIcon(of: .filter, weight: .regular), for: .normal)
-        button.addTarget(self, action: #selector(filterButtonPressed), for: .touchUpInside)
-        button.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-        button.imageView?.contentMode = .scaleAspectFit
-        
-        let barButton = UIBarButtonItem(customView: button)
-        self.navigationItem.rightBarButtonItem = barButton
+        let filterButton = UIBarButtonItem(image: IconHelper.systemIcon(of: .filter, weight: .regular), style: .plain, target: self, action: #selector(filterButtonPressed))
+        self.navigationItem.rightBarButtonItem = filterButton
         
         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.dirt1]
     }

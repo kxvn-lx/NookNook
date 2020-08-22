@@ -168,10 +168,14 @@ class SettingsTableViewController: UITableViewController {
             // Creator
             case 1:
                 if let url = URL(string: "https://twitter.com/kevinlx_") {
-                    let config = SFSafariViewController.Configuration()
+                    if UIApplication.shared.canOpenURL(url) {
+                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    } else {
+                        let config = SFSafariViewController.Configuration()
 
-                    let vc = SFSafariViewController(url: url, configuration: config)
-                    present(vc, animated: true)
+                        let sfSafariVC = SFSafariViewController(url: url, configuration: config)
+                        present(sfSafariVC, animated: true)
+                    }
                 }
             // Website
             case 2:
@@ -190,13 +194,13 @@ class SettingsTableViewController: UITableViewController {
                 if MFMailComposeViewController.canSendMail() {
                     let mailVC = MFMailComposeViewController()
                     mailVC.mailComposeDelegate = self
-                    mailVC.setToRecipients(["kevin.laminto@gmail.com"])
+                    mailVC.setToRecipients(["kevinlaminto.dev@gmail.com"])
                     mailVC.setSubject("[NookNook] Feature request! 🚀")
                     mailVC.setMessageBody("Hi! I have a cool feature idea that could improve the app.", isHTML: false)
                     
                     present(mailVC, animated: true, completion: nil)
                 } else {
-                    let alert = AlertHelper.createDefaultAction(title: "No mail accounts", message: "Please configure a mail account in order to send email. Or, manually email it to kevin.laminto@gmail.com")
+                    let alert = AlertHelper.createDefaultAction(title: "No mail accounts", message: "Please configure a mail account in order to send email. Or, manually email it to kevinlaminto.dev@gmail.com")
                     self.present(alert, animated: true)
                 }
                 
@@ -205,13 +209,13 @@ class SettingsTableViewController: UITableViewController {
                 if MFMailComposeViewController.canSendMail() {
                     let mailVC = MFMailComposeViewController()
                     mailVC.mailComposeDelegate = self
-                    mailVC.setToRecipients(["kevin.laminto@gmail.com"])
+                    mailVC.setToRecipients(["kevinlaminto.dev@gmail.com"])
                     mailVC.setSubject("[NookNook] Bug report! 🐜")
                     mailVC.setMessageBody("Hi! I found a bug.", isHTML: false)
                     
                     present(mailVC, animated: true, completion: nil)
                 } else {
-                    let alert = AlertHelper.createDefaultAction(title: "No mail accounts", message: "Please configure a mail account in order to send email. Or, manually email it to kevin.laminto@gmail.com")
+                    let alert = AlertHelper.createDefaultAction(title: "No mail accounts", message: "Please configure a mail account in order to send email. Or, manually email it to kevinlaminto.dev@gmail.com")
                     self.present(alert, animated: true)
                 }
                 

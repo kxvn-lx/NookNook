@@ -167,14 +167,8 @@ class DashboardViewController: UIViewController {
         self.view.backgroundColor = .cream1
         self.view.tintColor = .white
         
-        let button: UIButton = UIButton(type: .custom)
-        button.setImage(IconHelper.systemIcon(of: .gear, weight: .regular), for: .normal)
-        button.addTarget(self, action: #selector(settingsButtonPressed), for: .touchUpInside)
-        button.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-        button.imageView?.contentMode = .scaleAspectFit
-        
-        let barButton = UIBarButtonItem(customView: button)
-        self.navigationItem.rightBarButtonItem = barButton
+        let filterButton = UIBarButtonItem(image: IconHelper.systemIcon(of: .gear, weight: .regular), style: .plain, target: self, action: #selector(settingsButtonPressed))
+        self.navigationItem.rightBarButtonItem = filterButton
     }
     
     @objc private func settingsButtonPressed() {
