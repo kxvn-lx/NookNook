@@ -20,6 +20,10 @@ class PatchLogViewController: UIViewController {
     
     var logArray = [
         """
+        v1.3.4 (202008220)
+        - Added early support for iOS 14
+        - Minor improvements
+
         v1.3.3 (202008040)
         - Improved app performance
         - Improved security and privacy

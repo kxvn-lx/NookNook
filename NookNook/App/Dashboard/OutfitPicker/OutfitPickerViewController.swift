@@ -250,6 +250,7 @@ extension OutfitPickerViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as!  OutfitPickerCollectionViewCell
         let data = datasource[indexPath.section][indexPath.row]
+        cell.label.text = "\(indexPath)"
         
         if indexPath.row == 0 {
             cell.imgView.image = UIImage(named: "none")
