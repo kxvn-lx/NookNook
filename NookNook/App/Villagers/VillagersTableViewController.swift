@@ -168,7 +168,13 @@ class VillagersTableViewController: UITableViewController {
         
         tabBarController?.tabBar.tintColor = .white
         
-        let filterButton = UIBarButtonItem(image: IconHelper.systemIcon(of: .sort, weight: .regular), style: .plain, target: self, action: #selector(sortButtonPressed))
+        let filterButton: UIBarButtonItem
+        
+        if #available(iOS 14.0, *) {
+            filterButton = UIBarButtonItem(image: IconHelper.systemIcon(of: .sort, weight: .regular), menu: createMenu())
+        } else {
+            filterButton = UIBarButtonItem(image: IconHelper.systemIcon(of: .sort, weight: .regular), style: .plain, target: self, action: #selector(sortButtonPressed))
+        }
         self.navigationItem.leftBarButtonItem = filterButton
         
         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.dirt1]
@@ -329,5 +335,54 @@ extension VillagersTableViewController {
             self.present(navController, animated: true, completion: nil)
         }
     }
+    
+}
 
+// iOS 14 menu
+extension VillagersTableViewController {
+    func createMenu() -> UIMenu {
+        
+        let nameAction = UIAction(
+            title: "Name",
+            image: UIImage(systemName: "n.square")) { (_) in
+            self.villagers = SortEngine.sortVillagers(villagers: self.villagers, with: .name)
+            self.sortType = .name
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+            let indexPath = IndexPath(row: 0, section: 0)
+            self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+            Taptic.lightTaptic()
+        }
+        
+        let speciesAction = UIAction(
+            title: "Species",
+            image: UIImage(systemName: "s.square")) { (_) in
+            self.villagers = SortEngine.sortVillagers(villagers: self.villagers, with: .species)
+            self.sortType = .species
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+            let indexPath = IndexPath(row: 0, section: 0)
+            self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+            Taptic.lightTaptic()
+        }
+        
+        let personalityAction = UIAction(
+            title: "Personality",
+            image: UIImage(systemName: "p.square")) { (_) in
+            self.villagers = SortEngine.sortVillagers(villagers: self.villagers, with: .personality)
+            self.sortType = .personality
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+            let indexPath = IndexPath(row: 0, section: 0)
+            self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+            Taptic.lightTaptic()
+        }
+        
+        let menuActions = [nameAction, speciesAction, personalityAction]
+        let addNewMenu = UIMenu(title: "Sort villagers", children: menuActions)
+        return addNewMenu
+    }
 }
